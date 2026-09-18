@@ -1,0 +1,18 @@
+.ai-app { min-height: 0; display: flex; flex-direction: column; }
+.ai-panel { display: flex; flex-direction: column; height: min(650px, 72vh); min-height: 280px; gap: 12px; }
+.ai-app > .ai-panel { flex: 1; height: auto; min-height: 0; max-width: 1000px; width: 100%; margin: 0 auto; padding: 20px 26px; box-sizing: border-box; }
+.ai-panel-toolbar, .ai-compose-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ai-panel-toolbar .ant-select { flex: 1; max-width: 400px; }
+.ai-messages { flex: 1; min-height: 0; overflow: auto; padding: 8px; user-select: text; }
+.ai-empty { text-align: center; padding-top: 60px; color: #8a8793; }
+.ai-empty > .anticon { font-size: 30px; color: #8b73c9; }
+.ai-empty h3 { color: #51495f; font-weight: 500; }
+.ai-message { margin-bottom: 18px; padding: 14px 16px; border-radius: 12px; background: #f6f5fa; }
+.ai-message.user { background: #fafafa; }
+.ai-message strong { font-size: 12px; color: #82778e; }
+.ai-message > div { margin-top: 6px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.75; }
+.ai-progress { color: #8b73c9; }
+.ai-compose-actions { margin-top: 10px; }
+.ai-settings label { display: flex; flex-direction: column; gap: 7px; margin: 15px 0; }
+.ai-settings label .ant-select { width: 100%; }
+.ai-settings p { font-size: 12px; line-height: 1.65; color: #85808e; }

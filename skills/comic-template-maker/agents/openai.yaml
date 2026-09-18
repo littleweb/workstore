@@ -1,0 +1,4 @@
+interface:
+  display_name: "小漫画模板制作"
+  short_description: "从完整示例漫画提取可追加、可动态更新的 WorkStore 模板"
+  default_prompt: "请使用 $comic-template-maker 从我提供的完整漫画提取角色、场景、画风、分镜与连续性信息，制作一个 WorkStore 模板。"

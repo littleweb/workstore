@@ -1,0 +1,22 @@
+name: Checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - run: npm ci
+      - run: node --test tests/*.test.mjs
+      - run: npm run build
+      - run: cargo test --locked --manifest-path src-tauri/Cargo.toml -- --test-threads=1
+      - run: npm run tauri -- build --debug --bundles app

@@ -1,0 +1,24 @@
+{
+  "identifier": "main-capability",
+  "description": "Local main window only; remote pages receive no IPC permissions",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "dialog:allow-open",
+    {
+      "identifier": "opener:allow-open-url",
+      "allow": [
+        {
+          "url": "https://github.com"
+        }
+      ]
+    },
+    "core:window:allow-destroy",
+    "clipboard-manager:allow-write-text",
+    "updater:default",
+    "process:allow-restart"
+  ]
+}

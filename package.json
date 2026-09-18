@@ -1,0 +1,55 @@
+{
+  "name": "workstore",
+  "version": "0.1.4",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "tauri": "tauri",
+    "desktop": "tauri dev",
+    "desktop:build": "tauri build",
+    "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs",
+    "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs",
+    "desktop:update:build": "node scripts/build-update.mjs"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.0.0",
+    "@excalidraw/excalidraw": "^0.18.1",
+    "@tauri-apps/api": "^2.11.1",
+    "@tauri-apps/plugin-clipboard-manager": "^2.3.3",
+    "@tauri-apps/plugin-dialog": "^2.7.3",
+    "@tauri-apps/plugin-opener": "^2.5.5",
+    "@tauri-apps/plugin-process": "^2.3.1",
+    "@tauri-apps/plugin-updater": "^2.11.0",
+    "@teabook/teaeditor": "^0.0.4",
+    "@xyflow/react": "^12.11.6",
+    "ajv": "^8.20.0",
+    "antd": "^6.0.0",
+    "jszip": "^3.10.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.4",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "~5.8.3",
+    "vite": "^6.1.0"
+  },
+  "overrides": {
+    "lodash-es": "^4.18.1",
+    "@excalidraw/excalidraw": {
+      "nanoid": "^3.3.19"
+    },
+    "@excalidraw/mermaid-to-excalidraw": {
+      "nanoid": "^5.1.16"
+    }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/littleweb/workstore.git"
+  }
+}

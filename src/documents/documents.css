@@ -1,0 +1,335 @@
+.document-app {
+  height: 100vh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+}
+.document-heading {
+  height: 42px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #e9edea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  gap: 8px;
+}
+.document-heading > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.document-heading > div > .anticon {
+  color: #64867b;
+  background: #edf4f0;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  font-size: 16px;
+}
+.document-heading h2 {
+  font-size: 14px;
+  margin: 0;
+  white-space: nowrap;
+}
+.document-description {
+  font-size: 11px;
+  color: #929b95;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.document-heading .ant-btn {
+  height: 30px;
+  font-size: 12px;
+  flex-shrink: 0;
+  padding-inline: 8px;
+}
+.document-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+.document-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: #fafbf9;
+  border-right: 1px solid #e9edea;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.document-navigation {
+  padding: 18px 9px 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+.document-sidebar[hidden] {
+  display: none;
+}
+.document-app .tool-sidebar-footer .tool-sidebar-create {
+  justify-content: center;
+}
+.document-editor-root > .editor-shell > .toolbar .font-size-input,
+.document-editor-root > .editor-shell > .toolbar .font-decrement,
+.document-editor-root > .editor-shell > .toolbar .font-increment {
+  display: none;
+}
+.document-section {
+  margin-bottom: 24px;
+}
+.document-section-label {
+  font-size: 14px;
+  color: #8d9791;
+  padding: 0 10px 8px;
+}
+.document-section > p {
+  font-size: 14px;
+  color: #adb5af;
+  padding: 0 10px;
+  margin: 4px 0;
+}
+.document-row {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 2px;
+  border-radius: 6px;
+}
+.document-row:hover {
+  background: #eef2ee;
+}
+.document-row.active {
+  background: #e6eee8;
+  color: #376c58;
+}
+.document-open {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  background: none;
+  padding: 0 10px;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  min-width: 0;
+}
+.document-open > .anticon {
+  color: #889e90;
+  font-size: 14px;
+}
+.document-open > span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 15px;
+}
+.document-more {
+  opacity: 0;
+  position: absolute;
+  right: 2px;
+  border: 0;
+  background: #eef2ee;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+}
+.document-row:hover .document-more,
+.document-more:focus-visible {
+  opacity: 1;
+}
+.document-workspace {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.document-document-bar {
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #eef1ed;
+  padding: 0 16px;
+}
+.document-title-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  max-width: 45%;
+  border: 0;
+  background: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.document-title-edit > .anticon {
+  font-size: 10px;
+  color: #a0ada3;
+  flex-shrink: 0;
+}
+.document-save-status {
+  font-size: 10px;
+  color: #97a38f;
+  margin-left: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.document-save-status.failed {
+  color: #b34f46;
+  white-space: normal;
+}
+.document-editor-wrap {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  position: relative;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.document-editor-root {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.document-editor-root > .editor-shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+.document-editor-root > .editor-shell > .toolbar {
+  flex: 0 0 auto;
+  height: auto;
+  min-height: 40px;
+  align-items: center;
+  align-content: flex-start;
+  justify-content: flex-start;
+  gap: 2px;
+  padding: 4px 8px;
+  margin: 0;
+  border-bottom: 1px solid #e9edea;
+}
+.document-editor-root > .editor-shell > .toolbar .divider {
+  height: 24px;
+  align-self: center;
+  flex-shrink: 0;
+}
+.document-editor-root > .editor-shell > .editor-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.document-editor-root > .editor-shell > .editor-container > .editor-scroller {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  resize: none;
+}
+.document-editor-root > .editor-shell > .editor-container > .editor-scroller > .editor {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  resize: none;
+}
+.document-editor-root > .editor-shell > .editor-container > .editor-scroller > .editor > .ContentEditable__root {
+  flex: 1 0 auto;
+  min-height: 100%;
+  width: 100%;
+}
+.document-empty {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 30px;
+}
+.document-empty > .anticon {
+  width: 74px;
+  height: 74px;
+  border-radius: 21px;
+  background: #f0f5ed;
+  color: #779574;
+  font-size: 30px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+}
+.document-empty h2 {
+  font-size: 21px;
+  margin: 0 0 10px;
+  font-weight: 550;
+}
+.document-empty p {
+  font-size: 12px;
+  color: #95a08d;
+  margin-bottom: 22px;
+}
+.document-empty small {
+  font-size: 10px;
+  color: #a4af9c;
+  margin-top: 18px;
+}
+.document-error {
+  background: #fff4e9;
+  color: #9e6e3c;
+  padding: 10px 15px;
+  font-size: 12px;
+}
+.document-busy {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: #ffffffa8;
+  display: grid;
+  place-items: center;
+  color: #7d907f;
+  font-size: 13px;
+}
+@media (max-width: 1000px) {
+  .document-sidebar {
+    width: 190px;
+  }
+  .document-description {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .document-sidebar {
+    width: 164px;
+  }
+  .document-heading > div > span:last-child {
+    display: none;
+  }
+  .document-save-status {
+    max-width: 100px;
+  }
+}

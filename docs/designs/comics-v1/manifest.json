@@ -1,0 +1,44 @@
+[
+  {
+    "file": "01-create.png",
+    "title": "创建作品",
+    "note": "底部无内边框的多行输入；模板、尺寸、张数、更多设置同排；发送图标。",
+    "sourceFile": "exec-58dee8d2-b12c-44a2-8574-afc842cb2c41.png",
+    "sha256": "e2a063745137c5d9d83d08a82e7a36e521c42ca28d67e03b80eaffe4094f335d"
+  },
+  {
+    "file": "02-discover-detail.png",
+    "title": "爆款作品与完整预览",
+    "note": "瀑布流与详情弹窗共用参考。首版展示六套示例；顶部旧图中的头像、通知不实现。",
+    "sourceFile": "exec-d22e58e5-25e8-4ac4-b6b7-c5ff848bf1ff.png",
+    "sha256": "5f19069cbd98052c1231b98bc322048d0365467ee9edc94f7158f732ea8ea43a"
+  },
+  {
+    "file": "03-editor.png",
+    "title": "漫画编辑",
+    "note": "单行横向画布；选中卡片才显示右栏。所有作品页补齐右上角发布入口。",
+    "sourceFile": "exec-a905a422-bdb6-41e8-9d8a-58cb6eb2d866.png",
+    "sha256": "0ccf8146a6df6aa62c31279ef904b339bdef7b0de434f53a366271aeaa188a7b"
+  },
+  {
+    "file": "04-settings.png",
+    "title": "作品设定",
+    "note": "故事与画风、角色、故事走向、场景道具。补齐右上角发布入口。",
+    "sourceFile": "exec-11f6c151-e530-493d-bae5-4ce4a896cfe4.png",
+    "sha256": "001feb4d9cf637587637f94196b653ae10f12b96fb77c686c954440ce1062535"
+  },
+  {
+    "file": "05-history.png",
+    "title": "历史版本",
+    "note": "版本列表、只读预览、差异和恢复；恢复创建新版本。补齐右上角发布入口。",
+    "sourceFile": "exec-d3382b5d-0485-40b1-9169-b7ea207650bf.png",
+    "sha256": "05a07235e5924bc459422cf8f37a72d9637edaf510266c503d69d8be54f308d1"
+  },
+  {
+    "file": "06-publish.png",
+    "title": "发布物料",
+    "note": "按平台维护封面、标题、描述、标签；生成、修改、复制与导出。",
+    "sourceFile": "exec-2a88c640-5396-4209-9f72-67785e177871.png",
+    "sha256": "3ddf3958d8117753282c2ce9930777cde08f34dec996e31a7eeb5a9910136cc1"
+  }
+]

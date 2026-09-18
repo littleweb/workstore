@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "templates": [
+    {
+      "templateId": "cat-workday",
+      "revision": 3,
+      "path": "content/comics/templates/cat-workday/3.json",
+      "sha256": "014a6b4b51bea9c2e2cc84763aec51dd9dd118dd76621e760f5d5aee8d6346a4"
+    },
+    {
+      "templateId": "dad-superpower",
+      "revision": 3,
+      "path": "content/comics/templates/dad-superpower/3.json",
+      "sha256": "2539779339e8f0d9423c955dbba9ccd712a4f8f5bf01578e91b48f76ff30a63a"
+    },
+    {
+      "templateId": "plant-secrets",
+      "revision": 3,
+      "path": "content/comics/templates/plant-secrets/3.json",
+      "sha256": "bcdc99d8fa4a11a2bf0e0f36768f7637d7b9a409d9d9659c4eef21a68003b3e7"
+    },
+    {
+      "templateId": "keep-going",
+      "revision": 3,
+      "path": "content/comics/templates/keep-going/3.json",
+      "sha256": "fb3e3202ef48b1ac5265bf4d194e1b9a9fa474c6c75fb518372616581e0bf8d3"
+    },
+    {
+      "templateId": "waiting-home",
+      "revision": 3,
+      "path": "content/comics/templates/waiting-home/3.json",
+      "sha256": "cbcbd800aa77ab1dccf48ffa2bfad9a152d73cfce70cc4d07ad24199baed2421"
+    },
+    {
+      "templateId": "city-goodnight",
+      "revision": 3,
+      "path": "content/comics/templates/city-goodnight/3.json",
+      "sha256": "b3d45ac8a0f9cad5b61cd49eaa9f5f9463df2193326e20c8fe6f92133537685d"
+    }
+  ]
+}

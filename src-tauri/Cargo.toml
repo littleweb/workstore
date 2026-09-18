@@ -1,0 +1,34 @@
+[package]
+name = "workstore"
+version = "0.1.4"
+description = "Local-first desktop workspace"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/littleweb/workstore"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+tauri-plugin-clipboard-manager = "2"
+tauri-plugin-single-instance = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tempfile = "3"
+fs2 = "0.4"
+uuid = { version = "1", features = ["v4"] }
+
+sha2 = "0.10"
+tauri-plugin-updater = "2"
+tauri-plugin-process = "2"
+
+tokio = { version = "1", features = ["process", "io-util", "time", "macros", "sync"] }
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+
+base64 = "0.22"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"

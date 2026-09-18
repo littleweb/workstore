@@ -1,0 +1,1190 @@
+[
+  {
+    "type": "workstore.comic.template",
+    "schemaVersion": 1,
+    "templateId": "rain-umbrella",
+    "revision": 3,
+    "title": "雨天的小善意",
+    "summary": "一把伞，装下了两份温暖。",
+    "category": "温暖治愈",
+    "style": "暖色水彩手绘，清晰墨线，柔和光影",
+    "defaultPages": 4,
+    "supportedCounts": [
+      4,
+      6,
+      8
+    ],
+    "entities": [
+      {
+        "id": "rain-umbrella-asset-0",
+        "name": "小雨",
+        "kind": "character",
+        "description": "黑色短发，黄色雨衣，蓝色长裤",
+        "locked": true,
+        "reference": {
+          "src": "/comics/rain-umbrella.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "rain-umbrella-asset-1",
+        "name": "小白",
+        "kind": "character",
+        "description": "白色卷毛小狗，柔软垂耳",
+        "locked": true,
+        "reference": {
+          "src": "/comics/rain-umbrella.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "rain-umbrella-asset-2",
+        "name": "雨巷",
+        "kind": "scene",
+        "description": "书店门口，灰蓝雨幕和暖色橱窗",
+        "locked": true,
+        "reference": {
+          "src": "/comics/rain-umbrella.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "rain-umbrella-asset-3",
+        "name": "黄伞",
+        "kind": "prop",
+        "description": "明黄色长柄雨伞",
+        "locked": true,
+        "reference": {
+          "src": "/comics/rain-umbrella.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      }
+    ],
+    "beats": [
+      "书店避雨",
+      "遇见小狗",
+      "一起回家",
+      "温暖相伴"
+    ],
+    "example": [
+      {
+        "id": "rain-umbrella-1",
+        "title": "书店避雨",
+        "action": "书店避雨",
+        "dialogue": "雨还没有停。",
+        "entityIds": [
+          "rain-umbrella-asset-0",
+          "rain-umbrella-asset-1",
+          "rain-umbrella-asset-2",
+          "rain-umbrella-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/rain-umbrella.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "rain-umbrella-2",
+        "title": "遇见小狗",
+        "action": "遇见小狗",
+        "dialogue": "你也在等一个晴天吗？",
+        "entityIds": [
+          "rain-umbrella-asset-0",
+          "rain-umbrella-asset-1",
+          "rain-umbrella-asset-2",
+          "rain-umbrella-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/rain-umbrella.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "rain-umbrella-3",
+        "title": "一起回家",
+        "action": "一起回家",
+        "dialogue": "我的伞，还能分你一半。",
+        "entityIds": [
+          "rain-umbrella-asset-0",
+          "rain-umbrella-asset-1",
+          "rain-umbrella-asset-2",
+          "rain-umbrella-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/rain-umbrella.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "rain-umbrella-4",
+        "title": "温暖相伴",
+        "action": "温暖相伴",
+        "dialogue": "原来，家可以多一份温暖。",
+        "entityIds": [
+          "rain-umbrella-asset-0",
+          "rain-umbrella-asset-1",
+          "rain-umbrella-asset-2",
+          "rain-umbrella-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/rain-umbrella.png",
+          "crop": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      }
+    ],
+    "cover": {
+      "src": "/comics/rain-umbrella.png",
+      "crop": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ]
+    },
+    "continuity": [
+      "角色外貌与服装保持一致",
+      "时间和场景变化符合故事进程"
+    ],
+    "source": {
+      "kind": "original",
+      "author": "WorkStore",
+      "redistribution": "WorkStore 原创策划与 AI 生成示例，可随应用分发"
+    },
+    "publishingDirection": "围绕真实故事内容组织标题与文案，突出情绪变化",
+    "dialogueStyle": {
+      "shape": "speech",
+      "position": "auto",
+      "fill": "cream",
+      "rendering": "integrated",
+      "lettering": "对白与绘画一体生成；手绘字形、气泡轮廓与作品画风协调，按发声关系和留白自适应排布，避开脸部、手部与关键动作，不固定横条"
+    }
+  },
+  {
+    "type": "workstore.comic.template",
+    "schemaVersion": 1,
+    "templateId": "moon-delivery",
+    "revision": 3,
+    "title": "月亮快递员",
+    "summary": "小兔接到了一份送往月亮的快递。",
+    "category": "温暖治愈",
+    "style": "暖色水彩手绘，清晰墨线，柔和光影",
+    "defaultPages": 4,
+    "supportedCounts": [
+      4,
+      6,
+      8
+    ],
+    "entities": [
+      {
+        "id": "moon-delivery-asset-0",
+        "name": "小兔",
+        "kind": "character",
+        "description": "白色兔子，青绿邮差帽和制服，棕色包",
+        "locked": true,
+        "reference": {
+          "src": "/comics/moon-delivery.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "moon-delivery-asset-1",
+        "name": "星星",
+        "kind": "prop",
+        "description": "柔和发光的金色五角星",
+        "locked": true,
+        "reference": {
+          "src": "/comics/moon-delivery.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "moon-delivery-asset-2",
+        "name": "云梯",
+        "kind": "scene",
+        "description": "紫蓝夜空，通向月亮的白色云阶",
+        "locked": true,
+        "reference": {
+          "src": "/comics/moon-delivery.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      }
+    ],
+    "beats": [
+      "拾到星星",
+      "小心打包",
+      "走上云梯",
+      "送回夜空"
+    ],
+    "example": [
+      {
+        "id": "moon-delivery-1",
+        "title": "拾到星星",
+        "action": "拾到星星",
+        "dialogue": "是谁把星星落在这里？",
+        "entityIds": [
+          "moon-delivery-asset-0",
+          "moon-delivery-asset-1",
+          "moon-delivery-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/moon-delivery.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "moon-delivery-2",
+        "title": "小心打包",
+        "action": "小心打包",
+        "dialogue": "别着急，我送你回家。",
+        "entityIds": [
+          "moon-delivery-asset-0",
+          "moon-delivery-asset-1",
+          "moon-delivery-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/moon-delivery.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "moon-delivery-3",
+        "title": "走上云梯",
+        "action": "走上云梯",
+        "dialogue": "再高，也要送到。",
+        "entityIds": [
+          "moon-delivery-asset-0",
+          "moon-delivery-asset-1",
+          "moon-delivery-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/moon-delivery.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "moon-delivery-4",
+        "title": "送回夜空",
+        "action": "送回夜空",
+        "dialogue": "晚安，愿你继续发光。",
+        "entityIds": [
+          "moon-delivery-asset-0",
+          "moon-delivery-asset-1",
+          "moon-delivery-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/moon-delivery.png",
+          "crop": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      }
+    ],
+    "cover": {
+      "src": "/comics/moon-delivery.png",
+      "crop": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ]
+    },
+    "continuity": [
+      "角色外貌与服装保持一致",
+      "时间和场景变化符合故事进程"
+    ],
+    "source": {
+      "kind": "original",
+      "author": "WorkStore",
+      "redistribution": "WorkStore 原创策划与 AI 生成示例，可随应用分发"
+    },
+    "publishingDirection": "围绕真实故事内容组织标题与文案，突出情绪变化",
+    "dialogueStyle": {
+      "shape": "speech",
+      "position": "auto",
+      "fill": "cream",
+      "rendering": "integrated",
+      "lettering": "对白与绘画一体生成；手绘字形、气泡轮廓与作品画风协调，按发声关系和留白自适应排布，避开脸部、手部与关键动作，不固定横条"
+    }
+  },
+  {
+    "type": "workstore.comic.template",
+    "schemaVersion": 1,
+    "templateId": "grandma-kitchen",
+    "revision": 3,
+    "title": "奶奶的味道",
+    "summary": "一顿饺子，藏着两代人的牵挂。",
+    "category": "温暖治愈",
+    "style": "暖色水彩手绘，清晰墨线，柔和光影",
+    "defaultPages": 4,
+    "supportedCounts": [
+      4,
+      6,
+      8
+    ],
+    "entities": [
+      {
+        "id": "grandma-kitchen-asset-0",
+        "name": "奶奶",
+        "kind": "character",
+        "description": "银灰短发，红色碎花围裙，米色上衣",
+        "locked": true,
+        "reference": {
+          "src": "/comics/grandma-kitchen.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "grandma-kitchen-asset-1",
+        "name": "孙女",
+        "kind": "character",
+        "description": "黑色丸子头，绿色毛衣，学做饭时穿白色围裙",
+        "locked": true,
+        "reference": {
+          "src": "/comics/grandma-kitchen.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "grandma-kitchen-asset-2",
+        "name": "厨房",
+        "kind": "scene",
+        "description": "木质餐桌，窗边阳光，旧式温暖厨房",
+        "locked": true,
+        "reference": {
+          "src": "/comics/grandma-kitchen.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "grandma-kitchen-asset-3",
+        "name": "饺子",
+        "kind": "prop",
+        "description": "手工包制的白色饺子",
+        "locked": true,
+        "reference": {
+          "src": "/comics/grandma-kitchen.png",
+          "crop": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      }
+    ],
+    "beats": [
+      "来到厨房",
+      "一起擀皮",
+      "学习包饺子",
+      "共享晚餐"
+    ],
+    "example": [
+      {
+        "id": "grandma-kitchen-1",
+        "title": "来到厨房",
+        "action": "来到厨房",
+        "dialogue": "奶奶，我回来啦！",
+        "entityIds": [
+          "grandma-kitchen-asset-0",
+          "grandma-kitchen-asset-1",
+          "grandma-kitchen-asset-2",
+          "grandma-kitchen-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/grandma-kitchen.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "grandma-kitchen-2",
+        "title": "一起擀皮",
+        "action": "一起擀皮",
+        "dialogue": "手把手，教你家的味道。",
+        "entityIds": [
+          "grandma-kitchen-asset-0",
+          "grandma-kitchen-asset-1",
+          "grandma-kitchen-asset-2",
+          "grandma-kitchen-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/grandma-kitchen.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "grandma-kitchen-3",
+        "title": "学习包饺子",
+        "action": "学习包饺子",
+        "dialogue": "这个像不像一只小船？",
+        "entityIds": [
+          "grandma-kitchen-asset-0",
+          "grandma-kitchen-asset-1",
+          "grandma-kitchen-asset-2",
+          "grandma-kitchen-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/grandma-kitchen.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "grandma-kitchen-4",
+        "title": "共享晚餐",
+        "action": "共享晚餐",
+        "dialogue": "最香的调味，是陪伴。",
+        "entityIds": [
+          "grandma-kitchen-asset-0",
+          "grandma-kitchen-asset-1",
+          "grandma-kitchen-asset-2",
+          "grandma-kitchen-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/grandma-kitchen.png",
+          "crop": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      }
+    ],
+    "cover": {
+      "src": "/comics/grandma-kitchen.png",
+      "crop": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ]
+    },
+    "continuity": [
+      "角色外貌与服装保持一致",
+      "时间和场景变化符合故事进程"
+    ],
+    "source": {
+      "kind": "original",
+      "author": "WorkStore",
+      "redistribution": "WorkStore 原创策划与 AI 生成示例，可随应用分发"
+    },
+    "publishingDirection": "围绕真实故事内容组织标题与文案，突出情绪变化",
+    "dialogueStyle": {
+      "shape": "speech",
+      "position": "auto",
+      "fill": "cream",
+      "rendering": "integrated",
+      "lettering": "对白与绘画一体生成；手绘字形、气泡轮廓与作品画风协调，按发声关系和留白自适应排布，避开脸部、手部与关键动作，不固定横条"
+    }
+  },
+  {
+    "type": "workstore.comic.template",
+    "schemaVersion": 1,
+    "templateId": "dog-travel",
+    "revision": 3,
+    "title": "小狗的周末旅行",
+    "summary": "背起小包，把周末交给远方。",
+    "category": "日常反转",
+    "style": "暖色水彩手绘，清晰墨线，柔和光影",
+    "defaultPages": 4,
+    "supportedCounts": [
+      4,
+      6,
+      8
+    ],
+    "entities": [
+      {
+        "id": "dog-travel-asset-0",
+        "name": "柯基",
+        "kind": "character",
+        "description": "黄白柯基，红色方巾，绿色小背包",
+        "locked": true,
+        "reference": {
+          "src": "/comics/dog-travel.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "dog-travel-asset-1",
+        "name": "山间湖泊",
+        "kind": "scene",
+        "description": "雪山，蓝色湖面，野花草地",
+        "locked": true,
+        "reference": {
+          "src": "/comics/dog-travel.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "dog-travel-asset-2",
+        "name": "背包",
+        "kind": "prop",
+        "description": "橄榄绿帆布包，棕色皮带扣",
+        "locked": true,
+        "reference": {
+          "src": "/comics/dog-travel.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      }
+    ],
+    "beats": [
+      "准备出发",
+      "窗外风景",
+      "湖畔野餐",
+      "带梦回家"
+    ],
+    "example": [
+      {
+        "id": "dog-travel-1",
+        "title": "准备出发",
+        "action": "准备出发",
+        "dialogue": "今天，去地图上的蓝色那里。",
+        "entityIds": [
+          "dog-travel-asset-0",
+          "dog-travel-asset-1",
+          "dog-travel-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/dog-travel.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "dog-travel-2",
+        "title": "窗外风景",
+        "action": "窗外风景",
+        "dialogue": "原来风景会自己跑过来。",
+        "entityIds": [
+          "dog-travel-asset-0",
+          "dog-travel-asset-1",
+          "dog-travel-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/dog-travel.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "dog-travel-3",
+        "title": "湖畔野餐",
+        "action": "湖畔野餐",
+        "dialogue": "把烦恼留在山的另一边。",
+        "entityIds": [
+          "dog-travel-asset-0",
+          "dog-travel-asset-1",
+          "dog-travel-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/dog-travel.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "dog-travel-4",
+        "title": "带梦回家",
+        "action": "带梦回家",
+        "dialogue": "最好的纪念品，是一个好梦。",
+        "entityIds": [
+          "dog-travel-asset-0",
+          "dog-travel-asset-1",
+          "dog-travel-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/dog-travel.png",
+          "crop": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      }
+    ],
+    "cover": {
+      "src": "/comics/dog-travel.png",
+      "crop": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ]
+    },
+    "continuity": [
+      "角色外貌与服装保持一致",
+      "时间和场景变化符合故事进程"
+    ],
+    "source": {
+      "kind": "original",
+      "author": "WorkStore",
+      "redistribution": "WorkStore 原创策划与 AI 生成示例，可随应用分发"
+    },
+    "publishingDirection": "围绕真实故事内容组织标题与文案，突出情绪变化",
+    "dialogueStyle": {
+      "shape": "speech",
+      "position": "auto",
+      "fill": "white",
+      "rendering": "integrated",
+      "lettering": "对白与绘画一体生成；手绘字形、气泡轮廓与作品画风协调，按发声关系和留白自适应排布，避开脸部、手部与关键动作，不固定横条"
+    }
+  },
+  {
+    "type": "workstore.comic.template",
+    "schemaVersion": 1,
+    "templateId": "whale-song",
+    "revision": 3,
+    "title": "大海的晚安曲",
+    "summary": "鲸宝宝跟着妈妈的歌声，学会和夜晚相处。",
+    "category": "温暖治愈",
+    "style": "暖色水彩手绘，清晰墨线，柔和光影",
+    "defaultPages": 4,
+    "supportedCounts": [
+      4,
+      6,
+      8
+    ],
+    "entities": [
+      {
+        "id": "whale-song-asset-0",
+        "name": "鲸宝宝",
+        "kind": "character",
+        "description": "圆润蓝色幼鲸，白色腹部，明亮大眼睛",
+        "locked": true,
+        "reference": {
+          "src": "/comics/whale-song.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "whale-song-asset-1",
+        "name": "鲸妈妈",
+        "kind": "character",
+        "description": "体型较大的蓝鲸，柔和眼神，白色腹部",
+        "locked": true,
+        "reference": {
+          "src": "/comics/whale-song.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "whale-song-asset-2",
+        "name": "海洋",
+        "kind": "scene",
+        "description": "深蓝海水，发光水母，月光穿过水面",
+        "locked": true,
+        "reference": {
+          "src": "/comics/whale-song.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      }
+    ],
+    "beats": [
+      "害怕黑暗",
+      "听见歌声",
+      "追随微光",
+      "安心入睡"
+    ],
+    "example": [
+      {
+        "id": "whale-song-1",
+        "title": "害怕黑暗",
+        "action": "害怕黑暗",
+        "dialogue": "海底的夜，好像有点深。",
+        "entityIds": [
+          "whale-song-asset-0",
+          "whale-song-asset-1",
+          "whale-song-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/whale-song.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "whale-song-2",
+        "title": "听见歌声",
+        "action": "听见歌声",
+        "dialogue": "别怕，我的歌一直在。",
+        "entityIds": [
+          "whale-song-asset-0",
+          "whale-song-asset-1",
+          "whale-song-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/whale-song.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "whale-song-3",
+        "title": "追随微光",
+        "action": "追随微光",
+        "dialogue": "原来，黑暗里也有小星星。",
+        "entityIds": [
+          "whale-song-asset-0",
+          "whale-song-asset-1",
+          "whale-song-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/whale-song.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "whale-song-4",
+        "title": "安心入睡",
+        "action": "安心入睡",
+        "dialogue": "靠着你，就是最安静的海。",
+        "entityIds": [
+          "whale-song-asset-0",
+          "whale-song-asset-1",
+          "whale-song-asset-2"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/whale-song.png",
+          "crop": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      }
+    ],
+    "cover": {
+      "src": "/comics/whale-song.png",
+      "crop": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ]
+    },
+    "continuity": [
+      "角色外貌与服装保持一致",
+      "时间和场景变化符合故事进程"
+    ],
+    "source": {
+      "kind": "original",
+      "author": "WorkStore",
+      "redistribution": "WorkStore 原创策划与 AI 生成示例，可随应用分发"
+    },
+    "publishingDirection": "围绕真实故事内容组织标题与文案，突出情绪变化",
+    "dialogueStyle": {
+      "shape": "thought",
+      "position": "auto",
+      "fill": "cream",
+      "rendering": "integrated",
+      "lettering": "对白与绘画一体生成；手绘字形、气泡轮廓与作品画风协调，按发声关系和留白自适应排布，避开脸部、手部与关键动作，不固定横条"
+    }
+  },
+  {
+    "type": "workstore.comic.template",
+    "schemaVersion": 1,
+    "templateId": "little-sprout",
+    "revision": 3,
+    "title": "一颗种子的春天",
+    "summary": "从埋下一颗种子，到等来一朵花。",
+    "category": "知识科普",
+    "style": "暖色水彩手绘，清晰墨线，柔和光影",
+    "defaultPages": 4,
+    "supportedCounts": [
+      4,
+      6,
+      8
+    ],
+    "entities": [
+      {
+        "id": "little-sprout-asset-0",
+        "name": "小禾",
+        "kind": "character",
+        "description": "黑色齐刘海短发，橙色背带裤，米色上衣",
+        "locked": true,
+        "reference": {
+          "src": "/comics/little-sprout.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "little-sprout-asset-1",
+        "name": "小猫",
+        "kind": "character",
+        "description": "灰白虎斑猫，白色胸口",
+        "locked": true,
+        "reference": {
+          "src": "/comics/little-sprout.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "little-sprout-asset-2",
+        "name": "花园",
+        "kind": "scene",
+        "description": "乡间庭院，木架和陶盆，充足阳光",
+        "locked": true,
+        "reference": {
+          "src": "/comics/little-sprout.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "id": "little-sprout-asset-3",
+        "name": "向日葵",
+        "kind": "prop",
+        "description": "陶盆中由幼芽逐渐长成金黄色向日葵",
+        "locked": true,
+        "reference": {
+          "src": "/comics/little-sprout.png",
+          "crop": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      }
+    ],
+    "beats": [
+      "播下一粒种子",
+      "照顾幼苗",
+      "观察生长",
+      "等到花开"
+    ],
+    "example": [
+      {
+        "id": "little-sprout-1",
+        "title": "播下一粒种子",
+        "action": "播下一粒种子",
+        "dialogue": "把小小的期待，种进土里。",
+        "entityIds": [
+          "little-sprout-asset-0",
+          "little-sprout-asset-1",
+          "little-sprout-asset-2",
+          "little-sprout-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/little-sprout.png",
+          "crop": [
+            0.0,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "little-sprout-2",
+        "title": "照顾幼苗",
+        "action": "照顾幼苗",
+        "dialogue": "一点水，一点阳光。",
+        "entityIds": [
+          "little-sprout-asset-0",
+          "little-sprout-asset-1",
+          "little-sprout-asset-2",
+          "little-sprout-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/little-sprout.png",
+          "crop": [
+            0.5,
+            0.0,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "little-sprout-3",
+        "title": "观察生长",
+        "action": "观察生长",
+        "dialogue": "每天，都比昨天长高一点。",
+        "entityIds": [
+          "little-sprout-asset-0",
+          "little-sprout-asset-1",
+          "little-sprout-asset-2",
+          "little-sprout-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/little-sprout.png",
+          "crop": [
+            0.0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      },
+      {
+        "id": "little-sprout-4",
+        "title": "等到花开",
+        "action": "等到花开",
+        "dialogue": "慢慢来，也会有自己的春天。",
+        "entityIds": [
+          "little-sprout-asset-0",
+          "little-sprout-asset-1",
+          "little-sprout-asset-2",
+          "little-sprout-asset-3"
+        ],
+        "state": "延续前一画面的角色外观与情节状态",
+        "image": {
+          "src": "/comics/little-sprout.png",
+          "crop": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "status": "ready"
+      }
+    ],
+    "cover": {
+      "src": "/comics/little-sprout.png",
+      "crop": [
+        0.0,
+        0.0,
+        0.5,
+        0.5
+      ]
+    },
+    "continuity": [
+      "角色外貌与服装保持一致",
+      "时间和场景变化符合故事进程"
+    ],
+    "source": {
+      "kind": "original",
+      "author": "WorkStore",
+      "redistribution": "WorkStore 原创策划与 AI 生成示例，可随应用分发"
+    },
+    "publishingDirection": "围绕真实故事内容组织标题与文案，突出情绪变化",
+    "dialogueStyle": {
+      "shape": "speech",
+      "position": "auto",
+      "fill": "white",
+      "rendering": "integrated",
+      "lettering": "对白与绘画一体生成；手绘字形、气泡轮廓与作品画风协调，按发声关系和留白自适应排布，避开脸部、手部与关键动作，不固定横条"
+    }
+  }
+]
