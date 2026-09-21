@@ -16,6 +16,7 @@ dist/
 *.pfx
 /.tauri/
 /.codex/
+/.workbuddy/
 /workspace/
 /data/
 /.workstore/
