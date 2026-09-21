@@ -192,6 +192,9 @@ fn validate(files: &Files) -> Result<()> {
         return Err("工作区版本不兼容".into());
     }
     for (name, bytes) in files {
+        if name.starts_with(crate::sync_history::PREFIX) && !crate::sync_history::valid(name, bytes) {
+            return Err("同步历史校验失败，未修改工作区".into());
+        }
         if name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
             let v: Value =
                 serde_json::from_slice(bytes).map_err(|e| format!("{name} 无法解析：{e}"))?;
@@ -222,7 +225,7 @@ fn default_state(bytes: &[u8]) -> bool {
     serde_json::from_slice::<Value>(bytes).ok() == serde_json::to_value(Data::default()).ok()
 }
 // Objects merge per field; arrays (editor scenes/content) stay indivisible. A
-// conflicting field uses the remote value and preserves the entire local file.
+// conflicting field uses the remote value; merge() archives exact inputs outside tool lists.
 fn merge_value(base: Option<&Value>, local: &Value, remote: &Value, conflict: &mut bool) -> Value {
     if local == remote || Some(local) == base {
         return remote.clone();
@@ -301,7 +304,8 @@ fn merge_value(base: Option<&Value>, local: &Value, remote: &Value, conflict: &m
     *conflict = true;
     remote.clone()
 }
-fn conflict_copy(name: &str, bytes: &[u8]) -> (String, Vec<u8>) {
+#[cfg(test)]
+fn legacy_conflict_copy(name: &str, bytes: &[u8]) -> (String, Vec<u8>) {
     let digest = Sha256::digest([name.as_bytes(), bytes].concat());
     if name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
         if let Ok(mut value) = serde_json::from_slice::<Value>(bytes) {
@@ -333,13 +337,21 @@ fn conflict_copy(name: &str, bytes: &[u8]) -> (String, Vec<u8>) {
 }
 fn merge(base: &Files, local: &Files, remote: &Files, initial: bool) -> (Files, usize) {
     let mut result = Files::new();
-    let mut copies = Files::new();
+    let mut history = Files::new();
+    let mut conflicts = 0;
     for name in base
         .keys()
         .chain(local.keys())
         .chain(remote.keys())
         .collect::<BTreeSet<_>>()
     {
+        // History is append-only across devices, including delete/modify races.
+        if name.starts_with(crate::sync_history::PREFIX) {
+            if let Some(bytes) = remote.get(name).or(local.get(name)).or(base.get(name)) {
+                result.insert(name.clone(), bytes.clone());
+            }
+            continue;
+        }
         let b = base.get(name);
         let l = local.get(name);
         let r = remote.get(name);
@@ -375,18 +387,18 @@ fn merge(base: &Files, local: &Files, remote: &Files, initial: bool) -> (Files, 
             r.cloned()
         };
         if conflict {
-            if let Some(bytes) = l.or(b) {
-                let (path, bytes) = conflict_copy(name, bytes);
-                copies.insert(path, bytes);
+            conflicts += 1;
+            for bytes in [b, l, r].into_iter().flatten() {
+                crate::sync_history::archive(&mut history, name, bytes, "concurrent-edit", None);
             }
         }
         if let Some(bytes) = merged {
             result.insert(name.clone(), bytes);
         }
     }
-    let count = copies.len();
-    result.extend(copies);
-    (result, count)
+    result.extend(history);
+    crate::sync_history::normalize(&mut result);
+    (result, conflicts)
 }
 #[derive(Serialize, Deserialize)]
 pub struct Prepared {
@@ -406,13 +418,14 @@ fn json_write(path: &Path, value: &impl Serialize) -> Result<()> {
     atomic_write(path, &serde_json::to_vec(value).map_err(|e| e.to_string())?)
 }
 fn replace_checkout(root: &Path, files: &Files) -> Result<()> {
-    for name in snapshot(root)?.keys() {
+    let before = snapshot(root)?;
+    for (name, bytes) in files {
+        if before.get(name) != Some(bytes) { atomic_write(&root.join(name), bytes)?; }
+    }
+    for name in before.keys() {
         if !files.contains_key(name) {
             fs::remove_file(root.join(name)).map_err(|e| e.to_string())?;
         }
-    }
-    for (name, bytes) in files {
-        atomic_write(&root.join(name), bytes)?;
     }
     Ok(())
 }
@@ -600,7 +613,7 @@ pub fn prepare(root: &Path, preferences: &Preferences, captured: Files) -> Resul
         } else {
             Files::new()
         };
-        let (merged, conflicts) = if remote.is_empty() {
+        let (mut merged, conflicts) = if remote.is_empty() {
             (captured.clone(), 0)
         } else {
             merge(
@@ -610,6 +623,7 @@ pub fn prepare(root: &Path, preferences: &Preferences, captured: Files) -> Resul
                 baseline.identity.is_empty(),
             )
         };
+        crate::sync_history::normalize(&mut merged);
         validate(&merged)?;
         replace_checkout(repo, &merged)?;
         git(repo, &["add", "-A", "--force"], token)?;
@@ -714,6 +728,7 @@ pub fn apply(root: &Path, id: &str) -> Result<Applied> {
             }
         }
     }
+    crate::sync_history::normalize(&mut next);
     validate(&next)?;
     let changed: Vec<_> = current
         .keys()
@@ -738,13 +753,43 @@ pub fn apply(root: &Path, id: &str) -> Result<Applied> {
     fs::remove_file(path).map_err(|e| e.to_string())?;
     Ok(Applied {
         changed,
-        message: if prepared.conflicts == 0 {
-            "同步完成".into()
-        } else {
-            format!("同步完成，已保留 {} 份冲突副本", prepared.conflicts)
-        },
+        message: "同步完成".into(),
     })
 }
+/// Called only before editors mount, or under the explicit maintenance lock.
+/// Preserve the common baseline so the next Git sync still sees the retirement.
+pub fn reconcile_history(root: &Path) -> Result<usize> {
+    let current = snapshot(root)?;
+    let mut files = current.clone();
+    let count = crate::sync_history::normalize(&mut files);
+    if files == current { return Ok(0); }
+    validate(&files)?;
+    let baseline_path = root.join(".workstore/sync-base.json");
+    let baseline = if baseline_path.exists() {
+        serde_json::from_slice(&fs::read(&baseline_path).map_err(|e| e.to_string())?)
+            .map_err(|_| "同步基线无法读取，未整理用户文件".to_string())?
+    } else { Baseline::default() };
+    json_write(&root.join(".workstore/sync-recovery.json"), &Recovery { files, baseline })?;
+    recover(root)?;
+    Ok(count)
+}
+
+/// Offline repair uses the same workspace lock as the GUI. No network and no
+/// deletion without a durable exact-byte history plus recovery journal.
+pub fn maintain_history(root: &Path) -> Result<usize> {
+    use fs2::FileExt;
+    let root = fs::canonicalize(root).map_err(|e| e.to_string())?;
+    let area = root.join(".workstore");
+    let meta = fs::symlink_metadata(&area).map_err(|e| e.to_string())?;
+    if !meta.is_dir() || meta.file_type().is_symlink() { return Err("工作区缓存目录无效".into()); }
+    let lock = fs::OpenOptions::new().read(true).write(true).open(area.join("workspace.lock"))
+        .map_err(|e| e.to_string())?;
+    lock.try_lock_exclusive().map_err(|_| "请先正常退出 WorkStore，当前未修改任何用户文件".to_string())?;
+    validate(&snapshot(&root)?)?;
+    recover(&root)?;
+    reconcile_history(&root)
+}
+
 #[derive(Serialize, Deserialize)]
 struct Recovery {
     files: Files,
@@ -926,7 +971,7 @@ mod tests {
         assert!(snapshot(&a)
             .unwrap()
             .keys()
-            .any(|s| s.starts_with("conflicts/")));
+            .any(|s| s.starts_with(crate::sync_history::PREFIX)));
         // Idle checks do not generate new commits.
         let head = git(&remote, &["rev-parse", "refs/heads/main"], "").unwrap();
         sync(&a, &p);
@@ -1012,26 +1057,155 @@ mod tests {
         assert_eq!(before, snapshot(&root).unwrap());
     }
     #[test]
-    fn conflicting_document_content_has_valid_stable_copy() {
+    fn conflicting_document_content_keeps_one_visible_document_and_exact_history() {
+        use base64::Engine;
         let id = Uuid::new_v4().to_string();
         let name = format!("data/app.doc/{id}.doc.json");
         let base = serde_json::json!({"id":id,"type":"workstore.document","schemaVersion":1,"title":"Title","content":"original"});
-        let mut local = base.clone();
-        local["content"] = Value::from("local");
-        let mut remote = base.clone();
-        remote["content"] = Value::from("remote");
+        let mut local = base.clone(); local["content"] = Value::from("local");
+        let mut remote = base.clone(); remote["content"] = Value::from("remote");
         let wrap = |v: &Value| BTreeMap::from([(name.clone(), serde_json::to_vec(v).unwrap())]);
         let (merged, count) = merge(&wrap(&base), &wrap(&local), &wrap(&remote), false);
         assert_eq!(count, 1);
-        assert_eq!(merged.len(), 2);
-        assert_eq!(
-            merged,
-            merge(&wrap(&base), &wrap(&local), &wrap(&remote), false).0
-        );
-        let copy: Value =
-            serde_json::from_slice(merged.iter().find(|(k, _)| *k != &name).unwrap().1).unwrap();
-        assert_eq!(copy["content"], "local");
-        assert!(copy["title"].as_str().unwrap().contains("冲突副本"));
+        assert_eq!(merged.keys().filter(|p|p.starts_with("data/")).count(), 1);
+        assert_eq!(serde_json::from_slice::<Value>(&merged[&name]).unwrap()["content"],"remote");
+        assert_eq!(merged, merge(&wrap(&base), &wrap(&local), &wrap(&remote), false).0);
+        let versions: Vec<Value> = merged.iter().filter(|(p,_)|p.starts_with(crate::sync_history::PREFIX))
+            .map(|(_,bytes)| {
+                let v: Value = serde_json::from_slice(bytes).unwrap();
+                let raw = base64::engine::general_purpose::STANDARD.decode(v["contentBase64"].as_str().unwrap()).unwrap();
+                serde_json::from_slice(&raw).unwrap()
+            }).collect();
+        assert!(versions.contains(&base)); assert!(versions.contains(&local)); assert!(versions.contains(&remote));
+    }
+    #[test]
+    fn independent_document_fields_merge_without_extra_document_or_history() {
+        let id = Uuid::new_v4().to_string();
+        let path = format!("data/app.doc/{id}.doc.json");
+        let base = serde_json::json!({"id":id,"type":"workstore.document","schemaVersion":1,"title":"Title","content":"original","favorite":false});
+        let mut local = base.clone(); local["content"] = "changed".into();
+        let mut remote = base.clone(); remote["favorite"] = true.into();
+        let wrap = |v: &Value| Files::from([(path.clone(),serde_json::to_vec(v).unwrap())]);
+        let (files,count) = merge(&wrap(&base),&wrap(&local),&wrap(&remote),false);
+        assert_eq!(count,0); assert_eq!(files.len(),1);
+        let value: Value=serde_json::from_slice(&files[&path]).unwrap();
+        assert_eq!(value["content"],"changed"); assert_eq!(value["favorite"],true);
+    }
+    #[test]
+    fn local_conflict_migration_preserves_baseline_and_is_idempotent() {
+        let dir=tempfile::tempdir().unwrap(); let root=dir.path().join("data");
+        let store=Store::open(dir.path().join("config"),root.clone()).unwrap();
+        let doc=store.create_document().unwrap();
+        let primary=format!("data/app.doc/{}.doc.json",doc.document.info.id);
+        let bytes=fs::read(root.join(&primary)).unwrap();
+        let (copy,copy_bytes)=legacy_conflict_copy(&primary,&bytes);
+        atomic_write(&root.join(&copy),&copy_bytes).unwrap();
+        let before=snapshot(&root).unwrap();
+        json_write(&root.join(".workstore/sync-base.json"),&Baseline{identity:"fixture".into(),files:before.clone()}).unwrap();
+        assert_eq!(reconcile_history(&root).unwrap(),1);
+        assert!(!root.join(copy).exists()); assert_eq!(fs::read(root.join(&primary)).unwrap(),bytes);
+        assert_eq!(store.list_documents().unwrap().documents.len(),1);
+        let baseline:Baseline=serde_json::from_slice(&fs::read(root.join(".workstore/sync-base.json")).unwrap()).unwrap();
+        assert_eq!(baseline.files,before);
+        assert_eq!(reconcile_history(&root).unwrap(),0);
+        assert!(maintain_history(&root).is_err(),"maintenance must not touch an open workspace");
+    }
+    #[test]
+    fn all_tool_conflicts_archive_content_without_new_visible_ids() {
+        for (tool,suffix,kind,key,old,l,r) in [
+            ("app.whiteboard","whiteboard","workstore.whiteboard","scene",serde_json::json!({"elements":[]}),serde_json::json!({"elements":[{"id":"a","text":"local"}]}),serde_json::json!({"elements":[{"id":"a","text":"remote"}]})),
+            ("app.comic","comic","workstore.comic","pages",serde_json::json!([]),serde_json::json!([{"id":"page","text":"local"}]),serde_json::json!([{"id":"page","text":"remote"}]))
+        ] {
+            let id=Uuid::new_v4().to_string(); let path=format!("data/{tool}/{id}.{suffix}.json");
+            let base=serde_json::json!({"id":id,"type":kind,"schemaVersion":1,"title":"Title",key:old});
+            let mut local=base.clone(); local[key]=l;
+            let mut remote=base.clone(); remote[key]=r;
+            let wrap=|v:&Value|Files::from([(path.clone(),serde_json::to_vec(v).unwrap())]);
+            let (files,count)=merge(&wrap(&base),&wrap(&local),&wrap(&remote),false);
+            assert_eq!(count,1);
+            assert_eq!(files.keys().filter(|p|p.starts_with("data/")).count(),1);
+            assert_eq!(serde_json::from_slice::<Value>(&files[&path]).unwrap()[key],remote[key]);
+            assert!(files.keys().any(|p|p.starts_with(crate::sync_history::PREFIX)));
+        }
+    }
+    #[test]
+    fn deletion_conflict_preserves_exact_local_content_and_history_is_append_only() {
+        let base=Files::from([("notes/test.txt".into(),b"base".to_vec())]);
+        let local=Files::from([("notes/test.txt".into(),b"important unsynced edit".to_vec())]);
+        let (files,count)=merge(&base,&local,&Files::new(),false);
+        assert_eq!(count,1); assert!(!files.contains_key("notes/test.txt"));
+        assert_eq!(merge(&files,&files,&Files::new(),false).0,files);
+    }
+    #[test]
+    fn legacy_retirement_and_new_conflicts_converge_over_git_without_visible_copies() {
+        let dir=tempfile::tempdir().unwrap(); let remote=dir.path().join("remote.git");
+        fs::create_dir_all(&remote).unwrap(); git(&remote,&["init","--bare","--quiet"],"").unwrap();
+        let a=dir.path().join("a"); let b=dir.path().join("b");
+        let sa=Store::open(dir.path().join("ca"),a.clone()).unwrap();
+        let sb=Store::open(dir.path().join("cb"),b.clone()).unwrap();
+        let doc=sa.create_document().unwrap(); let id=doc.document.info.id;
+        let path=format!("data/app.doc/{id}.doc.json");
+        let mut p=Preferences::default(); p.github_repo_url=remote.to_str().unwrap().into(); p.github_sync_enabled=true;
+        sync(&a,&p); sync(&b,&p);
+        let mut local:Value=serde_json::from_slice(&fs::read(a.join(&path)).unwrap()).unwrap();
+        let mut other=local.clone(); local["content"]="version A".into(); other["content"]="version B".into();
+        json_write(&a.join(&path),&local).unwrap(); json_write(&b.join(&path),&other).unwrap();
+        sync(&a,&p); sync(&b,&p); sync(&a,&p);
+        assert_eq!(sa.list_documents().unwrap().documents.len(),1);
+        assert_eq!(sb.list_documents().unwrap().documents.len(),1);
+        assert_eq!(snapshot(&a).unwrap(),snapshot(&b).unwrap());
+        assert_eq!(serde_json::from_slice::<Value>(&fs::read(a.join(&path)).unwrap()).unwrap()["content"],"version A");
+        let (copy,bytes)=legacy_conflict_copy(&path,&serde_json::to_vec(&other).unwrap());
+        atomic_write(&a.join(&copy),&bytes).unwrap(); sync(&a,&p); sync(&b,&p);
+        assert!(!a.join(&copy).exists()); assert!(!b.join(&copy).exists());
+        assert_eq!(snapshot(&a).unwrap(),snapshot(&b).unwrap());
+        // An old peer can resend an edited former copy: retire it again but
+        // preserve those new bytes in the Git-tracked history.
+        let mut edited:Value=serde_json::from_slice(&bytes).unwrap(); edited["content"]="late old-device edit".into();
+        json_write(&b.join(&copy),&edited).unwrap(); sync(&b,&p); sync(&a,&p);
+        assert!(!b.join(&copy).exists()); assert_eq!(snapshot(&a).unwrap(),snapshot(&b).unwrap());
+        assert_eq!(sa.list_documents().unwrap().documents.len(),1);
+        let before=snapshot(&a).unwrap(); sync(&a,&p); assert_eq!(before,snapshot(&a).unwrap());
+    }
+
+    #[test]
+    fn interrupted_retirement_recovers_archives_before_removing_visible_copy() {
+        let dir=tempfile::tempdir().unwrap(); let root=dir.path().join("data");
+        let store=Store::open(dir.path().join("config"),root.clone()).unwrap();
+        let doc=store.create_document().unwrap();
+        let primary=format!("data/app.doc/{}.doc.json",doc.document.info.id);
+        let (copy,bytes)=legacy_conflict_copy(&primary,&fs::read(root.join(&primary)).unwrap());
+        atomic_write(&root.join(&copy),&bytes).unwrap();
+        let mut next=snapshot(&root).unwrap(); crate::sync_history::normalize(&mut next);
+        json_write(&root.join(".workstore/sync-recovery.json"),&Recovery{files:next.clone(),baseline:Baseline::default()}).unwrap();
+        recover(&root).unwrap();
+        assert_eq!(snapshot(&root).unwrap(),next); assert!(!root.join(&copy).exists());
+        recover(&root).unwrap(); assert_eq!(snapshot(&root).unwrap(),next);
+        // Do not delete a user's copy if a would-be archive write is invalid.
+        atomic_write(&root.join(&copy),&bytes).unwrap();
+        let path=next.keys().find(|p|p.starts_with(crate::sync_history::PREFIX)).unwrap().clone();
+        next.insert(path,b"corrupt".to_vec());
+        json_write(&root.join(".workstore/sync-recovery.json"),&Recovery{files:next,baseline:Baseline::default()}).unwrap();
+        assert!(recover(&root).is_err()); assert_eq!(fs::read(root.join(copy)).unwrap(),bytes);
+    }
+    #[test]
+    fn edits_saved_during_network_are_preserved_when_retiring_an_old_copy() {
+        use base64::Engine;
+        let dir=tempfile::tempdir().unwrap(); let root=dir.path().join("data");
+        let store=Store::open(dir.path().join("config"),root.clone()).unwrap();
+        let doc=store.create_document().unwrap(); let primary=format!("data/app.doc/{}.doc.json",doc.document.info.id);
+        let (copy,bytes)=legacy_conflict_copy(&primary,&fs::read(root.join(&primary)).unwrap());
+        atomic_write(&root.join(&copy),&bytes).unwrap();
+        let captured=snapshot(&root).unwrap(); let mut merged=captured.clone(); crate::sync_history::normalize(&mut merged);
+        json_write(&root.join(".workstore/sync-prepared.json"),&Prepared{id:"retirement".into(),root:root.to_str().unwrap().into(),captured,merged,conflicts:0,identity:"fixture".into()}).unwrap();
+        let mut edited:Value=serde_json::from_slice(&bytes).unwrap(); edited["content"]="typed during network".into();
+        let latest=serde_json::to_vec_pretty(&edited).unwrap(); atomic_write(&root.join(&copy),&latest).unwrap();
+        let applied=apply(&root,"retirement").unwrap(); assert!(applied.changed.contains(&copy));
+        let files=snapshot(&root).unwrap(); assert!(!files.contains_key(&copy));
+        assert!(files.iter().filter(|(p,_)|p.starts_with(crate::sync_history::PREFIX)).any(|(_,bytes)| {
+            let v:Value=serde_json::from_slice(bytes).unwrap();
+            base64::engine::general_purpose::STANDARD.decode(v["contentBase64"].as_str().unwrap()).unwrap()==latest
+        }));
     }
     #[test]
     fn recovery_completes_files_and_baseline_as_one_transaction() {

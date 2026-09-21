@@ -8,6 +8,7 @@ use comics::{Comic, ComicList, LoadedComic};
 mod preferences;
 mod storage;
 mod sync;
+mod sync_history;
 mod whiteboard;
 use documents::{Document, DocumentList, LoadedDocument};
 use std::{path::PathBuf, sync::Mutex};
@@ -261,7 +262,22 @@ fn updater_configured(app: tauri::AppHandle) -> bool {
     })
 }
 
+fn application_context() -> tauri::Context<tauri::Wry> {
+    tauri::generate_context!()
+}
+
 fn main() {
+    let args: Vec<_> = std::env::args_os().collect();
+    if args.get(1).is_some_and(|arg| arg == "--maintain-sync-history") {
+        let result = if args.len() == 3 {
+            sync::maintain_history(&PathBuf::from(&args[2]))
+        } else { Err("用法：--maintain-sync-history <workspace>".into()) };
+        match result {
+            Ok(count) => println!("整理完成：{count} 份可见冲突版本已安全转入后台历史"),
+            Err(error) => { eprintln!("{error}"); std::process::exit(1); }
+        }
+        return;
+    }
     tauri::Builder::default()
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_process::init())
@@ -331,7 +347,7 @@ fn main() {
             ai::ai_history,
             ai::ai_codex_status
         ])
-        .build(tauri::generate_context!())
+        .build(application_context())
         .expect("WorkStore failed to start; your existing files have not been overwritten")
         .run(|app, event| {
             if let tauri::RunEvent::ExitRequested {
@@ -344,4 +360,23 @@ fn main() {
                 }
             }
         });
+}
+
+#[cfg(test)]
+mod window_config_tests {
+    #[test]
+    fn main_window_preserves_first_click_and_web_drag_handling() {
+        // Exercise Tauri's actual platform merge, not just the base JSON. Arrays
+        // in tauri.macos.conf.json replace their base counterparts wholesale.
+        let context = super::application_context();
+        let main = context
+            .config()
+            .app
+            .windows
+            .iter()
+            .find(|window| window.label == "main")
+            .expect("main window must be configured");
+        assert!(main.accept_first_mouse, "the first click must reach the webview");
+        assert!(!main.drag_drop_enabled, "web tools own their drag interactions");
+    }
 }

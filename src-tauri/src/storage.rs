@@ -206,6 +206,7 @@ impl Store {
             write_json(&root.join("state.json"), &Data::default())?;
             atomic_write(&root.join(".gitignore"), b".workstore/\n")?;
         }
+        crate::sync::reconcile_history(&root)?;
         let disk = fs::read(root.join("state.json")).map_err(err)?;
         let store = Self {
             root,
