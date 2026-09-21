@@ -1,11 +1,14 @@
-import { AiAssistantButton } from "../ai/AiAssistant";
+import WhiteboardAiSidebar from "./SelectionAssistant";
+import { whiteboardSelectionTarget } from "./selectionTarget";
+import type { SelectionSnapshot } from "./selectionEditing";
 import "./assets";
 import { Excalidraw, MainMenu, serializeAsJSON } from "@excalidraw/excalidraw";
 import "@excalidraw/excalidraw/index.css";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { ExcalidrawProps } from "@excalidraw/excalidraw/types";
+import type { ExcalidrawProps, ExcalidrawImperativeAPI } from "@excalidraw/excalidraw/types";
 import { App, Button, Dropdown, Input, Modal } from "antd";
 import {
+  MessageOutlined,
   EditOutlined,
   ExportOutlined,
   FileTextOutlined,
@@ -16,9 +19,12 @@ import {
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
+import { whiteboardConversationTarget } from "./conversationTarget";
 import { native } from "../workspace";
+import { registerSyncActivationBlocker } from "../documentLifecycle";
 import {
   boardList,
+  boardStatus,
   boardWarnings,
   createBoard,
   currentBoard,
@@ -36,20 +42,32 @@ import {
 } from "./store";
 import "./whiteboard.css";
 import WhiteboardIcon from "./WhiteboardIcon";
-function Canvas({ id }: { id: string }) {
+function Canvas({ id, onApi, onSelectionCount }: { id: string; onApi?: (api: ExcalidrawImperativeAPI | null) => void; onSelectionCount?: (count: number) => void }) {
+  const api = useRef<ExcalidrawImperativeAPI | null>(null);
+  const connect = useCallback((value: ExcalidrawImperativeAPI) => { api.current = value; onApi?.(value); }, [onApi]);
+  useEffect(() => () => { onApi?.(null); }, [onApi]);
   const initialData = useMemo(() => currentBoard(id)!.scene, [id]);
   const previous = useRef("");
+  const editorVersion = useRef(remoteVersion(id));
+  const editingText = useRef(false);
+  useEffect(() => registerSyncActivationBlocker(() => editingText.current), []);
   const onChange = useCallback<NonNullable<ExcalidrawProps["onChange"]>>(
     (elements, appState, files) => {
+      if (editorVersion.current !== remoteVersion(id)) return;
+      // Editing state is transient and is omitted from the serialized scene.
+      // Update this even when the persisted scene has not changed.
+      editingText.current = !!appState.editingTextElement;
+      onSelectionCount?.(Object.values(appState.selectedElementIds).filter(Boolean).length);
       const serialized = serializeAsJSON(elements, appState, files, "local");
       if (serialized === previous.current) return;
       previous.current = serialized;
       stageBoard(id, { scene: JSON.parse(serialized) as Scene });
     },
-    [id],
+    [id, onSelectionCount],
   );
   return (
     <Excalidraw
+      excalidrawAPI={connect}
       initialData={initialData}
       onChange={onChange}
       langCode="zh-CN"
@@ -84,6 +102,39 @@ export default function Whiteboard() {
   const [renaming, setRenaming] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [aiOpen, setAiOpen] = useState(false);
+  const [attachment, setAttachment] = useState<SelectionSnapshot | null>(null);
+  const [selectionCount, setSelectionCount] = useState(0);
+  const [aiApplying, setAiApplying] = useState(false);
+  const canvas = useRef<ExcalidrawImperativeAPI | null>(null);
+  const connectCanvas = useCallback((api: ExcalidrawImperativeAPI | null) => { canvas.current = api; }, []);
+  const updateSelectionCount = useCallback((count: number) => setSelectionCount(previous => previous === count ? previous : count), []);
+  useEffect(() => { setAttachment(null); setSelectionCount(0); }, [id]);
+  const activeId = useRef(id); activeId.current = id;
+  const mounted = useRef(true);
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
+  const conversationTarget = whiteboardConversationTarget(() => activeId.current, () => canvas.current, next => {
+    if (mounted.current) { setId(next); setError(""); setBusy(false); }
+  });
+  const [aiProgress, setAiProgress] = useState<import("./conversationPlan").CanvasProgress | null>(null);
+  const liveConversationTarget = {
+    ...conversationTarget,
+    execute: async (...args: Parameters<typeof conversationTarget.execute>) => {
+      setAiProgress({ done: 0, total: 0, label: "准备绘制" });
+      try {
+        return await conversationTarget.execute(args[0], args[1], args[2], progress => {
+          if (mounted.current) setAiProgress(progress);
+          args[3](progress);
+        });
+      } finally { if (mounted.current) setAiProgress(null); }
+    },
+  };
+  const selectionTarget = whiteboardSelectionTarget(() => activeId.current, () => canvas.current);
+  const attachSelection = () => {
+    if (aiApplying) return;
+    try { setAttachment(selectionTarget.capture()); setAiOpen(true); }
+    catch (error) { message.warning(String(error)); }
+  };
   useEffect(() => subscribe(() => render((x) => x + 1)), []);
   useEffect(() => {
     let alive = true;
@@ -220,7 +271,7 @@ export default function Whiteboard() {
   );
   return (
     <section className="whiteboard-app">
-      <div className="whiteboard-body">
+      <div className={`whiteboard-body ${aiOpen ? "has-ai-sidebar" : ""}`}>
         <aside className="board-sidebar" style={sidebarCollapsed ? { display: "none" } : undefined}>
             <header className="whiteboard-heading">
             <div>
@@ -280,7 +331,11 @@ export default function Whiteboard() {
                 {doc.title}<EditOutlined />
               </button>
             ) : <span>白板</span>}
-            <div style={{ marginLeft: "auto" }}><AiAssistantButton key={id ?? "empty"} toolId="app.whiteboard" context={doc ? () => ({ title: doc.title, content: (currentBoard(doc.id)?.scene.elements ?? []).filter(e => !e.isDeleted && e.type === "text").map(e => "text" in e ? String(e.text) : "").join("\n") }) : undefined} /></div>
+            {doc && boardStatus(doc.id).startsWith("保存失败") && <span className="board-error" role="status">{boardStatus(doc.id)}<Button type="link" size="small" onClick={() => void flushWhiteboards().catch(e => message.error(String(e)))}>重试保存</Button></span>}
+            <div className="board-ai-actions" style={{ marginLeft: "auto" }}>
+              <Button size="small" disabled={!doc || !selectionCount || aiApplying} onMouseDown={event => event.preventDefault()} onClick={attachSelection}>加入 AI 对话{selectionCount ? ` (${selectionCount})` : ""}</Button>
+              <Button size="small" type="text" icon={<MessageOutlined />} disabled={aiApplying} aria-expanded={aiOpen} onMouseDown={event => event.preventDefault()} onClick={() => setAiOpen(value => !value)}>AI 助手</Button>
+            </div>
           </div>
           {error && (
             <div className="board-error">
@@ -304,7 +359,8 @@ export default function Whiteboard() {
           {doc ? (
             <>
               <div className="board-canvas">
-                <Canvas key={`${doc.id}:${remoteVersion(doc.id)}`} id={doc.id} />
+                <Canvas key={`${doc.id}:${remoteVersion(doc.id)}`} id={doc.id} onApi={connectCanvas} onSelectionCount={updateSelectionCount} />
+                {aiProgress && <div className="board-ai-live" role="status"><span className="ai-working-dot" />AI · {aiProgress.label}{aiProgress.total ? ` ${aiProgress.done}/${aiProgress.total}` : ""}</div>}
                 {busy && <div className="board-busy">正在打开白板…</div>}
               </div>
             </>
@@ -331,6 +387,7 @@ export default function Whiteboard() {
             </div>
           )}
         </div>
+        {aiOpen && <WhiteboardAiSidebar boardId={id} attachment={attachment} target={liveConversationTarget} onDetach={() => setAttachment(null)} onAttach={attachSelection} onClose={() => setAiOpen(false)} onWriteState={setAiApplying} />}
       </div>
       <Modal
         title="重命名白板"

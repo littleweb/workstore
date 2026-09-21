@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Alert, Button, Checkbox, Input, Modal, Select } from "antd";
+import { Alert, Button, Checkbox, Input, Modal, Select, Tabs } from "antd";
 import { MessageOutlined } from "@ant-design/icons";
 import { ai, type AiMessage, type AiRecord } from "./client";
 import { native, registerSyncRefresher } from "../workspace";
 import "./ai.css";
+import EditorAssistant from "./EditorAssistant";
+import type { EditorTarget } from "./editing";
 export type AiContext = { title: string; content: string };
 export function AiPanel({ toolId, context }: { toolId: string; context?: () => AiContext }) {
   const [messages, setMessages] = useState<AiMessage[]>([]);
@@ -43,7 +45,7 @@ export function AiPanel({ toolId, context }: { toolId: string; context?: () => A
   return <div className="ai-panel">
     <div className="ai-panel-toolbar"><Select aria-label="最近的 AI 回答" placeholder="最近的回答" value={null} disabled={busy || !history.length} options={history.map(r => ({ value: r.id, label: new Date(r.createdAt).toLocaleDateString() + " · " + r.prompt.split("\n")[0].slice(0, 35) }))} onChange={id => { const r = history.find(r => r.id === id); if (r) { setMessages([{ role: "user", content: r.prompt }, { role: "assistant", content: r.text }]); setError(""); } }} /><Button disabled={busy} onClick={() => { setMessages([]); setPrompt(""); setError(""); }}>新对话</Button></div>
     <div className="ai-messages">
-      {!messages.length && <div className="ai-empty"><MessageOutlined /><h3>有什么可以帮你？</h3><p>使用全局 AI 服务，回答自动保存到本地。</p></div>}
+      {!messages.length && <div className="ai-empty"><MessageOutlined /><h3>有什么可以帮你？</h3><p>使用全局 AI 服务，回答自动保存到本地；对话文字不会自动写入文档或白板。</p></div>}
       {messages.map((m, i) => <article className={`ai-message ${m.role}`} key={i}><strong>{m.role === "user" ? "你" : "AI"}</strong><div>{m.content}</div></article>)}
       {busy && <p className="ai-progress">正在思考…</p>}<div ref={end} />
     </div>
@@ -54,8 +56,15 @@ export function AiPanel({ toolId, context }: { toolId: string; context?: () => A
     </div>
   </div>;
 }
-export function AiAssistantButton(props: { toolId: string; context?: () => AiContext }) {
+export function AiAssistantButton(props: { toolId: string; context?: () => AiContext; editor?: EditorTarget }) {
   const [open, setOpen] = useState(false);
-  return <><Button size="small" type="text" icon={<MessageOutlined />} onClick={() => setOpen(true)}>AI 助手</Button><Modal title="AI 助手" open={open} footer={null} onCancel={() => setOpen(false)} width={760} destroyOnHidden>{open && <AiPanel {...props} />}</Modal></>;
+  const [applying, setApplying] = useState(false);
+  return <><Button size="small" type="text" icon={<MessageOutlined />} onClick={() => setOpen(true)}>AI 助手</Button>
+    <Modal title="AI 助手" open={open} footer={null} onCancel={() => { if (!applying) setOpen(false); }} closable={!applying} maskClosable={!applying} keyboard={!applying} width={860} destroyOnHidden>
+      {open && (props.editor ? <Tabs defaultActiveKey="edit" destroyOnHidden items={[
+        { key: "edit", label: props.editor.kind === "document" ? "生成 / 改写文档" : "生成 / 编辑白板", children: <EditorAssistant toolId={props.toolId} target={props.editor} onApplying={setApplying} /> },
+        { key: "chat", label: "仅对话", disabled: applying, children: <AiPanel toolId={props.toolId} context={props.context} /> },
+      ]} /> : <AiPanel {...props} />)}
+    </Modal></>;
 }
 export default function AiApp() { return <div className="tool-page ai-app"><header className="tool-heading"><div className="tool-title"><MessageOutlined /><div className="tool-title-copy"><h2>AI 对话</h2><p>使用全局 AI 服务，连接你的想法。</p></div></div></header><AiPanel toolId="app.ai" /></div>; }

@@ -182,35 +182,51 @@ export async function createDocument() {
       });
 
   cache.set(loaded.document.id, { ...loaded, generation: 0, saved: 0 });
-  lastDocumentId = loaded.document.id;
-  publish(cache.get(lastDocumentId)!);
+  // Creating/loading a file must not change selection: a newer click may have
+  // superseded the request while I/O was in flight.
+  publish(cache.get(loaded.document.id)!);
   scheduleAutosync();
   return loaded.document;
 }
 
-export async function openDocument(id: string) {
-  let c = cache.get(id);
-  if (!c || c.generation === c.saved) {
+export async function loadDocument(id: string) {
+  let cached = cache.get(id);
+  if (!cached || (cached.generation === cached.saved && !cached.saving)) {
+    const beforeRead = cached;
+    const generation = cached?.generation;
+    const token = cached?.token;
     const loaded = native
       ? await invoke<LoadedDocument>("load_document", { id })
       : await browserLoad(id);
-    c = { ...loaded, generation: 0, saved: 0 };
-    cache.set(id, c);
+    const current = cache.get(id);
+    // A late read must not replace edits, an in-flight save, or a newer cache
+    // installed by another load/sync while this request was awaiting disk I/O.
+    if (!current || (current === beforeRead && current.generation === generation &&
+      current.token === token && current.generation === current.saved && !current.saving)) {
+      cached = { ...loaded, generation: 0, saved: 0 };
+      cache.set(id, cached);
+    } else {
+      cached = current;
+    }
   }
+  return cached.document;
+}
 
+export function activateDocument(id: string) {
+  const cached = cache.get(id);
+  if (!cached) throw new Error("文档尚未载入");
   lastDocumentId = id;
-  if (!c.document.lastOpenedAt) stageDocument(id, { lastOpenedAt: Date.now() });
-  return c.document;
+  if (!cached.document.lastOpenedAt) stageDocument(id, { lastOpenedAt: Date.now() });
+  return cached.document;
+}
+
+export async function openDocument(id: string) {
+  await loadDocument(id);
+  return activateDocument(id);
 }
 
 export async function ensureDocument(id: string) {
-  if (!cache.has(id)) {
-    const loaded = native
-      ? await invoke<LoadedDocument>("load_document", { id })
-      : await browserLoad(id);
-    cache.set(id, { ...loaded, generation: 0, saved: 0 });
-  }
-  return cache.get(id)!.document;
+  return cache.get(id)?.document ?? loadDocument(id);
 }
 
 export function stageDocument(
@@ -340,3 +356,14 @@ registerSyncRefresher(async (paths) => {
   }
   flushSync(() => notify());
 });
+
+// AI/imported content deliberately starts a new editor session. Local typing
+// still uses stageDocument and never feeds htmlContent back into TeaEditor.
+export function applyDocumentContent(id: string, content: string) {
+  if (!cache.has(id)) throw new Error("文档尚未载入");
+  flushSync(() => {
+    remoteVersions.set(id, remoteVersion(id) + 1);
+    stageDocument(id, { content });
+    notify();
+  });
+}

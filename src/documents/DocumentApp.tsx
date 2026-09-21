@@ -1,6 +1,7 @@
-import { AiAssistantButton } from "../ai/AiAssistant";
+import { DocumentAiSidebar } from "../ai/AiSidebar";
 import { App as AntApp, Button, Dropdown, Input, Modal, Tooltip } from "antd";
 import {
+  MessageOutlined,
   EditOutlined,
   ExportOutlined,
   FileTextOutlined,
@@ -11,7 +12,7 @@ import {
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Editor as TeaEditor } from "@teabook/teaeditor";
 import {
   createDocument,
@@ -23,14 +24,19 @@ import {
   exportDocument,
   flushDocuments,
   lastDocumentId,
-  openDocument,
+  loadDocument,
+  activateDocument,
   refreshDocuments,
   stageDocument,
   subscribe,
   remoteVersion,
 } from "./store";
+import { documentAiTarget } from "./aiTarget";
 import { native } from "../workspace";
+import { registerSyncActivationBlocker } from "../documentLifecycle";
 import "./documents.css";
+import ClickDiagnostics from "./DocumentClickDiagnostics";
+import { recordDocumentClickStage } from "./clickDiagnostics";
 
 function getRenameError(message?: string) {
   if (!message?.trim()) return "文档名称不能为空";
@@ -42,7 +48,9 @@ function DocumentEditor({ id, content }: { id: string; content: string }) {
   // TeaEditor imports htmlContent on change; local edits must not feed back into it.
   // The parent's key starts a new session for another document or remote version.
   const [initialContent] = useState(content);
+  const editorVersion = useRef(remoteVersion(id));
   const handleHtmlChange = useCallback((html: string) => {
+    if (editorVersion.current !== remoteVersion(id)) return;
     stageDocument(id, { content: html });
   }, [id]);
 
@@ -64,10 +72,39 @@ export default function DocumentApp() {
   const [, rerender] = useState(0);
   const [id, setId] = useState<string | null>(null);
   const [busy, setBusy] = useState(true);
+  const [openingId, setOpeningId] = useState<string | null>(null);
+  const requestVersion = useRef(0);
+  const mounted = useRef(false);
+  const selectionPending = useRef(true);
+  const handledMousePress = useRef<HTMLButtonElement | null>(null);
+  const composing = useRef(false);
+  const compositionChoice = useRef<string | null>(null);
+  const compositionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isCurrentRequest = (request: number) => mounted.current && requestVersion.current === request;
   const [error, setError] = useState("");
   const [renaming, setRenaming] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [aiOpen, setAiOpen] = useState(false);
+  const [aiApplying, setAiApplying] = useState(false);
+  useEffect(() => { setAiApplying(false); }, [id]);
+  const activeId = useRef(id); activeId.current = id;
+  const aiTarget = documentAiTarget(() => activeId.current, next => {
+    if (!mounted.current) return;
+    requestVersion.current++;
+    activateDocument(next); setId(next); setError("");
+    selectionPending.current = false; setBusy(false); setOpeningId(null);
+  });
+
+  useEffect(() => {
+    if (id) recordDocumentClickStage("rendered");
+  }, [id]);
+
+  // A pending selection is also an editing transition: background activation
+  // must not refresh/remount its files while the requested document is loading.
+  useEffect(() => registerSyncActivationBlocker(() =>
+    selectionPending.current || composing.current || compositionChoice.current !== null,
+  ), []);
 
   useEffect(() => {
     const unsubscribe = subscribe(() => rerender((x) => x + 1));
@@ -75,59 +112,124 @@ export default function DocumentApp() {
   }, []);
 
   useEffect(() => {
-    let alive = true;
+    mounted.current = true;
+    const request = ++requestVersion.current;
     (async () => {
       try {
         await refreshDocuments();
-        if (!alive) return;
+        if (!isCurrentRequest(request)) return;
         const items = documentList();
         const selected = items.some((x) => x.id === lastDocumentId)
           ? lastDocumentId
           : [...items].sort((a, b) => b.lastOpenedAt - a.lastOpenedAt)[0]?.id;
 
         if (selected) {
-          await openDocument(selected);
-          if (alive) setId(selected);
+          setOpeningId(selected);
+          await loadDocument(selected);
+          if (!isCurrentRequest(request)) return;
+          activateDocument(selected);
+          setId(selected);
         }
       } catch (e) {
-        if (alive) setError(String(e));
+        if (isCurrentRequest(request)) setError(String(e));
       } finally {
-        if (alive) setBusy(false);
+        if (isCurrentRequest(request)) {
+          selectionPending.current = false;
+          setOpeningId(null);
+          setBusy(false);
+        }
       }
     })();
 
     return () => {
-      alive = false;
+      mounted.current = false;
+      requestVersion.current++;
+      if (compositionTimer.current) clearTimeout(compositionTimer.current);
+      compositionTimer.current = null;
+      compositionChoice.current = null;
       void flushDocuments().catch(() => {});
     };
   }, []);
 
   const select = async (next: string) => {
-    if (next === id) return;
+    // A click is an intent, even during loading. In particular clicking the
+    // current document must supersede an in-flight switch to another one.
+    recordDocumentClickStage("selected");
+    if (next === id && !selectionPending.current) { recordDocumentClickStage("ignored"); return; }
+    const request = ++requestVersion.current;
+    selectionPending.current = true;
+    setOpeningId(next);
     setBusy(true);
     try {
+      recordDocumentClickStage("saving");
       await flushDocuments();
-      await openDocument(next);
+      recordDocumentClickStage("saved");
+      if (!isCurrentRequest(request)) { recordDocumentClickStage("superseded"); return; }
+      // Cancelling back to the current editor must not reload its live cache
+      // beneath an already mounted TeaEditor session.
+      recordDocumentClickStage("loading");
+      if (next !== id || !currentDocument(next)) await loadDocument(next);
+      recordDocumentClickStage("loaded");
+      if (!isCurrentRequest(request)) { recordDocumentClickStage("superseded"); return; }
+      activateDocument(next);
       setId(next);
       setError("");
+      recordDocumentClickStage("applied");
     } catch (e) {
-      message.error("切换失败：" + String(e));
+      recordDocumentClickStage("failed");
+      if (isCurrentRequest(request)) message.error("切换失败：" + String(e));
     } finally {
-      setBusy(false);
+      if (isCurrentRequest(request)) {
+        selectionPending.current = false;
+        setOpeningId(null);
+        setBusy(false);
+      }
     }
   };
 
+  const requestSelection = (next: string) => {
+    // Never unmount an IME session before its last input has reached TeaEditor.
+    if (composing.current || compositionTimer.current) {
+      compositionChoice.current = next;
+      recordDocumentClickStage("compositionPending");
+      return;
+    }
+    void select(next);
+  };
+  const finishComposition = () => {
+    composing.current = false;
+    if (compositionTimer.current) clearTimeout(compositionTimer.current);
+    // compositionend precedes the final input/editor update. Wait one task,
+    // keeping selection requests queued until that update is staged for saving.
+    compositionTimer.current = setTimeout(() => {
+      compositionTimer.current = null;
+      const next = compositionChoice.current;
+      compositionChoice.current = null;
+      if (mounted.current && next) void select(next);
+    }, 0);
+  };
+
   const create = async () => {
+    const request = ++requestVersion.current;
+    selectionPending.current = true;
+    setOpeningId(null);
     setBusy(true);
     try {
       await flushDocuments();
+      if (!isCurrentRequest(request)) return;
       const document = await createDocument();
+      if (!isCurrentRequest(request)) return;
+      activateDocument(document.id);
       setId(document.id);
       setError("");
     } catch (e) {
-      message.error("创建失败：" + String(e));
+      if (isCurrentRequest(request)) message.error("创建失败：" + String(e));
     } finally {
-      setBusy(false);
+      if (isCurrentRequest(request)) {
+        selectionPending.current = false;
+        setOpeningId(null);
+        setBusy(false);
+      }
     }
   };
 
@@ -176,8 +278,33 @@ export default function DocumentApp() {
     >
       <button
         className="document-open"
-        disabled={busy}
-        onClick={() => void select(doc.id)}
+        aria-busy={openingId === doc.id}
+        aria-current={doc.id === id ? "page" : undefined}
+        type="button"
+        onPointerDownCapture={(event) => {
+          handledMousePress.current = null;
+          const target = event.target as Element;
+          if (event.pointerType !== "mouse" || !event.isPrimary || event.button !== 0 ||
+            event.metaKey || event.ctrlKey || event.altKey || event.shiftKey ||
+            target.closest('[draggable="true"]')) return;
+          // Native evidence: mouse press reaches this row, then the editor blurs
+          // and no mouseup/click follows. Like a desktop list, select on primary
+          // mouse-down instead of depending on that missing click. Keep default
+          // focus changes from tearing down the editor before its save completes.
+          handledMousePress.current = event.currentTarget;
+          if (!composing.current) event.preventDefault();
+          recordDocumentClickStage("mouseSelection");
+          requestSelection(doc.id);
+        }}
+        onClick={(event) => {
+          const handled = handledMousePress.current === event.currentTarget;
+          handledMousePress.current = null;
+          if (event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+          // Keyboard/assistive clicks (detail=0), touch taps, and drag-handle
+          // clicks use normal click activation. Never execute a mouse press twice.
+          if (event.detail > 0 && handled) return;
+          requestSelection(doc.id);
+        }}
         title={doc.title}
       >
         <span className="nav-drag-handle"
@@ -232,8 +359,20 @@ export default function DocumentApp() {
   );
 
   return (
-    <section className="document-app">
-      <div className="document-body">
+    <section className="document-app"
+      onCompositionStartCapture={(event) => {
+        if ((event.target as Element).closest(".document-editor-root")) {
+          if (compositionTimer.current) clearTimeout(compositionTimer.current);
+          compositionTimer.current = null;
+          composing.current = true;
+        }
+      }}
+      onCompositionEndCapture={(event) => {
+        if ((event.target as Element).closest(".document-editor-root")) finishComposition();
+      }}
+    >
+      <ClickDiagnostics />
+      <div className={`document-body ${aiOpen ? "has-ai-sidebar" : ""}`}>
         <aside className="document-sidebar" id="document-navigation" hidden={sidebarCollapsed}>
           <header className="document-heading">
             <div>
@@ -365,7 +504,7 @@ export default function DocumentApp() {
                     </>
                   )}
                 </div>
-                <AiAssistantButton key={item.id} toolId="app.doc" context={() => ({ title: item.title, content: new DOMParser().parseFromString(currentDocument(item.id)?.content ?? "", "text/html").body.textContent ?? "" })} />
+                <Button size="small" type="text" icon={<MessageOutlined />} aria-expanded={aiOpen} disabled={aiApplying} onClick={() => setAiOpen(value => !value)}>AI 助手</Button>
                 <Tooltip title="导出文档 JSON">
                   <Button
                     type="text"
@@ -414,6 +553,7 @@ export default function DocumentApp() {
               >
                 创建文档
               </Button>
+              <Button icon={<MessageOutlined />} onClick={() => setAiOpen(true)}>AI 助手</Button>
               <small>
                 {native
                   ? "每篇文档独立保存到工作目录"
@@ -423,6 +563,7 @@ export default function DocumentApp() {
             </>
           )}
         </div>
+        {aiOpen && <DocumentAiSidebar key={id ?? "empty"} target={aiTarget} onClose={() => setAiOpen(false)} onWriteState={setAiApplying} context={item ? () => ({ title: item.title, content: new DOMParser().parseFromString(currentDocument(item.id)?.content ?? "", "text/html").body.textContent ?? "" }) : undefined} />}
       </div>
 
       <Modal

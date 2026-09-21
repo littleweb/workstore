@@ -5,6 +5,8 @@
         "label": "main",
         "title": "WorkStore",
         "visible": false,
+        "acceptFirstMouse": true,
+        "dragDropEnabled": false,
         "width": 1200,
         "height": 800,
         "minWidth": 960,

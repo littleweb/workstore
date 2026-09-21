@@ -14,7 +14,7 @@ function harness({ native = true, saveError = null, wait = false } = {}) {
       return { text: 'answer', saveError };
     } };
   } });
-  return { ai: module.exports.ai, calls, finish: () => finish(), flush: () => module.exports.stopAiRequests(), synced: () => synced };
+  return { ai: module.exports.ai, calls, finish: () => finish(), flush: () => module.exports.stopAiRequests(), track: (controller, task) => module.exports.trackAiExecution(controller, task), synced: () => synced };
 }
 test('shared gateway keeps tool identity/messages and syncs successfully saved records', async () => {
   const h = harness(); const messages = [{ role: 'user', content: 'hello' }];
@@ -28,7 +28,7 @@ test('failed record save does not report success to sync; pure requests are not 
 test('abort forwards matching request ID and pre-aborted requests do not run', async () => {
   const h = harness({ wait: true }); const abort = new AbortController();
   const request = h.ai.generate({ toolId: 'app.ai', messages: [] }, abort.signal);
-  abort.abort(); assert.equal(h.calls[1].command, 'ai_cancel'); assert.equal(h.calls[1].args.id, 'request-id'); h.finish(); await request;
+  abort.abort(); assert.equal(h.calls[1].command, 'ai_cancel'); assert.equal(h.calls[1].args.id, 'request-id'); h.finish(); await assert.rejects(request,/已停止生成/);
   const other = harness(); await assert.rejects(other.ai.generate({ toolId: 'app.ai', messages: [] }, abort.signal), /已停止/); assert.equal(other.calls.length, 0);
 });
 test('browser preview cannot invoke desktop inference', async () => { const h = harness({ native: false }); await assert.rejects(h.ai.generate({ toolId: 'app.ai', messages: [] }), /桌面版/); assert.equal(h.calls.length, 0); });
@@ -37,5 +37,14 @@ test('workspace close or relocation stops pending generation and waits for settl
   const h = harness({ wait: true }); const response = h.ai.generate({ toolId: 'app.ai', messages: [] });
   let done = false; const closing = h.flush().then(() => { done = true; });
   assert.equal(h.calls[1].command, 'ai_cancel'); await Promise.resolve(); assert.equal(done, false);
-  h.finish(); await response; await closing; assert.equal(done, true);
+  h.finish(); await assert.rejects(response,/已停止生成/); await closing; assert.equal(done, true);
+});
+
+
+test('shutdown also cancels and awaits local canvas execution after inference has finished',async()=>{
+ const h=harness();const abort=new AbortController();let finish;
+ const applying=h.track(abort,new Promise(resolve=>{finish=resolve;}));
+ let exited=false;const closing=h.flush().then(()=>{exited=true;});
+ assert.equal(abort.signal.aborted,true);await Promise.resolve();assert.equal(exited,false);
+ finish({saved:true});await applying;await closing;assert.equal(exited,true);
 });

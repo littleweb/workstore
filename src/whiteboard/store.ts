@@ -315,3 +315,12 @@ registerSyncRefresher(async (paths) => {
   }
   flushSync(() => notify());
 });
+
+export function applyBoardScene(id: string, scene: Scene) {
+  if (!cache.has(id)) throw new Error("白板尚未载入");
+  flushSync(() => {
+    remoteVersions.set(id, remoteVersion(id) + 1);
+    stageBoard(id, { scene });
+    notify();
+  });
+}
