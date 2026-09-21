@@ -12,7 +12,10 @@
     "desktop:build": "tauri build",
     "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs",
     "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs",
-    "desktop:update:build": "node scripts/build-update.mjs"
+    "desktop:update:build": "node scripts/build-update.mjs",
+    "demo:apos": "vite --config demos/apos/vite.config.mjs",
+    "demo:apos:build": "tsc -p demos/apos/tsconfig.json && vite build --config demos/apos/vite.config.mjs",
+    "demo:apos:preview": "vite preview --config demos/apos/vite.config.mjs"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
@@ -35,6 +38,7 @@
     "@tauri-apps/cli": "^2.11.4",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "jsdom": "26.1.0",
     "typescript": "~5.8.3",
     "vite": "^6.1.0"
   },
