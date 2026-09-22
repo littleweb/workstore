@@ -1387,3 +1387,43 @@ kbd {
 .collapsed .window-actions .icon-button { flex: 0 0 28px; width: 30px; height: 28px; margin-top: 0; visibility: visible; }
 
 .tool-icon.comic-tool-icon { background: transparent; }
+
+/* Hidden main navigation leaves the entire width to the active tool. */
+.shell.collapsed > .workspace-sidebar { display: none; }
+.shell.collapsed > .workspace-main { margin-left: 0; width: 100%; }
+.compact-tool-heading {
+  height: 52px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #e9ecea;
+  background: #fff;
+}
+.native.macos .compact-tool-heading { padding-left: 100px; }
+.compact-window-space { flex: 1; align-self: stretch; }
+.compact-tool-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.compact-tool-switch:hover { background: #f2f5f3; }
+.compact-tool-switch > .anticon { font-size: 10px; color: #829087; }
+.compact-tool-switch:focus-visible { outline: 2px solid #5c8d76; outline-offset: 2px; }
+.shell.collapsed .document-app,
+.shell.collapsed .whiteboard-app,
+.shell.collapsed .comic-app { height: calc(100vh - 52px); min-height: 0; }
+.shell.collapsed .tool-heading .tool-title { display: none; }
+.shell.collapsed .tool-heading .tool-actions { grid-column: -2; }
+.compact-tool-switch .tool-icon { width: 22px; height: 22px; font-size: 16px; }
+.compact-tool-switch .tool-icon svg { width: 20px; height: 20px; }
+.shell.collapsed .ai-app > .tool-heading { display: none; }
+.shell.collapsed .development { min-height: calc(100vh - 117px); }
+.shell.collapsed .ai-sidebar .ai-panel { height: calc(100vh - 177px); }

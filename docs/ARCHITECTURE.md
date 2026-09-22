@@ -15,6 +15,10 @@ React / Ant Design 提供容器和子应用 UI；`src/workspace.ts` 协调保存
 | 更新 | `src/updateService.ts`、`scripts/*update*.mjs` | 签名清单、下载、安装与重启 |
 | 模板目录 | `content/comics/`、`schemas/` | 版本化公开模板与校验，不是用户漫画数据 |
 
+## 主导航隐藏布局
+
+主导航隐藏时完全让出宽度，不展示 dock。容器提供紧凑工具标题栏，包含展开主导航、当前工具下拉切换、更新和设置入口；工具切换复用现有保存与导航流程。各工具标题不显示描述，工具自身的文档列表可独立折叠。macOS 原生窗口预留系统窗口按钮位置；隐藏/展开主导航不更换编辑器组件或文档 key。更新自动检查只由常驻入口调度，紧凑栏共享状态。
+
 ## 桌面窗口与首击
 
 - Tauri 平台配置按 JSON Merge Patch 合并，`app.windows` 数组会整体替换，而不是按窗口 label 继承。macOS 主窗口必须显式保留 `acceptFirstMouse: true` 和 `dragDropEnabled: false`：非激活窗口的首击应到达 WebView，工具内拖动由网页处理。

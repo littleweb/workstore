@@ -378,9 +378,7 @@ export default function DocumentApp() {
             <div>
               <FileTextOutlined />
               <h2>文档</h2>
-              <span className="document-description" title="列表 + 右侧编辑区">
-                你的长文与灵感记录场。
-              </span>
+
             </div>
             <Button
               type="text"
