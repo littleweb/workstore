@@ -1437,8 +1437,8 @@ kbd {
 .compact-tool-item { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 6px; padding: 5px 9px; border: 0; border-radius: 7px; background: transparent; font-size: 13px; cursor: pointer; }
 .compact-tool-item:hover { background: #e9eeeb; }
 .compact-tool-item.selected { background: #e1ebe6; color: #294d40; }
-.compact-tool-item .tool-icon { width: 22px; height: 22px; font-size: 18px; background: transparent; }
-.compact-tool-item .tool-icon svg { width: 20px; height: 20px; }
+.compact-tool-item .tool-icon { width: 16px; height: 16px; font-size: 14px; background: transparent; }
+.compact-tool-item .tool-icon svg { width: 14px; height: 14px; }
 .compact-brand:focus-visible, .compact-tool-item:focus-visible { outline: 2px solid #5c8d76; outline-offset: -2px; }
 
-.compact-tool-heading .update-toggle, .compact-tool-heading .compact-settings { font-size: 10px; }
+.compact-tool-heading .update-toggle, .compact-tool-heading .compact-settings { font-size: 18px; }
