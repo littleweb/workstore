@@ -745,15 +745,10 @@ function WorkStore() {
             <button className="icon-button" aria-label="展开主导航" aria-expanded={false}
               onClick={() => setCollapsed(false)}><MenuUnfoldOutlined /></button>
             <button className="compact-brand" onClick={() => void navigate("home")}>WorkStore</button>
-            <Dropdown trigger={["click"]} menu={{
-              selectedKeys: [active],
-              items: tools.map((item) => ({ key: item.id, label: item.name, icon: <ToolIcon tool={item} /> })),
-              onClick: ({ key }) => open(key),
-            }}>
-              <button className="compact-tool-switch" aria-label="打开工具" aria-haspopup="menu">
-                打开工具 <DownOutlined />
-              </button>
-            </Dropdown>
+            <button className="compact-tool-switch" aria-label="打开工具" aria-haspopup="dialog"
+              onClick={() => { setQuery(""); setCatalog(true); }}>
+              打开工具 <DownOutlined />
+            </button>
             <nav className="compact-tool-list" aria-label="常用和最近工具">
               {[...favorites, ...recent].map((entry) => {
                 const item = tools.find((candidate) => candidate.id === entry.id)!;
@@ -767,7 +762,7 @@ function WorkStore() {
             </nav>
             <div className="compact-window-space" data-tauri-drag-region />
             <UpdateButton ready={ready} autoCheck={false} />
-            <button className="icon-button" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
+            <button className="icon-button compact-settings" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
           </header>
         )}
         {active === "home" ? (
