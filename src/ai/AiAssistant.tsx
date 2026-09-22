@@ -67,4 +67,4 @@ export function AiAssistantButton(props: { toolId: string; context?: () => AiCon
       ]} /> : <AiPanel {...props} />)}
     </Modal></>;
 }
-export default function AiApp() { return <div className="tool-page ai-app"><header className="tool-heading"><div className="tool-title"><MessageOutlined /><div className="tool-title-copy"><h2>AI 对话</h2><p>使用全局 AI 服务，连接你的想法。</p></div></div></header><AiPanel toolId="app.ai" /></div>; }
+export default function AiApp() { return <div className="tool-page ai-app"><header className="tool-heading"><div className="tool-title"><MessageOutlined /><div className="tool-title-copy"><h2>AI 对话</h2></div></div></header><AiPanel toolId="app.ai" /></div>; }

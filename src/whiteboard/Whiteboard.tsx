@@ -277,7 +277,7 @@ export default function Whiteboard() {
             <div>
               <span className="whiteboard-brand-icon"><WhiteboardIcon /></span>
               <h2>白板</h2>
-              <span className="whiteboard-description" title="把想法，画出来。">把想法，画出来。</span>
+
             </div>
             <Button type="text" size="small" icon={<MenuFoldOutlined />}
               aria-label="折叠白板导航栏" title="折叠导航栏"

@@ -194,7 +194,7 @@ function ToolHeader({
         <ToolIcon tool={tool} />
         <div className="tool-title-copy">
           <h2>{tool.name}</h2>
-          <p title={tool.description}>{tool.description}</p>
+
         </div>
       </div>
       {tabs && (
@@ -740,6 +740,25 @@ function WorkStore() {
         </div>
       </aside>
       <main className="workspace-main">
+        {collapsed && (
+          <header className="compact-tool-heading" data-tauri-drag-region>
+            <button className="icon-button" aria-label="展开主导航" aria-expanded={false}
+              onClick={() => setCollapsed(false)}><MenuUnfoldOutlined /></button>
+            <Dropdown trigger={["click"]} menu={{
+              selectedKeys: [active],
+              items: tools.map((item) => ({ key: item.id, label: item.name, icon: <ToolIcon tool={item} /> })),
+              onClick: ({ key }) => open(key),
+            }}>
+              <button className="compact-tool-switch" aria-label="切换工具" aria-haspopup="menu">
+                {tool && <ToolIcon tool={tool} />}
+                <span>{tool?.name ?? "WorkStore"}</span><DownOutlined />
+              </button>
+            </Dropdown>
+            <div className="compact-window-space" data-tauri-drag-region />
+            <UpdateButton ready={ready} autoCheck={false} />
+            <button className="icon-button" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
+          </header>
+        )}
         {active === "home" ? (
           <div className="dashboard">
             <div className="welcome">

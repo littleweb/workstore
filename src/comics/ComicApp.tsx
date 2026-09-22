@@ -923,7 +923,7 @@ export default function ComicApp() {
               <ComicIcon />
             </span>
             <strong>小漫画</strong>
-            <small>用漫画记录生活</small>
+
             <Button
               type="text"
               size="small"
