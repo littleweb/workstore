@@ -744,16 +744,27 @@ function WorkStore() {
           <header className="compact-tool-heading" data-tauri-drag-region>
             <button className="icon-button" aria-label="展开主导航" aria-expanded={false}
               onClick={() => setCollapsed(false)}><MenuUnfoldOutlined /></button>
+            <button className="compact-brand" onClick={() => void navigate("home")}>WorkStore</button>
             <Dropdown trigger={["click"]} menu={{
               selectedKeys: [active],
               items: tools.map((item) => ({ key: item.id, label: item.name, icon: <ToolIcon tool={item} /> })),
               onClick: ({ key }) => open(key),
             }}>
-              <button className="compact-tool-switch" aria-label="切换工具" aria-haspopup="menu">
-                {tool && <ToolIcon tool={tool} />}
-                <span>{tool?.name ?? "WorkStore"}</span><DownOutlined />
+              <button className="compact-tool-switch" aria-label="打开工具" aria-haspopup="menu">
+                打开工具 <DownOutlined />
               </button>
             </Dropdown>
+            <nav className="compact-tool-list" aria-label="常用和最近工具">
+              {[...favorites, ...recent].map((entry) => {
+                const item = tools.find((candidate) => candidate.id === entry.id)!;
+                return <button key={item.id} className={`compact-tool-item ${active === item.id ? "selected" : ""}`}
+                  aria-current={active === item.id ? "page" : undefined}
+                  onClick={() => open(item.id)}
+                  onFocus={(event) => event.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })}>
+                  <ToolIcon tool={item} /><span>{item.name}</span>
+                </button>;
+              })}
+            </nav>
             <div className="compact-window-space" data-tauri-drag-region />
             <UpdateButton ready={ready} autoCheck={false} />
             <button className="icon-button" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
