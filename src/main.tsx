@@ -1,6 +1,6 @@
 import { recordToolOpen } from "./navigation";
 import { stopAiRequests } from "./ai/client";
-import AiApp, { AiAssistantButton } from "./ai/AiAssistant";
+import { AiAssistantButton } from "./ai/AiAssistant";
 import AiSettings from "./ai/AiSettings";
 import UpdateButton from "./UpdateButton";
 import { isInstallingUpdate } from "./updateService";
@@ -21,14 +21,12 @@ import {
   AppstoreOutlined,
   ArrowRightOutlined,
   CheckCircleOutlined,
-  CodeOutlined,
   DeleteOutlined,
   DownOutlined,
   FileTextOutlined,
   FolderOutlined,
   GithubOutlined,
   LinkOutlined,
-  MessageOutlined,
   MoreOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -39,7 +37,6 @@ import {
   ThunderboltOutlined,
   GlobalOutlined,
   LockOutlined,
-  ClockCircleOutlined,
   ExportOutlined,
   ExperimentOutlined,
   FormatPainterOutlined,
@@ -83,14 +80,6 @@ type Tool = {
 const tools: Tool[] = [
   { id: "app.comic", name: "小漫画", description: "一句话，画出你的故事。", category: "设计工具", color: "green", icon: <ComicIcon /> },
   {
-    id: "app.ai",
-    name: "AI 对话",
-    description: "灵感、问题和想法，都从一次对话开始。",
-    category: "智能助手",
-    color: "purple",
-    icon: <MessageOutlined />,
-  },
-  {
     id: "app.project",
     name: "项目",
     description: "让目标、任务与进展，井然有序。",
@@ -116,28 +105,12 @@ const tools: Tool[] = [
     icon: <WhiteboardIcon />,
   },
   {
-    id: "tool.json",
-    name: "JSON 工具",
-    description: "格式化与校验，让数据清晰易读。",
-    category: "开发工具",
-    color: "green",
-    icon: <CodeOutlined />,
-  },
-  {
     id: "tool.color",
     name: "色彩拾取",
     description: "找到下一份作品的灵感色彩。",
     category: "设计工具",
     color: "pink",
     icon: <FormatPainterOutlined />,
-  },
-  {
-    id: "tool.time",
-    name: "时间戳转换",
-    description: "在时间戳和日期之间，轻松切换。",
-    category: "开发工具",
-    color: "gold",
-    icon: <ClockCircleOutlined />,
   },
   {
     id: "web.github",
@@ -154,7 +127,7 @@ type Entry = {
   rank: number;
   lastOpened: number | null;
 };
-const initial: Entry[] = ["app.ai", "app.project", "app.doc"].map(
+const initial: Entry[] = ["app.project", "app.doc"].map(
   (id, rank) => ({ id, favorite: true, rank, lastOpened: null }),
 );
 function restore(): Entry[] {
@@ -210,7 +183,7 @@ function ToolHeader({
 function WorkStore() {
   const { message } = AntApp.useApp();
   const [entries, setEntries] = useState<Entry[]>(restore),
-    [active, setActive] = useState("home"),
+    [active, setActive] = useState("app.project"),
     [collapsed, setCollapsed] = useState(false),
     [catalog, setCatalog] = useState(false),
     [settings, setSettings] = useState(false),
@@ -221,8 +194,7 @@ function WorkStore() {
     [path, setPath] = useState("~/WorkStore"),
     [json, setJson] = useState('{"hello":"WorkStore","local":true}'),
     [color, setColor] = useState("#28796B"),
-    [stamp, setStamp] = useState("1789257600"),
-    [dateResult, setDateResult] = useState("");
+    [stamp, setStamp] = useState("1789257600");
   const [maximizeOnStart, setMaximizeOnStart] = useState(true);
   const [githubSyncEnabled, setGithubSyncEnabled] = useState(false);
   const [githubRepoUrl, setGithubRepoUrl] = useState("");
@@ -553,10 +525,10 @@ function WorkStore() {
     message.success(value ? "已添加到常用工具" : "已移到最近工具");
   };
   const favorites = entries
-      .filter((e) => e.favorite)
+      .filter((e) => e.favorite && tools.some((t) => t.id === e.id))
       .sort((a, b) => a.rank - b.rank),
     recent = entries
-      .filter((e) => !e.favorite && e.lastOpened)
+      .filter((e) => !e.favorite && e.lastOpened && tools.some((t) => t.id === e.id))
       .sort((a, b) => (b.lastOpened || 0) - (a.lastOpened || 0) || a.id.localeCompare(b.id));
   const tool = tools.find((t) => t.id === active);
   const row = (entry: Entry) => {
@@ -606,7 +578,7 @@ function WorkStore() {
               else if (entry.favorite) favorite(t.id, false);
               else {
                 setEntries((es) => es.filter((e) => e.id !== t.id));
-                if (active === t.id) void navigate("home");
+                if (active === t.id) void navigate("app.project");
               }
             },
           }}
@@ -656,8 +628,8 @@ function WorkStore() {
         <div className="brand-row">
           <button
             className="brand"
-            aria-label="WorkStore 工作台"
-            onClick={() => void navigate("home")}
+            aria-label="WorkStore 项目"
+            onClick={() => void navigate("app.project")}
           >
             <img src="/workstore-icon.svg" />
             <span>WorkStore</span>
@@ -744,7 +716,7 @@ function WorkStore() {
           <header className="compact-tool-heading" data-tauri-drag-region>
             <button className="icon-button" aria-label="展开主导航" aria-expanded={false}
               onClick={() => setCollapsed(false)}><MenuUnfoldOutlined /></button>
-            <button className="compact-brand" onClick={() => void navigate("home")}>WorkStore</button>
+            <button className="compact-brand" onClick={() => void navigate("app.project")}>WorkStore</button>
             <button className="compact-tool-switch" aria-label="打开工具" aria-haspopup="dialog"
               onClick={() => { setQuery(""); setCatalog(true); }}>
               打开工具 <DownOutlined />
@@ -765,141 +737,13 @@ function WorkStore() {
             <button className="icon-button compact-settings" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
           </header>
         )}
-        {active === "home" ? (
-          <div className="dashboard">
-            <div className="welcome">
-              <div className="eyebrow">
-                <span /> YOUR PERSONAL WORKSPACE
-              </div>
-              <h1>让工作，回到心流。</h1>
-              <p>你的工具、想法与项目，在这里各就其位。</p>
-              <button
-                className="browse-shortcut"
-                onClick={() => setCatalog(true)}
-              >
-                <SearchOutlined /> 查找并打开工具 <kbd>⌘ K</kbd>
-              </button>
-              <div className="hero-art" aria-hidden="true">
-                <div className="orbit one" />
-                <div className="orbit two" />
-                <div className="art-tile tile-back">
-                  <FolderOutlined />
-                </div>
-                <div className="art-tile tile-main">
-                  <img src="/workstore-icon.svg" />
-                </div>
-                <div className="art-tile tile-front">
-                  <CodeOutlined />
-                </div>
-                <div className="spark s1">✦</div>
-                <div className="spark s2">+</div>
-              </div>
-            </div>
-            <div className="content-heading">
-              <div>
-                <h2>
-                  从常用开始{" "}
-                  <span>{favorites.length.toString().padStart(2, "0")}</span>
-                </h2>
-                <p>为每天的工作，留一个顺手的位置。</p>
-              </div>
-              <button className="text-link" onClick={() => setCatalog(true)}>
-                全部工具 <ArrowRightOutlined />
-              </button>
-            </div>
-            <div className="favorite-grid">
-              {favorites.map((e) => {
-                const t = tools.find((x) => x.id === e.id)!;
-                return (
-                  <button
-                    className="favorite-card"
-                    key={t.id}
-                    onClick={() => open(t.id)}
-                  >
-                    <div className="card-top">
-                      <ToolIcon tool={t} large />
-                      {t.status ? (
-                        <span className="dev-badge">开发中</span>
-                      ) : (
-                        <ArrowRightOutlined />
-                      )}
-                    </div>
-                    <h3>{t.name}</h3>
-                    <p>{t.description}</p>
-                    <div className="card-bottom">
-                      <span>{t.id}</span>
-                      <ArrowRightOutlined />
-                    </div>
-                  </button>
-                );
-              })}
-              {!favorites.length && (
-                <button
-                  className="favorite-card empty-card"
-                  onClick={() => setCatalog(true)}
-                >
-                  <PlusOutlined /> 打开工具，建立你的工作台
-                </button>
-              )}
-            </div>
-            <div className="content-heading utility-heading">
-              <div>
-                <h2>小工具，大帮手</h2>
-                <p>轻量、专注，随时解决手边的小事。</p>
-              </div>
-              <span className="section-note">即开即用</span>
-            </div>
-            <div className="utility-grid">
-              {tools
-                .filter((t) => t.id.startsWith("tool."))
-                .map((t) => (
-                  <button
-                    key={t.id}
-                    className="utility-card"
-                    onClick={() => open(t.id)}
-                  >
-                    <ToolIcon tool={t} />
-                    <div>
-                      <h3>{t.name}</h3>
-                      <p>{t.description}</p>
-                    </div>
-                    <ArrowRightOutlined />
-                  </button>
-                ))}
-            </div>
-            <div className="privacy-strip">
-              <div className="privacy-icon">
-                <LockOutlined />
-              </div>
-              <div>
-                <strong>属于你的工作空间</strong>
-                <p>文件存于本地，无需账号。也可以连接你自己的 GitHub 仓库。</p>
-              </div>
-              <button
-                className="text-link"
-                onClick={() => {
-                  setSettingsTab("sync");
-                  setSettings(true);
-                }}
-              >
-                了解同步 <ArrowRightOutlined />
-              </button>
-            </div>
-            <footer className="workspace-footer">
-              <span>少一点切换，多一点专注。</span>
-              <span>
-                MADE FOR YOUR FLOW <span className="footer-dot">✦</span>
-              </span>
-            </footer>
-          </div>
-        ) : active === "app.comic" ? (
+        {active === "app.comic" ? (
           <Suspense fallback={<div className="tool-page">正在打开小漫画…</div>}><ComicApp /></Suspense>
         ) : active === "app.whiteboard" ? (
           <Suspense fallback={<div className="startup">正在加载白板…</div>}>
             <Whiteboard />
           </Suspense>
-        ) : active === "app.ai" ? (
-          <AiApp />
+
         ) : active === "app.doc" ? (
           <Suspense fallback={<div className="startup">正在加载文档…</div>}>
             <DocumentApp />
@@ -909,21 +753,7 @@ function WorkStore() {
             <ToolHeader
               tool={tool}
               actions={
-                tool.status ? null : tool.id === "tool.json" ? (
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      try {
-                        setJson(JSON.stringify(JSON.parse(json), null, 2));
-                        message.success("JSON 校验通过，已格式化");
-                      } catch {
-                        message.error("JSON 格式有误，请检查引号、逗号与括号");
-                      }
-                    }}
-                  >
-                    校验并格式化
-                  </Button>
-                ) : tool.id === "tool.color" ? (
+                tool.status ? null : tool.id === "tool.color" ? (
                   <Button
                     onClick={async () => {
                       try {
@@ -936,27 +766,6 @@ function WorkStore() {
                     }}
                   >
                     复制 HEX
-                  </Button>
-                ) : tool.id === "tool.time" ? (
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      const date = new Date(Number(stamp) * 1000);
-                      if (
-                        !stamp.trim() ||
-                        !Number.isFinite(Number(stamp)) ||
-                        isNaN(date.getTime())
-                      )
-                        message.error("请输入有效的秒级时间戳");
-                      else
-                        setDateResult(
-                          date.toLocaleString() +
-                            " · " +
-                            Intl.DateTimeFormat().resolvedOptions().timeZone,
-                        );
-                    }}
-                  >
-                    转换为本地时间
                   </Button>
                 ) : (
                   <Button
@@ -1001,20 +810,7 @@ function WorkStore() {
               </div>
             ) : (
               <div className="tool-content">
-                {tool.id === "tool.json" ? (
-                  <>
-                    <div className="action-bar">
-                      <span>JSON 编辑器</span>
-                    </div>
-                    <Input.TextArea
-                      aria-label="JSON 编辑器"
-                      className="code-editor"
-                      value={json}
-                      onChange={(e) => setJson(e.target.value)}
-                      rows={17}
-                    />
-                  </>
-                ) : tool.id === "tool.color" ? (
+                {tool.id === "tool.color" ? (
                   <div className="color-tool">
                     <input
                       aria-label="选择颜色"
@@ -1027,18 +823,6 @@ function WorkStore() {
                       <p>点击色块选择颜色</p>
                     </div>
                   </div>
-                ) : tool.id === "tool.time" ? (
-                  <>
-                    <label>Unix 时间戳（秒）</label>
-                    <Input
-                      value={stamp}
-                      onChange={(e) => setStamp(e.target.value)}
-                    />
-
-                    {dateResult && (
-                      <div className="result-box">{dateResult}</div>
-                    )}
-                  </>
                 ) : (
                   <div className="web-placeholder">
                     <GlobalOutlined />
@@ -1237,7 +1021,7 @@ function WorkStore() {
               <Button
                 onClick={() => {
                   setEntries(initial);
-                  void navigate("home");
+                  void navigate("app.project");
                   message.success("已重置导航");
                 }}
               >
