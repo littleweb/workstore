@@ -1400,8 +1400,8 @@ kbd {
   border-bottom: 1px solid #e9ecea;
   background: #fff;
 }
-.native.macos .compact-tool-heading { padding-left: 100px; }
-.compact-window-space { flex: 1; align-self: stretch; }
+.native.macos .compact-tool-heading { padding-left: 88px; }
+.compact-window-space { flex: 0 0 16px; align-self: stretch; }
 .compact-tool-switch {
   display: inline-flex;
   align-items: center;
@@ -1414,7 +1414,7 @@ kbd {
   font-weight: 600;
   cursor: pointer;
 }
-.compact-tool-switch:hover { background: #f2f5f3; }
+.compact-tool-switch:hover { background: #e3e8e5; }
 .compact-tool-switch > .anticon { font-size: 10px; color: #829087; }
 .compact-tool-switch:focus-visible { outline: 2px solid #5c8d76; outline-offset: 2px; }
 .shell.collapsed .document-app,
@@ -1427,3 +1427,18 @@ kbd {
 .shell.collapsed .ai-app > .tool-heading { display: none; }
 .shell.collapsed .development { min-height: calc(100vh - 117px); }
 .shell.collapsed .ai-sidebar .ai-panel { height: calc(100vh - 177px); }
+
+/* The collapsed shell exposes the same ordered tool collection horizontally. */
+.compact-tool-heading { background: #f5f6f7; min-width: 0; gap: 10px; padding-left: 8px; }
+.compact-tool-heading > .icon-button { flex-shrink: 0; }
+.compact-brand { flex-shrink: 0; border: 0; padding: 0; background: transparent; font-size: 18px; font-weight: 600; letter-spacing: -.7px; cursor: pointer; }
+.compact-tool-switch { flex-shrink: 0; margin-left: 2px; padding: 5px 10px; border-radius: 16px; background: #e9ecea; color: #646d68; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.compact-tool-list { display: flex; flex: 1 1 0; min-width: 0; align-items: center; gap: 3px; overflow-x: auto; white-space: nowrap; scrollbar-width: thin; }
+.compact-tool-item { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 6px; padding: 5px 9px; border: 0; border-radius: 7px; background: transparent; font-size: 13px; cursor: pointer; }
+.compact-tool-item:hover { background: #e9eeeb; }
+.compact-tool-item.selected { background: #e1ebe6; color: #294d40; }
+.compact-tool-item .tool-icon { width: 16px; height: 16px; font-size: 14px; background: transparent; }
+.compact-tool-item .tool-icon svg { width: 14px; height: 14px; }
+.compact-brand:focus-visible, .compact-tool-item:focus-visible { outline: 2px solid #5c8d76; outline-offset: -2px; }
+
+.compact-tool-heading .update-toggle, .compact-tool-heading .compact-settings { font-size: 16px; }
