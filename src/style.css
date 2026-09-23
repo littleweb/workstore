@@ -1441,4 +1441,4 @@ kbd {
 .compact-tool-item .tool-icon svg { width: 14px; height: 14px; }
 .compact-brand:focus-visible, .compact-tool-item:focus-visible { outline: 2px solid #5c8d76; outline-offset: -2px; }
 
-.compact-tool-heading .update-toggle, .compact-tool-heading .compact-settings { font-size: 18px; }
+.compact-tool-heading .update-toggle, .compact-tool-heading .compact-settings { font-size: 16px; }
