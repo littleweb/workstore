@@ -654,3 +654,9 @@
 .cover-matching [role="status"] { color: #557860; font-size: 13px; margin-top: 24px; }
 .cover-matching ol { padding-left: 20px; font-size: 12px; color: #9ba69e; line-height: 2.5; }
 .cover-matching li[aria-current] { color: #376c58; }
+
+.cover-nav .tool-sidebar-create[aria-current="page"],
+.cover-nav .tool-sidebar-create[aria-current="page"]:hover {
+  background: #e6eee8 !important;
+  color: #376c58 !important;
+}

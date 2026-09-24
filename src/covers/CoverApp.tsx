@@ -601,7 +601,7 @@ export default function CoverApp() {
       .filter((d) => d.favorite === favorite)
       .map((item) => (
         <div
-          className={`cover-row ${item.id === id ? "selected" : ""}`}
+          className={`cover-row ${item.id === id && (page === "config" || page === "editor") ? "selected" : ""}`}
           key={item.id}
         >
           <button
@@ -715,6 +715,7 @@ export default function CoverApp() {
             <Button
               className="tool-sidebar-create"
               icon={<PlusOutlined />}
+              aria-current={page === "create" ? "page" : undefined}
               onClick={() => void startNew()}
             >
               创建封面
@@ -722,6 +723,7 @@ export default function CoverApp() {
             <Button
               className="tool-sidebar-create"
               icon={<AppstoreOutlined />}
+              aria-current={page === "gallery" ? "page" : undefined}
               onClick={() => void startNew("gallery")}
             >
               风格模板
