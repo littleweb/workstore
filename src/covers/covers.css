@@ -439,9 +439,36 @@
   padding: 20px;
   text-align: center;
 }
-.cover-generating > .anticon {
-  font-size: 25px;
-  color: #64867b;
+/* Indeterminate drawing loop: decorative, never a fabricated progress value. */
+.cover-drawing-grid {
+  width: min(220px, 65%);
+  overflow: visible;
+  stroke: #bdc9c1;
+  stroke-width: 1;
+}
+.cover-drawing-grid g {
+  stroke-dasharray: 1;
+  animation: cover-grid-draw 4.8s ease-in-out infinite both;
+}
+.cover-grid-sketch {
+  stroke: #658775;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  animation: cover-grid-draw 4.8s 900ms ease-in-out infinite both;
+}
+@keyframes cover-grid-draw {
+  0%, 8% { stroke-dashoffset: 1; opacity: 0; }
+  42%, 70% { stroke-dashoffset: 0; opacity: 1; }
+  95%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cover-drawing-grid g, .cover-grid-sketch {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
 }
 .cover-generating strong {
   font-weight: 500;
@@ -518,6 +545,8 @@
   color: #376c58;
 }
 .cover-export {
+  margin-left: auto;
+  flex-shrink: 0;
   flex-shrink: 0;
 }
 .cover-license {

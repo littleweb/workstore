@@ -6,6 +6,7 @@ import {
   MoreOutlined,
   PlusOutlined,
   LoadingOutlined,
+  DownloadOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import { ai, trackAiExecution } from "../ai/client";
@@ -674,6 +675,17 @@ export default function CoverApp() {
               </button>
             </nav>
           )}
+          {page === "editor" && (
+            <Button
+              type="text"
+              className="cover-export"
+              icon={<DownloadOutlined />}
+              disabled={!version || opening}
+              onClick={() => doc && void exportWork(doc.id)}
+            >
+              导出
+            </Button>
+          )}
         </header>
         {(error ||
           corrupt ||
@@ -826,7 +838,15 @@ export default function CoverApp() {
                   {!version && !busy && <p>点击右侧“生成封面”开始绘制</p>}
                   {busy && (
                     <div className="cover-generating" role="status">
-                      <LoadingOutlined />
+                      <svg className="cover-drawing-grid" viewBox="0 0 240 240" fill="none" aria-hidden="true">
+                        {Array.from({ length: 9 }, (_, i) => (
+                          <g key={i} style={{ animationDelay: `${i * 110}ms` }}>
+                            <path pathLength="1" d={`M ${24 + i * 24} 24 V 216`} />
+                            <path pathLength="1" d={`M 24 ${24 + i * 24} H 216`} />
+                          </g>
+                        ))}
+                        <path className="cover-grid-sketch" pathLength="1" d="M48 168 L96 96 L132 144 L168 72 L192 168 Z M156 54 a12 12 0 1 0 24 0 a12 12 0 1 0 -24 0" />
+                      </svg>
                       <strong>{status}</strong>
                       <Button onClick={cancel}>取消生成</Button>
                     </div>
@@ -845,14 +865,7 @@ export default function CoverApp() {
                     ))}
                   </div>
                 )}
-                {version && (
-                  <Button
-                    className="cover-export"
-                    onClick={() => void exportWork(doc!.id)}
-                  >
-                    导出图片
-                  </Button>
-                )}
+
               </section>
               <aside className="cover-settings">
                 <div className="cover-field">

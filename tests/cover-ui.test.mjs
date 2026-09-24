@@ -318,7 +318,7 @@ test("generation enters editor with real pending state, uses numbered reference,
     await h.resolve();
     assert.equal(JSON.parse(h.docs.get("a").content).versions.length, 1);
     assert.equal(h.host.querySelector(".cover-generating"), null);
-    assert.ok(h.host.textContent.includes("导出图片"));
+    assert.ok(h.host.querySelector(".cover-bar .cover-export")?.textContent.includes("导出"));
   } finally {
     await h.close();
   }
