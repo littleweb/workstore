@@ -71,6 +71,7 @@ export default function CoverApp() {
     [id, setId] = useState<string | null>(null);
   const [page, setPage] = useState<"create" | "gallery" | "config" | "editor">("create");
   const [theme, setTheme] = useState("");
+  const [recommendTopic, setRecommendTopic] = useState<string | null>(null);
   const themeRef = useRef(theme);
   themeRef.current = theme;
   const [collapsed, setCollapsed] = useState(false),
@@ -101,6 +102,10 @@ export default function CoverApp() {
     corrupt = "";
   try {
     if (doc) content = readContent(doc.content);
+    else if (page === "editor" && recommendTopic !== null) {
+      content = emptyContent();
+      content.config.topic = recommendTopic;
+    }
   } catch (e) {
     corrupt = String(e);
   }
@@ -141,6 +146,7 @@ export default function CoverApp() {
       active.current = next;
       setId(next);
       setChanging(false);
+      setRecommendTopic(null);
       setError("");
       setPage(
         readContent(opened.content).versions.length ? "editor" : "config",
@@ -194,6 +200,7 @@ export default function CoverApp() {
       if (!mounted.current || ticket !== request.current) return;
       active.current = null;
       setId(null);
+      setRecommendTopic(null);
       setPage(destination);
       setChanging(false);
       setCategory("全部");
@@ -272,6 +279,9 @@ export default function CoverApp() {
     controller.current = abort;
     setBusy(true);
     setError("");
+    setRecommendTopic(topic);
+    setStatus("正在匹配风格、版式与配色…");
+    setPage("editor");
     const valid = () => mounted.current && !abort.signal.aborted && request.current === ticket;
     await trackAiExecution(abort, (async () => {
       try {
@@ -294,6 +304,7 @@ export default function CoverApp() {
         store.activateDocument(target.id);
         active.current = target.id;
         setId(target.id);
+        setRecommendTopic(null);
         setPage("editor");
         setChanging(false);
         await store.flushDocument(target.id);
@@ -914,7 +925,7 @@ export default function CoverApp() {
             <div className="cover-editor">
               <section className="cover-canvas">
                 <div className="cover-canvas-bar">
-                  <span>{busy ? "正在生成" : "封面预览"}</span>
+                  <span>{busy ? (recommendTopic !== null ? "正在匹配" : "正在生成") : "封面预览"}</span>
                   <small>{version?.config.ratio || config.ratio}</small>
                 </div>
                 <div
@@ -926,7 +937,7 @@ export default function CoverApp() {
                   }}
                 >
                   {version && <CoverImage src={version.image} />}{" "}
-                  {!version && !busy && <p>点击右侧“生成封面”开始绘制</p>}
+                  {!version && !busy && <p>{recommendTopic !== null ? "点击右侧重新匹配并生成" : "点击右侧“生成封面”开始绘制"}</p>}
                   {busy && (
                     <div className="cover-generating" role="status" aria-label={status}>
                       <svg className="cover-drawing-grid" viewBox="0 0 240 240" preserveAspectRatio="none" fill="none" aria-hidden="true">
@@ -957,6 +968,17 @@ export default function CoverApp() {
 
               </section>
               <aside className="cover-settings">
+                {recommendTopic !== null ? (
+                  <div className="cover-matching">
+                    <span>封面主题</span>
+                    <p>{recommendTopic}</p>
+                    <div role="status">{busy ? status : "匹配尚未完成，可重新尝试"}</div>
+                    <ol>
+                      <li aria-current={busy ? "step" : undefined}>匹配风格、版式与配色</li>
+                      <li>生成封面图片</li>
+                    </ol>
+                  </div>
+                ) : <>
                 <div className="cover-field">
                   <span>风格模板</span>
                   <div className="cover-selected-style">
@@ -991,13 +1013,14 @@ export default function CoverApp() {
                     参考当前封面修改
                   </label>
                 )}
+                </>}
                 <Button
                   block
                   type="primary"
                   disabled={busy || opening}
-                  onClick={() => void generate()}
+                  onClick={() => void (recommendTopic !== null ? recommendAndGenerate() : generate())}
                 >
-                  {busy ? "生成中…" : version ? "重新生成" : "生成封面"}
+                  {busy ? (recommendTopic !== null ? "匹配中…" : "生成中…") : recommendTopic !== null ? "重新匹配并生成" : version ? "重新生成" : "生成封面"}
                 </Button>
                 {busy && (
                   <Button block className="cover-cancel" onClick={cancel}>

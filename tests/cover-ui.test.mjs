@@ -451,6 +451,10 @@ test("theme entry recommends valid catalog choices and automatically generates a
     assert.ok(h.host.querySelector(".cover-create"));
     await h.click("秋日第一杯奶茶，温暖又俏皮");
     await h.click("生成封面");
+    assert.ok(h.host.querySelector(".cover-editor"));
+    assert.equal(h.host.querySelector(".cover-create"), null);
+    assert.ok(h.host.querySelector(".cover-matching").textContent.includes("正在匹配"));
+    assert.equal(h.docs.size, 0);
     assert.equal(h.requests.length, 1);
     assert.ok(!h.requests[0].input.image);
     assert.ok(h.requests[0].input.messages[0].content.includes("277"));
@@ -488,6 +492,7 @@ test("invalid recommendation preserves the theme and creates no document", async
     await h.resolve({ text: JSON.stringify({ ...initial().config, style: "999", layout: "SC-001", color: "C-01" }) });
     assert.equal(h.docs.size, 0);
     assert.ok(h.host.querySelector('[role="alert"]'));
-    assert.equal(h.host.querySelector('textarea').value, "秋日第一杯奶茶，温暖又俏皮");
+    assert.ok(h.host.querySelector(".cover-matching").textContent.includes("秋日第一杯奶茶，温暖又俏皮"));
+    assert.ok(h.host.querySelector(".cover-editor"));
   } finally { await h.close(); }
 });
