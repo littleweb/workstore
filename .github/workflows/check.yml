@@ -16,6 +16,7 @@ jobs:
           cache: npm
       - uses: dtolnay/rust-toolchain@stable
       - run: npm ci
+      - run: npm run html:install
       - run: node --test tests/*.test.mjs
       - run: npm run build
       - run: cargo test --locked --manifest-path src-tauri/Cargo.toml -- --test-threads=1

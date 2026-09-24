@@ -2,7 +2,7 @@
 
 ## 新设备
 
-安装 Git、Node.js 22+、Rust stable 和当前平台 Tauri 2 系统依赖。使用自己的 GitHub 身份认证，不复制他人的 Token。克隆仓库后运行 `npm ci`，读取根目录 `AGENTS.md` 和 `docs/context/CURRENT.md`，再启动 `npm run desktop`。
+安装 Git、Node.js 22+、Rust stable 和当前平台 Tauri 2 系统依赖。使用自己的 GitHub 身份认证，不复制他人的 Token。克隆仓库后运行 `npm ci` 和 `npm run html:install`，读取根目录 `AGENTS.md` 和 `docs/context/CURRENT.md`，再启动 `npm run desktop`。
 
 本机 Codex 或 API 凭据需单独配置；源码开发不需要发布签名私钥。用户工作内容由应用自身的数据同步机制管理，与这里的 Git 流程独立。
 
