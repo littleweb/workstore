@@ -217,11 +217,12 @@
   color: #376c58;
   background: #e6eee8;
 }
-.cover-search {
-  order: -1;
+.cover-bar .cover-search {
   margin-left: auto;
-  width: 200px;
-  max-width: 100%;
+  width: clamp(110px, 24%, 180px);
+  flex-shrink: 0;
+  height: 28px;
+  font-size: 12px;
 }
 .cover-template-group h3 {
   font-size: 14px;

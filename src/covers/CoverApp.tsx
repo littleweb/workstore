@@ -606,6 +606,7 @@ export default function CoverApp() {
         >
           <button
             className="cover-row-name"
+            title={item.title}
             onPointerDown={(e) => {
               delete e.currentTarget.dataset.down;
               if (
@@ -776,6 +777,17 @@ export default function CoverApp() {
               </button>
             </nav>
           )}
+          {page === "gallery" && (
+              <Input
+                aria-label="查找风格模板"
+                className="cover-search"
+                prefix={<SearchOutlined />}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="编号、画风或作者"
+                allowClear
+              />
+          )}
           {page === "editor" && (
             <Button
               type="text"
@@ -859,15 +871,7 @@ export default function CoverApp() {
                   </button>
                 ))}
               </div>
-              <Input
-                aria-label="查找风格模板"
-                className="cover-search"
-                prefix={<SearchOutlined />}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="编号、画风或作者"
-                allowClear
-              />
+
             </div>
             {groups
               .filter((g) => visible.some((s) => s.group === g))
@@ -880,6 +884,7 @@ export default function CoverApp() {
                       .map((s) => (
                         <button
                           className="cover-template"
+                          title={`${s.number} · ${s.generation_name}`}
                           key={s.number}
                           onClick={() => void choose(s.number)}
                           aria-label={`选择 ${s.number} ${s.generation_name}`}
