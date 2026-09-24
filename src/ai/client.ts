@@ -29,6 +29,7 @@ export type AiSettings = {
   baseUrl: string;
   proxyUrl: string;
   timeoutSeconds: number;
+  imageTimeoutSeconds: number;
   hasApiKey: boolean;
   apiKey?: string;
 };
