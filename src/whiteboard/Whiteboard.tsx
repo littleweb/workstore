@@ -279,10 +279,21 @@ export default function Whiteboard() {
               <h2>白板</h2>
 
             </div>
-            <Button type="text" size="small" icon={<MenuFoldOutlined />}
+            <Button type="text" size="small" className="navigation-toggle" icon={<MenuFoldOutlined />}
               aria-label="折叠白板导航栏" title="折叠导航栏"
               onClick={() => setSidebarCollapsed(true)} />
           </header>
+          <div className="tool-sidebar-create-section">
+            <div className="tool-sidebar-create-label">创建</div>
+            <Button
+              className="tool-sidebar-create"
+              icon={<PlusOutlined />}
+              loading={busy}
+              onClick={() => void create()}
+            >
+              创建白板
+            </Button>
+          </div>
           <div className="board-navigation">
           <div
             className="board-section"
@@ -307,21 +318,12 @@ export default function Whiteboard() {
             {!recent.length && <p>暂无</p>}
           </div>
           </div>
-          <div className="tool-sidebar-footer">
-            <Button
-              className="tool-sidebar-create"
-              icon={<PlusOutlined />}
-              loading={busy}
-              onClick={() => void create()}
-            >
-              创建白板
-            </Button>
-          </div>
+
         </aside>
         <div className="board-workspace">
           <div className="board-document-bar">
             {sidebarCollapsed && (
-              <Button type="text" size="small" icon={<MenuUnfoldOutlined />}
+              <Button type="text" size="small" className="navigation-toggle" icon={<MenuUnfoldOutlined />}
                 aria-label="展开白板导航栏" title="展开导航栏"
                 onClick={() => setSidebarCollapsed(false)} />
             )}

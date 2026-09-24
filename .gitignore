@@ -23,3 +23,8 @@ dist/
 /preferences.json
 /ai-settings.json
 /bootstrap.json
+
+# Bundled upstream runtime (reproducible generated output)
+/.html-anything-build/
+/src-tauri/html-runtime/
+/vendor/html-anything/next/.next/

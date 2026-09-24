@@ -50,7 +50,8 @@ button {
   transition: width 0.2s;
 }
 .window-bar {
-  height: 58px;
+  height: 42px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1230,7 +1231,7 @@ kbd {
 }
 
 /* Compact desktop navigation and shared tool header. */
-.brand-row { margin-top: 2px; margin-bottom: 10px; gap: 8px; }
+.brand-row { margin-top: 10px; margin-bottom: 10px; gap: 8px; }
 .brand { font-size: 17px; font-weight: 550; letter-spacing: -.6px; }
 .brand-row .brand img { display: none; }
 .open-tools.ant-btn { height: 26px; padding: 0 10px; border: 0; border-radius: 18px; background: #e8e9e9; color: #626767; font-size: 12px; font-weight: 550; gap: 5px; box-shadow: none; flex-shrink: 0; }
@@ -1271,7 +1272,7 @@ kbd {
 .tool-heading { grid-template-columns: minmax(0, 1fr) auto auto; }
 .tool-tabs { position: absolute; left: 50%; transform: translateX(-50%); }
 .native .traffic { visibility: hidden; }
-.native:not(.macos) .window-bar { height: 30px; }
+.native:not(.macos) .window-bar { height: 42px; }
 .native.macos.collapsed .window-bar { height: 90px; align-items: flex-end; padding-bottom: 5px; }
 .save-state { padding: 0 10px 6px; font-size: 10px; color: #7f8d85; }
 .save-state.error { color: #b33c39; }
@@ -1286,7 +1287,8 @@ kbd {
   flex-shrink: 0;
   padding: 10px 12px 12px;
 }
-.tool-sidebar-footer .tool-sidebar-create {
+.tool-sidebar-footer .tool-sidebar-create,
+.tool-sidebar-create-section .tool-sidebar-create {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -1302,7 +1304,8 @@ kbd {
   font-size: 13px;
   font-weight: 550;
 }
-.tool-sidebar-footer .tool-sidebar-create:not(:disabled):hover {
+.tool-sidebar-footer .tool-sidebar-create:not(:disabled):hover,
+.tool-sidebar-create-section .tool-sidebar-create:not(:disabled):hover {
   background: #e3f0ec;
   color: #276757;
 }
@@ -1392,7 +1395,8 @@ kbd {
 .shell.collapsed > .workspace-sidebar { display: none; }
 .shell.collapsed > .workspace-main { margin-left: 0; width: 100%; }
 .compact-tool-heading {
-  height: 52px;
+  height: 42px;
+  flex-shrink: 0;
   padding: 0 16px;
   display: flex;
   align-items: center;
@@ -1419,22 +1423,22 @@ kbd {
 .compact-tool-switch:focus-visible { outline: 2px solid #5c8d76; outline-offset: 2px; }
 .shell.collapsed .document-app,
 .shell.collapsed .whiteboard-app,
-.shell.collapsed .comic-app { height: calc(100vh - 52px); min-height: 0; }
+.shell.collapsed .comic-app { height: calc(100vh - 42px); min-height: 0; }
 .shell.collapsed .tool-heading .tool-title { display: none; }
 .shell.collapsed .tool-heading .tool-actions { grid-column: -2; }
 .compact-tool-switch .tool-icon { width: 22px; height: 22px; font-size: 16px; }
 .compact-tool-switch .tool-icon svg { width: 20px; height: 20px; }
 .shell.collapsed .ai-app > .tool-heading { display: none; }
-.shell.collapsed .development { min-height: calc(100vh - 117px); }
-.shell.collapsed .ai-sidebar .ai-panel { height: calc(100vh - 177px); }
+.shell.collapsed .development { min-height: calc(100vh - 107px); }
+.shell.collapsed .ai-sidebar .ai-panel { height: calc(100vh - 167px); }
 
 /* The collapsed shell exposes the same ordered tool collection horizontally. */
 .compact-tool-heading { background: #f5f6f7; min-width: 0; gap: 10px; padding-left: 8px; }
 .compact-tool-heading > .icon-button { flex-shrink: 0; }
 .compact-brand { flex-shrink: 0; border: 0; padding: 0; background: transparent; font-size: 18px; font-weight: 600; letter-spacing: -.7px; cursor: pointer; }
-.compact-tool-switch { flex-shrink: 0; margin-left: 2px; padding: 5px 10px; border-radius: 16px; background: #e9ecea; color: #646d68; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.compact-tool-switch { flex-shrink: 0; margin-left: 2px; height: 26px; padding: 0 10px; border-radius: 16px; background: #e9ecea; color: #646d68; font-size: 12px; font-weight: 500; white-space: nowrap; }
 .compact-tool-list { display: flex; flex: 1 1 0; min-width: 0; align-items: center; gap: 3px; overflow-x: auto; white-space: nowrap; scrollbar-width: thin; }
-.compact-tool-item { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 6px; padding: 5px 9px; border: 0; border-radius: 7px; background: transparent; font-size: 13px; cursor: pointer; }
+.compact-tool-item { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 6px; height: 26px; padding: 0 9px; border: 0; border-radius: 7px; background: transparent; font-size: 13px; cursor: pointer; }
 .compact-tool-item:hover { background: #e9eeeb; }
 .compact-tool-item.selected { background: #e1ebe6; color: #294d40; }
 .compact-tool-item .tool-icon { width: 16px; height: 16px; font-size: 14px; background: transparent; }
@@ -1442,3 +1446,59 @@ kbd {
 .compact-brand:focus-visible, .compact-tool-item:focus-visible { outline: 2px solid #5c8d76; outline-offset: -2px; }
 
 .compact-tool-heading .update-toggle, .compact-tool-heading .compact-settings { font-size: 16px; }
+
+.tool-sidebar-create-section { flex-shrink: 0; padding: 18px 9px 6px; }
+.tool-sidebar-create-label { padding: 0 10px 8px; color: #8d9791; font-size: 14px; }
+.tool-sidebar-create-section .tool-sidebar-create { width: 100%; display: flex; align-items: center; justify-content: center; }
+.window-actions > .ant-tooltip-open, .window-actions > .icon-button { font-size: 16px; }
+
+/* Top window controls share one center line; creation reads as a list row. */
+.window-actions .icon-button { margin-top: 0; }
+.tool-sidebar-create-section .tool-sidebar-create {
+  justify-content: flex-start;
+  height: 32px;
+  padding: 0 10px;
+  gap: 7px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 400;
+}
+.tool-sidebar-create-section .tool-sidebar-create:not(:disabled):hover {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: #eef2ee;
+  color: inherit;
+}
+.document-app .tool-sidebar-create-section .tool-sidebar-create { justify-content: flex-start; }
+
+.tool-sidebar-create-section .tool-sidebar-create .anticon { color: #889e90; font-size: 14px; }
+
+/* One visual treatment for shell and tool navigation controls. */
+.shell .navigation-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 30px;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  margin-top: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: none;
+  color: #7d8581;
+  font-size: 16px;
+}
+.shell .navigation-toggle .anticon { font-size: 16px; }
+.shell .navigation-toggle:not(:disabled):hover {
+  color: #7d8581;
+  background: #e7ebe8;
+  border: 0;
+  box-shadow: none;
+}

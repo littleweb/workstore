@@ -1,6 +1,6 @@
 {
   "name": "workstore",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,12 +10,15 @@
     "tauri": "tauri",
     "desktop": "tauri dev",
     "desktop:build": "tauri build",
-    "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs",
-    "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs",
+    "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs",
+    "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs",
     "desktop:update:build": "node scripts/build-update.mjs",
     "demo:apos": "vite --config demos/apos/vite.config.mjs",
     "demo:apos:build": "tsc -p demos/apos/tsconfig.json && vite build --config demos/apos/vite.config.mjs",
-    "demo:apos:preview": "vite preview --config demos/apos/vite.config.mjs"
+    "demo:apos:preview": "vite preview --config demos/apos/vite.config.mjs",
+    "html:install": "npx --yes pnpm@10.33.2 --dir vendor/html-anything install --frozen-lockfile",
+    "html:build": "node scripts/html-anything/build.mjs",
+    "html:start": "node scripts/html-anything/start.mjs"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",

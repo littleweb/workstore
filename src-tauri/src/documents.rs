@@ -150,7 +150,7 @@ impl Store {
             schema_version: 1,
             info: DocumentInfo {
                 id: Uuid::new_v4().to_string(),
-                title: "未命名文档".into(),
+                title: "未命名笔记".into(),
                 favorite: false,
                 created_at: time,
                 updated_at: time,

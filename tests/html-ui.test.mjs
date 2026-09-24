@@ -1,0 +1,42 @@
+import {test, after} from 'node:test';
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {buildSync} from 'esbuild';
+import vm from 'node:vm';
+import {JSDOM} from 'jsdom';
+import React,{act} from 'react';
+const dom=new JSDOM('<!doctype html><body></body>',{url:'http://localhost'});
+for(const key of ['window','document','navigator','HTMLElement','Element','Node'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
+globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+const {createRoot}=await import('react-dom/client');const require=createRequire(import.meta.url);
+const code=buildSync({entryPoints:[new URL('../src/html/LegacyHtmlApp.tsx',import.meta.url).pathname],bundle:true,write:false,platform:'node',format:'cjs',jsx:'automatic',loader:{'.css':'empty'},external:['react','react/jsx-runtime','antd','@ant-design/icons','./store','./export','../ai/client','../documentLifecycle']}).outputFiles[0].text;
+after(()=>dom.window.close());
+const drain=()=>new Promise(r=>setImmediate(r));
+const result={text:'<!DOCTYPE html><html><body><h1>Generated</h1></body></html>'};
+async function harness(){
+ let resolve;const waiting=new Promise(r=>resolve=r);const requests=[],subscribers=new Set(),blockers=new Set();let serial=0;
+ const docs=new Map(['a','b'].map(id=>[id,{id,title:id,content:JSON.stringify({source:'材料',html:'',instruction:'',template:'doc-kami-parchment'}),favorite:false,lastOpenedAt:id==='a'?2:1}]));
+ const notify=()=>subscribers.forEach(f=>f());
+ const store={subscribe:f=>{subscribers.add(f);return()=>subscribers.delete(f)},documentList:()=>[...docs.values()],documentWarnings:()=>[],currentDocument:id=>docs.get(id),refreshDocuments:async()=>{},flushDocuments:async()=>{},flushDocument:async()=>{},loadDocument:async id=>docs.get(id),activateDocument:()=>{},remoteVersion:()=>0,documentStatus:()=> '已保存',stageDocument:(id,patch)=>{docs.set(id,{...docs.get(id),...patch});notify()},ensureDocument:async id=>docs.get(id),createDocument:async()=>{const doc={...docs.get('a'),id:'new'+ ++serial,title:'new',content:'',lastOpenedAt:3};docs.set(doc.id,doc);notify();return doc;}};
+ const Input=props=>React.createElement('input',props);Input.TextArea=props=>React.createElement('textarea',props);
+ const module={exports:{}};
+ vm.runInNewContext(code,{module,AbortController,Blob,document:dom.window.document,setTimeout,clearTimeout,require(id){
+ if(id==='react'||id==='react/jsx-runtime')return require(id);
+ if(id==='@ant-design/icons')return new Proxy({},{get:()=>()=>null});
+ if(id==='./store')return store;
+ if(id==='./export')return {exportHtmlFile:async()=>{}};
+ if(id==='../documentLifecycle')return {registerSyncActivationBlocker:f=>{blockers.add(f);return()=>blockers.delete(f)}};
+ if(id==='../ai/client')return {ai:{generate:(input,signal)=>{requests.push({input,signal});return waiting}}};
+ if(id==='antd')return {App:{useApp:()=>({message:{success:()=>{}}})},Input,Button:({children,onClick,disabled,loading})=>React.createElement('button',{onClick,disabled:disabled||loading},children),Dropdown:({children})=>children,Modal:()=>null,Select:()=>null,Segmented:()=>null};
+ throw new Error(id);
+ }});
+ const host=document.createElement('div');document.body.append(host);const root=createRoot(host);
+ await act(async()=>{root.render(React.createElement(module.exports.default));await drain()});
+ const click=async text=>act(async()=>{[...host.querySelectorAll('button')].find(b=>b.textContent===text).click();await drain()});
+ return {host,store,docs,requests,blockers,click,async resolve(){await act(async()=>{resolve(result);await drain()})},async close(){await act(async()=>root.unmount());host.remove()}};
+}
+test('HTML generation uses unified gateway and persists a complete result',async()=>{const h=await harness();try{await h.click('生成 HTML');assert.equal(h.requests[0].input.toolId,'app.html');await h.resolve();assert.equal(JSON.parse(h.docs.get('a').content).html,result.text);assert.equal(h.host.querySelector('iframe').getAttribute('sandbox'),'');}finally{await h.close()}});
+test('HTML late AI output cannot overwrite source edited during generation',async()=>{const h=await harness();try{await h.click('生成 HTML');await act(async()=>h.store.stageDocument('a',{content:JSON.stringify({...JSON.parse(h.docs.get('a').content),source:'new edit'})}));await h.resolve();assert.equal(JSON.parse(h.docs.get('a').content).html,'');assert.match(h.host.textContent,/未覆盖/);}finally{await h.close()}});
+test('HTML switching files cancels generation and rejects late completion',async()=>{const h=await harness();try{await h.click('生成 HTML');await h.click('b');assert.equal(h.requests[0].signal.aborted,true);await h.resolve();assert.equal(JSON.parse(h.docs.get('a').content).html,'');assert.equal(JSON.parse(h.docs.get('b').content).html,'');assert.equal(h.host.querySelector('.html-title').textContent,'b');}finally{await h.close()}});
+test('HTML stop preserves original content and a late provider response stays unapplied',async()=>{const h=await harness();try{await h.click('生成 HTML');await h.click('停止生成');await h.resolve();assert.equal(JSON.parse(h.docs.get('a').content).html,'');assert.equal(h.requests[0].signal.aborted,true);}finally{await h.close()}});
+test('HTML down-only document selection works without subsequent click',async()=>{const h=await harness();try{await act(async()=>{const b=[...h.host.querySelectorAll('.html-row-name')].find(b=>b.textContent==='b');const e=new window.MouseEvent('pointerdown',{bubbles:true,button:0});Object.defineProperty(e,'pointerType',{value:'mouse'});b.dispatchEvent(e);await drain();});assert.equal(h.host.querySelector('.html-title').textContent,'b');assert.equal(h.docs.get('b').lastOpenedAt,1);}finally{await h.close()}});

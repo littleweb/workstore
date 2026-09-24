@@ -5832,7 +5832,7 @@ dependencies = [
 
 [[package]]
 name = "workstore"
-version = "0.1.7"
+version = "0.1.8"
 dependencies = [
  "base64 0.22.1",
  "fs2",
@@ -5841,6 +5841,7 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
+ "tar",
  "tauri",
  "tauri-build",
  "tauri-plugin-clipboard-manager",

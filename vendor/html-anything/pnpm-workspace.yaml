@@ -1,0 +1,8 @@
+packages:
+  - cli
+  - e2e
+  - next
+
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
