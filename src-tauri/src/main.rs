@@ -4,6 +4,7 @@ mod ai_images;
 mod ai;
 mod documents;
 mod html;
+mod covers;
 mod html_runtime;
 mod comics;
 use comics::{Comic, ComicList, LoadedComic};
@@ -196,6 +197,50 @@ fn save_html_document(
         .save_html_document(document, expected_token)
 }
 #[tauri::command]
+fn list_cover_documents(state: tauri::State<Workspace>) -> Result<covers::DocumentList, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .list_cover_documents()
+}
+#[tauri::command]
+fn create_cover_document(state: tauri::State<Workspace>) -> Result<covers::LoadedDocument, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .create_cover_document()
+}
+#[tauri::command]
+fn load_cover_document(id: String, state: tauri::State<Workspace>) -> Result<covers::LoadedDocument, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .load_cover_document(&id)
+}
+#[tauri::command]
+fn save_cover_document(
+    document: covers::Document,
+    expected_token: String,
+    state: tauri::State<Workspace>,
+) -> Result<covers::LoadedDocument, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .save_cover_document(document, expected_token)
+}
+#[tauri::command]
 fn create_document(state: tauri::State<Workspace>) -> Result<LoadedDocument, String> {
     state
         .0
@@ -378,6 +423,11 @@ fn main() {
             html_runtime::html_original_cancel,
             html_runtime::html_original_backup,
             html_runtime::html_original_export,
+            list_cover_documents,
+            create_cover_document,
+            load_cover_document,
+            save_cover_document,
+            covers::save_cover_export,
             list_html_documents,
             create_html_document,
             load_html_document,

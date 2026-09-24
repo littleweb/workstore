@@ -195,20 +195,20 @@ fn validate(files: &Files) -> Result<()> {
         if name.starts_with(crate::sync_history::PREFIX) && !crate::sync_history::valid(name, bytes) {
             return Err("同步历史校验失败，未修改工作区".into());
         }
-        if name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
+        if name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
             let v: Value =
                 serde_json::from_slice(bytes).map_err(|e| format!("{name} 无法解析：{e}"))?;
             let board = name.ends_with(".whiteboard.json");
             let id = v["id"].as_str().ok_or("文档缺少 ID")?;
             Uuid::parse_str(id).map_err(|_| "文档 ID 无效")?;
-            let suffix = if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if board {
+            let suffix = if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if board {
                 ".whiteboard.json"
             } else {
                 ".doc.json"
             };
             if v["schemaVersion"] != 1
                 || v["type"]
-                    != if name.ends_with(".html.json") { "workstore.html" } else if name.ends_with(".comic.json") { "workstore.comic" } else if board {
+                    != if name.ends_with(".cover.json") { "workstore.cover" } else if name.ends_with(".html.json") { "workstore.html" } else if name.ends_with(".comic.json") { "workstore.comic" } else if board {
                         "workstore.whiteboard"
                     } else {
                         "workstore.document"
@@ -307,7 +307,7 @@ fn merge_value(base: Option<&Value>, local: &Value, remote: &Value, conflict: &m
 #[cfg(test)]
 fn legacy_conflict_copy(name: &str, bytes: &[u8]) -> (String, Vec<u8>) {
     let digest = Sha256::digest([name.as_bytes(), bytes].concat());
-    if name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
+    if name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
         if let Ok(mut value) = serde_json::from_slice::<Value>(bytes) {
             let mut raw = [0; 16];
             raw.copy_from_slice(&digest[..16]);
@@ -322,7 +322,7 @@ fn legacy_conflict_copy(name: &str, bytes: &[u8]) -> (String, Vec<u8>) {
                 .collect::<String>();
             value["id"] = Value::from(id.clone());
             value["title"] = Value::from(format!("{title}（冲突副本）"));
-            let suffix = if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if name.ends_with(".doc.json") {
+            let suffix = if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if name.ends_with(".doc.json") {
                 ".doc.json"
             } else {
                 ".whiteboard.json"
@@ -854,6 +854,35 @@ mod tests {
         assert_eq!(snapshot(&a).unwrap(), snapshot(&b).unwrap());
     }
     #[test]
+    fn cover_files_images_and_navigation_travel_between_local_peers() {
+        let temp = tempfile::tempdir().unwrap();
+        let remote = temp.path().join("remote.git"); fs::create_dir(&remote).unwrap();
+        git(&remote, &["init", "--bare", "--quiet"], "").unwrap();
+        let p = Preferences { github_sync_enabled: true, github_repo_url: remote.to_string_lossy().into_owned(), ..Preferences::default() };
+        let a = temp.path().join("a"); let b = temp.path().join("b");
+        let mut first = Store::open(temp.path().join("ca"), a.clone()).unwrap();
+        let second = Store::open(temp.path().join("cb"), b.clone()).unwrap();
+        let cover = first.create_cover_document().unwrap();
+        let mut image = b"\x89PNG\r\n\x1a\n".to_vec(); image.extend([0; 24]);
+        let image_id = crate::ai_images::save(&a, &image).unwrap();
+        let mut doc = cover.document.clone();
+        doc.content = Value::String(serde_json::json!({"versions":[{"image":image_id}]}).to_string());
+        let saved = first.save_cover_document(doc, cover.token).unwrap();
+        let mut data = first.snapshot().unwrap().data;
+        data.entries.push(crate::storage::Entry { id: "app.cover".into(), favorite: false, rank: 3, last_opened: Some(123) });
+        first.save(data).unwrap(); sync(&a, &p); sync(&b, &p);
+        assert!(second.snapshot().unwrap().data.entries.iter().any(|e| e.id == "app.cover"));
+        assert_eq!(second.list_cover_documents().unwrap().documents.len(), 1);
+        assert_eq!(second.load_cover_document(&saved.document.info.id).unwrap().document.content, saved.document.content);
+        assert_eq!(snapshot(&a).unwrap(), snapshot(&b).unwrap());
+        let mut invalid = snapshot(&b).unwrap();
+        let path = format!("data/app.cover/{}.cover.json", saved.document.info.id);
+        let mut value: Value = serde_json::from_slice(&invalid[&path]).unwrap();
+        value["type"] = Value::from("workstore.document");
+        invalid.insert(path,serde_json::to_vec(&value).unwrap());
+        assert!(validate(&invalid).is_err());
+    }
+    #[test]
     fn locked_checkout_recovers_without_deleting_lock_or_local_data() {
         let temp = tempfile::tempdir().unwrap();
         let remote = temp.path().join("remote.git"); fs::create_dir(&remote).unwrap();
@@ -1084,6 +1113,28 @@ mod tests {
         let id = Uuid::new_v4().to_string();
         let name = format!("data/app.html/{id}.html.json");
         let base = serde_json::json!({"id":id,"type":"workstore.html","schemaVersion":1,"title":"Title","content":"original"});
+        let mut local = base.clone(); local["content"] = Value::from("local");
+        let mut remote = base.clone(); remote["content"] = Value::from("remote");
+        let wrap = |v: &Value| BTreeMap::from([(name.clone(), serde_json::to_vec(v).unwrap())]);
+        let (merged, count) = merge(&wrap(&base), &wrap(&local), &wrap(&remote), false);
+        assert_eq!(count, 1);
+        assert_eq!(merged.keys().filter(|p|p.starts_with("data/")).count(), 1);
+        assert_eq!(serde_json::from_slice::<Value>(&merged[&name]).unwrap()["content"],"remote");
+        assert_eq!(merged, merge(&wrap(&base), &wrap(&local), &wrap(&remote), false).0);
+        let versions: Vec<Value> = merged.iter().filter(|(p,_)|p.starts_with(crate::sync_history::PREFIX))
+            .map(|(_,bytes)| {
+                let v: Value = serde_json::from_slice(bytes).unwrap();
+                let raw = base64::engine::general_purpose::STANDARD.decode(v["contentBase64"].as_str().unwrap()).unwrap();
+                serde_json::from_slice(&raw).unwrap()
+            }).collect();
+        assert!(versions.contains(&base)); assert!(versions.contains(&local)); assert!(versions.contains(&remote));
+    }
+    #[test]
+    fn conflicting_cover_content_keeps_one_visible_document_and_exact_history() {
+        use base64::Engine;
+        let id = Uuid::new_v4().to_string();
+        let name = format!("data/app.cover/{id}.cover.json");
+        let base = serde_json::json!({"id":id,"type":"workstore.cover","schemaVersion":1,"title":"Title","content":"original"});
         let mut local = base.clone(); local["content"] = Value::from("local");
         let mut remote = base.clone(); remote["content"] = Value::from("remote");
         let wrap = |v: &Value| BTreeMap::from([(name.clone(), serde_json::to_vec(v).unwrap())]);
