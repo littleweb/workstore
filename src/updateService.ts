@@ -43,6 +43,31 @@ export async function checkUpdates() {
   }
   finally { busy = false; }
 }
+function interruptedDownload(error: unknown) {
+  return /error decoding response body|error reading a body|error sending request|connection (?:reset|closed|aborted)|unexpected eof|incomplete message|timed? out|timeout|http2.*(?:error|reset)/i.test(String(error));
+}
+async function downloadUpdate(update: Update, version: string) {
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    let total = 0, received = 0;
+    const prefix = attempt === 1 ? "正在下载更新" : `正在重新下载更新（${attempt}/3）`;
+    publish({ phase: "downloading", version, message: `${prefix}…` });
+    try {
+      await update.download(event => {
+        if (event.event === "Started") { total = event.data.contentLength ?? 0; received = 0; }
+        if (event.event === "Progress") received += event.data.chunkLength;
+        const progress = total ? Math.min(100, Math.round(received / total * 100)) : undefined;
+        publish({ phase: "downloading", version, progress, message: progress === undefined ? `${prefix}…` : `${prefix} ${progress}%` });
+      }, { timeout: 10 * 60 * 1000 });
+      return;
+    } catch (error) {
+      // Retry transport interruptions only. Signature and installation failures
+      // must not be hidden or bypassed. The plugin verifies every full download.
+      if (attempt === 3 || !interruptedDownload(error)) throw error;
+      publish({ phase: "downloading", version, message: `下载连接中断，正在重新连接（${attempt + 1}/3）…` });
+      await new Promise(resolve => setTimeout(resolve, attempt * 1000));
+    }
+  }
+}
 export async function installUpdate() {
   if (busy) return;
   if (state.phase === "restart") {
@@ -59,14 +84,7 @@ export async function installUpdate() {
   const wasInert = root.inert;
   try {
     if (!downloaded) {
-      publish({ phase: "downloading", version, message: "正在下载更新…" });
-      let total = 0, received = 0;
-      await candidate.download(event => {
-        if (event.event === "Started") total = event.data.contentLength ?? 0;
-        if (event.event === "Progress") received += event.data.chunkLength;
-        const progress = total ? Math.min(100, Math.round(received / total * 100)) : undefined;
-        publish({ phase: "downloading", version, progress, message: progress === undefined ? "正在下载更新…" : `正在下载更新 ${progress}%` });
-      }, { timeout: 10 * 60 * 1000 });
+      await downloadUpdate(candidate, version);
       downloaded = true;
     }
     publish({ phase: "installing", version, message: "正在保存文档并安装，即将重启…" });
@@ -84,6 +102,8 @@ export async function installUpdate() {
     await relaunch();
   } catch (error) {
     if (updateState().phase === "restart") publish({ ...state, message: `更新已安装，重启失败；点击重试或手动重新打开：${String(error)}` });
+    else if (updateState().phase === "downloading" && interruptedDownload(error))
+      publish({ phase: "error", version, message: "更新包下载中断，自动重试仍未成功。请检查网络或代理后点击重试；当前版本未更改。" });
     else publish({ phase: "error", version, message: `更新未完成，点击重试：${String(error)}` });
   } finally {
     installing = false;

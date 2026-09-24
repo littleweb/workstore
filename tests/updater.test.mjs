@@ -8,11 +8,11 @@ function harness(options = {}) {
   const calls = []; const body = { inert: false };
   const update = {
     version: '0.2.0',
-    async download(fn) { calls.push('download'); if (options.downloadError) throw new Error('signature invalid'); fn({ event: 'Started', data: { contentLength: 100 } }); fn({ event: 'Progress', data: { chunkLength: 100 } }); },
+    async download(fn) { calls.push('download'); assert.equal(body.inert, false); if (options.transientFailures > 0) { options.transientFailures--; throw new Error('error decoding response body'); } if (options.downloadError) throw new Error('signature invalid'); fn({ event: 'Started', data: { contentLength: 100 } }); fn({ event: 'Progress', data: { chunkLength: 100 } }); },
     async install() { calls.push('install'); assert.equal(body.inert, true); },
   };
   const module = { exports: {} };
-  vm.runInNewContext(source, { module, document: { body }, require(id) {
+  vm.runInNewContext(source, { module, setTimeout: fn => fn(), document: { body }, require(id) {
     if (id.includes('ai/client')) return { stopAiRequests: async () => {} };
     if (id.includes('plugin-updater')) return { check: async () => { calls.push('check'); return options.noUpdate ? null : update; } };
     if (id.includes('plugin-process')) return { relaunch: async () => { calls.push('restart'); } };
@@ -44,4 +44,20 @@ test('unconfigured and current are distinct states', async () => {
   const h = harness({ configured: false }); await h.api.checkUpdates();
   assert.equal(h.api.updateState().phase, 'unconfigured'); assert.deepEqual(h.calls, []);
   const current = harness({ noUpdate: true }); await current.api.checkUpdates(); assert.equal(current.api.updateState().phase, 'current');
+});
+
+test('interrupted response reconnects and only installs after a complete verified download', async () => {
+  const h = harness({ transientFailures: 2 });
+  await h.api.checkUpdates(); await h.api.installUpdate();
+  assert.deepEqual(h.calls, ['check', 'download', 'download', 'download', 'pause', 'save', 'install', 'restart', 'resume']);
+});
+test('three interrupted downloads preserve installed app and allow a later manual retry', async () => {
+  const h = harness({ transientFailures: 3 });
+  await h.api.checkUpdates(); await h.api.installUpdate();
+  assert.deepEqual(h.calls, ['check', 'download', 'download', 'download']);
+  assert.equal(h.api.updateState().phase, 'error');
+  assert.match(h.api.updateState().message, /当前版本未更改/);
+  await h.api.installUpdate();
+  assert.equal(h.calls.filter(x => x === 'install').length, 1);
+  assert.equal(h.calls.filter(x => x === 'download').length, 4);
 });
