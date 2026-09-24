@@ -6,7 +6,7 @@
 
 ## 下载与当前状态
 
-从 [GitHub Releases](https://github.com/littleweb/workstore/releases) 下载。当前稳定版为 **0.1.8**，已发布 macOS Apple Silicon（M 系列）安装更新包。Windows、Linux 和 Intel Mac 尚未完成实机验收，也未提供正式安装包。当前 macOS 包使用 ad-hoc 签名，尚未完成 Apple Developer ID 签名和公证。
+从 [GitHub Releases](https://github.com/littleweb/workstore/releases) 下载。当前稳定版为 **0.1.9**，已发布 macOS Apple Silicon（M 系列）安装更新包。Windows、Linux 和 Intel Mac 尚未完成实机验收，也未提供正式安装包。当前 macOS 包使用 ad-hoc 签名，尚未完成 Apple Developer ID 签名和公证。
 
 - **文档**：本地富文本编辑、自动保存、重命名、导出；右侧 AI 助手生成草稿后可追加、替换正文或新建文档。
 - **白板**：基于 Excalidraw 的绘图文档；右侧常规 AI 对话可直接生成、分步绘制或修改内容；支持选中矩形/Frame 内补充手绘原型控件、可选选区限定、停止与逐步撤销。

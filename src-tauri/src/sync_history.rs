@@ -44,6 +44,8 @@ fn document(name: &str, bytes: &[u8]) -> Option<Value> {
         ("data/app.whiteboard", ".whiteboard.json", "workstore.whiteboard")
     } else if name.starts_with("data/app.comic/") {
         ("data/app.comic", ".comic.json", "workstore.comic")
+    } else if name.starts_with("data/app.cover/") {
+        ("data/app.cover", ".cover.json", "workstore.cover")
     } else { return None; };
     let value: Value = serde_json::from_slice(bytes).ok()?;
     let id = value["id"].as_str()?;
