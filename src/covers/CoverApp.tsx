@@ -837,18 +837,16 @@ export default function CoverApp() {
                   {version && <CoverImage src={version.image} />}{" "}
                   {!version && !busy && <p>点击右侧“生成封面”开始绘制</p>}
                   {busy && (
-                    <div className="cover-generating" role="status">
-                      <svg className="cover-drawing-grid" viewBox="0 0 240 240" fill="none" aria-hidden="true">
-                        {Array.from({ length: 9 }, (_, i) => (
+                    <div className="cover-generating" role="status" aria-label={status}>
+                      <svg className="cover-drawing-grid" viewBox="0 0 240 240" preserveAspectRatio="none" fill="none" aria-hidden="true">
+                        {Array.from({ length: 11 }, (_, i) => (
                           <g key={i} style={{ animationDelay: `${i * 110}ms` }}>
-                            <path pathLength="1" d={`M ${24 + i * 24} 24 V 216`} />
-                            <path pathLength="1" d={`M 24 ${24 + i * 24} H 216`} />
+                            <path pathLength="1" d={`M ${i * 24} 0 V 240`} />
+                            <path pathLength="1" d={`M 0 ${i * 24} H 240`} />
                           </g>
                         ))}
                         <path className="cover-grid-sketch" pathLength="1" d="M48 168 L96 96 L132 144 L168 72 L192 168 Z M156 54 a12 12 0 1 0 24 0 a12 12 0 1 0 -24 0" />
                       </svg>
-                      <strong>{status}</strong>
-                      <Button onClick={cancel}>取消生成</Button>
                     </div>
                   )}
                 </div>
@@ -910,6 +908,11 @@ export default function CoverApp() {
                 >
                   {busy ? "生成中…" : version ? "重新生成" : "生成封面"}
                 </Button>
+                {busy && (
+                  <Button block className="cover-cancel" onClick={cancel}>
+                    取消生成
+                  </Button>
+                )}
               </aside>
             </div>
           )
