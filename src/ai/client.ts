@@ -1,5 +1,10 @@
 import { invoke } from "@tauri-apps/api/core";
 import { native, scheduleAutosync } from "../workspace";
+const externalStoppers = new Set<() => Promise<void>>();
+export function registerAiStopper(stop: () => Promise<void>) {
+  externalStoppers.add(stop);
+  return () => { externalStoppers.delete(stop); };
+}
 const running = new Map<AbortController, Promise<unknown>>();
 // Canvas playback continues after model generation; shutdown/update must also
 // abort and await that local work before flushing files and exiting.
@@ -8,6 +13,7 @@ export async function trackAiExecution<T>(controller: AbortController, task: Pro
   try { return await task; } finally { running.delete(controller); }
 }
 export async function stopAiRequests() {
+  for (const stop of externalStoppers) await stop();
   const tasks = [...running.entries()];
   tasks.forEach(([controller]) => controller.abort());
   await Promise.allSettled(tasks.map(([, task]) => task));

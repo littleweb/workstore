@@ -75,8 +75,8 @@
 .document-sidebar[hidden] {
   display: none;
 }
-.document-app .tool-sidebar-footer .tool-sidebar-create {
-  justify-content: center;
+.document-app .tool-sidebar-create-section .tool-sidebar-create {
+  justify-content: flex-start;
 }
 .document-editor-root > .editor-shell > .toolbar .font-size-input,
 .document-editor-root > .editor-shell > .toolbar .font-decrement,

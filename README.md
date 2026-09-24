@@ -6,10 +6,11 @@
 
 ## 下载与当前状态
 
-从 [GitHub Releases](https://github.com/littleweb/workstore/releases) 下载。当前稳定版为 **0.1.4**，已发布 macOS Apple Silicon（M 系列）安装更新包。Windows、Linux 和 Intel Mac 尚未完成实机验收，也未提供正式安装包。当前 macOS 包使用 ad-hoc 签名，尚未完成 Apple Developer ID 签名和公证。
+从 [GitHub Releases](https://github.com/littleweb/workstore/releases) 下载。当前稳定版为 **0.1.8**，已发布 macOS Apple Silicon（M 系列）安装更新包。Windows、Linux 和 Intel Mac 尚未完成实机验收，也未提供正式安装包。当前 macOS 包使用 ad-hoc 签名，尚未完成 Apple Developer ID 签名和公证。
 
 - **文档**：本地富文本编辑、自动保存、重命名、导出；右侧 AI 助手生成草稿后可追加、替换正文或新建文档。
 - **白板**：基于 Excalidraw 的绘图文档；右侧常规 AI 对话可直接生成、分步绘制或修改内容；支持选中矩形/Frame 内补充手绘原型控件、可选选区限定、停止与逐步撤销。
+- **HTML**：嵌入 HTML Anything 原版界面与完整功能，保留 81 款模板、Agent 选择、流式生成、动态预览、历史和原有导出；桌面包内置本机运行组件。本阶段按原版存储与模型设置运行，后续再统一改造。
 - **小漫画**：模板、故事与分镜编辑、版本记录和导出；AI 相关功能依赖所配置的服务。
 - **全局 AI**：默认调用本地 Codex，启动时自动检测；支持兼容 OpenAI 的 API、模型和代理配置。Codex 需预先安装并登录，模型推理仍可能联网。
 - **常用与最近**：统一工具入口；切换已有条目保持顺序，新条目排在前面。
@@ -76,3 +77,8 @@ npm run desktop:build                           # 本机正式构建
 - [历史方案与设计规范](docs/方案与设计规范.md) · [小漫画开发交付](docs/小漫画开发交付.md)
 
 历史设计稿描述的是当时的方案，实际状态以代码与 `docs/context/CURRENT.md` 为准。依赖库和字体等第三方内容保留其原有许可证；项目采用 [MIT 许可证](LICENSE)，另见 [第三方内容说明](THIRD_PARTY_NOTICES.md)。
+
+
+### HTML Anything 原版开发
+
+首次开发先执行 `npm run html:install`，按上游锁文件安装独立依赖。桌面构建会自动生成并打包原版运行组件；最终用户无需安装 Node 或另启服务。浏览器开发需要另开 `npm run html:start`，再运行 `npm run dev -- --port 1420`。原版来源和适配边界见 [说明](third-party/html-anything/README.md)。

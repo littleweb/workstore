@@ -77,11 +77,11 @@
   min-height: 0;
   overflow: auto;
 }
-.whiteboard-app .tool-sidebar-create {
+.whiteboard-app .tool-sidebar-create-section .tool-sidebar-create {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
 }
 .board-section {
   margin-bottom: 24px;

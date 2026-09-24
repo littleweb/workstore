@@ -115,7 +115,7 @@ async function harness(options = {}) {
     initial: loads.get('a'),
     deferSave() { saveGate = deferred(); return saveGate; },
     deferCreate() { createGate = deferred(); return createGate; },
-    async create() { await act(async () => { host.querySelector('.tool-sidebar-footer button').click(); await drain(); }); },
+    async create() { await act(async () => { host.querySelector('.tool-sidebar-create-section button').click(); await drain(); }); },
     async click(id) { await act(async () => { row(id).click(); await drain(); }); },
     async settle(gate, error) { await act(async () => { error ? gate.reject(error) : gate.resolve(); await drain(); }); },
     async close() { if (closed) return; closed = true; await act(async () => root.unmount()); host.remove(); },

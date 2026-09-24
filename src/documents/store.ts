@@ -99,14 +99,14 @@ async function browserLoad(id: string): Promise<Cached> {
     request.onsuccess = () =>
       request.result
         ? resolve(request.result)
-        : reject(new Error("文档不存在"));
+        : reject(new Error("笔记不存在"));
     request.onerror = () => reject(request.error);
   });
 }
 
 async function browserWrite(document: Document, expected?: string): Promise<PersistedDocument> {
   if (new Blob([JSON.stringify(document)]).size > 64 * 1024 * 1024)
-    throw new Error("文档超过 64 MB");
+    throw new Error("笔记超过 64 MB");
 
   const db = await database();
 
@@ -120,7 +120,7 @@ async function browserWrite(document: Document, expected?: string): Promise<Pers
     request.onsuccess = () => {
       const previous = request.result as Cached | undefined;
       if ((expected && previous?.token !== expected) || (!expected && previous)) {
-        failure = "文档已在其他窗口修改，请先导出备份再重新打开";
+        failure = "笔记已在其他窗口修改，请先导出备份再重新打开";
         tx.abort();
         return;
       }
@@ -161,7 +161,7 @@ export async function refreshDocuments() {
 }
 
 function sanitizeTitle(value: string): string {
-  return value.trim().slice(0, 120) || "未命名文档";
+  return value.trim().slice(0, 120) || "未命名笔记";
 }
 
 export async function createDocument() {
@@ -172,7 +172,7 @@ export async function createDocument() {
         id: crypto.randomUUID(),
         type: "workstore.document",
         schemaVersion: 1,
-        title: "未命名文档",
+        title: "未命名笔记",
         favorite: false,
         createdAt: now,
         updatedAt: now,
@@ -214,7 +214,7 @@ export async function loadDocument(id: string) {
 
 export function activateDocument(id: string) {
   const cached = cache.get(id);
-  if (!cached) throw new Error("文档尚未载入");
+  if (!cached) throw new Error("笔记尚未载入");
   lastDocumentId = id;
   if (!cached.document.lastOpenedAt) stageDocument(id, { lastOpenedAt: Date.now() });
   return cached.document;
@@ -234,7 +234,7 @@ export function stageDocument(
   patch: Partial<Pick<Document, "content" | "title" | "favorite" | "lastOpenedAt">>,
 ) {
   const c = cache.get(id);
-  if (!c) throw new Error("文档尚未载入");
+  if (!c) throw new Error("笔记尚未载入");
   if (Object.entries(patch).every(([key, value]) => JSON.stringify(c.document[key as keyof typeof c.document]) === JSON.stringify(value))) return;
 
   const next = { ...c.document, ...patch, updatedAt: Date.now() };
@@ -360,7 +360,7 @@ registerSyncRefresher(async (paths) => {
 // AI/imported content deliberately starts a new editor session. Local typing
 // still uses stageDocument and never feeds htmlContent back into TeaEditor.
 export function applyDocumentContent(id: string, content: string) {
-  if (!cache.has(id)) throw new Error("文档尚未载入");
+  if (!cache.has(id)) throw new Error("笔记尚未载入");
   flushSync(() => {
     remoteVersions.set(id, remoteVersion(id) + 1);
     stageDocument(id, { content });

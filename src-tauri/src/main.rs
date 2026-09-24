@@ -3,6 +3,8 @@ mod comic_catalog;
 mod ai_images;
 mod ai;
 mod documents;
+mod html;
+mod html_runtime;
 mod comics;
 use comics::{Comic, ComicList, LoadedComic};
 mod preferences;
@@ -145,6 +147,55 @@ fn load_whiteboard(id: String, state: tauri::State<Workspace>) -> Result<LoadedB
         .load_board(&id)
 }
 #[tauri::command]
+fn save_html_export(path: String, content: String) -> Result<(), String> {
+    if content.len() > 64 * 1024 * 1024 { return Err("导出超过 64 MB".into()); }
+    storage::atomic_write(std::path::Path::new(&path), content.as_bytes())
+}
+#[tauri::command]
+fn list_html_documents(state: tauri::State<Workspace>) -> Result<html::DocumentList, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .list_html_documents()
+}
+#[tauri::command]
+fn create_html_document(state: tauri::State<Workspace>) -> Result<html::LoadedDocument, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .create_html_document()
+}
+#[tauri::command]
+fn load_html_document(id: String, state: tauri::State<Workspace>) -> Result<html::LoadedDocument, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .load_html_document(&id)
+}
+#[tauri::command]
+fn save_html_document(
+    document: html::Document,
+    expected_token: String,
+    state: tauri::State<Workspace>,
+) -> Result<html::LoadedDocument, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .save_html_document(document, expected_token)
+}
+#[tauri::command]
 fn create_document(state: tauri::State<Workspace>) -> Result<LoadedDocument, String> {
     state
         .0
@@ -279,6 +330,7 @@ fn main() {
         return;
     }
     tauri::Builder::default()
+        .manage(html_runtime::HtmlRuntime::default())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_single_instance::init(|app, _, _| {
@@ -322,6 +374,15 @@ fn main() {
             quit_ready,
             list_whiteboards,
             list_documents,
+            html_runtime::html_original_start,
+            html_runtime::html_original_cancel,
+            html_runtime::html_original_backup,
+            html_runtime::html_original_export,
+            list_html_documents,
+            create_html_document,
+            load_html_document,
+            save_html_document,
+            save_html_export,
             list_comics,
             create_comic,
             load_comic,
@@ -350,6 +411,7 @@ fn main() {
         .build(application_context())
         .expect("WorkStore failed to start; your existing files have not been overwritten")
         .run(|app, event| {
+            if matches!(event, tauri::RunEvent::Exit) { html_runtime::shutdown(app); }
             if let tauri::RunEvent::ExitRequested {
                 api, code: None, ..
             } = event

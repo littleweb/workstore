@@ -31,7 +31,6 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PlusOutlined,
-  SearchOutlined,
   SettingOutlined,
   StarOutlined,
   ThunderboltOutlined,
@@ -49,6 +48,7 @@ import { flushDocuments, registerDocumentFlusher } from "./documentLifecycle";
 import { flushSync } from "react-dom";
 const Whiteboard = lazy(() => import("./whiteboard/Whiteboard"));
 const ComicApp = lazy(() => import("./comics/ComicApp"));
+const HtmlApp = lazy(() => import("./html/HtmlApp"));
 const DocumentApp = lazy(() => import("./documents/DocumentApp"));
 import {
   native,
@@ -78,6 +78,7 @@ type Tool = {
   status?: "dev";
 };
 const tools: Tool[] = [
+  { id: "app.html", name: "HTML", description: "把内容变成精美的网页、卡片与演示。", category: "设计工具", color: "green", icon: <GlobalOutlined /> },
   { id: "app.comic", name: "小漫画", description: "一句话，画出你的故事。", category: "设计工具", color: "green", icon: <ComicIcon /> },
   {
     id: "app.project",
@@ -90,7 +91,7 @@ const tools: Tool[] = [
   },
   {
     id: "app.doc",
-    name: "文档",
+    name: "笔记",
     description: "记录值得留下的每一个想法。",
     category: "效率办公",
     color: "orange",
@@ -121,6 +122,9 @@ const tools: Tool[] = [
     icon: <GithubOutlined />,
   },
 ];
+// Temporarily hidden; retain registration and saved entries for restoration.
+const hiddenTools = new Set(["app.html", "tool.json", "tool.color", "web.github"]);
+const visibleTools = tools.filter((tool) => !hiddenTools.has(tool.id));
 type Entry = {
   id: string;
   favorite: boolean;
@@ -181,13 +185,13 @@ function ToolHeader({
 }
 
 function WorkStore() {
+  const [htmlOpened, setHtmlOpened] = useState(false);
   const { message } = AntApp.useApp();
   const [entries, setEntries] = useState<Entry[]>(restore),
     [active, setActive] = useState("app.project"),
     [collapsed, setCollapsed] = useState(false),
     [catalog, setCatalog] = useState(false),
     [settings, setSettings] = useState(false),
-    [query, setQuery] = useState(""),
     [category, setCategory] = useState("全部工具"),
     [dragging, setDragging] = useState(false);
   const [settingsTab, setSettingsTab] = useState("general"),
@@ -525,12 +529,13 @@ function WorkStore() {
     message.success(value ? "已添加到常用工具" : "已移到最近工具");
   };
   const favorites = entries
-      .filter((e) => e.favorite && tools.some((t) => t.id === e.id))
+      .filter((e) => e.favorite && visibleTools.some((t) => t.id === e.id))
       .sort((a, b) => a.rank - b.rank),
     recent = entries
-      .filter((e) => !e.favorite && e.lastOpened && tools.some((t) => t.id === e.id))
+      .filter((e) => !e.favorite && e.lastOpened && visibleTools.some((t) => t.id === e.id))
       .sort((a, b) => (b.lastOpened || 0) - (a.lastOpened || 0) || a.id.localeCompare(b.id));
   const tool = tools.find((t) => t.id === active);
+  useEffect(() => { if (active === "app.html") setHtmlOpened(true); }, [active]);
   const row = (entry: Entry) => {
     const t = tools.find((t) => t.id === entry.id)!;
     return (
@@ -613,9 +618,12 @@ function WorkStore() {
           </div>
           <div className="window-actions">
           <UpdateButton ready={ready} />
+          <Tooltip title="设置">
+            <button className="icon-button" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
+          </Tooltip>
           <Tooltip title={collapsed ? "展开导航" : "折叠导航"}>
             <button
-              className="icon-button collapse-toggle"
+              className="icon-button collapse-toggle navigation-toggle"
               aria-label={collapsed ? "展开导航" : "折叠导航"}
               aria-expanded={!collapsed}
               onClick={() => setCollapsed(!collapsed)}
@@ -638,7 +646,6 @@ function WorkStore() {
             className="open-tools"
             size="small"
             onClick={() => {
-              setQuery("");
               setCatalog(true);
             }}
           >
@@ -701,24 +708,17 @@ function WorkStore() {
               )}
             </div>
           )}
-          <button
-            className="settings-link"
-            aria-label="设置"
-            onClick={() => setSettings(true)}
-          >
-            <SettingOutlined />
-            <span>设置</span>
-          </button>
+
         </div>
       </aside>
       <main className="workspace-main">
         {collapsed && (
           <header className="compact-tool-heading" data-tauri-drag-region>
-            <button className="icon-button" aria-label="展开主导航" aria-expanded={false}
+            <button className="icon-button navigation-toggle" aria-label="展开主导航" aria-expanded={false}
               onClick={() => setCollapsed(false)}><MenuUnfoldOutlined /></button>
             <button className="compact-brand" onClick={() => void navigate("app.project")}>WorkStore</button>
             <button className="compact-tool-switch" aria-label="打开工具" aria-haspopup="dialog"
-              onClick={() => { setQuery(""); setCatalog(true); }}>
+              onClick={() => { setCatalog(true); }}>
               打开工具 <DownOutlined />
             </button>
             <nav className="compact-tool-list" aria-label="常用和最近工具">
@@ -737,7 +737,8 @@ function WorkStore() {
             <button className="icon-button compact-settings" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
           </header>
         )}
-        {active === "app.comic" ? (
+        {(htmlOpened || active === "app.html") && <div style={{display:active === "app.html" ? "contents" : "none"}}><Suspense fallback={<div className="startup">正在加载 HTML…</div>}><HtmlApp /></Suspense></div>}
+        {active === "app.html" ? null : active === "app.comic" ? (
           <Suspense fallback={<div className="tool-page">正在打开小漫画…</div>}><ComicApp /></Suspense>
         ) : active === "app.whiteboard" ? (
           <Suspense fallback={<div className="startup">正在加载白板…</div>}>
@@ -745,7 +746,7 @@ function WorkStore() {
           </Suspense>
 
         ) : active === "app.doc" ? (
-          <Suspense fallback={<div className="startup">正在加载文档…</div>}>
+          <Suspense fallback={<div className="startup">正在加载笔记…</div>}>
             <DocumentApp />
           </Suspense>
         ) : tool ? (
@@ -858,15 +859,6 @@ function WorkStore() {
         destroyOnHidden
       >
         <p className="modal-description">找到顺手的工具，开始下一件事。</p>
-        <Input
-          autoFocus
-          prefix={<SearchOutlined />}
-          placeholder="搜索工具名称、功能或 ID…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          allowClear
-          size="large"
-        />
         <div className="catalog-filters">
           <Segmented
             value={category}
@@ -881,13 +873,10 @@ function WorkStore() {
           />
         </div>
         <div className="catalog-grid">
-          {tools
+          {visibleTools
             .filter(
               (t) =>
-                (category === "全部工具" || t.category === category) &&
-                `${t.name}${t.description}${t.id}`
-                  .toLowerCase()
-                  .includes(query.toLowerCase()),
+                (category === "全部工具" || t.category === category),
             )
             .map((t) => (
               <button
@@ -916,20 +905,16 @@ function WorkStore() {
               </button>
             ))}
         </div>
-        {!tools.some(
+        {!visibleTools.some(
           (t) =>
-            (category === "全部工具" || t.category === category) &&
-            `${t.name}${t.description}${t.id}`
-              .toLowerCase()
-              .includes(query.toLowerCase()),
+            (category === "全部工具" || t.category === category),
         ) && (
           <div className="no-results">
-            没有找到“{query}”相关工具
+            此分类暂无工具
             <Button
               type="link"
               onClick={() => {
-                setQuery("");
-                setCategory("全部工具");
+                  setCategory("全部工具");
               }}
             >
               查看全部工具

@@ -39,8 +39,8 @@ import ClickDiagnostics from "./DocumentClickDiagnostics";
 import { recordDocumentClickStage } from "./clickDiagnostics";
 
 function getRenameError(message?: string) {
-  if (!message?.trim()) return "文档名称不能为空";
-  if ([...message].length > 120) return "文档名称不能超过 120 个字符";
+  if (!message?.trim()) return "笔记名称不能为空";
+  if ([...message].length > 120) return "笔记名称不能超过 120 个字符";
   return "";
 }
 
@@ -377,19 +377,30 @@ export default function DocumentApp() {
           <header className="document-heading">
             <div>
               <FileTextOutlined />
-              <h2>文档</h2>
+              <h2>笔记</h2>
 
             </div>
             <Button
               type="text"
-              icon={<MenuFoldOutlined />}
-              aria-label="折叠文档导航"
-              title="折叠文档导航"
+              className="navigation-toggle" icon={<MenuFoldOutlined />}
+              aria-label="折叠笔记导航"
+              title="折叠笔记导航"
               aria-expanded={!sidebarCollapsed}
               aria-controls="document-navigation"
               onClick={() => setSidebarCollapsed(true)}
             />
           </header>
+          <div className="tool-sidebar-create-section">
+            <div className="tool-sidebar-create-label">创建</div>
+            <Button
+              className="tool-sidebar-create"
+              icon={<PlusOutlined />}
+              loading={busy}
+              onClick={() => void create()}
+            >
+              创建笔记
+            </Button>
+          </div>
           <div
             className="document-navigation"
             onDragOver={(event) => event.preventDefault()}
@@ -414,16 +425,7 @@ export default function DocumentApp() {
               {!recent.length && <p>暂无</p>}
             </div>
           </div>
-          <div className="tool-sidebar-footer">
-            <Button
-              className="tool-sidebar-create"
-              icon={<PlusOutlined />}
-              loading={busy}
-              onClick={() => void create()}
-            >
-              创建文档
-            </Button>
-          </div>
+
         </aside>
 
         <div className="document-workspace">
@@ -447,7 +449,7 @@ export default function DocumentApp() {
               className="document-error"
               title={documentWarnings().join("\n")}
             >
-              {documentWarnings().length} 份文档无法读取，原文件已保留。
+              {documentWarnings().length} 份笔记无法读取，原文件已保留。
             </div>
           )}
 
@@ -457,9 +459,9 @@ export default function DocumentApp() {
                 {sidebarCollapsed && (
                   <Button
                     type="text"
-                    icon={<MenuUnfoldOutlined />}
-                    aria-label="展开文档导航"
-                    title="展开文档导航"
+                    className="navigation-toggle" icon={<MenuUnfoldOutlined />}
+                    aria-label="展开笔记导航"
+                    title="展开笔记导航"
                     aria-expanded={false}
                     aria-controls="document-navigation"
                     onClick={() => setSidebarCollapsed(false)}
@@ -471,7 +473,7 @@ export default function DocumentApp() {
                     setName(item.title);
                     setRenaming(item.id);
                   }}
-                  title="重命名文档"
+                  title="重命名笔记"
                 >
                   {item.title}
                   <EditOutlined />
@@ -503,12 +505,12 @@ export default function DocumentApp() {
                   )}
                 </div>
                 <Button size="small" type="text" icon={<MessageOutlined />} aria-expanded={aiOpen} disabled={aiApplying} onClick={() => setAiOpen(value => !value)}>AI 助手</Button>
-                <Tooltip title="导出文档 JSON">
+                <Tooltip title="导出笔记 JSON">
                   <Button
                     type="text"
                     size="small"
                     icon={<ExportOutlined />}
-                    aria-label="导出文档 JSON"
+                    aria-label="导出笔记 JSON"
                     onClick={() => exportDocument(item.id)}
                   />
                 </Tooltip>
@@ -522,7 +524,7 @@ export default function DocumentApp() {
                   />
                 </div>
               </div>
-              {busy && <div className="document-busy">正在切换文档…</div>}
+              {busy && <div className="document-busy">正在切换笔记…</div>}
             </>
           ) : (
             <>
@@ -530,9 +532,9 @@ export default function DocumentApp() {
                 <div className="document-document-bar">
                   <Button
                     type="text"
-                    icon={<MenuUnfoldOutlined />}
-                    aria-label="展开文档导航"
-                    title="展开文档导航"
+                    className="navigation-toggle" icon={<MenuUnfoldOutlined />}
+                    aria-label="展开笔记导航"
+                    title="展开笔记导航"
                     aria-expanded={false}
                     aria-controls="document-navigation"
                     onClick={() => setSidebarCollapsed(false)}
@@ -541,20 +543,20 @@ export default function DocumentApp() {
               )}
             <div className="document-empty">
               <FileTextOutlined />
-              <h2>创建第一篇文档</h2>
-              <p>这里放列表 + 编辑区的文档体验，支持收藏与自动保存。</p>
+              <h2>创建第一篇笔记</h2>
+              <p>这里放列表 + 编辑区的笔记体验，支持收藏与自动保存。</p>
               <Button
                 type="primary"
                 icon={<PlusOutlined />}
                 loading={busy}
                 onClick={() => void create()}
               >
-                创建文档
+                创建笔记
               </Button>
               <Button icon={<MessageOutlined />} onClick={() => setAiOpen(true)}>AI 助手</Button>
               <small>
                 {native
-                  ? "每篇文档独立保存到工作目录"
+                  ? "每篇笔记独立保存到工作目录"
                   : "预览数据保存在此浏览器，桌面版会同步到本地文件"}
               </small>
             </div>
@@ -565,7 +567,7 @@ export default function DocumentApp() {
       </div>
 
       <Modal
-        title="重命名文档"
+        title="重命名笔记"
         open={!!renaming}
         onCancel={() => setRenaming(null)}
         onOk={() => void rename()}
@@ -574,7 +576,7 @@ export default function DocumentApp() {
         okButtonProps={{ disabled: !name.trim() || getRenameError(name).length > 0 }}
       >
         <Input
-          aria-label="文档名称"
+          aria-label="笔记名称"
           value={name}
           maxLength={120}
           onChange={(e) => setName(e.target.value)}

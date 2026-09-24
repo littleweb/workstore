@@ -348,7 +348,7 @@ async fn generate(settings: &Settings, messages: &[Message]) -> Result<String, S
         _ => Err("不支持的 AI 服务".into()),
     }
 }
-fn codex_path(explicit: &str) -> Result<PathBuf, String> {
+pub(crate) fn codex_path(explicit: &str) -> Result<PathBuf, String> {
     if !explicit.trim().is_empty() {
         let path = PathBuf::from(explicit.trim());
         return if path.is_absolute() && path.is_file() {
