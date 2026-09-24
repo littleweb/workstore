@@ -27,6 +27,7 @@ pub struct Settings {
     pub base_url: String,
     pub proxy_url: String,
     pub timeout_seconds: u64,
+    pub image_timeout_seconds: u64,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub api_key: Option<String>,
     pub has_api_key: bool,
@@ -42,9 +43,20 @@ impl Default for Settings {
             base_url: "https://api.openai.com/v1".into(),
             proxy_url: String::new(),
             timeout_seconds: 180,
+            image_timeout_seconds: 600,
             api_key: None,
             has_api_key: false,
         }
+    }
+}
+fn request_timeout(settings: &Settings, image: bool) -> Duration {
+    Duration::from_secs(if image { settings.image_timeout_seconds } else { settings.timeout_seconds })
+}
+fn timeout_error(settings: &Settings, image: bool) -> String {
+    if image {
+        format!("图像生成超过 {} 秒，已停止本次请求。可重试或在设置 → AI 中延长“图像生成超时”", settings.image_timeout_seconds)
+    } else {
+        "AI 响应超时，请重试或在设置中延长超时".into()
     }
 }
 fn settings_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
@@ -106,6 +118,9 @@ fn validate_settings(s: &Settings) -> Result<(), String> {
     }
     if !(10..=600).contains(&s.timeout_seconds) {
         return Err("超时应为 10–600 秒".into());
+    }
+    if !(60..=1800).contains(&s.image_timeout_seconds) {
+        return Err("图像生成超时应为 60–1800 秒".into());
     }
     if !s.proxy_url.trim().is_empty() && s.proxy_url.trim() != "direct" {
         validate_proxy(s.proxy_url.trim())?;
@@ -285,7 +300,7 @@ pub async fn ai_generate(
                 Ok((parse_codex(&output)?, images))
             } else { Ok((generate(&settings, &request.messages).await?, vec![])) }
         } => result?,
-        _ = tokio::time::sleep(Duration::from_secs(settings.timeout_seconds)) => return Err("AI 响应超时，请重试或在设置中延长超时".into()),
+        _ = tokio::time::sleep(request_timeout(&settings, request.image)) => return Err(timeout_error(&settings, request.image)),
         _ = async { while !cancelled.load(Ordering::Relaxed) { tokio::time::sleep(Duration::from_millis(100)).await; } } => return Err("已停止生成".into()),
     };
     let mut images = Vec::new();
@@ -612,6 +627,26 @@ async fn compatible(settings: &Settings, messages: &[Message]) -> Result<String,
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn image_timeout_migrates_old_settings_and_routes_independently() {
+        let mut settings: Settings = serde_json::from_str(r#"{"timeoutSeconds":42}"#).unwrap();
+        assert_eq!(request_timeout(&settings, false), Duration::from_secs(42));
+        assert_eq!(request_timeout(&settings, true), Duration::from_secs(600));
+        settings.image_timeout_seconds = 1200;
+        let saved = serde_json::to_string(&settings).unwrap();
+        let restored: Settings = serde_json::from_str(&saved).unwrap();
+        assert_eq!(request_timeout(&restored, true), Duration::from_secs(1200));
+        assert_eq!(request_timeout(&restored, false), Duration::from_secs(42));
+        assert!(timeout_error(&restored, true).contains("1200 秒"));
+        for seconds in [60, 600, 1800] {
+            settings.image_timeout_seconds = seconds;
+            assert!(validate_settings(&settings).is_ok());
+        }
+        for seconds in [0, 59, 1801, u64::MAX] {
+            settings.image_timeout_seconds = seconds;
+            assert!(validate_settings(&settings).is_err());
+        }
+    }
     #[test]
     fn credentials_are_redacted() {
         let s = redacted(Settings {

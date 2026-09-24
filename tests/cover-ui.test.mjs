@@ -251,11 +251,12 @@ async function harness({ empty = false } = {}) {
     async remote() {
       remote++;
     },
-    async resolve() {
+    async resolve(result = {}) {
       await act(async () => {
         resolve({
           images: ["workstore-image:" + "a".repeat(64)],
           saveError: null,
+          ...result,
         });
         await drain();
       });
@@ -269,6 +270,7 @@ async function harness({ empty = false } = {}) {
 test("all 277 templates are selectable; header steps preserve configuration and creation opens a durable draft", async () => {
   const h = await harness({ empty: true });
   try {
+    await h.click("风格模板");
     assert.equal(h.host.querySelectorAll(".cover-template").length, 277);
     assert.ok(
       h.host
@@ -441,4 +443,86 @@ test("fold and unfold retain the current draft; entering template browser keeps 
   } finally {
     await h.close();
   }
+});
+
+test("theme entry recommends valid catalog choices and automatically generates a durable cover", async () => {
+  const h = await harness({ empty: true });
+  try {
+    assert.ok(h.host.querySelector(".cover-create"));
+    await h.click("秋日第一杯奶茶，温暖又俏皮");
+    await h.click("生成封面");
+    assert.ok(h.host.querySelector(".cover-editor"));
+    assert.equal(h.host.querySelector(".cover-create"), null);
+    assert.ok(h.host.querySelector(".cover-matching").textContent.includes("正在匹配"));
+    assert.equal(h.docs.size, 1);
+    assert.equal(JSON.parse([...h.docs.values()][0].content).needsRecommendation, true);
+    assert.equal(h.requests.length, 1);
+    assert.ok(!h.requests[0].input.image);
+    assert.ok(h.requests[0].input.messages[0].content.includes("277"));
+    await h.resolve({ text: JSON.stringify({ ...initial().config, layout: "SC-001", color: "C-01" }) });
+    assert.equal(h.requests.length, 2);
+    assert.equal(h.requests[1].input.image, true);
+    assert.equal(h.docs.size, 1);
+    const saved = JSON.parse([...h.docs.values()][0].content);
+    assert.equal(saved.config.topic, "秋日第一杯奶茶，温暖又俏皮");
+    assert.equal(saved.config.layout, "SC-001");
+    assert.equal(saved.config.color, "C-01");
+    assert.equal(saved.versions.length, 1);
+    assert.ok(h.host.querySelector(".cover-editor"));
+  } finally { await h.close(); }
+});
+for (const action of ["取消生成", "风格模板"]) {
+  test(`late recommendation after ${action} preserves the original draft without applying late results`, async () => {
+    const h = await harness({ empty: true });
+    try {
+      await h.click("秋日第一杯奶茶，温暖又俏皮");
+      await h.click("生成封面");
+      await h.click(action);
+      await h.resolve({ text: JSON.stringify({ ...initial().config, layout: "SC-001", color: "C-01" }) });
+      assert.equal(h.docs.size, 1);
+      assert.equal(h.requests.length, 1);
+      assert.equal(h.requests[0].signal.aborted, true);
+    } finally { await h.close(); }
+  });
+}
+test("invalid recommendation preserves a retryable draft", async () => {
+  const h = await harness({ empty: true });
+  try {
+    await h.click("秋日第一杯奶茶，温暖又俏皮");
+    await h.click("生成封面");
+    await h.resolve({ text: JSON.stringify({ ...initial().config, style: "999", layout: "SC-001", color: "C-01" }) });
+    assert.equal(h.docs.size, 1);
+    assert.ok(h.host.querySelector('[role="alert"]'));
+    assert.ok(h.host.querySelector(".cover-matching").textContent.includes("秋日第一杯奶茶，温暖又俏皮"));
+    assert.ok(h.host.querySelector(".cover-editor"));
+  } finally { await h.close(); }
+});
+
+test("cancelled matching reopens as a retryable editor draft and retries without duplicates", async () => {
+  const h = await harness({ empty: true });
+  try {
+    await h.click("秋日第一杯奶茶，温暖又俏皮");
+    await h.click("生成封面");
+    const id = [...h.docs.keys()][0];
+    await h.click("取消生成");
+    await h.click("风格模板");
+    await h.click("秋日第一杯奶茶，温暖又俏皮");
+    assert.ok(h.host.querySelector(".cover-editor .cover-matching"));
+    await h.click("重新匹配并生成");
+    assert.equal(h.docs.size, 1);
+    await h.resolve({ text: JSON.stringify({ ...initial().config, layout: "SC-001", color: "C-01" }) });
+    assert.equal(h.docs.size, 1);
+    assert.equal(JSON.parse(h.docs.get(id).content).versions.length, 1);
+  } finally { await h.close(); }
+});
+test("remote changes during matching prevent recommendation overwrites", async () => {
+  const h = await harness({ empty: true });
+  try {
+    await h.click("秋日第一杯奶茶，温暖又俏皮");
+    await h.click("生成封面");
+    await h.remote();
+    await h.resolve({ text: JSON.stringify({ ...initial().config, layout: "SC-001", color: "C-01" }) });
+    assert.equal(h.requests.length, 1);
+    assert.equal(JSON.parse([...h.docs.values()][0].content).needsRecommendation, true);
+  } finally { await h.close(); }
 });

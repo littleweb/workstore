@@ -27,6 +27,7 @@ export type CoverVersion = {
   prompt: string;
 };
 export type CoverContent = {
+  needsRecommendation?: boolean;
   config: CoverConfig;
   versions: CoverVersion[];
   selectedVersion: string | null;
@@ -84,6 +85,7 @@ export function readContent(raw: string): CoverContent {
   if (
     !v ||
     !validConfig(v.config) ||
+    (v.needsRecommendation !== undefined && typeof v.needsRecommendation !== "boolean") ||
     !Array.isArray(v.versions) ||
     v.versions.length > 200 ||
     v.versions.some(

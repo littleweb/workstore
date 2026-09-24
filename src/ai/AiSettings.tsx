@@ -27,7 +27,9 @@ export default function AiSettings() {
       <label>模型<Input value={value.model} placeholder={value.provider === "codex" ? "留空使用 Codex 默认模型" : "填写服务商提供的模型名称"} onChange={e => change({ model: e.target.value })} /></label>
       <label>网络代理<Input value={value.proxyUrl} placeholder="留空自动读取系统代理，例如 http://127.0.0.1:7897" onChange={e => change({ proxyUrl: e.target.value })} /></label>
       <p>macOS 自动读取系统 HTTPS 代理；其他系统使用代理环境变量。输入 direct 可直接连接。</p>
-      <label>响应超时（秒）<InputNumber min={10} max={600} value={value.timeoutSeconds} onChange={v => change({ timeoutSeconds: v ?? 180 })} /></label>
+      <label>文本响应超时（秒）<InputNumber min={10} max={600} value={value.timeoutSeconds} onChange={v => change({ timeoutSeconds: v ?? 180 })} /></label>
+      <label>图像生成超时（秒）<InputNumber min={60} max={1800} value={value.imageTimeoutSeconds} onChange={v => change({ imageTimeoutSeconds: v ?? 600 })} /></label>
+      <p>图像生成默认等待 10 分钟，最多 30 分钟；等待期间可随时取消。</p>
       <p>服务配置和密钥仅保存在当前设备；AI 回答记录存入工作目录，随 GitHub 数据同步。</p>
       <Space><Button type="primary" loading={busy} onClick={async () => { setBusy(true); setError(""); try { setValue(await ai.saveSettings(value)); setSaved(true); } catch (e) { setError(String(e)); } finally { setBusy(false); } }}>保存 AI 设置</Button>{saved && <span>已保存</span>}</Space>
     </>}
