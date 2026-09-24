@@ -6,7 +6,7 @@ import { native, pauseSyncForUpdate } from "./workspace";
 import { flushDocuments } from "./documentLifecycle";
 
 export type UpdateState = {
-  phase: "idle" | "checking" | "available" | "downloading" | "installing" | "restart" | "current" | "error" | "unconfigured";
+  phase: "idle" | "checking" | "available" | "downloading" | "verifying" | "saving" | "installing" | "restart" | "current" | "error" | "unconfigured";
   version?: string;
   progress?: number;
   message: string;
@@ -55,7 +55,12 @@ async function downloadUpdate(update: Update, version: string) {
       await update.download(event => {
         if (event.event === "Started") { total = event.data.contentLength ?? 0; received = 0; }
         if (event.event === "Progress") received += event.data.chunkLength;
-        const progress = total ? Math.min(100, Math.round(received / total * 100)) : undefined;
+        if (event.event === "Finished") {
+          publish({ phase: "verifying", version, message: "下载传输结束，正在校验更新包签名…" });
+          return;
+        }
+        // Byte counts are estimates; 100% must not precede stream completion.
+        const progress = total ? Math.min(99, Math.floor(received / total * 100)) : undefined;
         publish({ phase: "downloading", version, progress, message: progress === undefined ? `${prefix}…` : `${prefix} ${progress}%` });
       }, { timeout: 10 * 60 * 1000 });
       return;
@@ -87,7 +92,7 @@ export async function installUpdate() {
       await downloadUpdate(candidate, version);
       downloaded = true;
     }
-    publish({ phase: "installing", version, message: "正在保存文档并安装，即将重启…" });
+    publish({ phase: "saving", version, message: "更新包校验通过，正在保存文档…" });
     installing = true;
     resume = await pauseSyncForUpdate();
     root.inert = true;
@@ -95,6 +100,7 @@ export async function installUpdate() {
     await flushDocuments();
     // Download and installation are separate so Windows can never exit before
     // durable local saves finish. The updater verifies the package signature.
+    publish({ phase: "installing", version, message: "正在安装更新，即将重启…" });
     downloaded = false;
     await candidate.install();
     candidate = null;
@@ -104,7 +110,11 @@ export async function installUpdate() {
     if (updateState().phase === "restart") publish({ ...state, message: `更新已安装，重启失败；点击重试或手动重新打开：${String(error)}` });
     else if (updateState().phase === "downloading" && interruptedDownload(error))
       publish({ phase: "error", version, message: "更新包下载中断，自动重试仍未成功。请检查网络或代理后点击重试；当前版本未更改。" });
-    else publish({ phase: "error", version, message: `更新未完成，点击重试：${String(error)}` });
+    else {
+      const stage = updateState().phase;
+      const label = stage === "verifying" ? "更新包签名校验失败" : stage === "saving" ? "更新前保存失败，尚未安装" : stage === "installing" ? "安装更新失败" : "下载更新包失败";
+      publish({ phase: "error", version, message: `${label}，点击重试：${String(error)}` });
+    }
   } finally {
     installing = false;
     root.inert = wasInert;
