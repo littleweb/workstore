@@ -146,11 +146,14 @@ export default function CoverApp() {
       active.current = next;
       setId(next);
       setChanging(false);
-      setRecommendTopic(null);
+      const openedContent = readContent(opened.content);
+      setRecommendTopic(openedContent.needsRecommendation ? openedContent.config.topic : null);
+      if (openedContent.needsRecommendation) {
+        themeRef.current = openedContent.config.topic;
+        setTheme(openedContent.config.topic);
+      }
       setError("");
-      setPage(
-        readContent(opened.content).versions.length ? "editor" : "config",
-      );
+      setPage(openedContent.needsRecommendation || openedContent.versions.length ? "editor" : "config");
     } catch (e) {
       if (ticket === request.current) fail(e);
     } finally {
@@ -272,7 +275,9 @@ export default function CoverApp() {
       queued.current = () => void recommendAndGenerate();
       return;
     }
-    const topic = themeRef.current.trim();
+    const existing = active.current ? store.currentDocument(active.current) : undefined;
+    const draftContent = existing ? readContent(existing.content) : undefined;
+    const topic = (draftContent?.needsRecommendation ? draftContent.config.topic : themeRef.current).trim();
     if (!topic || controller.current || pending.current) return;
     const ticket = ++request.current;
     const abort = new AbortController();
@@ -285,6 +290,26 @@ export default function CoverApp() {
     const valid = () => mounted.current && !abort.signal.aborted && request.current === ticket;
     await trackAiExecution(abort, (async () => {
       try {
+        pending.current = true;
+        await store.flushDocuments();
+        if (!valid()) return;
+        let target = active.current ? store.currentDocument(active.current) : undefined;
+        if (!target || !readContent(target.content).needsRecommendation) {
+          target = await store.createDocument();
+          const draft = emptyContent();
+          draft.config.topic = topic;
+          draft.config.mood = "";
+          draft.needsRecommendation = true;
+          store.stageDocument(target.id, { title: topic.slice(0, 40), content: JSON.stringify(draft) });
+          await store.flushDocument(target.id);
+        }
+        if (!valid()) return;
+        store.activateDocument(target.id);
+        active.current = target.id;
+        setId(target.id);
+        const snapshot = store.currentDocument(target.id)!.content;
+        const remote = store.remoteVersion(target.id);
+        pending.current = false;
         const caps = await ai.capabilities();
         if (!valid()) return;
         if (!caps.imageGenerate) throw new Error("当前 AI 服务不支持图片生成，请在设置中选择 Codex");
@@ -294,16 +319,11 @@ export default function CoverApp() {
         if (!valid()) return;
         if (result.saveError) throw new Error(result.saveError);
         const config = parseRecommendation(result.text, topic);
-        await store.flushDocuments();
-        if (!valid()) return;
+        if (store.currentDocument(target.id)?.content !== snapshot || store.remoteVersion(target.id) !== remote)
+          throw new Error("匹配期间封面已修改或同步，请按最新内容重试");
         pending.current = true;
-        const target = await store.createDocument();
-        if (!valid()) return;
-        store.stageDocument(target.id, { title: config.title || topic.slice(0, 40),
-          content: JSON.stringify({ ...emptyContent(config.style), config }) });
-        store.activateDocument(target.id);
-        active.current = target.id;
-        setId(target.id);
+        store.stageDocument(target.id, {
+          content: JSON.stringify({ ...readContent(snapshot), config, needsRecommendation: false }) });
         setRecommendTopic(null);
         setPage("editor");
         setChanging(false);
