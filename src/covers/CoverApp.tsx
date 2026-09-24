@@ -8,6 +8,7 @@ import {
   LoadingOutlined,
   DownloadOutlined,
   SearchOutlined,
+  AppstoreOutlined,
 } from "@ant-design/icons";
 import { ai, trackAiExecution } from "../ai/client";
 import { registerSyncActivationBlocker } from "../documentLifecycle";
@@ -29,6 +30,7 @@ import {
 import { imageSource, pngReference } from "./images";
 import { exportCover } from "./export";
 import CoverIcon from "./CoverIcon";
+import { recommendationPrompt, parseRecommendation } from "./recommendation";
 import attribution from "./attribution.json";
 import "./covers.css";
 
@@ -67,7 +69,10 @@ export default function CoverApp() {
   const { message } = App.useApp();
   const [, redraw] = useState(0),
     [id, setId] = useState<string | null>(null);
-  const [page, setPage] = useState<"gallery" | "config" | "editor">("gallery");
+  const [page, setPage] = useState<"create" | "gallery" | "config" | "editor">("create");
+  const [theme, setTheme] = useState("");
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
   const [collapsed, setCollapsed] = useState(false),
     [busy, setBusy] = useState(false),
     [opening, setOpening] = useState(false);
@@ -175,9 +180,9 @@ export default function CoverApp() {
       unblock();
     };
   }, []);
-  async function startNew() {
+  async function startNew(destination: "create" | "gallery" = "create") {
     if (composing.current) {
-      queued.current = () => void startNew();
+      queued.current = () => void startNew(destination);
       return;
     }
     const ticket = ++request.current;
@@ -189,7 +194,7 @@ export default function CoverApp() {
       if (!mounted.current || ticket !== request.current) return;
       active.current = null;
       setId(null);
-      setPage("gallery");
+      setPage(destination);
       setChanging(false);
       setCategory("全部");
       setSearch("");
@@ -255,7 +260,63 @@ export default function CoverApp() {
       }
     }
   }
-  async function generate() {
+  async function recommendAndGenerate() {
+    if (composing.current) {
+      queued.current = () => void recommendAndGenerate();
+      return;
+    }
+    const topic = themeRef.current.trim();
+    if (!topic || controller.current || pending.current) return;
+    const ticket = ++request.current;
+    const abort = new AbortController();
+    controller.current = abort;
+    setBusy(true);
+    setError("");
+    const valid = () => mounted.current && !abort.signal.aborted && request.current === ticket;
+    await trackAiExecution(abort, (async () => {
+      try {
+        const caps = await ai.capabilities();
+        if (!valid()) return;
+        if (!caps.imageGenerate) throw new Error("当前 AI 服务不支持图片生成，请在设置中选择 Codex");
+        const result = await ai.generate({ toolId: "app.cover", record: false,
+          messages: [{ role: "user", content: recommendationPrompt(topic) }],
+        }, abort.signal);
+        if (!valid()) return;
+        if (result.saveError) throw new Error(result.saveError);
+        const config = parseRecommendation(result.text, topic);
+        await store.flushDocuments();
+        if (!valid()) return;
+        pending.current = true;
+        const target = await store.createDocument();
+        if (!valid()) return;
+        store.stageDocument(target.id, { title: config.title || topic.slice(0, 40),
+          content: JSON.stringify({ ...emptyContent(config.style), config }) });
+        store.activateDocument(target.id);
+        active.current = target.id;
+        setId(target.id);
+        setPage("editor");
+        setChanging(false);
+        await store.flushDocument(target.id);
+        if (!valid()) return;
+        pending.current = false;
+        controller.current = null;
+        setBusy(false);
+        await generate(store.currentDocument(target.id)!);
+      } catch (e) {
+        if (valid()) fail(e);
+      } finally {
+        if (ticket === request.current) pending.current = false;
+        if (controller.current === abort) {
+          controller.current = null;
+          if (mounted.current) setBusy(false);
+        }
+      }
+    })());
+  }
+  async function generate(prepared?: NonNullable<ReturnType<typeof store.currentDocument>>) {
+    const sourceDoc = prepared ?? (active.current ? store.currentDocument(active.current) : undefined);
+    const sourceContent = sourceDoc ? readContent(sourceDoc.content) : undefined;
+    const doc = sourceDoc, content = sourceContent, config = content?.config;
     if (!doc || !content || controller.current || pending.current) return;
     if (composing.current) {
       queued.current = () => void generate();
@@ -627,6 +688,13 @@ export default function CoverApp() {
             >
               创建封面
             </Button>
+            <Button
+              className="tool-sidebar-create"
+              icon={<AppstoreOutlined />}
+              onClick={() => void startNew("gallery")}
+            >
+              风格模板
+            </Button>
           </div>
           <div className="cover-list">
             {[true, false].map((favorite) => (
@@ -653,11 +721,11 @@ export default function CoverApp() {
             className="cover-title"
             onClick={() => doc && setRename({ id: doc.id, title: doc.title })}
           >
-            {page === "gallery" && !changing
-              ? "创建封面"
+            {page === "create" ? "创建封面" : page === "gallery" && !changing
+              ? "风格模板"
               : doc?.title || "封面大师"}
           </button>
-          {page !== "editor" && !changing && (
+          {(page === "gallery" || page === "config") && !changing && (
             <nav className="cover-steps" aria-label="创建封面步骤">
               <button
                 aria-current={page === "gallery" ? "step" : undefined}
@@ -719,7 +787,30 @@ export default function CoverApp() {
             <LoadingOutlined /> 正在打开封面…
           </div>
         )}
-        {page === "gallery" ? (
+        {page === "create" ? (
+          <section className="cover-create">
+            <div className="cover-create-intro">
+              <CoverIcon />
+              <h2>今天，想为怎样的灵感做封面？</h2>
+              <p>写下主题，自动搭配风格、版式与配色。</p>
+              <div className="cover-theme-examples">
+                {["秋日第一杯奶茶，温暖又俏皮", "周末去山里，给自己放个假", "读书笔记：慢下来，发现生活的小美好"].map(example => (
+                  <button key={example} disabled={busy} onClick={() => setTheme(example)}>{example}</button>
+                ))}
+              </div>
+            </div>
+            <div className="cover-theme-composer">
+              <Input.TextArea aria-label="封面主题" placeholder="描述你想做的封面，也可以补充文案、受众或使用场景…"
+                value={theme} maxLength={4000} disabled={busy} autoSize={{ minRows: 3, maxRows: 7 }}
+                onChange={e => { themeRef.current = e.target.value; setTheme(e.target.value); }} />
+              <div className="cover-theme-actions">
+                <span>{busy ? "正在搭配风格、版式与配色…" : "灵感交给你，搭配交给我"}</span>
+                {busy ? <Button onClick={cancel}>取消生成</Button> :
+                  <Button type="primary" disabled={!theme.trim() || opening} onClick={() => void recommendAndGenerate()}>生成封面</Button>}
+              </div>
+            </div>
+          </section>
+        ) : page === "gallery" ? (
           <section className="cover-gallery">
             <div className="cover-gallery-tools">
               <div className="cover-categories">
