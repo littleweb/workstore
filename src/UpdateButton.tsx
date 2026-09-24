@@ -10,7 +10,7 @@ export default function UpdateButton({ ready, autoCheck = true }: { ready: boole
     const interval = setInterval(() => void checkUpdates(), 6 * 60 * 60 * 1000);
     return () => { clearTimeout(startup); clearInterval(interval); };
   }, [ready, autoCheck]);
-  const busy = ["checking", "downloading", "installing"].includes(state.phase);
+  const busy = ["checking", "downloading", "verifying", "saving", "installing"].includes(state.phase);
   return <Tooltip title={state.message}>
     <button className={`icon-button update-toggle ${state.phase}`} aria-label={state.message}
       disabled={!ready || busy} onClick={() => void installUpdate()}>

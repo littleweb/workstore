@@ -601,11 +601,12 @@ export default function CoverApp() {
       .filter((d) => d.favorite === favorite)
       .map((item) => (
         <div
-          className={`cover-row ${item.id === id ? "selected" : ""}`}
+          className={`cover-row ${item.id === id && (page === "config" || page === "editor") ? "selected" : ""}`}
           key={item.id}
         >
           <button
             className="cover-row-name"
+            title={item.title}
             onPointerDown={(e) => {
               delete e.currentTarget.dataset.down;
               if (
@@ -715,6 +716,7 @@ export default function CoverApp() {
             <Button
               className="tool-sidebar-create"
               icon={<PlusOutlined />}
+              aria-current={page === "create" ? "page" : undefined}
               onClick={() => void startNew()}
             >
               创建封面
@@ -722,6 +724,7 @@ export default function CoverApp() {
             <Button
               className="tool-sidebar-create"
               icon={<AppstoreOutlined />}
+              aria-current={page === "gallery" ? "page" : undefined}
               onClick={() => void startNew("gallery")}
             >
               风格模板
@@ -773,6 +776,17 @@ export default function CoverApp() {
                 02 配置封面
               </button>
             </nav>
+          )}
+          {page === "gallery" && (
+              <Input
+                aria-label="查找风格模板"
+                className="cover-search"
+                prefix={<SearchOutlined />}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="编号、画风或作者"
+                allowClear
+              />
           )}
           {page === "editor" && (
             <Button
@@ -857,15 +871,7 @@ export default function CoverApp() {
                   </button>
                 ))}
               </div>
-              <Input
-                aria-label="查找风格模板"
-                className="cover-search"
-                prefix={<SearchOutlined />}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="编号、画风或作者"
-                allowClear
-              />
+
             </div>
             {groups
               .filter((g) => visible.some((s) => s.group === g))
@@ -878,6 +884,7 @@ export default function CoverApp() {
                       .map((s) => (
                         <button
                           className="cover-template"
+                          title={`${s.number} · ${s.generation_name}`}
                           key={s.number}
                           onClick={() => void choose(s.number)}
                           aria-label={`选择 ${s.number} ${s.generation_name}`}
