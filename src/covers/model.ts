@@ -39,7 +39,7 @@ export const emptyContent = (style = "042"): CoverContent => ({
     title: "",
     subtitle: "",
     language: "中文",
-    ratio: "2:3",
+    ratio: "3:4",
     layout: "auto",
     color: "auto",
     density: "低",
@@ -163,7 +163,7 @@ export function generationPrompt(
   return [
     `生成一张完成的封面图片，所有可见文案使用${config.language}。比例 ${config.ratio}。`,
     `主题：${config.topic}\n业务场景：社交媒体封面\n内容密度：${config.density}\n情感基调：${config.mood}`,
-    `主标题（保持原文）：${config.title || "根据主题拟写"}\n副文案（保持原文）：${config.subtitle || "不添加副文案"}`,
+    `主标题（保持原文）：${config.title.trim() || "根据主题自动拟写简短有吸引力的主标题"}\n副文案（保持原文）：${config.subtitle.trim() || "根据主题自动拟写一句与主标题呼应、不重复的副文案"}`,
     "用户填写的标题和副文案必须逐字保留；该要求优先于自动升华或提炼文案。",
     color
       ? `主题色：${color.name_zh}（${color.name_en}）。`

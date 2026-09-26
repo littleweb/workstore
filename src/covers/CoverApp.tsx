@@ -515,8 +515,8 @@ export default function CoverApp() {
         "例如：秋日第一杯奶茶，东亚少女，温暖、俏皮",
         true,
       )}
-      {inputField("title", "主标题", "封面上显示的标题")}
-      {inputField("subtitle", "副文案", "选填；留空不添加")}
+      {inputField("title", "主标题", "留空自动生成，可自行填写")}
+      {inputField("subtitle", "副文案", "留空自动生成，可自行填写")}
       <div className="cover-pair">
         <label className="cover-field">
           <span>语言</span>
