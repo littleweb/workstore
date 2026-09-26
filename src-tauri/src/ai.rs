@@ -153,26 +153,32 @@ fn endpoint(s: &Settings) -> Result<reqwest::Url, String> {
 #[tauri::command]
 pub async fn ai_capabilities(app: tauri::AppHandle) -> Result<Value, String> {
     let s = read_settings(&settings_path(&app)?)?;
-    let mut image = false;
-    if s.provider == "codex" {
-        if let Ok(path) = configured_codex_path(&s) {
-            let mut command = Command::new(path);
-            command.args(["features", "list"]).kill_on_drop(true);
-            if let Ok(Ok(output)) =
-                tokio::time::timeout(Duration::from_secs(8), command.output()).await
-            {
-                image = output.status.success()
-                    && String::from_utf8_lossy(&output.stdout).lines().any(|line| {
-                        line.starts_with("image_generation")
-                            && line.split_whitespace().last() == Some("true")
-                    });
-            }
+    let image = if s.provider == "codex" {
+        let path = configured_codex_path(&s)?;
+        let mut command = Command::new(path);
+        command.args(["features", "list"]).kill_on_drop(true);
+        let output = tokio::time::timeout(Duration::from_secs(8), command.output())
+            .await
+            .map_err(|_| "Codex 图片能力检测超时，请重试")?
+            .map_err(|_| "无法启动 Codex，请在设置 → AI 中重新检测本地 Codex")?;
+        if !output.status.success() {
+            return Err("Codex 图片能力检测失败，请在设置 → AI 中检查本地 Codex".into());
         }
-    }
+        image_feature_enabled(&String::from_utf8_lossy(&output.stdout))
+    } else {
+        false
+    };
     Ok(
         json!({"provider":s.provider,"text":true,"imageGenerate":image,"referenceImages":image,"maxReferences":8}),
     )
 }
+fn image_feature_enabled(output: &str) -> bool {
+    output.lines().any(|line| {
+        let fields = line.split_whitespace().collect::<Vec<_>>();
+        fields.first() == Some(&"image_generation") && fields.last() == Some(&"true")
+    })
+}
+
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Message {
     pub role: String,
@@ -382,6 +388,8 @@ pub(crate) fn codex_path(explicit: &str) -> Result<PathBuf, String> {
         .unwrap_or_default();
     candidates.extend(
         [
+            "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+            "/Applications/Codex.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
             "/Applications/ChatGPT.app/Contents/Resources/codex",
             "/Applications/Codex.app/Contents/Resources/codex",
             "/opt/homebrew/bin/codex",
@@ -627,6 +635,13 @@ async fn compatible(settings: &Settings, messages: &[Message]) -> Result<String,
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn image_feature_detection_requires_exact_enabled_feature() {
+        assert!(image_feature_enabled("  image_generation   stable   true\n"));
+        assert!(!image_feature_enabled("image_generation stable false\n"));
+        assert!(!image_feature_enabled("image_generation_other stable true\n"));
+        assert!(!image_feature_enabled("view_image stable true\n"));
+    }
     #[test]
     fn image_timeout_migrates_old_settings_and_routes_independently() {
         let mut settings: Settings = serde_json::from_str(r#"{"timeoutSeconds":42}"#).unwrap();
