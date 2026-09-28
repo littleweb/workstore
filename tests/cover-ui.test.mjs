@@ -526,3 +526,56 @@ test("remote changes during matching prevent recommendation overwrites", async (
     assert.equal(JSON.parse([...h.docs.values()][0].content).needsRecommendation, true);
   } finally { await h.close(); }
 });
+
+test("blank copy is saved and shown before image generation, preserving a manual title", async () => {
+  const h = await harness();
+  try {
+    await act(async () => {
+      const c = JSON.parse(h.docs.get("a").content);
+      c.config.subtitle = "";
+      h.store.stageDocument("a", { content: JSON.stringify(c) });
+    });
+    await h.click("生成封面 →");
+    assert.equal(h.requests.length, 1);
+    assert.equal(h.requests[0].input.image, undefined);
+    await h.resolve({ text: JSON.stringify({title:"不要覆盖",subtitle:"把秋天捧在手心"}) });
+    const c = JSON.parse(h.docs.get("a").content);
+    assert.equal(c.config.title, "秋日");
+    assert.equal(c.config.subtitle, "把秋天捧在手心");
+    assert.ok([...h.host.querySelectorAll("input")].some(i => i.value === "把秋天捧在手心"));
+    assert.equal(h.requests[1].input.image, true);
+    assert.match(h.requests[1].input.messages[0].content, /把秋天捧在手心/);
+  } finally { await h.close(); }
+});
+test("editing while copy is being written prevents stale copy and image requests", async () => {
+  const h = await harness();
+  try {
+    await act(async () => {
+      const c = JSON.parse(h.docs.get("a").content); c.config.title="";c.config.subtitle="";
+      h.store.stageDocument("a", { content: JSON.stringify(c) });
+    });
+    await h.click("生成封面 →");
+    await act(async () => {
+      const c=JSON.parse(h.docs.get("a").content);c.config.title="我刚写的标题";
+      h.store.stageDocument("a",{content:JSON.stringify(c)});
+    });
+    await h.resolve({text:JSON.stringify({title:"迟到标题",subtitle:"迟到文案"})});
+    assert.equal(JSON.parse(h.docs.get("a").content).config.title,"我刚写的标题");
+    assert.equal(h.requests.length,1);
+  } finally { await h.close(); }
+});
+
+test("incomplete generated copy cannot start an image request", async () => {
+  const h = await harness();
+  try {
+    await act(async () => {
+      const c=JSON.parse(h.docs.get("a").content);c.config.title="";c.config.subtitle="";
+      h.store.stageDocument("a",{content:JSON.stringify(c)});
+    });
+    await h.click("生成封面 →");
+    await h.resolve({text:JSON.stringify({title:"秋天",subtitle:" "})});
+    assert.equal(h.requests.length,1);
+    assert.equal(JSON.parse(h.docs.get("a").content).config.title,"");
+    assert.match(h.host.textContent,/文案生成不完整/);
+  } finally {await h.close();}
+});

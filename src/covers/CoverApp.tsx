@@ -27,6 +27,7 @@ import {
   type CoverConfig,
   type CoverContent,
 } from "./model";
+import { copyPrompt, fillCopy } from "./copy";
 import { imageSource, pngReference } from "./images";
 import { exportCover } from "./export";
 import CoverIcon from "./CoverIcon";
@@ -361,10 +362,8 @@ export default function CoverApp() {
       fail("此作品已有 200 个版本，请创建新封面继续");
       return;
     }
-    const target = doc.id,
-      snapshot = doc.content,
-      remote = store.remoteVersion(target),
-      captured = content;
+    const target = doc.id, remote = store.remoteVersion(target);
+    let snapshot = doc.content, captured = content;
     const abort = new AbortController();
     controller.current = abort;
     setBusy(true);
@@ -388,6 +387,21 @@ export default function CoverApp() {
             throw new Error(
               "当前 AI 服务不支持图片生成，请在全局设置中选择支持图片生成的 Codex",
             );
+          if (!captured.config.title.trim() || !captured.config.subtitle.trim()) {
+            setStatus("正在拟写主标题与副文案…");
+            const copy = await ai.generate({ toolId: "app.cover", record: false,
+              messages: [{ role: "user", content: copyPrompt(captured.config) }],
+            }, abort.signal);
+            if (!isValid()) return;
+            if (!unchanged()) throw new Error("拟写期间配置已变化，文案未覆盖当前编辑，请重试");
+            if (copy.saveError) throw new Error(copy.saveError);
+            captured = { ...captured, config: fillCopy(copy.text, captured.config) };
+            snapshot = JSON.stringify(captured);
+            store.stageDocument(target, { content: snapshot });
+            await store.flushDocument(target);
+            if (!isValid()) return;
+            if (!unchanged()) throw new Error("保存文案期间配置已变化，请重试");
+          }
           // Codex's configured model is the orchestrator, not a confirmed image model.
           // Do not confuse its name with the upstream image-model calibration table.
           const policy = stylePolicy(captured.config.style),
