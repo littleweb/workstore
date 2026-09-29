@@ -82,6 +82,7 @@ async function harness(options = {}) {
   vm.runInNewContext(options.diagnostics ? integratedSource : source, { module, DOMParser, window, document, MutationObserver: window.MutationObserver, queueMicrotask, setTimeout, clearTimeout, require(id) {
     if (id === 'react' || id === 'react-dom' || id === 'react/jsx-runtime') return require(id);
     if (id === './store') return store;
+    if (id === './ConversationNote') return { __esModule: true, default: () => null, conversationContent: () => null };
     if (id === './aiTarget') return { documentAiTarget: () => ({ kind: 'document', capture: () => ({id:lastId,title:'test',content:''}) }) };
     if (id === './DocumentClickDiagnostics') return { __esModule: true, default: () => null };
     if (id === './clickDiagnostics') return { recordDocumentClickStage: () => {} };

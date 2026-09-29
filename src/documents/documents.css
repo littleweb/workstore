@@ -394,3 +394,77 @@
 }
 
 .document-click-read-status { margin-left: 8px; color: #b7d3c7; font-size: 11px; }
+
+.conversation-note {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #f7f9f7;
+}
+.conversation-cards {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 20px clamp(12px, 4vw, 48px);
+}
+.conversation-card {
+  max-width: 880px;
+  margin: 0 auto 14px;
+  border: 1px solid #e5ebe6;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+.conversation-time { display: flex; justify-content: center; margin-bottom: 8px; }
+.conversation-time .ant-tag { margin: 0; color: #7b8c82; border-color: #e5ebe6; background: #eef2ef; }
+.conversation-card .editor-shell { background: #fff; }
+.conversation-card .editor-scroller { min-height: 0; resize: none; }
+.conversation-card .editor { resize: none; }
+.conversation-card .ContentEditable__root { min-height: 0; padding: 14px 20px; }
+.conversation-composer {
+  flex: 0 0 auto;
+  padding: 12px clamp(12px, 4vw, 48px) 20px;
+  background: #f7f9f7;
+}
+.conversation-input-box {
+  max-width: 880px;
+  margin: auto;
+  padding: 8px 8px 8px 12px;
+  background: #fff;
+  border: 1px solid #dce5df;
+  border-radius: 18px;
+  box-shadow: 0 3px 16px #29473808;
+}
+.conversation-input-box:focus-within {
+  border-color: #85b2a2;
+  box-shadow: 0 0 0 3px #28796b0a;
+}
+.conversation-composer .document-editor-root {
+  display: block;
+  height: auto;
+  max-height: 35vh;
+  overflow: auto;
+  max-width: 880px;
+  margin: auto;
+}
+.conversation-composer .document-editor-root > .editor-shell,
+.conversation-composer .document-editor-root > .editor-shell > .editor-container,
+.conversation-composer .document-editor-root > .editor-shell > .editor-container > .editor-scroller,
+.conversation-composer .document-editor-root > .editor-shell > .editor-container > .editor-scroller > .editor {
+  display: block;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+.conversation-composer .document-editor-root > .editor-shell > .editor-container > .editor-scroller > .editor > .ContentEditable__root {
+  min-height: 48px;
+  padding: 0;
+  line-height: 24px;
+}
+.conversation-composer .ContentEditable__placeholder { left: 0; right: 0; top: 0; line-height: 24px; }
+.conversation-submit { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 4px 0 0; }
+.conversation-shortcut { font-size: 11px; color: #94a19a; }
+.conversation-submit .ant-btn { width: 34px; height: 34px; flex-shrink: 0; }
+.conversation-note .draggable-block-menu,
+.conversation-note .draggable-block-target-line { display: none !important; }

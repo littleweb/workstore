@@ -275,6 +275,11 @@ fn save_document(
         .save_document(document, expected_token)
 }
 #[tauri::command]
+fn delete_document(id: String, expected_token: String, state: tauri::State<Workspace>) -> Result<(), String> {
+    state.0.lock().map_err(|e| e.to_string())?.as_ref()
+        .ok_or("工作空间尚未打开")?.delete_document(&id, &expected_token)
+}
+#[tauri::command]
 fn save_whiteboard(
     document: Board,
     expected_token: String,
@@ -441,6 +446,7 @@ fn main() {
             create_document,
             load_document,
             save_document,
+            delete_document,
             load_whiteboard,
             save_whiteboard,
             sync_workspace,

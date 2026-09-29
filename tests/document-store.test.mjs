@@ -116,3 +116,31 @@ test('AI content starts a new editor session and persists through normal guarded
   assert.deepEqual(tokens,['a:1']);
   await store.openDocument('a');assert.equal(store.currentDocument('a').content,'<h1>New AI content</h1>');
 });
+
+test('delete saves pending edits and uses the latest token before removing the cached note', async () => {
+  const calls=[];
+  const store=harness(async(command,args)=>{
+    calls.push([command,args]);
+    if(command==='load_document') return loaded('a');
+    if(command==='save_document') return loaded('a',args.document.content,2);
+    if(command==='delete_document') return;
+  });
+  await store.openDocument('a');store.stageDocument('a',{content:'latest'});
+  await store.deleteDocument('a');
+  assert.equal(calls.at(-1)[0],'delete_document');assert.equal(calls.at(-1)[1].expectedToken,'a:2');
+  assert.equal(store.currentDocument('a'),undefined);assert.equal(store.lastDocumentId,null);
+  assert.equal(store.documentList().some(x=>x.id==='a'),false);
+  await assert.rejects(store.loadDocument('a'),/删除/);
+});
+test('failed deletion preserves the note and allows later edits',async()=>{
+  const store=harness(async(command)=>{if(command==='delete_document') throw Error('changed externally');return loaded('a');});
+  await store.openDocument('a');await assert.rejects(store.deleteDocument('a'),/changed externally/);
+  assert.ok(store.currentDocument('a'));assert.equal(store.lastDocumentId,'a');
+  store.stageDocument('a',{content:'still editable'});assert.equal(store.currentDocument('a').content,'still editable');
+});
+test('a pending read cannot resurrect a deleted note',async()=>{
+ const gate=deferred();let reads=0;
+ const store=harness(async(command)=>{if(command==='load_document')return ++reads===1?loaded('a'):gate.promise;});
+ await store.openDocument('a');const read=store.loadDocument('a');await store.deleteDocument('a');gate.resolve(loaded('a'));
+ await assert.rejects(read,/删除/);assert.equal(store.currentDocument('a'),undefined);
+});

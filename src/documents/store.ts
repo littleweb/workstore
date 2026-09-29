@@ -32,6 +32,8 @@ type Cached = LoadedDocument & {
 type PersistedDocument = LoadedDocument;
 
 const cache = new Map<string, Cached>();
+const deleting = new Set<string>();
+const deleted = new Set<string>();
 const subscribers = new Set<() => void>();
 let summaries: DocumentInfo[] = [];
 let warnings: string[] = [];
@@ -190,6 +192,7 @@ export async function createDocument() {
 }
 
 export async function loadDocument(id: string) {
+  if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
   let cached = cache.get(id);
   if (!cached || (cached.generation === cached.saved && !cached.saving)) {
     const beforeRead = cached;
@@ -199,6 +202,7 @@ export async function loadDocument(id: string) {
       ? await invoke<LoadedDocument>("load_document", { id })
       : await browserLoad(id);
     const current = cache.get(id);
+    if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
     // A late read must not replace edits, an in-flight save, or a newer cache
     // installed by another load/sync while this request was awaiting disk I/O.
     if (!current || (current === beforeRead && current.generation === generation &&
@@ -233,6 +237,7 @@ export function stageDocument(
   id: string,
   patch: Partial<Pick<Document, "content" | "title" | "favorite" | "lastOpenedAt">>,
 ) {
+  if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
   const c = cache.get(id);
   if (!c) throw new Error("笔记尚未载入");
   if (Object.entries(patch).every(([key, value]) => JSON.stringify(c.document[key as keyof typeof c.document]) === JSON.stringify(value))) return;
@@ -307,6 +312,38 @@ export async function flushDocument(id: string): Promise<void> {
 
 export async function flushDocuments() {
   for (const id of cache.keys()) await flushDocument(id);
+}
+
+export async function deleteDocument(id: string) {
+  if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
+  await ensureDocument(id);
+  await flushDocument(id);
+  const cached = cache.get(id)!;
+  deleting.add(id);
+  try {
+    if (native) await invoke("delete_document", { id, expectedToken: cached.token });
+    else {
+      const db = await database();
+      await new Promise<void>((resolve, reject) => {
+        const tx = db.transaction("documents", "readwrite");
+        const store = tx.objectStore("documents");
+        const request = store.get(id);
+        request.onsuccess = () => {
+          if (!request.result || request.result.token !== cached.token) { tx.abort(); return; }
+          store.delete(id);
+        };
+        tx.oncomplete = () => resolve();
+        tx.onerror = tx.onabort = () => reject(new Error("笔记已变化或删除失败，请重新打开后重试"));
+      });
+    }
+    deleted.add(id);
+    cache.delete(id);
+    summaries = summaries.filter(item => item.id !== id);
+    if (lastDocumentId === id) lastDocumentId = null;
+    remoteVersions.set(id, remoteVersion(id) + 1);
+    notify();
+    scheduleAutosync();
+  } finally { deleting.delete(id); }
 }
 
 registerDocumentFlusher(flushDocuments);
