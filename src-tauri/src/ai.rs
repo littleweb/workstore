@@ -208,8 +208,18 @@ pub struct Response {
     #[serde(default)]
     pub images: Vec<String>,
 }
-#[derive(Default)]
-pub struct Runtime(Mutex<HashMap<String, Arc<AtomicBool>>>);
+pub struct Runtime(Mutex<HashMap<String, Arc<AtomicBool>>>, tokio::sync::Semaphore);
+impl Default for Runtime {
+    fn default() -> Self { Self(Mutex::new(HashMap::new()), tokio::sync::Semaphore::new(2)) }
+}
+async fn acquire_slot<'a>(runtime: &'a Runtime, cancelled: &AtomicBool) -> Result<tokio::sync::SemaphorePermit<'a>, String> {
+    let permit = tokio::select! {
+        value = runtime.1.acquire() => value.map_err(|_| "AI 队列已关闭".to_string())?,
+        _ = async { while !cancelled.load(Ordering::Relaxed) { tokio::time::sleep(Duration::from_millis(25)).await; } } => return Err("已停止生成".into()),
+    };
+    if cancelled.load(Ordering::Relaxed) { return Err("已停止生成".into()); }
+    Ok(permit)
+}
 struct Registration<'a> {
     runtime: &'a Runtime,
     id: String,
@@ -288,8 +298,8 @@ pub async fn ai_generate(
     let cancelled = Arc::new(AtomicBool::new(false));
     {
         let mut calls = runtime.0.lock().map_err(|e| e.to_string())?;
-        if calls.contains_key(&request.id) || calls.len() >= 2 {
-            return Err("已有 AI 请求运行中，请等待或停止后重试".into());
+        if calls.contains_key(&request.id) || calls.len() >= 64 {
+            return Err("AI 请求编号重复或等待队列已满".into());
         }
         calls.insert(request.id.clone(), cancelled.clone());
     }
@@ -297,6 +307,9 @@ pub async fn ai_generate(
         runtime: &runtime,
         id: request.id.clone(),
     };
+    // Register cancellation while queued; never hold the workspace mutex while waiting.
+    // The model timeout starts only after this request receives an execution slot.
+    let _permit = acquire_slot(&runtime, &cancelled).await?;
     let (text, image_bytes) = tokio::select! {
         result = async {
             if request.image {
@@ -1108,5 +1121,40 @@ mod startup_tests {
         let saved = read_settings(&path).unwrap();
         assert_eq!(saved.provider, "codex");
         assert_eq!(saved.codex_status, "not-found");
+    }
+}
+
+#[cfg(test)]
+mod queue_tests {
+    use super::*;
+    #[tokio::test]
+    async fn queued_requests_execute_two_at_a_time_without_busy_errors() {
+        let runtime=Arc::new(Runtime::default());
+        let active=Arc::new(std::sync::atomic::AtomicUsize::new(0));
+        let peak=Arc::new(std::sync::atomic::AtomicUsize::new(0));
+        let mut tasks=vec![];
+        for _ in 0..8 {
+            let runtime=runtime.clone(); let active=active.clone(); let peak=peak.clone();
+            tasks.push(tokio::spawn(async move {
+                let cancelled=AtomicBool::new(false);
+                let _permit=acquire_slot(&runtime,&cancelled).await.unwrap();
+                let n=active.fetch_add(1,Ordering::SeqCst)+1;peak.fetch_max(n,Ordering::SeqCst);
+                tokio::time::sleep(Duration::from_millis(10)).await;
+                active.fetch_sub(1,Ordering::SeqCst);
+            }));
+        }
+        for task in tasks {task.await.unwrap();}
+        assert_eq!(peak.load(Ordering::SeqCst),2);
+        assert_eq!(runtime.1.available_permits(),2);
+    }
+    #[tokio::test]
+    async fn queued_cancellation_never_acquires_a_model_slot() {
+        let runtime=Runtime::default();
+        let first=runtime.1.acquire().await.unwrap();let second=runtime.1.acquire().await.unwrap();
+        let cancelled=AtomicBool::new(true);
+        assert!(acquire_slot(&runtime,&cancelled).await.is_err());
+        assert_eq!(runtime.1.available_permits(),0);
+        drop(first);drop(second);
+        assert_eq!(runtime.1.available_permits(),2);
     }
 }

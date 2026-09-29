@@ -392,7 +392,24 @@ registerSyncRefresher(async (paths) => {
     }
   }
   flushSync(() => notify());
-});
+}, { receiveAdditions: async (id) => {
+  await refreshDocuments();
+  const incoming = await invoke<{ id: string; entries: { id: string; html: string; createdAt?: number }[] }[]>("pending_conversation_records", { id });
+  for (const update of incoming) {
+    const cached = cache.get(update.id);
+    if (!cached || deleting.has(update.id) || deleted.has(update.id)) continue;
+    let local;
+    try { local = JSON.parse(cached.document.content); } catch { continue; }
+    if (local?.type !== "workstore.conversation" || local.version !== 1 || !Array.isArray(local.entries)) continue;
+    const known = new Set(local.entries.map((entry: { id: string }) => entry.id));
+    const added = update.entries.filter(entry => !known.has(entry.id));
+    if (added.length) {
+      // Append to the latest cached draft through the normal guarded save queue.
+      // Do not replace its token, draft, editor version, or existing card contents.
+      stageDocument(update.id, { content: JSON.stringify({ ...local, entries: [...local.entries, ...added] }) });
+    }
+  }
+} });
 
 // AI/imported content deliberately starts a new editor session. Local typing
 // still uses stageDocument and never feeds htmlContent back into TeaEditor.

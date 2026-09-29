@@ -1,3 +1,4 @@
+import StoryComicIcon from "./story-comic/StoryComicIcon";
 import CoverIcon from "./covers/CoverIcon";
 import { recordToolOpen } from "./navigation";
 import { stopAiRequests } from "./ai/client";
@@ -48,6 +49,7 @@ import WhiteboardIcon from "./whiteboard/WhiteboardIcon";
 import { flushDocuments, registerDocumentFlusher } from "./documentLifecycle";
 import { flushSync } from "react-dom";
 const Whiteboard = lazy(() => import("./whiteboard/Whiteboard"));
+const StoryComicApp = lazy(() => import("./story-comic/StoryComicApp"));
 const CoverApp = lazy(() => import("./covers/CoverApp"));
 const ComicApp = lazy(() => import("./comics/ComicApp"));
 const HtmlApp = lazy(() => import("./html/HtmlApp"));
@@ -81,6 +83,7 @@ type Tool = {
 };
 const tools: Tool[] = [
   { id: "app.html", name: "HTML", description: "把内容变成精美的网页、卡片与演示。", category: "设计工具", color: "green", icon: <GlobalOutlined /> },
+  { id: "app.story-comic", name: "故事漫画", description: "输入主题，一键生成漫画与发布文案。", category: "设计工具", color: "green", icon: <StoryComicIcon /> },
   { id: "app.cover", name: "封面大师", description: "选个画风，把灵感变成封面。", category: "设计工具", color: "green", icon: <CoverIcon /> },
   { id: "app.comic", name: "小漫画", description: "一句话，画出你的故事。", category: "设计工具", color: "green", icon: <ComicIcon /> },
   {
@@ -741,7 +744,9 @@ function WorkStore() {
           </header>
         )}
         {(htmlOpened || active === "app.html") && <div style={{display:active === "app.html" ? "contents" : "none"}}><Suspense fallback={<div className="startup">正在加载 HTML…</div>}><HtmlApp /></Suspense></div>}
-        {active === "app.html" ? null : active === "app.cover" ? (
+        {active === "app.html" ? null : active === "app.story-comic" ? (
+          <Suspense fallback={<div className="tool-page">正在打开故事漫画…</div>}><StoryComicApp /></Suspense>
+        ) : active === "app.cover" ? (
           <Suspense fallback={<div className="tool-page">正在打开封面大师…</div>}><CoverApp /></Suspense>
         ) : active === "app.comic" ? (
           <Suspense fallback={<div className="tool-page">正在打开小漫画…</div>}><ComicApp /></Suspense>

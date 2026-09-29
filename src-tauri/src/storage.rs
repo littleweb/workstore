@@ -121,6 +121,7 @@ pub(crate) fn validate(data: &Data) -> Result<()> {
             "app.comic",
             "app.html",
             "app.cover",
+            "app.story-comic",
             "tool.json",
             "tool.color",
             "tool.time",

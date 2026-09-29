@@ -1,6 +1,6 @@
 {
   "name": "workstore",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,8 +10,8 @@
     "tauri": "tauri",
     "desktop": "tauri dev",
     "desktop:build": "tauri build",
-    "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs",
-    "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs",
+    "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs",
+    "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs",
     "desktop:update:build": "node scripts/build-update.mjs",
     "demo:apos": "vite --config demos/apos/vite.config.mjs",
     "demo:apos:build": "tsc -p demos/apos/tsconfig.json && vite build --config demos/apos/vite.config.mjs",
