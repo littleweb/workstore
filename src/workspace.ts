@@ -78,7 +78,8 @@ function isActivationBlocked() {
 }
 
 async function waitForInteraction() {
-  while (!syncPaused && isActivationBlocked()) {
+  const recheckAt = Date.now() + 60_000;
+  while (!syncPaused && isActivationBlocked() && Date.now() < recheckAt) {
     await new Promise<void>(resolve => {
       const wake = () => {
         clearTimeout(timer);
@@ -119,9 +120,11 @@ function reportSyncStatus(message: string) {
 }
 const pendingRefresh = new Set<string>();
 const refreshers = new Set<(paths: string[]) => Promise<void>>();
-export function registerSyncRefresher(fn: (paths: string[]) => Promise<void>) {
+const additionRefreshers = new Set<(id: string) => Promise<void>>();
+export function registerSyncRefresher(fn: (paths: string[]) => Promise<void>, options?: { receiveAdditions: (id: string) => Promise<void> }) {
   refreshers.add(fn);
-  return () => { refreshers.delete(fn); };
+  if (options) additionRefreshers.add(options.receiveAdditions);
+  return () => { refreshers.delete(fn); if (options) additionRefreshers.delete(options.receiveAdditions); };
 }
 export function startBackgroundSync(onStatus: (message: string) => void) {
   statusListeners.add(onStatus);
@@ -176,14 +179,34 @@ export function syncWorkspace(mode: "auto" | "manual" = "auto"): Promise<string>
     try {
       await flushDocuments();
       await queue;
-      const id = await invoke<string | null>("sync_workspace");
+      let id = await invoke<string | null>("sync_workspace");
       if (!id) { reportSyncStatus("未开启 GitHub 同步"); return lastSyncStatus; }
+      // New note files cannot overwrite an active editor. Receive only additions
+      // and refresh list metadata, without making the page inert or loading editors.
+      const receiveAdditions = async () => {
+        if (!id || id === "unchanged" || additionRefreshers.size === 0) return;
+        const added = await invoke<string[]>("receive_note_additions", { id });
+        if (added.length) {
+          added.forEach(path => pendingRefresh.add(path));
+        }
+        for (const refresh of additionRefreshers) await refresh(id);
+      };
+      if (isActivationBlocked()) await receiveAdditions();
       // Making the page inert blurs inputs. Excalidraw submits and removes its
       // textarea on blur, so never do this in the middle of a text-editing session
       // (including an unchanged pull or an upload of our own local edits).
       while (!syncPaused && isActivationBlocked()) {
         reportSyncStatus("本地保存不受影响，编辑和当前操作结束后继续应用同步结果…");
         await waitForInteraction();
+        if (!syncPaused && isActivationBlocked()) {
+          // A permanently focused editor must not starve subsequent uploads or
+          // newly created remote notes. Network preparation never activates edits.
+          await flushDocuments();
+          await queue;
+          id = await invoke<string | null>("sync_workspace");
+          if (!id) { reportSyncStatus("未开启 GitHub 同步"); return lastSyncStatus; }
+          await receiveAdditions();
+        }
       }
       if (syncPaused) { syncAgain = true; return "安装更新期间暂停同步"; }
       // No workspace lock is held while waiting. Acquire the short activation

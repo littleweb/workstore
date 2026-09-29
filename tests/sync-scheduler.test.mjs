@@ -355,3 +355,16 @@ test('update pause cancels a held-gesture wait without replaying the pending cli
   resume();
   assert.equal(clicks, 0);
 });
+
+test('new remote notes arrive while an editor stays focused without activating existing edits', async () => {
+ const calls=[];let listed=0,full=0;
+ const h=harness(async command=>{calls.push(command);if(command==='sync_workspace')return 'job';if(command==='receive_note_additions')return ['data/app.doc/new.doc.json'];return {changed:[],message:'done'};});
+ h.document.activeElement={tagName:'DIV',isContentEditable:true};
+ h.api.registerSyncRefresher(async()=>{full++;},{receiveAdditions:async()=>{listed++;}});
+ const task=h.api.syncWorkspace();await drain();
+ assert.equal(listed,1);assert.equal(full,0);assert.deepEqual(h.inertChanges,[]);
+ h.advance(60001);[...h.timers.values()].find(t=>t.delay===100).fn();await drain();
+ assert.equal(calls.filter(x=>x==='sync_workspace').length,2);assert.equal(listed,2);
+ assert.equal(full,0);assert.deepEqual(h.inertChanges,[]);
+ endEditing(h);await task;assert.equal(full,1);
+});

@@ -12,10 +12,10 @@ type Conversation = {
 };
 export const emptyConversation = () => JSON.stringify({ type: "workstore.conversation", version: 1, entries: [], draft: "" });
 export function conversationContent(content: string): Conversation | null {
-  if (!content.startsWith('{"type":"workstore.conversation"')) return null;
+  if (!content.trimStart().startsWith("{")) return null;
   try {
     const value = JSON.parse(content);
-    if (value.version !== 1 || typeof value.draft !== "string" || !Array.isArray(value.entries) ||
+    if (value.type !== "workstore.conversation" || value.version !== 1 || typeof value.draft !== "string" || !Array.isArray(value.entries) ||
       !value.entries.every((entry: { id?: unknown; html?: unknown }) => entry && typeof entry.id === "string" && typeof entry.html === "string")) return null;
     return value;
   } catch { return null; }
@@ -41,6 +41,16 @@ export default function ConversationNote({ id, content }: { id: string; content:
   const pending = useRef(false);
   const inputGeneration = useRef(0);
   const list = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const incoming = conversationContent(content);
+    if (!incoming) return;
+    const known = new Set(state.current.entries.map(entry => entry.id));
+    const added = incoming.entries.filter(entry => !known.has(entry.id));
+    if (!added.length) return;
+    const next = [...state.current.entries, ...added];
+    state.current = { ...state.current, entries: next };
+    setEntries(next);
+  }, [content]);
   useEffect(() => {
     if (list.current) list.current.scrollTop = list.current.scrollHeight;
   }, [entries.length]);

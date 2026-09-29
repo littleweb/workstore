@@ -14,7 +14,7 @@ export type DocumentInfo = {
   revision: number;
 };
 export type Document = DocumentInfo & {
-  type: "workstore.document";
+  type: "workstore.story-comic";
   schemaVersion: 1;
   content: string;
 };
@@ -32,8 +32,6 @@ type Cached = LoadedDocument & {
 type PersistedDocument = LoadedDocument;
 
 const cache = new Map<string, Cached>();
-const deleting = new Set<string>();
-const deleted = new Set<string>();
 const subscribers = new Set<() => void>();
 let summaries: DocumentInfo[] = [];
 let warnings: string[] = [];
@@ -48,7 +46,10 @@ export const subscribe = (fn: () => void) => {
     subscribers.delete(fn);
   };
 };
-export const documentList = () => summaries;
+export const documentList = () =>
+  [...summaries].sort(
+    (a, b) => b.lastOpenedAt - a.lastOpenedAt || a.id.localeCompare(b.id)
+  );
 export const documentWarnings = () => warnings;
 export const currentDocument = (id: string) => cache.get(id)?.document;
 
@@ -57,23 +58,20 @@ export const documentStatus = (id: string) => {
   return c?.error
     ? c.error
     : c && c.generation > c.saved
-      ? "正在保存…"
-      : native
-        ? "已保存到本地"
-        : "已保存到浏览器";
+    ? "正在保存…"
+    : native
+    ? "已保存到本地"
+    : "已保存到浏览器";
 };
 
 function publish(c: Cached) {
-  summaries = [
-    ...summaries.filter((x) => x.id !== c.document.id),
-    c.document,
-  ];
+  summaries = [...summaries.filter((x) => x.id !== c.document.id), c.document];
   notify();
 }
 
 function database() {
   return (dbPromise ??= new Promise<IDBDatabase>((resolve, reject) => {
-    const request = indexedDB.open("workstore-documents", 1);
+    const request = indexedDB.open("workstore-story-comics", 1);
     request.onupgradeneeded = () =>
       request.result.createObjectStore("documents", { keyPath: "document.id" });
     request.onsuccess = () => resolve(request.result);
@@ -101,14 +99,17 @@ async function browserLoad(id: string): Promise<Cached> {
     request.onsuccess = () =>
       request.result
         ? resolve(request.result)
-        : reject(new Error("笔记不存在"));
+        : reject(new Error("文档不存在"));
     request.onerror = () => reject(request.error);
   });
 }
 
-async function browserWrite(document: Document, expected?: string): Promise<PersistedDocument> {
+async function browserWrite(
+  document: Document,
+  expected?: string
+): Promise<PersistedDocument> {
   if (new Blob([JSON.stringify(document)]).size > 64 * 1024 * 1024)
-    throw new Error("笔记超过 64 MB");
+    throw new Error("文档超过 64 MB");
 
   const db = await database();
 
@@ -121,8 +122,11 @@ async function browserWrite(document: Document, expected?: string): Promise<Pers
 
     request.onsuccess = () => {
       const previous = request.result as Cached | undefined;
-      if ((expected && previous?.token !== expected) || (!expected && previous)) {
-        failure = "笔记已在其他窗口修改，请先导出备份再重新打开";
+      if (
+        (expected && previous?.token !== expected) ||
+        (!expected && previous)
+      ) {
+        failure = "文档已在其他窗口修改，请先导出备份再重新打开";
         tx.abort();
         return;
       }
@@ -145,7 +149,9 @@ async function browserWrite(document: Document, expected?: string): Promise<Pers
 
 export async function refreshDocuments() {
   const result = native
-    ? await invoke<{ documents: DocumentInfo[]; warnings: string[] }>("list_documents")
+    ? await invoke<{ documents: DocumentInfo[]; warnings: string[] }>(
+        "list_story_comic_documents"
+      )
     : {
         documents: (await browserList()).map((x) => x.document),
         warnings: [],
@@ -156,25 +162,28 @@ export async function refreshDocuments() {
 
   for (const c of cache.values()) {
     if (c.generation > c.saved)
-      summaries = [...summaries.filter((x) => x.id !== c.document.id), c.document];
+      summaries = [
+        ...summaries.filter((x) => x.id !== c.document.id),
+        c.document,
+      ];
   }
 
   notify();
 }
 
 function sanitizeTitle(value: string): string {
-  return value.trim().slice(0, 120) || "未命名笔记";
+  return value.trim().slice(0, 120) || "未命名故事漫画";
 }
 
 export async function createDocument() {
   const now = Date.now();
   const loaded = native
-    ? await invoke<LoadedDocument>("create_document")
+    ? await invoke<LoadedDocument>("create_story_comic_document")
     : await browserWrite({
         id: crypto.randomUUID(),
-        type: "workstore.document",
+        type: "workstore.story-comic",
         schemaVersion: 1,
-        title: "未命名笔记",
+        title: "未命名故事漫画",
         favorite: false,
         createdAt: now,
         updatedAt: now,
@@ -192,21 +201,25 @@ export async function createDocument() {
 }
 
 export async function loadDocument(id: string) {
-  if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
   let cached = cache.get(id);
   if (!cached || (cached.generation === cached.saved && !cached.saving)) {
     const beforeRead = cached;
     const generation = cached?.generation;
     const token = cached?.token;
     const loaded = native
-      ? await invoke<LoadedDocument>("load_document", { id })
+      ? await invoke<LoadedDocument>("load_story_comic_document", { id })
       : await browserLoad(id);
     const current = cache.get(id);
-    if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
     // A late read must not replace edits, an in-flight save, or a newer cache
     // installed by another load/sync while this request was awaiting disk I/O.
-    if (!current || (current === beforeRead && current.generation === generation &&
-      current.token === token && current.generation === current.saved && !current.saving)) {
+    if (
+      !current ||
+      (current === beforeRead &&
+        current.generation === generation &&
+        current.token === token &&
+        current.generation === current.saved &&
+        !current.saving)
+    ) {
       cached = { ...loaded, generation: 0, saved: 0 };
       cache.set(id, cached);
     } else {
@@ -218,9 +231,10 @@ export async function loadDocument(id: string) {
 
 export function activateDocument(id: string) {
   const cached = cache.get(id);
-  if (!cached) throw new Error("笔记尚未载入");
+  if (!cached) throw new Error("文档尚未载入");
   lastDocumentId = id;
-  if (!cached.document.lastOpenedAt) stageDocument(id, { lastOpenedAt: Date.now() });
+  if (!cached.document.lastOpenedAt)
+    stageDocument(id, { lastOpenedAt: Date.now() });
   return cached.document;
 }
 
@@ -235,12 +249,20 @@ export async function ensureDocument(id: string) {
 
 export function stageDocument(
   id: string,
-  patch: Partial<Pick<Document, "content" | "title" | "favorite" | "lastOpenedAt">>,
+  patch: Partial<
+    Pick<Document, "content" | "title" | "favorite" | "lastOpenedAt">
+  >
 ) {
-  if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
   const c = cache.get(id);
-  if (!c) throw new Error("笔记尚未载入");
-  if (Object.entries(patch).every(([key, value]) => JSON.stringify(c.document[key as keyof typeof c.document]) === JSON.stringify(value))) return;
+  if (!c) throw new Error("文档尚未载入");
+  if (
+    Object.entries(patch).every(
+      ([key, value]) =>
+        JSON.stringify(c.document[key as keyof typeof c.document]) ===
+        JSON.stringify(value)
+    )
+  )
+    return;
 
   const next = { ...c.document, ...patch, updatedAt: Date.now() };
   if (patch.title !== undefined) next.title = sanitizeTitle(patch.title);
@@ -280,7 +302,7 @@ export async function flushDocument(id: string): Promise<void> {
         const generation = c.generation;
         const document = c.document;
         const result = native
-          ? await invoke<LoadedDocument>("save_document", {
+          ? await invoke<LoadedDocument>("save_story_comic_document", {
               document,
               expectedToken: c.token,
             })
@@ -314,54 +336,7 @@ export async function flushDocuments() {
   for (const id of cache.keys()) await flushDocument(id);
 }
 
-export async function deleteDocument(id: string) {
-  if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
-  await ensureDocument(id);
-  await flushDocument(id);
-  const cached = cache.get(id)!;
-  deleting.add(id);
-  try {
-    if (native) await invoke("delete_document", { id, expectedToken: cached.token });
-    else {
-      const db = await database();
-      await new Promise<void>((resolve, reject) => {
-        const tx = db.transaction("documents", "readwrite");
-        const store = tx.objectStore("documents");
-        const request = store.get(id);
-        request.onsuccess = () => {
-          if (!request.result || request.result.token !== cached.token) { tx.abort(); return; }
-          store.delete(id);
-        };
-        tx.oncomplete = () => resolve();
-        tx.onerror = tx.onabort = () => reject(new Error("笔记已变化或删除失败，请重新打开后重试"));
-      });
-    }
-    deleted.add(id);
-    cache.delete(id);
-    summaries = summaries.filter(item => item.id !== id);
-    if (lastDocumentId === id) lastDocumentId = null;
-    remoteVersions.set(id, remoteVersion(id) + 1);
-    notify();
-    scheduleAutosync();
-  } finally { deleting.delete(id); }
-}
-
 registerDocumentFlusher(flushDocuments);
-
-export function exportDocument(id: string) {
-  const doc = currentDocument(id);
-  if (!doc) return;
-
-  const blob = new Blob([JSON.stringify(doc, null, 2)], {
-    type: "application/json",
-  });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `${doc.title.replace(/[\\/:*?\"<>|]/g, "_")}.doc.json`;
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
 
 if (!native)
   window.addEventListener("beforeunload", (event) => {
@@ -377,11 +352,27 @@ export const remoteVersion = (id: string) => remoteVersions.get(id) ?? 0;
 registerSyncRefresher(async (paths) => {
   await refreshDocuments();
   for (const [id, cached] of cache) {
-    if (!paths.includes(`data/app.doc/${id}.doc.json`)) continue;
+    if (!paths.includes(`data/app.story-comic/${id}.story-comic.json`))
+      continue;
     if (cached.generation !== cached.saved || cached.saving) continue;
+    const generation = cached.generation,
+      token = cached.token;
     try {
-      const loaded = await invoke<LoadedDocument>("load_document", { id });
-      if (JSON.stringify(loaded.document.content) !== JSON.stringify(cached.document.content)) {
+      const loaded = await invoke<LoadedDocument>("load_story_comic_document", {
+        id,
+      });
+      if (
+        cache.get(id) !== cached ||
+        cached.generation !== generation ||
+        cached.token !== token ||
+        cached.generation !== cached.saved ||
+        cached.saving
+      )
+        continue;
+      if (
+        JSON.stringify(loaded.document.content) !==
+        JSON.stringify(cached.document.content)
+      ) {
         remoteVersions.set(id, (remoteVersions.get(id) ?? 0) + 1);
       }
       cache.set(id, { ...loaded, generation: 0, saved: 0 });
@@ -392,29 +383,11 @@ registerSyncRefresher(async (paths) => {
     }
   }
   flushSync(() => notify());
-}, { receiveAdditions: async (id) => {
-  await refreshDocuments();
-  const incoming = await invoke<{ id: string; entries: { id: string; html: string; createdAt?: number }[] }[]>("pending_conversation_records", { id });
-  for (const update of incoming) {
-    const cached = cache.get(update.id);
-    if (!cached || deleting.has(update.id) || deleted.has(update.id)) continue;
-    let local;
-    try { local = JSON.parse(cached.document.content); } catch { continue; }
-    if (local?.type !== "workstore.conversation" || local.version !== 1 || !Array.isArray(local.entries)) continue;
-    const known = new Set(local.entries.map((entry: { id: string }) => entry.id));
-    const added = update.entries.filter(entry => !known.has(entry.id));
-    if (added.length) {
-      // Append to the latest cached draft through the normal guarded save queue.
-      // Do not replace its token, draft, editor version, or existing card contents.
-      stageDocument(update.id, { content: JSON.stringify({ ...local, entries: [...local.entries, ...added] }) });
-    }
-  }
-} });
+});
 
-// AI/imported content deliberately starts a new editor session. Local typing
-// still uses stageDocument and never feeds htmlContent back into TeaEditor.
+// Explicit content replacement invalidates pending generation snapshots.
 export function applyDocumentContent(id: string, content: string) {
-  if (!cache.has(id)) throw new Error("笔记尚未载入");
+  if (!cache.has(id)) throw new Error("文档尚未载入");
   flushSync(() => {
     remoteVersions.set(id, remoteVersion(id) + 1);
     stageDocument(id, { content });

@@ -75,3 +75,13 @@ test('legacy records without a timestamp remain visible without an invented time
  try {assert.equal(h.host.querySelector('[data-testid="time-tag"]').textContent,'时间未知');assert.equal(h.host.querySelectorAll('[data-readonly="true"]').length,1);}
  finally{await h.close();}
 });
+
+test('remote cards append without replacing the live draft or remounting the input',async()=>{
+ const h=await setup();try{
+  await h.change('<p>local draft</p>');const input=h.input;
+  await h.mount(JSON.stringify({draft:'remote draft',entries:[{id:'remote',html:'<p>remote card</p>',createdAt:100}],version:1,type:'workstore.conversation'}));
+  assert.equal(h.host.querySelectorAll('[data-readonly="true"]').length,1);
+  assert.equal(h.input.htmlContent,input.htmlContent);
+  await h.send();const data=JSON.parse(h.content);assert.equal(data.entries.length,2);assert.equal(data.entries[1].html,'<p>local draft</p>');
+ }finally{await h.close();}
+});

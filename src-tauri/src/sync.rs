@@ -195,20 +195,20 @@ fn validate(files: &Files) -> Result<()> {
         if name.starts_with(crate::sync_history::PREFIX) && !crate::sync_history::valid(name, bytes) {
             return Err("同步历史校验失败，未修改工作区".into());
         }
-        if name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
+        if name.ends_with(".story-comic.json") || name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
             let v: Value =
                 serde_json::from_slice(bytes).map_err(|e| format!("{name} 无法解析：{e}"))?;
             let board = name.ends_with(".whiteboard.json");
             let id = v["id"].as_str().ok_or("文档缺少 ID")?;
             Uuid::parse_str(id).map_err(|_| "文档 ID 无效")?;
-            let suffix = if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if board {
+            let suffix = if name.ends_with(".story-comic.json") { ".story-comic.json" } else if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if board {
                 ".whiteboard.json"
             } else {
                 ".doc.json"
             };
             if v["schemaVersion"] != 1
                 || v["type"]
-                    != if name.ends_with(".cover.json") { "workstore.cover" } else if name.ends_with(".html.json") { "workstore.html" } else if name.ends_with(".comic.json") { "workstore.comic" } else if board {
+                    != if name.ends_with(".story-comic.json") { "workstore.story-comic" } else if name.ends_with(".cover.json") { "workstore.cover" } else if name.ends_with(".html.json") { "workstore.html" } else if name.ends_with(".comic.json") { "workstore.comic" } else if board {
                         "workstore.whiteboard"
                     } else {
                         "workstore.document"
@@ -232,6 +232,19 @@ fn merge_value(base: Option<&Value>, local: &Value, remote: &Value, conflict: &m
     }
     if Some(remote) == base {
         return local.clone();
+    }
+    if let (Some(l), Some(r)) = (conversation_value(local), conversation_value(remote)) {
+        let b = base.and_then(conversation_value);
+        let mut merged = l.clone();
+        let mut entries = l["entries"].as_array().unwrap().clone();
+        for entry in r["entries"].as_array().unwrap() {
+            if let Some(existing) = entries.iter().find(|existing| existing["id"] == entry["id"]) {
+                if existing != entry { *conflict = true; }
+            } else { entries.push(entry.clone()); }
+        }
+        merged["entries"] = Value::Array(entries);
+        merged["draft"] = merge_value(b.as_ref().map(|v| &v["draft"]), &l["draft"], &r["draft"], conflict);
+        return Value::String(merged.to_string());
     }
     if let (Some(l), Some(r)) = (local.as_object(), remote.as_object()) {
         let b = base.and_then(Value::as_object);
@@ -307,7 +320,7 @@ fn merge_value(base: Option<&Value>, local: &Value, remote: &Value, conflict: &m
 #[cfg(test)]
 fn legacy_conflict_copy(name: &str, bytes: &[u8]) -> (String, Vec<u8>) {
     let digest = Sha256::digest([name.as_bytes(), bytes].concat());
-    if name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
+    if name.ends_with(".story-comic.json") || name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
         if let Ok(mut value) = serde_json::from_slice::<Value>(bytes) {
             let mut raw = [0; 16];
             raw.copy_from_slice(&digest[..16]);
@@ -322,7 +335,7 @@ fn legacy_conflict_copy(name: &str, bytes: &[u8]) -> (String, Vec<u8>) {
                 .collect::<String>();
             value["id"] = Value::from(id.clone());
             value["title"] = Value::from(format!("{title}（冲突副本）"));
-            let suffix = if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if name.ends_with(".doc.json") {
+            let suffix = if name.ends_with(".story-comic.json") { ".story-comic.json" } else if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if name.ends_with(".doc.json") {
                 ".doc.json"
             } else {
                 ".whiteboard.json"
@@ -712,7 +725,7 @@ pub fn apply(root: &Path, id: &str) -> Result<Applied> {
         .chain(prepared.merged.keys())
         .collect::<BTreeSet<_>>()
     {
-        if current.get(name) == prepared.captured.get(name) {
+        if current.get(name) == prepared.captured.get(name) || current.get(name) == prepared.merged.get(name) {
             if let Some(bytes) = prepared.merged.get(name) {
                 next.insert(name.clone(), bytes.clone());
             } else {
@@ -755,6 +768,57 @@ pub fn apply(root: &Path, id: &str) -> Result<Applied> {
         changed,
         message: "同步完成".into(),
     })
+}
+
+// Under the same workspace lock as saves. No existing file, baseline, or editor
+// state is replaced; complete activation still waits for the interaction barrier.
+pub fn receive_note_additions(root: &Path, id: &str) -> Result<Vec<String>> {
+    let mut prepared: Prepared = serde_json::from_slice(
+        &fs::read(root.join(".workstore/sync-prepared.json")).map_err(|e| e.to_string())?
+    ).map_err(|e| e.to_string())?;
+    if prepared.id != id || Path::new(&prepared.root) != root {
+        return Err("工作区已变化，将在下一次同步时重试".into());
+    }
+    validate(&prepared.merged)?;
+    let current = snapshot(root)?;
+    let mut added = vec![];
+    for (name, bytes) in &prepared.merged {
+        if name.starts_with("data/app.doc/") && name.ends_with(".doc.json") &&
+            !prepared.captured.contains_key(name) && !current.contains_key(name) {
+            atomic_write(&root.join(name), bytes)?;
+            // This exact remote version is now on disk. Treat it as the local
+            // capture for later activation so edits made after receiving it use
+            // the correct ancestor instead of becoming unrelated creations.
+            prepared.captured.insert(name.clone(), bytes.clone());
+            added.push(name.clone());
+        }
+    }
+    if !added.is_empty() {
+        json_write(&root.join(".workstore/sync-prepared.json"), &prepared)?;
+    }
+    Ok(added)
+}
+
+fn conversation_value(value: &Value) -> Option<Value> {
+    let parsed: Value = serde_json::from_str(value.as_str()?).ok()?;
+    if parsed["type"] != "workstore.conversation" || parsed["version"] != 1 || !parsed["draft"].is_string() { return None; }
+    if !parsed["entries"].as_array()?.iter().all(|e| e["id"].is_string() && e["html"].is_string()) { return None; }
+    Some(parsed)
+}
+
+pub fn pending_conversation_records(root: &Path, id: &str) -> Result<Vec<Value>> {
+    let prepared: Prepared = serde_json::from_slice(&fs::read(root.join(".workstore/sync-prepared.json")).map_err(|e| e.to_string())?)
+        .map_err(|e| e.to_string())?;
+    if prepared.id != id || Path::new(&prepared.root) != root { return Err("同步任务已变化".into()); }
+    let mut updates = vec![];
+    for (name, bytes) in prepared.merged {
+        if !name.starts_with("data/app.doc/") || !name.ends_with(".doc.json") { continue; }
+        let doc: Value = serde_json::from_slice(&bytes).map_err(|e| e.to_string())?;
+        if let Some(content) = conversation_value(&doc["content"]) {
+            updates.push(serde_json::json!({"id":doc["id"],"entries":content["entries"]}));
+        }
+    }
+    Ok(updates)
 }
 /// Called only before editors mount, or under the explicit maintenance lock.
 /// Preserve the common baseline so the next Git sync still sees the retirement.
@@ -828,6 +892,48 @@ mod tests {
         }
     }
     #[test]
+    fn conversation_additions_arrive_without_replacing_active_note_and_survive_full_sync() {
+        let temp = tempfile::tempdir().unwrap();
+        let remote = temp.path().join("remote.git"); fs::create_dir(&remote).unwrap();
+        git(&remote, &["init", "--bare", "--quiet"], "").unwrap();
+        let p = Preferences { github_sync_enabled: true, github_repo_url: remote.to_string_lossy().into_owned(), ..Preferences::default() };
+        let a = temp.path().join("a"); let b = temp.path().join("b");
+        let first = Store::open(temp.path().join("ca"), a.clone()).unwrap();
+        let second = Store::open(temp.path().join("cb"), b.clone()).unwrap();
+        let old = first.create_document().unwrap(); sync(&a, &p); sync(&b, &p);
+        let mut changed = old.document.clone(); changed.content = Value::String("remote changed".into());
+        first.save_document(changed, old.token).unwrap();
+        let new = first.create_document().unwrap(); let mut note = new.document;
+        note.content = Value::String(serde_json::json!({"type":"workstore.conversation","version":1,"entries":[{"id":"entry","html":"<p>hello</p>","createdAt":123}],"draft":"draft"}).to_string());
+        let saved = first.save_document(note, new.token).unwrap(); sync(&a, &p);
+        let captured = snapshot(&b).unwrap();
+        let prepared = prepare(&b, &p, captured.clone()).unwrap();
+        let added = receive_note_additions(&b, &prepared.id).unwrap();
+        assert_eq!(added.len(), 1);
+        assert_eq!(second.load_document(&old.document.info.id).unwrap().document.content, old.document.content);
+        assert_eq!(second.load_document(&saved.document.info.id).unwrap().document.content, saved.document.content);
+        assert!(receive_note_additions(&b, &prepared.id).unwrap().is_empty());
+        let local = second.load_document(&saved.document.info.id).unwrap();
+        let mut local_note = local.document; local_note.content = Value::String("local edit after receiving".into());
+        second.save_document(local_note, local.token).unwrap();
+        apply(&b, &prepared.id).unwrap();
+        assert_eq!(second.load_document(&saved.document.info.id).unwrap().document.content, Value::String("local edit after receiving".into()));
+        sync(&b, &p); sync(&a, &p);
+        assert_eq!(first.load_document(&saved.document.info.id).unwrap().document.content, Value::String("local edit after receiving".into()));
+    }
+    #[test]
+    fn independent_conversation_records_merge_without_losing_either_card() {
+        let base = Value::String(serde_json::json!({"type":"workstore.conversation","version":1,"entries":[],"draft":""}).to_string());
+        let mut l = conversation_value(&base).unwrap(); let mut r = l.clone();
+        l["entries"] = serde_json::json!([{"id":"a","html":"local"}]);
+        r["entries"] = serde_json::json!([{"id":"b","html":"remote"}]);
+        let mut conflict = false;
+        let merged = merge_value(Some(&base), &Value::String(l.to_string()), &Value::String(r.to_string()), &mut conflict);
+        let parsed = conversation_value(&merged).unwrap();
+        assert_eq!(parsed["entries"].as_array().unwrap().len(), 2);
+        assert!(!conflict);
+    }
+    #[test]
     fn recent_tools_and_comic_lists_arrive_on_new_and_existing_peers() {
         let temp = tempfile::tempdir().unwrap();
         let remote = temp.path().join("remote.git");
@@ -877,6 +983,35 @@ mod tests {
         assert_eq!(snapshot(&a).unwrap(), snapshot(&b).unwrap());
         let mut invalid = snapshot(&b).unwrap();
         let path = format!("data/app.cover/{}.cover.json", saved.document.info.id);
+        let mut value: Value = serde_json::from_slice(&invalid[&path]).unwrap();
+        value["type"] = Value::from("workstore.document");
+        invalid.insert(path,serde_json::to_vec(&value).unwrap());
+        assert!(validate(&invalid).is_err());
+    }
+    #[test]
+    fn story_comic_files_images_and_navigation_travel_between_local_peers() {
+        let temp = tempfile::tempdir().unwrap();
+        let remote = temp.path().join("remote.git"); fs::create_dir(&remote).unwrap();
+        git(&remote, &["init", "--bare", "--quiet"], "").unwrap();
+        let p = Preferences { github_sync_enabled: true, github_repo_url: remote.to_string_lossy().into_owned(), ..Preferences::default() };
+        let a = temp.path().join("a"); let b = temp.path().join("b");
+        let mut first = Store::open(temp.path().join("ca"), a.clone()).unwrap();
+        let second = Store::open(temp.path().join("cb"), b.clone()).unwrap();
+        let story_comic = first.create_story_comic_document().unwrap();
+        let mut image = b"\x89PNG\r\n\x1a\n".to_vec(); image.extend([0; 24]);
+        let image_id = crate::ai_images::save(&a, &image).unwrap();
+        let mut doc = story_comic.document.clone();
+        doc.content = Value::String(serde_json::json!({"versions":[{"image":image_id}]}).to_string());
+        let saved = first.save_story_comic_document(doc, story_comic.token).unwrap();
+        let mut data = first.snapshot().unwrap().data;
+        data.entries.push(crate::storage::Entry { id: "app.story-comic".into(), favorite: false, rank: 3, last_opened: Some(123) });
+        first.save(data).unwrap(); sync(&a, &p); sync(&b, &p);
+        assert!(second.snapshot().unwrap().data.entries.iter().any(|e| e.id == "app.story-comic"));
+        assert_eq!(second.list_story_comic_documents().unwrap().documents.len(), 1);
+        assert_eq!(second.load_story_comic_document(&saved.document.info.id).unwrap().document.content, saved.document.content);
+        assert_eq!(snapshot(&a).unwrap(), snapshot(&b).unwrap());
+        let mut invalid = snapshot(&b).unwrap();
+        let path = format!("data/app.story-comic/{}.story-comic.json", saved.document.info.id);
         let mut value: Value = serde_json::from_slice(&invalid[&path]).unwrap();
         value["type"] = Value::from("workstore.document");
         invalid.insert(path,serde_json::to_vec(&value).unwrap());
@@ -1135,6 +1270,28 @@ mod tests {
         let id = Uuid::new_v4().to_string();
         let name = format!("data/app.cover/{id}.cover.json");
         let base = serde_json::json!({"id":id,"type":"workstore.cover","schemaVersion":1,"title":"Title","content":"original"});
+        let mut local = base.clone(); local["content"] = Value::from("local");
+        let mut remote = base.clone(); remote["content"] = Value::from("remote");
+        let wrap = |v: &Value| BTreeMap::from([(name.clone(), serde_json::to_vec(v).unwrap())]);
+        let (merged, count) = merge(&wrap(&base), &wrap(&local), &wrap(&remote), false);
+        assert_eq!(count, 1);
+        assert_eq!(merged.keys().filter(|p|p.starts_with("data/")).count(), 1);
+        assert_eq!(serde_json::from_slice::<Value>(&merged[&name]).unwrap()["content"],"remote");
+        assert_eq!(merged, merge(&wrap(&base), &wrap(&local), &wrap(&remote), false).0);
+        let versions: Vec<Value> = merged.iter().filter(|(p,_)|p.starts_with(crate::sync_history::PREFIX))
+            .map(|(_,bytes)| {
+                let v: Value = serde_json::from_slice(bytes).unwrap();
+                let raw = base64::engine::general_purpose::STANDARD.decode(v["contentBase64"].as_str().unwrap()).unwrap();
+                serde_json::from_slice(&raw).unwrap()
+            }).collect();
+        assert!(versions.contains(&base)); assert!(versions.contains(&local)); assert!(versions.contains(&remote));
+    }
+    #[test]
+    fn conflicting_story_comic_content_keeps_one_visible_document_and_exact_history() {
+        use base64::Engine;
+        let id = Uuid::new_v4().to_string();
+        let name = format!("data/app.story-comic/{id}.story-comic.json");
+        let base = serde_json::json!({"id":id,"type":"workstore.story-comic","schemaVersion":1,"title":"Title","content":"original"});
         let mut local = base.clone(); local["content"] = Value::from("local");
         let mut remote = base.clone(); remote["content"] = Value::from("remote");
         let wrap = |v: &Value| BTreeMap::from([(name.clone(), serde_json::to_vec(v).unwrap())]);

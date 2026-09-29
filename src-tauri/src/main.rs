@@ -5,6 +5,7 @@ mod ai;
 mod documents;
 mod html;
 mod covers;
+mod story_comics;
 mod html_runtime;
 mod comics;
 use comics::{Comic, ComicList, LoadedComic};
@@ -241,6 +242,50 @@ fn save_cover_document(
         .save_cover_document(document, expected_token)
 }
 #[tauri::command]
+fn list_story_comic_documents(state: tauri::State<Workspace>) -> Result<story_comics::DocumentList, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .list_story_comic_documents()
+}
+#[tauri::command]
+fn create_story_comic_document(state: tauri::State<Workspace>) -> Result<story_comics::LoadedDocument, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .create_story_comic_document()
+}
+#[tauri::command]
+fn load_story_comic_document(id: String, state: tauri::State<Workspace>) -> Result<story_comics::LoadedDocument, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .load_story_comic_document(&id)
+}
+#[tauri::command]
+fn save_story_comic_document(
+    document: story_comics::Document,
+    expected_token: String,
+    state: tauri::State<Workspace>,
+) -> Result<story_comics::LoadedDocument, String> {
+    state
+        .0
+        .lock()
+        .map_err(|e| e.to_string())?
+        .as_ref()
+        .ok_or("工作空间尚未打开")?
+        .save_story_comic_document(document, expected_token)
+}
+#[tauri::command]
 fn create_document(state: tauri::State<Workspace>) -> Result<LoadedDocument, String> {
     state
         .0
@@ -352,6 +397,23 @@ async fn finish_sync(app: tauri::AppHandle, id: String) -> Result<sync::Applied,
 }
 
 #[tauri::command]
+async fn receive_note_additions(app: tauri::AppHandle, id: String) -> Result<Vec<String>, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let worker = app.state::<SyncWorker>();
+        let _guard = worker.0.try_lock().map_err(|_| "同步正在进行")?;
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        let store = slot.as_ref().ok_or("工作空间尚未打开")?;
+        sync::receive_note_additions(store.root_path(), &id)
+    }).await.map_err(|e| e.to_string())?
+}
+#[tauri::command]
+fn pending_conversation_records(state: tauri::State<Workspace>, id: String) -> Result<Vec<serde_json::Value>, String> {
+    let slot = state.0.lock().map_err(|e| e.to_string())?;
+    sync::pending_conversation_records(slot.as_ref().ok_or("工作空间尚未打开")?.root_path(), &id)
+}
+
+#[tauri::command]
 fn updater_configured(app: tauri::AppHandle) -> bool {
     app.config().plugins.0.get("updater").is_some_and(|config| {
         config["pubkey"]
@@ -428,6 +490,12 @@ fn main() {
             html_runtime::html_original_cancel,
             html_runtime::html_original_backup,
             html_runtime::html_original_export,
+            list_story_comic_documents,
+            create_story_comic_document,
+            load_story_comic_document,
+            save_story_comic_document,
+            story_comics::save_story_comic_export,
+            story_comics::save_story_comic_image,
             list_cover_documents,
             create_cover_document,
             load_cover_document,
@@ -451,6 +519,8 @@ fn main() {
             save_whiteboard,
             sync_workspace,
             finish_sync,
+            receive_note_additions,
+            pending_conversation_records,
             updater_configured,
             ai::ai_settings,
             ai::ai_capabilities,
