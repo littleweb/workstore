@@ -280,6 +280,8 @@ test("upstream styles, separate result tabs, creation at top and collapse keeps 
   try {
     assert.equal(h.host.querySelectorAll(".story-styles>button").length, 11);
     assert.equal(h.host.querySelectorAll(".story-tabs button").length, 3);
+    assert.equal(h.host.querySelector("textarea").rows, 2);
+    assert.ok(!h.host.querySelector(".story-controls").textContent.includes("包含封面"));
     await h.click("创建故事漫画");
     assert.equal(h.docs.size, 1);
     const saved = [...h.docs.values()][0];
@@ -404,7 +406,10 @@ test("clicking generate lays out all placeholders immediately while planning is 
     assert.equal(h.host.querySelector("progress").value, 0);
     assert.ok(h.host.textContent.includes("画面已完成 0/4 页"));
     assert.ok(h.host.textContent.includes("正在规划"));
-    await h.click("停止生成");
+    assert.equal(h.host.querySelectorAll(".story-generate button").length, 1);
+    assert.equal(h.host.querySelector(".story-generate button").disabled, false);
+    assert.ok(!h.host.querySelector(".story-controls").textContent.includes("已完成"));
+    await h.click("暂停");
     await h.resolve({ text: "{}" });
   } finally {
     await h.close();
