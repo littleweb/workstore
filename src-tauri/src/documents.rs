@@ -219,4 +219,39 @@ impl Store {
             token: token(&bytes),
         })
     }
+
+    pub fn delete_document(&self, id: &str, expected_token: &str) -> Result<()> {
+        let path = self.document_path(id)?;
+        let (doc, bytes) = read_file(&path)?;
+        if doc.info.id != id || token(&bytes) != expected_token {
+            return Err("笔记已被外部修改，请重新打开后再删除".into());
+        }
+        let backup = checked_dir(&checked_dir(self.root_path(), ".workstore")?, "deleted-documents")?
+            .join(format!("{id}-{}.json", token(&bytes)));
+        atomic_write(&backup, &bytes)?;
+        fs::remove_file(path).map_err(|e| e.to_string())
+    }
+}
+
+#[cfg(test)]
+mod deletion_tests {
+    use super::*;
+    #[test]
+    fn deletion_checks_token_and_preserves_original_bytes() {
+        let temp = tempfile::tempdir().unwrap();
+        let store = Store::open(temp.path().join("config"), temp.path().join("workspace")).unwrap();
+        let loaded = store.create_document().unwrap();
+        let id = &loaded.document.info.id;
+        let path = store.document_path(id).unwrap();
+        let bytes = fs::read(&path).unwrap();
+        assert!(store.delete_document(id, "stale").is_err());
+        assert_eq!(fs::read(&path).unwrap(), bytes);
+        store.delete_document(id, &loaded.token).unwrap();
+        assert!(!path.exists());
+        let backup = store.root_path().join(".workstore/deleted-documents")
+            .join(format!("{id}-{}.json", token(&bytes)));
+        assert_eq!(fs::read(backup).unwrap(), bytes);
+        assert!(store.list_documents().unwrap().documents.is_empty());
+        assert!(store.delete_document("../invalid", &loaded.token).is_err());
+    }
 }

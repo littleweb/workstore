@@ -1,7 +1,9 @@
+import ConversationNote, { conversationContent, emptyConversation } from "./ConversationNote";
 import { DocumentAiSidebar } from "../ai/AiSidebar";
 import { App as AntApp, Button, Dropdown, Input, Modal, Tooltip } from "antd";
 import {
   MessageOutlined,
+  DeleteOutlined,
   EditOutlined,
   ExportOutlined,
   FileTextOutlined,
@@ -16,6 +18,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Editor as TeaEditor } from "@teabook/teaeditor";
 import {
   createDocument,
+  deleteDocument,
   currentDocument,
   documentList,
   documentStatus,
@@ -68,7 +71,7 @@ function DocumentEditor({ id, content }: { id: string; content: string }) {
 }
 
 export default function DocumentApp() {
-  const { message } = AntApp.useApp();
+  const { message, modal } = AntApp.useApp();
   const [, rerender] = useState(0);
   const [id, setId] = useState<string | null>(null);
   const [busy, setBusy] = useState(true);
@@ -209,7 +212,8 @@ export default function DocumentApp() {
     }, 0);
   };
 
-  const create = async () => {
+  const create = async (conversation = false) => {
+    if (composing.current || compositionTimer.current) return;
     const request = ++requestVersion.current;
     selectionPending.current = true;
     setOpeningId(null);
@@ -218,6 +222,10 @@ export default function DocumentApp() {
       await flushDocuments();
       if (!isCurrentRequest(request)) return;
       const document = await createDocument();
+      if (conversation) {
+        stageDocument(document.id, { title: "对话笔记", content: emptyConversation() });
+        await flushDocuments();
+      }
       if (!isCurrentRequest(request)) return;
       activateDocument(document.id);
       setId(document.id);
@@ -231,6 +239,35 @@ export default function DocumentApp() {
         setBusy(false);
       }
     }
+  };
+
+  const remove = (doc: ReturnType<typeof documentList>[number]) => {
+    modal.confirm({
+      title: "删除笔记？",
+      content: "将删除这篇笔记及其全部内容。桌面端会保留文件备份。",
+      okText: "删除", cancelText: "取消", okButtonProps: { danger: true },
+      onOk: async () => {
+        if (composing.current || compositionTimer.current || selectionPending.current || aiApplying) {
+          message.warning("请等待当前输入或操作完成后再删除");
+          throw new Error("当前笔记正在操作中");
+        }
+        const request = ++requestVersion.current;
+        selectionPending.current = true;
+        setBusy(true);
+        try {
+          await deleteDocument(doc.id);
+          if (isCurrentRequest(request) && activeId.current === doc.id) {
+            setId(null);
+            setAiOpen(false);
+          }
+        } catch (error) {
+          message.error("删除失败：" + String(error));
+          throw error;
+        } finally {
+          if (isCurrentRequest(request)) { selectionPending.current = false; setBusy(false); }
+        }
+      },
+    });
   };
 
   const pin = async (item: ReturnType<typeof documentList>[number]) => {
@@ -270,6 +307,7 @@ export default function DocumentApp() {
 
   const item = id ? currentDocument(id) : undefined;
   const status = id ? documentStatus(id) : "";
+  const isConversation = !!item && conversationContent(item.content) !== null;
 
   const row = (doc: ReturnType<typeof documentList>[number]) => (
     <div
@@ -321,6 +359,7 @@ export default function DocumentApp() {
         trigger={["click"]}
         menu={{
           items: [
+            ...(!doc.favorite ? [{ key: "delete", icon: <DeleteOutlined />, label: "删除", danger: true }] : []),
             {
               key: "favorite",
               icon: doc.favorite ? <StarFilled /> : <StarOutlined />,
@@ -338,6 +377,7 @@ export default function DocumentApp() {
             },
           ],
           onClick: ({ key }) => {
+            if (key === "delete") remove(doc);
             if (key === "favorite") void pin(doc);
             if (key === "rename") {
               setName(doc.title);
@@ -392,14 +432,10 @@ export default function DocumentApp() {
           </header>
           <div className="tool-sidebar-create-section">
             <div className="tool-sidebar-create-label">创建</div>
-            <Button
-              className="tool-sidebar-create"
-              icon={<PlusOutlined />}
-              loading={busy}
-              onClick={() => void create()}
-            >
-              创建笔记
-            </Button>
+            <button type="button" className="tool-sidebar-create" disabled={busy}
+              onClick={() => void create()}><PlusOutlined />普通笔记</button>
+            <button type="button" className="tool-sidebar-create" disabled={busy}
+              onClick={() => void create(true)}><PlusOutlined />对话笔记</button>
           </div>
           <div
             className="document-navigation"
@@ -504,7 +540,7 @@ export default function DocumentApp() {
                     </>
                   )}
                 </div>
-                <Button size="small" type="text" icon={<MessageOutlined />} aria-expanded={aiOpen} disabled={aiApplying} onClick={() => setAiOpen(value => !value)}>AI 助手</Button>
+                {!isConversation && <Button size="small" type="text" icon={<MessageOutlined />} aria-expanded={aiOpen} disabled={aiApplying} onClick={() => setAiOpen(value => !value)}>AI 助手</Button>}
                 <Tooltip title="导出笔记 JSON">
                   <Button
                     type="text"
@@ -515,7 +551,9 @@ export default function DocumentApp() {
                   />
                 </Tooltip>
               </div>
-              <div className="document-editor-wrap">
+              {isConversation ? (
+                <ConversationNote key={`${item.id}:${remoteVersion(item.id)}`} id={item.id} content={item.content} />
+              ) : <div className="document-editor-wrap">
                 <div className="document-editor-root">
                   <DocumentEditor
                     key={`${item.id}:${remoteVersion(item.id)}`}
@@ -524,6 +562,7 @@ export default function DocumentApp() {
                   />
                 </div>
               </div>
+              }
               {busy && <div className="document-busy">正在切换笔记…</div>}
             </>
           ) : (
@@ -551,7 +590,7 @@ export default function DocumentApp() {
                 loading={busy}
                 onClick={() => void create()}
               >
-                创建笔记
+                普通笔记
               </Button>
               <Button icon={<MessageOutlined />} onClick={() => setAiOpen(true)}>AI 助手</Button>
               <small>
@@ -563,7 +602,7 @@ export default function DocumentApp() {
             </>
           )}
         </div>
-        {aiOpen && <DocumentAiSidebar key={id ?? "empty"} target={aiTarget} onClose={() => setAiOpen(false)} onWriteState={setAiApplying} context={item ? () => ({ title: item.title, content: new DOMParser().parseFromString(currentDocument(item.id)?.content ?? "", "text/html").body.textContent ?? "" }) : undefined} />}
+        {aiOpen && !isConversation && <DocumentAiSidebar key={id ?? "empty"} target={aiTarget} onClose={() => setAiOpen(false)} onWriteState={setAiApplying} context={item ? () => ({ title: item.title, content: new DOMParser().parseFromString(currentDocument(item.id)?.content ?? "", "text/html").body.textContent ?? "" }) : undefined} />}
       </div>
 
       <Modal
