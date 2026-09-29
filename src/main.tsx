@@ -126,7 +126,7 @@ const tools: Tool[] = [
   },
 ];
 // Temporarily hidden; retain registration and saved entries for restoration.
-const hiddenTools = new Set(["app.html", "tool.json", "tool.color", "web.github"]);
+const hiddenTools = new Set(["app.project", "app.html", "tool.json", "tool.color", "web.github"]);
 const visibleTools = tools.filter((tool) => !hiddenTools.has(tool.id));
 type Entry = {
   id: string;
@@ -134,7 +134,7 @@ type Entry = {
   rank: number;
   lastOpened: number | null;
 };
-const initial: Entry[] = ["app.project", "app.doc"].map(
+const initial: Entry[] = ["app.doc"].map(
   (id, rank) => ({ id, favorite: true, rank, lastOpened: null }),
 );
 function restore(): Entry[] {
@@ -191,7 +191,7 @@ function WorkStore() {
   const [htmlOpened, setHtmlOpened] = useState(false);
   const { message } = AntApp.useApp();
   const [entries, setEntries] = useState<Entry[]>(restore),
-    [active, setActive] = useState("app.project"),
+    [active, setActive] = useState("app.doc"),
     [collapsed, setCollapsed] = useState(false),
     [catalog, setCatalog] = useState(false),
     [settings, setSettings] = useState(false),
@@ -586,7 +586,7 @@ function WorkStore() {
               else if (entry.favorite) favorite(t.id, false);
               else {
                 setEntries((es) => es.filter((e) => e.id !== t.id));
-                if (active === t.id) void navigate("app.project");
+                if (active === t.id) void navigate("app.doc");
               }
             },
           }}
@@ -639,8 +639,8 @@ function WorkStore() {
         <div className="brand-row">
           <button
             className="brand"
-            aria-label="WorkStore 项目"
-            onClick={() => void navigate("app.project")}
+            aria-label="WorkStore 笔记"
+            onClick={() => void navigate("app.doc")}
           >
             <img src="/workstore-icon.svg" />
             <span>WorkStore</span>
@@ -719,7 +719,7 @@ function WorkStore() {
           <header className="compact-tool-heading" data-tauri-drag-region>
             <button className="icon-button navigation-toggle" aria-label="展开主导航" aria-expanded={false}
               onClick={() => setCollapsed(false)}><MenuUnfoldOutlined /></button>
-            <button className="compact-brand" onClick={() => void navigate("app.project")}>WorkStore</button>
+            <button className="compact-brand" onClick={() => void navigate("app.doc")}>WorkStore</button>
             <button className="compact-tool-switch" aria-label="打开工具" aria-haspopup="dialog"
               onClick={() => { setCatalog(true); }}>
               打开工具 <DownOutlined />
@@ -1011,7 +1011,7 @@ function WorkStore() {
               <Button
                 onClick={() => {
                   setEntries(initial);
-                  void navigate("app.project");
+                  void navigate("app.doc");
                   message.success("已重置导航");
                 }}
               >
