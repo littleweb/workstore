@@ -82,7 +82,7 @@ test("cover prompts preserve exact Chinese copy, selected layout and distinguish
   assert.match(p, /芥末黄/);
   assert.match(p, /第一张附图只用于画风/);
   assert.match(p, /第二张附图是当前封面/);
-  assert.match(p, /2:3/);
+  assert.match(p, /3:4/);
   assert.ok(p.endsWith(m.graphicSuffix));
   const english = m.generationPrompt({ ...c, language: "英文" }, false);
   assert.match(english, /Text|text-above-image/);
@@ -107,4 +107,15 @@ test("stored cover validation rejects external image URLs and dangling version s
   assert.equal(m.readContent(JSON.stringify(c)).selectedVersion, "missing");
   c.config.style = "999";
   assert.throws(() => m.readContent(JSON.stringify(c)));
+});
+
+test("new covers default to portrait and blank copy is generated without changing saved ratios", () => {
+  const c = m.emptyContent();
+  assert.equal(c.config.ratio, "3:4");
+  c.config.topic = "秋天";
+  const prompt = m.generationPrompt(c.config, false);
+  assert.match(prompt, /自动拟写.*主标题/);
+  assert.match(prompt, /自动拟写.*副文案/);
+  c.config.ratio = "2:3";
+  assert.equal(m.readContent(JSON.stringify(c)).config.ratio, "2:3");
 });

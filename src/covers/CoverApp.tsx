@@ -27,6 +27,7 @@ import {
   type CoverConfig,
   type CoverContent,
 } from "./model";
+import { copyPrompt, fillCopy } from "./copy";
 import { imageSource, pngReference } from "./images";
 import { exportCover } from "./export";
 import CoverIcon from "./CoverIcon";
@@ -361,10 +362,8 @@ export default function CoverApp() {
       fail("此作品已有 200 个版本，请创建新封面继续");
       return;
     }
-    const target = doc.id,
-      snapshot = doc.content,
-      remote = store.remoteVersion(target),
-      captured = content;
+    const target = doc.id, remote = store.remoteVersion(target);
+    let snapshot = doc.content, captured = content;
     const abort = new AbortController();
     controller.current = abort;
     setBusy(true);
@@ -388,6 +387,21 @@ export default function CoverApp() {
             throw new Error(
               "当前 AI 服务不支持图片生成，请在全局设置中选择支持图片生成的 Codex",
             );
+          if (!captured.config.title.trim() || !captured.config.subtitle.trim()) {
+            setStatus("正在拟写主标题与副文案…");
+            const copy = await ai.generate({ toolId: "app.cover", record: false,
+              messages: [{ role: "user", content: copyPrompt(captured.config) }],
+            }, abort.signal);
+            if (!isValid()) return;
+            if (!unchanged()) throw new Error("拟写期间配置已变化，文案未覆盖当前编辑，请重试");
+            if (copy.saveError) throw new Error(copy.saveError);
+            captured = { ...captured, config: fillCopy(copy.text, captured.config) };
+            snapshot = JSON.stringify(captured);
+            store.stageDocument(target, { content: snapshot });
+            await store.flushDocument(target);
+            if (!isValid()) return;
+            if (!unchanged()) throw new Error("保存文案期间配置已变化，请重试");
+          }
           // Codex's configured model is the orchestrator, not a confirmed image model.
           // Do not confuse its name with the upstream image-model calibration table.
           const policy = stylePolicy(captured.config.style),
@@ -515,8 +529,8 @@ export default function CoverApp() {
         "例如：秋日第一杯奶茶，东亚少女，温暖、俏皮",
         true,
       )}
-      {inputField("title", "主标题", "封面上显示的标题")}
-      {inputField("subtitle", "副文案", "选填；留空不添加")}
+      {inputField("title", "主标题", "留空自动生成，可自行填写")}
+      {inputField("subtitle", "副文案", "留空自动生成，可自行填写")}
       <div className="cover-pair">
         <label className="cover-field">
           <span>语言</span>
@@ -601,11 +615,12 @@ export default function CoverApp() {
       .filter((d) => d.favorite === favorite)
       .map((item) => (
         <div
-          className={`cover-row ${item.id === id ? "selected" : ""}`}
+          className={`cover-row ${item.id === id && (page === "config" || page === "editor") ? "selected" : ""}`}
           key={item.id}
         >
           <button
             className="cover-row-name"
+            title={item.title}
             onPointerDown={(e) => {
               delete e.currentTarget.dataset.down;
               if (
@@ -715,6 +730,7 @@ export default function CoverApp() {
             <Button
               className="tool-sidebar-create"
               icon={<PlusOutlined />}
+              aria-current={page === "create" ? "page" : undefined}
               onClick={() => void startNew()}
             >
               创建封面
@@ -722,6 +738,7 @@ export default function CoverApp() {
             <Button
               className="tool-sidebar-create"
               icon={<AppstoreOutlined />}
+              aria-current={page === "gallery" ? "page" : undefined}
               onClick={() => void startNew("gallery")}
             >
               风格模板
@@ -773,6 +790,17 @@ export default function CoverApp() {
                 02 配置封面
               </button>
             </nav>
+          )}
+          {page === "gallery" && (
+              <Input
+                aria-label="查找风格模板"
+                className="cover-search"
+                prefix={<SearchOutlined />}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="编号、画风或作者"
+                allowClear
+              />
           )}
           {page === "editor" && (
             <Button
@@ -857,15 +885,7 @@ export default function CoverApp() {
                   </button>
                 ))}
               </div>
-              <Input
-                aria-label="查找风格模板"
-                className="cover-search"
-                prefix={<SearchOutlined />}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="编号、画风或作者"
-                allowClear
-              />
+
             </div>
             {groups
               .filter((g) => visible.some((s) => s.group === g))
@@ -878,6 +898,7 @@ export default function CoverApp() {
                       .map((s) => (
                         <button
                           className="cover-template"
+                          title={`${s.number} · ${s.generation_name}`}
                           key={s.number}
                           onClick={() => void choose(s.number)}
                           aria-label={`选择 ${s.number} ${s.generation_name}`}
