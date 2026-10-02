@@ -132,7 +132,7 @@ test("editorial covers replace previews only and cover all 35 styles with square
     assert.ok(png.readUInt32BE(16) >= 1024);
     assert.equal(m.stylePolicy(s.number).style.image, s.image);
   }
-  for (const s of m.styles.filter(s => !/^[ABCD] /.test(s.group)))
+  for (const s of m.styles.filter(s => !/^[ABCDEFG] /.test(s.group)))
     assert.equal(s.preview, s.image);
 });
 
@@ -155,6 +155,21 @@ test("modern and Japanese previews cover 69 styles while retaining original gene
   assert.equal(group.filter(s => s.group.startsWith('C ')).length, 28);
   assert.equal(group.filter(s => s.group.startsWith('D ')).length, 41);
   assert.equal(new Set(group.map(s => s.previewTitle)).size, 69);
+  for (const s of group) {
+    assert.notEqual(s.preview, s.image);
+    const png = readFileSync(new URL('public' + s.preview, root));
+    assert.equal(png.subarray(1, 4).toString(), 'PNG');
+    assert.equal(png.readUInt32BE(16), png.readUInt32BE(20));
+    assert.ok(png.readUInt32BE(16) >= 1024);
+    assert.equal(m.stylePolicy(s.number).style.image, s.image);
+  }
+});
+
+test("Chinese, general and supplementary previews cover all 93 styles with independent square assets", () => {
+  const group = m.styles.filter(s => /^[EFG] /.test(s.group));
+  for (const [prefix, count] of [['E ', 31], ['F ', 46], ['G ', 16]])
+    assert.equal(group.filter(s => s.group.startsWith(prefix)).length, count);
+  assert.equal(new Set(group.map(s => s.previewTitle)).size, 93);
   for (const s of group) {
     assert.notEqual(s.preview, s.image);
     const png = readFileSync(new URL('public' + s.preview, root));

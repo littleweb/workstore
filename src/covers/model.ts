@@ -4,7 +4,10 @@ import editorialCovers from "./editorial-covers.json";
 import storybookCovers from "./storybook-covers.json";
 import modernCovers from "./modern-covers.json";
 import japaneseCovers from "./japanese-covers.json";
-const coverPreviews = new Map([...editorialCovers, ...storybookCovers, ...modernCovers, ...japaneseCovers].map(cover => [cover.number, cover]));
+import chineseCovers from "./chinese-covers.json";
+import generalCovers from "./general-covers.json";
+import chineseExtraCovers from "./chinese-extra-covers.json";
+const coverPreviews = new Map([...editorialCovers, ...storybookCovers, ...modernCovers, ...japaneseCovers, ...chineseCovers, ...generalCovers, ...chineseExtraCovers].map(cover => [cover.number, cover]));
 export const styles = catalog.styles.map(style => ({
   ...style,
   preview: coverPreviews.get(style.number)?.image ?? style.image,
