@@ -906,7 +906,7 @@ export default function CoverApp() {
                           <div className="cover-template-image">
                             <img
                               loading="lazy"
-                              src={s.image}
+                              src={s.preview}
                               alt={`${s.number} ${s.generation_name}`}
                             />
                             <span className="cover-template-action">
@@ -943,11 +943,11 @@ export default function CoverApp() {
           page === "config" ? (
             <section className="cover-config">
               <div className="cover-reference">
-                <img src={style.image} alt={`${style.number} 风格参考`} />
+                <img src={style.preview} alt={`${style.number} 风格参考`} />
                 <p>
                   {style.number} · {style.generation_name}
                 </p>
-                <small>风格参考，不是最终封面</small>
+                <small>模板效果示例，生成时使用原始画风参考</small>
               </div>
               <div className="cover-config-fields">
                 {fields()}
@@ -1023,7 +1023,7 @@ export default function CoverApp() {
                 <div className="cover-field">
                   <span>风格模板</span>
                   <div className="cover-selected-style">
-                    <img src={style.image} alt="当前画风" />
+                    <img src={style.preview} alt="当前画风" />
                     <span>
                       {style.number}
                       <small>{style.generation_name}</small>

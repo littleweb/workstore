@@ -119,3 +119,19 @@ test("new covers default to portrait and blank copy is generated without changin
   c.config.ratio = "2:3";
   assert.equal(m.readContent(JSON.stringify(c)).config.ratio, "2:3");
 });
+
+test("editorial covers replace previews only and cover all 35 styles with square PNGs", () => {
+  const group = m.styles.filter(s => s.group.startsWith("A "));
+  assert.equal(group.length, 35);
+  assert.equal(new Set(group.map(s => s.previewTitle)).size, 35);
+  for (const s of group) {
+    assert.notEqual(s.preview, s.image);
+    const png = readFileSync(new URL("public" + s.preview, root));
+    assert.equal(png.subarray(1,4).toString(), "PNG");
+    assert.equal(png.readUInt32BE(16), png.readUInt32BE(20));
+    assert.ok(png.readUInt32BE(16) >= 1024);
+    assert.equal(m.stylePolicy(s.number).style.image, s.image);
+  }
+  for (const s of m.styles.filter(s => !s.group.startsWith("A ")))
+    assert.equal(s.preview, s.image);
+});

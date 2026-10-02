@@ -1,6 +1,12 @@
 import catalog from "./catalog.json";
 import capabilities from "./capabilities.json";
-export const styles = catalog.styles;
+import editorialCovers from "./editorial-covers.json";
+const coverPreviews = new Map(editorialCovers.map(cover => [cover.number, cover]));
+export const styles = catalog.styles.map(style => ({
+  ...style,
+  preview: coverPreviews.get(style.number)?.image ?? style.image,
+  previewTitle: coverPreviews.get(style.number)?.title ?? "",
+}));
 export const layouts = catalog.layouts;
 export const colors = catalog.colors;
 export const groups = [...new Set(styles.map((s) => s.group))];
