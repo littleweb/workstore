@@ -2,7 +2,9 @@ import catalog from "./catalog.json";
 import capabilities from "./capabilities.json";
 import editorialCovers from "./editorial-covers.json";
 import storybookCovers from "./storybook-covers.json";
-const coverPreviews = new Map([...editorialCovers, ...storybookCovers].map(cover => [cover.number, cover]));
+import modernCovers from "./modern-covers.json";
+import japaneseCovers from "./japanese-covers.json";
+const coverPreviews = new Map([...editorialCovers, ...storybookCovers, ...modernCovers, ...japaneseCovers].map(cover => [cover.number, cover]));
 export const styles = catalog.styles.map(style => ({
   ...style,
   preview: coverPreviews.get(style.number)?.image ?? style.image,

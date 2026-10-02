@@ -132,7 +132,7 @@ test("editorial covers replace previews only and cover all 35 styles with square
     assert.ok(png.readUInt32BE(16) >= 1024);
     assert.equal(m.stylePolicy(s.number).style.image, s.image);
   }
-  for (const s of m.styles.filter(s => !/^[AB] /.test(s.group)))
+  for (const s of m.styles.filter(s => !/^[ABCD] /.test(s.group)))
     assert.equal(s.preview, s.image);
 });
 
@@ -144,6 +144,21 @@ test("storybook previews cover all 19 styles without replacing generation refere
     assert.notEqual(s.preview, s.image);
     const png = readFileSync(new URL("public" + s.preview, root));
     assert.equal(png.subarray(1, 4).toString(), "PNG");
+    assert.equal(png.readUInt32BE(16), png.readUInt32BE(20));
+    assert.ok(png.readUInt32BE(16) >= 1024);
+    assert.equal(m.stylePolicy(s.number).style.image, s.image);
+  }
+});
+
+test("modern and Japanese previews cover 69 styles while retaining original generation references", () => {
+  const group = m.styles.filter(s => /^[CD] /.test(s.group));
+  assert.equal(group.filter(s => s.group.startsWith('C ')).length, 28);
+  assert.equal(group.filter(s => s.group.startsWith('D ')).length, 41);
+  assert.equal(new Set(group.map(s => s.previewTitle)).size, 69);
+  for (const s of group) {
+    assert.notEqual(s.preview, s.image);
+    const png = readFileSync(new URL('public' + s.preview, root));
+    assert.equal(png.subarray(1, 4).toString(), 'PNG');
     assert.equal(png.readUInt32BE(16), png.readUInt32BE(20));
     assert.ok(png.readUInt32BE(16) >= 1024);
     assert.equal(m.stylePolicy(s.number).style.image, s.image);
