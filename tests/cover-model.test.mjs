@@ -132,8 +132,6 @@ test("editorial covers replace previews only and cover all 35 styles with square
     assert.ok(png.readUInt32BE(16) >= 1024);
     assert.equal(m.stylePolicy(s.number).style.image, s.image);
   }
-  for (const s of m.styles.filter(s => !/^[ABCDEFG] /.test(s.group)))
-    assert.equal(s.preview, s.image);
 });
 
 test("storybook previews cover all 19 styles without replacing generation references", () => {
@@ -172,6 +170,30 @@ test("Chinese, general and supplementary previews cover all 93 styles with indep
   assert.equal(new Set(group.map(s => s.previewTitle)).size, 93);
   for (const s of group) {
     assert.notEqual(s.preview, s.image);
+    const png = readFileSync(new URL('public' + s.preview, root));
+    assert.equal(png.subarray(1, 4).toString(), 'PNG');
+    assert.equal(png.readUInt32BE(16), png.readUInt32BE(20));
+    assert.ok(png.readUInt32BE(16) >= 1024);
+    assert.equal(m.stylePolicy(s.number).style.image, s.image);
+  }
+});
+
+
+test("all 277 templates have Chinese display names while retaining generation identities", () => {
+  const source = JSON.parse(readFileSync(new URL('src/covers/catalog.json', root), 'utf8')).styles;
+  for (const style of m.styles) {
+    assert.match(style.displayName, /[\u3400-\u9fff]/);
+    assert.doesNotMatch(style.displayName, /[a-zA-Z]/);
+    assert.equal(style.generation_name, source.find(s => s.number === style.number).generation_name);
+    assert.notEqual(style.preview, style.image);
+  }
+});
+
+test("the final 61 covers are square and retain original style references", () => {
+  const group = m.styles.filter(s => s.group.startsWith('H '));
+  assert.equal(group.length, 61);
+  assert.equal(new Set(group.map(s => s.previewTitle)).size, 61);
+  for (const s of group) {
     const png = readFileSync(new URL('public' + s.preview, root));
     assert.equal(png.subarray(1, 4).toString(), 'PNG');
     assert.equal(png.readUInt32BE(16), png.readUInt32BE(20));

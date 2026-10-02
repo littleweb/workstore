@@ -281,7 +281,7 @@ test("all 277 templates are selectable; header steps preserve configuration and 
     assert.equal(step.disabled, true);
     await act(async () => {
       h.host
-        .querySelector('[aria-label="选择 200 Mid-century Deadpan Ink Mascot"]')
+        .querySelector('[aria-label="选择 200 世纪中叶冷幽默墨绘吉祥物"]')
         .click();
       await drain();
     });

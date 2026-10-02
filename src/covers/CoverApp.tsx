@@ -688,7 +688,7 @@ export default function CoverApp() {
     (s) =>
       (category === "全部" || s.group === category) &&
       (!query ||
-        `${s.number} ${s.generation_name} ${s.reference} ${s.traits}`
+        `${s.number} ${s.displayName} ${s.previewTitle} ${s.generation_name} ${s.reference} ${s.traits}`
           .toLowerCase()
           .includes(query)),
   );
@@ -898,23 +898,23 @@ export default function CoverApp() {
                       .map((s) => (
                         <button
                           className="cover-template"
-                          title={`${s.number} · ${s.generation_name}`}
+                          title={`${s.number} · ${s.displayName}`}
                           key={s.number}
                           onClick={() => void choose(s.number)}
-                          aria-label={`选择 ${s.number} ${s.generation_name}`}
+                          aria-label={`选择 ${s.number} ${s.displayName}`}
                         >
                           <div className="cover-template-image">
                             <img
                               loading="lazy"
                               src={s.preview}
-                              alt={`${s.number} ${s.generation_name}`}
+                              alt={`${s.number} ${s.displayName}`}
                             />
                             <span className="cover-template-action">
                               选择此模板 →
                             </span>
                           </div>
                           <div className="cover-template-caption">
-                            <span>{s.generation_name}</span>
+                            <span>{s.displayName}</span>
                             <small>{s.number}</small>
                           </div>
                         </button>
@@ -945,7 +945,7 @@ export default function CoverApp() {
               <div className="cover-reference">
                 <img src={style.preview} alt={`${style.number} 风格参考`} />
                 <p>
-                  {style.number} · {style.generation_name}
+                  {style.number} · {style.displayName}
                 </p>
                 <small>模板效果示例，生成时使用原始画风参考</small>
               </div>
@@ -1026,7 +1026,7 @@ export default function CoverApp() {
                     <img src={style.preview} alt="当前画风" />
                     <span>
                       {style.number}
-                      <small>{style.generation_name}</small>
+                      <small>{style.displayName}</small>
                     </span>
                     <button
                       disabled={busy}

@@ -7,9 +7,12 @@ import japaneseCovers from "./japanese-covers.json";
 import chineseCovers from "./chinese-covers.json";
 import generalCovers from "./general-covers.json";
 import chineseExtraCovers from "./chinese-extra-covers.json";
-const coverPreviews = new Map([...editorialCovers, ...storybookCovers, ...modernCovers, ...japaneseCovers, ...chineseCovers, ...generalCovers, ...chineseExtraCovers].map(cover => [cover.number, cover]));
+import otherCovers from "./other-covers.json";
+import styleNamesZh from "./style-names-zh.json";
+const coverPreviews = new Map([...editorialCovers, ...storybookCovers, ...modernCovers, ...japaneseCovers, ...chineseCovers, ...generalCovers, ...chineseExtraCovers, ...otherCovers].map(cover => [cover.number, cover]));
 export const styles = catalog.styles.map(style => ({
   ...style,
+  displayName: styleNamesZh[style.number as keyof typeof styleNamesZh],
   preview: coverPreviews.get(style.number)?.image ?? style.image,
   previewTitle: coverPreviews.get(style.number)?.title ?? "",
 }));
