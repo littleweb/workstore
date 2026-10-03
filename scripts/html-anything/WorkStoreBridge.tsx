@@ -34,7 +34,8 @@ export default function WorkStoreBridge() {
     document.addEventListener('click', download, true);
     const handler = async (event: MessageEvent) => {
       if (event.source !== window.parent || !allowed.has(event.origin)) return;
-      if (event.data?.type === 'workstore:html-init') { desktop = event.data.desktop === true; return; }
+      if (event.data?.type === 'workstore:html-init') { desktop = event.data.desktop === true; publishTasks(event.origin); return; }
+      if (event.data?.type === 'workstore:html-cancel' && typeof event.data.taskId === 'string') { cancel(event.data.taskId); return; }
       if (event.data?.type !== 'workstore:html-request') return;
       const { requestId, action } = event.data;
       if (typeof requestId !== 'string' || !['flush', 'stop'].includes(action)) return;
@@ -64,10 +65,21 @@ export default function WorkStoreBridge() {
         window.parent.postMessage({type:'workstore:html-response',requestId,error:'HTML Anything 本地存储读取失败，请先在工具中导出作品。'},event.origin);
       }
     };
+    let lastTasks = '';
+    const publishTasks = (origin: string) => {
+      if (!allowed.has(origin)) return;
+      const tasks = useStore.getState().tasks.map(task => ({id:task.id,name:task.name,status:task.status}));
+      const serialized = JSON.stringify(tasks);
+      if (lastTasks === serialized) return;
+      lastTasks = serialized;
+      window.parent.postMessage({type:'workstore:html-tasks',tasks},origin);
+    };
     window.addEventListener('message', handler);
     const parentOrigin = document.referrer ? new URL(document.referrer).origin : 'tauri://localhost';
     if (allowed.has(parentOrigin)) window.parent.postMessage({type:'workstore:html-ready'},parentOrigin);
-    return () => {window.removeEventListener('message', handler);document.removeEventListener('click', download, true);};
+    const unsubscribe = useStore.subscribe(() => publishTasks(parentOrigin));
+    publishTasks(parentOrigin);
+    return () => {unsubscribe();window.removeEventListener('message', handler);document.removeEventListener('click', download, true);};
   }, [cancel]);
   return null;
 }

@@ -1,3 +1,6 @@
+import { ProjectSection, useProjects } from "../list-projects/Projects";
+import { beginTask, updateTask } from "../tasks/store";
+import { trackAiExecution } from "../ai/client";
 import { useEffect, useRef, useState } from "react";
 import {
   App,
@@ -119,6 +122,8 @@ function ComicNode({ data, selected }: NodeProps<PageNode>) {
 }
 const nodeTypes = { comic: ComicNode };
 export default function ComicApp() {
+  const projects = useProjects("app.comic");
+  const creationProject = useRef<string | null>(null);
   const { message } = App.useApp();
   const [, tick] = useState(0);
   const [templates, setTemplates] = useState<Template[]>([]);
@@ -230,17 +235,21 @@ export default function ComicApp() {
     setPreview(undefined);
     setView("create");
   }
+  useEffect(() => { if (abort.current) updateTask(abort.current.signal, {stage: stage || "正在生成…"}); }, [stage]);
   async function task(fn: (signal: AbortSignal) => Promise<void>) {
     if (abort.current) return;
     const ctl = new AbortController();
     abort.current = ctl;
     setBusy(true);
     setError("");
+    const card = beginTask(ctl, {toolId: "app.comic", title: "漫画生成", stage: "正在准备…"});
     try {
-      await fn(ctl.signal);
+      await trackAiExecution(ctl, fn(ctl.signal));
     } catch (e) {
+      card.finish(e);
       report(e);
     } finally {
+      card.finish();
       setBusy(false);
       setStage("");
       abort.current = undefined;
@@ -601,6 +610,7 @@ export default function ComicApp() {
   async function create(example = false) {
     if (!template || abort.current || creating.current) return;
     creating.current = true;
+    const projectId = creationProject.current;
     setBusy(true);
     try {
       let content = instantiate(
@@ -621,6 +631,7 @@ export default function ComicApp() {
         title: example ? template.title : theme.trim().slice(0, 24),
       });
       await store.flushComic(d.id);
+      if (projectId) await projects.move(d.id, projectId);
       setWorkId(d.id);
       setSettingsDraft(structuredClone(content.settings));
       setView(example ? "edit" : "settings");
@@ -914,41 +925,7 @@ export default function ComicApp() {
             : p[key] || "—",
       }));
     }) ?? [];
-  return (
-    <div className="comic-app">
-      {!collapsed && (
-        <aside className="comic-nav">
-          <header>
-            <span className="comic-mark">
-              <ComicIcon />
-            </span>
-            <strong>小漫画</strong>
-
-            <Button
-              type="text"
-              size="small"
-              aria-label="收起导航"
-              icon={<MenuFoldOutlined />}
-              onClick={() => setCollapsed(true)}
-            />
-          </header>
-          <div className="comic-nav-actions">
-            <button
-              className={view === "create" ? "active" : ""}
-              onClick={() => setView("create")}
-            >
-              <EditOutlined /> 创建作品
-            </button>
-            <button
-              className={view === "featured" ? "active" : ""}
-              onClick={() => setView("featured")}
-            >
-              <FireOutlined /> 爆款作品
-            </button>
-          </div>
-          <small className="comic-nav-label">我的作品</small>
-          <div className="comic-work-list">
-            {store.comicList().map((w) => (
+  const row = (w: ReturnType<typeof store.comicList>[number]) => (
               <div
                 key={w.id}
                 className={`comic-work ${
@@ -963,6 +940,7 @@ export default function ComicApp() {
                 <Dropdown
                   menu={{
                     items: [
+                      ...projects.menu(w.id),
                       { key: "rename", label: "重命名" },
                       {
                         key: "favorite",
@@ -971,6 +949,7 @@ export default function ComicApp() {
                       { key: "export", label: "导出作品数据" },
                     ],
                     onClick: async ({ key }) => {
+                      if (projects.handle(key, w.id)) return;
                       await store.ensureComic(w.id);
                       if (key === "rename") {
                         let title = w.title;
@@ -1000,8 +979,48 @@ export default function ComicApp() {
                   />
                 </Dropdown>
               </div>
-            ))}
-            {!store.comicList().length && <small>暂无</small>}
+  );
+  return (
+    <div className="comic-app">
+      {!collapsed && (
+        <aside className="comic-nav">
+          <header>
+            <span className="comic-mark">
+              <ComicIcon />
+            </span>
+            <strong>小漫画</strong>
+
+            <Button
+              type="text"
+              size="small"
+              aria-label="收起导航"
+              icon={<MenuFoldOutlined />}
+              onClick={() => setCollapsed(true)}
+            />
+          </header>
+          <div className="comic-nav-actions">
+            <button
+              className={view === "create" ? "active" : ""}
+              onClick={() => { creationProject.current = null; setView("create"); }}
+            >
+              <EditOutlined /> 创建作品
+            </button>
+            <button
+              className={view === "featured" ? "active" : ""}
+              onClick={() => setView("featured")}
+            >
+              <FireOutlined /> 爆款作品
+            </button>
+          </div>
+          <div className="comic-work-list">
+            {store.comicList().some(w=>w.favorite && !projects.projectOf(w.id)) && <>
+              <small className="comic-nav-label">常用</small>
+              {store.comicList().filter(w=>w.favorite && !projects.projectOf(w.id)).map(row)}
+            </>}
+            <ProjectSection navigation={projects} items={store.comicList()} renderItem={row} activeId={workId} onCreate={projectId=>{creationProject.current=projectId;setView("create");}} />
+            <small className="comic-nav-label">最近打开</small>
+            {store.comicList().filter(w=>!w.favorite && !projects.projectOf(w.id)).map(row)}
+            {!store.comicList().some(w=>!w.favorite && !projects.projectOf(w.id)) && <small>暂无</small>}
           </div>
         </aside>
       )}
@@ -1960,6 +1979,7 @@ export default function ComicApp() {
                 style={{ marginTop: 12 }}
                 onClick={async () => {
                   const t = preview;
+                  const projectId = creationProject.current;
                   useTemplate(t);
                   let data = instantiate(t, t.summary, t.defaultPages, "3:4");
                   data.settings.entities = structuredClone(t.entities);
@@ -1968,6 +1988,7 @@ export default function ComicApp() {
                   const d = await store.createComic(data);
                   store.stageComic(d.id, { title: t.title });
                   await store.flushComic(d.id);
+                  if (projectId) await projects.move(d.id, projectId);
                   setWorkId(d.id);
                   setView("edit");
                 }}

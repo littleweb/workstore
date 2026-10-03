@@ -368,3 +368,10 @@ test('new remote notes arrive while an editor stays focused without activating e
  assert.equal(full,0);assert.deepEqual(h.inertChanges,[]);
  endEditing(h);await task;assert.equal(full,1);
 });
+
+test('slow pre-activation saving never makes the foreground inert',async()=>{
+ let finish;let saves=0;const gate=new Promise(resolve=>{finish=resolve;});
+ const h=harness(async command=>command==='sync_workspace'?'job':{changed:[],message:'done'}, {flush:async()=>{if(++saves===2)await gate;}});
+ const task=h.api.syncWorkspace();await drain();assert.equal(saves,2);assert.equal(h.root.inert,false);assert.deepEqual(h.inertChanges,[]);
+ finish();await task;assert.equal(h.root.inert,false);
+});

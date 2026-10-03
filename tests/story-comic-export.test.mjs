@@ -18,7 +18,7 @@ const code = buildSync({
     "@tauri-apps/plugin-dialog",
   ],
 }).outputFiles[0].text;
-function harness() {
+function harness(imageSize = {width:900,height:1200}) {
   const module = { exports: {} },
     downloads = [];
   let blob;
@@ -53,7 +53,7 @@ function harness() {
       if (id === "jszip") return JSZip;
       if (id === "../workspace") return { native: false };
       if (id === "./render")
-        return { loadImage: async () => ({ width: 900, height: 1200 }) };
+        return { loadImage: async () => imageSize };
       if (id === "../comics/images")
         return { imageSource: async () => "data:image/png;base64,aGVsbG8=" };
       return {};
@@ -99,4 +99,21 @@ test("PDF page tree, binary stream lengths and xref offsets parse correctly", as
       `${i + 1} 0 obj`
     );
   }
+});
+
+test("PDF preserves the selected wide page dimensions without stretching", async()=>{
+ const h=harness({width:1920,height:1080});
+ const text=await (await h.pdfBlob(["fixture"])).text();
+ assert.match(text,/\/MediaBox \[0 0 1280 720\]/);
+ assert.match(text,/\/Width 1920 \/Height 1080/);
+});
+
+
+test("A4 print PDF fixes physical paper size and duplex viewer preferences", async () => {
+ const h=harness({width:2480,height:3508});
+ const text=await (await h.pdfBlob(["fixture"], {width:210*72/25.4,height:297*72/25.4,duplex:"long"})).text();
+ assert.ok(text.includes(`/MediaBox [0 0 ${210*72/25.4} ${297*72/25.4}]`));
+ assert.match(text,/\/PrintScaling \/None \/Duplex \/DuplexFlipLongEdge/);
+ const booklet=await (await h.pdfBlob(["fixture"], {width:297*72/25.4,height:210*72/25.4,duplex:"short"})).text();
+ assert.match(booklet,/\/Duplex \/DuplexFlipShortEdge/);
 });

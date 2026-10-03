@@ -1,3 +1,4 @@
+import {noProjects} from './helpers/projects.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -23,7 +24,7 @@ const source = transformSync(readFileSync(new URL('../src/documents/DocumentApp.
 const integratedSource = buildSync({
   entryPoints: [new URL('../src/documents/DocumentApp.tsx', import.meta.url).pathname],
   bundle: true, write: false, platform: 'node', format: 'cjs', jsx: 'automatic',
-  external: ['react', 'react-dom', 'react/jsx-runtime', 'antd', '@ant-design/icons', '@teabook/teaeditor',
+  external: ["../list-projects/Projects", 'react', 'react-dom', 'react/jsx-runtime', 'antd', '@ant-design/icons', '@teabook/teaeditor',
     '../ai/AiAssistant', '../ai/AiSidebar', './store', '../workspace', '../documentLifecycle', './documents.css'],
 }).outputFiles[0].text;
 const drain = () => new Promise(resolve => setImmediate(resolve));
@@ -34,6 +35,7 @@ function deferred() {
 }
 
 async function harness(options = {}) {
+  const memberships = new Map();
   const documents = ['a', 'b', 'c'].map((id, index) => ({
     id, title: `Document ${id}`, content: `<p>Content ${id}</p>`, favorite: false,
     createdAt: index, lastOpenedAt: 10 - index, revision: 1,
@@ -80,6 +82,10 @@ async function harness(options = {}) {
   const Pass = ({ children }) => children;
   const icon = () => React.createElement('span', { 'aria-hidden': true });
   vm.runInNewContext(options.diagnostics ? integratedSource : source, { module, DOMParser, window, document, MutationObserver: window.MutationObserver, queueMicrotask, setTimeout, clearTimeout, require(id) {
+    if (id === "../list-projects/Projects") return options.project ? {
+      useProjects:()=>({...noProjects.useProjects(),move:async(id,target)=>{if(options.moveFails)throw Error('项目保存失败');memberships.set(id,target);}}),
+      ProjectSection:({onCreate})=>React.createElement('button',{onClick:()=>onCreate('project-a')},'项目中创建'),
+    } : noProjects;
     if (id === 'react' || id === 'react-dom' || id === 'react/jsx-runtime') return require(id);
     if (id === './store') return store;
     if (id === './ConversationNote') return { __esModule: true, default: () => null, conversationContent: () => null };
@@ -95,7 +101,7 @@ async function harness(options = {}) {
       Input: props => React.createElement('input', { value: props.value, onChange: props.onChange }),
     };
     if (id === '@ant-design/icons') return new Proxy({}, { get: () => icon });
-    if (id === '../ai/AiSidebar') return { DocumentAiSidebar: props => { aiProps.push({editor:props.target}); return React.createElement('aside', {'aria-label':'AI 助手侧栏'}, 'AI'); } };
+    if (id === '../ai/AiSidebar') return { DocumentAiSidebar: props => { aiProps.push({editor:props.target}); return React.createElement('aside', {'aria-label':'AI 助手侧栏'}, 'AI', React.createElement('button',{onClick:props.onClose},'关闭AI侧栏')); } };
     if (id === '../ai/AiAssistant') return { AiAssistantButton: props => {aiProps.push(props);return null;} };
     if (id === '@teabook/teaeditor') return { Editor: ({ htmlContent, onHtmlChange }) => React.createElement('div', {
       'data-testid': 'editor', 'data-content': htmlContent, contentEditable: true, suppressContentEditableWarning: true,
@@ -108,7 +114,7 @@ async function harness(options = {}) {
   const row = id => host.querySelector(`.document-open[title="Document ${id}"]`);
   let closed = false;
   return {
-    host, row, opened, activated, errors, savedContent, store, aiProps,
+    host, row, opened, activated, errors, savedContent, store, aiProps, memberships,
     get lastId() { return lastId; },
     get syncBlocked() { return [...blockers].some(fn => fn()); },
     content: () => host.querySelector('[data-testid="editor"]')?.getAttribute('data-content'),
@@ -187,13 +193,13 @@ test('failed saves keep the current document and do not activate the requested o
   } finally { await h.close(); }
 });
 
-test('loading overlay is anchored to the editor workspace, not the document list or whole window', async () => {
+test('pending navigation never covers the editor with a blocking overlay', async () => {
   const h = await harness(); const b = h.deferLoad('b');
   try {
     await h.click('b');
     const workspace = h.host.querySelector('.document-workspace');
     assert.equal(window.getComputedStyle(workspace).position, 'relative');
-    assert.ok(workspace.contains(h.host.querySelector('.document-busy')));
+    assert.equal(h.host.querySelector('.document-busy'), null);
     await h.settle(b);
   } finally { await h.close(); }
 });
@@ -437,9 +443,10 @@ test('unmount cancels a selection queued behind composition completion', async (
 
 
 test('document AI adapter is wired to the active editor and applied content remounts immediately', async () => {
-  const h = await harness({ diagnostics: true });
+  const h = await harness({ diagnostics: true, deferInitial: true });
   try {
     await act(async () => { [...h.host.querySelectorAll('button')].find(button => button.textContent === 'AI 助手').click(); await drain(); });
+    await h.settle(h.initial);
     const editor = h.aiProps.at(-1).editor;
     const source = editor.capture();
     const draft = {kind:'document',title:'Generated',blocks:[{type:'paragraph',text:'AI linked content'}]};
@@ -455,18 +462,32 @@ test('document AI adapter is wired to the active editor and applied content remo
 
 
 test('AI assistant docks beside the editor without a dialog or replacing the live document', async () => {
-  const h=await harness();
+  const h=await harness({deferInitial:true});
   try {
-    const editor=h.host.querySelector('[data-testid="editor"]');
     const toggle=[...h.host.querySelectorAll('button')].find(button=>button.textContent==='AI 助手');
     await act(async()=>{toggle.click();await drain();});
+    await h.settle(h.initial);
+    const editor=h.host.querySelector('[data-testid="editor"]');
     const sidebar=h.host.querySelector('[aria-label="AI 助手侧栏"]');
     assert.ok(sidebar);assert.equal(sidebar.parentElement,h.host.querySelector('.document-body'));
     assert.equal(sidebar.previousElementSibling,h.host.querySelector('.document-workspace'));
     assert.equal(h.host.querySelector('[role="dialog"]'),null);
     assert.equal(h.host.querySelector('[data-testid="editor"]'),editor);
-    await act(async()=>{toggle.click();await drain();});
+    await act(async()=>{[...sidebar.querySelectorAll('button')].find(b=>b.textContent==='关闭AI侧栏').click();await drain();});
     assert.equal(h.host.querySelector('[aria-label="AI 助手侧栏"]'),null);
     assert.equal(h.host.querySelector('[data-testid="editor"]'),editor);
   }finally{await h.close();}
+});
+
+test('project create saves a note into the requested project without changing existing content',async()=>{
+ const h=await harness({project:true});try{
+  await act(async()=>{[...h.host.querySelectorAll('button')].find(b=>b.textContent==='项目中创建').click();await drain();});
+  assert.equal(h.lastId,'new');assert.equal(h.memberships.get('new'),'project-a');assert.equal(h.store.currentDocument('a').content,'<p>Content a</p>');
+ }finally{await h.close();}
+});
+test('failed project assignment retains the created note and reports failure',async()=>{
+ const h=await harness({project:true,moveFails:true});try{
+  await act(async()=>{[...h.host.querySelectorAll('button')].find(b=>b.textContent==='项目中创建').click();await drain();});
+  assert(h.store.currentDocument('new'));assert.equal(h.lastId,'a');assert(h.errors.some(e=>String(e).includes('项目保存失败')));
+ }finally{await h.close();}
 });

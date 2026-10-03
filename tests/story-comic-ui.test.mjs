@@ -1,3 +1,4 @@
+import {noProjects} from './helpers/projects.mjs';
 import { test, after } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -34,15 +35,17 @@ const code = buildSync({
   format: "cjs",
   jsx: "automatic",
   loader: { ".css": "empty" },
-  external: [
+  external: ["../list-projects/Projects",
     "react",
     "react/jsx-runtime",
     "antd",
     "@ant-design/icons",
     "./store",
     "./export",
+    "./printExport",
     "../comics/images",
     "./render",
+    "./ComicCanvas",
     "../workspace",
     "@tauri-apps/plugin-clipboard-manager",
     "../ai/client",
@@ -63,6 +66,7 @@ const initial = () => ({
   history: [],
 });
 async function harness({ empty = false } = {}) {
+  window.localStorage.clear();
   let resolve;
   const waiting = new Promise((r) => (resolve = r)),
     requests = [],
@@ -137,19 +141,23 @@ async function harness({ empty = false } = {}) {
     Blob,
     crypto: webcrypto,
     document: dom.window.document,
+    window: dom.window,
     setTimeout,
     clearTimeout,
     require(id) {
+    if (id === "../list-projects/Projects") return noProjects;
       if (id === "react" || id === "react/jsx-runtime") return require(id);
       if (id === "@ant-design/icons")
         return new Proxy({}, { get: () => () => null });
       if (id === "./store") return store;
+      if (id === "./printExport") return { clearPrintDocument() {}, exportPrintPdf: async () => {}, printSheets: async () => {} };
       if (id === "./export")
         return {
           exportZip: async () => {},
           exportPage: async () => {},
           exportPdf: async () => {},
         };
+      if (id === "./ComicCanvas") return ({children}) => React.createElement("div", {className:"story-pages"}, children);
       if (id === "./render")
         return { composePage: async () => "workstore-image:" + "b".repeat(64) };
       if (id === "../workspace") return { native: false };
@@ -186,7 +194,7 @@ async function harness({ empty = false } = {}) {
         return {
           App: { useApp: () => ({ message: { success: () => {} } }) },
           Input,
-          Switch: () => null,
+          Switch: ({checked,onChange,disabled,...props}) => React.createElement("button", {"aria-label":props["aria-label"],"aria-pressed":checked,disabled,onClick:()=>onChange(!checked)}, checked ? "开" : "关"),
           Button: ({
             children,
             onClick,
@@ -206,14 +214,14 @@ async function harness({ empty = false } = {}) {
               children
             ),
           Dropdown: ({ children }) => children,
-          Modal: () => null,
+          Modal: ({ open, children, footer }) => open ? React.createElement("div", { role: "dialog" }, children, footer) : null,
           Select: ({ value, options, onChange, ...props }) =>
             React.createElement(
               "select",
               {
                 value,
                 "aria-label": props["aria-label"],
-                onChange: (e) => onChange(e.target.value),
+                onChange: (e) => onChange(options.find(o => String(o.value) === e.target.value).value),
               },
               options.map((o) =>
                 React.createElement(
@@ -278,23 +286,25 @@ async function harness({ empty = false } = {}) {
 test("upstream styles, separate result tabs, creation at top and collapse keeps current file", async () => {
   const h = await harness({ empty: true });
   try {
-    assert.equal(h.host.querySelectorAll(".story-styles>button").length, 11);
-    assert.equal(h.host.querySelectorAll(".story-tabs button").length, 3);
-    assert.equal(h.host.querySelector("textarea").rows, 2);
+    assert.equal(h.host.querySelectorAll(".story-styles>button").length, 12);
+    assert.equal(h.host.querySelectorAll(".story-tabs button").length, 5);
+    assert.equal(h.host.querySelector("textarea").rows, 1);
+    assert.equal(h.host.querySelector("textarea").hasAttribute("maxlength"), false);
     assert.ok(!h.host.querySelector(".story-controls").textContent.includes("包含封面"));
-    await h.click("创建故事漫画");
-    assert.equal(h.docs.size, 1);
-    const saved = [...h.docs.values()][0];
+    await h.click("漫画");
+    await h.click("故事漫画");
+    assert.equal(h.host.querySelector(".story-work.controls-collapsed"), null);
+    assert.equal(h.docs.size, 0);
     await act(async () => {
       h.host.querySelector('[aria-label="折叠故事漫画导航"]').click();
     });
     assert.equal(h.host.querySelector(".story-nav"), null);
-    assert.equal(h.host.querySelector(".story-title").textContent, saved.title);
+    assert.ok(h.host.querySelector(".story-title").textContent);
     await act(async () =>
       h.host.querySelector('[aria-label="展开故事漫画导航"]').click()
     );
     assert.ok(h.host.querySelector(".story-nav"));
-    await h.click("发布文案");
+    await h.click("发布");
     assert.equal(h.host.querySelector(".story-pages"), null);
     assert.ok(h.host.textContent.includes("发布文案会在这里准备好"));
   } finally {
@@ -345,7 +355,9 @@ test("down-only selection works and trailing click is deduplicated, save failure
 test("generation saves pending work before AI and ignores result after navigation", async () => {
   const h = await harness();
   try {
-    await h.click("一键生成完整漫画");
+    assert.equal(h.host.querySelectorAll(".story-generate button").length, 1);
+    assert.equal(h.host.querySelector(".story-controls .story-generate button")?.textContent, "生成");
+    await h.click("生成");
     assert.equal(h.requests.length, 1);
     assert.equal(h.requests[0].input.toolId, "app.story-comic");
     assert.equal(JSON.parse(h.docs.get("a").content).job.status, "running");
@@ -400,14 +412,21 @@ test("IME selection waits for composition end, keeping activation protected", as
 test("clicking generate lays out all placeholders immediately while planning is pending", async () => {
   const h = await harness();
   try {
-    await h.click("发布文案");
-    await h.click("一键生成完整漫画");
-    assert.equal(h.host.querySelectorAll(".story-pages article").length, 4);
-    assert.equal(h.host.querySelector("progress").value, 0);
-    assert.ok(h.host.textContent.includes("画面已完成 0/4 页"));
-    assert.ok(h.host.textContent.includes("正在规划"));
+    await h.click("发布");
+    await h.click("偏好");
     assert.equal(h.host.querySelectorAll(".story-generate button").length, 1);
-    assert.equal(h.host.querySelector(".story-generate button").disabled, false);
+    assert.equal(h.host.querySelector(".story-controls .story-generate button")?.textContent, "生成");
+    await h.click("生成");
+    assert.equal(h.host.querySelectorAll(".story-pages article").length, 4);
+    assert.equal(h.host.querySelector(".story-progress"), null);
+    assert.ok(h.host.querySelector(".story-work.controls-collapsed"));
+    assert.equal(h.host.querySelector('[aria-label="展开创作面板"]'), null);
+    assert.equal(h.host.querySelector(".story-title").textContent, "拖延怎么办");
+    assert.ok(!h.host.textContent.includes("画面已完成"));
+    assert.ok(h.host.textContent.includes("正在规划"));
+    assert.equal(h.host.querySelectorAll(".story-generate button").length, 0);
+    assert.equal(h.host.querySelector(".story-job-status button").textContent, "暂停");
+    assert.equal(h.host.querySelector(".story-job-status button").disabled, false);
     assert.ok(!h.host.querySelector(".story-controls").textContent.includes("已完成"));
     await h.click("暂停");
     await h.resolve({ text: "{}" });
@@ -433,17 +452,174 @@ test("failed pages show their persisted concrete error", async () => {
         error: "已有 AI 请求运行中，请等待或停止后重试",
       })),
     };
+    c.plannedConfig = JSON.stringify(c.config);
     await act(async () => {
       h.store.stageDocument("a", { content: JSON.stringify(c) });
       await drain();
     });
+    await h.click("漫画");
     assert.equal(h.host.querySelectorAll(".story-page-error").length, 4);
-    assert.ok(
-      h.host
-        .querySelector(".story-page-error")
-        .textContent.includes("已有 AI 请求运行中")
-    );
+    const retry = [...h.host.querySelectorAll('.story-job-status button')].find(b => b.textContent === '重试失败页');
+    assert.ok(retry);
+    assert.equal(retry.disabled, false);
+    assert.equal(h.host.querySelector('[aria-label="重新生成第3页"]'), null);
+    await act(async () => { retry.click(); await drain(); });
+    const saved = JSON.parse(h.docs.get('a').content);
+    assert.ok(saved.plan.pages.every(p => p.status === 'queued'));
+    assert.equal(h.requests.length, 1);
+    assert.equal(h.requests[0].input.image, true);
+    assert.equal(h.host.querySelector('.story-job-status button').textContent, '暂停');
+    assert.equal(h.host.querySelectorAll('.story-page-error').length, 0);
   } finally {
     await h.close();
   }
+});
+
+test("planning refines an existing work title before images finish", async () => {
+  const h = await harness();
+  try {
+    assert.equal(h.host.querySelectorAll(".story-generate button").length, 1);
+    assert.equal(h.host.querySelector(".story-controls .story-generate button")?.textContent, "生成");
+    await h.click("生成");
+    await h.resolve({ text: JSON.stringify({
+      summary: "从小事开始行动", characters: "蓝衣女孩",
+      pages: Array.from({length:4}, (_, i) => ({
+        title: i ? "开始行动" : "告别拖延", text: "从小事开始",
+        visual: `不同场景${i}`, layout: "standard"
+      }))
+    }) });
+    assert.equal(h.host.querySelector(".story-title").textContent, "告别拖延");
+    assert.equal(h.docs.get("a").title, "告别拖延");
+    assert.equal(h.host.querySelector('textarea').value, '拖延怎么办');
+    assert.equal(JSON.parse(h.docs.get('a').content).config.topic, '拖延怎么办');
+  } finally { await h.close(); }
+});
+
+test("card selection does not open preview and selects matching style", async () => {
+  const h = await harness({ empty: true });
+  try {
+    assert.equal(h.host.querySelectorAll('.story-style-select').length, 12);
+    assert.equal(h.host.querySelector('.story-empty-intro p'), null);
+    assert.equal(h.host.querySelector('.story-empty-intro svg'), null);
+    assert.equal(h.host.querySelectorAll('.story-empty-panels span').length, 0);
+    const topic = h.host.querySelector('textarea').value;
+    for (const cover of h.host.querySelectorAll('.story-style-select')) {
+      await act(async () => { cover.click(); await drain(); });
+      const name = cover.querySelector('span').textContent;
+      assert.equal(h.host.querySelector('.story-style-preview img'), null);
+      assert.equal(h.requests.length, 0);
+      assert.equal(cover.getAttribute('aria-pressed'), 'true');
+
+      const selected = h.host.querySelector('.story-styles > button[aria-pressed="true"]');
+      assert.ok(selected.textContent.includes(name));
+      assert.equal(h.host.querySelector('textarea').value, topic);
+      assert.equal(h.requests.length, 0);
+    }
+  } finally { await h.close(); }
+});
+
+
+test("selecting twelve pages sends twelve to planning and immediately creates twelve placeholders", async () => {
+  const h = await harness();
+  try {
+    await act(async () => {
+      const select = h.host.querySelector('[aria-label="篇幅"]');
+      select.value = '12';
+      select.dispatchEvent(new dom.window.Event('change', { bubbles: true }));
+    });
+    await h.click('生成');
+    assert.equal(JSON.parse(h.docs.get('a').content).config.count, 12);
+    assert.match(h.requests[0].input.messages[0].content, /总页数12/);
+    assert.equal(h.requests[0].input.timeoutSeconds, 600);
+    assert.equal(JSON.parse(h.docs.get('a').content).job.total, 12);
+    assert.ok(h.host.textContent.includes('/12'));
+  } finally { await h.close(); }
+});
+
+
+test("title-only draft restores full input and sends it to generation", async () => {
+  const h = await harness();
+  try {
+    const title = '一只小狐狸第一次走进森林图书馆，发现每本书都会发出不同的声音';
+    const c = initial(); c.config.topic = '';
+    await act(async () => h.store.stageDocument('a', { title, content: JSON.stringify(c) }));
+    assert.equal(h.host.querySelector('textarea').value, title);
+    await h.click('生成');
+    assert.equal(JSON.parse(h.docs.get('a').content).config.topic, title);
+    assert.ok(h.requests[0].input.messages[0].content.includes(title));
+  } finally { await h.close(); }
+});
+
+
+test("preferences tab contains settings and title has a rename action", async () => {
+ const h = await harness();
+ try {
+  assert.deepEqual([...h.host.querySelectorAll('.story-tabs button')].map(b=>b.textContent), ['偏好','漫画','发布','下载','打印']);
+  assert.equal(h.host.querySelector('.controls-collapsed'), null);
+  await h.click('漫画'); assert.ok(h.host.querySelector('.controls-collapsed'));
+  await h.click('偏好'); assert.equal(h.host.querySelector('.controls-collapsed'), null);
+  assert.ok(h.host.querySelector('[aria-label="重命名作品"]'));
+ } finally { await h.close(); }
+});
+
+
+test("opening template preview does not mutate an existing work", async () => {
+  const h = await harness();
+  try {
+    const before = h.docs.get('a').content;
+    await act(async () => h.host.querySelectorAll('.story-style-preview-button')[3].click());
+    assert.ok(h.host.querySelector('.story-style-preview img'));
+    assert.equal(h.docs.get('a').content, before);
+    assert.equal(h.requests.length, 0);
+  } finally { await h.close(); }
+});
+
+test("phone preview supports carousel, likes, follows, comments and simulated share", async () => {
+ const h = await harness();
+ try {
+  const c=initial();c.plan={summary:'故事',characters:'角色',pages:Array.from({length:4},(_,i)=>({title:'页',text:'',visual:`场景${i}`,layout:'single',history:[]}))};
+  c.copy={title:'预览标题',alternatives:['备选一','备选二'],description:'完整描述',hashtags:['故事','漫画','阅读','成长','生活']};
+  await act(async()=>h.store.stageDocument('a',{content:JSON.stringify(c)}));
+  await h.click('发布');
+  const before=h.docs.get('a').content;
+  const button=label=>h.host.querySelector(`[aria-label="${label}"]`);
+  assert.equal(h.host.querySelector('.phone-copy h3').textContent,'预览标题');
+  await act(async()=>button('预览下一页').click());
+  assert.equal(h.host.querySelector('.phone-page-count').textContent,'2/4');
+  await act(async()=>button('预览点赞').click());assert.equal(button('预览点赞').getAttribute('aria-pressed'),'true');
+  await act(async()=>button('预览收藏').click());assert.equal(button('预览收藏').getAttribute('aria-pressed'),'true');
+  await h.click('关注');assert.equal(h.host.querySelector('.phone-follow').textContent,'已关注');
+  await act(async()=>button('预览评论').click());
+  await act(async()=>{const input=button('预览评论内容');Object.getOwnPropertyDescriptor(dom.window.HTMLInputElement.prototype,'value').set.call(input,'真有趣');input.dispatchEvent(new dom.window.Event('input',{bubbles:true}));});
+  await act(async()=>h.host.querySelector('.phone-sheet form').dispatchEvent(new dom.window.Event('submit',{bubbles:true,cancelable:true})));
+  assert.ok(h.host.querySelector('.phone-comment-list').textContent.includes('真有趣'));
+  await act(async()=>button('关闭手机弹层').click());
+  await act(async()=>button('预览分享').click());await h.click('微信好友');
+  assert.ok(h.host.querySelector('.phone-notice').textContent.includes('未实际分享'));
+  assert.equal(h.docs.get('a').content,before);assert.equal(h.requests.length,0);
+ } finally {await h.close();}
+});
+
+
+test("print tab previews duplex blanks, booklet imposition and prevents incomplete output", async () => {
+ const h=await harness();
+ try {
+  const c=initial(); c.plan={summary:'故事',characters:'角色',pages:Array.from({length:5},(_,i)=>({title:'页',text:'',visual:`场景${i}`,layout:'single',history:[],image:i<4?'data:image/png;base64,aGVsbG8=':undefined}))};
+  await act(async()=>h.store.stageDocument('a',{content:JSON.stringify(c)})); await h.click('打印');
+  const before=h.docs.get('a').content;
+  assert.equal(h.host.querySelectorAll('.story-print-paper').length,6);
+  assert.ok(h.host.querySelector('.story-print-preview header').textContent.includes('3 张 A4 · 补 1 页空白'));
+  assert.ok([...h.host.querySelectorAll('button')].find(b=>b.textContent==='打印'&&b.closest('.story-print-actions')).disabled);
+  await act(async()=>h.host.querySelector('[aria-label="封面背面留白"]').click());
+  assert.equal(h.host.querySelectorAll('.story-print-paper')[1].textContent,'空白页');
+  await act(async()=>{const select=h.host.querySelector('[aria-label="打印排版"]');select.value='booklet';select.dispatchEvent(new dom.window.Event('change',{bubbles:true}));});
+  assert.equal(h.host.querySelectorAll('.story-print-paper').length,4);
+  assert.ok(h.host.querySelector('.story-print-preview header').textContent.includes('2 张 A4 · 补 3 页空白'));
+  const first=h.host.querySelector('.story-print-paper'); assert.equal(first.querySelectorAll('.story-print-slot').length,2);
+  assert.equal(first.querySelector('.story-print-page-number').textContent,'1');
+  await act(async()=>{const select=h.host.querySelector('[aria-label="打印输出页面"]');select.value='back';select.dispatchEvent(new dom.window.Event('change',{bubbles:true}));});
+  assert.equal(h.host.querySelectorAll('.story-print-paper').length,2);
+  assert.ok([...h.host.querySelectorAll('figcaption')].every(n=>n.textContent.includes('背面')));
+  assert.equal(h.docs.get('a').content,before);assert.equal(h.requests.length,0);
+ } finally { await h.close(); }
 });

@@ -64,8 +64,9 @@ export async function exportZip(c: Content, title: string, backup?: string) {
   );
 }
 /** Minimal image-only PDF; each page uses the exact composed PNG raster. */
-export async function pdfBlob(images: string[]): Promise<Blob> {
+export async function pdfBlob(images: string[], paper?: { width: number; height: number; duplex?: "long" | "short" }): Promise<Blob> {
   const encoded: Uint8Array[] = [];
+  const dimensions: { width: number; height: number }[] = [];
   for (const src of images) {
     const image = await loadImage(src),
       canvas = document.createElement("canvas");
@@ -75,6 +76,7 @@ export async function pdfBlob(images: string[]): Promise<Blob> {
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(image, 0, 0);
+    dimensions.push({ width: image.width, height: image.height });
     encoded.push(bytes(canvas.toDataURL("image/jpeg", 0.96)));
   }
   const encoder = new TextEncoder(),
@@ -94,7 +96,7 @@ export async function pdfBlob(images: string[]): Promise<Blob> {
     append("\nendobj\n");
   };
   append("%PDF-1.4\n");
-  object(1, "<< /Type /Catalog /Pages 2 0 R >>");
+  object(1, `<< /Type /Catalog /Pages 2 0 R${paper ? ` /ViewerPreferences << /PrintScaling /None /Duplex /${paper.duplex === "short" ? "DuplexFlipShortEdge" : paper.duplex === "long" ? "DuplexFlipLongEdge" : "Simplex"} >>` : ""} >>`);
   object(
     2,
     `<< /Type /Pages /Count ${images.length} /Kids [${images
@@ -102,11 +104,14 @@ export async function pdfBlob(images: string[]): Promise<Blob> {
       .join(" ")}] >>`
   );
   for (let i = 0; i < images.length; i++) {
+    const { width, height } = dimensions[i];
+    const pageHeight = paper?.height ?? 720,
+      pageWidth = paper?.width ?? (720 * width) / height;
     const n = 3 + i * 3,
-      stream = "q 540 0 0 720 0 0 cm /Im0 Do Q";
+      stream = `q ${pageWidth} 0 0 ${pageHeight} 0 0 cm /Im0 Do Q`;
     object(
       n,
-      `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 540 720] /Resources << /XObject << /Im0 ${
+      `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pageWidth} ${pageHeight}] /Resources << /XObject << /Im0 ${
         n + 2
       } 0 R >> >> /Contents ${n + 1} 0 R >>`
     );
@@ -116,7 +121,7 @@ export async function pdfBlob(images: string[]): Promise<Blob> {
     );
     object(n + 2, [
       encoder.encode(
-        `<< /Type /XObject /Subtype /Image /Width 900 /Height 1200 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${encoded[i].length} >>\nstream\n`
+        `<< /Type /XObject /Subtype /Image /Width ${width} /Height ${height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${encoded[i].length} >>\nstream\n`
       ),
       encoded[i],
       encoder.encode("\nendstream"),

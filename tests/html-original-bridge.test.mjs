@@ -20,7 +20,7 @@ async function harness(alreadyApplied=false){
  const cancel=id=>cancelled.push(id);
  vm.runInNewContext(code,{module,window,document,Element:window.Element,HTMLAnchorElement:window.HTMLAnchorElement,URL,URLSearchParams,setTimeout,fetch:async()=>({arrayBuffer:async()=>new Uint8Array([1,2,3]).buffer}),localStorage:window.localStorage,indexedDB:{open(){const request={};queueMicrotask(()=>request.onsuccess());request.result={objectStoreNames:{contains:()=>true},close(){},transaction(){const tx={objectStore:()=>({getAll:()=>({result:[{id:'test__1',html:'<h1>saved</h1>'}]})})};queueMicrotask(()=>tx.oncomplete());return tx;}};return request;}},require(id){
  if(id==='react'||id==='react/jsx-runtime')return require(id);
- if(id==='@/lib/store')return {useStore:{persist:{hasHydrated:()=>true,onFinishHydration:()=>()=>{}},getState:()=>({setSelectedAgent:id=>selected.push(id),tasks:[{id:'running',status:'running'},{id:'done',status:'done'}]})}};
+ if(id==='@/lib/store')return {useStore:{subscribe:()=>()=>{},persist:{hasHydrated:()=>true,onFinishHydration:()=>()=>{}},getState:()=>({setSelectedAgent:id=>selected.push(id),tasks:[{id:'running',name:'Page',status:'running'},{id:'done',name:'Finished',status:'done'}]})}};
  if(id==='@/lib/use-convert')return {useConvert:()=>({cancel})};throw new Error(id);
  }});
  const host=document.createElement('div');document.body.append(host);const root=createRoot(host);await act(async()=>root.render(React.createElement(module.exports.default)));
@@ -28,7 +28,7 @@ async function harness(alreadyApplied=false){
 }
 test('original bridge accepts only its exact parent/origin and flushes upstream state plus history',async()=>{const h=await harness();try{
  assert.equal(h.sent[0][0].type,'workstore:html-ready');
- await h.send({type:'workstore:html-request',requestId:'bad',action:'flush'},'https://evil.example');assert.equal(h.sent.length,1);
+ await h.send({type:'workstore:html-request',requestId:'bad',action:'flush'},'https://evil.example');assert.equal(h.sent.length,2);
  await h.send({type:'workstore:html-request',requestId:'good',action:'flush'});
  const snapshot=h.sent.at(-1)[0].snapshot;assert.equal(snapshot.schemaVersion,1);assert.equal(snapshot.history[0].id,'test__1');assert.equal(snapshot.local['unrelated-secret'],undefined);assert.ok(snapshot.local['html-everything-store']);assert.deepEqual(h.cancelled,[]);
  }finally{await h.close()}});
@@ -43,3 +43,9 @@ test('desktop download bridge forwards original bytes and filename without accep
 test('WorkStore defaults the hydrated original store to Codex',async()=>{const h=await harness();try{assert.deepEqual(h.selected,['codex']);assert.equal(window.localStorage.getItem('workstore:html-codex-default-v1'),'1');}finally{await h.close()}});
 
 test('Codex default migration does not override subsequent user selections',async()=>{const h=await harness(true);try{assert.deepEqual(h.selected,[]);}finally{await h.close()}});
+
+test('HTML publishes only task metadata and validates per-task cancellation origin',async()=>{const h=await harness();try{
+ const update=h.sent.find(item=>item[0].type==='workstore:html-tasks')[0];assert.equal(update.tasks[0].name,'Page');assert.equal(update.tasks[0].content,undefined);
+ await h.send({type:'workstore:html-cancel',taskId:'running'},'https://evil.example');assert.deepEqual(h.cancelled,[]);
+ await h.send({type:'workstore:html-cancel',taskId:'running'});assert.deepEqual(h.cancelled,['running']);
+ }finally{await h.close()}});

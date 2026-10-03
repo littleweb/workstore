@@ -240,7 +240,7 @@ export function stageDocument(
   if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
   const c = cache.get(id);
   if (!c) throw new Error("笔记尚未载入");
-  if (Object.entries(patch).every(([key, value]) => JSON.stringify(c.document[key as keyof typeof c.document]) === JSON.stringify(value))) return;
+  if (Object.entries(patch).every(([key, value]) => c.document[key as keyof typeof c.document] === value)) return;
 
   const next = { ...c.document, ...patch, updatedAt: Date.now() };
   if (patch.title !== undefined) next.title = sanitizeTitle(patch.title);
@@ -346,7 +346,7 @@ export async function deleteDocument(id: string) {
   } finally { deleting.delete(id); }
 }
 
-registerDocumentFlusher(flushDocuments);
+registerDocumentFlusher(flushDocuments, "app.doc");
 
 export function exportDocument(id: string) {
   const doc = currentDocument(id);
@@ -381,7 +381,7 @@ registerSyncRefresher(async (paths) => {
     if (cached.generation !== cached.saved || cached.saving) continue;
     try {
       const loaded = await invoke<LoadedDocument>("load_document", { id });
-      if (JSON.stringify(loaded.document.content) !== JSON.stringify(cached.document.content)) {
+      if (loaded.document.content !== cached.document.content) {
         remoteVersions.set(id, (remoteVersions.get(id) ?? 0) + 1);
       }
       cache.set(id, { ...loaded, generation: 0, saved: 0 });

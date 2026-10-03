@@ -64,7 +64,7 @@ fn save_prompt_group(root: &Path, doc: &Document) -> Result<()> {
         }
     }
     if prompts.is_empty() { return Ok(()) }
-    if prompts.len() > 9 || prompts.iter().any(|(_, p)| p.len() > 128_000) { return Err("漫画提示词过长".into()) }
+    if prompts.len() > 21 || prompts.iter().any(|(_, p)| p.len() > 128_000) { return Err("漫画提示词过长".into()) }
     let digest = token(&serde_json::to_vec(&prompts).map_err(|e| e.to_string())?);
     let dir = checked_dir(&checked_dir(&checked_dir(&checked_dir(root, ".workstore")?, "story-comic-prompts")?, &doc.info.id)?, &digest)?;
     let dir = checked_dir(&dir, "prompts")?;
@@ -217,6 +217,18 @@ impl Store {
         })
     }
 
+    pub fn delete_story_comic_document(&self, id: &str, expected_token: &str) -> Result<()> {
+        let path = self.story_comic_document_path(id)?;
+        let (doc, bytes) = read_file(&path)?;
+        if doc.info.id != id || token(&bytes) != expected_token {
+            return Err("作品已被外部修改，请重新打开后再删除".into());
+        }
+        let backup = checked_dir(&checked_dir(self.root_path(), ".workstore")?, "deleted-story-comics")?
+            .join(format!("{id}-{}.json", token(&bytes)));
+        atomic_write(&backup, &bytes)?;
+        fs::remove_file(path).map_err(|e| e.to_string())
+    }
+
     pub fn save_story_comic_document(
         &self,
         mut doc: Document,
@@ -259,6 +271,24 @@ impl Store {
 mod tests {
     use super::*;
     #[test]
+    fn deletion_checks_version_and_preserves_original() {
+        let temp = tempfile::tempdir().unwrap();
+        let store = Store::open(temp.path().join("config"), temp.path().join("workspace")).unwrap();
+        let loaded = store.create_story_comic_document().unwrap();
+        let id = &loaded.document.info.id;
+        let path = store.story_comic_document_path(id).unwrap();
+        let bytes = fs::read(&path).unwrap();
+        assert!(store.delete_story_comic_document(id, "stale").is_err());
+        assert!(path.exists());
+        store.delete_story_comic_document(id, &loaded.token).unwrap();
+        assert!(!path.exists());
+        let backup = store.root_path().join(".workstore/deleted-story-comics")
+            .join(format!("{id}-{}.json", loaded.token));
+        assert_eq!(fs::read(backup).unwrap(), bytes);
+        assert!(store.list_story_comic_documents().unwrap().documents.is_empty());
+        assert!(store.delete_story_comic_document("../invalid", &loaded.token).is_err());
+    }
+    #[test]
     fn prompt_group_is_durable_and_versions_do_not_overwrite() {
         let root = std::env::temp_dir().join(format!("story-prompts-{}", Uuid::new_v4()));
         let store = Store::open(root.join("config"), root.join("workspace")).unwrap();
@@ -272,6 +302,10 @@ mod tests {
         doc.content = Value::String(doc.content.as_str().unwrap().replace("cover", "revised"));
         store.save_story_comic_document(doc, saved.token).unwrap();
         assert_eq!(fs::read_dir(&dir).unwrap().count(), 2);
+        let mut extended = store.load_story_comic_document(&saved.document.info.id).unwrap();
+        extended.document.content = Value::String(serde_json::json!({"engine":"baoyu-comic@test","characterPrompt":"characters","plan":{"pages":(0..20).map(|i| serde_json::json!({"prompt":format!("page-{i}")})).collect::<Vec<_>>()}}).to_string());
+        store.save_story_comic_document(extended.document, extended.token).unwrap();
+        assert_eq!(fs::read_dir(&dir).unwrap().count(), 3);
         assert_eq!(fs::read_to_string(first.join("prompts/01-cover.md")).unwrap(), "cover");
         drop(store); fs::remove_dir_all(root).unwrap();
     }
@@ -317,4 +351,27 @@ pub fn save_story_comic_image(data: String, workspace: tauri::State<crate::Works
     let slot = workspace.0.lock().map_err(|e| e.to_string())?;
     let root = slot.as_ref().ok_or("工作空间尚未打开")?.root_path();
     crate::ai_images::save(root, &bytes)
+}
+
+
+#[tauri::command]
+pub async fn open_story_comic_print_dialog(window: tauri::WebviewWindow, landscape: bool) -> Result<bool> {
+    if window.label() != "main" { return Err("打印仅可从主窗口打开".into()); }
+    #[cfg(target_os = "macos")]
+    {
+        let (send, receive) = tokio::sync::oneshot::channel();
+        let print_window = window.clone();
+        window.run_on_main_thread(move || {
+            use objc2_app_kit::{NSPrintInfo, NSPaperOrientation};
+            use objc2_foundation::NSSize;
+            let info = NSPrintInfo::sharedPrintInfo();
+            info.setPaperSize(NSSize::new(210.0 * 72.0 / 25.4, 297.0 * 72.0 / 25.4));
+            info.setOrientation(if landscape { NSPaperOrientation::Landscape } else { NSPaperOrientation::Portrait });
+            let result = print_window.print().map(|_| true).map_err(|error| format!("无法打开打印窗口：{error}"));
+            let _ = send.send(result);
+        }).map_err(|error| format!("无法准备打印窗口：{error}"))?;
+        receive.await.map_err(|_| "打印窗口准备中断".to_string())?
+    }
+    #[cfg(not(target_os = "macos"))]
+    { let _ = landscape; Ok(false) }
 }

@@ -1,3 +1,6 @@
+import ToolSessions from "./tasks/ToolSessions";
+import TaskCenter from "./tasks/TaskCenter";
+import { createToolSelection } from "./toolSelection";
 import StoryComicIcon from "./story-comic/StoryComicIcon";
 import CoverIcon from "./covers/CoverIcon";
 import { recordToolOpen } from "./navigation";
@@ -6,7 +9,7 @@ import { AiAssistantButton } from "./ai/AiAssistant";
 import AiSettings from "./ai/AiSettings";
 import UpdateButton from "./UpdateButton";
 import { isInstallingUpdate } from "./updateService";
-import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
+import React, { useEffect, useState, useRef, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import {
   App as AntApp,
@@ -20,6 +23,7 @@ import {
   Tooltip,
 } from "antd";
 import {
+  PlayCircleOutlined,
   AppstoreOutlined,
   ArrowRightOutlined,
   CheckCircleOutlined,
@@ -46,14 +50,18 @@ import {
 import "./style.css";
 import ComicIcon from "./comics/ComicIcon";
 import WhiteboardIcon from "./whiteboard/WhiteboardIcon";
-import { flushDocuments, registerDocumentFlusher } from "./documentLifecycle";
+import { flushDocuments, flushBeforeToolSwitch, registerDocumentFlusher } from "./documentLifecycle";
 import { flushSync } from "react-dom";
 const Whiteboard = lazy(() => import("./whiteboard/Whiteboard"));
 const StoryComicApp = lazy(() => import("./story-comic/StoryComicApp"));
+const AnimationApp = lazy(() => import("./animations/AnimationApp"));
+const DesignStudio = lazy(() => import("./design-studio/DesignStudio"));
 const CoverApp = lazy(() => import("./covers/CoverApp"));
 const ComicApp = lazy(() => import("./comics/ComicApp"));
 const HtmlApp = lazy(() => import("./html/HtmlApp"));
 const DocumentApp = lazy(() => import("./documents/DocumentApp"));
+const sessionTools = {"app.html": HtmlApp, "app.story-comic": StoryComicApp, "app.animation": AnimationApp,
+  "app.design": DesignStudio, "app.cover": CoverApp, "app.comic": ComicApp, "app.whiteboard": Whiteboard, "app.doc": DocumentApp};
 import {
   native,
   loadWorkspace,
@@ -83,8 +91,10 @@ type Tool = {
 };
 const tools: Tool[] = [
   { id: "app.html", name: "HTML", description: "把内容变成精美的网页、卡片与演示。", category: "设计工具", color: "green", icon: <GlobalOutlined /> },
-  { id: "app.story-comic", name: "故事漫画", description: "输入主题，一键生成漫画与发布文案。", category: "设计工具", color: "green", icon: <StoryComicIcon /> },
-  { id: "app.cover", name: "封面大师", description: "选个画风，把灵感变成封面。", category: "设计工具", color: "green", icon: <CoverIcon /> },
+  { id: "app.story-comic", name: "绘漫画", description: "输入主题，一键生成漫画与发布文案。", category: "设计工具", color: "green", icon: <StoryComicIcon /> },
+  { id: "app.animation", name: "小动画", description: "一点灵感，让想法动起来。", category: "设计工具", color: "green", icon: <PlayCircleOutlined style={{ color: "#64867b" }} /> },
+  { id: "app.design", name: "设计室", description: "商品、创意、人像与空间设计。", category: "设计工具", color: "green", icon: <ExperimentOutlined style={{ color: "#64867b" }} /> },
+  { id: "app.cover", name: "做封面", description: "选个画风，把灵感变成封面。", category: "设计工具", color: "green", icon: <CoverIcon /> },
   { id: "app.comic", name: "小漫画", description: "一句话，画出你的故事。", category: "设计工具", color: "green", icon: <ComicIcon /> },
   {
     id: "app.project",
@@ -97,7 +107,7 @@ const tools: Tool[] = [
   },
   {
     id: "app.doc",
-    name: "笔记",
+    name: "记笔记",
     description: "记录值得留下的每一个想法。",
     category: "效率办公",
     color: "orange",
@@ -105,7 +115,7 @@ const tools: Tool[] = [
   },
   {
     id: "app.whiteboard",
-    name: "白板",
+    name: "画白板",
     description: "自由绘图，让想法清晰可见。",
     category: "效率办公",
     color: "green",
@@ -129,7 +139,7 @@ const tools: Tool[] = [
   },
 ];
 // Temporarily hidden; retain registration and saved entries for restoration.
-const hiddenTools = new Set(["app.project", "app.html", "tool.json", "tool.color", "web.github"]);
+const hiddenTools = new Set(["app.project", "app.html", "app.comic", "tool.json", "tool.color", "web.github"]);
 const visibleTools = tools.filter((tool) => !hiddenTools.has(tool.id));
 type Entry = {
   id: string;
@@ -191,7 +201,6 @@ function ToolHeader({
 }
 
 function WorkStore() {
-  const [htmlOpened, setHtmlOpened] = useState(false);
   const { message } = AntApp.useApp();
   const [entries, setEntries] = useState<Entry[]>(restore),
     [active, setActive] = useState("app.doc"),
@@ -482,26 +491,34 @@ function WorkStore() {
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
   }, []);
+  const toolNavigation = useRef(0);
   const navigate = async (id: string) => {
+    const request = ++toolNavigation.current;
     try {
-      await flushDocuments();
+      await flushBeforeToolSwitch(active);
+      if (request !== toolNavigation.current) return;
       setActive(id);
     } catch (e) {
       message.error("文档尚未保存：" + String(e));
     }
   };
   const open = async (id: string) => {
+    const request = ++toolNavigation.current;
     try {
-      await flushDocuments();
+      await flushBeforeToolSwitch(active);
     } catch (e) {
       message.error("文档尚未保存：" + String(e));
       return;
     }
+    if (request !== toolNavigation.current) return;
     // Commit the recent entry before opening the tool, including before a close/sync flush.
     const openedAt = Date.now();
     flushSync(() => {
       setEntries((es) => recordToolOpen(es, id, openedAt));
     });
+    // Content is safely flushed; persisting navigation metadata need not hold the UI.
+    setActive(id);
+    setCatalog(false);
     if (pending.current) {
       clearTimeout(pending.current);
       pending.current = null;
@@ -511,13 +528,20 @@ function WorkStore() {
       if (native) await saveWorkspace(latest.current);
       else localStorage.setItem("workstore.preview.tools", JSON.stringify(latest.current.entries));
       if (version.current === revision) setSaveStatus("已保存");
-      setActive(id);
-      setCatalog(false);
     } catch (e) {
       if (version.current === revision) setSaveStatus("保存失败：" + String(e));
-      message.error("打开记录保存失败，请重试：" + String(e));
+      message.error("工具已打开，但打开记录保存失败：" + String(e));
     }
   };
+
+  const compactOpen = useRef(open);
+  compactOpen.current = open;
+  const compactSelection = useRef<ReturnType<typeof createToolSelection> | null>(null);
+  useEffect(() => {
+    const selection = createToolSelection(window, (id) => { void compactOpen.current(id); });
+    compactSelection.current = selection;
+    return () => { selection.dispose(); compactSelection.current = null; };
+  }, []);
 
   const favorite = (id: string, value = true) => {
     setEntries((es) =>
@@ -541,7 +565,6 @@ function WorkStore() {
       .filter((e) => !e.favorite && e.lastOpened && visibleTools.some((t) => t.id === e.id))
       .sort((a, b) => (b.lastOpened || 0) - (a.lastOpened || 0) || a.id.localeCompare(b.id));
   const tool = tools.find((t) => t.id === active);
-  useEffect(() => { if (active === "app.html") setHtmlOpened(true); }, [active]);
   const row = (entry: Entry) => {
     const t = tools.find((t) => t.id === entry.id)!;
     return (
@@ -623,7 +646,7 @@ function WorkStore() {
             <i />
           </div>
           <div className="window-actions">
-          <UpdateButton ready={ready} />
+          <TaskCenter onOpen={id => void navigate(id)} /><UpdateButton ready={ready} />
           <Tooltip title="设置">
             <button className="icon-button" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
           </Tooltip>
@@ -732,34 +755,20 @@ function WorkStore() {
                 const item = tools.find((candidate) => candidate.id === entry.id)!;
                 return <button key={item.id} className={`compact-tool-item ${active === item.id ? "selected" : ""}`}
                   aria-current={active === item.id ? "page" : undefined}
-                  onClick={() => open(item.id)}
+                  onPointerDownCapture={(event) => compactSelection.current?.pointerDown(event, item.id)}
+                  onClick={(event) => compactSelection.current?.click(event, item.id)}
                   onFocus={(event) => event.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })}>
                   <ToolIcon tool={item} /><span>{item.name}</span>
                 </button>;
               })}
             </nav>
             <div className="compact-window-space" data-tauri-drag-region />
-            <UpdateButton ready={ready} autoCheck={false} />
+            <TaskCenter onOpen={id => void navigate(id)} /><UpdateButton ready={ready} autoCheck={false} />
             <button className="icon-button compact-settings" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
           </header>
         )}
-        {(htmlOpened || active === "app.html") && <div style={{display:active === "app.html" ? "contents" : "none"}}><Suspense fallback={<div className="startup">正在加载 HTML…</div>}><HtmlApp /></Suspense></div>}
-        {active === "app.html" ? null : active === "app.story-comic" ? (
-          <Suspense fallback={<div className="tool-page">正在打开故事漫画…</div>}><StoryComicApp /></Suspense>
-        ) : active === "app.cover" ? (
-          <Suspense fallback={<div className="tool-page">正在打开封面大师…</div>}><CoverApp /></Suspense>
-        ) : active === "app.comic" ? (
-          <Suspense fallback={<div className="tool-page">正在打开小漫画…</div>}><ComicApp /></Suspense>
-        ) : active === "app.whiteboard" ? (
-          <Suspense fallback={<div className="startup">正在加载白板…</div>}>
-            <Whiteboard />
-          </Suspense>
-
-        ) : active === "app.doc" ? (
-          <Suspense fallback={<div className="startup">正在加载笔记…</div>}>
-            <DocumentApp />
-          </Suspense>
-        ) : tool ? (
+        <ToolSessions active={active} tools={sessionTools} />
+        {["app.html", "app.design", "app.story-comic", "app.animation", "app.cover", "app.comic", "app.whiteboard", "app.doc"].includes(active) ? null : tool ? (
           <div className="tool-page">
             <ToolHeader
               tool={tool}

@@ -1,3 +1,4 @@
+import { beginTask, failTask, updateTask } from "../tasks/store";
 import { useEffect, useRef, useState } from "react";
 import { Alert, Button, Checkbox, Input } from "antd";
 import { AiSidebar } from "../ai/AiSidebar";
@@ -53,6 +54,7 @@ export function CanvasConversation({ boardId, attachment, target, onAttach, onDe
     setMessages([...previous, { role: "user", content: instruction }]);
     setPrompt(""); setPhase("planning"); setError(""); setProgress(null);
     const current = () => alive.current && requestId.current === request;
+    const card = beginTask(abort, {toolId: "app.whiteboard", title: instruction.slice(0, 40), stage: "正在规划白板…"});
     let ownsExecution = false;
     try {
       const context = target.capture(source, includeCanvas);
@@ -70,8 +72,10 @@ export function CanvasConversation({ boardId, attachment, target, onAttach, onDe
       }
       ownsExecution = true; writing.current = true; onWriteState(true); setPhase("executing");
       const result = await trackAiExecution(abort, target.execute(context, plan, abort.signal, value => {
+        updateTask(abort.signal, {stage: value.label, done: value.done, total: value.total});
         if (current()) setProgress(value);
       }));
+      if (!result.saved || result.reason) failTask(abort.signal, result.reason || "白板尚未保存成功，请打开工具重试保存");
       if (!current()) return;
       if (source && result.region) setSource(result.region);
       setNeedsSave(!result.saved);
@@ -82,8 +86,10 @@ export function CanvasConversation({ boardId, attachment, target, onAttach, onDe
       else if (result.reason) setError(result.reason);
       else if (response.saveError) setError("白板操作已保存，但对话历史保存失败。");
     } catch (failure) {
+      failTask(abort.signal, failure);
       if (current()) setError(abort.signal.aborted ? "已停止本次请求。" : String(failure));
     } finally {
+      card.finish();
       if (ownsExecution) { writing.current = false; onWriteState(false); }
       if (controller.current === abort) {
         controller.current = null;

@@ -1,3 +1,4 @@
+import { beginTask, hasTask, failTask, cancelAllTasks } from "../tasks/store";
 import { invoke } from "@tauri-apps/api/core";
 import { native, scheduleAutosync } from "../workspace";
 const externalStoppers = new Set<() => Promise<void>>();
@@ -13,6 +14,7 @@ export async function trackAiExecution<T>(controller: AbortController, task: Pro
   try { return await task; } finally { running.delete(controller); }
 }
 export async function stopAiRequests() {
+  cancelAllTasks();
   for (const stop of externalStoppers) await stop();
   const tasks = [...running.entries()];
   tasks.forEach(([controller]) => controller.abort());
@@ -85,7 +87,9 @@ export const ai = {
       toolId: string;
       messages: AiMessage[];
       record?: boolean;
+      timeoutSeconds?: number;
       image?: boolean;
+      vision?: boolean;
       references?: string[];
     },
     signal?: AbortSignal
@@ -104,6 +108,8 @@ export const ai = {
     const timer = setInterval(() => {
       if (controller.signal.aborted) cancel();
     }, 200);
+    const card = hasTask(signal) ? null : beginTask(controller, {toolId: input.toolId, title: input.image ? "生成图片" : "AI 生成", stage: "等待模型响应…"});
+    let failure: unknown;
     const task = invoke<AiResponse>("ai_generate", {
       request: { ...input, id },
     });
@@ -113,8 +119,16 @@ export const ai = {
       if (controller.signal.aborted) throw new Error("已停止生成");
       if ((input.record || input.image) && !response.saveError)
         scheduleAutosync();
+      if (response.saveError) {
+        if (signal) failTask(signal, response.saveError);
+        failure = response.saveError;
+      }
       return response;
+    } catch (error) {
+      failure = error;
+      throw error;
     } finally {
+      card?.finish(failure);
       clearInterval(timer);
       running.delete(controller);
       signal?.removeEventListener("abort", forwardAbort);

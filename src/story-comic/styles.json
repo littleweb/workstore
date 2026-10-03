@@ -130,5 +130,17 @@
     "paper": "#f4f4ed",
     "ink": "#304c43",
     "accent": "#7c9b83"
+  },
+  {
+    "id": "retro-comic",
+    "name": "复古欧漫",
+    "hint": "清线叙事 · 怀旧色调",
+    "art": "ligne-claire",
+    "tone": "vintage",
+    "layout": "standard",
+    "preset": "",
+    "paper": "#f4f4ed",
+    "ink": "#304c43",
+    "accent": "#7c9b83"
   }
 ]

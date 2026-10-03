@@ -1,6 +1,7 @@
+import { ProjectSection, useProjects } from "../list-projects/Projects";
 import ConversationNote, { conversationContent, emptyConversation } from "./ConversationNote";
 import { DocumentAiSidebar } from "../ai/AiSidebar";
-import { App as AntApp, Button, Dropdown, Input, Modal, Tooltip } from "antd";
+import { App as AntApp, Button, Dropdown, Input, Modal } from "antd";
 import {
   MessageOutlined,
   DeleteOutlined,
@@ -14,7 +15,7 @@ import {
   StarFilled,
   StarOutlined,
 } from "@ant-design/icons";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { Editor as TeaEditor } from "@teabook/teaeditor";
 import {
   createDocument,
@@ -26,6 +27,7 @@ import {
   ensureDocument,
   exportDocument,
   flushDocuments,
+  flushDocument,
   lastDocumentId,
   loadDocument,
   activateDocument,
@@ -47,7 +49,7 @@ function getRenameError(message?: string) {
   return "";
 }
 
-function DocumentEditor({ id, content }: { id: string; content: string }) {
+const DocumentEditor = memo(function DocumentEditor({ id, content }: { id: string; content: string }) {
   // TeaEditor imports htmlContent on change; local edits must not feed back into it.
   // The parent's key starts a new session for another document or remote version.
   const [initialContent] = useState(content);
@@ -68,9 +70,10 @@ function DocumentEditor({ id, content }: { id: string; content: string }) {
       onHtmlChange={handleHtmlChange}
     />
   );
-}
+}, (previous, next) => previous.id === next.id);
 
 export default function DocumentApp() {
+  const projects = useProjects("app.doc");
   const { message, modal } = AntApp.useApp();
   const [, rerender] = useState(0);
   const [id, setId] = useState<string | null>(null);
@@ -165,7 +168,7 @@ export default function DocumentApp() {
     setBusy(true);
     try {
       recordDocumentClickStage("saving");
-      await flushDocuments();
+      if (id) await flushDocument(id);
       recordDocumentClickStage("saved");
       if (!isCurrentRequest(request)) { recordDocumentClickStage("superseded"); return; }
       // Cancelling back to the current editor must not reload its live cache
@@ -212,7 +215,7 @@ export default function DocumentApp() {
     }, 0);
   };
 
-  const create = async (conversation = false) => {
+  const create = async (conversation = false, projectId: string | null = null) => {
     if (composing.current || compositionTimer.current) return;
     const request = ++requestVersion.current;
     selectionPending.current = true;
@@ -226,6 +229,8 @@ export default function DocumentApp() {
         stageDocument(document.id, { title: "对话笔记", content: emptyConversation() });
         await flushDocuments();
       }
+      if (!isCurrentRequest(request)) return;
+      if (projectId) await projects.move(document.id, projectId);
       if (!isCurrentRequest(request)) return;
       activateDocument(document.id);
       setId(document.id);
@@ -299,10 +304,10 @@ export default function DocumentApp() {
 
   const documents = documentList();
   const favorites = documents
-    .filter((x) => x.favorite)
+    .filter((x) => x.favorite && !projects.projectOf(x.id))
     .sort((a, b) => b.createdAt - a.createdAt || a.id.localeCompare(b.id));
   const recent = documents
-    .filter((x) => !x.favorite)
+    .filter((x) => !x.favorite && !projects.projectOf(x.id))
     .sort((a, b) => b.createdAt - a.createdAt || a.id.localeCompare(b.id));
 
   const item = id ? currentDocument(id) : undefined;
@@ -359,6 +364,7 @@ export default function DocumentApp() {
         trigger={["click"]}
         menu={{
           items: [
+            ...projects.menu(doc.id),
             ...(!doc.favorite ? [{ key: "delete", icon: <DeleteOutlined />, label: "删除", danger: true }] : []),
             {
               key: "favorite",
@@ -377,6 +383,7 @@ export default function DocumentApp() {
             },
           ],
           onClick: ({ key }) => {
+            if (projects.handle(key, doc.id)) return;
             if (key === "delete") remove(doc);
             if (key === "favorite") void pin(doc);
             if (key === "rename") {
@@ -417,7 +424,7 @@ export default function DocumentApp() {
           <header className="document-heading">
             <div>
               <FileTextOutlined />
-              <h2>笔记</h2>
+              <h2>记笔记</h2>
 
             </div>
             <Button
@@ -450,11 +457,11 @@ export default function DocumentApp() {
               if (dropped && !dropped.favorite) void pin(dropped);
             }}
           >
-            <div className="document-section">
+            {favorites.length > 0 && <div className="document-section">
               <div className="document-section-label">常用</div>
               {favorites.map(row)}
-              {!favorites.length && <p>暂无</p>}
-            </div>
+            </div>}
+            <ProjectSection navigation={projects} items={[...documents].sort((a,b)=>b.createdAt-a.createdAt || a.id.localeCompare(b.id))} renderItem={row} activeId={id} onCreate={projectId=>void create(false, projectId)} />
             <div className="document-section">
               <div className="document-section-label">最近打开</div>
               {recent.map(row)}
@@ -491,30 +498,7 @@ export default function DocumentApp() {
 
           {item ? (
             <>
-              <div className="document-document-bar">
-                {sidebarCollapsed && (
-                  <Button
-                    type="text"
-                    className="navigation-toggle" icon={<MenuUnfoldOutlined />}
-                    aria-label="展开笔记导航"
-                    title="展开笔记导航"
-                    aria-expanded={false}
-                    aria-controls="document-navigation"
-                    onClick={() => setSidebarCollapsed(false)}
-                  />
-                )}
-                <button
-                  className="document-title-edit"
-                  onClick={() => {
-                    setName(item.title);
-                    setRenaming(item.id);
-                  }}
-                  title="重命名笔记"
-                >
-                  {item.title}
-                  <EditOutlined />
-                </button>
-                <div
+            {status.startsWith("保存失败") && (<div
                   className={`document-save-status ${status.startsWith("保存失败") ? "failed" : ""}`}
                   role="status"
                 >
@@ -539,17 +523,34 @@ export default function DocumentApp() {
                       </Button>
                     </>
                   )}
-                </div>
-                {!isConversation && <Button size="small" type="text" icon={<MessageOutlined />} aria-expanded={aiOpen} disabled={aiApplying} onClick={() => setAiOpen(value => !value)}>AI 助手</Button>}
-                <Tooltip title="导出笔记 JSON">
+                </div>)}
+            <div className={`document-page ${!isConversation ? "document-page-editor" : ""}`}>
+              <div className="document-document-bar">
+                {sidebarCollapsed && (
                   <Button
                     type="text"
-                    size="small"
-                    icon={<ExportOutlined />}
-                    aria-label="导出笔记 JSON"
-                    onClick={() => exportDocument(item.id)}
+                    className="navigation-toggle" icon={<MenuUnfoldOutlined />}
+                    aria-label="展开笔记导航"
+                    title="展开笔记导航"
+                    aria-expanded={false}
+                    aria-controls="document-navigation"
+                    onClick={() => setSidebarCollapsed(false)}
                   />
-                </Tooltip>
+                )}
+                <button
+                  className="document-title-edit"
+                  onClick={() => {
+                    setName(item.title);
+                    setRenaming(item.id);
+                  }}
+                  title="重命名笔记"
+                >
+                  {item.title}
+                  <EditOutlined />
+                </button>
+
+
+
               </div>
               {isConversation ? (
                 <ConversationNote key={`${item.id}:${remoteVersion(item.id)}`} id={item.id} content={item.content} />
@@ -563,7 +564,7 @@ export default function DocumentApp() {
                 </div>
               </div>
               }
-              {busy && <div className="document-busy">正在切换笔记…</div>}
+            </div>
             </>
           ) : (
             <>

@@ -1,3 +1,4 @@
+import {noProjects} from './helpers/projects.mjs';
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -19,6 +20,8 @@ test('marquee selection can be attached through the toolbar and the AI panel doc
  const doc={id:'board',title:'Test',favorite:false,createdAt:1,lastOpenedAt:1,scene:{elements:[],files:{},appState:{}}};
  const snapshot={boardId:'board',elements:[{id:'selected'}]};
  vm.runInNewContext(code,{module,require(id){
+    if (id === "../list-projects/Projects") return noProjects;
+    if(id === "../tasks/ToolSessions") return {useToolVisible:()=>true};
   if(id==='react'||id==='react/jsx-runtime')return require(id);
   if(id==='./SelectionAssistant')return {__esModule:true,default:props=>{attached=props.attachment;return React.createElement('aside',{className:'ai-sidebar','aria-label':'AI 助手侧栏'},React.createElement('button',{onClick:props.onClose},'Close'));}};
   if(id==='./selectionTarget')return {whiteboardSelectionTarget:(getId,getCanvas)=>({capture:()=>{assert.equal(getId(),'board');assert.ok(getCanvas());captured++;return snapshot;}})};

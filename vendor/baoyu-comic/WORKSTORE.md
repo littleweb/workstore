@@ -24,8 +24,10 @@ Application adaptations:
 - WorkStore's unified AI interface supplies text and raster generation. The
   shared service capacity is two, so two page workers use the same prior
   character reference. Failed items retry once; existing successful pages stay.
-- Product page counts are 4–8 including cover, all portrait 3:4. Prompt contracts
-  explicitly override the older base-prompt template's 2:3 default.
+- Product auto page counts are 4–8 including cover; manual counts extend to 20.
+  Output dimensions offer 3:4, 1:1, 9:16, 4:3 and 16:9. Prompt contracts
+  explicitly override the older base-prompt template's 2:3 default. Whole-page scaling/padding normalizes explicit output
+  dimensions without cropping or repainting any lettering.
 - Generated pages contain native lettering. No Canvas lettering is applied to
   newly generated baoyu pages. Legacy saved images remain unchanged; the legacy
   compositor remains available only for legacy content.

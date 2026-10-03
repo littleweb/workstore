@@ -1,0 +1,20 @@
+.list-project-section { margin: 0 0 16px; font-size:14px; min-width:0; }
+.list-project-label { display:flex; align-items:center; justify-content:space-between; min-height:32px; padding:0 10px; color:#919b95; }
+.list-project-section button { font:inherit; color:inherit; background:transparent; border:0; box-shadow:none; cursor:pointer; }
+.list-project-section button:hover { background:#eef2ee; border:0; box-shadow:none; }
+.list-project-section button:focus-visible { outline:2px solid #6c9588; outline-offset:-2px; }
+.list-project-label > button, .list-project-more, .list-project-create { width:26px; height:28px; padding:0; flex-shrink:0; border-radius:5px; }
+.list-project-section button:disabled { opacity:.45; cursor:default; }
+.list-project-heading { display:flex; align-items:center; border-radius:7px; min-height:32px; margin:2px 0; }
+.list-project-heading:hover { background:#eef2ee; }
+.list-project-open { flex:1; min-width:0; display:flex; gap:7px; align-items:center; height:32px; padding:0 10px; border-radius:7px; text-align:left; }
+.list-project-open > .anticon:first-child { font-size:16px; }
+.list-project-open > .anticon { color:#7d9589; flex-shrink:0; }
+.list-project-open > span:last-child { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.list-project-more, .list-project-create { opacity:0; }
+.list-project-heading:hover .list-project-more, .list-project-heading:focus-within .list-project-more, .list-project-heading:hover .list-project-create, .list-project-heading:focus-within .list-project-create { opacity:1; }
+.list-project-children { margin-left:16px; }
+.list-project-section p { font-size:14px; color:#a2aaa5; margin:5px 10px 10px; }
+.list-project-error { font-size:12px; color:#a34f46; padding:0 10px; overflow-wrap:anywhere; }
+.list-project-error > span { display:block; }
+@media(hover:none) { .list-project-more, .list-project-create {opacity:1;} }

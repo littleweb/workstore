@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { App, Button, Tag } from "antd";
 import { ArrowUpOutlined } from "@ant-design/icons";
 import { Editor as TeaEditor } from "@teabook/teaeditor";
-import { flushDocuments, remoteVersion, stageDocument } from "./store";
+import { flushDocument, remoteVersion, stageDocument } from "./store";
 
 type Conversation = {
   type: "workstore.conversation";
@@ -12,6 +12,8 @@ type Conversation = {
 };
 export const emptyConversation = () => JSON.stringify({ type: "workstore.conversation", version: 1, entries: [], draft: "" });
 export function conversationContent(content: string): Conversation | null {
+  // Ordinary rich-text HTML is not a conversation JSON document.
+  if (!content.trimStart().startsWith("{")) return null;
   if (!content.trimStart().startsWith("{")) return null;
   try {
     const value = JSON.parse(content);
@@ -36,7 +38,6 @@ export default function ConversationNote({ id, content }: { id: string; content:
   const version = useRef(remoteVersion(id));
   const [entries, setEntries] = useState(initial.entries);
   const [input, setInput] = useState({ key: 0, html: initial.draft });
-  const [recording, setRecording] = useState(false);
   const composing = useRef(false);
   const pending = useRef(false);
   const inputGeneration = useRef(0);
@@ -59,13 +60,12 @@ export default function ConversationNote({ id, content }: { id: string; content:
     state.current = { ...state.current, draft: html };
     stageDocument(id, { content: JSON.stringify(state.current) });
   }, [id, input.key]);
-  const record = async () => {
+  const record = () => {
     if (pending.current || composing.current || version.current !== remoteVersion(id)) return;
     const html = state.current.draft;
     const body = new DOMParser().parseFromString(html, "text/html").body;
     if (!body.textContent?.replace(/[\s\u200b]/g, "") && !body.querySelector("img,video,audio,iframe,table,hr,svg")) return;
     pending.current = true;
-    setRecording(true);
     try {
       const next = { ...state.current, draft: "", entries: [...state.current.entries, { id: globalThis.crypto.randomUUID(), html, createdAt: Date.now() }] };
       stageDocument(id, { content: JSON.stringify(next) });
@@ -73,12 +73,13 @@ export default function ConversationNote({ id, content }: { id: string; content:
       setEntries(next.entries);
       inputGeneration.current++;
       setInput({ key: inputGeneration.current, html: "" });
-      await flushDocuments();
+      void flushDocument(id).catch(error => {
+        message.error("记录保存失败，请通过标题栏重试：" + String(error));
+      });
     } catch (error) {
       message.error("记录保存失败，请通过标题栏重试：" + String(error));
     } finally {
       pending.current = false;
-      setRecording(false);
     }
   };
   return (
@@ -111,7 +112,7 @@ export default function ConversationNote({ id, content }: { id: string; content:
         <div className="conversation-submit">
           <span className="conversation-shortcut">⌘ Enter 记录</span>
           <Button type="primary" shape="circle" icon={<ArrowUpOutlined />} aria-label="记录笔记"
-            title="记录笔记（⌘ Enter）" loading={recording} onClick={() => void record()} />
+            title="记录笔记（⌘ Enter）" onClick={record} />
         </div>
         </div>
       </div>

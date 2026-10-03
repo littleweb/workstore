@@ -1,3 +1,4 @@
+import {noProjects} from './helpers/projects.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -36,6 +37,8 @@ test('whiteboard tracks transient text sessions even when serialized content is 
   const code = transformSync(`${source}\nexport { Canvas };`, { loader: 'tsx', format: 'cjs', jsx: 'automatic' }).code;
   const module = { exports: {} };
   vm.runInNewContext(code, { module, require(id) {
+    if (id === "../list-projects/Projects") return noProjects;
+    if(id === "../tasks/ToolSessions") return {useToolVisible:()=>true};
     if (id === 'react') return {
       useMemo: fn => fn(), useRef: current => ({ current }), useCallback: fn => fn,
       useEffect: fn => cleanups.push(fn()),

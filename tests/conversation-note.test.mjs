@@ -12,12 +12,12 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const { createRoot } = await import('react-dom/client');
 const require = createRequire(import.meta.url);
 const source = transformSync(readFileSync(new URL('../src/documents/ConversationNote.tsx',import.meta.url),'utf8'),{loader:'tsx',format:'cjs',jsx:'automatic'}).code;
-async function setup(initialContent) {
+async function setup(initialContent, options = {}) {
   let version=0, content, fail=false; const editors=[], errors=[];
   const module={exports:{}};
   vm.runInNewContext(source,{module,DOMParser,globalThis,require(id){
     if(['react','react/jsx-runtime'].includes(id)) return require(id);
-    if(id==='./store') return {remoteVersion:()=>version,stageDocument:(_,p)=>{content=p.content;},flushDocuments:async()=>{if(fail) throw Error('disk');}};
+    if(id==='./store') return {remoteVersion:()=>version,stageDocument:(_,p)=>{content=p.content;},flushDocument:async()=>{await options.saveGate;if(fail) throw Error('disk');}};
     if(id==='@ant-design/icons') return {ArrowUpOutlined:()=>null};
     if(id==='antd') return {Tag:({children})=>React.createElement('span',{'data-testid':'time-tag'},children),App:{useApp:()=>({message:{error:e=>errors.push(e)}})},Button:({children,onClick,loading})=>React.createElement('button',{onClick,disabled:loading},children)};
     if(id==='@teabook/teaeditor') return {Editor:props=>{editors.push(props);return React.createElement('div',{'data-readonly':String(!!props.readOnly)},props.htmlContent);}};
@@ -84,4 +84,11 @@ test('remote cards append without replacing the live draft or remounting the inp
   assert.equal(h.input.htmlContent,input.htmlContent);
   await h.send();const data=JSON.parse(h.content);assert.equal(data.entries.length,2);assert.equal(data.entries[1].html,'<p>local draft</p>');
  }finally{await h.close();}
+});
+
+test('pending disk saves do not disable submission of the next conversation record',async()=>{
+ let finish;const gate=new Promise(resolve=>{finish=resolve;});const h=await setup(undefined,{saveGate:gate});
+ try{await h.change('<p>first</p>');await h.send();assert.equal(h.host.querySelector('button').disabled,false);
+ await h.change('<p>second</p>');await h.send();assert.equal(JSON.parse(h.content).entries.length,2);}
+ finally{finish();await h.close();}
 });

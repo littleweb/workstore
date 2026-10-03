@@ -56,7 +56,7 @@ fn timeout_error(settings: &Settings, image: bool) -> String {
     if image {
         format!("图像生成超过 {} 秒，已停止本次请求。可重试或在设置 → AI 中延长“图像生成超时”", settings.image_timeout_seconds)
     } else {
-        "AI 响应超时，请重试或在设置中延长超时".into()
+        format!("AI 文本响应超过 {} 秒，已停止本次请求。请重试或精简主题；已完成页面仍保留", settings.timeout_seconds)
     }
 }
 fn settings_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
@@ -195,7 +195,11 @@ pub struct Request {
     #[serde(default)]
     pub image: bool,
     #[serde(default)]
+    pub vision: bool,
+    #[serde(default)]
     pub references: Vec<String>,
+    #[serde(default)]
+    pub timeout_seconds: Option<u64>,
 }
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -238,7 +242,16 @@ pub fn ai_cancel(id: String, runtime: tauri::State<Runtime>) -> Result<(), Strin
     }
     Ok(())
 }
+fn settings_for_request(mut settings: Settings, request: &Request) -> Settings {
+    if !request.image {
+        settings.timeout_seconds = settings.timeout_seconds.max(request.timeout_seconds.unwrap_or(0));
+    }
+    settings
+}
 fn validate_request(request: &Request) -> Result<(), String> {
+    if request.timeout_seconds.is_some_and(|seconds| !(10..=600).contains(&seconds)) {
+        return Err("请求文本超时应为10–600秒".into());
+    }
     uuid::Uuid::parse_str(&request.id).map_err(|_| "请求编号无效")?;
     if request.tool_id.is_empty()
         || request.tool_id.len() > 80
@@ -264,7 +277,7 @@ fn validate_request(request: &Request) -> Result<(), String> {
         return Err("对话过长，请开启新对话或缩短上下文".into());
     }
     if request.references.len() > 8
-        || (!request.image && !request.references.is_empty())
+        || (!request.image && !request.vision && !request.references.is_empty())
         || request.references.iter().any(|r| r.len() > 8_000_000)
     {
         return Err("图像参考最多 8 张，每张不超过 6 MB".into());
@@ -295,6 +308,7 @@ pub async fn ai_generate(
     };
     let settings = read_settings(&settings_path(&app)?)?;
     validate_settings(&settings)?;
+    let settings = settings_for_request(settings, &request);
     let cancelled = Arc::new(AtomicBool::new(false));
     {
         let mut calls = runtime.0.lock().map_err(|e| e.to_string())?;
@@ -317,6 +331,10 @@ pub async fn ai_generate(
                 let output = codex_run(&settings, &request.messages, Some(&request.references)).await?;
                 let images = generated_images(&output)?;
                 Ok((parse_codex(&output)?, images))
+            } else if request.vision {
+                if settings.provider != "codex" { return Err("当前服务不支持图片分析，请在AI设置中选择Codex".into()); }
+                let output = codex_run_mode(&settings, &request.messages, Some(&request.references), false).await?;
+                Ok((parse_codex(&output)?, vec![]))
             } else { Ok((generate(&settings, &request.messages).await?, vec![])) }
         } => result?,
         _ = tokio::time::sleep(request_timeout(&settings, request.image)) => return Err(timeout_error(&settings, request.image)),
@@ -439,6 +457,14 @@ async fn codex_run(
     messages: &[Message],
     references: Option<&[String]>,
 ) -> Result<Vec<u8>, String> {
+    codex_run_mode(settings, messages, references, references.is_some()).await
+}
+async fn codex_run_mode(
+    settings: &Settings,
+    messages: &[Message],
+    references: Option<&[String]>,
+    generate_image: bool,
+) -> Result<Vec<u8>, String> {
     let directory = tempfile::tempdir().map_err(|e| e.to_string())?;
     let mut command = Command::new(configured_codex_path(settings)?);
     if settings.proxy_url.trim() == "direct" {
@@ -506,10 +532,10 @@ async fn codex_run(
         .spawn()
         .map_err(|e| format!("无法启动 Codex：{e}"))?;
     let mut stdin = child.stdin.take().ok_or("无法打开 Codex 输入")?;
-    let mode = if references.is_some() {
+    let mode = if generate_image {
         "你是 WorkStore 内的通用图像助手。必须使用内置 imagegen 工具生成一张 PNG 图片。参考随附图片并遵守用户的画面要求。不要执行命令，不访问其他文件。完成后简短回复生成图片的路径。"
     } else {
-        "你是 WorkStore 内的通用 AI 助手。只提供文本回答，不执行命令、不访问文件。"
+        "你是 WorkStore 内的通用 AI 助手。只提供文本回答，可以分析随附图片；不执行命令、不访问其他文件。"
     };
     let prompt = format!(
         "{mode} 下面是按角色排列的对话 JSON，请回答最后的用户请求：\n{}",
@@ -714,6 +740,31 @@ mod tests {
         assert!(bounded_read(&b"12345"[..], 4).await.is_err());
     }
     #[test]
+    fn request_text_budget_is_bounded_and_does_not_change_image_timeout() {
+        let mut r: Request = serde_json::from_value(json!({"id":uuid::Uuid::new_v4().to_string(),"toolId":"app.story-comic","messages":[{"role":"user","content":"test"}]})).unwrap();
+        assert_eq!(settings_for_request(Settings::default(), &r).timeout_seconds, 180);
+        r.timeout_seconds = Some(600);
+        assert!(validate_request(&r).is_ok());
+        let adjusted = settings_for_request(Settings::default(), &r);
+        assert_eq!(request_timeout(&adjusted, false), Duration::from_secs(600));
+        assert!(timeout_error(&adjusted, false).contains("600 秒"));
+        r.image = true;
+        let settings = Settings { image_timeout_seconds: 900, ..Settings::default() };
+        let adjusted = settings_for_request(settings, &r);
+        assert_eq!(adjusted.timeout_seconds, 180);
+        assert_eq!(request_timeout(&adjusted, true), Duration::from_secs(900));
+        for seconds in [0, 9, 601] { r.timeout_seconds=Some(seconds); assert!(validate_request(&r).is_err()); }
+    }
+    #[test]
+    fn vision_references_require_explicit_mode_and_remain_bounded() {
+        let mut r: Request = serde_json::from_value(json!({"id":uuid::Uuid::new_v4().to_string(),"toolId":"app.design","messages":[{"role":"user","content":"分析图片"}],"references":["data:image/png;base64,abc"]})).unwrap();
+        assert!(validate_request(&r).is_err());
+        r.vision = true;
+        assert!(validate_request(&r).is_ok());
+        r.references = vec!["x".into(); 9];
+        assert!(validate_request(&r).is_err());
+    }
+    #[test]
     fn invalid_messages_are_rejected() {
         let mut r = Request {
             id: uuid::Uuid::new_v4().to_string(),
@@ -724,7 +775,9 @@ mod tests {
             }],
             record: false,
             image: false,
+            vision: false,
             references: vec![],
+            timeout_seconds: None,
         };
         assert!(validate_request(&r).is_err());
         r.messages[0].content = "ok".into();

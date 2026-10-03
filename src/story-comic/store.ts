@@ -32,6 +32,8 @@ type Cached = LoadedDocument & {
 type PersistedDocument = LoadedDocument;
 
 const cache = new Map<string, Cached>();
+const deleting = new Set<string>();
+const deleted = new Set<string>();
 const subscribers = new Set<() => void>();
 let summaries: DocumentInfo[] = [];
 let warnings: string[] = [];
@@ -71,9 +73,12 @@ function publish(c: Cached) {
 
 function database() {
   return (dbPromise ??= new Promise<IDBDatabase>((resolve, reject) => {
-    const request = indexedDB.open("workstore-story-comics", 1);
-    request.onupgradeneeded = () =>
-      request.result.createObjectStore("documents", { keyPath: "document.id" });
+    const request = indexedDB.open("workstore-story-comics", 2);
+    request.onupgradeneeded = () => {
+      for (const name of ["documents", "deleted-documents"])
+        if (!request.result.objectStoreNames.contains(name))
+          request.result.createObjectStore(name, { keyPath: "document.id" });
+    };
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => reject(request.error);
   }));
@@ -201,6 +206,7 @@ export async function createDocument() {
 }
 
 export async function loadDocument(id: string) {
+  if (deleting.has(id) || deleted.has(id)) throw new Error("作品已删除或正在删除");
   let cached = cache.get(id);
   if (!cached || (cached.generation === cached.saved && !cached.saving)) {
     const beforeRead = cached;
@@ -210,6 +216,7 @@ export async function loadDocument(id: string) {
       ? await invoke<LoadedDocument>("load_story_comic_document", { id })
       : await browserLoad(id);
     const current = cache.get(id);
+    if (deleting.has(id) || deleted.has(id)) throw new Error("作品已删除或正在删除");
     // A late read must not replace edits, an in-flight save, or a newer cache
     // installed by another load/sync while this request was awaiting disk I/O.
     if (
@@ -253,6 +260,7 @@ export function stageDocument(
     Pick<Document, "content" | "title" | "favorite" | "lastOpenedAt">
   >
 ) {
+  if (deleting.has(id) || deleted.has(id)) throw new Error("作品已删除或正在删除");
   const c = cache.get(id);
   if (!c) throw new Error("文档尚未载入");
   if (
@@ -336,7 +344,7 @@ export async function flushDocuments() {
   for (const id of cache.keys()) await flushDocument(id);
 }
 
-registerDocumentFlusher(flushDocuments);
+registerDocumentFlusher(flushDocuments, "app.story-comic");
 
 if (!native)
   window.addEventListener("beforeunload", (event) => {
@@ -393,4 +401,36 @@ export function applyDocumentContent(id: string, content: string) {
     stageDocument(id, { content });
     notify();
   });
+}
+
+export async function deleteDocument(id: string) {
+  await ensureDocument(id);
+  await flushDocument(id);
+  if (deleting.has(id) || deleted.has(id)) throw new Error("作品已删除或正在删除");
+  const cached = cache.get(id)!;
+  deleting.add(id);
+  try {
+    if (native) await invoke("delete_story_comic_document", { id, expectedToken: cached.token });
+    else {
+      const db = await database();
+      await new Promise<void>((resolve, reject) => {
+        const tx = db.transaction(["documents", "deleted-documents"], "readwrite");
+        const records = tx.objectStore("documents"), req = records.get(id);
+        req.onsuccess = () => {
+          if (!req.result || req.result.token !== cached.token) { tx.abort(); return; }
+          tx.objectStore("deleted-documents").put(req.result);
+          records.delete(id);
+        };
+        tx.oncomplete = () => resolve();
+        tx.onerror = tx.onabort = () => reject(new Error("作品已变化或删除失败，请重新打开后重试"));
+      });
+    }
+    deleted.add(id);
+    cache.delete(id);
+    summaries = summaries.filter(item => item.id !== id);
+    if (lastDocumentId === id) lastDocumentId = null;
+    remoteVersions.set(id, remoteVersion(id) + 1);
+    notify();
+    scheduleAutosync();
+  } finally { deleting.delete(id); }
 }

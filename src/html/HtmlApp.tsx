@@ -1,3 +1,4 @@
+import { beginTask } from "../tasks/store";
 import { useEffect, useRef, useState } from 'react';
 import { Button } from 'antd';
 import { save } from '@tauri-apps/plugin-dialog';
@@ -24,8 +25,27 @@ export default function HtmlApp() {
   useEffect(() => {
     if (!url) return;
     const origin = new URL(url).origin;
+    const cards = new Map<string, {controller: AbortController; card: ReturnType<typeof beginTask>}>();
     const receive = (event: MessageEvent) => {
       if (event.source !== frame.current?.contentWindow || event.origin !== origin) return;
+      if (event.data?.type === 'workstore:html-tasks' && Array.isArray(event.data.tasks)) {
+        const seen = new Set<string>();
+        for (const task of event.data.tasks.slice(0, 1000)) {
+          if (typeof task?.id !== 'string' || typeof task?.name !== 'string' || !['idle','running','done','error'].includes(task.status)) continue;
+          seen.add(task.id);
+          if (task.status === 'running' && !cards.has(task.id)) {
+            const controller = new AbortController();
+            const card = beginTask(controller, {toolId:'app.html',title:task.name.slice(0,100) || '生成 HTML',stage:'正在生成网页…'});
+            controller.signal.addEventListener('abort', () => frame.current?.contentWindow?.postMessage({type:'workstore:html-cancel',taskId:task.id},origin), {once:true});
+            cards.set(task.id,{controller,card});
+          } else if (task.status !== 'running' && cards.has(task.id)) {
+            const entry = cards.get(task.id)!; cards.delete(task.id);
+            void persist('flush').then(() => entry.card.finish(task.status === 'error' ? '生成失败，请打开 HTML 查看详情' : undefined), error => entry.card.finish(error));
+          }
+        }
+        for (const [id, entry] of cards) if (!seen.has(id)) {entry.controller.abort();entry.card.finish();cards.delete(id);}
+        return;
+      }
       if (event.data?.type === 'workstore:html-ready') {
         ready.current = true; frame.current?.contentWindow?.postMessage({type:'workstore:html-init',desktop:native},origin); return;
       }
@@ -63,6 +83,8 @@ export default function HtmlApp() {
     const unstop = registerAiStopper(async () => { await persist('stop'); if (native) await invoke('html_original_cancel'); });
     const timer = setInterval(() => { void persist('flush').catch(e => setError(String(e))); }, 15000);
     return () => {
+      for (const entry of cards.values()) {entry.controller.abort();entry.card.finish();}
+      cards.clear();
       clearInterval(timer); unflush(); unstop(); window.removeEventListener('message', receive);
       pending.current.forEach(request => {clearTimeout(request.timer);request.reject(new Error('HTML 页面已关闭'));});pending.current.clear();
     };

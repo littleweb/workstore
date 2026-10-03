@@ -1,3 +1,4 @@
+import {taskStore} from './helpers/tasks.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -6,15 +7,16 @@ import vm from 'node:vm';
 const source = transformSync(readFileSync(new URL('../src/ai/client.ts', import.meta.url), 'utf8'), { loader: 'ts', format: 'cjs' }).code;
 function harness({ native = true, saveError = null, wait = false } = {}) {
   let finish; let synced = 0; const calls = [];
-  const module = { exports: {} };
+  const module = { exports: {} }; const tasks=taskStore();
   vm.runInNewContext(source, { module, setInterval, clearInterval, AbortController, crypto: { randomUUID: () => 'request-id' }, require(id) {
+    if (id === '../tasks/store') return tasks;
     if (id.includes('workspace')) return { native, scheduleAutosync: () => synced++ };
     return { invoke: async (command, args) => { calls.push({ command, args }); if (command === 'ai_cancel') return;
       if (wait) await new Promise(resolve => { finish = resolve; });
       return { text: 'answer', saveError };
     } };
   } });
-  return { ai: module.exports.ai, calls, finish: () => finish(), flush: () => module.exports.stopAiRequests(), track: (controller, task) => module.exports.trackAiExecution(controller, task), synced: () => synced };
+  return { tasks, ai: module.exports.ai, calls, finish: () => finish(), flush: () => module.exports.stopAiRequests(), track: (controller, task) => module.exports.trackAiExecution(controller, task), synced: () => synced };
 }
 test('shared gateway keeps tool identity/messages and syncs successfully saved records', async () => {
   const h = harness(); const messages = [{ role: 'user', content: 'hello' }];
@@ -47,4 +49,16 @@ test('shutdown also cancels and awaits local canvas execution after inference ha
  let exited=false;const closing=h.flush().then(()=>{exited=true;});
  assert.equal(abort.signal.aborted,true);await Promise.resolve();assert.equal(exited,false);
  finish({saved:true});await applying;await closing;assert.equal(exited,true);
+});
+
+test('gateway exposes pending task and task-center cancellation reaches the native request',async()=>{
+ const h=harness({wait:true});const request=h.ai.generate({toolId:'app.cover',messages:[],image:true});
+ assert.equal(h.tasks.taskSnapshot()[0].state,'running');h.tasks.cancelTask(h.tasks.taskSnapshot()[0].id);
+ assert.equal(h.calls[1].command,'ai_cancel');h.finish();await assert.rejects(request,/已停止/);
+ assert.equal(h.tasks.taskSnapshot()[0].state,'cancelled');
+});
+test('multi-stage parent owns the card; child request does not prematurely complete it',async()=>{
+ const h=harness(),c=new AbortController();const card=h.tasks.beginTask(c,{toolId:'app.whiteboard',title:'draw'});
+ await h.ai.generate({toolId:'app.whiteboard',messages:[]},c.signal);assert.equal(h.tasks.taskSnapshot().length,1);
+ assert.equal(h.tasks.taskSnapshot()[0].state,'running');card.finish();assert.equal(h.tasks.taskSnapshot()[0].state,'done');
 });

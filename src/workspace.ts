@@ -209,6 +209,15 @@ export function syncWorkspace(mode: "auto" | "manual" = "auto"): Promise<string>
         }
       }
       if (syncPaused) { syncAgain = true; return "安装更新期间暂停同步"; }
+      // Durable writes can be slow: keep the UI interactive while they drain.
+      // Recheck gestures afterwards because the user may have resumed typing.
+      while (!syncPaused) {
+        await flushDocuments();
+        await queue;
+        if (!isActivationBlocked()) break;
+        await waitForInteraction();
+      }
+      if (syncPaused) { syncAgain = true; return "安装更新期间暂停同步"; }
       // No workspace lock is held while waiting. Acquire the short activation
       // barrier only after editing AND the click/key gesture end, then flush the
       // latest local edits again. Never cancel, synthesize or replay user clicks.
@@ -216,8 +225,6 @@ export function syncWorkspace(mode: "auto" | "manual" = "auto"): Promise<string>
       const wasInert = root?.inert ?? false;
       if (root) root.inert = true;
       try {
-        await flushDocuments();
-        await queue;
         const result = id === "unchanged"
           ? { changed: [] as string[], message: "已与其他设备保持同步" }
           : await invoke<{ changed: string[]; message: string }>("finish_sync", { id });

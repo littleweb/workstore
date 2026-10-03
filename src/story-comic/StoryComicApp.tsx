@@ -1,10 +1,19 @@
+import { ProjectSection, useProjects } from "../list-projects/Projects";
+import { beginTask, failTask, updateTask } from "../tasks/store";
+import { sizes, sizeFor, pageCounts } from "./sizes";
+import ComicCanvas from "./ComicCanvas";
+import PhonePreview from "./PhonePreview";
+import PrintPanel from "./PrintPanel";
+import { readPanels, savePanel } from "./panelState";
 import { tones, resolveStyle } from "./baoyu";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { App, Button, Dropdown, Input, Modal, Select } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   MoreOutlined,
+  EditOutlined,
+  ZoomInOutlined,
   PlusOutlined,
   DownloadOutlined,
   CopyOutlined,
@@ -20,6 +29,8 @@ import {
   emptyContent,
   readContent,
   signature,
+  topicTitle,
+  topicInputValue,
   styles,
   copyText,
   type Config,
@@ -53,6 +64,7 @@ function PageImage({ src, alt }: { src: string; alt: string }) {
     <img
       src={url}
       alt={alt}
+      draggable={false}
       onError={() => {
         setUrl("");
         setError("图片无法显示");
@@ -71,46 +83,62 @@ const topics = [
   "AI会取代人类吗",
 ];
 export default function StoryComicApp() {
-  const { message } = App.useApp();
+  const projects = useProjects("app.story-comic");
+  const creationProject = useRef<string | null>(null);
+  const { message, modal } = App.useApp();
   const [, redraw] = useState(0),
-    [id, setId] = useState<string | null>(null),
+    [id, setId] = useState<string | null>(() =>
+      store.lastDocumentId && store.currentDocument(store.lastDocumentId)
+        ? store.lastDocumentId : null
+    ),
     [draft, setDraft] = useState<Config>(defaults);
-  const [collapsed, setCollapsed] = useState(false),
-    [tab, setTab] = useState("漫画内容"),
+  const [collapsed, setNavigationState] = useState(() => readPanels(id).navigation),
+    [tab, setTab] = useState("偏好"),
     [busy, setBusy] = useState(false),
     [opening, setOpening] = useState(false),
     [error, setError] = useState("");
+  const [stylePreview, setStylePreview] = useState<string | null>(null);
   const [preview, setPreview] = useState<number | null>(null),
     [rename, setRename] = useState<{ id: string; title: string } | null>(null);
   const mounted = useRef(true),
-    active = useRef<string | null>(null),
+    active = useRef<string | null>(id),
     request = useRef(0),
     pending = useRef(false),
     controller = useRef<AbortController | null>(null),
     creating = useRef(false);
+  const setCollapsed = (value: boolean) => {
+    setNavigationState(value); savePanel(active.current, "navigation", value);
+  };
+  const controlsCollapsed = tab !== "偏好";
+  const setControlsCollapsed = (value: boolean) => setTab(value ? "漫画" : "偏好");
+  useLayoutEffect(() => {
+    const saved = readPanels(id);
+    setNavigationState(saved.navigation);
+  }, [id]);
   const composing = useRef(false),
     queued = useRef<(() => void) | null>(null),
     compositionTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
       undefined
     );
   const doc = id ? store.currentDocument(id) : undefined;
-  let content: Content | undefined,
-    corrupt = "";
-  try {
-    if (doc) content = readContent(doc.content);
-  } catch (e) {
-    corrupt = String(e);
-  }
+  const { content, corrupt } = useMemo(() => {
+    try {
+      return { content: doc ? readContent(doc.content) : undefined, corrupt: "" };
+    } catch (e) {
+      return { content: undefined, corrupt: String(e) };
+    }
+  }, [doc?.content]);
   const config = content?.config ?? draft;
+  const inputTopic = content ? topicInputValue(content, doc?.title) : config.topic;
   const fail = (e: unknown) => {
     if (mounted.current) setError(String(e));
   };
   const cancel = () => {
     controller.current?.abort();
   };
-  async function navigate(next: string | null, create = false) {
+  async function navigate(next: string | null, create = false, projectId: string | null = null) {
     if (composing.current) {
-      queued.current = () => void navigate(next, create);
+      queued.current = () => void navigate(next, create, projectId);
       return;
     }
     if (create && creating.current) return;
@@ -123,10 +151,11 @@ export default function StoryComicApp() {
       await store.flushDocuments();
       if (!mounted.current || ticket !== request.current) return;
       if (create) {
-        const d = await store.createDocument();
-        store.stageDocument(d.id, { content: JSON.stringify(emptyContent()) });
-        await store.flushDocument(d.id);
-        next = d.id;
+        setTab("偏好");
+        setNavigationState(false);
+        creationProject.current = projectId;
+        setDraft(emptyContent().config);
+        next = null;
       } else if (next && next !== active.current)
         await store.loadDocument(next);
       if (!mounted.current || ticket !== request.current) return;
@@ -135,7 +164,7 @@ export default function StoryComicApp() {
       setId(next);
       setError("");
       setPreview(null);
-      setTab("漫画内容");
+      setTab(next && store.currentDocument(next)?.content && readContent(store.currentDocument(next)!.content).plan ? "漫画" : "偏好");
     } catch (e) {
       if (ticket === request.current) fail(e);
     } finally {
@@ -160,7 +189,9 @@ export default function StoryComicApp() {
         const first =
           store.documentList().find((d) => d.id === store.lastDocumentId) ??
           store.documentList()[0];
-        if (first) void navigate(first.id);
+        if (first?.id === active.current) {
+          void store.loadDocument(first.id).catch(fail);
+        } else if (first) void navigate(first.id);
       })
       .catch(fail);
     return () => {
@@ -173,41 +204,52 @@ export default function StoryComicApp() {
     };
   }, []);
   function patch(change: Partial<Config>) {
+    if (Object.entries(change).every(([key, value]) => config[key as keyof Config] === value)) return;
     cancel();
     if (doc && content)
       store.stageDocument(doc.id, {
         content: JSON.stringify({
           ...content,
-          config: { ...content.config, ...change },
+          config: { ...content.config, topic: topicInputValue(content, doc.title), ...change },
+          ...(change.topic !== undefined ? { topicEdited: true } : {}),
         }),
       });
     else setDraft({ ...draft, ...change });
   }
-  async function generate(onlyPage?: number) {
+  async function generate(onlyPage?: number, retryFailed = false) {
     if (controller.current || pending.current || composing.current || corrupt)
       return;
     const abort = new AbortController();
     controller.current = abort;
     setBusy(true);
-    setTab("漫画内容");
+    setControlsCollapsed(true);
+    setTab("漫画");
     setError("");
-    let target = doc,
-      source = content ?? { ...emptyContent(), config: draft };
+    let target = doc ? store.currentDocument(doc.id) : undefined,
+      source = target ? readContent(target.content) : { ...emptyContent(), config: draft };
+    source = { ...source, config: { ...source.config, topic: topicInputValue(source, target?.title) } };
     const ticket = request.current;
+    const projectId = creationProject.current;
+    const card = beginTask(abort, {toolId: "app.story-comic", title: target?.title || source.config.topic.slice(0, 40) || "生成漫画", stage: "正在准备漫画…"});
     await trackAiExecution(
       abort,
       (async () => {
         try {
           if (!source.config.topic.trim()) throw new Error("请先输入主题");
+          const caps = await ai.capabilities();
+          if (abort.signal.aborted || !mounted.current || ticket !== request.current) return;
+          if (!caps.imageGenerate || !caps.referenceImages)
+            throw new Error("当前 AI 服务需要支持图片生成及参考图，请在设置中检查");
           if (!target) {
             creating.current = true;
             pending.current = true;
             const created = await store.createDocument();
             store.stageDocument(created.id, {
-              title: source.config.topic.slice(0, 60),
+              title: topicTitle(source.config.topic),
               content: JSON.stringify(source),
             });
             await store.flushDocument(created.id);
+            if (projectId) await projects.move(created.id, projectId);
             if (
               abort.signal.aborted ||
               !mounted.current ||
@@ -231,12 +273,13 @@ export default function StoryComicApp() {
             active.current === targetId &&
             store.remoteVersion(targetId) === remote &&
             store.currentDocument(targetId)?.content === expected;
-          const caps = await ai.capabilities();
+          let autoTitle = topicTitle(source.config.topic);
+          let refinedTitleApplied = false;
           if (!valid()) return;
-          if (!caps.imageGenerate || !caps.referenceImages)
-            throw new Error(
-              "当前 AI 服务需要支持图片生成及参考图，请在设置中检查"
-            );
+          if (onlyPage === undefined && !retryFailed) {
+            store.stageDocument(targetId, { title: autoTitle });
+            await store.flushDocument(targetId);
+          }
           await runWorkflow(
             source,
             {
@@ -246,6 +289,7 @@ export default function StoryComicApp() {
                   await ai.generate(
                     {
                       toolId: "app.story-comic",
+                      timeoutSeconds: 600,
                       messages: [{ role: "user", content: prompt }],
                     },
                     abort.signal
@@ -275,17 +319,35 @@ export default function StoryComicApp() {
               compose: composePage,
               save: async (value) => {
                 if (!valid()) throw new Error("作品已修改，未覆盖新内容");
+                updateTask(abort.signal, {stage: value.job?.stage || "正在保存漫画…", done: value.plan?.pages.filter(page => page.status === "ready").length ?? 0, total: value.job?.total});
+                if (value.job?.status === "error") failTask(abort.signal, value.job.stage);
                 expected = JSON.stringify(value);
-                store.stageDocument(targetId, { content: expected });
+                const refined =
+                  value.plannedConfig === signature(source.config)
+                    ? value.plan?.pages[0]?.title
+                    : undefined;
+                const rename =
+                  onlyPage === undefined && !retryFailed &&
+                  !refinedTitleApplied &&
+                  refined &&
+                  store.currentDocument(targetId)?.title === autoTitle;
+                store.stageDocument(targetId, {
+                  content: expected,
+                  ...(rename ? { title: refined } : {}),
+                });
+                if (rename) refinedTitleApplied = true;
                 await store.flushDocument(targetId);
               },
             },
             abort.signal,
-            onlyPage
+            onlyPage,
+            retryFailed
           );
         } catch (e) {
+          failTask(abort.signal, e);
           if (!abort.signal.aborted) fail(e);
         } finally {
+          card.finish();
           if (controller.current === abort) {
             controller.current = null;
             creating.current = false;
@@ -321,11 +383,7 @@ export default function StoryComicApp() {
     const d = await store.ensureDocument(targetId);
     await exportZip(emptyContent(), d.title, JSON.stringify(d, null, 2));
   };
-  const rows = (favorite: boolean) =>
-    store
-      .documentList()
-      .filter((d) => d.favorite === favorite)
-      .map((item) => (
+  const row = (item: store.DocumentInfo) => (
         <div
           className={`story-row ${id === item.id ? "selected" : ""}`}
           key={item.id}
@@ -364,20 +422,41 @@ export default function StoryComicApp() {
             trigger={["click"]}
             menu={{
               items: [
-                { key: "favorite", label: favorite ? "取消常用" : "设为常用" },
+                ...projects.menu(item.id),
+                { key: "favorite", label: item.favorite ? "取消常用" : "设为常用" },
                 { key: "rename", label: "重命名" },
                 { key: "backup", label: "导出作品备份" },
+                { key: "delete", label: "删除", danger: true },
               ],
               onClick: ({ key }) => {
+                if (projects.handle(key, item.id)) return;
                 if (key === "rename")
                   setRename({ id: item.id, title: item.title });
                 else if (key === "backup") act(backup(item.id));
+                else if (key === "delete") modal.confirm({
+                  title: `删除“${item.title}”？`,
+                  content: "作品将从列表移除，保留本地删除备份。",
+                  okText: "删除", cancelText: "取消", okButtonProps: { danger: true },
+                  onOk: async () => {
+                    if (active.current === item.id) cancel();
+                    await store.deleteDocument(item.id);
+                    if (active.current === item.id) {
+                      ++request.current;
+                      active.current = null;
+                      setId(null);
+                      setDraft(defaults);
+                      setControlsCollapsed(false);
+                      const next = store.documentList()[0];
+                      if (next) await navigate(next.id);
+                    }
+                  },
+                });
                 else
                   act(
                     store
                       .ensureDocument(item.id)
                       .then(() =>
-                        store.stageDocument(item.id, { favorite: !favorite })
+                        store.stageDocument(item.id, { favorite: !item.favorite })
                       )
                   );
               },
@@ -391,7 +470,8 @@ export default function StoryComicApp() {
             </button>
           </Dropdown>
         </div>
-      ));
+      );
+  const rows = (favorite: boolean) => store.documentList().filter(item=>item.favorite === favorite && !projects.projectOf(item.id)).map(row);
   const saveError =
     id && store.documentStatus(id).startsWith("保存失败")
       ? store.documentStatus(id)
@@ -399,7 +479,8 @@ export default function StoryComicApp() {
   const pages = content?.plan?.pages ?? [],
     complete = !!pages.length && pages.every((p) => p.image) && !!content?.copy;
   const changed =
-    !!content?.plan && content.plannedConfig !== signature(config);
+    !!content?.plan && (content.plannedConfig !== signature(config) ||
+      (config.count > 0 && content.plan.pages.length !== config.count));
   const provisional =
     (!content?.plan || (busy && changed)) && (busy || !!content?.job?.total);
   const displayPages: Page[] = provisional
@@ -412,12 +493,6 @@ export default function StoryComicApp() {
         status: "queued",
       }))
     : pages;
-  const readyCount = displayPages.filter(
-    (p) => p.status === "ready" || (!p.status && p.image && !p.error)
-  ).length;
-  const failedCount = displayPages.filter(
-    (p) => p.status === "error" || p.error
-  ).length;
   const pageState = (p: Page) =>
     p.status ?? (p.error ? "error" : p.image ? "ready" : "queued");
   const pageLabel = (p: Page) => {
@@ -432,11 +507,6 @@ export default function StoryComicApp() {
       composing: "正在排版…",
     }[state];
   };
-  const stage = busy
-    ? content?.job?.stage || "正在准备…"
-    : content?.job?.status === "running"
-    ? "上次生成已中断，可继续完成"
-    : content?.job?.stage;
   return (
     <section
       className="story-app"
@@ -457,7 +527,7 @@ export default function StoryComicApp() {
         <aside className="story-nav">
           <header className="story-heading">
             <StoryComicIcon />
-            <strong>故事漫画</strong>
+            <strong>绘漫画</strong>
             <Button
               type="text"
               className="navigation-toggle"
@@ -475,20 +545,21 @@ export default function StoryComicApp() {
               onClick={() => void navigate(null, true)}
             >
               <PlusOutlined />
-              创建故事漫画
+              故事漫画
             </button>
           </div>
           <div className="story-list">
-            {[true, false].map((favorite) => (
-              <section key={String(favorite)}>
-                <h3>{favorite ? "常用" : "最近打开"}</h3>
-                {rows(favorite).length ? rows(favorite) : <p>暂无</p>}
-              </section>
-            ))}
+            {rows(true).length > 0 && <section><h3>常用</h3>{rows(true)}</section>}
+            <ProjectSection navigation={projects} items={store.documentList()} renderItem={row} activeId={id} onCreate={projectId=>void navigate(null, true, projectId)} />
+            <section><h3>最近打开</h3>{rows(false).length ? rows(false) : <p>暂无</p>}</section>
           </div>
         </aside>
       )}
-      <main className="story-work">
+      <main
+        className={`story-work ${
+          controlsCollapsed ? "controls-collapsed" : ""
+        }`}
+      >
         <header className="story-bar">
           <div className="story-bar-title">
             {collapsed && (
@@ -501,17 +572,13 @@ export default function StoryComicApp() {
                 onClick={() => setCollapsed(false)}
               />
             )}
-            <button
-              className="story-title"
-              disabled={!doc}
-              title={doc?.title}
-              onClick={() => doc && setRename({ id: doc.id, title: doc.title })}
-            >
-              {doc?.title ?? "故事漫画"}
-            </button>
+            <span className="story-title" title={doc?.title}>{doc?.title ?? "绘漫画"}</span>
+            <Button type="text" size="small" icon={<EditOutlined />}
+              aria-label="重命名作品" title="重命名作品" disabled={!doc}
+              onClick={() => doc && setRename({ id: doc.id, title: doc.title })} />
           </div>
           <nav className="story-tabs" aria-label="作品内容">
-            {["漫画内容", "发布文案", "下载分享"].map((t) => (
+            {["偏好", "漫画", "发布", "下载", "打印"].map((t) => (
               <button
                 key={t}
                 aria-current={tab === t ? "page" : undefined}
@@ -521,6 +588,19 @@ export default function StoryComicApp() {
               </button>
             ))}
           </nav>
+          <div className="story-job-status">
+            {(busy || content?.job) && (
+              <span role="status" title={busy ? content?.job?.stage || "正在准备…" : complete ? "生成完成" : "已暂停"}>
+                {busy ? content?.job?.stage || "正在准备…" : complete ? "生成完成" : "已暂停"}
+                {" · "}{displayPages.filter((p) => !!p.image && !p.error).length}/{displayPages.length || config.count || 8} 页
+              </span>
+            )}
+            {busy ? <Button size="small" onClick={cancel}>暂停</Button> :
+              pages.some((p) => p.error || p.status === "error") && (
+                <Button size="small" disabled={opening || !!corrupt || changed || provisional}
+                  onClick={() => void generate(undefined, true)}>重试失败页</Button>
+              )}
+          </div>
         </header>
         {(error ||
           corrupt ||
@@ -557,9 +637,9 @@ export default function StoryComicApp() {
                 </h2>
                 <Input.TextArea
                   aria-label="输入主题"
-                  rows={2}
-                  maxLength={200}
-                  value={config.topic}
+                  rows={1}
+                  autoSize={{ minRows: 1, maxRows: 8 }}
+                  value={inputTopic}
                   disabled={!!corrupt}
                   placeholder="输入一个主题，让故事变成漫画"
                   onChange={(e) => patch({ topic: e.target.value })}
@@ -579,7 +659,7 @@ export default function StoryComicApp() {
               </section>
               <section>
                 <h2>
-                  <b>2</b>选择风格 <small>6种画风 · 5种预设</small>
+                  <b>2</b>选择风格 <small>12种风格，轻松创作</small>
                 </h2>
                 <div className="story-styles">
                   {styles.map((s) => (
@@ -613,6 +693,18 @@ export default function StoryComicApp() {
                   <b>3</b>生成设置 <small>可选</small>
                 </h2>
                 <div className="story-options">
+                  <label className="story-size-option">
+                    尺寸
+                    <Select
+                      aria-label="尺寸"
+                      value={config.size ?? "xhs-portrait"}
+                      onChange={(size) => patch({ size })}
+                      options={sizes.map((s) => ({
+                        value: s.id,
+                        label: `${s.label}（${s.width}×${s.height}）`,
+                      }))}
+                    />
+                  </label>
                   <label>
                     基调
                     <Select
@@ -631,10 +723,12 @@ export default function StoryComicApp() {
                       onChange={(count) => patch({ count })}
                       options={[
                         { value: 0, label: "自动（4–8页）" },
-                        ...[4, 6, 8].map((value) => ({
-                          value,
-                          label: `${value}页（含封面）`,
-                        })),
+                        ...pageCounts
+                          .filter((n) => n > 0)
+                          .map((value) => ({
+                            value,
+                            label: `${value}页（含封面）`,
+                          })),
                       ]}
                     />
                   </label>
@@ -664,34 +758,27 @@ export default function StoryComicApp() {
                 </div>
               </section>
             </div>
-            <div className="story-generate">
-              <Button
-                type="primary"
-                block
-                disabled={
-                  !busy &&
-                  (opening ||
-                    !!corrupt ||
-                    !config.topic.trim() ||
-                    (complete && !changed && !pages.some((p) => p.error)))
-                }
-                onClick={() => (busy ? cancel() : void generate())}
-              >
-                {busy
-                  ? "暂停"
-                  : changed
-                  ? "按新设置生成漫画"
-                  : complete && !pages.some((p) => p.error)
-                  ? "漫画已完成"
-                  : pages.length
-                  ? "继续完成漫画"
-                  : "一键生成完整漫画"}
-              </Button>
-            </div>
+            {!controlsCollapsed && (
+              <div className="story-generate">
+                <Button
+                  type="primary"
+                  size="small"
+                  block
+                  disabled={busy || opening || !!corrupt || !inputTopic.trim() ||
+                    (complete && !changed && !pages.some((p) => p.error))}
+                  onClick={() => void generate()}
+                >生成</Button>
+
+              </div>
+            )}
           </aside>
-          <section className="story-results">
-            {tab === "漫画内容" &&
-              (displayPages.length ? (
+          <section
+            className={`story-results ${
+              tab === "打印" ? "has-print" : tab === "偏好" ? "has-style-gallery" : tab === "漫画" && displayPages.length ? "has-canvas" : ""
+            }`}
+          >
+            {(tab === "偏好" || tab === "漫画") &&
+              (tab === "漫画" && displayPages.length ? (
                 <>
                   <div className="story-result-heading">
                     {provisional && !config.count && (
@@ -707,48 +794,48 @@ export default function StoryComicApp() {
                       </Button>
                     )}
                   </div>
-                  <div className="story-progress" role="status">
-                    <div>
-                      <span>
-                        画面已完成 {readyCount}/{displayPages.length} 页
-                        {failedCount ? ` · ${failedCount} 页失败` : ""}
-                      </span>
-                      <span>{stage}</span>
-                    </div>
-                    <progress
-                      aria-label="漫画画面进度"
-                      max={displayPages.length}
-                      value={readyCount}
-                    />
-                  </div>
-                  <div className="story-pages">
+                  <ComicCanvas
+                    key={id ?? "draft"}
+                    ratio={
+                      sizeFor(content?.plan ? content.plan.size : config.size)
+                        .width /
+                      sizeFor(content?.plan ? content.plan.size : config.size)
+                        .height
+                    }
+                  >
                     {displayPages.map((p, i) => (
-                      <article key={i} data-page-state={pageState(p)}>
-                        <button
-                          className="story-page-image"
-                          disabled={!p.image}
-                          onClick={() => setPreview(i)}
-                        >
-                          {p.image ? (
-                            <PageImage
-                              src={p.image}
-                              alt={`第${i + 1}页 ${p.title}`}
-                            />
-                          ) : (
-                            <span
-                              className={`story-page-placeholder ${
-                                busy ? "active" : ""
-                              }`}
-                            >
+                      <article
+                        key={i}
+                        data-page-state={pageState(p)}
+                        style={
+                          {
+                            "--story-page-ratio": `${
+                              sizeFor(
+                                content?.plan ? content.plan.size : config.size
+                              ).width
+                            } / ${
+                              sizeFor(
+                                content?.plan ? content.plan.size : config.size
+                              ).height
+                            }`,
+                          } as React.CSSProperties
+                        }
+                      >
+                        {p.image ? (
+                          <button className="story-page-image" onClick={() => setPreview(i)}>
+                            <PageImage src={p.image} alt={`第${i + 1}页 ${p.title}`} />
+                          </button>
+                        ) : (
+                          <div className="story-page-image story-page-empty">
+                            <span className={`story-page-placeholder ${busy ? "active" : ""}`}>
                               <i aria-hidden="true" />
-                              <strong>
-                                第 {i + 1} 页{i === 0 ? " · 封面" : ""}
-                              </strong>
+                              <strong>第 {i + 1} 页{i === 0 ? " · 封面" : ""}</strong>
                               <span>{pageLabel(p)}</span>
+
                             </span>
-                          )}
-                        </button>
-                        <footer>
+                          </div>
+                        )}
+                        <footer className="nopan">
                           <span>
                             第 {i + 1} 页{i === 0 ? " · 封面" : ""}
                           </span>
@@ -802,30 +889,42 @@ export default function StoryComicApp() {
                             </button>
                           </Dropdown>
                         </footer>
-                        {p.error && (
+                        {p.error && p.status !== "queued" && p.status !== "generating" && p.status !== "composing" && (
                           <p className="story-page-error" role="alert">
                             {p.error}
                           </p>
                         )}
                       </article>
                     ))}
-                  </div>
+                  </ComicCanvas>
                 </>
-              ) : (
-                <div className="story-empty">
-                  <StoryComicIcon />
-                  <h2>把一个想法，画成完整故事</h2>
-                  <p>输入主题，选择喜欢的风格。</p>
-                  <p>封面与每页漫画将独立呈现在这里。</p>
-                  <div className="story-empty-panels">
-                    <span>封面</span>
-                    <span>故事</span>
-                    <span>结尾</span>
-                  </div>
+              ) : tab === "漫画" ? <div className="story-empty">请在偏好中设置并生成漫画</div> : (
+                <div className="story-style-welcome">
+                  <section className="story-style-gallery" aria-label="风格模板参考">
+                    <header><h3>风格模板参考</h3><span>点击选择风格 · 悬停预览</span></header>
+                    <div className="story-style-covers">
+                      {styles.map((s) => (
+                        <div key={s.id} className="story-style-card" data-selected={resolveStyle(config).id === s.id}>
+                          <button type="button" className="story-style-select"
+                            aria-label={`选择${s.name}模板`}
+                            aria-pressed={resolveStyle(config).id === s.id}
+                            title={`${s.name} · ${s.hint}`}
+                            disabled={busy || opening || !!corrupt}
+                            onClick={() => patch({ style: s.id, tone: s.tone })}>
+                            <div className="story-cover-art"><img src={`/story-comic/covers/${s.id}.jpg`} alt={`${s.name}封面：日常奇遇`} decoding="async" /></div>
+                            <span>{s.name}</span>
+                          </button>
+                          <button type="button" className="story-style-preview-button"
+                            aria-label={`预览${s.name}模板`} title="放大预览"
+                            onClick={() => setStylePreview(s.id)}><ZoomInOutlined /></button>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
                 </div>
               ))}
-            {tab === "发布文案" &&
-              (content?.copy ? (
+            {tab === "发布" && <div className="story-publish-layout">
+              {content?.copy ? (
                 <div className="story-copy">
                   <header>
                     <h2>发布文案</h2>
@@ -877,8 +976,11 @@ export default function StoryComicApp() {
                     <Button onClick={() => void generate()}>继续完成</Button>
                   )}
                 </div>
-              ))}
-            {tab === "下载分享" && (
+              )}
+              <PhonePreview key={doc?.id ?? "draft"} pages={pages} copy={content?.copy} renderImage={(page, index) => <PageImage src={page.image!} alt={`手机预览第${index + 1}页`} />} />
+            </div>}
+            {tab === "打印" && <PrintPanel key={doc?.id ?? "draft"} pages={pages} title={doc?.title ?? config.topic} renderImage={(page, index) => <PageImage src={page.image!} alt={`打印预览第${index + 1}页`} />} />}
+            {tab === "下载" && (
               <div className="story-download">
                 <h2>带走你的故事</h2>
                 <p>每页都是独立图片，封面排在第一张。</p>
@@ -964,6 +1066,24 @@ export default function StoryComicApp() {
           {preview !== null && pages[preview]?.image && (
             <PageImage src={pages[preview].image!} alt={`第${preview + 1}页`} />
           )}
+        </div>
+      </Modal>
+      <Modal
+        title={`${styles.find((s) => s.id === stylePreview)?.name ?? ""} · 风格参考`}
+        open={stylePreview !== null}
+        footer={<Button size="small" disabled={busy || opening || !!corrupt}
+          onClick={() => {
+            const style = styles.find((s) => s.id === stylePreview);
+            if (style) patch({ style: style.id, tone: style.tone });
+            setStylePreview(null);
+          }}>使用此风格</Button>}
+        onCancel={() => setStylePreview(null)}
+        width={620}
+        centered
+      >
+        <div className="story-preview story-style-preview">
+          {stylePreview && <img src={`/story-comic/covers/${stylePreview}.jpg`} decoding="async"
+            alt={`${styles.find((s) => s.id === stylePreview)?.name}封面放大预览`} />}
         </div>
       </Modal>
     </section>

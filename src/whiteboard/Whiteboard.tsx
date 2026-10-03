@@ -1,3 +1,5 @@
+import { ProjectSection, useProjects } from "../list-projects/Projects";
+import { useToolVisible } from "../tasks/ToolSessions";
 import WhiteboardAiSidebar from "./SelectionAssistant";
 import { whiteboardSelectionTarget } from "./selectionTarget";
 import type { SelectionSnapshot } from "./selectionEditing";
@@ -43,6 +45,8 @@ import {
 import "./whiteboard.css";
 import WhiteboardIcon from "./WhiteboardIcon";
 function Canvas({ id, onApi, onSelectionCount }: { id: string; onApi?: (api: ExcalidrawImperativeAPI | null) => void; onSelectionCount?: (count: number) => void }) {
+  const visible = useToolVisible();
+  const visibility = useRef(visible); visibility.current = visible;
   const api = useRef<ExcalidrawImperativeAPI | null>(null);
   const connect = useCallback((value: ExcalidrawImperativeAPI) => { api.current = value; onApi?.(value); }, [onApi]);
   useEffect(() => () => { onApi?.(null); }, [onApi]);
@@ -50,7 +54,7 @@ function Canvas({ id, onApi, onSelectionCount }: { id: string; onApi?: (api: Exc
   const previous = useRef("");
   const editorVersion = useRef(remoteVersion(id));
   const editingText = useRef(false);
-  useEffect(() => registerSyncActivationBlocker(() => editingText.current), []);
+  useEffect(() => registerSyncActivationBlocker(() => visibility.current && editingText.current), []);
   const onChange = useCallback<NonNullable<ExcalidrawProps["onChange"]>>(
     (elements, appState, files) => {
       if (editorVersion.current !== remoteVersion(id)) return;
@@ -68,6 +72,8 @@ function Canvas({ id, onApi, onSelectionCount }: { id: string; onApi?: (api: Exc
   return (
     <Excalidraw
       excalidrawAPI={connect}
+      autoFocus={false}
+      handleKeyboardGlobally={false}
       initialData={initialData}
       onChange={onChange}
       langCode="zh-CN"
@@ -94,6 +100,7 @@ function Canvas({ id, onApi, onSelectionCount }: { id: string; onApi?: (api: Exc
   );
 }
 export default function Whiteboard() {
+  const projects = useProjects("app.whiteboard");
   const { message } = App.useApp();
   const [, render] = useState(0);
   const [id, setId] = useState<string | null>(null);
@@ -175,11 +182,12 @@ export default function Whiteboard() {
       setBusy(false);
     }
   };
-  const create = async () => {
+  const create = async (projectId: string | null = null) => {
     setBusy(true);
     try {
       await flushWhiteboards();
       const doc = await createBoard();
+      if (projectId) await projects.move(doc.id, projectId);
       setId(doc.id);
       setError("");
     } catch (e) {
@@ -211,10 +219,10 @@ export default function Whiteboard() {
   };
   const items = boardList();
   const favorites = items
-    .filter((x) => x.favorite)
+    .filter((x) => x.favorite && !projects.projectOf(x.id))
     .sort((a, b) => b.createdAt - a.createdAt || a.id.localeCompare(b.id));
   const recent = items
-    .filter((x) => !x.favorite)
+    .filter((x) => !x.favorite && !projects.projectOf(x.id))
     .sort((a, b) => b.createdAt - a.createdAt || a.id.localeCompare(b.id));
   const doc = id ? currentBoard(id) : undefined;
   const row = (item: BoardInfo) => (
@@ -242,6 +250,7 @@ export default function Whiteboard() {
         trigger={["click"]}
         menu={{
           items: [
+            ...projects.menu(item.id),
             {
               key: "favorite",
               icon: item.favorite ? <StarFilled /> : <StarOutlined />,
@@ -251,6 +260,7 @@ export default function Whiteboard() {
             { key: "export", icon: <ExportOutlined />, label: "导出 JSON" },
           ],
           onClick: ({ key }) => {
+            if (projects.handle(key, item.id)) return;
             if (key === "favorite") void pin(item);
             if (key === "rename") {
               setName(item.title);
@@ -276,7 +286,7 @@ export default function Whiteboard() {
             <header className="whiteboard-heading">
             <div>
               <span className="whiteboard-brand-icon"><WhiteboardIcon /></span>
-              <h2>白板</h2>
+              <h2>画白板</h2>
 
             </div>
             <Button type="text" size="small" className="navigation-toggle" icon={<MenuFoldOutlined />}
@@ -295,7 +305,7 @@ export default function Whiteboard() {
             </Button>
           </div>
           <div className="board-navigation">
-          <div
+          {favorites.length > 0 && <div
             className="board-section"
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
@@ -310,8 +320,8 @@ export default function Whiteboard() {
           >
             <div className="board-section-label">常用</div>
             {favorites.map(row)}
-            {!favorites.length && <p>暂无</p>}
-          </div>
+          </div>}
+          <ProjectSection navigation={projects} items={[...items].sort((a,b)=>b.createdAt-a.createdAt || a.id.localeCompare(b.id))} renderItem={row} activeId={id} onCreate={projectId=>void create(projectId)} />
           <div className="board-section">
             <div className="board-section-label">最近打开</div>
             {recent.map(row)}
@@ -332,7 +342,7 @@ export default function Whiteboard() {
                 onClick={() => { setName(doc.title); setRenaming(doc.id); }}>
                 {doc.title}<EditOutlined />
               </button>
-            ) : <span>白板</span>}
+            ) : <span>画白板</span>}
             {doc && boardStatus(doc.id).startsWith("保存失败") && <span className="board-error" role="status">{boardStatus(doc.id)}<Button type="link" size="small" onClick={() => void flushWhiteboards().catch(e => message.error(String(e)))}>重试保存</Button></span>}
             <div className="board-ai-actions" style={{ marginLeft: "auto" }}>
               <Button size="small" disabled={!doc || !selectionCount || aiApplying} onMouseDown={event => event.preventDefault()} onClick={attachSelection}>加入 AI 对话{selectionCount ? ` (${selectionCount})` : ""}</Button>

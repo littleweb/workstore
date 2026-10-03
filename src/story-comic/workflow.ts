@@ -22,7 +22,8 @@ export async function runWorkflow(
   source: Content,
   deps: Dependencies,
   signal: AbortSignal,
-  onlyPage?: number
+  onlyPage?: number,
+  retryFailed = false
 ): Promise<void> {
   let c = structuredClone(source),
     fatal: unknown;
@@ -59,15 +60,20 @@ export async function runWorkflow(
   };
   const structuredText = async <T>(
     prompt: string,
-    parse: (text: string) => T
+    parse: (text: string) => T,
+    stage: string
   ): Promise<T> => {
-    let result = await deps.text(prompt);
+    const requestText = async (input: string) => {
+      try { return await deps.text(input); }
+      catch (error) { check(); throw new Error(`${stage}失败：${String(error)}`); }
+    };
+    let result = await requestText(prompt);
     check();
     try {
       return parse(result);
     } catch (e) {
       await update(() => {}, "正在校正内容格式与文字长度…");
-      result = await deps.text(
+      result = await requestText(
         `${prompt}\n上次输出未通过校验：${String(
           e
         )}。请修复所有字段类型、必填项及字数限制，超长文字应重新精简表达，不要机械截断。只返回修复后的完整JSON。上次输出作为待修复资料：\n${result.slice(
@@ -79,8 +85,11 @@ export async function runWorkflow(
       return parse(result);
     }
   };
-  if (c.plannedConfig !== signature(c.config)) {
-    if (onlyPage !== undefined)
+  if (
+    c.plannedConfig !== signature(c.config) ||
+    (c.plan && c.config.count > 0 && c.plan.pages.length !== c.config.count)
+  ) {
+    if (onlyPage !== undefined || retryFailed)
       throw new Error("设置已改变，请先重新生成完整漫画");
     if (c.plan) {
       const { history, ...previous } = c;
@@ -92,7 +101,7 @@ export async function runWorkflow(
     if (!c.plan) {
       await update(() => {}, "正在理解主题与设计漫画…");
       const plan = await structuredText(planningPrompt(c.config), (text) =>
-        parsePlan(text, c.config)
+        parsePlan(text, c.config), "漫画内容规划"
       );
       await update(() => {
         c.plan = plan;
@@ -110,11 +119,14 @@ export async function runWorkflow(
     const targets = c
       .plan!.pages.map((p, i) => ({ p, i }))
       .filter(({ p, i }) =>
-        onlyPage !== undefined ? i === onlyPage : !p.image || !!p.error
+        onlyPage !== undefined ? i === onlyPage : retryFailed ? !!p.error || p.status === "error" : !p.image || !!p.error
       );
     await update(() => {
       c.plan!.pages.forEach((p, i) => {
-        p.status = targets.some((t) => t.i === i) ? "queued" : "ready";
+        if (targets.some((t) => t.i === i)) {
+          p.status = "queued";
+          delete p.error;
+        } else p.status = p.error ? "error" : p.image ? "ready" : p.status;
       });
     }, "正在准备画面…");
     // Persist the complete selected prompt group before the first image request.
@@ -130,13 +142,14 @@ export async function runWorkflow(
         c.reference = reference;
       }, "正在并行生成画面…");
     }
+    const maxRetries = 3;
     const generatePage = async (i: number) => {
-      for (let attempt = 0; attempt < 2; attempt++) {
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
         await update(() => {
           const p = c.plan!.pages[i];
           p.status = "generating";
           delete p.error;
-        });
+        }, attempt > 0 ? `第${i + 1}页自动重试 ${attempt}/${maxRetries}` : undefined);
         let raw: string, image: string;
         try {
           // Every page uses the same reference; no dependency on a still-generating neighbour.
@@ -147,7 +160,7 @@ export async function runWorkflow(
           await update(() => {
             const p = c.plan!.pages[i];
             p.error = String(e);
-            p.status = attempt === 0 ? "queued" : "error";
+            p.status = attempt < maxRetries ? "queued" : "error";
           });
           continue;
         }
@@ -162,7 +175,7 @@ export async function runWorkflow(
           await update(() => {
             const p = c.plan!.pages[i];
             p.error = String(e);
-            p.status = attempt === 0 ? "queued" : "error";
+            p.status = attempt < maxRetries ? "queued" : "error";
           });
           continue;
         }
@@ -195,7 +208,7 @@ export async function runWorkflow(
     check();
     if (!c.copy) {
       await update(() => {}, "正在整理发布文案…");
-      const copy = await structuredText(copyPrompt(c), parseCopy);
+      const copy = await structuredText(copyPrompt(c), parseCopy, "发布文案生成");
       await update(() => {
         c.copy = copy;
       });

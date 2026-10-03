@@ -1,3 +1,5 @@
+import { ProjectSection, useProjects } from "../list-projects/Projects";
+import { beginTask, failTask, updateTask } from "../tasks/store";
 import { useEffect, useRef, useState } from "react";
 import { App, Button, Dropdown, Input, Modal, Select, Switch } from "antd";
 import {
@@ -67,11 +69,14 @@ function CoverImage({ src }: { src: string }) {
   );
 }
 export default function CoverApp() {
+  const projects = useProjects("app.cover");
+  const creationProject = useRef<string | null>(null);
   const { message } = App.useApp();
   const [, redraw] = useState(0),
     [id, setId] = useState<string | null>(null);
   const [page, setPage] = useState<"create" | "gallery" | "config" | "editor">("create");
   const [theme, setTheme] = useState("");
+  const [draft, setDraft] = useState<CoverContent | undefined>();
   const [recommendTopic, setRecommendTopic] = useState<string | null>(null);
   const themeRef = useRef(theme);
   themeRef.current = theme;
@@ -103,6 +108,7 @@ export default function CoverApp() {
     corrupt = "";
   try {
     if (doc) content = readContent(doc.content);
+    else if (draft) content = draft;
     else if (page === "editor" && recommendTopic !== null) {
       content = emptyContent();
       content.config.topic = recommendTopic;
@@ -190,9 +196,9 @@ export default function CoverApp() {
       unblock();
     };
   }, []);
-  async function startNew(destination: "create" | "gallery" = "create") {
+  async function startNew(destination: "create" | "gallery" = "create", projectId: string | null = null) {
     if (composing.current) {
-      queued.current = () => void startNew(destination);
+      queued.current = () => void startNew(destination, projectId);
       return;
     }
     const ticket = ++request.current;
@@ -202,8 +208,10 @@ export default function CoverApp() {
     try {
       await store.flushDocuments();
       if (!mounted.current || ticket !== request.current) return;
+      creationProject.current = projectId;
       active.current = null;
       setId(null);
+      setDraft(undefined);
       setRecommendTopic(null);
       setPage(destination);
       setChanging(false);
@@ -228,7 +236,7 @@ export default function CoverApp() {
         }),
       });
       setError("");
-    }
+    } else if (content) setDraft({ ...content, config: { ...content.config, ...change } });
   }
   async function choose(number: string) {
     if (composing.current) {
@@ -242,7 +250,13 @@ export default function CoverApp() {
     try {
       await store.flushDocuments();
       if (!mounted.current || ticket !== request.current) return;
-      const target = doc ?? (await store.createDocument());
+      if (!doc) {
+        setDraft({ ...emptyContent(number), config: { ...emptyContent(number).config, ...(draft?.config ?? {}), style: number } });
+        setPage("config");
+        setChanging(false);
+        return;
+      }
+      const target = doc;
       // A completed file stays available even when another navigation superseded creation.
       if (!mounted.current || ticket !== request.current) return;
       const latest = store.currentDocument(target.id) ?? target;
@@ -281,6 +295,7 @@ export default function CoverApp() {
     const topic = (draftContent?.needsRecommendation ? draftContent.config.topic : themeRef.current).trim();
     if (!topic || controller.current || pending.current) return;
     const ticket = ++request.current;
+    const projectId = creationProject.current;
     const abort = new AbortController();
     controller.current = abort;
     setBusy(true);
@@ -289,9 +304,13 @@ export default function CoverApp() {
     setStatus("正在匹配风格、版式与配色…");
     setPage("editor");
     const valid = () => mounted.current && !abort.signal.aborted && request.current === ticket;
+    const card = beginTask(abort, {toolId: "app.cover", title: topic.slice(0, 40), stage: "正在匹配风格、版式与配色…"});
     await trackAiExecution(abort, (async () => {
       try {
         pending.current = true;
+        const caps = await ai.capabilities();
+        if (!valid()) return;
+        if (!caps.imageGenerate) throw new Error("当前 AI 服务不支持图片生成，请在设置中选择 Codex");
         await store.flushDocuments();
         if (!valid()) return;
         let target = active.current ? store.currentDocument(active.current) : undefined;
@@ -303,6 +322,7 @@ export default function CoverApp() {
           draft.needsRecommendation = true;
           store.stageDocument(target.id, { title: topic.slice(0, 40), content: JSON.stringify(draft) });
           await store.flushDocument(target.id);
+          if (projectId) await projects.move(target.id, projectId);
         }
         if (!valid()) return;
         store.activateDocument(target.id);
@@ -311,9 +331,6 @@ export default function CoverApp() {
         const snapshot = store.currentDocument(target.id)!.content;
         const remote = store.remoteVersion(target.id);
         pending.current = false;
-        const caps = await ai.capabilities();
-        if (!valid()) return;
-        if (!caps.imageGenerate) throw new Error("当前 AI 服务不支持图片生成，请在设置中选择 Codex");
         const result = await ai.generate({ toolId: "app.cover", record: false,
           messages: [{ role: "user", content: recommendationPrompt(topic) }],
         }, abort.signal);
@@ -333,10 +350,13 @@ export default function CoverApp() {
         pending.current = false;
         controller.current = null;
         setBusy(false);
+        card.finish();
         await generate(store.currentDocument(target.id)!);
       } catch (e) {
+        failTask(abort.signal, e);
         if (valid()) fail(e);
       } finally {
+        card.finish();
         if (ticket === request.current) pending.current = false;
         if (controller.current === abort) {
           controller.current = null;
@@ -346,10 +366,10 @@ export default function CoverApp() {
     })());
   }
   async function generate(prepared?: NonNullable<ReturnType<typeof store.currentDocument>>) {
-    const sourceDoc = prepared ?? (active.current ? store.currentDocument(active.current) : undefined);
-    const sourceContent = sourceDoc ? readContent(sourceDoc.content) : undefined;
-    const doc = sourceDoc, content = sourceContent, config = content?.config;
-    if (!doc || !content || controller.current || pending.current) return;
+    let sourceDoc = prepared ?? (active.current ? store.currentDocument(active.current) : undefined);
+    const sourceContent = sourceDoc ? readContent(sourceDoc.content) : draft;
+    const content = sourceContent, config = content?.config;
+    if (!content || controller.current || pending.current) return;
     if (composing.current) {
       queued.current = () => void generate();
       return;
@@ -362,6 +382,27 @@ export default function CoverApp() {
       fail("此作品已有 200 个版本，请创建新封面继续");
       return;
     }
+    if (!sourceDoc) {
+      pending.current = true;
+      const ticket = request.current;
+      const projectId = creationProject.current;
+      try {
+        const caps = await ai.capabilities();
+        if (!caps.imageGenerate) throw new Error("当前 AI 服务不支持图片生成");
+        if (!mounted.current || ticket !== request.current) return;
+        sourceDoc = await store.createDocument();
+        store.stageDocument(sourceDoc.id, { title: (config!.title || config!.topic).slice(0, 40), content: JSON.stringify(content) });
+        await store.flushDocument(sourceDoc.id);
+        if (projectId) await projects.move(sourceDoc.id, projectId);
+        if (!mounted.current || ticket !== request.current) return;
+        store.activateDocument(sourceDoc.id);
+        active.current = sourceDoc.id;
+        setId(sourceDoc.id);
+        sourceDoc = store.currentDocument(sourceDoc.id)!;
+      } catch (e) { fail(e); return; }
+      finally { pending.current = false; }
+    }
+    const doc = sourceDoc;
     const target = doc.id, remote = store.remoteVersion(target);
     let snapshot = doc.content, captured = content;
     const abort = new AbortController();
@@ -375,6 +416,7 @@ export default function CoverApp() {
     const unchanged = () =>
       store.currentDocument(target)?.content === snapshot &&
       store.remoteVersion(target) === remote;
+    const card = beginTask(abort, {toolId: "app.cover", title: doc.title, stage: "正在准备画风与参考图片…"});
     await trackAiExecution(
       abort,
       (async () => {
@@ -388,7 +430,7 @@ export default function CoverApp() {
               "当前 AI 服务不支持图片生成，请在全局设置中选择支持图片生成的 Codex",
             );
           if (!captured.config.title.trim() || !captured.config.subtitle.trim()) {
-            setStatus("正在拟写主标题与副文案…");
+            setStatus("正在拟写主标题与副文案…"); updateTask(abort.signal, {stage: "正在拟写主标题与副文案…"});
             const copy = await ai.generate({ toolId: "app.cover", record: false,
               messages: [{ role: "user", content: copyPrompt(captured.config) }],
             }, abort.signal);
@@ -418,7 +460,7 @@ export default function CoverApp() {
           if (references.length > caps.maxReferences)
             throw new Error("参考图片数量超过当前服务限制");
           const prompt = generationPrompt(captured.config, withCurrent);
-          setStatus("正在生成封面…");
+          setStatus("正在生成封面…"); updateTask(abort.signal, {stage: "正在生成封面…"});
           const result = await ai.generate(
             {
               toolId: "app.cover",
@@ -461,12 +503,14 @@ export default function CoverApp() {
                 }
               : {}),
           });
-          setStatus("正在保存封面…");
+          setStatus("正在保存封面…"); updateTask(abort.signal, {stage: "正在保存封面…"});
           await store.flushDocument(target);
           if (isValid()) message.success("封面已生成");
         } catch (e) {
+          failTask(abort.signal, e);
           if (!abort.signal.aborted) fail(e);
         } finally {
+          card.finish();
           if (controller.current === abort) {
             controller.current = null;
             if (mounted.current) {
@@ -609,11 +653,7 @@ export default function CoverApp() {
       </details>
     </>
   );
-  const rows = (favorite: boolean) =>
-    store
-      .documentList()
-      .filter((d) => d.favorite === favorite)
-      .map((item) => (
+  const row = (item: store.DocumentInfo) => (
         <div
           className={`cover-row ${item.id === id && (page === "config" || page === "editor") ? "selected" : ""}`}
           key={item.id}
@@ -651,12 +691,14 @@ export default function CoverApp() {
             trigger={["click"]}
             menu={{
               items: [
-                { key: "favorite", label: favorite ? "取消常用" : "设为常用" },
+                ...projects.menu(item.id),
+                { key: "favorite", label: item.favorite ? "取消常用" : "设为常用" },
                 { key: "rename", label: "重命名" },
                 { key: "export", label: "导出封面图片" },
                 { key: "backup", label: "导出作品备份" },
               ],
               onClick: ({ key }) => {
+                if (projects.handle(key, item.id)) return;
                 if (key === "export" || key === "backup") {
                   void exportWork(item.id, key === "backup");
                   return;
@@ -668,7 +710,7 @@ export default function CoverApp() {
                 void store
                   .ensureDocument(item.id)
                   .then(() =>
-                    store.stageDocument(item.id, { favorite: !favorite }),
+                    store.stageDocument(item.id, { favorite: !item.favorite }),
                   )
                   .catch(fail);
               },
@@ -682,7 +724,8 @@ export default function CoverApp() {
             </button>
           </Dropdown>
         </div>
-      ));
+      );
+  const rows = (favorite: boolean) => store.documentList().filter(item=>item.favorite === favorite && !projects.projectOf(item.id)).map(row);
   const query = search.trim().toLowerCase();
   const visible = styles.filter(
     (s) =>
@@ -716,7 +759,7 @@ export default function CoverApp() {
         <aside className="cover-nav">
           <header className="cover-heading">
             <CoverIcon />
-            <strong>封面大师</strong>
+            <strong>做封面</strong>
             <Button
               type="text"
               className="navigation-toggle"
@@ -739,18 +782,15 @@ export default function CoverApp() {
               className="tool-sidebar-create"
               icon={<AppstoreOutlined />}
               aria-current={page === "gallery" ? "page" : undefined}
-              onClick={() => void startNew("gallery")}
+              onClick={() => void startNew("gallery", doc ? null : creationProject.current)}
             >
               风格模板
             </Button>
           </div>
           <div className="cover-list">
-            {[true, false].map((favorite) => (
-              <section key={String(favorite)}>
-                <h3>{favorite ? "常用" : "最近打开"}</h3>
-                {rows(favorite).length ? rows(favorite) : <p>暂无</p>}
-              </section>
-            ))}
+            {rows(true).length > 0 && <section><h3>常用</h3>{rows(true)}</section>}
+            <ProjectSection navigation={projects} items={store.documentList()} renderItem={row} activeId={id} onCreate={projectId=>void startNew("create", projectId)} />
+            <section><h3>最近打开</h3>{rows(false).length ? rows(false) : <p>暂无</p>}</section>
           </div>
         </aside>
       )}
@@ -771,7 +811,7 @@ export default function CoverApp() {
           >
             {page === "create" ? "创建封面" : page === "gallery" && !changing
               ? "风格模板"
-              : doc?.title || "封面大师"}
+              : doc?.title || "做封面"}
           </button>
           {(page === "gallery" || page === "config") && !changing && (
             <nav className="cover-steps" aria-label="创建封面步骤">

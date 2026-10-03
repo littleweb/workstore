@@ -1,3 +1,4 @@
+import { sizeFor } from "./sizes";
 import { invoke } from "@tauri-apps/api/core";
 import { native } from "../workspace";
 import { imageSource } from "../comics/images";
@@ -58,7 +59,34 @@ export async function composePage(
   index: number
 ): Promise<string> {
   // Upstream comic pages already contain their complete lettering and composition.
-  if (content.engine?.startsWith("baoyu-comic@")) return raw;
+  if (content.engine?.startsWith("baoyu-comic@")) {
+    const sizeId = content.plan?.size ?? content.config?.size;
+    if (!sizeId) return raw; // Preserve existing works without explicit output dimensions.
+    const size = sizeFor(sizeId),
+      image = await loadImage(raw);
+    const canvas = document.createElement("canvas");
+    canvas.width = size.width;
+    canvas.height = size.height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("无法调整漫画尺寸");
+    ctx.fillStyle = styleFor(content.config).paper;
+    ctx.fillRect(0, 0, size.width, size.height);
+    const scale = Math.min(
+      size.width / image.width,
+      size.height / image.height
+    );
+    const width = image.width * scale,
+      height = image.height * scale;
+    ctx.drawImage(
+      image,
+      (size.width - width) / 2,
+      (size.height - height) / 2,
+      width,
+      height
+    );
+    const data = canvas.toDataURL("image/png");
+    return native ? invoke<string>("save_story_comic_image", { data }) : data;
+  }
   await document.fonts.ready;
   const image = await loadImage(raw),
     style = styleFor(content.config),

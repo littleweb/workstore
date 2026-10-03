@@ -1,3 +1,4 @@
+import {taskStore} from './helpers/tasks.mjs';
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
@@ -9,7 +10,7 @@ const dom=new JSDOM('<!doctype html><body></body>',{url:'http://localhost/'});
 for(const key of ['window','document','navigator','HTMLElement','Element','Node'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
 globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 const {createRoot}=await import('react-dom/client');const require=createRequire(import.meta.url);
-const code=buildSync({entryPoints:[new URL('../src/whiteboard/SelectionAssistant.tsx',import.meta.url).pathname],bundle:true,write:false,platform:'node',format:'cjs',jsx:'automatic',external:['react','react/jsx-runtime','antd','../ai/client','../ai/AiSidebar','../documentLifecycle','../workspace','@excalidraw/excalidraw']}).outputFiles[0].text;
+const code=buildSync({entryPoints:[new URL('../src/whiteboard/SelectionAssistant.tsx',import.meta.url).pathname],bundle:true,write:false,platform:'node',format:'cjs',jsx:'automatic',external:['../tasks/store','react','react/jsx-runtime','antd','../ai/client','../ai/AiSidebar','../documentLifecycle','../workspace','@excalidraw/excalidraw']}).outputFiles[0].text;
 after(()=>dom.window.close());
 const drain=()=>new Promise(resolve=>setImmediate(resolve));
 const deferred=()=>{let resolve;const promise=new Promise(r=>{resolve=r;});return {promise,resolve};};
@@ -17,9 +18,10 @@ const region={boardId:'board-a',elements:[{id:'t',type:'text',text:'Private text
 const diagram={kind:'whiteboard',title:'Flow',nodes:[{id:'a',label:'开始',shape:'rectangle',x:0,y:0,width:200,height:100}],edges:[]};
 const response={text:JSON.stringify({kind:'whiteboard-turn',message:'绘制一个流程',changes:[],diagram}),saveError:null};
 async function harness(options={}){
- const module={exports:{}};const calls=[],executions=[],writeStates=[],blockers=new Set(),captures=[];
+ const tasks=taskStore();const module={exports:{}};const calls=[],executions=[],writeStates=[],blockers=new Set(),captures=[];
  let attachment=options.attachment??null,boardId=options.empty?null:'board-a';
  vm.runInNewContext(code,{module,AbortController,structuredClone,require(id){
+  if(id==='../tasks/store')return tasks;
   if(id==='react'||id==='react/jsx-runtime')return require(id);
   if(id==='@excalidraw/excalidraw')return {getCommonBounds:elements=>{const e=elements[0];return [e.x,e.y,e.x+e.width,e.y+e.height];}};
   if(id==='../workspace')return {native:true};
@@ -44,7 +46,7 @@ async function harness(options={}){
  const onWriteState=value=>writeStates.push(value);
  const render=()=>root.render(React.createElement(module.exports.CanvasConversation,{boardId,attachment,target,onAttach:()=>{},onDetach:()=>{},onWriteState}));
  await act(async()=>render());
- return {host,calls,executions,captures,blockers,writeStates,
+ return {tasks,host,calls,executions,captures,blockers,writeStates,
   button:text=>[...host.querySelectorAll('button')].find(b=>b.textContent===text),
   async prompt(text='画一个流程图'){await act(async()=>{const input=host.querySelector('textarea');Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,'value').set.call(input,text);input.dispatchEvent(new window.Event('input',{bubbles:true}));});},
   async click(text){await act(async()=>{[...host.querySelectorAll('button')].find(b=>b.textContent===text).click();await drain();});},
@@ -124,5 +126,16 @@ test('an empty selected container receives real layout execution rather than a n
   assert.match(h.calls[0].request.messages[0].content,/空矩形/);
   assert.match(h.calls[0].request.messages.at(-1).content,/可绘制区域/);
   assert.match(h.host.textContent,/完成 3 步/);assert.ok(!h.host.textContent.includes('未修改白板'));
+ }finally{await h.close();}
+});
+
+test('whiteboard task continues while hidden and task-center cancellation stops the same executor',async()=>{
+ const wait=deferred();const h=await harness({executeWait:wait});try{
+  await h.prompt();await h.click('发送');h.host.hidden=true;
+  assert.equal(h.tasks.taskSnapshot()[0].state,'running');assert.equal(h.tasks.taskSnapshot()[0].done,1);
+  await act(async()=>h.tasks.cancelTask(h.tasks.taskSnapshot()[0].id));
+  assert.equal(h.executions[0][2].aborted,true);
+  await act(async()=>{wait.resolve();await drain();});
+  assert.equal(h.tasks.taskSnapshot()[0].state,'cancelled');
  }finally{await h.close();}
 });

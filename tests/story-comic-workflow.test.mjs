@@ -83,7 +83,7 @@ function harness(options = {}) {
   };
 }
 test("upstream styles and count includes cover; malformed copy, repeated pages and invalid counts rejected", () => {
-  assert.equal(m.styles.length, 11);
+  assert.equal(m.styles.length, 12);
   assert.equal(
     m.parsePlan(JSON.stringify(plan()), { ...m.defaults(), count: 4 }).pages
       .length,
@@ -111,11 +111,11 @@ test("one-click pipeline creates a hidden reference, independent pages and copy 
     h.saves.some((c) => c.plan?.pages[0].image && !c.plan.pages[1].image)
   );
 });
-test("a failed page retries once, preserves other pages and resumes only failed page", async () => {
+test("a failed page retries three times, preserves other pages and resumes only failed page", async () => {
   let failedAttempts = 0;
   const h = harness({
     image: async (prompt, refs, n) => {
-      if (prompt.includes("当前第2页") && failedAttempts++ < 2)
+      if (prompt.includes("当前第2页") && failedAttempts++ < 4)
         throw Error("page failed");
       return `image-${n}`;
     },
@@ -123,6 +123,8 @@ test("a failed page retries once, preserves other pages and resumes only failed 
   await runWorkflow(h.current, h.deps, h.abort.signal);
   assert.equal(h.current.job.status, "error");
   assert.equal(h.current.plan.pages.filter((p) => p.image).length, 3);
+  assert.equal(failedAttempts, 4);
+  assert.ok(h.saves.some(c => c.job.stage === "第2页自动重试 3/3"));
   assert.ok(h.current.copy);
   const before = h.images.length;
   const keep = h.current.plan.pages[0].image;
@@ -321,4 +323,116 @@ test("every final prompt is checkpointed before any image request and matches di
   };
   await runWorkflow(h.current,h.deps,h.abort.signal);
   assert.match(h.current.plan.pages[1].prompt, /对白气泡/);
+});
+
+test("long comics validate, retain size and apply selected ratio to page prompts",()=>{
+ for(const count of [12,16,18,20]) {
+  const config={...m.defaults(),topic:'一个完整的故事',count,size:'wide'};
+  m.validateConfig(config);
+  const source=plan();source.pages=Array.from({length:count},(_,i)=>({...source.pages[i%4],visual:`场景${i}`}));
+  const parsed=m.parsePlan(JSON.stringify(source),config);
+  assert.equal(parsed.pages.length,count);assert.equal(parsed.size,'wide');
+  assert.match(m.artPrompt({...m.emptyContent(),config,plan:parsed},0),/16:9/);
+  assert.match(m.artPrompt({...m.emptyContent(),config,plan:parsed},0),/1920×1080/);
+ }
+ assert.throws(()=>m.validateConfig({...m.defaults(),topic:'test',count:22}));
+ assert.throws(()=>m.validateConfig({...m.defaults(),topic:'test',size:'bad-size'}));
+});
+
+test("manual page counts reach all image jobs; inconsistent cached eight-page plan is archived", async () => {
+  for (const count of [12, 16, 18, 20]) {
+    const h = harness();
+    const source = h.current;
+    source.config.count = count;
+    const makePlan = (length) => ({ ...plan(), pages: Array.from({ length }, (_, i) => ({ ...plan().pages[i % 4], visual: `场景${i}` })) });
+    source.plan = m.parsePlan(JSON.stringify(makePlan(8)), { ...source.config, count: 8 });
+    source.plannedConfig = m.signature(source.config);
+    source.reference = 'old-reference';
+    let calls = 0;
+    h.deps.text = async (prompt) => {
+      if (++calls === 1) {
+        assert.match(prompt, new RegExp(`总页数${count}`));
+        return JSON.stringify(makePlan(8));
+      }
+      if (calls === 2) {
+        assert.match(prompt, new RegExp(`需要${count}页.*实际返回8页`));
+        return JSON.stringify(makePlan(count));
+      }
+      return JSON.stringify(copy());
+    };
+    await runWorkflow(source, h.deps, h.abort.signal);
+    assert.equal(h.current.plan.pages.length, count);
+    assert.equal(h.current.plan.pages.filter(p => p.status === 'ready').length, count);
+    assert.equal(h.current.job.total, count);
+    assert.equal(h.images.length, count + 1);
+    assert.equal(h.current.history[0].plan.pages.length, 8);
+    assert.equal(h.current.job.status, 'done');
+  }
+});
+
+test("cover title is refined within ten characters without invalidating saved old titles", () => {
+  const config = { ...m.defaults(), count: 4 };
+  const p = plan();
+  p.pages[0].title = '一二三四五六七八九十一';
+  assert.throws(() => m.parsePlan(JSON.stringify(p), config), /最多允许10字/);
+  p.pages[0].title = '一二三四五六七八九十';
+  assert.equal(m.parsePlan(JSON.stringify(p), config).pages[0].title.length, 10);
+  const old = { ...m.emptyContent(), plan: { ...p, pages: p.pages.map(x => ({ ...x, title: '一二三四五六七八九十一二', history: [] })) } };
+  assert.equal(m.readContent(JSON.stringify(old)).plan.pages.length, 4);
+  assert.equal([...m.topicTitle('一二三四五六七八九十一二三四')].length, 11);
+});
+
+
+test("input keeps the full original title and respects explicitly cleared drafts", () => {
+  const config = { ...m.defaults(), topic: '请帮我讲一个关于拖延的完整故事', count: 4 };
+  const c = { ...m.emptyContent(), config, plannedConfig: m.signature(config), plan: m.parsePlan(JSON.stringify(plan()), config) };
+  assert.equal(m.topicInputValue(m.readContent(JSON.stringify(c))), config.topic);
+  assert.equal(m.topicInputValue(m.emptyContent(), '完整标题'), '完整标题');
+  assert.equal(m.topicInputValue(m.emptyContent(), '未命名故事漫画'), '');
+  assert.equal(m.topicInputValue({ ...m.emptyContent(), topicEdited: true }, '完整标题'), '');
+});
+
+test("planning timeout identifies stage and preserves requested placeholders for retry", async () => {
+  const h = harness(); h.current.config.count = 12;
+  h.deps.text = async () => { throw Error('AI 文本响应超过 600 秒'); };
+  await assert.rejects(runWorkflow(h.current, h.deps, h.abort.signal), /漫画内容规划失败.*600 秒/);
+  assert.equal(h.current.job.total, 12);
+  assert.equal(h.current.job.status, 'error');
+  assert.equal(h.images.length, 0);
+});
+
+test("retry failed pages preserves completed images and the work plan", async () => {
+  const h = harness(); await runWorkflow(h.current, h.deps, h.abort.signal);
+  const c = structuredClone(h.current), old = c.plan.pages[0].image;
+  c.plan.pages[1].error = 'timeout'; c.plan.pages[1].status = 'error'; delete c.plan.pages[1].image;
+  c.plan.pages[3].error = 'timeout'; c.plan.pages[3].status = 'error'; delete c.plan.pages[3].image;
+  const count = h.images.length;
+  await runWorkflow(c, h.deps, h.abort.signal, undefined, true);
+  assert.equal(h.images.length - count, 2);
+  assert.equal(h.current.plan.pages[0].image, old);
+  assert.equal(h.current.history.length, 0);
+  assert.equal(h.current.job.status, 'done');
+});
+
+
+test("long topics remain intact through validation, persistence and planning", () => {
+  const topic = '这是完整的故事创作要求。'.repeat(1000);
+  const c = { ...m.emptyContent(), config: { ...m.defaults(), topic } };
+  m.validateConfig(c.config);
+  assert.equal(m.readContent(JSON.stringify(c)).config.topic, topic);
+  assert.ok(m.planningPrompt(c.config).includes(topic));
+  assert.throws(() => m.validateConfig({ ...c.config, topic: '  ' }), /主题不能为空/);
+});
+
+
+test("third automatic retry can succeed without regenerating completed pages", async () => {
+  let attempts = 0;
+  const h = harness({ image: async (prompt, refs, n) => {
+    if (prompt.includes('当前第2页') && ++attempts <= 3) throw Error('temporary failure');
+    return `image-${n}`;
+  } });
+  await runWorkflow(h.current, h.deps, h.abort.signal);
+  assert.equal(attempts, 4);
+  assert.equal(h.current.job.status, 'done');
+  assert.equal(h.images.length, 8);
 });

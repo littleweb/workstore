@@ -35,6 +35,8 @@ test('document layout does not trigger the real Lexical flex-parent focus warnin
     assert.equal(window.getComputedStyle(fixture.editable.parentElement).display, 'block', 'contenteditable must not be a direct flex item');
     assert.equal(warnings.some(text => text.includes('unwanted focusing behavior')), false, warnings.join('\n'));
     assert.equal(window.getComputedStyle(fixture.editable).minHeight, '100%', 'keep the empty editor hit area');
+    assert.equal(window.getComputedStyle(fixture.editable.parentElement).zIndex, '0', 'caret must not paint behind the editor background');
+    assert.equal(window.getComputedStyle(fixture.editable).caretColor, 'rgb(37, 44, 43)');
   } finally { fixture?.close(); console.warn = original; }
 });
 

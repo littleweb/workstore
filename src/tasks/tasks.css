@@ -1,0 +1,17 @@
+.task-center-trigger { position: relative; }
+.task-count { position:absolute; right:-3px; top:-3px; font-size:10px; line-height:15px; min-width:15px; padding:0 2px; border-radius:9px; color:white; background:#64867b; }
+.task-explanation { color:#84908b; font-size:12px; margin:0 0 24px; }
+.task-group { margin-bottom:24px; }
+.task-group h3 { font-size:13px; color:#7c8882; margin-bottom:10px; }
+.background-task { border:1px solid #e5ebe7; border-radius:12px; padding:14px; margin-bottom:10px; }
+.task-heading,.task-footer { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.task-heading strong { font-size:14px; overflow-wrap:anywhere; }
+.task-heading .ant-tag { flex-shrink:0; margin:0; }
+.background-task p { font-size:12px; color:#78827e; overflow-wrap:anywhere; }
+.task-footer { margin-top:12px; }
+.task-footer time { font-size:11px; color:#929c96; }
+.task-working { height:3px; background:linear-gradient(90deg,#e9efec,#7da89a,#e9efec); background-size:200% 100%; border-radius:3px; animation:task-working 2s linear infinite; }
+@keyframes task-working { to { background-position:-200% 0; } }
+@media(prefers-reduced-motion:reduce) { .task-working {animation:none;} }
+.tool-session { display:contents; }
+.tool-session[hidden] { display:none !important; }

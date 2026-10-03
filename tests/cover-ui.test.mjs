@@ -1,3 +1,4 @@
+import {noProjects} from './helpers/projects.mjs';
 import { test, after } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -34,7 +35,7 @@ const code = buildSync({
   format: "cjs",
   jsx: "automatic",
   loader: { ".css": "empty" },
-  external: [
+  external: ["../list-projects/Projects",
     "react",
     "react/jsx-runtime",
     "antd",
@@ -66,7 +67,8 @@ const initial = () => ({
   versions: [],
   selectedVersion: null,
 });
-async function harness({ empty = false } = {}) {
+async function harness({ empty = false, project = false } = {}) {
+  const memberships = new Map();
   let resolve;
   const waiting = new Promise((r) => (resolve = r)),
     requests = [],
@@ -142,6 +144,10 @@ async function harness({ empty = false } = {}) {
     setTimeout,
     clearTimeout,
     require(id) {
+    if (id === "../list-projects/Projects") return project ? {
+      useProjects:()=>({...noProjects.useProjects(),move:async(id,target)=>memberships.set(id,target)}),
+      ProjectSection:({onCreate})=>React.createElement('button',{onClick:()=>onCreate('project-a')},'项目中创建'),
+    } : noProjects;
       if (id === "react" || id === "react/jsx-runtime") return require(id);
       if (id === "@ant-design/icons")
         return new Proxy({}, { get: () => () => null });
@@ -237,6 +243,7 @@ async function harness({ empty = false } = {}) {
     });
   return {
     host,
+    memberships,
     store,
     docs,
     requests,
@@ -267,7 +274,7 @@ async function harness({ empty = false } = {}) {
     },
   };
 }
-test("all 277 templates are selectable; header steps preserve configuration and creation opens a durable draft", async () => {
+test("all 277 templates are selectable; header steps preserve configuration and creation keeps an unsaved draft", async () => {
   const h = await harness({ empty: true });
   try {
     await h.click("风格模板");
@@ -285,11 +292,9 @@ test("all 277 templates are selectable; header steps preserve configuration and 
         .click();
       await drain();
     });
-    assert.equal(h.docs.size, 1);
-    assert.equal(
-      JSON.parse([...h.docs.values()][0].content).config.style,
-      "200",
-    );
+    assert.equal(h.docs.size, 0);
+    await h.click("生成封面 →");
+    assert.equal(h.docs.size, 0); // Missing required text never creates a record.
     assert.ok(h.host.querySelector(".cover-config"));
     assert.equal(
       h.host
@@ -578,4 +583,49 @@ test("incomplete generated copy cannot start an image request", async () => {
     assert.equal(JSON.parse(h.docs.get("a").content).config.title,"");
     assert.match(h.host.textContent,/文案生成不完整/);
   } finally {await h.close();}
+});
+
+test("new style configuration creates exactly one record when generation starts", async () => {
+  const h = await harness({ empty: true });
+  try {
+    await h.click("风格模板");
+    await act(async () => {
+      h.host.querySelector('[aria-label="选择 200 世纪中叶冷幽默墨绘吉祥物"]').click();
+      await drain();
+    });
+    assert.equal(h.docs.size, 0);
+    await act(async () => {
+      for (const [selector, value] of [["textarea", "奶茶"], ["input", "今日奶茶"]]) {
+        const field = h.host.querySelector(".cover-config " + selector);
+        const proto = selector === "textarea" ? window.HTMLTextAreaElement.prototype : window.HTMLInputElement.prototype;
+        Object.getOwnPropertyDescriptor(proto, "value").set.call(field, value);
+        field.dispatchEvent(new window.Event("input", { bubbles: true }));
+      }
+      await drain();
+    });
+    assert.equal(h.docs.size, 0);
+    await h.click("生成封面 →");
+    assert.equal(h.docs.size, 1);
+    assert.equal(JSON.parse([...h.docs.values()][0].content).config.style, "200");
+  } finally { await h.close(); }
+});
+
+test("project creation keeps a draft and generation saves into its chosen project", async () => {
+  const h = await harness({ empty: true, project: true });
+  try {
+    await h.click("项目中创建");
+    assert.equal(h.docs.size, 0);
+    await h.click("风格模板");
+    await act(async () => {
+      h.host.querySelector('[aria-label="选择 200 世纪中叶冷幽默墨绘吉祥物"]').click();await drain();
+    });
+    await act(async () => {
+      const field=h.host.querySelector('.cover-config textarea');
+      Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,'value').set.call(field,'项目里的奶茶封面');
+      field.dispatchEvent(new window.Event('input',{bubbles:true}));await drain();
+    });
+    assert.equal(h.memberships.size,0);
+    await h.click('生成封面 →');
+    assert.equal(h.docs.size,1);assert.equal(h.memberships.get([...h.docs.keys()][0]),'project-a');
+  } finally { await h.close(); }
 });

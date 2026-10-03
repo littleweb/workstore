@@ -22,7 +22,8 @@
   },
   "bundle": {
     "macOS": {
-      "signingIdentity": "-"
+      "signingIdentity": "-",
+      "infoPlist": "Info.plist"
     },
     "targets": [
       "app"
