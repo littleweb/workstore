@@ -58,7 +58,7 @@ npm run desktop:build                           # 本机正式构建
 3. [架构与决定](docs/ARCHITECTURE.md)：必须保持的行为和数据边界。
 4. [多设备开发流程](docs/DEVELOPMENT.md)：分支、提交、同步与交接。
 
-本轮发布代码同时维护在 `master`；克隆后可执行 `git switch master` 接续本轮开发。原默认分支 `main` 保留。
+发布代码与共享上下文统一维护在默认分支 `main`；克隆后可执行 `git switch main` 接续开发。
 
 开发前 `git pull --ff-only`；完成后同步更新上下文文档，与代码一起 commit、push。另一台设备 pull 后即可接续。AI 助手应读取这些仓库文档；这不是对任何聊天软件私有记忆的自动同步。
 
