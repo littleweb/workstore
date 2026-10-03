@@ -8,9 +8,11 @@
 
 ## 每次开始
 
+当前发布开发线为 `master`，从 v0.1.14 起在该分支维护代码与共享上下文；GitHub 原默认分支 `main` 保留，首次克隆后先 `git fetch origin` 并切换 `master`。
+
 ```bash
 git status
-git switch main
+git switch master
 git pull --ff-only
 git switch -c fix/describe-the-change
 ```
