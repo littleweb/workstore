@@ -25,5 +25,5 @@ const base = JSON.parse(readFileSync('src-tauri/tauri.conf.json', 'utf8'));
 const resources = Object.keys(base.bundle.resources).filter(path => !/^(course-runtime|whiteboard-runtime)\//.test(path));
 run(process.execPath, ['node_modules/@tauri-apps/cli/tauri.js', 'build', '--config', JSON.stringify({
   build: { beforeBuildCommand: '', frontendDist: frontend },
-  bundle: { resources, createUpdaterArtifacts: true },
+  bundle: { resources, createUpdaterArtifacts: true, ...(process.platform === 'darwin' ? { targets: ['app', 'dmg'] } : {}) },
 }), ...process.argv.slice(2)]);
