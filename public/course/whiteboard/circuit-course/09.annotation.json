@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-09",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "一个低压小灯不亮，先确认开关是否闭合。再查看安全接点是否松动，以及元件是否符合说明。不要用短接电池或家庭插座来验证猜想。每次只改变一个允许的条件，记录观察到的结果。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "手检查简单回路的开关",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：一个低压小灯不亮，先确认开关是否闭合。",
+      "subtitle": "一个低压小灯不亮，先确认开关是否闭合。",
+      "type": "concept",
+      "region": {
+        "x": 132,
+        "y": 92,
+        "width": 625,
+        "height": 296
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3474,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          444.5,
+          102
+        ],
+        "end": [
+          444.5,
+          378
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "手观察完整导线夹与灯泡底座",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：再查看安全接点是否松动，以及元件是否符合说明。",
+      "subtitle": "再查看安全接点是否松动，以及元件是否符合说明。",
+      "type": "concept",
+      "region": {
+        "x": 959,
+        "y": 92,
+        "width": 626,
+        "height": 304
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 3974,
+        "durationMs": 4466,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1272,
+          102
+        ],
+        "end": [
+          1272,
+          386
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "教学电池与关闭的家用插座远离摆放",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：不要用短接电池或家庭插座来验证猜想。",
+      "subtitle": "不要用短接电池或家庭插座来验证猜想。",
+      "type": "concept",
+      "region": {
+        "x": 167,
+        "y": 595,
+        "width": 522,
+        "height": 233
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8640,
+        "durationMs": 3451,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          428,
+          605
+        ],
+        "end": [
+          428,
+          818
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "小人把观察结果画成简单无字图形记录",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：每次只改变一个允许的条件，记录观察到的结果。",
+      "subtitle": "每次只改变一个允许的条件，记录观察到的结果。",
+      "type": "concept",
+      "region": {
+        "x": 974,
+        "y": 519,
+        "width": 553,
+        "height": 324
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12291,
+        "durationMs": 17009,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1250.5,
+          529
+        ],
+        "end": [
+          1250.5,
+          833
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

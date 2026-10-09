@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-02",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "水蒸气来到较冷的地方，可能凝结成小水滴。云里聚集着小水滴或冰晶，云不是一团水蒸气。水滴不断碰合，变大后可能落下来形成雨。回想一下：看到云和看不到水蒸气，有什么区别？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "上升波纹旁一片小水滴群",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：水蒸气来到较冷的地方，可能凝结成小水滴。",
+      "subtitle": "水蒸气来到较冷的地方，可能凝结成小水滴。",
+      "type": "concept",
+      "region": {
+        "x": 256,
+        "y": 59,
+        "width": 391,
+        "height": 352
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3640,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          451.5,
+          69
+        ],
+        "end": [
+          451.5,
+          401
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "云轮廓里面可见稀疏小水滴和简单冰晶",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：云里聚集着小水滴或冰晶，云不是一团水蒸气。",
+      "subtitle": "云里聚集着小水滴或冰晶，云不是一团水蒸气。",
+      "type": "concept",
+      "region": {
+        "x": 967,
+        "y": 73,
+        "width": 520,
+        "height": 321
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4140,
+        "durationMs": 4021,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1227,
+          83
+        ],
+        "end": [
+          1227,
+          384
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "云下不同大小的雨滴",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：水滴不断碰合，变大后可能落下来形成雨。",
+      "subtitle": "水滴不断碰合，变大后可能落下来形成雨。",
+      "type": "concept",
+      "region": {
+        "x": 223,
+        "y": 487,
+        "width": 437,
+        "height": 390
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8361,
+        "durationMs": 3619,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          441.5,
+          497
+        ],
+        "end": [
+          441.5,
+          867
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "观察者看着云，旁边一片透明波纹",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：回想一下：看到云和看不到水蒸气，有什么区别？",
+      "subtitle": "回想一下：看到云和看不到水蒸气，有什么区别？",
+      "type": "concept",
+      "region": {
+        "x": 995,
+        "y": 501,
+        "width": 499,
+        "height": 397
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12180,
+        "durationMs": 17120,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1244.5,
+          511
+        ],
+        "end": [
+          1244.5,
+          888
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

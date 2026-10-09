@@ -20,6 +20,7 @@ function harness(invoke, options = {}) {
       document.activeElement = root;
     }
   } };
+  document.querySelectorAll = () => options.hosts ?? [root];
   document.visibilityState = 'visible'; document.body = root; document.activeElement = root;
   const context = {
     module: { exports: {} }, window, document, console,
@@ -27,7 +28,7 @@ function harness(invoke, options = {}) {
     setTimeout: (fn, delay) => { const id = ++serial; timers.set(id, { fn, delay, interval: false }); return id; },
     setInterval: (fn, delay) => { const id = ++serial; timers.set(id, { fn, delay, interval: true }); return id; },
     clearTimeout: id => timers.delete(id), clearInterval: id => timers.delete(id),
-    require: id => id.includes('documentLifecycle') ? { flushDocuments: async () => options.flush?.(), isSyncActivationBlocked: () => options.blocked?.() ?? false } : { isTauri: () => true, invoke },
+    require: id => id.includes('documentLifecycle') ? { beginSyncActivation: () => options.activate?.() ?? (() => {}), flushDocuments: async () => options.flush?.(), isSyncActivationBlocked: () => options.blocked?.() ?? false } : { isTauri: () => true, invoke },
   };
   vm.runInNewContext(code, context);
   return { api: context.module.exports, root, window, document, timers, inertChanges, advance: ms => { time += ms; } };
@@ -374,4 +375,29 @@ test('slow pre-activation saving never makes the foreground inert',async()=>{
  const h=harness(async command=>command==='sync_workspace'?'job':{changed:[],message:'done'}, {flush:async()=>{if(++saves===2)await gate;}});
  const task=h.api.syncWorkspace();await drain();assert.equal(saves,2);assert.equal(h.root.inert,false);assert.deepEqual(h.inertChanges,[]);
  finish();await task;assert.equal(h.root.inert,false);
+});
+
+test('sync protects editor hosts but navigation remains interactive throughout slow refresh', async () => {
+  const editor = { inert: false }, hidden = { inert: true };
+  let release, activated = false;
+  const h = harness(async command => command === 'sync_workspace' ? 'job' : {changed:['state.json'],message:'done'}, {
+    hosts: [editor, hidden], activate: () => { activated = true; return () => { activated = false; }; },
+  });
+  h.api.registerSyncRefresher(() => new Promise(resolve => { release = resolve; }));
+  const task = h.api.syncWorkspace(); await drain();
+  assert.equal(activated, true); assert.equal(editor.inert, true); assert.equal(hidden.inert, true);
+  assert.equal(h.root.inert, false); assert.deepEqual(h.inertChanges, []);
+  let clicks = 0;
+  h.document.addEventListener('click', () => { clicks++; });
+  h.document.dispatchEvent(new Event('click')); assert.equal(clicks, 1);
+  release(); await task;
+  assert.equal(editor.inert, false); assert.equal(hidden.inert, true); assert.equal(activated, false);
+});
+test('failed activation releases editor protection and queued navigation barrier', async () => {
+  const editor = { inert: false }; let released = false;
+  const h = harness(async command => { if (command === 'sync_workspace') return 'job'; throw Error('disk failure'); }, {
+    hosts:[editor], activate: () => () => { released = true; },
+  });
+  await assert.rejects(h.api.syncWorkspace(), /disk failure/);
+  assert.equal(released,true); assert.equal(editor.inert,false); assert.equal(h.root.inert,false);
 });

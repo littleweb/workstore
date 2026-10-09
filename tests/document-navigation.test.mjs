@@ -88,7 +88,8 @@ async function harness(options = {}) {
     } : noProjects;
     if (id === 'react' || id === 'react-dom' || id === 'react/jsx-runtime') return require(id);
     if (id === './store') return store;
-    if (id === './ConversationNote') return { __esModule: true, default: () => null, conversationContent: () => null };
+    if (id === './ConversationNote') return { __esModule: true, default: () => null, conversationContent: () => null,
+      emptyConversation: () => JSON.stringify({type:'workstore.conversation',version:1,entries:[],draft:''}) };
     if (id === './aiTarget') return { documentAiTarget: () => ({ kind: 'document', capture: () => ({id:lastId,title:'test',content:''}) }) };
     if (id === './DocumentClickDiagnostics') return { __esModule: true, default: () => null };
     if (id === './clickDiagnostics') return { recordDocumentClickStage: () => {} };
@@ -97,7 +98,8 @@ async function harness(options = {}) {
     if (id === 'antd') return {
       App: { useApp: () => ({ message: { error: text => errors.push(text), warning: text => errors.push(text) } }) },
       Button: ({ children, onClick, disabled, loading }) => React.createElement('button', { onClick, disabled: disabled || loading }, children),
-      Dropdown: Pass, Tooltip: Pass, Modal: ({ open, children }) => open ? children : null,
+      Dropdown: Pass, Tooltip: Pass, Modal: ({ open, children, title, onCancel }) => open ? React.createElement('div', {role:'dialog','aria-label':title}, children,
+        React.createElement('button',{onClick:onCancel},'关闭弹窗')) : null,
       Input: props => React.createElement('input', { value: props.value, onChange: props.onChange }),
     };
     if (id === '@ant-design/icons') return new Proxy({}, { get: () => icon });
@@ -480,14 +482,28 @@ test('AI assistant docks beside the editor without a dialog or replacing the liv
 });
 
 test('project create saves a note into the requested project without changing existing content',async()=>{
+ for (const type of ['普通笔记','对话笔记']) {
  const h=await harness({project:true});try{
   await act(async()=>{[...h.host.querySelectorAll('button')].find(b=>b.textContent==='项目中创建').click();await drain();});
+  assert.equal(h.lastId,'a');assert.equal(h.store.currentDocument('new'),undefined);
+  await act(async()=>{[...h.host.querySelectorAll('[aria-label="创建笔记"] button')].find(b=>b.textContent==='关闭弹窗').click();await drain();});
+  assert.equal(h.store.currentDocument('new'),undefined,'cancel must not create a note');
+  await act(async()=>{[...h.host.querySelectorAll('button')].find(b=>b.textContent==='项目中创建').click();await drain();});
+  await act(async()=>{[...h.host.querySelectorAll('[aria-label="创建笔记"] button')].find(b=>b.textContent===type).click();await drain();});
   assert.equal(h.lastId,'new');assert.equal(h.memberships.get('new'),'project-a');assert.equal(h.store.currentDocument('a').content,'<p>Content a</p>');
+  assert.equal(h.host.querySelector('[aria-label="创建笔记"]'),null);
+  if(type==='对话笔记'){
+    assert.equal(h.store.currentDocument('new').title,'对话笔记');
+    const content=JSON.parse(h.store.currentDocument('new').content);
+    assert.equal(content.type,'workstore.conversation');assert.equal(content.entries.length,0);assert.equal(content.draft,'');
+  }else assert.equal(h.store.currentDocument('new').content,'');
  }finally{await h.close();}
+ }
 });
 test('failed project assignment retains the created note and reports failure',async()=>{
  const h=await harness({project:true,moveFails:true});try{
   await act(async()=>{[...h.host.querySelectorAll('button')].find(b=>b.textContent==='项目中创建').click();await drain();});
+  await act(async()=>{[...h.host.querySelectorAll('[aria-label="创建笔记"] button')].find(b=>b.textContent==='普通笔记').click();await drain();});
   assert(h.store.currentDocument('new'));assert.equal(h.lastId,'a');assert(h.errors.some(e=>String(e).includes('项目保存失败')));
  }finally{await h.close();}
 });

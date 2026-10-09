@@ -1,0 +1,1 @@
+export default function CourseIcon(){return <svg viewBox="0 0 24 24" fill="none" stroke="#56856d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{width:'100%',height:'100%',display:'block'}}><path d="M3 5h6l3 2 3-2h6v14h-6l-3 2-3-2H3z"/><path d="M12 7v14M6 10h3m-3 4h3m6-4h3m-3 4h3"/></svg>;}

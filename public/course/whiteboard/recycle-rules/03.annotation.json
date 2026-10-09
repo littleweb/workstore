@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-03",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "菜叶、果皮等食物残余，通常有专门处理路径。把包装和里面的食物分开，能减少后续处理麻烦。水分和混杂物会影响处理，不要把袋子当食物残余。练习：带包装的剩饭，你会先做哪个分开动作？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "少量菜叶与果皮放在小容器",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：菜叶、果皮等食物残余，通常有专门处理路径。",
+      "subtitle": "菜叶、果皮等食物残余，通常有专门处理路径。",
+      "type": "concept",
+      "region": {
+        "x": 257,
+        "y": 123,
+        "width": 347,
+        "height": 272
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3830,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          430.5,
+          133
+        ],
+        "end": [
+          430.5,
+          385
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "手将菜叶和无字包装袋分开",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：把包装和里面的食物分开，能减少后续处理麻烦。",
+      "subtitle": "把包装和里面的食物分开，能减少后续处理麻烦。",
+      "type": "concept",
+      "region": {
+        "x": 971,
+        "y": 125,
+        "width": 578,
+        "height": 264
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4330,
+        "durationMs": 4211,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1260,
+          135
+        ],
+        "end": [
+          1260,
+          379
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "食物小容器旁一个被单独取出的塑料袋",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：水分和混杂物会影响处理，不要把袋子当食物残余。",
+      "subtitle": "水分和混杂物会影响处理，不要把袋子当食物残余。",
+      "type": "concept",
+      "region": {
+        "x": 162,
+        "y": 583,
+        "width": 512,
+        "height": 233
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8741,
+        "durationMs": 4412,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          418,
+          593
+        ],
+        "end": [
+          418,
+          806
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "一盒剩饭与旁边空容器和包装袋",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：带包装的剩饭，你会先做哪个分开动作？",
+      "subtitle": "练习：带包装的剩饭，你会先做哪个分开动作？",
+      "type": "concept",
+      "region": {
+        "x": 935,
+        "y": 575,
+        "width": 647,
+        "height": 276
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13353,
+        "durationMs": 15947,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1258.5,
+          585
+        ],
+        "end": [
+          1258.5,
+          841
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

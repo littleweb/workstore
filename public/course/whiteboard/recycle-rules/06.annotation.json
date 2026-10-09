@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-06",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "现在拿一个空饮料盒，先观察材料和残留状态。清空残液，再查你所在地对复合包装的要求。按当地规则投放，并避免污染其他已分好的物品。总结：辨材料、看状态、查规则，再进行投放。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "手拿一个无字空饮料盒",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：现在拿一个空饮料盒，先观察材料和残留状态。",
+      "subtitle": "现在拿一个空饮料盒，先观察材料和残留状态。",
+      "type": "concept",
+      "region": {
+        "x": 196,
+        "y": 52,
+        "width": 373,
+        "height": 395
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3705,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          382.5,
+          62
+        ],
+        "end": [
+          382.5,
+          437
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "手倒空饮料盒，旁边纯图标规则卡片",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：清空残液，再查你所在地对复合包装的要求。",
+      "subtitle": "清空残液，再查你所在地对复合包装的要求。",
+      "type": "concept",
+      "region": {
+        "x": 918,
+        "y": 80,
+        "width": 619,
+        "height": 365
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4205,
+        "durationMs": 3692,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1227.5,
+          90
+        ],
+        "end": [
+          1227.5,
+          435
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "整齐投放的包装盒与干净纸张",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：按当地规则投放，并避免污染其他已分好的物品。",
+      "subtitle": "按当地规则投放，并避免污染其他已分好的物品。",
+      "type": "concept",
+      "region": {
+        "x": 181,
+        "y": 493,
+        "width": 470,
+        "height": 387
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8097,
+        "durationMs": 4079,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          416,
+          503
+        ],
+        "end": [
+          416,
+          870
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "放大镜、空容器、规则图标和分类箱四个小图形",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：总结：辨材料、看状态、查规则，再进行投放。",
+      "subtitle": "总结：辨材料、看状态、查规则，再进行投放。",
+      "type": "concept",
+      "region": {
+        "x": 925,
+        "y": 591,
+        "width": 657,
+        "height": 235
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12376,
+        "durationMs": 16924,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1253.5,
+          601
+        ],
+        "end": [
+          1253.5,
+          816
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

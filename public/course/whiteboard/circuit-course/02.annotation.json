@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-02",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "电源两端通过导线和用电器连接，才能形成回路。路线看起来挨着，不等于接点真的接通。轻轻检查安全接点，观察导线是否实际接触。练习：把一个接点拿开，整个路径发生什么变化？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "电池两端分别连接灯泡的完整导线环路",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：电源两端通过导线和用电器连接，才能形成回路。",
+      "subtitle": "电源两端通过导线和用电器连接，才能形成回路。",
+      "type": "concept",
+      "region": {
+        "x": 172,
+        "y": 111,
+        "width": 508,
+        "height": 257
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4046,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          426,
+          121
+        ],
+        "end": [
+          426,
+          358
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "两个看似接近却没有接触的导线端头",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：路线看起来挨着，不等于接点真的接通。",
+      "subtitle": "路线看起来挨着，不等于接点真的接通。",
+      "type": "concept",
+      "region": {
+        "x": 932,
+        "y": 180,
+        "width": 644,
+        "height": 91
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4546,
+        "durationMs": 3420,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1254,
+          190
+        ],
+        "end": [
+          1254,
+          261
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "手检查低压教具的导线接头",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：轻轻检查安全接点，观察导线是否实际接触。",
+      "subtitle": "轻轻检查安全接点，观察导线是否实际接触。",
+      "type": "concept",
+      "region": {
+        "x": 93,
+        "y": 582,
+        "width": 641,
+        "height": 246
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8166,
+        "durationMs": 3823,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          413.5,
+          592
+        ],
+        "end": [
+          413.5,
+          818
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "一只手断开回路中的一个连接夹",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：把一个接点拿开，整个路径发生什么变化？",
+      "subtitle": "练习：把一个接点拿开，整个路径发生什么变化？",
+      "type": "concept",
+      "region": {
+        "x": 1000,
+        "y": 480,
+        "width": 494,
+        "height": 360
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12189,
+        "durationMs": 17111,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1247,
+          490
+        ],
+        "end": [
+          1247,
+          830
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

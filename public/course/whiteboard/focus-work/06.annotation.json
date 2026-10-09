@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-06",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "卡住时，先描述具体困难，而不是给自己贴标签。问自己缺的是资料、决定，还是一个可操作的小动作。只解决眼前的一个阻碍，再检查能否继续。如果问题超出能力，写清需要什么帮助再去求助。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "人在一块缺口拼图前观察",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：卡住时，先描述具体困难，而不是给自己贴标签。",
+      "subtitle": "卡住时，先描述具体困难，而不是给自己贴标签。",
+      "type": "concept",
+      "region": {
+        "x": 184,
+        "y": 118,
+        "width": 428,
+        "height": 302
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3953,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          398,
+          128
+        ],
+        "end": [
+          398,
+          410
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "书本、岔路和手部动作三个独立图形",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：问自己缺的是资料、决定，还是一个可操作的小动作。",
+      "subtitle": "问自己缺的是资料、决定，还是一个可操作的小动作。",
+      "type": "concept",
+      "region": {
+        "x": 911,
+        "y": 132,
+        "width": 640,
+        "height": 260
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4453,
+        "durationMs": 4527,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1231,
+          142
+        ],
+        "end": [
+          1231,
+          382
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "一块拼图补进当前缺口",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：只解决眼前的一个阻碍，再检查能否继续。",
+      "subtitle": "只解决眼前的一个阻碍，再检查能否继续。",
+      "type": "concept",
+      "region": {
+        "x": 191,
+        "y": 549,
+        "width": 422,
+        "height": 286
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 9180,
+        "durationMs": 3542,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          402,
+          559
+        ],
+        "end": [
+          402,
+          825
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "两个人一起查看具体拼图缺口",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：如果问题超出能力，写清需要什么帮助再去求助。",
+      "subtitle": "如果问题超出能力，写清需要什么帮助再去求助。",
+      "type": "concept",
+      "region": {
+        "x": 995,
+        "y": 531,
+        "width": 485,
+        "height": 303
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12922,
+        "durationMs": 16378,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1237.5,
+          541
+        ],
+        "end": [
+          1237.5,
+          824
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

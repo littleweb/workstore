@@ -79,7 +79,7 @@ export default function HtmlApp() {
       const snapshot = await send(action);
       if (native && snapshot) await invoke('html_original_backup', {snapshot});
     };
-    const unflush = registerDocumentFlusher(() => persist('flush'));
+    const unflush = registerDocumentFlusher(() => persist('flush'), 'app.html');
     const unstop = registerAiStopper(async () => { await persist('stop'); if (native) await invoke('html_original_cancel'); });
     const timer = setInterval(() => { void persist('flush').catch(e => setError(String(e))); }, 15000);
     return () => {

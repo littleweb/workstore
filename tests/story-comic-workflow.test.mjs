@@ -436,3 +436,28 @@ test("third automatic retry can succeed without regenerating completed pages", a
   assert.equal(h.current.job.status, 'done');
   assert.equal(h.images.length, 8);
 });
+
+test('audiences survive persisted content and guide planning for children, students and workplace', () => {
+  for (const audience of ['大众读者','学龄前儿童','儿童','青少年','学生','大学生','职场人士','职场新人','家长','教师','中老年读者']) {
+    const content = m.emptyContent(); content.config.audience = audience;
+    assert.equal(m.readContent(JSON.stringify(content)).config.audience, audience);
+    assert.match(m.planningPrompt(content.config), new RegExp('目标受众：'+audience));
+    assert.doesNotThrow(()=>m.parsePlan(JSON.stringify(plan()), {...content.config,count:4}));
+  }
+  const invalid = m.emptyContent(); invalid.config.audience = 'unknown';
+  assert.throws(()=>m.readContent(JSON.stringify(invalid)));
+  assert.match(m.planningPrompt({...m.defaults(),audience:'儿童'}), /儿童能理解的词语/);
+});
+
+test('scene and character references survive storage and reach the matching generation requests',async()=>{
+ const id=c=>'workstore-image:'+c.repeat(64);
+ const c=m.emptyContent();c.config={...c.config,topic:'朋友',count:4,characterReferences:[id('a')],sceneReferences:[id('b')]};
+ assert.equal(m.readContent(JSON.stringify(c)).config.sceneReferences[0],id('b'));
+ const calls=[];let saved;
+ await runWorkflow(c,{valid:()=>true,text:async prompt=>prompt.includes('只输出 JSON')?JSON.stringify(plan()):JSON.stringify({title:'朋友',alternatives:['朋友们','友情'],description:'朋友的故事',hashtags:['朋友','友情','成长','漫画','故事']}),image:async(prompt,refs)=>{calls.push({prompt,refs});return id('c');},compose:async raw=>raw,save:async next=>saved=next},new AbortController().signal);
+ assert.deepEqual(Array.from(calls[0].refs),[id('a')]);
+ assert.deepEqual(Array.from(calls[1].refs),[id('c'),id('a'),id('b')]);
+ assert.match(calls[1].prompt,/用户场景图/);assert.equal(saved.plan.pages.length,4);
+ const invalid=m.emptyContent();invalid.config.sceneReferences=Array(4).fill(id('a'));
+ assert.throws(()=>m.readContent(JSON.stringify(invalid)));
+});

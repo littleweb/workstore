@@ -1,0 +1,909 @@
+{
+  "title": "一滴水的循环旅行",
+  "summary": "一滴水开始旅行；水蒸气与云；落地之后去哪儿；把旅行讲给别人听",
+  "duration": 120,
+  "scenes": [
+    {
+      "title": "一滴水开始旅行",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "想象一滴水落进小池塘，它的旅行才刚开始。",
+          "subject": "小池塘与橙色点缀的一滴水"
+        },
+        {
+          "text": "太阳把能量带到水面，部分水变成看不见的水蒸气。",
+          "subject": "太阳照射水面，稀疏灰色上升波纹"
+        },
+        {
+          "text": "蒸发可以发生在常温下，不必等水沸腾。",
+          "subject": "一只浅水碟放在窗边"
+        },
+        {
+          "text": "小实验：观察同样的水，放在不同位置有什么变化？",
+          "subject": "窗边与阴凉处各一个相同无标签水碟"
+        }
+      ],
+      "narration": "想象一滴水落进小池塘，它的旅行才刚开始。太阳把能量带到水面，部分水变成看不见的水蒸气。蒸发可以发生在常温下，不必等水沸腾。小实验：观察同样的水，放在不同位置有什么变化？",
+      "image": "/course/whiteboard/water-journey/01.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"想象一滴水落进小池塘，它的旅行才刚开始。\",\"图形\":\"小池塘与橙色点缀的一滴水\"},{\"讲解\":\"太阳把能量带到水面，部分水变成看不见的水蒸气。\",\"图形\":\"太阳照射水面，稀疏灰色上升波纹\"},{\"讲解\":\"蒸发可以发生在常温下，不必等水沸腾。\",\"图形\":\"一只浅水碟放在窗边\"},{\"讲解\":\"小实验：观察同样的水，放在不同位置有什么变化？\",\"图形\":\"窗边与阴凉处各一个相同无标签水碟\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "想象一滴水落进小池塘",
+          "startMs": 0,
+          "endMs": 2334,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "它的旅行才刚开始",
+          "startMs": 2334,
+          "endMs": 4145,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "太阳把能量带到水面",
+          "startMs": 4145,
+          "endMs": 6158,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "部分水变成看不见的水蒸气",
+          "startMs": 6158,
+          "endMs": 8774,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "蒸发可以发生在常温下",
+          "startMs": 8774,
+          "endMs": 10988,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不必等水沸腾",
+          "startMs": 10988,
+          "endMs": 12397,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "小实验：观察同样的水",
+          "startMs": 12397,
+          "endMs": 14611,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "放在不同位置有什么变化",
+          "startMs": 14611,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-01",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "想象一滴水落进小池塘，它的旅行才刚开始。太阳把能量带到水面，部分水变成看不见的水蒸气。蒸发可以发生在常温下，不必等水沸腾。小实验：观察同样的水，放在不同位置有什么变化？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "小池塘与橙色点缀的一滴水",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：想象一滴水落进小池塘，它的旅行才刚开始。",
+            "subtitle": "想象一滴水落进小池塘，它的旅行才刚开始。",
+            "type": "concept",
+            "region": {
+              "x": 156,
+              "y": 107,
+              "width": 520,
+              "height": 320
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3645,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                416,
+                117
+              ],
+              "end": [
+                416,
+                417
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "太阳照射水面，稀疏灰色上升波纹",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：太阳把能量带到水面，部分水变成看不见的水蒸气。",
+            "subtitle": "太阳把能量带到水面，部分水变成看不见的水蒸气。",
+            "type": "concept",
+            "region": {
+              "x": 999,
+              "y": 58,
+              "width": 511,
+              "height": 374
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4145,
+              "durationMs": 4429,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1254.5,
+                68
+              ],
+              "end": [
+                1254.5,
+                422
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "一只浅水碟放在窗边",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：蒸发可以发生在常温下，不必等水沸腾。",
+            "subtitle": "蒸发可以发生在常温下，不必等水沸腾。",
+            "type": "concept",
+            "region": {
+              "x": 147,
+              "y": 527,
+              "width": 565,
+              "height": 322
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8774,
+              "durationMs": 3423,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                429.5,
+                537
+              ],
+              "end": [
+                429.5,
+                839
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "窗边与阴凉处各一个相同无标签水碟",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：小实验：观察同样的水，放在不同位置有什么变化？",
+            "subtitle": "小实验：观察同样的水，放在不同位置有什么变化？",
+            "type": "concept",
+            "region": {
+              "x": 920,
+              "y": 538,
+              "width": 669,
+              "height": 297
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12397,
+              "durationMs": 16903,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1254.5,
+                548
+              ],
+              "end": [
+                1254.5,
+                825
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/water-journey/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "水蒸气与云",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "水蒸气来到较冷的地方，可能凝结成小水滴。",
+          "subject": "上升波纹旁一片小水滴群"
+        },
+        {
+          "text": "云里聚集着小水滴或冰晶，云不是一团水蒸气。",
+          "subject": "云轮廓里面可见稀疏小水滴和简单冰晶"
+        },
+        {
+          "text": "水滴不断碰合，变大后可能落下来形成雨。",
+          "subject": "云下不同大小的雨滴"
+        },
+        {
+          "text": "回想一下：看到云和看不到水蒸气，有什么区别？",
+          "subject": "观察者看着云，旁边一片透明波纹"
+        }
+      ],
+      "narration": "水蒸气来到较冷的地方，可能凝结成小水滴。云里聚集着小水滴或冰晶，云不是一团水蒸气。水滴不断碰合，变大后可能落下来形成雨。回想一下：看到云和看不到水蒸气，有什么区别？",
+      "image": "/course/whiteboard/water-journey/02.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"水蒸气来到较冷的地方，可能凝结成小水滴。\",\"图形\":\"上升波纹旁一片小水滴群\"},{\"讲解\":\"云里聚集着小水滴或冰晶，云不是一团水蒸气。\",\"图形\":\"云轮廓里面可见稀疏小水滴和简单冰晶\"},{\"讲解\":\"水滴不断碰合，变大后可能落下来形成雨。\",\"图形\":\"云下不同大小的雨滴\"},{\"讲解\":\"回想一下：看到云和看不到水蒸气，有什么区别？\",\"图形\":\"观察者看着云，旁边一片透明波纹\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "水蒸气来到较冷的地方",
+          "startMs": 0,
+          "endMs": 2331,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "可能凝结成小水滴",
+          "startMs": 2331,
+          "endMs": 4140,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "云里聚集着小水滴或冰晶",
+          "startMs": 4140,
+          "endMs": 6552,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "云不是一团水蒸气",
+          "startMs": 6552,
+          "endMs": 8361,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "水滴不断碰合",
+          "startMs": 8361,
+          "endMs": 9768,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "变大后可能落下来形成雨",
+          "startMs": 9768,
+          "endMs": 12180,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "回想一下：看到云和看不到水蒸气",
+          "startMs": 12180,
+          "endMs": 15397,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "有什么区别",
+          "startMs": 15397,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-02",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "水蒸气来到较冷的地方，可能凝结成小水滴。云里聚集着小水滴或冰晶，云不是一团水蒸气。水滴不断碰合，变大后可能落下来形成雨。回想一下：看到云和看不到水蒸气，有什么区别？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "上升波纹旁一片小水滴群",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：水蒸气来到较冷的地方，可能凝结成小水滴。",
+            "subtitle": "水蒸气来到较冷的地方，可能凝结成小水滴。",
+            "type": "concept",
+            "region": {
+              "x": 256,
+              "y": 59,
+              "width": 391,
+              "height": 352
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3640,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                451.5,
+                69
+              ],
+              "end": [
+                451.5,
+                401
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "云轮廓里面可见稀疏小水滴和简单冰晶",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：云里聚集着小水滴或冰晶，云不是一团水蒸气。",
+            "subtitle": "云里聚集着小水滴或冰晶，云不是一团水蒸气。",
+            "type": "concept",
+            "region": {
+              "x": 967,
+              "y": 73,
+              "width": 520,
+              "height": 321
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4140,
+              "durationMs": 4021,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1227,
+                83
+              ],
+              "end": [
+                1227,
+                384
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "云下不同大小的雨滴",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：水滴不断碰合，变大后可能落下来形成雨。",
+            "subtitle": "水滴不断碰合，变大后可能落下来形成雨。",
+            "type": "concept",
+            "region": {
+              "x": 223,
+              "y": 487,
+              "width": 437,
+              "height": 390
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8361,
+              "durationMs": 3619,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                441.5,
+                497
+              ],
+              "end": [
+                441.5,
+                867
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "观察者看着云，旁边一片透明波纹",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：回想一下：看到云和看不到水蒸气，有什么区别？",
+            "subtitle": "回想一下：看到云和看不到水蒸气，有什么区别？",
+            "type": "concept",
+            "region": {
+              "x": 995,
+              "y": 501,
+              "width": 499,
+              "height": 397
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12180,
+              "durationMs": 17120,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1244.5,
+                511
+              ],
+              "end": [
+                1244.5,
+                888
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/water-journey/02.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "落地之后去哪儿",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "落下来的雨，有一部分流入河流和湖泊。",
+          "subject": "小山坡的雨水沿溪流进入湖泊"
+        },
+        {
+          "text": "还有一些进入土壤，补充地下的水。",
+          "subject": "简洁土地剖面，蓝色水滴下渗"
+        },
+        {
+          "text": "植物从土壤中吸水，也把水带回空气。",
+          "subject": "小植物根系吸水，叶片附近水汽波纹"
+        },
+        {
+          "text": "不同路径连在一起，水循环没有唯一的起点。",
+          "subject": "河流、土壤与树木三个独立小图标组成循环"
+        }
+      ],
+      "narration": "落下来的雨，有一部分流入河流和湖泊。还有一些进入土壤，补充地下的水。植物从土壤中吸水，也把水带回空气。不同路径连在一起，水循环没有唯一的起点。",
+      "image": "/course/whiteboard/water-journey/03.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"落下来的雨，有一部分流入河流和湖泊。\",\"图形\":\"小山坡的雨水沿溪流进入湖泊\"},{\"讲解\":\"还有一些进入土壤，补充地下的水。\",\"图形\":\"简洁土地剖面，蓝色水滴下渗\"},{\"讲解\":\"植物从土壤中吸水，也把水带回空气。\",\"图形\":\"小植物根系吸水，叶片附近水汽波纹\"},{\"讲解\":\"不同路径连在一起，水循环没有唯一的起点。\",\"图形\":\"河流、土壤与树木三个独立小图标组成循环\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "落下来的雨",
+          "startMs": 0,
+          "endMs": 1269,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "有一部分流入河流和湖泊",
+          "startMs": 1269,
+          "endMs": 3567,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "还有一些进入土壤",
+          "startMs": 3567,
+          "endMs": 5290,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "补充地下的水",
+          "startMs": 5290,
+          "endMs": 6630,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "植物从土壤中吸水",
+          "startMs": 6630,
+          "endMs": 8353,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "也把水带回空气",
+          "startMs": 8353,
+          "endMs": 9885,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不同路径连在一起",
+          "startMs": 9885,
+          "endMs": 11608,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "水循环没有唯一的起点",
+          "startMs": 11608,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-03",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "落下来的雨，有一部分流入河流和湖泊。还有一些进入土壤，补充地下的水。植物从土壤中吸水，也把水带回空气。不同路径连在一起，水循环没有唯一的起点。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "小山坡的雨水沿溪流进入湖泊",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：落下来的雨，有一部分流入河流和湖泊。",
+            "subtitle": "落下来的雨，有一部分流入河流和湖泊。",
+            "type": "concept",
+            "region": {
+              "x": 147,
+              "y": 45,
+              "width": 584,
+              "height": 383
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3067,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                439,
+                55
+              ],
+              "end": [
+                439,
+                418
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "简洁土地剖面，蓝色水滴下渗",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：还有一些进入土壤，补充地下的水。",
+            "subtitle": "还有一些进入土壤，补充地下的水。",
+            "type": "concept",
+            "region": {
+              "x": 1032,
+              "y": 45,
+              "width": 422,
+              "height": 387
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 3567,
+              "durationMs": 2863,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1243,
+                55
+              ],
+              "end": [
+                1243,
+                422
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "小植物根系吸水，叶片附近水汽波纹",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：植物从土壤中吸水，也把水带回空气。",
+            "subtitle": "植物从土壤中吸水，也把水带回空气。",
+            "type": "concept",
+            "region": {
+              "x": 203,
+              "y": 498,
+              "width": 438,
+              "height": 380
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 6630,
+              "durationMs": 3055,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                422,
+                508
+              ],
+              "end": [
+                422,
+                868
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "河流、土壤与树木三个独立小图标组成循环",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：不同路径连在一起，水循环没有唯一的起点。",
+            "subtitle": "不同路径连在一起，水循环没有唯一的起点。",
+            "type": "concept",
+            "region": {
+              "x": 990,
+              "y": 497,
+              "width": 502,
+              "height": 358
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 9885,
+              "durationMs": 19415,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1241,
+                507
+              ],
+              "end": [
+                1241,
+                845
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/water-journey/03.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "把旅行讲给别人听",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "用自己的话，把蒸发、凝结和降水连成一次旅行。",
+          "subject": "小人向另一个人展示水滴旅行的图形卡片，无字"
+        },
+        {
+          "text": "遇到太阳和水面，就想起能量与蒸发。",
+          "subject": "太阳、水面和上升的水汽"
+        },
+        {
+          "text": "遇到冷空气和小水滴，就想起凝结。",
+          "subject": "冷空气波纹旁稀疏小水滴"
+        },
+        {
+          "text": "练习：雨停之后地面慢慢变干，水可能去了哪里？",
+          "subject": "雨后湿地面旁小水坑与上升波纹"
+        }
+      ],
+      "narration": "用自己的话，把蒸发、凝结和降水连成一次旅行。遇到太阳和水面，就想起能量与蒸发。遇到冷空气和小水滴，就想起凝结。练习：雨停之后地面慢慢变干，水可能去了哪里？",
+      "image": "/course/whiteboard/water-journey/04.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"用自己的话，把蒸发、凝结和降水连成一次旅行。\",\"图形\":\"小人向另一个人展示水滴旅行的图形卡片，无字\"},{\"讲解\":\"遇到太阳和水面，就想起能量与蒸发。\",\"图形\":\"太阳、水面和上升的水汽\"},{\"讲解\":\"遇到冷空气和小水滴，就想起凝结。\",\"图形\":\"冷空气波纹旁稀疏小水滴\"},{\"讲解\":\"练习：雨停之后地面慢慢变干，水可能去了哪里？\",\"图形\":\"雨后湿地面旁小水坑与上升波纹\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "用自己的话",
+          "startMs": 0,
+          "endMs": 1342,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把蒸发、凝结和降水连成一次旅行",
+          "startMs": 1342,
+          "endMs": 4601,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "遇到太阳和水面",
+          "startMs": 4601,
+          "endMs": 6230,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就想起能量与蒸发",
+          "startMs": 6230,
+          "endMs": 8064,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "遇到冷空气和小水滴",
+          "startMs": 8064,
+          "endMs": 10101,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就想起凝结",
+          "startMs": 10101,
+          "endMs": 11323,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "练习：雨停之后地面慢慢变干",
+          "startMs": 11323,
+          "endMs": 14175,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "水可能去了哪里",
+          "startMs": 14175,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-04",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "用自己的话，把蒸发、凝结和降水连成一次旅行。遇到太阳和水面，就想起能量与蒸发。遇到冷空气和小水滴，就想起凝结。练习：雨停之后地面慢慢变干，水可能去了哪里？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "小人向另一个人展示水滴旅行的图形卡片，无字",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：用自己的话，把蒸发、凝结和降水连成一次旅行。",
+            "subtitle": "用自己的话，把蒸发、凝结和降水连成一次旅行。",
+            "type": "concept",
+            "region": {
+              "x": 101,
+              "y": 101,
+              "width": 632,
+              "height": 311
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4101,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                417,
+                111
+              ],
+              "end": [
+                417,
+                402
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "太阳、水面和上升的水汽",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：遇到太阳和水面，就想起能量与蒸发。",
+            "subtitle": "遇到太阳和水面，就想起能量与蒸发。",
+            "type": "concept",
+            "region": {
+              "x": 969,
+              "y": 51,
+              "width": 643,
+              "height": 417
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4601,
+              "durationMs": 3263,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1290.5,
+                61
+              ],
+              "end": [
+                1290.5,
+                458
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "冷空气波纹旁稀疏小水滴",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：遇到冷空气和小水滴，就想起凝结。",
+            "subtitle": "遇到冷空气和小水滴，就想起凝结。",
+            "type": "concept",
+            "region": {
+              "x": 93,
+              "y": 542,
+              "width": 593,
+              "height": 286
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8064,
+              "durationMs": 3059,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                389.5,
+                552
+              ],
+              "end": [
+                389.5,
+                818
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "雨后湿地面旁小水坑与上升波纹",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：练习：雨停之后地面慢慢变干，水可能去了哪里？",
+            "subtitle": "练习：雨停之后地面慢慢变干，水可能去了哪里？",
+            "type": "concept",
+            "region": {
+              "x": 935,
+              "y": 595,
+              "width": 670,
+              "height": 291
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 11323,
+              "durationMs": 17977,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1270,
+                605
+              ],
+              "end": [
+                1270,
+                876
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/water-journey/04.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "srt": "1\n00:00:00,000 --> 00:00:02,334\n想象一滴水落进小池塘\n\n2\n00:00:02,334 --> 00:00:04,145\n它的旅行才刚开始\n\n3\n00:00:04,145 --> 00:00:06,158\n太阳把能量带到水面\n\n4\n00:00:06,158 --> 00:00:08,774\n部分水变成看不见的水蒸气\n\n5\n00:00:08,774 --> 00:00:10,988\n蒸发可以发生在常温下\n\n6\n00:00:10,988 --> 00:00:12,397\n不必等水沸腾\n\n7\n00:00:12,397 --> 00:00:14,611\n小实验：观察同样的水\n\n8\n00:00:14,611 --> 00:00:30,000\n放在不同位置有什么变化\n\n9\n00:00:30,000 --> 00:00:32,331\n水蒸气来到较冷的地方\n\n10\n00:00:32,331 --> 00:00:34,140\n可能凝结成小水滴\n\n11\n00:00:34,140 --> 00:00:36,552\n云里聚集着小水滴或冰晶\n\n12\n00:00:36,552 --> 00:00:38,361\n云不是一团水蒸气\n\n13\n00:00:38,361 --> 00:00:39,768\n水滴不断碰合\n\n14\n00:00:39,768 --> 00:00:42,180\n变大后可能落下来形成雨\n\n15\n00:00:42,180 --> 00:00:45,397\n回想一下：看到云和看不到水蒸气\n\n16\n00:00:45,397 --> 00:01:00,000\n有什么区别\n\n17\n00:01:00,000 --> 00:01:01,269\n落下来的雨\n\n18\n00:01:01,269 --> 00:01:03,567\n有一部分流入河流和湖泊\n\n19\n00:01:03,567 --> 00:01:05,290\n还有一些进入土壤\n\n20\n00:01:05,290 --> 00:01:06,630\n补充地下的水\n\n21\n00:01:06,630 --> 00:01:08,353\n植物从土壤中吸水\n\n22\n00:01:08,353 --> 00:01:09,885\n也把水带回空气\n\n23\n00:01:09,885 --> 00:01:11,608\n不同路径连在一起\n\n24\n00:01:11,608 --> 00:01:30,000\n水循环没有唯一的起点\n\n25\n00:01:30,000 --> 00:01:31,342\n用自己的话\n\n26\n00:01:31,342 --> 00:01:34,601\n把蒸发、凝结和降水连成一次旅行\n\n27\n00:01:34,601 --> 00:01:36,230\n遇到太阳和水面\n\n28\n00:01:36,230 --> 00:01:38,064\n就想起能量与蒸发\n\n29\n00:01:38,064 --> 00:01:40,101\n遇到冷空气和小水滴\n\n30\n00:01:40,101 --> 00:01:41,323\n就想起凝结\n\n31\n00:01:41,323 --> 00:01:44,175\n练习：雨停之后地面慢慢变干\n\n32\n00:01:44,175 --> 00:02:00,000\n水可能去了哪里\n",
+  "video": "/course/whiteboard/water-journey/tutorial.mp4"
+}

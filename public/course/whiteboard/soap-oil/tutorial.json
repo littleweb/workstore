@@ -1,0 +1,241 @@
+{
+  "title": "肥皂怎样带走油污",
+  "summary": "肥皂怎样带走油污",
+  "duration": 30,
+  "scenes": [
+    {
+      "title": "肥皂怎样带走油污",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "手上沾了油，清水常常很难把油直接冲走。",
+          "subject": "带两块深色油污的手掌"
+        },
+        {
+          "text": "加入肥皂，揉搓会让肥皂和油污充分接触。",
+          "subject": "肥皂块与几个蓝色小泡泡"
+        },
+        {
+          "text": "肥皂帮助油污分散到水中，变得容易带走。",
+          "subject": "橙色油滴被少量肥皂泡泡围住，不画分子结构"
+        },
+        {
+          "text": "最后用流水冲洗。想一想，为什么揉搓有帮助？",
+          "subject": "水龙头的流水冲过干净的双手"
+        }
+      ],
+      "narration": "手上沾了油，清水常常很难把油直接冲走。加入肥皂，揉搓会让肥皂和油污充分接触。肥皂帮助油污分散到水中，变得容易带走。最后用流水冲洗。想一想，为什么揉搓有帮助？",
+      "image": "/course/whiteboard/soap-oil/01.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"手上沾了油，清水常常很难把油直接冲走。\",\"图形\":\"带两块深色油污的手掌\"},{\"讲解\":\"加入肥皂，揉搓会让肥皂和油污充分接触。\",\"图形\":\"肥皂块与几个蓝色小泡泡\"},{\"讲解\":\"肥皂帮助油污分散到水中，变得容易带走。\",\"图形\":\"橙色油滴被少量肥皂泡泡围住，不画分子结构\"},{\"讲解\":\"最后用流水冲洗。想一想，为什么揉搓有帮助？\",\"图形\":\"水龙头的流水冲过干净的双手\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "手上沾了油",
+          "startMs": 0,
+          "endMs": 1333,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "清水常常很难把油直接冲走",
+          "startMs": 1333,
+          "endMs": 3962,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "加入肥皂",
+          "startMs": 3962,
+          "endMs": 4973,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "揉搓会让肥皂和油污充分接触",
+          "startMs": 4973,
+          "endMs": 7803,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "肥皂帮助油污分散到水中",
+          "startMs": 7803,
+          "endMs": 10229,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "变得容易带走",
+          "startMs": 10229,
+          "endMs": 11645,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "最后用流水冲洗",
+          "startMs": 11645,
+          "endMs": 13263,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "想一想",
+          "startMs": 13263,
+          "endMs": 14071,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "为什么揉搓有帮助",
+          "startMs": 14071,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-01",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "手上沾了油，清水常常很难把油直接冲走。加入肥皂，揉搓会让肥皂和油污充分接触。肥皂帮助油污分散到水中，变得容易带走。最后用流水冲洗。想一想，为什么揉搓有帮助？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "带两块深色油污的手掌",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：手上沾了油，清水常常很难把油直接冲走。",
+            "subtitle": "手上沾了油，清水常常很难把油直接冲走。",
+            "type": "concept",
+            "region": {
+              "x": 261,
+              "y": 11,
+              "width": 365,
+              "height": 436
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3462,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                443.5,
+                21
+              ],
+              "end": [
+                443.5,
+                437
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "肥皂块与几个蓝色小泡泡",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：加入肥皂，揉搓会让肥皂和油污充分接触。",
+            "subtitle": "加入肥皂，揉搓会让肥皂和油污充分接触。",
+            "type": "concept",
+            "region": {
+              "x": 963,
+              "y": 59,
+              "width": 516,
+              "height": 357
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 3962,
+              "durationMs": 3641,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1221,
+                69
+              ],
+              "end": [
+                1221,
+                406
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "橙色油滴被少量肥皂泡泡围住，不画分子结构",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：肥皂帮助油污分散到水中，变得容易带走。",
+            "subtitle": "肥皂帮助油污分散到水中，变得容易带走。",
+            "type": "concept",
+            "region": {
+              "x": 267,
+              "y": 495,
+              "width": 360,
+              "height": 370
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 7803,
+              "durationMs": 3642,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                447,
+                505
+              ],
+              "end": [
+                447,
+                855
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "水龙头的流水冲过干净的双手",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：最后用流水冲洗。想一想，为什么揉搓有帮助？",
+            "subtitle": "最后用流水冲洗。想一想，为什么揉搓有帮助？",
+            "type": "concept",
+            "region": {
+              "x": 964,
+              "y": 442,
+              "width": 540,
+              "height": 484
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 11645,
+              "durationMs": 17655,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1234,
+                452
+              ],
+              "end": [
+                1234,
+                916
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/soap-oil/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "srt": "1\n00:00:00,000 --> 00:00:01,333\n手上沾了油\n\n2\n00:00:01,333 --> 00:00:03,962\n清水常常很难把油直接冲走\n\n3\n00:00:03,962 --> 00:00:04,973\n加入肥皂\n\n4\n00:00:04,973 --> 00:00:07,803\n揉搓会让肥皂和油污充分接触\n\n5\n00:00:07,803 --> 00:00:10,229\n肥皂帮助油污分散到水中\n\n6\n00:00:10,229 --> 00:00:11,645\n变得容易带走\n\n7\n00:00:11,645 --> 00:00:13,263\n最后用流水冲洗\n\n8\n00:00:13,263 --> 00:00:14,071\n想一想\n\n9\n00:00:14,071 --> 00:00:30,000\n为什么揉搓有帮助\n",
+  "video": "/course/whiteboard/soap-oil/tutorial.mp4"
+}

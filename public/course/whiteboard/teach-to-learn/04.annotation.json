@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-04",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "学习、讲解、找缺口、再修正，可以组成一轮循环。再请别人提一个问题，检查你是否只背熟了例子。留下最难的一点，下次再用一个新例子复习。今天就选一个小概念，用两分钟把它讲明白。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "四个无字图标围成小圆圈：书、说话、放大镜、拼图",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：学习、讲解、找缺口、再修正，可以组成一轮循环。",
+      "subtitle": "学习、讲解、找缺口、再修正，可以组成一轮循环。",
+      "type": "concept",
+      "region": {
+        "x": 205,
+        "y": 39,
+        "width": 493,
+        "height": 414
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4105,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          451.5,
+          49
+        ],
+        "end": [
+          451.5,
+          443
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "两个小人交谈，一人伸手提问，不用问号字形",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：再请别人提一个问题，检查你是否只背熟了例子。",
+      "subtitle": "再请别人提一个问题，检查你是否只背熟了例子。",
+      "type": "concept",
+      "region": {
+        "x": 967,
+        "y": 162,
+        "width": 529,
+        "height": 235
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4605,
+        "durationMs": 4090,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1231.5,
+          172
+        ],
+        "end": [
+          1231.5,
+          387
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "一块橙色拼图放在日历形空白卡旁，无数字",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：留下最难的一点，下次再用一个新例子复习。",
+      "subtitle": "留下最难的一点，下次再用一个新例子复习。",
+      "type": "concept",
+      "region": {
+        "x": 211,
+        "y": 581,
+        "width": 433,
+        "height": 264
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8895,
+        "durationMs": 3700,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          427.5,
+          591
+        ],
+        "end": [
+          427.5,
+          835
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "小人向朋友讲解一个简单图形模型",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：今天就选一个小概念，用两分钟把它讲明白。",
+      "subtitle": "今天就选一个小概念，用两分钟把它讲明白。",
+      "type": "concept",
+      "region": {
+        "x": 945,
+        "y": 581,
+        "width": 585,
+        "height": 253
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12795,
+        "durationMs": 16505,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1237.5,
+          591
+        ],
+        "end": [
+          1237.5,
+          824
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

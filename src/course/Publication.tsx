@@ -1,0 +1,23 @@
+import CourseCoverPanel from './CourseCoverPanel';
+import {coverVersion,courseSubject} from './cover';
+import {mediaSource,exportMedia} from '../course-animation/media';
+import {openUrl} from '@tauri-apps/plugin-opener';
+import {Button,Card,Input} from 'antd';
+import {CopyOutlined} from '@ant-design/icons';
+import {imageSource} from '../comics/images';
+import {useEffect,useState} from 'react';
+import {writeText} from '@tauri-apps/plugin-clipboard-manager';
+import {native} from '../workspace';
+import XhsPublisher from '../story-comic/XhsPublisher';
+import PhonePreview from '../story-comic/PhonePreview';
+import {publicationCopy,copyText,type Content,type Copy} from './model';
+import type {Page as ComicPage} from '../story-comic/model';
+import {CardImage} from './CourseApp';
+export const publicationPages=(c:Content):ComicPage[]=>{const v=coverVersion(c),pages=c.plan?.pages.map(p=>({...p,text:p.text.join('\n')}))??[];return v?[{title:v.config.title,text:v.config.subtitle,visual:'课程封面',image:v.image,history:[],status:'ready',layout:'sparse'},...pages]:pages;};
+export default function Publication({content,documentId,disabled,onChange,onCover,onError}:{content:Content;documentId?:string;disabled:boolean;onChange:(copy:Copy)=>void;onCover?:(style?:string,instruction?:string)=>void;onError:(error:unknown)=>void}){
+ const copy=publicationCopy(content),pages=publicationPages(content),subject=courseSubject(content),video=content.animationPlan?.video??content.whiteboardPlan?.video,ready=!!(content.plan||content.animationPlan||content.whiteboardPlan);const previewPages=video?[{title:copy.title,image:"video",text:"",visual:"",layout:"sparse",history:[]} as ComicPage]:pages;
+ const [poster,setPoster]=useState<string>();const coverImage=coverVersion(content)?.image;useEffect(()=>{let live=true;setPoster(undefined);if(coverImage)void imageSource(coverImage).then(s=>{if(live)setPoster(s);}).catch(onError);return()=>{live=false;};},[coverImage]);
+ const tags=copy.hashtags.map(t=>'#'+t).join(' '),[tagDraft,setTagDraft]=useState(tags);useEffect(()=>setTagDraft(tags),[tags,documentId]);
+ const clipboard=async(text:string)=>{try{if(native)await writeText(text);else await navigator.clipboard.writeText(text);}catch(e){onError(e);}};
+ return <div className="story-publish-layout course-publication"><div className="story-copy">{onCover&&<CourseCoverPanel content={content} disabled={disabled} onGenerate={onCover} onError={onError}/>}<Card className="course-publication-copy" title="发布文案" extra={<div className="course-publication-actions">{!content.mode&&documentId&&pages.some(p=>p.image)&&<XhsPublisher size="small" key={documentId} documentId={documentId} copy={copy} pages={pages} toolId="app.course" subject={subject}/>}<Button size="small" icon={<CopyOutlined/>} disabled={!ready} onClick={()=>void clipboard(copyText(copy))}>复制全部</Button>{video&&<><Button size="small" disabled={disabled} onClick={()=>void exportMedia(video,copy.title).catch(onError)}>下载发布视频</Button><Button size="small" onClick={()=>void (native?openUrl("https://creator.xiaohongshu.com/publish/publish"):Promise.resolve(window.open("https://creator.xiaohongshu.com/publish/publish","_blank","noopener"))).catch(onError)}>前往小红书发布</Button></>}</div>}>{!ready?<p>生成作品后，在这里准备发布文案。</p>:<>{[{key:'title',label:'标题'},{key:'description',label:'描述'},{key:'hashtags',label:'话题'}].map(({key,label})=><Card key={key} size="small" title={label} extra={<Button size="small" type="text" onClick={()=>void clipboard(key==='hashtags'?copy.hashtags.map(t=>'#'+t).join(' '):copy[key as 'title'|'description'])}>复制{label}</Button>}>{key==='description'?<Input.TextArea aria-label="发布描述" autoSize value={copy.description} disabled={disabled} maxLength={12000} onChange={e=>onChange({...copy,description:e.target.value})}/>:<Input aria-label={`发布${label}`} value={key==='hashtags'?tagDraft:copy.title} disabled={disabled} maxLength={key==='title'?120:300} onChange={e=>key==='hashtags'?setTagDraft(e.target.value):onChange({...copy,title:e.target.value})} onBlur={()=>{if(key==='hashtags')onChange({...copy,hashtags:tagDraft.split(/[\s,，]+/).map(t=>t.replace(/^#+/,'')).filter(Boolean)});}}/>}</Card>)}{copy.alternatives.map((title,i)=><Button key={i} size="small" onClick={()=>void clipboard(title)}>备选 {i+1} · {title}</Button>)}</>}</Card></div><PhonePreview mediaType={video?"video":"image"} subject={subject} key={documentId??'draft'} pages={previewPages} copy={ready?copy:undefined} renderImage={p=>video?<video src={mediaSource(video)} poster={poster} controls playsInline style={{width:"100%"}}/>:<CardImage src={p.image!} alt={p.title}/>}/></div>;
+}

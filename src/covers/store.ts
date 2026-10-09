@@ -336,7 +336,7 @@ export async function flushDocuments() {
   for (const id of cache.keys()) await flushDocument(id);
 }
 
-registerDocumentFlusher(flushDocuments);
+registerDocumentFlusher(flushDocuments, "app.cover");
 
 if (!native)
   window.addEventListener("beforeunload", (event) => {

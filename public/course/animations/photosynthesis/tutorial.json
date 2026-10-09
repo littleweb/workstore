@@ -1,0 +1,393 @@
+{
+  "title": "叶子的能量工厂",
+  "summary": "观察同种植物放在不同位置的状态，记录光照和浇水等条件。变化有多个原因，结论要与观察证据对应。",
+  "scenes": [
+    {
+      "title": "植物怎么获得能量",
+      "seconds": 15,
+      "narration": "植物并不是靠吃土长大的。叶片可以借助光，把水和二氧化碳转化成有机物，同时释放氧气。",
+      "points": [
+        "光合作用制造有机物"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "光能",
+          "叶片",
+          "有机物"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "植物并不是靠吃土长大的",
+          "startMs": 120,
+          "endMs": 2563,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "叶片可以借助光",
+          "startMs": 2563,
+          "endMs": 4192,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把水和二氧化碳转化成有机物",
+          "startMs": 4192,
+          "endMs": 7042,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "同时释放氧气",
+          "startMs": 7042,
+          "endMs": 8467,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/photosynthesis/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "原料分别来自哪里",
+      "seconds": 15,
+      "narration": "二氧化碳主要从空气进入叶片，水主要经根部吸收再送到叶片。光提供能量，不是物质原料。",
+      "points": [
+        "水来自根",
+        "二氧化碳来自空气"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "根吸收水",
+          "空气二氧化碳",
+          "叶片"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "二氧化碳主要从空气进入叶片",
+          "startMs": 120,
+          "endMs": 3091,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "水主要经根部吸收再送到叶片",
+          "startMs": 3091,
+          "endMs": 6062,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "光提供能量",
+          "startMs": 6062,
+          "endMs": 7335,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不是物质原料",
+          "startMs": 7335,
+          "endMs": 8820,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/photosynthesis/02.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "把原料变成产物",
+      "seconds": 15,
+      "narration": "光合作用把光能转成储存在有机物里的化学能。我们把这些有机物理解为植物生长的一部分基础。",
+      "points": [
+        "光能转成化学能"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "水与二氧化碳",
+          "光合作用",
+          "有机物与氧气"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "光合作用把光能转成储存在有机物里的化学能",
+          "startMs": 120,
+          "endMs": 4280,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "我们把这些有机物理解为植物生长的一部分基础",
+          "startMs": 4280,
+          "endMs": 8637,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/photosynthesis/03.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "叶片中的小工厂",
+      "seconds": 15,
+      "narration": "叶绿体是发生光合作用的重要场所。叶绿素能吸收光，让我们看到叶片常呈绿色，但并非所有叶都一样。",
+      "points": [
+        "叶绿体",
+        "吸收光"
+      ],
+      "visual": {
+        "kind": "orbit",
+        "labels": [
+          "光",
+          "叶绿体",
+          "有机物",
+          "氧气"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "叶绿体是发生光合作用的重要场所",
+          "startMs": 120,
+          "endMs": 3347,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "叶绿素能吸收光",
+          "startMs": 3347,
+          "endMs": 4960,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "让我们看到叶片常呈绿色",
+          "startMs": 4960,
+          "endMs": 7380,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "但并非所有叶都一样",
+          "startMs": 7380,
+          "endMs": 9397,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/photosynthesis/04.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "光合作用和呼吸不同",
+      "seconds": 15,
+      "narration": "光合作用把光能转成化学能；呼吸作用释放有机物里的能量。植物也会呼吸，不能说它只制造氧气。",
+      "points": [
+        "储存能量",
+        "释放能量"
+      ],
+      "visual": {
+        "kind": "compare",
+        "labels": [
+          "光合作用：储存",
+          "呼吸作用：释放"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "光合作用把光能转成化学能",
+          "startMs": 120,
+          "endMs": 2773,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "呼吸作用释放有机物里的能量",
+          "startMs": 2773,
+          "endMs": 5629,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "植物也会呼吸",
+          "startMs": 5629,
+          "endMs": 7057,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不能说它只制造氧气",
+          "startMs": 7057,
+          "endMs": 9097,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/photosynthesis/05.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "如果没有光会怎样",
+      "seconds": 15,
+      "narration": "没有合适的光，光合作用不能照常进行，但呼吸仍会发生。不要把灯光强弱和生长速度简单画等号。",
+      "points": [
+        "条件改变，过程会改变"
+      ],
+      "visual": {
+        "kind": "compare",
+        "labels": [
+          "有合适的光",
+          "缺少光"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "没有合适的光",
+          "startMs": 120,
+          "endMs": 1613,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "光合作用不能照常进行",
+          "startMs": 1613,
+          "endMs": 3959,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "但呼吸仍会发生",
+          "startMs": 3959,
+          "endMs": 5665,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不要把灯光强弱和生长速度简单画等号",
+          "startMs": 5665,
+          "endMs": 9504,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/photosynthesis/06.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "用自己的话解释",
+      "seconds": 15,
+      "narration": "现在用水、二氧化碳、光、有机物和氧气这五个词，向同学解释叶片做了什么，核对原料与产物。",
+      "points": [
+        "说明原料",
+        "说明能量与产物"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "原料",
+          "能量",
+          "产物"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "现在用水、二氧化碳、光、有机物和氧气这五个词",
+          "startMs": 120,
+          "endMs": 4629,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "向同学解释叶片做了什么",
+          "startMs": 4629,
+          "endMs": 6981,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "核对原料与产物",
+          "startMs": 6981,
+          "endMs": 8550,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/photosynthesis/07.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "把知识用在观察里",
+      "seconds": 15,
+      "narration": "观察同种植物放在不同位置的状态，记录光照和浇水等条件。变化有多个原因，结论要与观察证据对应。",
+      "points": [
+        "记录条件",
+        "避免单一原因推断"
+      ],
+      "visual": {
+        "kind": "cycle",
+        "labels": [
+          "记录条件",
+          "持续观察",
+          "比较",
+          "解释"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "观察同种植物放在不同位置的状态",
+          "startMs": 120,
+          "endMs": 3472,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "记录光照和浇水等条件",
+          "startMs": 3472,
+          "endMs": 5776,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "变化有多个原因",
+          "startMs": 5776,
+          "endMs": 7453,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "结论要与观察证据对应",
+          "startMs": 7453,
+          "endMs": 9757,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/photosynthesis/08.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "duration": 120,
+  "style": "warm",
+  "video": "/course/animations/photosynthesis/tutorial.mp4"
+}

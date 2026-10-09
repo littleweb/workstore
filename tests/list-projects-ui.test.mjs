@@ -65,3 +65,16 @@ test('project folder conveys expansion and inline create opens the correct proje
   assert.equal(h.disk.memberships[doc],id);assert.equal(h.host.querySelectorAll('[data-document]').length,1);
  }finally{await h.close();}
 });
+
+test('whole project section folds without changing memberships and restores its children',async()=>{
+ const h=await setup();try{
+  await act(async()=>{await h.store.mutate({action:'create',id,name:'Research'});await h.navigation.move(doc,id);});
+  const before=structuredClone(h.disk);
+  await act(async()=>h.host.querySelector('[aria-label="折叠项目"]').click());
+  assert.equal(h.host.querySelector('.list-project-heading'),null);
+  assert.deepEqual(h.disk,before);
+  assert(h.host.querySelector('[aria-label="创建项目"]'));
+  await act(async()=>h.host.querySelector('[aria-label="展开项目"]').click());
+  assert.equal(h.host.querySelectorAll('[data-document]').length,1);
+ }finally{await h.close();}
+});

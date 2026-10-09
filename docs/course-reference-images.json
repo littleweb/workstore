@@ -1,0 +1,247 @@
+{
+  "backend": "native imagegen",
+  "series": 8,
+  "cardsPerSeries": 5,
+  "images": [
+    {
+      "path": "public/course/examples/feynman/01-clean.png",
+      "sha256": "8aa633d2eede9c5826eacde0d4707813569bca77900b88a2126cf605bee094e6",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/feynman/02-clean.png",
+      "sha256": "96c293d33317a40ba95e9cad9974579a3ebaa08ecb9a86aa992d1e95e4bb49b5",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/feynman/03-clean.png",
+      "sha256": "bf1192b31387c5ca3e8f7bd61dfb8c980b290792207b1c0eb9fdb92352d7ab71",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/feynman/04-clean.png",
+      "sha256": "94e2e36616f33612ae402213393ab20792009cfc9b3e6680d983e6fe01ae7066",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/feynman/05-clean.png",
+      "sha256": "d0290968f59472e8ecf65bc59c537957c32c894424c4fdf5032f007458c8585f",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/water-cycle/01-clean.png",
+      "sha256": "077cd0a85227d936dfd613b9bbd11f998fff6b3edfbf0f19cb17de739f498ad2",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/water-cycle/02-clean.png",
+      "sha256": "4844a0f6a3bebaf166017e9bab2cfd4a098d578e0af0f668ae3a196ec70e9f8f",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/water-cycle/03-clean.png",
+      "sha256": "8da55680db8bbdb9c99643d0b1bac3a26ab26aa6c25adc9fc9a7109661fe0dba",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/water-cycle/04-clean.png",
+      "sha256": "cfa79de6c6873f6235cef2f321d3b1b90f622b168db3081f72b9d0e2501d8dcf",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/water-cycle/05-clean.png",
+      "sha256": "fe7be9528e57da265af25b5f3694fe9022b40c1c73cde7ff92298d037dce57da",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/small-steps/01-clean.png",
+      "sha256": "4ece4a7bde0173915ca6a78241e0b3afbba8dfaee3889e4a266424ba963a3a99",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/small-steps/02-clean.png",
+      "sha256": "6f1665300e1e855735c49b2fd1558df732f7ec00919c25ee3eaac6ea269a53d4",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/small-steps/03-clean.png",
+      "sha256": "e75de7eb0ff39c8cbde28b33df32f346bac55a7d0a57d40d3cfa55a455d405d1",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/small-steps/04-clean.png",
+      "sha256": "bd80e0555a702a4508217a3e274d7534763e4b67837ea3ad9f7b968c7ec06681",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/small-steps/05-clean.png",
+      "sha256": "ec4d21610c7fc55dfe257d5495af0b805583ff5f49e6b8dea300d6b4c14a7cc7",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/photosynthesis/01-clean.png",
+      "sha256": "1516a9c61fc5016bf1ebcbe2a528f3ea99c72ce14d425438fc8a7fd96c1d0876",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/photosynthesis/02-clean.png",
+      "sha256": "7a07ebb141cc43b5cf9dc28aa9b7ea236b1dc982467bc9ee6300af362d2f59a9",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/photosynthesis/03-clean.png",
+      "sha256": "04db7ce1c288a07c36c014df3181e6799066fe5bb06d93597a533ade899bf0b4",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/photosynthesis/04-clean.png",
+      "sha256": "8e12c17c7bb6cef0f577d7bf6b6de17116ae10da5322d52866578c64adcdb3cb",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/photosynthesis/05-clean.png",
+      "sha256": "4aae0ef62b925f9a0e2faa2271d522c16e488222b679afd64920d5f54e632336",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/fractions/01-clean.png",
+      "sha256": "08b1a371b0018387acce7477dab0642f8ab282aeabb76bd6f4f97160c85816f2",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/fractions/02-clean.png",
+      "sha256": "5568391744c6443389619f2b09a542dcf231d82d2dfb7722a998c739d6e13958",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/fractions/03-clean.png",
+      "sha256": "319a649f5dc0633a9e39ad74f65df5372028bdb68d571b1ffc443dd70efd9ca7",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/fractions/04-clean.png",
+      "sha256": "e65e7d922bb624cbfc6bebe4ddc4c478d89a0fd120427664c2b289238f13ef82",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/fractions/05-clean.png",
+      "sha256": "f74cb5095a992bf1fc194e22d04bffa18c337586620cd919f72d5cddaeeb3843",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/source-check/01-clean.png",
+      "sha256": "8023aaee5c889bd1610d71c3878d47aed174eeaf0db10a84fcce84327219f7f5",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/source-check/02-clean.png",
+      "sha256": "f092e5ad4f9e90afbb1454555f83a334966a649485b74e481a7577d6dbb80da9",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/source-check/03-clean.png",
+      "sha256": "a514a27a91593fb6ae6132f10e6d6ce6d540f2799e6c9808db0ca9413e9ed171",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/source-check/04-clean.png",
+      "sha256": "c986f3010ba68282f45a1be828341e0281bb7c65dcfd25d62cf984414dc31753",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/source-check/05-clean.png",
+      "sha256": "1f97a789890194d1bbf243418f34355c4fcbf4db2363ff23ac75358ce58a6cb7",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/better-questions/01-clean.png",
+      "sha256": "c293b1e233c337bfc8198196bb11060944912c602f08eeed5176b2fd8335890e",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/better-questions/02-clean.png",
+      "sha256": "9715462bb23f3da9a910b365376c5fe87257eafa1e524a9a6d161745da6e1265",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/better-questions/03-clean.png",
+      "sha256": "d211ab9d6999e0e1ad7fdeedce4afe752530812ef653205e639a84ded043cbdd",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/better-questions/04-clean.png",
+      "sha256": "893e81706faa61e72b5636dbcf2fd74d432d3fca33d72f0fd0abd311e6d117fc",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/better-questions/05-clean.png",
+      "sha256": "714b3b9a9da97f104827aced2cfc140fbf741ba63a01486bfb19bb3552e27a9c",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/observation-writing/01-clean.png",
+      "sha256": "78d24273c495f4a8f256ecbbba945a0b65a73be0511ce0c596fd9e538944a7a1",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/observation-writing/02-clean.png",
+      "sha256": "224e27cc667532ddaea396050918e8adbb2abe4191276285d36e0bac302a361b",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/observation-writing/03-clean.png",
+      "sha256": "65cabf7e098afbe7f63197ac966be8f3b6c0bcf4e37a0555ee429a0a1b28277d",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/observation-writing/04-clean.png",
+      "sha256": "b322dd737819aa894f7c6d15ed56fa486d35f40459d913836cb8d3907ae051c9",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "path": "public/course/examples/observation-writing/05-clean.png",
+      "sha256": "5400c1f9036a3960251cc4dfdbeb5717352b77071efb53326c52087f4848f6d9",
+      "width": 1086,
+      "height": 1448
+    }
+  ]
+}

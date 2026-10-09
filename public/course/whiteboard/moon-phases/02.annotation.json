@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-02",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "拿一盏灯代表太阳，用一个球代表月球。灯固定不动，让球绕着观察者缓慢移动。你会看到亮面有时大、有时小，光源并没改变。练习：灯还亮着，为什么我们仍可能只看见弯月？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "桌面台灯和一个小圆球",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：拿一盏灯代表太阳，用一个球代表月球。",
+      "subtitle": "拿一盏灯代表太阳，用一个球代表月球。",
+      "type": "concept",
+      "region": {
+        "x": 97,
+        "y": 101,
+        "width": 600,
+        "height": 264
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3053,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          397,
+          111
+        ],
+        "end": [
+          397,
+          355
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "观察者手持球，旁边固定灯，简单动作虚线",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：灯固定不动，让球绕着观察者缓慢移动。",
+      "subtitle": "灯固定不动，让球绕着观察者缓慢移动。",
+      "type": "concept",
+      "region": {
+        "x": 940,
+        "y": 120,
+        "width": 630,
+        "height": 308
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 3553,
+        "durationMs": 3233,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1255,
+          130
+        ],
+        "end": [
+          1255,
+          418
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "三个不同亮面的小球排列，纯图形无文字",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：你会看到亮面有时大、有时小，光源并没改变。",
+      "subtitle": "你会看到亮面有时大、有时小，光源并没改变。",
+      "type": "concept",
+      "region": {
+        "x": 152,
+        "y": 624,
+        "width": 532,
+        "height": 155
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 6986,
+        "durationMs": 3806,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          418,
+          634
+        ],
+        "end": [
+          418,
+          769
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "观察者侧面视角看一个部分明亮的小球",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：灯还亮着，为什么我们仍可能只看见弯月？",
+      "subtitle": "练习：灯还亮着，为什么我们仍可能只看见弯月？",
+      "type": "concept",
+      "region": {
+        "x": 900,
+        "y": 571,
+        "width": 652,
+        "height": 303
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 10992,
+        "durationMs": 18308,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1226,
+          581
+        ],
+        "end": [
+          1226,
+          864
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

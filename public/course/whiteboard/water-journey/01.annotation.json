@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-01",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "想象一滴水落进小池塘，它的旅行才刚开始。太阳把能量带到水面，部分水变成看不见的水蒸气。蒸发可以发生在常温下，不必等水沸腾。小实验：观察同样的水，放在不同位置有什么变化？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "小池塘与橙色点缀的一滴水",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：想象一滴水落进小池塘，它的旅行才刚开始。",
+      "subtitle": "想象一滴水落进小池塘，它的旅行才刚开始。",
+      "type": "concept",
+      "region": {
+        "x": 156,
+        "y": 107,
+        "width": 520,
+        "height": 320
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3645,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          416,
+          117
+        ],
+        "end": [
+          416,
+          417
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "太阳照射水面，稀疏灰色上升波纹",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：太阳把能量带到水面，部分水变成看不见的水蒸气。",
+      "subtitle": "太阳把能量带到水面，部分水变成看不见的水蒸气。",
+      "type": "concept",
+      "region": {
+        "x": 999,
+        "y": 58,
+        "width": 511,
+        "height": 374
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4145,
+        "durationMs": 4429,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1254.5,
+          68
+        ],
+        "end": [
+          1254.5,
+          422
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "一只浅水碟放在窗边",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：蒸发可以发生在常温下，不必等水沸腾。",
+      "subtitle": "蒸发可以发生在常温下，不必等水沸腾。",
+      "type": "concept",
+      "region": {
+        "x": 147,
+        "y": 527,
+        "width": 565,
+        "height": 322
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8774,
+        "durationMs": 3423,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          429.5,
+          537
+        ],
+        "end": [
+          429.5,
+          839
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "窗边与阴凉处各一个相同无标签水碟",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：小实验：观察同样的水，放在不同位置有什么变化？",
+      "subtitle": "小实验：观察同样的水，放在不同位置有什么变化？",
+      "type": "concept",
+      "region": {
+        "x": 920,
+        "y": 538,
+        "width": 669,
+        "height": 297
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12397,
+        "durationMs": 16903,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1254.5,
+          548
+        ],
+        "end": [
+          1254.5,
+          825
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

@@ -306,7 +306,7 @@ export async function flushComics() {
   for (const id of cache.keys()) await flushComic(id);
 }
 
-registerDocumentFlusher(flushComics);
+registerDocumentFlusher(flushComics, "app.comic");
 
 export function exportComic(id: string) {
   const doc = currentComic(id);

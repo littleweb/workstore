@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-02",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "电池内部有不同材料，它们能参与化学反应。反应推动电荷移动，形成两端的电势差。材料和结构决定不同电池的使用特点。这是简化模型；真实电池的具体反应并不完全相同。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "电池剖面两种不同灰色材料与中间隔层",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：电池内部有不同材料，它们能参与化学反应。",
+      "subtitle": "电池内部有不同材料，它们能参与化学反应。",
+      "type": "concept",
+      "region": {
+        "x": 321,
+        "y": 63,
+        "width": 204,
+        "height": 336
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3696,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          423,
+          73
+        ],
+        "end": [
+          423,
+          389
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "电池两端附近简单小圆点与稀疏箭头，无正负文字",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：反应推动电荷移动，形成两端的电势差。",
+      "subtitle": "反应推动电荷移动，形成两端的电势差。",
+      "type": "concept",
+      "region": {
+        "x": 1014,
+        "y": 69,
+        "width": 449,
+        "height": 332
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4196,
+        "durationMs": 3469,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1238.5,
+          79
+        ],
+        "end": [
+          1238.5,
+          391
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "三种不同外形无字电池",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：材料和结构决定不同电池的使用特点。",
+      "subtitle": "材料和结构决定不同电池的使用特点。",
+      "type": "concept",
+      "region": {
+        "x": 187,
+        "y": 546,
+        "width": 513,
+        "height": 287
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 7865,
+        "durationMs": 3265,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          443.5,
+          556
+        ],
+        "end": [
+          443.5,
+          823
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "一个简化剖面与旁边一只放大镜",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：这是简化模型；真实电池的具体反应并不完全相同。",
+      "subtitle": "这是简化模型；真实电池的具体反应并不完全相同。",
+      "type": "concept",
+      "region": {
+        "x": 1036,
+        "y": 518,
+        "width": 495,
+        "height": 324
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 11330,
+        "durationMs": 17970,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1283.5,
+          528
+        ],
+        "end": [
+          1283.5,
+          832
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

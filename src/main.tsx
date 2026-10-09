@@ -1,7 +1,9 @@
 import ToolSessions from "./tasks/ToolSessions";
 import TaskCenter from "./tasks/TaskCenter";
+import { createToolNavigation } from "./toolNavigation";
 import { createToolSelection } from "./toolSelection";
 import StoryComicIcon from "./story-comic/StoryComicIcon";
+import CourseIcon from "./course/CourseIcon";
 import CoverIcon from "./covers/CoverIcon";
 import { recordToolOpen } from "./navigation";
 import { stopAiRequests } from "./ai/client";
@@ -50,17 +52,20 @@ import {
 import "./style.css";
 import ComicIcon from "./comics/ComicIcon";
 import WhiteboardIcon from "./whiteboard/WhiteboardIcon";
-import { flushDocuments, flushBeforeToolSwitch, registerDocumentFlusher } from "./documentLifecycle";
+import { flushDocuments, flushBeforeToolSwitch, registerDocumentFlusher, runAfterSyncActivation } from "./documentLifecycle";
 import { flushSync } from "react-dom";
 const Whiteboard = lazy(() => import("./whiteboard/Whiteboard"));
 const StoryComicApp = lazy(() => import("./story-comic/StoryComicApp"));
 const AnimationApp = lazy(() => import("./animations/AnimationApp"));
 const DesignStudio = lazy(() => import("./design-studio/DesignStudio"));
+declare const __WORKSTORE_RELEASE__: boolean;
+const releaseBuild = typeof __WORKSTORE_RELEASE__ !== "undefined" && __WORKSTORE_RELEASE__;
 const CoverApp = lazy(() => import("./covers/CoverApp"));
 const ComicApp = lazy(() => import("./comics/ComicApp"));
 const HtmlApp = lazy(() => import("./html/HtmlApp"));
 const DocumentApp = lazy(() => import("./documents/DocumentApp"));
-const sessionTools = {"app.html": HtmlApp, "app.story-comic": StoryComicApp, "app.animation": AnimationApp,
+const sessionTools: Record<string, React.ComponentType> = {
+  ...(!releaseBuild ? {"app.course": lazy(() => import("./course/CourseApp"))} : {}), "app.html": HtmlApp, "app.story-comic": StoryComicApp, "app.animation": AnimationApp,
   "app.design": DesignStudio, "app.cover": CoverApp, "app.comic": ComicApp, "app.whiteboard": Whiteboard, "app.doc": DocumentApp};
 import {
   native,
@@ -90,8 +95,9 @@ type Tool = {
   status?: "dev";
 };
 const tools: Tool[] = [
+  { id: "app.course", name: "做课程", description: "把知识变成清晰易懂的学习卡片。", category: "设计工具", color: "green", icon: <CourseIcon /> },
   { id: "app.html", name: "HTML", description: "把内容变成精美的网页、卡片与演示。", category: "设计工具", color: "green", icon: <GlobalOutlined /> },
-  { id: "app.story-comic", name: "绘漫画", description: "输入主题，一键生成漫画与发布文案。", category: "设计工具", color: "green", icon: <StoryComicIcon /> },
+  { id: "app.story-comic", name: "画漫画", description: "输入主题，一键生成漫画与发布文案。", category: "设计工具", color: "green", icon: <StoryComicIcon /> },
   { id: "app.animation", name: "小动画", description: "一点灵感，让想法动起来。", category: "设计工具", color: "green", icon: <PlayCircleOutlined style={{ color: "#64867b" }} /> },
   { id: "app.design", name: "设计室", description: "商品、创意、人像与空间设计。", category: "设计工具", color: "green", icon: <ExperimentOutlined style={{ color: "#64867b" }} /> },
   { id: "app.cover", name: "做封面", description: "选个画风，把灵感变成封面。", category: "设计工具", color: "green", icon: <CoverIcon /> },
@@ -139,7 +145,7 @@ const tools: Tool[] = [
   },
 ];
 // Temporarily hidden; retain registration and saved entries for restoration.
-const hiddenTools = new Set(["app.project", "app.html", "app.comic", "tool.json", "tool.color", "web.github"]);
+const hiddenTools = new Set([...(releaseBuild ? ["app.course"] : []),"app.project", "app.html", "app.comic", "app.animation", "tool.json", "tool.color", "web.github"]);
 const visibleTools = tools.filter((tool) => !hiddenTools.has(tool.id));
 type Entry = {
   id: string;
@@ -350,7 +356,14 @@ function WorkStore() {
     const removeRefresh = registerSyncRefresher(async (changed) => {
       if (changed.length && !changed.includes("state.json")) return;
       if (pending.current) { clearTimeout(pending.current); pending.current = null; }
+      const before = latest.current;
       const { data } = await loadWorkspace();
+      // The navigation stays interactive during sync. Do not replace preferences
+      // or list changes made while this disk read was in flight; retry next pass.
+      if (Object.keys(before).some(key => before[key as keyof WorkspaceData] !== latest.current[key as keyof WorkspaceData])) {
+        scheduleAutosync();
+        throw new Error("导航已变更，稍后刷新同步结果");
+      }
       latest.current = data;
       flushSync(() => {
         setEntries(data.entries); setJson(data.json); setColor(data.color);
@@ -491,34 +504,34 @@ function WorkStore() {
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
   }, []);
-  const toolNavigation = useRef(0);
+  const activeTool = useRef(active);
+  activeTool.current = active;
+  const [switchTarget, setSwitchTarget] = useState<string | null>(null);
+  const toolNavigation = useRef<ReturnType<typeof createToolNavigation> | null>(null);
+  if (!toolNavigation.current) toolNavigation.current = createToolNavigation({
+    active: () => activeTool.current,
+    flush: flushBeforeToolSwitch,
+    activate: runAfterSyncActivation,
+    pending: setSwitchTarget,
+    error: e => message.error("文档尚未保存：" + String(e)),
+  });
+  useEffect(() => () => toolNavigation.current?.dispose(), []);
   const navigate = async (id: string) => {
-    const request = ++toolNavigation.current;
-    try {
-      await flushBeforeToolSwitch(active);
-      if (request !== toolNavigation.current) return;
-      setActive(id);
-    } catch (e) {
-      message.error("文档尚未保存：" + String(e));
-    }
+    if (releaseBuild && id === "app.course") return;
+    await toolNavigation.current!.select(id, () => { activeTool.current = id; setActive(id); });
   };
   const open = async (id: string) => {
-    const request = ++toolNavigation.current;
-    try {
-      await flushBeforeToolSwitch(active);
-    } catch (e) {
-      message.error("文档尚未保存：" + String(e));
-      return;
-    }
-    if (request !== toolNavigation.current) return;
-    // Commit the recent entry before opening the tool, including before a close/sync flush.
+    if (releaseBuild && id === "app.course") return;
     const openedAt = Date.now();
-    flushSync(() => {
-      setEntries((es) => recordToolOpen(es, id, openedAt));
+    const switched = await toolNavigation.current!.select(id, () => {
+      activeTool.current = id;
+      flushSync(() => {
+        setEntries((es) => recordToolOpen(es, id, openedAt));
+        setActive(id);
+        setCatalog(false);
+      });
     });
-    // Content is safely flushed; persisting navigation metadata need not hold the UI.
-    setActive(id);
-    setCatalog(false);
+    if (!switched) return;
     if (pending.current) {
       clearTimeout(pending.current);
       pending.current = null;
@@ -575,7 +588,10 @@ function WorkStore() {
         <button
           className="nav-open"
           aria-label={t.name}
-          onClick={() => open(t.id)}
+          onPointerDownCapture={event => {
+            if (!(event.target instanceof Element && event.target.closest('.nav-drag-handle[draggable="true"]'))) compactSelection.current?.pointerDown(event, t.id);
+          }}
+          onClick={event => compactSelection.current?.click(event, t.id)}
           title={collapsed ? t.name : undefined}
         >
           <span
@@ -753,13 +769,21 @@ function WorkStore() {
             <nav className="compact-tool-list" aria-label="常用和最近工具">
               {[...favorites, ...recent].map((entry) => {
                 const item = tools.find((candidate) => candidate.id === entry.id)!;
-                return <button key={item.id} className={`compact-tool-item ${active === item.id ? "selected" : ""}`}
+                return <Dropdown key={item.id} trigger={["contextMenu"]} menu={{
+                  items: [{ key: "remove", label: "移除", icon: <DeleteOutlined /> }],
+                  onClick: ({ domEvent }) => {
+                    domEvent.stopPropagation();
+                    setEntries(es => es.filter(candidate => candidate.id !== item.id));
+                  },
+                }}>
+                  <button className={`compact-tool-item ${active === item.id ? "selected" : ""}`}
                   aria-current={active === item.id ? "page" : undefined}
                   onPointerDownCapture={(event) => compactSelection.current?.pointerDown(event, item.id)}
                   onClick={(event) => compactSelection.current?.click(event, item.id)}
                   onFocus={(event) => event.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" })}>
                   <ToolIcon tool={item} /><span>{item.name}</span>
-                </button>;
+                  </button>
+                </Dropdown>;
               })}
             </nav>
             <div className="compact-window-space" data-tauri-drag-region />
@@ -767,8 +791,9 @@ function WorkStore() {
             <button className="icon-button compact-settings" aria-label="设置" onClick={() => setSettings(true)}><SettingOutlined /></button>
           </header>
         )}
+        {switchTarget && <div className="tool-switch-status" role="status">正在准备打开{tools.find(t=>t.id===switchTarget)?.name ?? "工具"}…</div>}
         <ToolSessions active={active} tools={sessionTools} />
-        {["app.html", "app.design", "app.story-comic", "app.animation", "app.cover", "app.comic", "app.whiteboard", "app.doc"].includes(active) ? null : tool ? (
+        {["app.course", "app.html", "app.design", "app.story-comic", "app.animation", "app.cover", "app.comic", "app.whiteboard", "app.doc"].includes(active) ? null : tool ? (
           <div className="tool-page">
             <ToolHeader
               tool={tool}

@@ -1,4 +1,4 @@
-/** Down-only mouse selection for the compact tool list, not action buttons. */
+/** Down-only mouse selection for the tool navigation lists, not action buttons. */
 export function createToolSelection(target: EventTarget, select: (id: string) => void) {
   let composing = false;
   let pending: string | null = null;

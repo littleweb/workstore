@@ -1,0 +1,15 @@
+.xhs-publisher { display:flex; flex-direction:column; gap:14px; max-height:70vh; overflow:auto; padding:4px; }
+.xhs-publisher label { display:flex; flex-direction:column; gap:6px; }
+.xhs-account,.xhs-actions { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.xhs-account > span { margin-right:auto; }
+.xhs-qrcode { display:flex; flex-direction:column; align-items:center; gap:10px; }
+.xhs-qrcode img { width:180px; height:180px; object-fit:contain; }
+.xhs-images { display:flex; gap:12px; flex-wrap:wrap; }
+.xhs-images label { flex-direction:row; }
+.xhs-actions { justify-content:flex-end; flex-shrink:0; position:sticky; bottom:0; background:white; padding:10px 0; }
+.xhs-publisher p { margin:0; color:#597369; }
+.xhs-publisher small { color:#84928b; }
+.story-copy > header { flex-wrap:wrap; }
+
+.xhs-upload-working { height:5px; border-radius:5px; background:linear-gradient(90deg,#e6eee8 25%,#6c9588 50%,#e6eee8 75%); background-size:200% 100%; animation:xhs-upload 1.5s linear infinite; }
+@keyframes xhs-upload { to {background-position:-200% 0;} }

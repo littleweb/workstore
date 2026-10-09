@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-09",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "一天结束，挑一次打断，看看它发生在什么条件下。找出一个可以改变的小条件，比如提前准备文件。下一次只调整这一点，再比较自己的体验。这是个人工作实验，不需要宣称对所有人都有效。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "小人观察桌面手机与临时资料",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：一天结束，挑一次打断，看看它发生在什么条件下。",
+      "subtitle": "一天结束，挑一次打断，看看它发生在什么条件下。",
+      "type": "concept",
+      "region": {
+        "x": 119,
+        "y": 106,
+        "width": 612,
+        "height": 314
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4123,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          425,
+          116
+        ],
+        "end": [
+          425,
+          410
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "手把需要的图形文件放到桌面",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：找出一个可以改变的小条件，比如提前准备文件。",
+      "subtitle": "找出一个可以改变的小条件，比如提前准备文件。",
+      "type": "concept",
+      "region": {
+        "x": 950,
+        "y": 84,
+        "width": 613,
+        "height": 311
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4623,
+        "durationMs": 4108,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1256.5,
+          94
+        ],
+        "end": [
+          1256.5,
+          385
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "两个相似桌面，其中一个预先准备好材料",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：下一次只调整这一点，再比较自己的体验。",
+      "subtitle": "下一次只调整这一点，再比较自己的体验。",
+      "type": "concept",
+      "region": {
+        "x": 95,
+        "y": 558,
+        "width": 654,
+        "height": 275
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8931,
+        "durationMs": 3520,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          422,
+          568
+        ],
+        "end": [
+          422,
+          823
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "一人记录自己的小实验，旁边独立小图形卡",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：这是个人工作实验，不需要宣称对所有人都有效。",
+      "subtitle": "这是个人工作实验，不需要宣称对所有人都有效。",
+      "type": "concept",
+      "region": {
+        "x": 952,
+        "y": 528,
+        "width": 613,
+        "height": 307
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12651,
+        "durationMs": 16649,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1258.5,
+          538
+        ],
+        "end": [
+          1258.5,
+          825
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

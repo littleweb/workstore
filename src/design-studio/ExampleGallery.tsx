@@ -10,6 +10,6 @@ export function ExampleGallery({title,groups,renderImage,onPreview,onCopyPrompt}
    const label=`${title} 示例第${index+1}组 ${asset.label||'作品示例'}`;
    return <button className="ds-example-pane" key={asset.src+n} aria-label={label} onClick={()=>onPreview(asset.src,label)}>{renderImage(asset,label)}{asset.label&&<span className={'ds-example-badge'+(asset.label.includes('AI')?' ds-example-ai':'')}>{asset.label}</span>}</button>;
   })}</div>
-  {group.prompt&&<div className="ds-example-prompt"><div><span>创作提示词</span><Tooltip title="复制提示词"><button aria-label={`复制示例第${index+1}组提示词`} onClick={()=>onCopyPrompt(group.prompt!)}><CopyOutlined/></button></Tooltip></div><p title={group.prompt}>{group.prompt}</p></div>}
+  {group.prompt&&<div className="ds-example-prompt"><div><span>创作提示词</span><Tooltip title="复制提示词"><button aria-label={`复制示例第${index+1}组提示词`} onClick={()=>onCopyPrompt(group.prompt!)}><CopyOutlined/></button></Tooltip></div><p tabIndex={0} role="region" aria-label={`示例第${index+1}组创作提示词`} title={group.prompt}>{group.prompt}</p></div>}
  </article>)}</div>;
 }

@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-03",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "把小灯连成回路，电池就能向电路提供能量。能量在小灯处变成光，也有一部分变成热。导线上的电荷不是被灯泡吃掉，它们持续参与回路。练习：断开一处连接，为什么灯通常会熄灭？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "电池、导线与亮灯形成闭合环路",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：把小灯连成回路，电池就能向电路提供能量。",
+      "subtitle": "把小灯连成回路，电池就能向电路提供能量。",
+      "type": "concept",
+      "region": {
+        "x": 191,
+        "y": 32,
+        "width": 464,
+        "height": 382
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3565,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          423,
+          42
+        ],
+        "end": [
+          423,
+          404
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "发光灯泡周围橙色光线和柔和热波纹",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：能量在小灯处变成光，也有一部分变成热。",
+      "subtitle": "能量在小灯处变成光，也有一部分变成热。",
+      "type": "concept",
+      "region": {
+        "x": 1015,
+        "y": 27,
+        "width": 490,
+        "height": 378
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4065,
+        "durationMs": 3549,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1260,
+          37
+        ],
+        "end": [
+          1260,
+          395
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "闭合导线内多个圆点循环移动",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：导线上的电荷不是被灯泡吃掉，它们持续参与回路。",
+      "subtitle": "导线上的电荷不是被灯泡吃掉，它们持续参与回路。",
+      "type": "concept",
+      "region": {
+        "x": 182,
+        "y": 494,
+        "width": 480,
+        "height": 391
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 7814,
+        "durationMs": 4337,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          422,
+          504
+        ],
+        "end": [
+          422,
+          875
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "断开的导线回路与不发光灯泡",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：断开一处连接，为什么灯通常会熄灭？",
+      "subtitle": "练习：断开一处连接，为什么灯通常会熄灭？",
+      "type": "concept",
+      "region": {
+        "x": 1008,
+        "y": 532,
+        "width": 486,
+        "height": 341
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12351,
+        "durationMs": 16949,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1251,
+          542
+        ],
+        "end": [
+          1251,
+          863
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

@@ -1,0 +1,902 @@
+{
+  "title": "用讲解检验理解",
+  "summary": "先选一个小知识点；试着不用术语讲；查缺口，再检验；完成一次小循环",
+  "duration": 120,
+  "scenes": [
+    {
+      "title": "先选一个小知识点",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "想理解一个知识点，先选一个可以说清楚的小问题。",
+          "subject": "一个人从几张空白图形卡片中挑一张"
+        },
+        {
+          "text": "把大主题拆成小问题，今天只处理其中一个。",
+          "subject": "一大块拼图拆成四块，其中一块橙色"
+        },
+        {
+          "text": "写下你要让别人学会的动作，比如比较或解释。",
+          "subject": "手指向两件物品进行比较，不含文字"
+        },
+        {
+          "text": "范围明确之后，学习时才知道自己要寻找什么。",
+          "subject": "手电筒照亮一小块拼图"
+        }
+      ],
+      "narration": "想理解一个知识点，先选一个可以说清楚的小问题。把大主题拆成小问题，今天只处理其中一个。写下你要让别人学会的动作，比如比较或解释。范围明确之后，学习时才知道自己要寻找什么。",
+      "image": "/course/whiteboard/teach-to-learn/01.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"想理解一个知识点，先选一个可以说清楚的小问题。\",\"图形\":\"一个人从几张空白图形卡片中挑一张\"},{\"讲解\":\"把大主题拆成小问题，今天只处理其中一个。\",\"图形\":\"一大块拼图拆成四块，其中一块橙色\"},{\"讲解\":\"写下你要让别人学会的动作，比如比较或解释。\",\"图形\":\"手指向两件物品进行比较，不含文字\"},{\"讲解\":\"范围明确之后，学习时才知道自己要寻找什么。\",\"图形\":\"手电筒照亮一小块拼图\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "想理解一个知识点",
+          "startMs": 0,
+          "endMs": 1890,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先选一个可以说清楚的小问题",
+          "startMs": 1890,
+          "endMs": 4644,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把大主题拆成小问题",
+          "startMs": 4644,
+          "endMs": 6611,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "今天只处理其中一个",
+          "startMs": 6611,
+          "endMs": 8577,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "写下你要让别人学会的动作",
+          "startMs": 8577,
+          "endMs": 11134,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "比如比较或解释",
+          "startMs": 11134,
+          "endMs": 12708,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "范围明确之后",
+          "startMs": 12708,
+          "endMs": 14085,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "学习时才知道自己要寻找什么",
+          "startMs": 14085,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-01",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "想理解一个知识点，先选一个可以说清楚的小问题。把大主题拆成小问题，今天只处理其中一个。写下你要让别人学会的动作，比如比较或解释。范围明确之后，学习时才知道自己要寻找什么。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "一个人从几张空白图形卡片中挑一张",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：想理解一个知识点，先选一个可以说清楚的小问题。",
+            "subtitle": "想理解一个知识点，先选一个可以说清楚的小问题。",
+            "type": "concept",
+            "region": {
+              "x": 218,
+              "y": 77,
+              "width": 425,
+              "height": 324
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4144,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                430.5,
+                87
+              ],
+              "end": [
+                430.5,
+                391
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "一大块拼图拆成四块，其中一块橙色",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：把大主题拆成小问题，今天只处理其中一个。",
+            "subtitle": "把大主题拆成小问题，今天只处理其中一个。",
+            "type": "concept",
+            "region": {
+              "x": 976,
+              "y": 85,
+              "width": 544,
+              "height": 268
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4644,
+              "durationMs": 3733,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1248,
+                95
+              ],
+              "end": [
+                1248,
+                343
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "手指向两件物品进行比较，不含文字",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：写下你要让别人学会的动作，比如比较或解释。",
+            "subtitle": "写下你要让别人学会的动作，比如比较或解释。",
+            "type": "concept",
+            "region": {
+              "x": 230,
+              "y": 576,
+              "width": 428,
+              "height": 280
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8577,
+              "durationMs": 3931,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                444,
+                586
+              ],
+              "end": [
+                444,
+                846
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "手电筒照亮一小块拼图",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：范围明确之后，学习时才知道自己要寻找什么。",
+            "subtitle": "范围明确之后，学习时才知道自己要寻找什么。",
+            "type": "concept",
+            "region": {
+              "x": 985,
+              "y": 569,
+              "width": 484,
+              "height": 223
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12708,
+              "durationMs": 16592,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1227,
+                579
+              ],
+              "end": [
+                1227,
+                782
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/teach-to-learn/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "试着不用术语讲",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "合上资料，用日常语言向一个新手讲解。",
+          "subject": "合上的无字书本，旁边两个人交谈"
+        },
+        {
+          "text": "找一个具体例子，把抽象关系放进熟悉的场景。",
+          "subject": "抽象圆点连线旁一个生活小场景"
+        },
+        {
+          "text": "如果只能背术语，先停下来找出自己没懂的部分。",
+          "subject": "人看着断开的拼图接口"
+        },
+        {
+          "text": "讲不顺的地方，就是下一轮查资料的线索。",
+          "subject": "放大镜照着书本里纯图形的页面"
+        }
+      ],
+      "narration": "合上资料，用日常语言向一个新手讲解。找一个具体例子，把抽象关系放进熟悉的场景。如果只能背术语，先停下来找出自己没懂的部分。讲不顺的地方，就是下一轮查资料的线索。",
+      "image": "/course/whiteboard/teach-to-learn/02.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"合上资料，用日常语言向一个新手讲解。\",\"图形\":\"合上的无字书本，旁边两个人交谈\"},{\"讲解\":\"找一个具体例子，把抽象关系放进熟悉的场景。\",\"图形\":\"抽象圆点连线旁一个生活小场景\"},{\"讲解\":\"如果只能背术语，先停下来找出自己没懂的部分。\",\"图形\":\"人看着断开的拼图接口\"},{\"讲解\":\"讲不顺的地方，就是下一轮查资料的线索。\",\"图形\":\"放大镜照着书本里纯图形的页面\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "合上资料",
+          "startMs": 0,
+          "endMs": 1116,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "用日常语言向一个新手讲解",
+          "startMs": 1116,
+          "endMs": 3707,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "找一个具体例子",
+          "startMs": 3707,
+          "endMs": 5301,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把抽象关系放进熟悉的场景",
+          "startMs": 5301,
+          "endMs": 7892,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "如果只能背术语",
+          "startMs": 7892,
+          "endMs": 9486,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先停下来找出自己没懂的部分",
+          "startMs": 9486,
+          "endMs": 12276,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "讲不顺的地方",
+          "startMs": 12276,
+          "endMs": 13671,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就是下一轮查资料的线索",
+          "startMs": 13671,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-02",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "合上资料，用日常语言向一个新手讲解。找一个具体例子，把抽象关系放进熟悉的场景。如果只能背术语，先停下来找出自己没懂的部分。讲不顺的地方，就是下一轮查资料的线索。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "合上的无字书本，旁边两个人交谈",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：合上资料，用日常语言向一个新手讲解。",
+            "subtitle": "合上资料，用日常语言向一个新手讲解。",
+            "type": "concept",
+            "region": {
+              "x": 97,
+              "y": 88,
+              "width": 657,
+              "height": 310
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3207,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                425.5,
+                98
+              ],
+              "end": [
+                425.5,
+                388
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "抽象圆点连线旁一个生活小场景",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：找一个具体例子，把抽象关系放进熟悉的场景。",
+            "subtitle": "找一个具体例子，把抽象关系放进熟悉的场景。",
+            "type": "concept",
+            "region": {
+              "x": 936,
+              "y": 81,
+              "width": 653,
+              "height": 298
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 3707,
+              "durationMs": 3985,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1262.5,
+                91
+              ],
+              "end": [
+                1262.5,
+                369
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "人看着断开的拼图接口",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：如果只能背术语，先停下来找出自己没懂的部分。",
+            "subtitle": "如果只能背术语，先停下来找出自己没懂的部分。",
+            "type": "concept",
+            "region": {
+              "x": 110,
+              "y": 542,
+              "width": 577,
+              "height": 300
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 7892,
+              "durationMs": 4184,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                398.5,
+                552
+              ],
+              "end": [
+                398.5,
+                832
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "放大镜照着书本里纯图形的页面",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：讲不顺的地方，就是下一轮查资料的线索。",
+            "subtitle": "讲不顺的地方，就是下一轮查资料的线索。",
+            "type": "concept",
+            "region": {
+              "x": 1001,
+              "y": 512,
+              "width": 525,
+              "height": 327
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12276,
+              "durationMs": 17024,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1263.5,
+                522
+              ],
+              "end": [
+                1263.5,
+                829
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/teach-to-learn/02.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "查缺口，再检验",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "带着具体疑问回到资料，避免从头漫无目的重读。",
+          "subject": "手指定位书中一个纯图形段落"
+        },
+        {
+          "text": "把新理解接回原来的例子，检查是否自洽。",
+          "subject": "缺口被填上的几块拼图"
+        },
+        {
+          "text": "换一个例子，看看原来的解释还能不能成立。",
+          "subject": "同一连接关系用于两个不同物品组"
+        },
+        {
+          "text": "练习：你能找到一个让旧解释失效的例子吗？",
+          "subject": "小人比较两张不同的图形卡片"
+        }
+      ],
+      "narration": "带着具体疑问回到资料，避免从头漫无目的重读。把新理解接回原来的例子，检查是否自洽。换一个例子，看看原来的解释还能不能成立。练习：你能找到一个让旧解释失效的例子吗？",
+      "image": "/course/whiteboard/teach-to-learn/03.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"带着具体疑问回到资料，避免从头漫无目的重读。\",\"图形\":\"手指定位书中一个纯图形段落\"},{\"讲解\":\"把新理解接回原来的例子，检查是否自洽。\",\"图形\":\"缺口被填上的几块拼图\"},{\"讲解\":\"换一个例子，看看原来的解释还能不能成立。\",\"图形\":\"同一连接关系用于两个不同物品组\"},{\"讲解\":\"练习：你能找到一个让旧解释失效的例子吗？\",\"图形\":\"小人比较两张不同的图形卡片\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "带着具体疑问回到资料",
+          "startMs": 0,
+          "endMs": 2296,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "避免从头漫无目的重读",
+          "startMs": 2296,
+          "endMs": 4471,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把新理解接回原来的例子",
+          "startMs": 4471,
+          "endMs": 6844,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "检查是否自洽",
+          "startMs": 6844,
+          "endMs": 8229,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "换一个例子",
+          "startMs": 8229,
+          "endMs": 9416,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "看看原来的解释还能不能成立",
+          "startMs": 9416,
+          "endMs": 12185,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "练习：你能找到一个让旧解释失效的例子吗",
+          "startMs": 12185,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-03",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "带着具体疑问回到资料，避免从头漫无目的重读。把新理解接回原来的例子，检查是否自洽。换一个例子，看看原来的解释还能不能成立。练习：你能找到一个让旧解释失效的例子吗？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "手指定位书中一个纯图形段落",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：带着具体疑问回到资料，避免从头漫无目的重读。",
+            "subtitle": "带着具体疑问回到资料，避免从头漫无目的重读。",
+            "type": "concept",
+            "region": {
+              "x": 210,
+              "y": 74,
+              "width": 480,
+              "height": 338
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3971,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                450,
+                84
+              ],
+              "end": [
+                450,
+                402
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "缺口被填上的几块拼图",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：把新理解接回原来的例子，检查是否自洽。",
+            "subtitle": "把新理解接回原来的例子，检查是否自洽。",
+            "type": "concept",
+            "region": {
+              "x": 1017,
+              "y": 92,
+              "width": 447,
+              "height": 280
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4471,
+              "durationMs": 3558,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1240.5,
+                102
+              ],
+              "end": [
+                1240.5,
+                362
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "同一连接关系用于两个不同物品组",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：换一个例子，看看原来的解释还能不能成立。",
+            "subtitle": "换一个例子，看看原来的解释还能不能成立。",
+            "type": "concept",
+            "region": {
+              "x": 167,
+              "y": 545,
+              "width": 552,
+              "height": 298
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8229,
+              "durationMs": 3756,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                443,
+                555
+              ],
+              "end": [
+                443,
+                833
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "小人比较两张不同的图形卡片",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：练习：你能找到一个让旧解释失效的例子吗？",
+            "subtitle": "练习：你能找到一个让旧解释失效的例子吗？",
+            "type": "concept",
+            "region": {
+              "x": 956,
+              "y": 582,
+              "width": 553,
+              "height": 285
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12185,
+              "durationMs": 17115,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1232.5,
+                592
+              ],
+              "end": [
+                1232.5,
+                857
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/teach-to-learn/03.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "完成一次小循环",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "学习、讲解、找缺口、再修正，可以组成一轮循环。",
+          "subject": "四个无字图标围成小圆圈：书、说话、放大镜、拼图"
+        },
+        {
+          "text": "再请别人提一个问题，检查你是否只背熟了例子。",
+          "subject": "两个小人交谈，一人伸手提问，不用问号字形"
+        },
+        {
+          "text": "留下最难的一点，下次再用一个新例子复习。",
+          "subject": "一块橙色拼图放在日历形空白卡旁，无数字"
+        },
+        {
+          "text": "今天就选一个小概念，用两分钟把它讲明白。",
+          "subject": "小人向朋友讲解一个简单图形模型"
+        }
+      ],
+      "narration": "学习、讲解、找缺口、再修正，可以组成一轮循环。再请别人提一个问题，检查你是否只背熟了例子。留下最难的一点，下次再用一个新例子复习。今天就选一个小概念，用两分钟把它讲明白。",
+      "image": "/course/whiteboard/teach-to-learn/04.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"学习、讲解、找缺口、再修正，可以组成一轮循环。\",\"图形\":\"四个无字图标围成小圆圈：书、说话、放大镜、拼图\"},{\"讲解\":\"再请别人提一个问题，检查你是否只背熟了例子。\",\"图形\":\"两个小人交谈，一人伸手提问，不用问号字形\"},{\"讲解\":\"留下最难的一点，下次再用一个新例子复习。\",\"图形\":\"一块橙色拼图放在日历形空白卡旁，无数字\"},{\"讲解\":\"今天就选一个小概念，用两分钟把它讲明白。\",\"图形\":\"小人向朋友讲解一个简单图形模型\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "学习、讲解、找缺口、再修正",
+          "startMs": 0,
+          "endMs": 2850,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "可以组成一轮循环",
+          "startMs": 2850,
+          "endMs": 4605,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再请别人提一个问题",
+          "startMs": 4605,
+          "endMs": 6555,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "检查你是否只背熟了例子",
+          "startMs": 6555,
+          "endMs": 8895,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "留下最难的一点",
+          "startMs": 8895,
+          "endMs": 10455,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "下次再用一个新例子复习",
+          "startMs": 10455,
+          "endMs": 12795,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "今天就选一个小概念",
+          "startMs": 12795,
+          "endMs": 14745,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "用两分钟把它讲明白",
+          "startMs": 14745,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-04",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "学习、讲解、找缺口、再修正，可以组成一轮循环。再请别人提一个问题，检查你是否只背熟了例子。留下最难的一点，下次再用一个新例子复习。今天就选一个小概念，用两分钟把它讲明白。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "四个无字图标围成小圆圈：书、说话、放大镜、拼图",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：学习、讲解、找缺口、再修正，可以组成一轮循环。",
+            "subtitle": "学习、讲解、找缺口、再修正，可以组成一轮循环。",
+            "type": "concept",
+            "region": {
+              "x": 205,
+              "y": 39,
+              "width": 493,
+              "height": 414
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4105,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                451.5,
+                49
+              ],
+              "end": [
+                451.5,
+                443
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "两个小人交谈，一人伸手提问，不用问号字形",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：再请别人提一个问题，检查你是否只背熟了例子。",
+            "subtitle": "再请别人提一个问题，检查你是否只背熟了例子。",
+            "type": "concept",
+            "region": {
+              "x": 967,
+              "y": 162,
+              "width": 529,
+              "height": 235
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4605,
+              "durationMs": 4090,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1231.5,
+                172
+              ],
+              "end": [
+                1231.5,
+                387
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "一块橙色拼图放在日历形空白卡旁，无数字",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：留下最难的一点，下次再用一个新例子复习。",
+            "subtitle": "留下最难的一点，下次再用一个新例子复习。",
+            "type": "concept",
+            "region": {
+              "x": 211,
+              "y": 581,
+              "width": 433,
+              "height": 264
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8895,
+              "durationMs": 3700,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                427.5,
+                591
+              ],
+              "end": [
+                427.5,
+                835
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "小人向朋友讲解一个简单图形模型",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：今天就选一个小概念，用两分钟把它讲明白。",
+            "subtitle": "今天就选一个小概念，用两分钟把它讲明白。",
+            "type": "concept",
+            "region": {
+              "x": 945,
+              "y": 581,
+              "width": 585,
+              "height": 253
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12795,
+              "durationMs": 16505,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1237.5,
+                591
+              ],
+              "end": [
+                1237.5,
+                824
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/teach-to-learn/04.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "srt": "1\n00:00:00,000 --> 00:00:01,890\n想理解一个知识点\n\n2\n00:00:01,890 --> 00:00:04,644\n先选一个可以说清楚的小问题\n\n3\n00:00:04,644 --> 00:00:06,611\n把大主题拆成小问题\n\n4\n00:00:06,611 --> 00:00:08,577\n今天只处理其中一个\n\n5\n00:00:08,577 --> 00:00:11,134\n写下你要让别人学会的动作\n\n6\n00:00:11,134 --> 00:00:12,708\n比如比较或解释\n\n7\n00:00:12,708 --> 00:00:14,085\n范围明确之后\n\n8\n00:00:14,085 --> 00:00:30,000\n学习时才知道自己要寻找什么\n\n9\n00:00:30,000 --> 00:00:31,116\n合上资料\n\n10\n00:00:31,116 --> 00:00:33,707\n用日常语言向一个新手讲解\n\n11\n00:00:33,707 --> 00:00:35,301\n找一个具体例子\n\n12\n00:00:35,301 --> 00:00:37,892\n把抽象关系放进熟悉的场景\n\n13\n00:00:37,892 --> 00:00:39,486\n如果只能背术语\n\n14\n00:00:39,486 --> 00:00:42,276\n先停下来找出自己没懂的部分\n\n15\n00:00:42,276 --> 00:00:43,671\n讲不顺的地方\n\n16\n00:00:43,671 --> 00:01:00,000\n就是下一轮查资料的线索\n\n17\n00:01:00,000 --> 00:01:02,296\n带着具体疑问回到资料\n\n18\n00:01:02,296 --> 00:01:04,471\n避免从头漫无目的重读\n\n19\n00:01:04,471 --> 00:01:06,844\n把新理解接回原来的例子\n\n20\n00:01:06,844 --> 00:01:08,229\n检查是否自洽\n\n21\n00:01:08,229 --> 00:01:09,416\n换一个例子\n\n22\n00:01:09,416 --> 00:01:12,185\n看看原来的解释还能不能成立\n\n23\n00:01:12,185 --> 00:01:30,000\n练习：你能找到一个让旧解释失效的例子吗\n\n24\n00:01:30,000 --> 00:01:32,850\n学习、讲解、找缺口、再修正\n\n25\n00:01:32,850 --> 00:01:34,605\n可以组成一轮循环\n\n26\n00:01:34,605 --> 00:01:36,555\n再请别人提一个问题\n\n27\n00:01:36,555 --> 00:01:38,895\n检查你是否只背熟了例子\n\n28\n00:01:38,895 --> 00:01:40,455\n留下最难的一点\n\n29\n00:01:40,455 --> 00:01:42,795\n下次再用一个新例子复习\n\n30\n00:01:42,795 --> 00:01:44,745\n今天就选一个小概念\n\n31\n00:01:44,745 --> 00:02:00,000\n用两分钟把它讲明白\n",
+  "video": "/course/whiteboard/teach-to-learn/tutorial.mp4"
+}

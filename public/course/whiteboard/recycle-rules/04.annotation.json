@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-04",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "电池、灯管等特殊物品，不应靠普通包装规则处理。先保持完整，避免破损，再查看当地收集方式。闲置电器可能有专门回收渠道，别随手混入日常垃圾。拿不准时先查询，比直接猜测更可靠。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "电池、灯管与电子小物件",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：电池、灯管等特殊物品，不应靠普通包装规则处理。",
+      "subtitle": "电池、灯管等特殊物品，不应靠普通包装规则处理。",
+      "type": "concept",
+      "region": {
+        "x": 130,
+        "y": 91,
+        "width": 606,
+        "height": 310
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4400,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          433,
+          101
+        ],
+        "end": [
+          433,
+          391
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "完整灯管放在保护盒内",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：先保持完整，避免破损，再查看当地收集方式。",
+      "subtitle": "先保持完整，避免破损，再查看当地收集方式。",
+      "type": "concept",
+      "region": {
+        "x": 947,
+        "y": 84,
+        "width": 610,
+        "height": 300
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4900,
+        "durationMs": 4164,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1252,
+          94
+        ],
+        "end": [
+          1252,
+          374
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "旧电器与专用收集箱",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：闲置电器可能有专门回收渠道，别随手混入日常垃圾。",
+      "subtitle": "闲置电器可能有专门回收渠道，别随手混入日常垃圾。",
+      "type": "concept",
+      "region": {
+        "x": 100,
+        "y": 509,
+        "width": 655,
+        "height": 356
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 9264,
+        "durationMs": 4788,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          427.5,
+          519
+        ],
+        "end": [
+          427.5,
+          855
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "小人用手机查看纯图标分类信息",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：拿不准时先查询，比直接猜测更可靠。",
+      "subtitle": "拿不准时先查询，比直接猜测更可靠。",
+      "type": "concept",
+      "region": {
+        "x": 964,
+        "y": 502,
+        "width": 594,
+        "height": 375
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 14252,
+        "durationMs": 15048,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1261,
+          512
+        ],
+        "end": [
+          1261,
+          867
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

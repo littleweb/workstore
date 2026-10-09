@@ -89,6 +89,7 @@ export default function DocumentApp() {
   const isCurrentRequest = (request: number) => mounted.current && requestVersion.current === request;
   const [error, setError] = useState("");
   const [renaming, setRenaming] = useState<string | null>(null);
+  const [createProject, setCreateProject] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [aiOpen, setAiOpen] = useState(false);
@@ -461,7 +462,7 @@ export default function DocumentApp() {
               <div className="document-section-label">常用</div>
               {favorites.map(row)}
             </div>}
-            <ProjectSection navigation={projects} items={[...documents].sort((a,b)=>b.createdAt-a.createdAt || a.id.localeCompare(b.id))} renderItem={row} activeId={id} onCreate={projectId=>void create(false, projectId)} />
+            <ProjectSection navigation={projects} items={[...documents].sort((a,b)=>b.createdAt-a.createdAt || a.id.localeCompare(b.id))} renderItem={row} activeId={id} onCreate={setCreateProject} />
             <div className="document-section">
               <div className="document-section-label">最近打开</div>
               {recent.map(row)}
@@ -605,6 +606,32 @@ export default function DocumentApp() {
         </div>
         {aiOpen && !isConversation && <DocumentAiSidebar key={id ?? "empty"} target={aiTarget} onClose={() => setAiOpen(false)} onWriteState={setAiApplying} context={item ? () => ({ title: item.title, content: new DOMParser().parseFromString(currentDocument(item.id)?.content ?? "", "text/html").body.textContent ?? "" }) : undefined} />}
       </div>
+
+      <Modal
+        title="创建笔记"
+        open={createProject !== null}
+        onCancel={() => setCreateProject(null)}
+        footer={null}
+        width={320}
+        centered
+      >
+        <div style={{ display: "grid", gap: 8 }}>
+          <Button block icon={<FileTextOutlined />} disabled={busy}
+            onClick={() => {
+              if (!createProject || busy) return;
+              const projectId = createProject;
+              setCreateProject(null);
+              void create(false, projectId);
+            }}>普通笔记</Button>
+          <Button block icon={<MessageOutlined />} disabled={busy}
+            onClick={() => {
+              if (!createProject || busy) return;
+              const projectId = createProject;
+              setCreateProject(null);
+              void create(true, projectId);
+            }}>对话笔记</Button>
+        </div>
+      </Modal>
 
       <Modal
         title="重命名笔记"

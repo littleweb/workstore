@@ -1,4 +1,5 @@
-//! Content-addressed images travel with the workspace; revisions only store IDs.
+use tauri::Manager;
+// Content-addressed images travel with the workspace; revisions only store IDs.
 use base64::{engine::general_purpose::STANDARD, Engine};
 use sha2::{Digest, Sha256};
 use std::{
@@ -55,26 +56,30 @@ pub fn save(root: &Path, bytes: &[u8]) -> Result<String, String> {
     Ok(format!("workstore-image:{id}"))
 }
 #[tauri::command]
-pub fn ai_read_image(
-    workspace: tauri::State<crate::Workspace>,
+pub async fn ai_read_image(
+    app: tauri::AppHandle,
     id: String,
 ) -> Result<String, String> {
-    let digest = id.strip_prefix("workstore-image:").ok_or("图片编号无效")?;
-    if digest.len() != 64
-        || !digest
-            .bytes()
-            .all(|c| c.is_ascii_hexdigit() && !c.is_ascii_uppercase())
-    {
-        return Err("图片编号无效".into());
-    }
-    let slot = workspace.0.lock().map_err(|e| e.to_string())?;
-    let root = slot.as_ref().ok_or("工作空间尚未打开")?.root_path();
-    let bytes = read_png(&directory(root)?.join(format!("{digest}.png")))?;
-    if format!("{:x}", Sha256::digest(&bytes)) != digest {
-        return Err("图片校验失败".into());
-    }
-    Ok(format!("data:image/png;base64,{}", STANDARD.encode(bytes)))
+    crate::file_operation(move || {
+        let workspace = app.state::<crate::Workspace>();
+        let digest = id.strip_prefix("workstore-image:").ok_or("图片编号无效")?;
+        if digest.len() != 64
+            || !digest
+                .bytes()
+                .all(|c| c.is_ascii_hexdigit() && !c.is_ascii_uppercase())
+        {
+            return Err("图片编号无效".into());
+        }
+        let slot = workspace.0.lock().map_err(|e| e.to_string())?;
+        let root = slot.as_ref().ok_or("工作空间尚未打开")?.root_path();
+        let bytes = read_png(&directory(root)?.join(format!("{digest}.png")))?;
+        if format!("{:x}", Sha256::digest(&bytes)) != digest {
+            return Err("图片校验失败".into());
+        }
+        Ok(format!("data:image/png;base64,{}", STANDARD.encode(bytes)))
+    }).await
 }
+
 #[cfg(test)]
 mod tests {
     use super::*;

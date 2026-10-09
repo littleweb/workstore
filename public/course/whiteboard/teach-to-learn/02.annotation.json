@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-02",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "合上资料，用日常语言向一个新手讲解。找一个具体例子，把抽象关系放进熟悉的场景。如果只能背术语，先停下来找出自己没懂的部分。讲不顺的地方，就是下一轮查资料的线索。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "合上的无字书本，旁边两个人交谈",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：合上资料，用日常语言向一个新手讲解。",
+      "subtitle": "合上资料，用日常语言向一个新手讲解。",
+      "type": "concept",
+      "region": {
+        "x": 97,
+        "y": 88,
+        "width": 657,
+        "height": 310
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3207,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          425.5,
+          98
+        ],
+        "end": [
+          425.5,
+          388
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "抽象圆点连线旁一个生活小场景",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：找一个具体例子，把抽象关系放进熟悉的场景。",
+      "subtitle": "找一个具体例子，把抽象关系放进熟悉的场景。",
+      "type": "concept",
+      "region": {
+        "x": 936,
+        "y": 81,
+        "width": 653,
+        "height": 298
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 3707,
+        "durationMs": 3985,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1262.5,
+          91
+        ],
+        "end": [
+          1262.5,
+          369
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "人看着断开的拼图接口",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：如果只能背术语，先停下来找出自己没懂的部分。",
+      "subtitle": "如果只能背术语，先停下来找出自己没懂的部分。",
+      "type": "concept",
+      "region": {
+        "x": 110,
+        "y": 542,
+        "width": 577,
+        "height": 300
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 7892,
+        "durationMs": 4184,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          398.5,
+          552
+        ],
+        "end": [
+          398.5,
+          832
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "放大镜照着书本里纯图形的页面",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：讲不顺的地方，就是下一轮查资料的线索。",
+      "subtitle": "讲不顺的地方，就是下一轮查资料的线索。",
+      "type": "concept",
+      "region": {
+        "x": 1001,
+        "y": 512,
+        "width": 525,
+        "height": 327
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12276,
+        "durationMs": 17024,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1263.5,
+          522
+        ],
+        "end": [
+          1263.5,
+          829
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { flushDocuments, isSyncActivationBlocked } from "./documentLifecycle";
+import { beginSyncActivation, flushDocuments, isSyncActivationBlocked } from "./documentLifecycle";
 import { invoke, isTauri } from "@tauri-apps/api/core";
 export const native = isTauri();
 export type WorkspaceData = {
@@ -221,10 +221,11 @@ export function syncWorkspace(mode: "auto" | "manual" = "auto"): Promise<string>
       // No workspace lock is held while waiting. Acquire the short activation
       // barrier only after editing AND the click/key gesture end, then flush the
       // latest local edits again. Never cancel, synthesize or replay user clicks.
-      const root = document.body;
-      const wasInert = root?.inert ?? false;
-      if (root) root.inert = true;
+      const releaseActivation = beginSyncActivation();
+      const hosts = [...document.querySelectorAll<HTMLElement>(".tool-session")];
+      const previous = hosts.map(host => host.inert);
       try {
+        hosts.forEach(host => { host.inert = true; });
         const result = id === "unchanged"
           ? { changed: [] as string[], message: "已与其他设备保持同步" }
           : await invoke<{ changed: string[]; message: string }>("finish_sync", { id });
@@ -243,7 +244,8 @@ export function syncWorkspace(mode: "auto" | "manual" = "auto"): Promise<string>
         reportSyncStatus(result.message);
         return result.message;
       } finally {
-        if (root) root.inert = wasInert;
+        hosts.forEach((host, index) => { host.inert = previous[index]; });
+        releaseActivation();
       }
     } catch (error) {
       failures++;

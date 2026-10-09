@@ -7,6 +7,7 @@ import {
   signature,
   characterPrompt,
   validateConfig,
+  userReferences,
   type Content,
 } from "./model";
 import { baoyuVersion } from "./baoyu";
@@ -136,7 +137,7 @@ export async function runWorkflow(
       for (const { i } of targets) c.plan!.pages[i].prompt = artPrompt(c, i);
     }, "正在准备漫画画面…");
     if (!c.reference) {
-      const reference = await deps.image(c.characterPrompt!, []);
+      const reference = await deps.image(c.characterPrompt!, c.config.characterReferences ?? []);
       check();
       await update(() => {
         c.reference = reference;
@@ -153,7 +154,7 @@ export async function runWorkflow(
         let raw: string, image: string;
         try {
           // Every page uses the same reference; no dependency on a still-generating neighbour.
-          raw = await deps.image(c.plan!.pages[i].prompt!, [c.reference!]);
+          raw = await deps.image(c.plan!.pages[i].prompt!, [c.reference!, ...userReferences(c.config)]);
           check();
         } catch (e) {
           check();

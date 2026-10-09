@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-05",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "把两个小灯依次接在同一条路径上，就是简单串联。只有一条主要通过用电器的路径，元件首尾相接。断开其中一处，整个串联路径都会受到影响。练习：另一只灯也熄灭，怎样用路径来解释？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "两只灯泡依次接在同一闭合导线中",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：把两个小灯依次接在同一条路径上，就是简单串联。",
+      "subtitle": "把两个小灯依次接在同一条路径上，就是简单串联。",
+      "type": "concept",
+      "region": {
+        "x": 163,
+        "y": 63,
+        "width": 505,
+        "height": 322
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4240,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          415.5,
+          73
+        ],
+        "end": [
+          415.5,
+          375
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "一条曲折但单一路径上的电池与两个灯泡",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：只有一条主要通过用电器的路径，元件首尾相接。",
+      "subtitle": "只有一条主要通过用电器的路径，元件首尾相接。",
+      "type": "concept",
+      "region": {
+        "x": 1007,
+        "y": 60,
+        "width": 523,
+        "height": 325
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4740,
+        "durationMs": 4219,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1268.5,
+          70
+        ],
+        "end": [
+          1268.5,
+          375
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "一只灯泡的连接被断开，两个灯都暗",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：断开其中一处，整个串联路径都会受到影响。",
+      "subtitle": "断开其中一处，整个串联路径都会受到影响。",
+      "type": "concept",
+      "region": {
+        "x": 138,
+        "y": 542,
+        "width": 537,
+        "height": 299
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 9159,
+        "durationMs": 3817,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          406.5,
+          552
+        ],
+        "end": [
+          406.5,
+          831
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "手指沿断开的单一导线路径检查两个灯泡",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：另一只灯也熄灭，怎样用路径来解释？",
+      "subtitle": "练习：另一只灯也熄灭，怎样用路径来解释？",
+      "type": "concept",
+      "region": {
+        "x": 992,
+        "y": 542,
+        "width": 555,
+        "height": 299
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13176,
+        "durationMs": 16124,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1269.5,
+          552
+        ],
+        "end": [
+          1269.5,
+          831
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

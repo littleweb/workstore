@@ -1,0 +1,2259 @@
+{
+  "title": "安排一次专注工作",
+  "summary": "先明确今天的任务；把需要的材料准备好；设置一次可结束的工作段；暂存临时冒出的想法；处理通知与打断；把困难拆成下一步；结束时检查成果；休息也安排一个边界；回顾哪里容易被打断；形成适合自己的小流程",
+  "duration": 300,
+  "scenes": [
+    {
+      "title": "先明确今天的任务",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "准备工作时，先把模糊目标变成一个具体的小任务。",
+          "subject": "人把一大堆空白工作卡整理成一张"
+        },
+        {
+          "text": "选择能够看到结果的动作，比如完成一段草稿。",
+          "subject": "打开的电脑旁一张只有图形的草稿纸"
+        },
+        {
+          "text": "任务太大时，先找出可以开始的第一步。",
+          "subject": "阶梯图形中第一阶被橙色强调"
+        },
+        {
+          "text": "练习：你今天能完成的最小成果是什么？",
+          "subject": "手挑选一张小任务卡片"
+        }
+      ],
+      "narration": "准备工作时，先把模糊目标变成一个具体的小任务。选择能够看到结果的动作，比如完成一段草稿。任务太大时，先找出可以开始的第一步。练习：你今天能完成的最小成果是什么？",
+      "image": "/course/whiteboard/focus-work/01.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"准备工作时，先把模糊目标变成一个具体的小任务。\",\"图形\":\"人把一大堆空白工作卡整理成一张\"},{\"讲解\":\"选择能够看到结果的动作，比如完成一段草稿。\",\"图形\":\"打开的电脑旁一张只有图形的草稿纸\"},{\"讲解\":\"任务太大时，先找出可以开始的第一步。\",\"图形\":\"阶梯图形中第一阶被橙色强调\"},{\"讲解\":\"练习：你今天能完成的最小成果是什么？\",\"图形\":\"手挑选一张小任务卡片\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "准备工作时",
+          "startMs": 0,
+          "endMs": 1315,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先把模糊目标变成一个具体的小任务",
+          "startMs": 1315,
+          "endMs": 4700,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "选择能够看到结果的动作",
+          "startMs": 4700,
+          "endMs": 7090,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "比如完成一段草稿",
+          "startMs": 7090,
+          "endMs": 8882,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "任务太大时",
+          "startMs": 8882,
+          "endMs": 10077,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先找出可以开始的第一步",
+          "startMs": 10077,
+          "endMs": 12467,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "练习：你今天能完成的最小成果是什么",
+          "startMs": 12467,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-01",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "准备工作时，先把模糊目标变成一个具体的小任务。选择能够看到结果的动作，比如完成一段草稿。任务太大时，先找出可以开始的第一步。练习：你今天能完成的最小成果是什么？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "人把一大堆空白工作卡整理成一张",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：准备工作时，先把模糊目标变成一个具体的小任务。",
+            "subtitle": "准备工作时，先把模糊目标变成一个具体的小任务。",
+            "type": "concept",
+            "region": {
+              "x": 137,
+              "y": 51,
+              "width": 572,
+              "height": 386
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4200,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                423,
+                61
+              ],
+              "end": [
+                423,
+                427
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "打开的电脑旁一张只有图形的草稿纸",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：选择能够看到结果的动作，比如完成一段草稿。",
+            "subtitle": "选择能够看到结果的动作，比如完成一段草稿。",
+            "type": "concept",
+            "region": {
+              "x": 936,
+              "y": 96,
+              "width": 582,
+              "height": 334
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4700,
+              "durationMs": 3982,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1227,
+                106
+              ],
+              "end": [
+                1227,
+                420
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "阶梯图形中第一阶被橙色强调",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：任务太大时，先找出可以开始的第一步。",
+            "subtitle": "任务太大时，先找出可以开始的第一步。",
+            "type": "concept",
+            "region": {
+              "x": 209,
+              "y": 538,
+              "width": 478,
+              "height": 312
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8882,
+              "durationMs": 3385,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                448,
+                548
+              ],
+              "end": [
+                448,
+                840
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "手挑选一张小任务卡片",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：练习：你今天能完成的最小成果是什么？",
+            "subtitle": "练习：你今天能完成的最小成果是什么？",
+            "type": "concept",
+            "region": {
+              "x": 989,
+              "y": 514,
+              "width": 510,
+              "height": 343
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12467,
+              "durationMs": 16833,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1244,
+                524
+              ],
+              "end": [
+                1244,
+                847
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "把需要的材料准备好",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "开始之前，把本次任务真正需要的材料放在手边。",
+          "subject": "桌面书本、笔和电脑整齐摆放"
+        },
+        {
+          "text": "把不相关的物品移开，减少临时寻找的机会。",
+          "subject": "手把多余杂物放进收纳盒"
+        },
+        {
+          "text": "先确认文件和工具能打开，避免开始后再来回切换。",
+          "subject": "电脑显示纯图形文件夹和工具图标，无字"
+        },
+        {
+          "text": "准备不是无限整理，够支持第一步就可以开始。",
+          "subject": "简洁桌面旁开始工作的一个人"
+        }
+      ],
+      "narration": "开始之前，把本次任务真正需要的材料放在手边。把不相关的物品移开，减少临时寻找的机会。先确认文件和工具能打开，避免开始后再来回切换。准备不是无限整理，够支持第一步就可以开始。",
+      "image": "/course/whiteboard/focus-work/02.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"开始之前，把本次任务真正需要的材料放在手边。\",\"图形\":\"桌面书本、笔和电脑整齐摆放\"},{\"讲解\":\"把不相关的物品移开，减少临时寻找的机会。\",\"图形\":\"手把多余杂物放进收纳盒\"},{\"讲解\":\"先确认文件和工具能打开，避免开始后再来回切换。\",\"图形\":\"电脑显示纯图形文件夹和工具图标，无字\"},{\"讲解\":\"准备不是无限整理，够支持第一步就可以开始。\",\"图形\":\"简洁桌面旁开始工作的一个人\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "开始之前",
+          "startMs": 0,
+          "endMs": 1122,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把本次任务真正需要的材料放在手边",
+          "startMs": 1122,
+          "endMs": 4531,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把不相关的物品移开",
+          "startMs": 4531,
+          "endMs": 6536,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "减少临时寻找的机会",
+          "startMs": 6536,
+          "endMs": 8542,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先确认文件和工具能打开",
+          "startMs": 8542,
+          "endMs": 10948,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "避免开始后再来回切换",
+          "startMs": 10948,
+          "endMs": 13153,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "准备不是无限整理",
+          "startMs": 13153,
+          "endMs": 14958,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "够支持第一步就可以开始",
+          "startMs": 14958,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-02",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "开始之前，把本次任务真正需要的材料放在手边。把不相关的物品移开，减少临时寻找的机会。先确认文件和工具能打开，避免开始后再来回切换。准备不是无限整理，够支持第一步就可以开始。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "桌面书本、笔和电脑整齐摆放",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：开始之前，把本次任务真正需要的材料放在手边。",
+            "subtitle": "开始之前，把本次任务真正需要的材料放在手边。",
+            "type": "concept",
+            "region": {
+              "x": 78,
+              "y": 117,
+              "width": 719,
+              "height": 312
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4031,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                437.5,
+                127
+              ],
+              "end": [
+                437.5,
+                419
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "手把多余杂物放进收纳盒",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：把不相关的物品移开，减少临时寻找的机会。",
+            "subtitle": "把不相关的物品移开，减少临时寻找的机会。",
+            "type": "concept",
+            "region": {
+              "x": 905,
+              "y": 38,
+              "width": 677,
+              "height": 402
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4531,
+              "durationMs": 3811,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1243.5,
+                48
+              ],
+              "end": [
+                1243.5,
+                430
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "电脑显示纯图形文件夹和工具图标，无字",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：先确认文件和工具能打开，避免开始后再来回切换。",
+            "subtitle": "先确认文件和工具能打开，避免开始后再来回切换。",
+            "type": "concept",
+            "region": {
+              "x": 130,
+              "y": 535,
+              "width": 647,
+              "height": 326
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8542,
+              "durationMs": 4411,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                453.5,
+                545
+              ],
+              "end": [
+                453.5,
+                851
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "简洁桌面旁开始工作的一个人",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：准备不是无限整理，够支持第一步就可以开始。",
+            "subtitle": "准备不是无限整理，够支持第一步就可以开始。",
+            "type": "concept",
+            "region": {
+              "x": 883,
+              "y": 500,
+              "width": 705,
+              "height": 371
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 13153,
+              "durationMs": 16147,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1235.5,
+                510
+              ],
+              "end": [
+                1235.5,
+                861
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/02.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "设置一次可结束的工作段",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "给这一轮工作设一个明确的结束点，长度按实际调整。",
+          "subject": "无数字计时器旁一张小任务卡"
+        },
+        {
+          "text": "开始后，先坚持完成选定的小步骤。",
+          "subject": "人专注写草稿，旁边安静计时器"
+        },
+        {
+          "text": "结束点不是保证效率的魔法，只是帮助安排边界。",
+          "subject": "计时器与一条清晰边界线的概念图"
+        },
+        {
+          "text": "练习：这次结束时，你希望得到哪一个可见成果？",
+          "subject": "一段完成的纯图形草稿放在桌上"
+        }
+      ],
+      "narration": "给这一轮工作设一个明确的结束点，长度按实际调整。开始后，先坚持完成选定的小步骤。结束点不是保证效率的魔法，只是帮助安排边界。练习：这次结束时，你希望得到哪一个可见成果？",
+      "image": "/course/whiteboard/focus-work/03.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"给这一轮工作设一个明确的结束点，长度按实际调整。\",\"图形\":\"无数字计时器旁一张小任务卡\"},{\"讲解\":\"开始后，先坚持完成选定的小步骤。\",\"图形\":\"人专注写草稿，旁边安静计时器\"},{\"讲解\":\"结束点不是保证效率的魔法，只是帮助安排边界。\",\"图形\":\"计时器与一条清晰边界线的概念图\"},{\"讲解\":\"练习：这次结束时，你希望得到哪一个可见成果？\",\"图形\":\"一段完成的纯图形草稿放在桌上\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "给这一轮工作设一个明确的结束点",
+          "startMs": 0,
+          "endMs": 3236,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "长度按实际调整",
+          "startMs": 3236,
+          "endMs": 4795,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "开始后",
+          "startMs": 4795,
+          "endMs": 5574,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先坚持完成选定的小步骤",
+          "startMs": 5574,
+          "endMs": 7912,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "结束点不是保证效率的魔法",
+          "startMs": 7912,
+          "endMs": 10444,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "只是帮助安排边界",
+          "startMs": 10444,
+          "endMs": 12197,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "练习：这次结束时",
+          "startMs": 12197,
+          "endMs": 13950,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "你希望得到哪一个可见成果",
+          "startMs": 13950,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-03",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "给这一轮工作设一个明确的结束点，长度按实际调整。开始后，先坚持完成选定的小步骤。结束点不是保证效率的魔法，只是帮助安排边界。练习：这次结束时，你希望得到哪一个可见成果？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "无数字计时器旁一张小任务卡",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：给这一轮工作设一个明确的结束点，长度按实际调整。",
+            "subtitle": "给这一轮工作设一个明确的结束点，长度按实际调整。",
+            "type": "concept",
+            "region": {
+              "x": 166,
+              "y": 113,
+              "width": 500,
+              "height": 261
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4295,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                416,
+                123
+              ],
+              "end": [
+                416,
+                364
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "人专注写草稿，旁边安静计时器",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：开始后，先坚持完成选定的小步骤。",
+            "subtitle": "开始后，先坚持完成选定的小步骤。",
+            "type": "concept",
+            "region": {
+              "x": 902,
+              "y": 49,
+              "width": 612,
+              "height": 358
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4795,
+              "durationMs": 2917,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1208,
+                59
+              ],
+              "end": [
+                1208,
+                397
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "计时器与一条清晰边界线的概念图",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：结束点不是保证效率的魔法，只是帮助安排边界。",
+            "subtitle": "结束点不是保证效率的魔法，只是帮助安排边界。",
+            "type": "concept",
+            "region": {
+              "x": 175,
+              "y": 551,
+              "width": 504,
+              "height": 256
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 7912,
+              "durationMs": 4085,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                427,
+                561
+              ],
+              "end": [
+                427,
+                797
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "一段完成的纯图形草稿放在桌上",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：练习：这次结束时，你希望得到哪一个可见成果？",
+            "subtitle": "练习：这次结束时，你希望得到哪一个可见成果？",
+            "type": "concept",
+            "region": {
+              "x": 953,
+              "y": 573,
+              "width": 587,
+              "height": 261
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12197,
+              "durationMs": 17103,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1246.5,
+                583
+              ],
+              "end": [
+                1246.5,
+                824
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/03.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "暂存临时冒出的想法",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "工作中突然想起另一件事，可以先简短记下来。",
+          "subject": "小人把一个小想法画在旁边便签上"
+        },
+        {
+          "text": "记好后回到当前任务，不必立刻打开另一项工作。",
+          "subject": "手回到原来的一张任务卡"
+        },
+        {
+          "text": "为临时想法留一个收集位置，减少反复担心忘记。",
+          "subject": "几个简洁图形便签放进小收集盒"
+        },
+        {
+          "text": "这里的目标是减少切换，并非压住所有新想法。",
+          "subject": "当前工作桌与旁边独立想法盒"
+        }
+      ],
+      "narration": "工作中突然想起另一件事，可以先简短记下来。记好后回到当前任务，不必立刻打开另一项工作。为临时想法留一个收集位置，减少反复担心忘记。这里的目标是减少切换，并非压住所有新想法。",
+      "image": "/course/whiteboard/focus-work/04.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"工作中突然想起另一件事，可以先简短记下来。\",\"图形\":\"小人把一个小想法画在旁边便签上\"},{\"讲解\":\"记好后回到当前任务，不必立刻打开另一项工作。\",\"图形\":\"手回到原来的一张任务卡\"},{\"讲解\":\"为临时想法留一个收集位置，减少反复担心忘记。\",\"图形\":\"几个简洁图形便签放进小收集盒\"},{\"讲解\":\"这里的目标是减少切换，并非压住所有新想法。\",\"图形\":\"当前工作桌与旁边独立想法盒\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "工作中突然想起另一件事",
+          "startMs": 0,
+          "endMs": 2541,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "可以先简短记下来",
+          "startMs": 2541,
+          "endMs": 4356,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "记好后回到当前任务",
+          "startMs": 4356,
+          "endMs": 6373,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不必立刻打开另一项工作",
+          "startMs": 6373,
+          "endMs": 8794,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "为临时想法留一个收集位置",
+          "startMs": 8794,
+          "endMs": 11416,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "减少反复担心忘记",
+          "startMs": 11416,
+          "endMs": 13231,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "这里的目标是减少切换",
+          "startMs": 13231,
+          "endMs": 15450,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "并非压住所有新想法",
+          "startMs": 15450,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-04",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "工作中突然想起另一件事，可以先简短记下来。记好后回到当前任务，不必立刻打开另一项工作。为临时想法留一个收集位置，减少反复担心忘记。这里的目标是减少切换，并非压住所有新想法。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "小人把一个小想法画在旁边便签上",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：工作中突然想起另一件事，可以先简短记下来。",
+            "subtitle": "工作中突然想起另一件事，可以先简短记下来。",
+            "type": "concept",
+            "region": {
+              "x": 189,
+              "y": 67,
+              "width": 564,
+              "height": 345
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3856,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                471,
+                77
+              ],
+              "end": [
+                471,
+                402
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "手回到原来的一张任务卡",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：记好后回到当前任务，不必立刻打开另一项工作。",
+            "subtitle": "记好后回到当前任务，不必立刻打开另一项工作。",
+            "type": "concept",
+            "region": {
+              "x": 912,
+              "y": 152,
+              "width": 556,
+              "height": 260
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4356,
+              "durationMs": 4238,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1190,
+                162
+              ],
+              "end": [
+                1190,
+                402
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "几个简洁图形便签放进小收集盒",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：为临时想法留一个收集位置，减少反复担心忘记。",
+            "subtitle": "为临时想法留一个收集位置，减少反复担心忘记。",
+            "type": "concept",
+            "region": {
+              "x": 211,
+              "y": 530,
+              "width": 482,
+              "height": 305
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8794,
+              "durationMs": 4237,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                452,
+                540
+              ],
+              "end": [
+                452,
+                825
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "当前工作桌与旁边独立想法盒",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：这里的目标是减少切换，并非压住所有新想法。",
+            "subtitle": "这里的目标是减少切换，并非压住所有新想法。",
+            "type": "concept",
+            "region": {
+              "x": 874,
+              "y": 563,
+              "width": 669,
+              "height": 278
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 13231,
+              "durationMs": 16069,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1208.5,
+                573
+              ],
+              "end": [
+                1208.5,
+                831
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/04.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "处理通知与打断",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "先检查哪些通知与这一段工作直接相关。",
+          "subject": "手机与几枚纯图形通知圆点"
+        },
+        {
+          "text": "在允许的范围内，给不紧急的提醒安排晚一点处理。",
+          "subject": "手机放在一旁，旁边无数字计时器"
+        },
+        {
+          "text": "如果必须响应，就记录回来之后要继续的下一步。",
+          "subject": "手在任务卡上画出一个小箭头"
+        },
+        {
+          "text": "练习：现在的打断是必须处理，还是可以稍后再看？",
+          "subject": "人比较两张紧急程度不同的图形卡，无文字"
+        }
+      ],
+      "narration": "先检查哪些通知与这一段工作直接相关。在允许的范围内，给不紧急的提醒安排晚一点处理。如果必须响应，就记录回来之后要继续的下一步。练习：现在的打断是必须处理，还是可以稍后再看？",
+      "image": "/course/whiteboard/focus-work/05.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"先检查哪些通知与这一段工作直接相关。\",\"图形\":\"手机与几枚纯图形通知圆点\"},{\"讲解\":\"在允许的范围内，给不紧急的提醒安排晚一点处理。\",\"图形\":\"手机放在一旁，旁边无数字计时器\"},{\"讲解\":\"如果必须响应，就记录回来之后要继续的下一步。\",\"图形\":\"手在任务卡上画出一个小箭头\"},{\"讲解\":\"练习：现在的打断是必须处理，还是可以稍后再看？\",\"图形\":\"人比较两张紧急程度不同的图形卡，无文字\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "先检查哪些通知与这一段工作直接相关",
+          "startMs": 0,
+          "endMs": 3730,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "在允许的范围内",
+          "startMs": 3730,
+          "endMs": 5334,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "给不紧急的提醒安排晚一点处理",
+          "startMs": 5334,
+          "endMs": 8342,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "如果必须响应",
+          "startMs": 8342,
+          "endMs": 9746,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就记录回来之后要继续的下一步",
+          "startMs": 9746,
+          "endMs": 12754,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "练习：现在的打断是必须处理",
+          "startMs": 12754,
+          "endMs": 15562,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "还是可以稍后再看",
+          "startMs": 15562,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-05",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "先检查哪些通知与这一段工作直接相关。在允许的范围内，给不紧急的提醒安排晚一点处理。如果必须响应，就记录回来之后要继续的下一步。练习：现在的打断是必须处理，还是可以稍后再看？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "手机与几枚纯图形通知圆点",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：先检查哪些通知与这一段工作直接相关。",
+            "subtitle": "先检查哪些通知与这一段工作直接相关。",
+            "type": "concept",
+            "region": {
+              "x": 254,
+              "y": 82,
+              "width": 372,
+              "height": 297
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3230,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                440,
+                92
+              ],
+              "end": [
+                440,
+                369
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "手机放在一旁，旁边无数字计时器",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：在允许的范围内，给不紧急的提醒安排晚一点处理。",
+            "subtitle": "在允许的范围内，给不紧急的提醒安排晚一点处理。",
+            "type": "concept",
+            "region": {
+              "x": 962,
+              "y": 158,
+              "width": 529,
+              "height": 210
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 3730,
+              "durationMs": 4412,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1226.5,
+                168
+              ],
+              "end": [
+                1226.5,
+                358
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "手在任务卡上画出一个小箭头",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：如果必须响应，就记录回来之后要继续的下一步。",
+            "subtitle": "如果必须响应，就记录回来之后要继续的下一步。",
+            "type": "concept",
+            "region": {
+              "x": 222,
+              "y": 572,
+              "width": 505,
+              "height": 274
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8342,
+              "durationMs": 4212,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                474.5,
+                582
+              ],
+              "end": [
+                474.5,
+                836
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "人比较两张紧急程度不同的图形卡，无文字",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：练习：现在的打断是必须处理，还是可以稍后再看？",
+            "subtitle": "练习：现在的打断是必须处理，还是可以稍后再看？",
+            "type": "concept",
+            "region": {
+              "x": 967,
+              "y": 532,
+              "width": 521,
+              "height": 325
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12754,
+              "durationMs": 16546,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1227.5,
+                542
+              ],
+              "end": [
+                1227.5,
+                847
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/05.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "把困难拆成下一步",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "卡住时，先描述具体困难，而不是给自己贴标签。",
+          "subject": "人在一块缺口拼图前观察"
+        },
+        {
+          "text": "问自己缺的是资料、决定，还是一个可操作的小动作。",
+          "subject": "书本、岔路和手部动作三个独立图形"
+        },
+        {
+          "text": "只解决眼前的一个阻碍，再检查能否继续。",
+          "subject": "一块拼图补进当前缺口"
+        },
+        {
+          "text": "如果问题超出能力，写清需要什么帮助再去求助。",
+          "subject": "两个人一起查看具体拼图缺口"
+        }
+      ],
+      "narration": "卡住时，先描述具体困难，而不是给自己贴标签。问自己缺的是资料、决定，还是一个可操作的小动作。只解决眼前的一个阻碍，再检查能否继续。如果问题超出能力，写清需要什么帮助再去求助。",
+      "image": "/course/whiteboard/focus-work/06.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"卡住时，先描述具体困难，而不是给自己贴标签。\",\"图形\":\"人在一块缺口拼图前观察\"},{\"讲解\":\"问自己缺的是资料、决定，还是一个可操作的小动作。\",\"图形\":\"书本、岔路和手部动作三个独立图形\"},{\"讲解\":\"只解决眼前的一个阻碍，再检查能否继续。\",\"图形\":\"一块拼图补进当前缺口\"},{\"讲解\":\"如果问题超出能力，写清需要什么帮助再去求助。\",\"图形\":\"两个人一起查看具体拼图缺口\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "卡住时",
+          "startMs": 0,
+          "endMs": 908,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先描述具体困难",
+          "startMs": 908,
+          "endMs": 2484,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "而不是给自己贴标签",
+          "startMs": 2484,
+          "endMs": 4453,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "问自己缺的是资料、决定",
+          "startMs": 4453,
+          "endMs": 6816,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "还是一个可操作的小动作",
+          "startMs": 6816,
+          "endMs": 9180,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "只解决眼前的一个阻碍",
+          "startMs": 9180,
+          "endMs": 11346,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再检查能否继续",
+          "startMs": 11346,
+          "endMs": 12922,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "如果问题超出能力",
+          "startMs": 12922,
+          "endMs": 14695,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "写清需要什么帮助再去求助",
+          "startMs": 14695,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-06",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "卡住时，先描述具体困难，而不是给自己贴标签。问自己缺的是资料、决定，还是一个可操作的小动作。只解决眼前的一个阻碍，再检查能否继续。如果问题超出能力，写清需要什么帮助再去求助。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "人在一块缺口拼图前观察",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：卡住时，先描述具体困难，而不是给自己贴标签。",
+            "subtitle": "卡住时，先描述具体困难，而不是给自己贴标签。",
+            "type": "concept",
+            "region": {
+              "x": 184,
+              "y": 118,
+              "width": 428,
+              "height": 302
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3953,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                398,
+                128
+              ],
+              "end": [
+                398,
+                410
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "书本、岔路和手部动作三个独立图形",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：问自己缺的是资料、决定，还是一个可操作的小动作。",
+            "subtitle": "问自己缺的是资料、决定，还是一个可操作的小动作。",
+            "type": "concept",
+            "region": {
+              "x": 911,
+              "y": 132,
+              "width": 640,
+              "height": 260
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4453,
+              "durationMs": 4527,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1231,
+                142
+              ],
+              "end": [
+                1231,
+                382
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "一块拼图补进当前缺口",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：只解决眼前的一个阻碍，再检查能否继续。",
+            "subtitle": "只解决眼前的一个阻碍，再检查能否继续。",
+            "type": "concept",
+            "region": {
+              "x": 191,
+              "y": 549,
+              "width": 422,
+              "height": 286
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 9180,
+              "durationMs": 3542,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                402,
+                559
+              ],
+              "end": [
+                402,
+                825
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "两个人一起查看具体拼图缺口",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：如果问题超出能力，写清需要什么帮助再去求助。",
+            "subtitle": "如果问题超出能力，写清需要什么帮助再去求助。",
+            "type": "concept",
+            "region": {
+              "x": 995,
+              "y": 531,
+              "width": 485,
+              "height": 303
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12922,
+              "durationMs": 16378,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1237.5,
+                541
+              ],
+              "end": [
+                1237.5,
+                824
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/06.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "结束时检查成果",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "到结束点，先看看任务实际完成到了哪里。",
+          "subject": "人查看桌面已经完成的草稿片段"
+        },
+        {
+          "text": "把完成和未完成分开记录，避免只记得忙了多久。",
+          "subject": "两组不同状态的无字任务卡片"
+        },
+        {
+          "text": "检查结果是否符合最开始选定的目标。",
+          "subject": "任务卡与完成的图形作品相互对照"
+        },
+        {
+          "text": "练习：你能用一句话描述这一轮的实际成果吗？",
+          "subject": "小人向朋友展示一份简洁成果"
+        }
+      ],
+      "narration": "到结束点，先看看任务实际完成到了哪里。把完成和未完成分开记录，避免只记得忙了多久。检查结果是否符合最开始选定的目标。练习：你能用一句话描述这一轮的实际成果吗？",
+      "image": "/course/whiteboard/focus-work/07.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"到结束点，先看看任务实际完成到了哪里。\",\"图形\":\"人查看桌面已经完成的草稿片段\"},{\"讲解\":\"把完成和未完成分开记录，避免只记得忙了多久。\",\"图形\":\"两组不同状态的无字任务卡片\"},{\"讲解\":\"检查结果是否符合最开始选定的目标。\",\"图形\":\"任务卡与完成的图形作品相互对照\"},{\"讲解\":\"练习：你能用一句话描述这一轮的实际成果吗？\",\"图形\":\"小人向朋友展示一份简洁成果\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "到结束点",
+          "startMs": 0,
+          "endMs": 1121,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先看看任务实际完成到了哪里",
+          "startMs": 1121,
+          "endMs": 3921,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把完成和未完成分开记录",
+          "startMs": 3921,
+          "endMs": 6322,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "避免只记得忙了多久",
+          "startMs": 6322,
+          "endMs": 8323,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "检查结果是否符合最开始选定的目标",
+          "startMs": 8323,
+          "endMs": 11724,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "练习：你能用一句话描述这一轮的实际成果吗",
+          "startMs": 11724,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-07",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "到结束点，先看看任务实际完成到了哪里。把完成和未完成分开记录，避免只记得忙了多久。检查结果是否符合最开始选定的目标。练习：你能用一句话描述这一轮的实际成果吗？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "人查看桌面已经完成的草稿片段",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：到结束点，先看看任务实际完成到了哪里。",
+            "subtitle": "到结束点，先看看任务实际完成到了哪里。",
+            "type": "concept",
+            "region": {
+              "x": 146,
+              "y": 69,
+              "width": 554,
+              "height": 339
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3421,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                423,
+                79
+              ],
+              "end": [
+                423,
+                398
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "两组不同状态的无字任务卡片",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：把完成和未完成分开记录，避免只记得忙了多久。",
+            "subtitle": "把完成和未完成分开记录，避免只记得忙了多久。",
+            "type": "concept",
+            "region": {
+              "x": 989,
+              "y": 84,
+              "width": 567,
+              "height": 303
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 3921,
+              "durationMs": 4202,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1272.5,
+                94
+              ],
+              "end": [
+                1272.5,
+                377
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "任务卡与完成的图形作品相互对照",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：检查结果是否符合最开始选定的目标。",
+            "subtitle": "检查结果是否符合最开始选定的目标。",
+            "type": "concept",
+            "region": {
+              "x": 125,
+              "y": 540,
+              "width": 591,
+              "height": 342
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8323,
+              "durationMs": 3201,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                420.5,
+                550
+              ],
+              "end": [
+                420.5,
+                872
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "小人向朋友展示一份简洁成果",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：练习：你能用一句话描述这一轮的实际成果吗？",
+            "subtitle": "练习：你能用一句话描述这一轮的实际成果吗？",
+            "type": "concept",
+            "region": {
+              "x": 991,
+              "y": 566,
+              "width": 591,
+              "height": 300
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 11724,
+              "durationMs": 17576,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1286.5,
+                576
+              ],
+              "end": [
+                1286.5,
+                856
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/07.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "休息也安排一个边界",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "离开工作一小会儿，可以起身活动或看看远处。",
+          "subject": "人从桌前起身伸展，窗边留白"
+        },
+        {
+          "text": "休息方式和长度按个人情况选择，不追求固定模板。",
+          "subject": "无数字计时器与散步小人"
+        },
+        {
+          "text": "回来时查看刚记录的下一步，减少重新找方向。",
+          "subject": "手查看便签上的简单下一步箭头"
+        },
+        {
+          "text": "如果确实疲劳，就调整计划，不必强行延长这一轮。",
+          "subject": "人安静休息，旁边合上的电脑"
+        }
+      ],
+      "narration": "离开工作一小会儿，可以起身活动或看看远处。休息方式和长度按个人情况选择，不追求固定模板。回来时查看刚记录的下一步，减少重新找方向。如果确实疲劳，就调整计划，不必强行延长这一轮。",
+      "image": "/course/whiteboard/focus-work/08.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"离开工作一小会儿，可以起身活动或看看远处。\",\"图形\":\"人从桌前起身伸展，窗边留白\"},{\"讲解\":\"休息方式和长度按个人情况选择，不追求固定模板。\",\"图形\":\"无数字计时器与散步小人\"},{\"讲解\":\"回来时查看刚记录的下一步，减少重新找方向。\",\"图形\":\"手查看便签上的简单下一步箭头\"},{\"讲解\":\"如果确实疲劳，就调整计划，不必强行延长这一轮。\",\"图形\":\"人安静休息，旁边合上的电脑\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "离开工作一小会儿",
+          "startMs": 0,
+          "endMs": 1940,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "可以起身活动或看看远处",
+          "startMs": 1940,
+          "endMs": 4367,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "休息方式和长度按个人情况选择",
+          "startMs": 4367,
+          "endMs": 7401,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不追求固定模板",
+          "startMs": 7401,
+          "endMs": 9018,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "回来时查看刚记录的下一步",
+          "startMs": 9018,
+          "endMs": 11647,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "减少重新找方向",
+          "startMs": 11647,
+          "endMs": 13265,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "如果确实疲劳",
+          "startMs": 13265,
+          "endMs": 14681,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就调整计划",
+          "startMs": 14681,
+          "endMs": 15894,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不必强行延长这一轮",
+          "startMs": 15894,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-08",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "离开工作一小会儿，可以起身活动或看看远处。休息方式和长度按个人情况选择，不追求固定模板。回来时查看刚记录的下一步，减少重新找方向。如果确实疲劳，就调整计划，不必强行延长这一轮。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "人从桌前起身伸展，窗边留白",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：离开工作一小会儿，可以起身活动或看看远处。",
+            "subtitle": "离开工作一小会儿，可以起身活动或看看远处。",
+            "type": "concept",
+            "region": {
+              "x": 90,
+              "y": 35,
+              "width": 601,
+              "height": 406
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3867,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                390.5,
+                45
+              ],
+              "end": [
+                390.5,
+                431
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "无数字计时器与散步小人",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：休息方式和长度按个人情况选择，不追求固定模板。",
+            "subtitle": "休息方式和长度按个人情况选择，不追求固定模板。",
+            "type": "concept",
+            "region": {
+              "x": 967,
+              "y": 68,
+              "width": 586,
+              "height": 365
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4367,
+              "durationMs": 4451,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1260,
+                78
+              ],
+              "end": [
+                1260,
+                423
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "手查看便签上的简单下一步箭头",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：回来时查看刚记录的下一步，减少重新找方向。",
+            "subtitle": "回来时查看刚记录的下一步，减少重新找方向。",
+            "type": "concept",
+            "region": {
+              "x": 67,
+              "y": 531,
+              "width": 602,
+              "height": 369
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 9018,
+              "durationMs": 4047,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                368,
+                541
+              ],
+              "end": [
+                368,
+                890
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "人安静休息，旁边合上的电脑",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：如果确实疲劳，就调整计划，不必强行延长这一轮。",
+            "subtitle": "如果确实疲劳，就调整计划，不必强行延长这一轮。",
+            "type": "concept",
+            "region": {
+              "x": 955,
+              "y": 561,
+              "width": 646,
+              "height": 335
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 13265,
+              "durationMs": 16035,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1278,
+                571
+              ],
+              "end": [
+                1278,
+                886
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/08.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "回顾哪里容易被打断",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "一天结束，挑一次打断，看看它发生在什么条件下。",
+          "subject": "小人观察桌面手机与临时资料"
+        },
+        {
+          "text": "找出一个可以改变的小条件，比如提前准备文件。",
+          "subject": "手把需要的图形文件放到桌面"
+        },
+        {
+          "text": "下一次只调整这一点，再比较自己的体验。",
+          "subject": "两个相似桌面，其中一个预先准备好材料"
+        },
+        {
+          "text": "这是个人工作实验，不需要宣称对所有人都有效。",
+          "subject": "一人记录自己的小实验，旁边独立小图形卡"
+        }
+      ],
+      "narration": "一天结束，挑一次打断，看看它发生在什么条件下。找出一个可以改变的小条件，比如提前准备文件。下一次只调整这一点，再比较自己的体验。这是个人工作实验，不需要宣称对所有人都有效。",
+      "image": "/course/whiteboard/focus-work/09.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"一天结束，挑一次打断，看看它发生在什么条件下。\",\"图形\":\"小人观察桌面手机与临时资料\"},{\"讲解\":\"找出一个可以改变的小条件，比如提前准备文件。\",\"图形\":\"手把需要的图形文件放到桌面\"},{\"讲解\":\"下一次只调整这一点，再比较自己的体验。\",\"图形\":\"两个相似桌面，其中一个预先准备好材料\"},{\"讲解\":\"这是个人工作实验，不需要宣称对所有人都有效。\",\"图形\":\"一人记录自己的小实验，旁边独立小图形卡\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "一天结束",
+          "startMs": 0,
+          "endMs": 1099,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "挑一次打断",
+          "startMs": 1099,
+          "endMs": 2274,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "看看它发生在什么条件下",
+          "startMs": 2274,
+          "endMs": 4623,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "找出一个可以改变的小条件",
+          "startMs": 4623,
+          "endMs": 7168,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "比如提前准备文件",
+          "startMs": 7168,
+          "endMs": 8931,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "下一次只调整这一点",
+          "startMs": 8931,
+          "endMs": 10888,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再比较自己的体验",
+          "startMs": 10888,
+          "endMs": 12651,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "这是个人工作实验",
+          "startMs": 12651,
+          "endMs": 14413,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不需要宣称对所有人都有效",
+          "startMs": 14413,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-09",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "一天结束，挑一次打断，看看它发生在什么条件下。找出一个可以改变的小条件，比如提前准备文件。下一次只调整这一点，再比较自己的体验。这是个人工作实验，不需要宣称对所有人都有效。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "小人观察桌面手机与临时资料",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：一天结束，挑一次打断，看看它发生在什么条件下。",
+            "subtitle": "一天结束，挑一次打断，看看它发生在什么条件下。",
+            "type": "concept",
+            "region": {
+              "x": 119,
+              "y": 106,
+              "width": 612,
+              "height": 314
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4123,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                425,
+                116
+              ],
+              "end": [
+                425,
+                410
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "手把需要的图形文件放到桌面",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：找出一个可以改变的小条件，比如提前准备文件。",
+            "subtitle": "找出一个可以改变的小条件，比如提前准备文件。",
+            "type": "concept",
+            "region": {
+              "x": 950,
+              "y": 84,
+              "width": 613,
+              "height": 311
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4623,
+              "durationMs": 4108,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1256.5,
+                94
+              ],
+              "end": [
+                1256.5,
+                385
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "两个相似桌面，其中一个预先准备好材料",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：下一次只调整这一点，再比较自己的体验。",
+            "subtitle": "下一次只调整这一点，再比较自己的体验。",
+            "type": "concept",
+            "region": {
+              "x": 95,
+              "y": 558,
+              "width": 654,
+              "height": 275
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8931,
+              "durationMs": 3520,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                422,
+                568
+              ],
+              "end": [
+                422,
+                823
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "一人记录自己的小实验，旁边独立小图形卡",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：这是个人工作实验，不需要宣称对所有人都有效。",
+            "subtitle": "这是个人工作实验，不需要宣称对所有人都有效。",
+            "type": "concept",
+            "region": {
+              "x": 952,
+              "y": 528,
+              "width": 613,
+              "height": 307
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12651,
+              "durationMs": 16649,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1258.5,
+                538
+              ],
+              "end": [
+                1258.5,
+                825
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/09.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "形成适合自己的小流程",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "明确小任务、准备材料、开始一段工作，再检查成果。",
+          "subject": "任务卡、材料盒、工作小人和成果四个简洁图标"
+        },
+        {
+          "text": "遇到打断就记下返回点，遇到困难就寻找下一步。",
+          "subject": "便签返回箭头与补齐的小拼图"
+        },
+        {
+          "text": "每次根据实际体验调整，不把流程变成额外负担。",
+          "subject": "一个人轻松整理少量工具"
+        },
+        {
+          "text": "现在选一个小任务，试一轮，然后告诉自己完成了什么。",
+          "subject": "人完成一份小草稿并把它展示在桌上"
+        }
+      ],
+      "narration": "明确小任务、准备材料、开始一段工作，再检查成果。遇到打断就记下返回点，遇到困难就寻找下一步。每次根据实际体验调整，不把流程变成额外负担。现在选一个小任务，试一轮，然后告诉自己完成了什么。",
+      "image": "/course/whiteboard/focus-work/10.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"明确小任务、准备材料、开始一段工作，再检查成果。\",\"图形\":\"任务卡、材料盒、工作小人和成果四个简洁图标\"},{\"讲解\":\"遇到打断就记下返回点，遇到困难就寻找下一步。\",\"图形\":\"便签返回箭头与补齐的小拼图\"},{\"讲解\":\"每次根据实际体验调整，不把流程变成额外负担。\",\"图形\":\"一个人轻松整理少量工具\"},{\"讲解\":\"现在选一个小任务，试一轮，然后告诉自己完成了什么。\",\"图形\":\"人完成一份小草稿并把它展示在桌上\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "明确小任务、准备材料、开始一段工作",
+          "startMs": 0,
+          "endMs": 3634,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再检查成果",
+          "startMs": 3634,
+          "endMs": 4806,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "遇到打断就记下返回点",
+          "startMs": 4806,
+          "endMs": 6953,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "遇到困难就寻找下一步",
+          "startMs": 6953,
+          "endMs": 9102,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "每次根据实际体验调整",
+          "startMs": 9102,
+          "endMs": 11249,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不把流程变成额外负担",
+          "startMs": 11249,
+          "endMs": 13397,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "现在选一个小任务",
+          "startMs": 13397,
+          "endMs": 15154,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "试一轮",
+          "startMs": 15154,
+          "endMs": 15934,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "然后告诉自己完成了什么",
+          "startMs": 15934,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-10",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "明确小任务、准备材料、开始一段工作，再检查成果。遇到打断就记下返回点，遇到困难就寻找下一步。每次根据实际体验调整，不把流程变成额外负担。现在选一个小任务，试一轮，然后告诉自己完成了什么。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "任务卡、材料盒、工作小人和成果四个简洁图标",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：明确小任务、准备材料、开始一段工作，再检查成果。",
+            "subtitle": "明确小任务、准备材料、开始一段工作，再检查成果。",
+            "type": "concept",
+            "region": {
+              "x": 96,
+              "y": 170,
+              "width": 675,
+              "height": 186
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4306,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                433.5,
+                180
+              ],
+              "end": [
+                433.5,
+                346
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "便签返回箭头与补齐的小拼图",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：遇到打断就记下返回点，遇到困难就寻找下一步。",
+            "subtitle": "遇到打断就记下返回点，遇到困难就寻找下一步。",
+            "type": "concept",
+            "region": {
+              "x": 954,
+              "y": 139,
+              "width": 619,
+              "height": 232
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4806,
+              "durationMs": 4096,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1263.5,
+                149
+              ],
+              "end": [
+                1263.5,
+                361
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "一个人轻松整理少量工具",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：每次根据实际体验调整，不把流程变成额外负担。",
+            "subtitle": "每次根据实际体验调整，不把流程变成额外负担。",
+            "type": "concept",
+            "region": {
+              "x": 197,
+              "y": 548,
+              "width": 482,
+              "height": 254
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 9102,
+              "durationMs": 4095,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                438,
+                558
+              ],
+              "end": [
+                438,
+                792
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "人完成一份小草稿并把它展示在桌上",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：现在选一个小任务，试一轮，然后告诉自己完成了什么。",
+            "subtitle": "现在选一个小任务，试一轮，然后告诉自己完成了什么。",
+            "type": "concept",
+            "region": {
+              "x": 1025,
+              "y": 530,
+              "width": 486,
+              "height": 283
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 13397,
+              "durationMs": 15903,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1268,
+                540
+              ],
+              "end": [
+                1268,
+                803
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/focus-work/10.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "srt": "1\n00:00:00,000 --> 00:00:01,315\n准备工作时\n\n2\n00:00:01,315 --> 00:00:04,700\n先把模糊目标变成一个具体的小任务\n\n3\n00:00:04,700 --> 00:00:07,090\n选择能够看到结果的动作\n\n4\n00:00:07,090 --> 00:00:08,882\n比如完成一段草稿\n\n5\n00:00:08,882 --> 00:00:10,077\n任务太大时\n\n6\n00:00:10,077 --> 00:00:12,467\n先找出可以开始的第一步\n\n7\n00:00:12,467 --> 00:00:30,000\n练习：你今天能完成的最小成果是什么\n\n8\n00:00:30,000 --> 00:00:31,122\n开始之前\n\n9\n00:00:31,122 --> 00:00:34,531\n把本次任务真正需要的材料放在手边\n\n10\n00:00:34,531 --> 00:00:36,536\n把不相关的物品移开\n\n11\n00:00:36,536 --> 00:00:38,542\n减少临时寻找的机会\n\n12\n00:00:38,542 --> 00:00:40,948\n先确认文件和工具能打开\n\n13\n00:00:40,948 --> 00:00:43,153\n避免开始后再来回切换\n\n14\n00:00:43,153 --> 00:00:44,958\n准备不是无限整理\n\n15\n00:00:44,958 --> 00:01:00,000\n够支持第一步就可以开始\n\n16\n00:01:00,000 --> 00:01:03,236\n给这一轮工作设一个明确的结束点\n\n17\n00:01:03,236 --> 00:01:04,795\n长度按实际调整\n\n18\n00:01:04,795 --> 00:01:05,574\n开始后\n\n19\n00:01:05,574 --> 00:01:07,912\n先坚持完成选定的小步骤\n\n20\n00:01:07,912 --> 00:01:10,444\n结束点不是保证效率的魔法\n\n21\n00:01:10,444 --> 00:01:12,197\n只是帮助安排边界\n\n22\n00:01:12,197 --> 00:01:13,950\n练习：这次结束时\n\n23\n00:01:13,950 --> 00:01:30,000\n你希望得到哪一个可见成果\n\n24\n00:01:30,000 --> 00:01:32,541\n工作中突然想起另一件事\n\n25\n00:01:32,541 --> 00:01:34,356\n可以先简短记下来\n\n26\n00:01:34,356 --> 00:01:36,373\n记好后回到当前任务\n\n27\n00:01:36,373 --> 00:01:38,794\n不必立刻打开另一项工作\n\n28\n00:01:38,794 --> 00:01:41,416\n为临时想法留一个收集位置\n\n29\n00:01:41,416 --> 00:01:43,231\n减少反复担心忘记\n\n30\n00:01:43,231 --> 00:01:45,450\n这里的目标是减少切换\n\n31\n00:01:45,450 --> 00:02:00,000\n并非压住所有新想法\n\n32\n00:02:00,000 --> 00:02:03,730\n先检查哪些通知与这一段工作直接相关\n\n33\n00:02:03,730 --> 00:02:05,334\n在允许的范围内\n\n34\n00:02:05,334 --> 00:02:08,342\n给不紧急的提醒安排晚一点处理\n\n35\n00:02:08,342 --> 00:02:09,746\n如果必须响应\n\n36\n00:02:09,746 --> 00:02:12,754\n就记录回来之后要继续的下一步\n\n37\n00:02:12,754 --> 00:02:15,562\n练习：现在的打断是必须处理\n\n38\n00:02:15,562 --> 00:02:30,000\n还是可以稍后再看\n\n39\n00:02:30,000 --> 00:02:30,908\n卡住时\n\n40\n00:02:30,908 --> 00:02:32,484\n先描述具体困难\n\n41\n00:02:32,484 --> 00:02:34,453\n而不是给自己贴标签\n\n42\n00:02:34,453 --> 00:02:36,816\n问自己缺的是资料、决定\n\n43\n00:02:36,816 --> 00:02:39,180\n还是一个可操作的小动作\n\n44\n00:02:39,180 --> 00:02:41,346\n只解决眼前的一个阻碍\n\n45\n00:02:41,346 --> 00:02:42,922\n再检查能否继续\n\n46\n00:02:42,922 --> 00:02:44,695\n如果问题超出能力\n\n47\n00:02:44,695 --> 00:03:00,000\n写清需要什么帮助再去求助\n\n48\n00:03:00,000 --> 00:03:01,121\n到结束点\n\n49\n00:03:01,121 --> 00:03:03,921\n先看看任务实际完成到了哪里\n\n50\n00:03:03,921 --> 00:03:06,322\n把完成和未完成分开记录\n\n51\n00:03:06,322 --> 00:03:08,323\n避免只记得忙了多久\n\n52\n00:03:08,323 --> 00:03:11,724\n检查结果是否符合最开始选定的目标\n\n53\n00:03:11,724 --> 00:03:30,000\n练习：你能用一句话描述这一轮的实际成果吗\n\n54\n00:03:30,000 --> 00:03:31,940\n离开工作一小会儿\n\n55\n00:03:31,940 --> 00:03:34,367\n可以起身活动或看看远处\n\n56\n00:03:34,367 --> 00:03:37,401\n休息方式和长度按个人情况选择\n\n57\n00:03:37,401 --> 00:03:39,018\n不追求固定模板\n\n58\n00:03:39,018 --> 00:03:41,647\n回来时查看刚记录的下一步\n\n59\n00:03:41,647 --> 00:03:43,265\n减少重新找方向\n\n60\n00:03:43,265 --> 00:03:44,681\n如果确实疲劳\n\n61\n00:03:44,681 --> 00:03:45,894\n就调整计划\n\n62\n00:03:45,894 --> 00:04:00,000\n不必强行延长这一轮\n\n63\n00:04:00,000 --> 00:04:01,099\n一天结束\n\n64\n00:04:01,099 --> 00:04:02,274\n挑一次打断\n\n65\n00:04:02,274 --> 00:04:04,623\n看看它发生在什么条件下\n\n66\n00:04:04,623 --> 00:04:07,168\n找出一个可以改变的小条件\n\n67\n00:04:07,168 --> 00:04:08,931\n比如提前准备文件\n\n68\n00:04:08,931 --> 00:04:10,888\n下一次只调整这一点\n\n69\n00:04:10,888 --> 00:04:12,651\n再比较自己的体验\n\n70\n00:04:12,651 --> 00:04:14,413\n这是个人工作实验\n\n71\n00:04:14,413 --> 00:04:30,000\n不需要宣称对所有人都有效\n\n72\n00:04:30,000 --> 00:04:33,634\n明确小任务、准备材料、开始一段工作\n\n73\n00:04:33,634 --> 00:04:34,806\n再检查成果\n\n74\n00:04:34,806 --> 00:04:36,953\n遇到打断就记下返回点\n\n75\n00:04:36,953 --> 00:04:39,102\n遇到困难就寻找下一步\n\n76\n00:04:39,102 --> 00:04:41,249\n每次根据实际体验调整\n\n77\n00:04:41,249 --> 00:04:43,397\n不把流程变成额外负担\n\n78\n00:04:43,397 --> 00:04:45,154\n现在选一个小任务\n\n79\n00:04:45,154 --> 00:04:45,934\n试一轮\n\n80\n00:04:45,934 --> 00:05:00,000\n然后告诉自己完成了什么\n",
+  "video": "/course/whiteboard/focus-work/tutorial.mp4"
+}

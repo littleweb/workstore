@@ -200,20 +200,20 @@ fn validate(files: &Files) -> Result<()> {
         if name.starts_with(crate::sync_history::PREFIX) && !crate::sync_history::valid(name, bytes) {
             return Err("同步历史校验失败，未修改工作区".into());
         }
-        if name.ends_with(".design.json") || name.ends_with(".story-comic.json") || name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
+        if name.ends_with(".course.json") || name.ends_with(".design.json") || name.ends_with(".story-comic.json") || name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
             let v: Value =
                 serde_json::from_slice(bytes).map_err(|e| format!("{name} 无法解析：{e}"))?;
             let board = name.ends_with(".whiteboard.json");
             let id = v["id"].as_str().ok_or("文档缺少 ID")?;
             Uuid::parse_str(id).map_err(|_| "文档 ID 无效")?;
-            let suffix = if name.ends_with(".design.json") { ".design.json" } else if name.ends_with(".story-comic.json") { ".story-comic.json" } else if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if board {
+            let suffix = if name.ends_with(".course.json") { ".course.json" } else if name.ends_with(".design.json") { ".design.json" } else if name.ends_with(".story-comic.json") { ".story-comic.json" } else if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if board {
                 ".whiteboard.json"
             } else {
                 ".doc.json"
             };
             if v["schemaVersion"] != 1
                 || v["type"]
-                    != if name.ends_with(".design.json") { "workstore.design" } else if name.ends_with(".story-comic.json") { "workstore.story-comic" } else if name.ends_with(".cover.json") { "workstore.cover" } else if name.ends_with(".html.json") { "workstore.html" } else if name.ends_with(".comic.json") { "workstore.comic" } else if board {
+                    != if name.ends_with(".course.json") { "workstore.course" } else if name.ends_with(".design.json") { "workstore.design" } else if name.ends_with(".story-comic.json") { "workstore.story-comic" } else if name.ends_with(".cover.json") { "workstore.cover" } else if name.ends_with(".html.json") { "workstore.html" } else if name.ends_with(".comic.json") { "workstore.comic" } else if board {
                         "workstore.whiteboard"
                     } else {
                         "workstore.document"
@@ -229,6 +229,51 @@ fn validate(files: &Files) -> Result<()> {
 fn default_state(bytes: &[u8]) -> bool {
     serde_json::from_slice::<Value>(bytes).ok() == serde_json::to_value(Data::default()).ok()
 }
+// Recognize only TeaEditor's blank wrappers, never media or arbitrary HTML.
+fn empty_note_html(value: &Value) -> bool {
+    let Some(mut html) = value.as_str() else { return false; };
+    while !html.is_empty() {
+        html = html.trim_start_matches(|c: char| c.is_whitespace() || c == '\u{200b}');
+        if html.is_empty() { return true; }
+        if html.starts_with('<') {
+            let Some(end) = html.find('>') else { return false; };
+            let tag = html[1..end].trim_start_matches('/');
+            let name = tag.split(|c: char| c.is_whitespace() || c == '/').next().unwrap_or("");
+            if !["p", "div", "span", "br"].iter().any(|allowed| name.eq_ignore_ascii_case(allowed)) {
+                return false;
+            }
+            if tag.contains('<') { return false; }
+            html = &html[end + 1..];
+        } else if let Some(entity) = ["&nbsp;", "&#160;", "&#xa0;", "&#x00a0;", "&#8203;", "&#x200b;"]
+            .iter().find(|entity| html.get(..entity.len()).is_some_and(|s| s.eq_ignore_ascii_case(entity))) {
+            html = &html[entity.len()..];
+        } else { return false; }
+    }
+    true
+}
+
+fn merge_note_field(base: Option<&Value>, local: &Value, remote: &Value, key: &str, conflict: &mut bool) -> Value {
+    if key == "content" && empty_note_html(local) && empty_note_html(remote) {
+        return remote.clone();
+    }
+    if key == "content" && base.is_some_and(empty_note_html) {
+        if empty_note_html(local) { return remote.clone(); }
+        if empty_note_html(remote) { return local.clone(); }
+    }
+    // Exact non-conflicting changes have already been handled by merge_value.
+    // For a real conflict, keep the populated branch visible and archive both
+    // originals. A deliberate clear still applies when its peer is unchanged.
+    let placeholder = |v: &Value| matches!(v.as_str(), Some("未命名笔记" | "未命名文档"));
+    let (local_empty, remote_empty) = if key == "content" {
+        (empty_note_html(local), empty_note_html(remote))
+    } else { (placeholder(local), placeholder(remote)) };
+    if local_empty != remote_empty {
+        *conflict = true;
+        return if local_empty { remote.clone() } else { local.clone() };
+    }
+    merge_value(base, local, remote, conflict)
+}
+
 // Objects merge per field; arrays (editor scenes/content) stay indivisible. A
 // conflicting field uses the remote value; merge() archives exact inputs outside tool lists.
 fn merge_value(base: Option<&Value>, local: &Value, remote: &Value, conflict: &mut bool) -> Value {
@@ -253,6 +298,8 @@ fn merge_value(base: Option<&Value>, local: &Value, remote: &Value, conflict: &m
     }
     if let (Some(l), Some(r)) = (local.as_object(), remote.as_object()) {
         let b = base.and_then(Value::as_object);
+        let note = l.get("type").and_then(Value::as_str) == Some("workstore.document") &&
+            r.get("type").and_then(Value::as_str) == Some("workstore.document");
         let keys: BTreeSet<_> = l
             .keys()
             .chain(r.keys())
@@ -280,7 +327,9 @@ fn merge_value(base: Option<&Value>, local: &Value, remote: &Value, conflict: &m
                         .max(rv.unwrap().as_u64().unwrap()),
                 ))
             } else if let (Some(lv), Some(rv)) = (lv, rv) {
-                Some(merge_value(bv, lv, rv, conflict))
+                Some(if note && matches!(key.as_str(), "title" | "content") {
+                    merge_note_field(bv, lv, rv, key, conflict)
+                } else { merge_value(bv, lv, rv, conflict) })
             } else {
                 *conflict = true;
                 rv.cloned()
@@ -325,7 +374,7 @@ fn merge_value(base: Option<&Value>, local: &Value, remote: &Value, conflict: &m
 #[cfg(test)]
 fn legacy_conflict_copy(name: &str, bytes: &[u8]) -> (String, Vec<u8>) {
     let digest = Sha256::digest([name.as_bytes(), bytes].concat());
-    if name.ends_with(".design.json") || name.ends_with(".story-comic.json") || name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
+    if name.ends_with(".course.json") || name.ends_with(".design.json") || name.ends_with(".story-comic.json") || name.ends_with(".cover.json") || name.ends_with(".html.json") || name.ends_with(".doc.json") || name.ends_with(".whiteboard.json") || name.ends_with(".comic.json") {
         if let Ok(mut value) = serde_json::from_slice::<Value>(bytes) {
             let mut raw = [0; 16];
             raw.copy_from_slice(&digest[..16]);
@@ -340,7 +389,7 @@ fn legacy_conflict_copy(name: &str, bytes: &[u8]) -> (String, Vec<u8>) {
                 .collect::<String>();
             value["id"] = Value::from(id.clone());
             value["title"] = Value::from(format!("{title}（冲突副本）"));
-            let suffix = if name.ends_with(".design.json") { ".design.json" } else if name.ends_with(".story-comic.json") { ".story-comic.json" } else if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if name.ends_with(".doc.json") {
+            let suffix = if name.ends_with(".course.json") { ".course.json" } else if name.ends_with(".design.json") { ".design.json" } else if name.ends_with(".story-comic.json") { ".story-comic.json" } else if name.ends_with(".cover.json") { ".cover.json" } else if name.ends_with(".html.json") { ".html.json" } else if name.ends_with(".comic.json") { ".comic.json" } else if name.ends_with(".doc.json") {
                 ".doc.json"
             } else {
                 ".whiteboard.json"
@@ -422,7 +471,9 @@ fn merge(base: &Files, local: &Files, remote: &Files, initial: bool) -> (Files, 
 pub struct Prepared {
     pub id: String,
     pub root: String,
+    #[serde(with = "crate::sync_bytes")]
     pub captured: Files,
+    #[serde(with = "crate::sync_bytes")]
     pub merged: Files,
     pub conflicts: usize,
     pub identity: String,
@@ -430,10 +481,24 @@ pub struct Prepared {
 #[derive(Default, Serialize, Deserialize)]
 struct Baseline {
     identity: String,
+    #[serde(with = "crate::sync_bytes")]
     files: Files,
 }
 fn json_write(path: &Path, value: &impl Serialize) -> Result<()> {
-    atomic_write(path, &serde_json::to_vec(value).map_err(|e| e.to_string())?)
+    use std::io::Write;
+    let parent=path.parent().ok_or("Invalid path")?;
+    fs::create_dir_all(parent).map_err(|e|e.to_string())?;
+    let mut tmp=tempfile::NamedTempFile::new_in(parent).map_err(|e|e.to_string())?;
+    {
+        let mut writer=std::io::BufWriter::new(tmp.as_file_mut());
+        serde_json::to_writer(&mut writer,value).map_err(|e|e.to_string())?;
+        writer.flush().map_err(|e|e.to_string())?;
+    }
+    tmp.as_file().sync_all().map_err(|e|e.to_string())?;
+    tmp.persist(path).map_err(|e|e.to_string())?;
+    #[cfg(unix)]
+    fs::File::open(parent).map_err(|e|e.to_string())?.sync_all().map_err(|e|e.to_string())?;
+    Ok(())
 }
 fn replace_checkout(root: &Path, files: &Files) -> Result<()> {
     let before = snapshot(root)?;
@@ -549,7 +614,7 @@ pub fn prepare(root: &Path, preferences: &Preferences, captured: Files) -> Resul
     fs::create_dir_all(&area).map_err(|e| e.to_string())?;
     let base_path = area.join("sync-base.json");
     let baseline: Baseline = if base_path.exists() {
-        serde_json::from_slice(&fs::read(base_path).map_err(|e| e.to_string())?)
+        serde_json::from_reader(std::io::BufReader::new(fs::File::open(&base_path).map_err(|e| e.to_string())?))
             .map_err(|e| format!("同步基线损坏：{e}"))?
     } else {
         Baseline::default()
@@ -690,6 +755,14 @@ pub fn prepare(root: &Path, preferences: &Preferences, captured: Files) -> Resul
         prepared.id = "unchanged".into();
         return Ok(prepared);
     }
+    // An upload-only pass changes no user files. Commit its private common
+    // baseline during preparation, outside editor activation and the writer mutex.
+    // Edits made since capture remain local changes relative to this baseline.
+    if prepared.merged == captured {
+        json_write(&base_path, &Baseline { identity: identity.clone(), files: captured })?;
+        prepared.id = "unchanged".into();
+        return Ok(prepared);
+    }
     json_write(&area.join("sync-prepared.json"), &prepared)?;
     Ok(prepared)
 }
@@ -702,7 +775,7 @@ pub struct Applied {
 pub fn apply(root: &Path, id: &str) -> Result<Applied> {
     let area = root.join(".workstore");
     let path = area.join("sync-prepared.json");
-    let prepared: Prepared = serde_json::from_slice(&fs::read(&path).map_err(|e| e.to_string())?)
+    let prepared: Prepared = serde_json::from_reader(std::io::BufReader::new(fs::File::open(&path).map_err(|e| e.to_string())?))
         .map_err(|e| e.to_string())?;
     if prepared.id != id || Path::new(&prepared.root) != root {
         return Err("工作区已变化，将在下一次同步时重试".into());
@@ -812,7 +885,7 @@ fn conversation_value(value: &Value) -> Option<Value> {
 }
 
 pub fn pending_conversation_records(root: &Path, id: &str) -> Result<Vec<Value>> {
-    let prepared: Prepared = serde_json::from_slice(&fs::read(root.join(".workstore/sync-prepared.json")).map_err(|e| e.to_string())?)
+    let prepared: Prepared = serde_json::from_reader(std::io::BufReader::new(fs::File::open(root.join(".workstore/sync-prepared.json")).map_err(|e| e.to_string())?))
         .map_err(|e| e.to_string())?;
     if prepared.id != id || Path::new(&prepared.root) != root { return Err("同步任务已变化".into()); }
     let mut updates = vec![];
@@ -835,7 +908,7 @@ pub fn reconcile_history(root: &Path) -> Result<usize> {
     validate(&files)?;
     let baseline_path = root.join(".workstore/sync-base.json");
     let baseline = if baseline_path.exists() {
-        serde_json::from_slice(&fs::read(&baseline_path).map_err(|e| e.to_string())?)
+        serde_json::from_reader(std::io::BufReader::new(fs::File::open(&baseline_path).map_err(|e| e.to_string())?))
             .map_err(|_| "同步基线无法读取，未整理用户文件".to_string())?
     } else { Baseline::default() };
     json_write(&root.join(".workstore/sync-recovery.json"), &Recovery { files, baseline })?;
@@ -861,6 +934,7 @@ pub fn maintain_history(root: &Path) -> Result<usize> {
 
 #[derive(Serialize, Deserialize)]
 struct Recovery {
+    #[serde(with = "crate::sync_bytes")]
     files: Files,
     baseline: Baseline,
 }
@@ -868,7 +942,7 @@ pub fn recover(root: &Path) -> Result<()> {
     let journal = root.join(".workstore/sync-recovery.json");
     if journal.exists() {
         let transaction: Recovery =
-            serde_json::from_slice(&fs::read(&journal).map_err(|e| e.to_string())?)
+            serde_json::from_reader(std::io::BufReader::new(fs::File::open(&journal).map_err(|e| e.to_string())?))
                 .map_err(|e| e.to_string())?;
         validate(&transaction.files)?;
         replace_checkout(root, &transaction.files)?;
@@ -885,6 +959,26 @@ pub fn recover(root: &Path) -> Result<()> {
 mod tests {
     use super::*;
     use crate::storage::Store;
+    #[test]
+    fn upload_only_updates_common_baseline_without_editor_activation() {
+        let temp=tempfile::tempdir().unwrap();
+        let remote=temp.path().join("remote.git");
+        fs::create_dir(&remote).unwrap();
+        git(&remote,&["init","--bare","--quiet"],"").unwrap();
+        let p=Preferences{github_sync_enabled:true,github_repo_url:remote.to_string_lossy().into_owned(),..Preferences::default()};
+        let root=temp.path().join("workspace");
+        let store=Store::open(temp.path().join("config"),root.clone()).unwrap();
+        let original=store.create_document().unwrap();
+        sync(&root,&p);
+        let mut doc=original.document;doc.content=Value::String("local edit".into());
+        store.save_document(doc,original.token).unwrap();
+        let captured=snapshot(&root).unwrap();
+        let prepared=prepare(&root,&p,captured.clone()).unwrap();
+        assert_eq!(prepared.id,"unchanged");
+        assert_eq!(snapshot(&root).unwrap(),captured);
+        let baseline:Baseline=serde_json::from_reader(fs::File::open(root.join(".workstore/sync-base.json")).unwrap()).unwrap();
+        assert_eq!(baseline.files,captured);
+    }
     fn sync(root: &Path, p: &Preferences) -> Applied {
         let prepared = prepare(root, p, snapshot(root).unwrap()).unwrap();
         if prepared.id == "unchanged" {
@@ -1047,6 +1141,57 @@ mod tests {
         value["type"] = Value::from("workstore.document");
         invalid.insert(path,serde_json::to_vec(&value).unwrap());
         assert!(validate(&invalid).is_err());
+    }
+    #[test]
+    fn course_files_images_and_navigation_travel_between_local_peers() {
+        let temp = tempfile::tempdir().unwrap();
+        let remote = temp.path().join("remote.git"); fs::create_dir(&remote).unwrap();
+        git(&remote, &["init", "--bare", "--quiet"], "").unwrap();
+        let p = Preferences { github_sync_enabled: true, github_repo_url: remote.to_string_lossy().into_owned(), ..Preferences::default() };
+        let a = temp.path().join("a"); let b = temp.path().join("b");
+        let mut first = Store::open(temp.path().join("ca"), a.clone()).unwrap();
+        let second = Store::open(temp.path().join("cb"), b.clone()).unwrap();
+        let course = first.create_course_document().unwrap();
+        let mut image = b"\x89PNG\r\n\x1a\n".to_vec(); image.extend([0; 24]);
+        let image_id = crate::ai_images::save(&a, &image).unwrap();
+        let mut doc = course.document.clone();
+        doc.content = Value::String(serde_json::json!({"versions":[{"image":image_id}]}).to_string());
+        let saved = first.save_course_document(doc, course.token).unwrap();
+        let mut data = first.snapshot().unwrap().data;
+        data.entries.push(crate::storage::Entry { id: "app.course".into(), favorite: false, rank: 3, last_opened: Some(123) });
+        first.save(data).unwrap(); sync(&a, &p); sync(&b, &p);
+        assert!(second.snapshot().unwrap().data.entries.iter().any(|e| e.id == "app.course"));
+        assert_eq!(second.list_course_documents().unwrap().documents.len(), 1);
+        assert_eq!(second.load_course_document(&saved.document.info.id).unwrap().document.content, saved.document.content);
+        assert_eq!(snapshot(&a).unwrap(), snapshot(&b).unwrap());
+        let mut invalid = snapshot(&b).unwrap();
+        let path = format!("data/app.course/{}.course.json", saved.document.info.id);
+        let mut value: Value = serde_json::from_slice(&invalid[&path]).unwrap();
+        value["type"] = Value::from("workstore.document");
+        invalid.insert(path,serde_json::to_vec(&value).unwrap());
+        assert!(validate(&invalid).is_err());
+    }
+    #[test]
+    fn conflicting_course_content_keeps_one_visible_document_and_exact_history() {
+        use base64::Engine;
+        let id = Uuid::new_v4().to_string();
+        let name = format!("data/app.course/{id}.course.json");
+        let base = serde_json::json!({"id":id,"type":"workstore.course","schemaVersion":1,"title":"Title","content":"original"});
+        let mut local = base.clone(); local["content"] = Value::from("local");
+        let mut remote = base.clone(); remote["content"] = Value::from("remote");
+        let wrap = |v: &Value| BTreeMap::from([(name.clone(), serde_json::to_vec(v).unwrap())]);
+        let (merged, count) = merge(&wrap(&base), &wrap(&local), &wrap(&remote), false);
+        assert_eq!(count, 1);
+        assert_eq!(merged.keys().filter(|p|p.starts_with("data/")).count(), 1);
+        assert_eq!(serde_json::from_slice::<Value>(&merged[&name]).unwrap()["content"],"remote");
+        assert_eq!(merged, merge(&wrap(&base), &wrap(&local), &wrap(&remote), false).0);
+        let versions: Vec<Value> = merged.iter().filter(|(p,_)|p.starts_with(crate::sync_history::PREFIX))
+            .map(|(_,bytes)| {
+                let v: Value = serde_json::from_slice(bytes).unwrap();
+                let raw = base64::engine::general_purpose::STANDARD.decode(v["contentBase64"].as_str().unwrap()).unwrap();
+                serde_json::from_slice(&raw).unwrap()
+            }).collect();
+        assert!(versions.contains(&base)); assert!(versions.contains(&local)); assert!(versions.contains(&remote));
     }
     #[test]
     fn story_comic_files_images_and_navigation_travel_between_local_peers() {
@@ -1301,6 +1446,61 @@ mod tests {
                 serde_json::from_slice(&raw).unwrap()
             }).collect();
         assert!(versions.contains(&base)); assert!(versions.contains(&local)); assert!(versions.contains(&remote));
+    }
+    #[test]
+    fn note_placeholder_conflict_keeps_written_title_and_content_in_both_directions() {
+        use base64::Engine;
+        let id = Uuid::new_v4().to_string();
+        let name = format!("data/app.doc/{id}.doc.json");
+        let base = serde_json::json!({"id":id,"type":"workstore.document","schemaVersion":1,
+            "title":"Earlier title","content":"<p>Earlier content</p>","revision":3});
+        let mut written = base.clone();
+        written["title"] = Value::from("Product positioning");
+        written["content"] = Value::from("<p>Latest written content</p>");
+        written["revision"] = Value::from(23);
+        let mut empty = base.clone();
+        empty["title"] = Value::from("未命名笔记");
+        empty["content"] = Value::from("<p class=\"PlaygroundEditorTheme__paragraph\"><br></p><p><br></p>");
+        empty["revision"] = Value::from(21);
+        let wrap = |v: &Value| Files::from([(name.clone(), serde_json::to_vec(v).unwrap())]);
+        for (local, remote) in [(&written, &empty), (&empty, &written)] {
+            let (merged, count) = merge(&wrap(&base), &wrap(local), &wrap(remote), false);
+            let visible: Value = serde_json::from_slice(&merged[&name]).unwrap();
+            assert_eq!(visible["title"], written["title"]);
+            assert_eq!(visible["content"], written["content"]);
+            assert_eq!(count, 1);
+            let originals: Vec<Vec<u8>> = merged.iter().filter(|(p,_)|p.starts_with(crate::sync_history::PREFIX))
+                .map(|(_, bytes)| {
+                    let v: Value = serde_json::from_slice(bytes).unwrap();
+                    base64::engine::general_purpose::STANDARD.decode(v["contentBase64"].as_str().unwrap()).unwrap()
+                }).collect();
+            assert!(originals.contains(&serde_json::to_vec(&written).unwrap()));
+            assert!(originals.contains(&serde_json::to_vec(&empty).unwrap()));
+        }
+    }
+    #[test]
+    fn blank_editor_serialization_is_not_a_content_conflict() {
+        let base = serde_json::json!({"type":"workstore.document","title":"未命名笔记","content":""});
+        let mut written = base.clone(); written["content"] = Value::from("<p>Written</p>");
+        let mut initialized = base.clone(); initialized["content"] = Value::from("<p><br></p>");
+        for (local, remote) in [(&written, &initialized), (&initialized, &written)] {
+            let mut conflict = false;
+            let merged = merge_value(Some(&base), local, remote, &mut conflict);
+            assert_eq!(merged["content"], written["content"]);
+            assert!(!conflict);
+        }
+        assert!(!empty_note_html(&Value::from("<p><img src=\"x\"></p>")));
+        assert!(!empty_note_html(&Value::from("<table></table>")));
+    }
+    #[test]
+    fn intentional_note_clear_and_rename_apply_when_the_other_device_has_not_edited() {
+        let base = serde_json::json!({"type":"workstore.document","title":"Named note","content":"<p>Written</p>"});
+        let cleared = serde_json::json!({"type":"workstore.document","title":"未命名笔记","content":"<p><br></p>"});
+        for (local, remote) in [(&base, &cleared), (&cleared, &base)] {
+            let mut conflict = false;
+            assert_eq!(merge_value(Some(&base), local, remote, &mut conflict), cleared);
+            assert!(!conflict);
+        }
     }
     #[test]
     fn conflicting_html_content_keeps_one_visible_document_and_exact_history() {

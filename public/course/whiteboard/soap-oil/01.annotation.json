@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-01",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "手上沾了油，清水常常很难把油直接冲走。加入肥皂，揉搓会让肥皂和油污充分接触。肥皂帮助油污分散到水中，变得容易带走。最后用流水冲洗。想一想，为什么揉搓有帮助？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "带两块深色油污的手掌",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：手上沾了油，清水常常很难把油直接冲走。",
+      "subtitle": "手上沾了油，清水常常很难把油直接冲走。",
+      "type": "concept",
+      "region": {
+        "x": 261,
+        "y": 11,
+        "width": 365,
+        "height": 436
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3462,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          443.5,
+          21
+        ],
+        "end": [
+          443.5,
+          437
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "肥皂块与几个蓝色小泡泡",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：加入肥皂，揉搓会让肥皂和油污充分接触。",
+      "subtitle": "加入肥皂，揉搓会让肥皂和油污充分接触。",
+      "type": "concept",
+      "region": {
+        "x": 963,
+        "y": 59,
+        "width": 516,
+        "height": 357
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 3962,
+        "durationMs": 3641,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1221,
+          69
+        ],
+        "end": [
+          1221,
+          406
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "橙色油滴被少量肥皂泡泡围住，不画分子结构",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：肥皂帮助油污分散到水中，变得容易带走。",
+      "subtitle": "肥皂帮助油污分散到水中，变得容易带走。",
+      "type": "concept",
+      "region": {
+        "x": 267,
+        "y": 495,
+        "width": 360,
+        "height": 370
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 7803,
+        "durationMs": 3642,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          447,
+          505
+        ],
+        "end": [
+          447,
+          855
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "水龙头的流水冲过干净的双手",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：最后用流水冲洗。想一想，为什么揉搓有帮助？",
+      "subtitle": "最后用流水冲洗。想一想，为什么揉搓有帮助？",
+      "type": "concept",
+      "region": {
+        "x": 964,
+        "y": 442,
+        "width": 540,
+        "height": 484
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 11645,
+        "durationMs": 17655,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1234,
+          452
+        ],
+        "end": [
+          1234,
+          916
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

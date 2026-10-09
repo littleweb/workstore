@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-10",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "明确小任务、准备材料、开始一段工作，再检查成果。遇到打断就记下返回点，遇到困难就寻找下一步。每次根据实际体验调整，不把流程变成额外负担。现在选一个小任务，试一轮，然后告诉自己完成了什么。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "任务卡、材料盒、工作小人和成果四个简洁图标",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：明确小任务、准备材料、开始一段工作，再检查成果。",
+      "subtitle": "明确小任务、准备材料、开始一段工作，再检查成果。",
+      "type": "concept",
+      "region": {
+        "x": 96,
+        "y": 170,
+        "width": 675,
+        "height": 186
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4306,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          433.5,
+          180
+        ],
+        "end": [
+          433.5,
+          346
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "便签返回箭头与补齐的小拼图",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：遇到打断就记下返回点，遇到困难就寻找下一步。",
+      "subtitle": "遇到打断就记下返回点，遇到困难就寻找下一步。",
+      "type": "concept",
+      "region": {
+        "x": 954,
+        "y": 139,
+        "width": 619,
+        "height": 232
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4806,
+        "durationMs": 4096,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1263.5,
+          149
+        ],
+        "end": [
+          1263.5,
+          361
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "一个人轻松整理少量工具",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：每次根据实际体验调整，不把流程变成额外负担。",
+      "subtitle": "每次根据实际体验调整，不把流程变成额外负担。",
+      "type": "concept",
+      "region": {
+        "x": 197,
+        "y": 548,
+        "width": 482,
+        "height": 254
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 9102,
+        "durationMs": 4095,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          438,
+          558
+        ],
+        "end": [
+          438,
+          792
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "人完成一份小草稿并把它展示在桌上",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：现在选一个小任务，试一轮，然后告诉自己完成了什么。",
+      "subtitle": "现在选一个小任务，试一轮，然后告诉自己完成了什么。",
+      "type": "concept",
+      "region": {
+        "x": 1025,
+        "y": 530,
+        "width": 486,
+        "height": 283
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13397,
+        "durationMs": 15903,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1268,
+          540
+        ],
+        "end": [
+          1268,
+          803
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

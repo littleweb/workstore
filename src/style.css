@@ -1502,3 +1502,5 @@ kbd {
   border: 0;
   box-shadow: none;
 }
+
+.tool-switch-status { position:fixed; right:20px; bottom:18px; z-index:1000; padding:8px 12px; border-radius:8px; background:#eef3f0; color:#557467; font-size:13px; pointer-events:none; }

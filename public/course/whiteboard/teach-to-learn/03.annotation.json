@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-03",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "带着具体疑问回到资料，避免从头漫无目的重读。把新理解接回原来的例子，检查是否自洽。换一个例子，看看原来的解释还能不能成立。练习：你能找到一个让旧解释失效的例子吗？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "手指定位书中一个纯图形段落",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：带着具体疑问回到资料，避免从头漫无目的重读。",
+      "subtitle": "带着具体疑问回到资料，避免从头漫无目的重读。",
+      "type": "concept",
+      "region": {
+        "x": 210,
+        "y": 74,
+        "width": 480,
+        "height": 338
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3971,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          450,
+          84
+        ],
+        "end": [
+          450,
+          402
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "缺口被填上的几块拼图",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：把新理解接回原来的例子，检查是否自洽。",
+      "subtitle": "把新理解接回原来的例子，检查是否自洽。",
+      "type": "concept",
+      "region": {
+        "x": 1017,
+        "y": 92,
+        "width": 447,
+        "height": 280
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4471,
+        "durationMs": 3558,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1240.5,
+          102
+        ],
+        "end": [
+          1240.5,
+          362
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "同一连接关系用于两个不同物品组",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：换一个例子，看看原来的解释还能不能成立。",
+      "subtitle": "换一个例子，看看原来的解释还能不能成立。",
+      "type": "concept",
+      "region": {
+        "x": 167,
+        "y": 545,
+        "width": 552,
+        "height": 298
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8229,
+        "durationMs": 3756,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          443,
+          555
+        ],
+        "end": [
+          443,
+          833
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "小人比较两张不同的图形卡片",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：你能找到一个让旧解释失效的例子吗？",
+      "subtitle": "练习：你能找到一个让旧解释失效的例子吗？",
+      "type": "concept",
+      "region": {
+        "x": 956,
+        "y": 582,
+        "width": 553,
+        "height": 285
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12185,
+        "durationMs": 17115,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1232.5,
+          592
+        ],
+        "end": [
+          1232.5,
+          857
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

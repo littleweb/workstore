@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-05",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "把容器放在方便的位置，减少每次分类的额外步骤。用物品图片作提示，让家人更容易知道放哪里。发现投放错误，先说明具体原因，再一起修正。每次只解决一个常见问题，流程会更容易保持。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "厨房角落整齐并排的分类小容器，无标记",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：把容器放在方便的位置，减少每次分类的额外步骤。",
+      "subtitle": "把容器放在方便的位置，减少每次分类的额外步骤。",
+      "type": "concept",
+      "region": {
+        "x": 60,
+        "y": 37,
+        "width": 627,
+        "height": 411
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4302,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          373.5,
+          47
+        ],
+        "end": [
+          373.5,
+          438
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "容器旁独立纸盒、菜叶图标，无文字",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：用物品图片作提示，让家人更容易知道放哪里。",
+      "subtitle": "用物品图片作提示，让家人更容易知道放哪里。",
+      "type": "concept",
+      "region": {
+        "x": 998,
+        "y": 76,
+        "width": 596,
+        "height": 364
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4802,
+        "durationMs": 4076,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1296,
+          86
+        ],
+        "end": [
+          1296,
+          430
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "两个人把错误放入的物品取出重新归置",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：发现投放错误，先说明具体原因，再一起修正。",
+      "subtitle": "发现投放错误，先说明具体原因，再一起修正。",
+      "type": "concept",
+      "region": {
+        "x": 99,
+        "y": 508,
+        "width": 592,
+        "height": 389
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 9078,
+        "durationMs": 4075,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          395,
+          518
+        ],
+        "end": [
+          395,
+          887
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "一个小人整理一件物品，旁边小收纳盒",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：每次只解决一个常见问题，流程会更容易保持。",
+      "subtitle": "每次只解决一个常见问题，流程会更容易保持。",
+      "type": "concept",
+      "region": {
+        "x": 973,
+        "y": 553,
+        "width": 622,
+        "height": 336
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13353,
+        "durationMs": 15947,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1284,
+          563
+        ],
+        "end": [
+          1284,
+          879
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

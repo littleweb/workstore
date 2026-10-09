@@ -1,15 +1,10 @@
 import { invoke } from "@tauri-apps/api/core";
 import type { Picture } from "./types";
-const cache = new Map<string, Promise<string>>();
+import { stringCache } from './imageCache';
+const cachedRead = stringCache(24*1024*1024,12);
 export function imageSource(src: string): Promise<string> {
   if (!src.startsWith("workstore-image:")) return Promise.resolve(src);
-  let value = cache.get(src);
-  if (!value) {
-    value = invoke<string>("ai_read_image", { id: src });
-    cache.set(src, value);
-    value.catch(() => cache.delete(src));
-  }
-  return value;
+  return cachedRead(src,()=>invoke<string>("ai_read_image", { id: src }));
 }
 export async function referenceImage(p: Picture): Promise<string> {
   const im = new Image();

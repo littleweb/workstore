@@ -1,0 +1,1373 @@
+{
+  "title": "把垃圾分类变成小流程",
+  "summary": "先辨认物品是什么；可回收也要看状态；食物残余单独考虑；特殊物品要查规则；让分类变成小流程；拿一个物品做练习",
+  "duration": 180,
+  "scenes": [
+    {
+      "title": "先辨认物品是什么",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "整理垃圾时，先看物品的材料和当前状态。",
+          "subject": "桌面纸盒、玻璃瓶、塑料瓶与菜叶"
+        },
+        {
+          "text": "看见一个包装，不要只凭外形就猜它的类别。",
+          "subject": "手翻看无字包装袋的材料层"
+        },
+        {
+          "text": "同样像纸的东西，可能带有复合涂层。",
+          "subject": "纸张与多层饮料盒剖面并列，无文字"
+        },
+        {
+          "text": "当地规则是判断依据，不同地区的分类可能不同。",
+          "subject": "小人查看社区的纯图标公告板，无字"
+        }
+      ],
+      "narration": "整理垃圾时，先看物品的材料和当前状态。看见一个包装，不要只凭外形就猜它的类别。同样像纸的东西，可能带有复合涂层。当地规则是判断依据，不同地区的分类可能不同。",
+      "image": "/course/whiteboard/recycle-rules/01.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"整理垃圾时，先看物品的材料和当前状态。\",\"图形\":\"桌面纸盒、玻璃瓶、塑料瓶与菜叶\"},{\"讲解\":\"看见一个包装，不要只凭外形就猜它的类别。\",\"图形\":\"手翻看无字包装袋的材料层\"},{\"讲解\":\"同样像纸的东西，可能带有复合涂层。\",\"图形\":\"纸张与多层饮料盒剖面并列，无文字\"},{\"讲解\":\"当地规则是判断依据，不同地区的分类可能不同。\",\"图形\":\"小人查看社区的纯图标公告板，无字\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "整理垃圾时",
+          "startMs": 0,
+          "endMs": 1299,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先看物品的材料和当前状态",
+          "startMs": 1299,
+          "endMs": 3853,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "看见一个包装",
+          "startMs": 3853,
+          "endMs": 5228,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不要只凭外形就猜它的类别",
+          "startMs": 5228,
+          "endMs": 7782,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "同样像纸的东西",
+          "startMs": 7782,
+          "endMs": 9353,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "可能带有复合涂层",
+          "startMs": 9353,
+          "endMs": 11121,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "当地规则是判断依据",
+          "startMs": 11121,
+          "endMs": 13086,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不同地区的分类可能不同",
+          "startMs": 13086,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-01",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "整理垃圾时，先看物品的材料和当前状态。看见一个包装，不要只凭外形就猜它的类别。同样像纸的东西，可能带有复合涂层。当地规则是判断依据，不同地区的分类可能不同。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "桌面纸盒、玻璃瓶、塑料瓶与菜叶",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：整理垃圾时，先看物品的材料和当前状态。",
+            "subtitle": "整理垃圾时，先看物品的材料和当前状态。",
+            "type": "concept",
+            "region": {
+              "x": 60,
+              "y": 95,
+              "width": 720,
+              "height": 306
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3353,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                420,
+                105
+              ],
+              "end": [
+                420,
+                391
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "手翻看无字包装袋的材料层",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：看见一个包装，不要只凭外形就猜它的类别。",
+            "subtitle": "看见一个包装，不要只凭外形就猜它的类别。",
+            "type": "concept",
+            "region": {
+              "x": 980,
+              "y": 58,
+              "width": 597,
+              "height": 392
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 3853,
+              "durationMs": 3729,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1278.5,
+                68
+              ],
+              "end": [
+                1278.5,
+                440
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "纸张与多层饮料盒剖面并列，无文字",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：同样像纸的东西，可能带有复合涂层。",
+            "subtitle": "同样像纸的东西，可能带有复合涂层。",
+            "type": "concept",
+            "region": {
+              "x": 72,
+              "y": 499,
+              "width": 649,
+              "height": 351
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 7782,
+              "durationMs": 3139,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                396.5,
+                509
+              ],
+              "end": [
+                396.5,
+                840
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "小人查看社区的纯图标公告板，无字",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：当地规则是判断依据，不同地区的分类可能不同。",
+            "subtitle": "当地规则是判断依据，不同地区的分类可能不同。",
+            "type": "concept",
+            "region": {
+              "x": 877,
+              "y": 503,
+              "width": 751,
+              "height": 388
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 11121,
+              "durationMs": 18179,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1252.5,
+                513
+              ],
+              "end": [
+                1252.5,
+                881
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/recycle-rules/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "可回收也要看状态",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "干净的纸、金属和一些包装，可以进入相应回收流程。",
+          "subject": "干净纸盒、金属罐和玻璃瓶整齐摆放"
+        },
+        {
+          "text": "严重污染会影响回收，不是材质对了就一定能回收。",
+          "subject": "干净纸盒与油污纸盒并列"
+        },
+        {
+          "text": "适当清空容器，能减少残液污染其他物品。",
+          "subject": "手把空瓶里的少量液体倒出"
+        },
+        {
+          "text": "具体清洗和分类要求，仍要遵循所在地说明。",
+          "subject": "小人把无字空瓶对照社区图标说明"
+        }
+      ],
+      "narration": "干净的纸、金属和一些包装，可以进入相应回收流程。严重污染会影响回收，不是材质对了就一定能回收。适当清空容器，能减少残液污染其他物品。具体清洗和分类要求，仍要遵循所在地说明。",
+      "image": "/course/whiteboard/recycle-rules/02.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"干净的纸、金属和一些包装，可以进入相应回收流程。\",\"图形\":\"干净纸盒、金属罐和玻璃瓶整齐摆放\"},{\"讲解\":\"严重污染会影响回收，不是材质对了就一定能回收。\",\"图形\":\"干净纸盒与油污纸盒并列\"},{\"讲解\":\"适当清空容器，能减少残液污染其他物品。\",\"图形\":\"手把空瓶里的少量液体倒出\"},{\"讲解\":\"具体清洗和分类要求，仍要遵循所在地说明。\",\"图形\":\"小人把无字空瓶对照社区图标说明\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "干净的纸、金属和一些包装",
+          "startMs": 0,
+          "endMs": 2697,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "可以进入相应回收流程",
+          "startMs": 2697,
+          "endMs": 4878,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "严重污染会影响回收",
+          "startMs": 4878,
+          "endMs": 6860,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不是材质对了就一定能回收",
+          "startMs": 6860,
+          "endMs": 9437,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "适当清空容器",
+          "startMs": 9437,
+          "endMs": 10825,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "能减少残液污染其他物品",
+          "startMs": 10825,
+          "endMs": 13204,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "具体清洗和分类要求",
+          "startMs": 13204,
+          "endMs": 15186,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "仍要遵循所在地说明",
+          "startMs": 15186,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-02",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "干净的纸、金属和一些包装，可以进入相应回收流程。严重污染会影响回收，不是材质对了就一定能回收。适当清空容器，能减少残液污染其他物品。具体清洗和分类要求，仍要遵循所在地说明。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "干净纸盒、金属罐和玻璃瓶整齐摆放",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：干净的纸、金属和一些包装，可以进入相应回收流程。",
+            "subtitle": "干净的纸、金属和一些包装，可以进入相应回收流程。",
+            "type": "concept",
+            "region": {
+              "x": 136,
+              "y": 109,
+              "width": 593,
+              "height": 273
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4378,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                432.5,
+                119
+              ],
+              "end": [
+                432.5,
+                372
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "干净纸盒与油污纸盒并列",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：严重污染会影响回收，不是材质对了就一定能回收。",
+            "subtitle": "严重污染会影响回收，不是材质对了就一定能回收。",
+            "type": "concept",
+            "region": {
+              "x": 933,
+              "y": 99,
+              "width": 597,
+              "height": 294
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4878,
+              "durationMs": 4359,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1231.5,
+                109
+              ],
+              "end": [
+                1231.5,
+                383
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "手把空瓶里的少量液体倒出",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：适当清空容器，能减少残液污染其他物品。",
+            "subtitle": "适当清空容器，能减少残液污染其他物品。",
+            "type": "concept",
+            "region": {
+              "x": 245,
+              "y": 467,
+              "width": 377,
+              "height": 387
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 9437,
+              "durationMs": 3567,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                433.5,
+                477
+              ],
+              "end": [
+                433.5,
+                844
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "小人把无字空瓶对照社区图标说明",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：具体清洗和分类要求，仍要遵循所在地说明。",
+            "subtitle": "具体清洗和分类要求，仍要遵循所在地说明。",
+            "type": "concept",
+            "region": {
+              "x": 944,
+              "y": 485,
+              "width": 609,
+              "height": 363
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 13204,
+              "durationMs": 16096,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1248.5,
+                495
+              ],
+              "end": [
+                1248.5,
+                838
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/recycle-rules/02.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "食物残余单独考虑",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "菜叶、果皮等食物残余，通常有专门处理路径。",
+          "subject": "少量菜叶与果皮放在小容器"
+        },
+        {
+          "text": "把包装和里面的食物分开，能减少后续处理麻烦。",
+          "subject": "手将菜叶和无字包装袋分开"
+        },
+        {
+          "text": "水分和混杂物会影响处理，不要把袋子当食物残余。",
+          "subject": "食物小容器旁一个被单独取出的塑料袋"
+        },
+        {
+          "text": "练习：带包装的剩饭，你会先做哪个分开动作？",
+          "subject": "一盒剩饭与旁边空容器和包装袋"
+        }
+      ],
+      "narration": "菜叶、果皮等食物残余，通常有专门处理路径。把包装和里面的食物分开，能减少后续处理麻烦。水分和混杂物会影响处理，不要把袋子当食物残余。练习：带包装的剩饭，你会先做哪个分开动作？",
+      "image": "/course/whiteboard/recycle-rules/03.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"菜叶、果皮等食物残余，通常有专门处理路径。\",\"图形\":\"少量菜叶与果皮放在小容器\"},{\"讲解\":\"把包装和里面的食物分开，能减少后续处理麻烦。\",\"图形\":\"手将菜叶和无字包装袋分开\"},{\"讲解\":\"水分和混杂物会影响处理，不要把袋子当食物残余。\",\"图形\":\"食物小容器旁一个被单独取出的塑料袋\"},{\"讲解\":\"练习：带包装的剩饭，你会先做哪个分开动作？\",\"图形\":\"一盒剩饭与旁边空容器和包装袋\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "菜叶、果皮等食物残余",
+          "startMs": 0,
+          "endMs": 2325,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "通常有专门处理路径",
+          "startMs": 2325,
+          "endMs": 4330,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把包装和里面的食物分开",
+          "startMs": 4330,
+          "endMs": 6736,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "能减少后续处理麻烦",
+          "startMs": 6736,
+          "endMs": 8741,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "水分和混杂物会影响处理",
+          "startMs": 8741,
+          "endMs": 11147,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不要把袋子当食物残余",
+          "startMs": 11147,
+          "endMs": 13353,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "练习：带包装的剩饭",
+          "startMs": 13353,
+          "endMs": 15357,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "你会先做哪个分开动作",
+          "startMs": 15357,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-03",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "菜叶、果皮等食物残余，通常有专门处理路径。把包装和里面的食物分开，能减少后续处理麻烦。水分和混杂物会影响处理，不要把袋子当食物残余。练习：带包装的剩饭，你会先做哪个分开动作？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "少量菜叶与果皮放在小容器",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：菜叶、果皮等食物残余，通常有专门处理路径。",
+            "subtitle": "菜叶、果皮等食物残余，通常有专门处理路径。",
+            "type": "concept",
+            "region": {
+              "x": 257,
+              "y": 123,
+              "width": 347,
+              "height": 272
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3830,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                430.5,
+                133
+              ],
+              "end": [
+                430.5,
+                385
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "手将菜叶和无字包装袋分开",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：把包装和里面的食物分开，能减少后续处理麻烦。",
+            "subtitle": "把包装和里面的食物分开，能减少后续处理麻烦。",
+            "type": "concept",
+            "region": {
+              "x": 971,
+              "y": 125,
+              "width": 578,
+              "height": 264
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4330,
+              "durationMs": 4211,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1260,
+                135
+              ],
+              "end": [
+                1260,
+                379
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "食物小容器旁一个被单独取出的塑料袋",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：水分和混杂物会影响处理，不要把袋子当食物残余。",
+            "subtitle": "水分和混杂物会影响处理，不要把袋子当食物残余。",
+            "type": "concept",
+            "region": {
+              "x": 162,
+              "y": 583,
+              "width": 512,
+              "height": 233
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8741,
+              "durationMs": 4412,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                418,
+                593
+              ],
+              "end": [
+                418,
+                806
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "一盒剩饭与旁边空容器和包装袋",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：练习：带包装的剩饭，你会先做哪个分开动作？",
+            "subtitle": "练习：带包装的剩饭，你会先做哪个分开动作？",
+            "type": "concept",
+            "region": {
+              "x": 935,
+              "y": 575,
+              "width": 647,
+              "height": 276
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 13353,
+              "durationMs": 15947,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1258.5,
+                585
+              ],
+              "end": [
+                1258.5,
+                841
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/recycle-rules/03.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "特殊物品要查规则",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "电池、灯管等特殊物品，不应靠普通包装规则处理。",
+          "subject": "电池、灯管与电子小物件"
+        },
+        {
+          "text": "先保持完整，避免破损，再查看当地收集方式。",
+          "subject": "完整灯管放在保护盒内"
+        },
+        {
+          "text": "闲置电器可能有专门回收渠道，别随手混入日常垃圾。",
+          "subject": "旧电器与专用收集箱"
+        },
+        {
+          "text": "拿不准时先查询，比直接猜测更可靠。",
+          "subject": "小人用手机查看纯图标分类信息"
+        }
+      ],
+      "narration": "电池、灯管等特殊物品，不应靠普通包装规则处理。先保持完整，避免破损，再查看当地收集方式。闲置电器可能有专门回收渠道，别随手混入日常垃圾。拿不准时先查询，比直接猜测更可靠。",
+      "image": "/course/whiteboard/recycle-rules/04.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"电池、灯管等特殊物品，不应靠普通包装规则处理。\",\"图形\":\"电池、灯管与电子小物件\"},{\"讲解\":\"先保持完整，避免破损，再查看当地收集方式。\",\"图形\":\"完整灯管放在保护盒内\"},{\"讲解\":\"闲置电器可能有专门回收渠道，别随手混入日常垃圾。\",\"图形\":\"旧电器与专用收集箱\"},{\"讲解\":\"拿不准时先查询，比直接猜测更可靠。\",\"图形\":\"小人用手机查看纯图标分类信息\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "电池、灯管等特殊物品",
+          "startMs": 0,
+          "endMs": 2406,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不应靠普通包装规则处理",
+          "startMs": 2406,
+          "endMs": 4900,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先保持完整",
+          "startMs": 4900,
+          "endMs": 6147,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "避免破损",
+          "startMs": 6147,
+          "endMs": 7186,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再查看当地收集方式",
+          "startMs": 7186,
+          "endMs": 9264,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "闲置电器可能有专门回收渠道",
+          "startMs": 9264,
+          "endMs": 12173,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "别随手混入日常垃圾",
+          "startMs": 12173,
+          "endMs": 14252,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "拿不准时先查询",
+          "startMs": 14252,
+          "endMs": 15915,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "比直接猜测更可靠",
+          "startMs": 15915,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-04",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "电池、灯管等特殊物品，不应靠普通包装规则处理。先保持完整，避免破损，再查看当地收集方式。闲置电器可能有专门回收渠道，别随手混入日常垃圾。拿不准时先查询，比直接猜测更可靠。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "电池、灯管与电子小物件",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：电池、灯管等特殊物品，不应靠普通包装规则处理。",
+            "subtitle": "电池、灯管等特殊物品，不应靠普通包装规则处理。",
+            "type": "concept",
+            "region": {
+              "x": 130,
+              "y": 91,
+              "width": 606,
+              "height": 310
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4400,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                433,
+                101
+              ],
+              "end": [
+                433,
+                391
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "完整灯管放在保护盒内",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：先保持完整，避免破损，再查看当地收集方式。",
+            "subtitle": "先保持完整，避免破损，再查看当地收集方式。",
+            "type": "concept",
+            "region": {
+              "x": 947,
+              "y": 84,
+              "width": 610,
+              "height": 300
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4900,
+              "durationMs": 4164,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1252,
+                94
+              ],
+              "end": [
+                1252,
+                374
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "旧电器与专用收集箱",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：闲置电器可能有专门回收渠道，别随手混入日常垃圾。",
+            "subtitle": "闲置电器可能有专门回收渠道，别随手混入日常垃圾。",
+            "type": "concept",
+            "region": {
+              "x": 100,
+              "y": 509,
+              "width": 655,
+              "height": 356
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 9264,
+              "durationMs": 4788,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                427.5,
+                519
+              ],
+              "end": [
+                427.5,
+                855
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "小人用手机查看纯图标分类信息",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：拿不准时先查询，比直接猜测更可靠。",
+            "subtitle": "拿不准时先查询，比直接猜测更可靠。",
+            "type": "concept",
+            "region": {
+              "x": 964,
+              "y": 502,
+              "width": 594,
+              "height": 375
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 14252,
+              "durationMs": 15048,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1261,
+                512
+              ],
+              "end": [
+                1261,
+                867
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/recycle-rules/04.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "让分类变成小流程",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "把容器放在方便的位置，减少每次分类的额外步骤。",
+          "subject": "厨房角落整齐并排的分类小容器，无标记"
+        },
+        {
+          "text": "用物品图片作提示，让家人更容易知道放哪里。",
+          "subject": "容器旁独立纸盒、菜叶图标，无文字"
+        },
+        {
+          "text": "发现投放错误，先说明具体原因，再一起修正。",
+          "subject": "两个人把错误放入的物品取出重新归置"
+        },
+        {
+          "text": "每次只解决一个常见问题，流程会更容易保持。",
+          "subject": "一个小人整理一件物品，旁边小收纳盒"
+        }
+      ],
+      "narration": "把容器放在方便的位置，减少每次分类的额外步骤。用物品图片作提示，让家人更容易知道放哪里。发现投放错误，先说明具体原因，再一起修正。每次只解决一个常见问题，流程会更容易保持。",
+      "image": "/course/whiteboard/recycle-rules/05.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"把容器放在方便的位置，减少每次分类的额外步骤。\",\"图形\":\"厨房角落整齐并排的分类小容器，无标记\"},{\"讲解\":\"用物品图片作提示，让家人更容易知道放哪里。\",\"图形\":\"容器旁独立纸盒、菜叶图标，无文字\"},{\"讲解\":\"发现投放错误，先说明具体原因，再一起修正。\",\"图形\":\"两个人把错误放入的物品取出重新归置\"},{\"讲解\":\"每次只解决一个常见问题，流程会更容易保持。\",\"图形\":\"一个小人整理一件物品，旁边小收纳盒\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "把容器放在方便的位置",
+          "startMs": 0,
+          "endMs": 2359,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "减少每次分类的额外步骤",
+          "startMs": 2359,
+          "endMs": 4802,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "用物品图片作提示",
+          "startMs": 4802,
+          "endMs": 6635,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "让家人更容易知道放哪里",
+          "startMs": 6635,
+          "endMs": 9078,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "发现投放错误",
+          "startMs": 9078,
+          "endMs": 10503,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先说明具体原因",
+          "startMs": 10503,
+          "endMs": 12132,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再一起修正",
+          "startMs": 12132,
+          "endMs": 13353,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "每次只解决一个常见问题",
+          "startMs": 13353,
+          "endMs": 15795,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "流程会更容易保持",
+          "startMs": 15795,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-05",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "把容器放在方便的位置，减少每次分类的额外步骤。用物品图片作提示，让家人更容易知道放哪里。发现投放错误，先说明具体原因，再一起修正。每次只解决一个常见问题，流程会更容易保持。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "厨房角落整齐并排的分类小容器，无标记",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：把容器放在方便的位置，减少每次分类的额外步骤。",
+            "subtitle": "把容器放在方便的位置，减少每次分类的额外步骤。",
+            "type": "concept",
+            "region": {
+              "x": 60,
+              "y": 37,
+              "width": 627,
+              "height": 411
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 4302,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                373.5,
+                47
+              ],
+              "end": [
+                373.5,
+                438
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "容器旁独立纸盒、菜叶图标，无文字",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：用物品图片作提示，让家人更容易知道放哪里。",
+            "subtitle": "用物品图片作提示，让家人更容易知道放哪里。",
+            "type": "concept",
+            "region": {
+              "x": 998,
+              "y": 76,
+              "width": 596,
+              "height": 364
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4802,
+              "durationMs": 4076,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1296,
+                86
+              ],
+              "end": [
+                1296,
+                430
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "两个人把错误放入的物品取出重新归置",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：发现投放错误，先说明具体原因，再一起修正。",
+            "subtitle": "发现投放错误，先说明具体原因，再一起修正。",
+            "type": "concept",
+            "region": {
+              "x": 99,
+              "y": 508,
+              "width": 592,
+              "height": 389
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 9078,
+              "durationMs": 4075,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                395,
+                518
+              ],
+              "end": [
+                395,
+                887
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "一个小人整理一件物品，旁边小收纳盒",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：每次只解决一个常见问题，流程会更容易保持。",
+            "subtitle": "每次只解决一个常见问题，流程会更容易保持。",
+            "type": "concept",
+            "region": {
+              "x": 973,
+              "y": 553,
+              "width": 622,
+              "height": 336
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 13353,
+              "durationMs": 15947,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1284,
+                563
+              ],
+              "end": [
+                1284,
+                879
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/recycle-rules/05.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "拿一个物品做练习",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "现在拿一个空饮料盒，先观察材料和残留状态。",
+          "subject": "手拿一个无字空饮料盒"
+        },
+        {
+          "text": "清空残液，再查你所在地对复合包装的要求。",
+          "subject": "手倒空饮料盒，旁边纯图标规则卡片"
+        },
+        {
+          "text": "按当地规则投放，并避免污染其他已分好的物品。",
+          "subject": "整齐投放的包装盒与干净纸张"
+        },
+        {
+          "text": "总结：辨材料、看状态、查规则，再进行投放。",
+          "subject": "放大镜、空容器、规则图标和分类箱四个小图形"
+        }
+      ],
+      "narration": "现在拿一个空饮料盒，先观察材料和残留状态。清空残液，再查你所在地对复合包装的要求。按当地规则投放，并避免污染其他已分好的物品。总结：辨材料、看状态、查规则，再进行投放。",
+      "image": "/course/whiteboard/recycle-rules/06.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"现在拿一个空饮料盒，先观察材料和残留状态。\",\"图形\":\"手拿一个无字空饮料盒\"},{\"讲解\":\"清空残液，再查你所在地对复合包装的要求。\",\"图形\":\"手倒空饮料盒，旁边纯图标规则卡片\"},{\"讲解\":\"按当地规则投放，并避免污染其他已分好的物品。\",\"图形\":\"整齐投放的包装盒与干净纸张\"},{\"讲解\":\"总结：辨材料、看状态、查规则，再进行投放。\",\"图形\":\"放大镜、空容器、规则图标和分类箱四个小图形\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "现在拿一个空饮料盒",
+          "startMs": 0,
+          "endMs": 2065,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先观察材料和残留状态",
+          "startMs": 2065,
+          "endMs": 4205,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "清空残液",
+          "startMs": 4205,
+          "endMs": 5178,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再查你所在地对复合包装的要求",
+          "startMs": 5178,
+          "endMs": 8097,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "按当地规则投放",
+          "startMs": 8097,
+          "endMs": 9653,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "并避免污染其他已分好的物品",
+          "startMs": 9653,
+          "endMs": 12376,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "总结：辨材料、看状态、查规则",
+          "startMs": 12376,
+          "endMs": 15295,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再进行投放",
+          "startMs": 15295,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-06",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "现在拿一个空饮料盒，先观察材料和残留状态。清空残液，再查你所在地对复合包装的要求。按当地规则投放，并避免污染其他已分好的物品。总结：辨材料、看状态、查规则，再进行投放。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "手拿一个无字空饮料盒",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：现在拿一个空饮料盒，先观察材料和残留状态。",
+            "subtitle": "现在拿一个空饮料盒，先观察材料和残留状态。",
+            "type": "concept",
+            "region": {
+              "x": 196,
+              "y": 52,
+              "width": 373,
+              "height": 395
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3705,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                382.5,
+                62
+              ],
+              "end": [
+                382.5,
+                437
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "手倒空饮料盒，旁边纯图标规则卡片",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：清空残液，再查你所在地对复合包装的要求。",
+            "subtitle": "清空残液，再查你所在地对复合包装的要求。",
+            "type": "concept",
+            "region": {
+              "x": 918,
+              "y": 80,
+              "width": 619,
+              "height": 365
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4205,
+              "durationMs": 3692,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1227.5,
+                90
+              ],
+              "end": [
+                1227.5,
+                435
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "整齐投放的包装盒与干净纸张",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：按当地规则投放，并避免污染其他已分好的物品。",
+            "subtitle": "按当地规则投放，并避免污染其他已分好的物品。",
+            "type": "concept",
+            "region": {
+              "x": 181,
+              "y": 493,
+              "width": 470,
+              "height": 387
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8097,
+              "durationMs": 4079,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                416,
+                503
+              ],
+              "end": [
+                416,
+                870
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "放大镜、空容器、规则图标和分类箱四个小图形",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：总结：辨材料、看状态、查规则，再进行投放。",
+            "subtitle": "总结：辨材料、看状态、查规则，再进行投放。",
+            "type": "concept",
+            "region": {
+              "x": 925,
+              "y": 591,
+              "width": 657,
+              "height": 235
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12376,
+              "durationMs": 16924,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1253.5,
+                601
+              ],
+              "end": [
+                1253.5,
+                816
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/recycle-rules/06.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "srt": "1\n00:00:00,000 --> 00:00:01,299\n整理垃圾时\n\n2\n00:00:01,299 --> 00:00:03,853\n先看物品的材料和当前状态\n\n3\n00:00:03,853 --> 00:00:05,228\n看见一个包装\n\n4\n00:00:05,228 --> 00:00:07,782\n不要只凭外形就猜它的类别\n\n5\n00:00:07,782 --> 00:00:09,353\n同样像纸的东西\n\n6\n00:00:09,353 --> 00:00:11,121\n可能带有复合涂层\n\n7\n00:00:11,121 --> 00:00:13,086\n当地规则是判断依据\n\n8\n00:00:13,086 --> 00:00:30,000\n不同地区的分类可能不同\n\n9\n00:00:30,000 --> 00:00:32,697\n干净的纸、金属和一些包装\n\n10\n00:00:32,697 --> 00:00:34,878\n可以进入相应回收流程\n\n11\n00:00:34,878 --> 00:00:36,860\n严重污染会影响回收\n\n12\n00:00:36,860 --> 00:00:39,437\n不是材质对了就一定能回收\n\n13\n00:00:39,437 --> 00:00:40,825\n适当清空容器\n\n14\n00:00:40,825 --> 00:00:43,204\n能减少残液污染其他物品\n\n15\n00:00:43,204 --> 00:00:45,186\n具体清洗和分类要求\n\n16\n00:00:45,186 --> 00:01:00,000\n仍要遵循所在地说明\n\n17\n00:01:00,000 --> 00:01:02,325\n菜叶、果皮等食物残余\n\n18\n00:01:02,325 --> 00:01:04,330\n通常有专门处理路径\n\n19\n00:01:04,330 --> 00:01:06,736\n把包装和里面的食物分开\n\n20\n00:01:06,736 --> 00:01:08,741\n能减少后续处理麻烦\n\n21\n00:01:08,741 --> 00:01:11,147\n水分和混杂物会影响处理\n\n22\n00:01:11,147 --> 00:01:13,353\n不要把袋子当食物残余\n\n23\n00:01:13,353 --> 00:01:15,357\n练习：带包装的剩饭\n\n24\n00:01:15,357 --> 00:01:30,000\n你会先做哪个分开动作\n\n25\n00:01:30,000 --> 00:01:32,406\n电池、灯管等特殊物品\n\n26\n00:01:32,406 --> 00:01:34,900\n不应靠普通包装规则处理\n\n27\n00:01:34,900 --> 00:01:36,147\n先保持完整\n\n28\n00:01:36,147 --> 00:01:37,186\n避免破损\n\n29\n00:01:37,186 --> 00:01:39,264\n再查看当地收集方式\n\n30\n00:01:39,264 --> 00:01:42,173\n闲置电器可能有专门回收渠道\n\n31\n00:01:42,173 --> 00:01:44,252\n别随手混入日常垃圾\n\n32\n00:01:44,252 --> 00:01:45,915\n拿不准时先查询\n\n33\n00:01:45,915 --> 00:02:00,000\n比直接猜测更可靠\n\n34\n00:02:00,000 --> 00:02:02,359\n把容器放在方便的位置\n\n35\n00:02:02,359 --> 00:02:04,802\n减少每次分类的额外步骤\n\n36\n00:02:04,802 --> 00:02:06,635\n用物品图片作提示\n\n37\n00:02:06,635 --> 00:02:09,078\n让家人更容易知道放哪里\n\n38\n00:02:09,078 --> 00:02:10,503\n发现投放错误\n\n39\n00:02:10,503 --> 00:02:12,132\n先说明具体原因\n\n40\n00:02:12,132 --> 00:02:13,353\n再一起修正\n\n41\n00:02:13,353 --> 00:02:15,795\n每次只解决一个常见问题\n\n42\n00:02:15,795 --> 00:02:30,000\n流程会更容易保持\n\n43\n00:02:30,000 --> 00:02:32,065\n现在拿一个空饮料盒\n\n44\n00:02:32,065 --> 00:02:34,205\n先观察材料和残留状态\n\n45\n00:02:34,205 --> 00:02:35,178\n清空残液\n\n46\n00:02:35,178 --> 00:02:38,097\n再查你所在地对复合包装的要求\n\n47\n00:02:38,097 --> 00:02:39,653\n按当地规则投放\n\n48\n00:02:39,653 --> 00:02:42,376\n并避免污染其他已分好的物品\n\n49\n00:02:42,376 --> 00:02:45,295\n总结：辨材料、看状态、查规则\n\n50\n00:02:45,295 --> 00:03:00,000\n再进行投放\n",
+  "video": "/course/whiteboard/recycle-rules/tutorial.mp4"
+}

@@ -1,6 +1,6 @@
 [package]
 name = "workstore"
-version = "0.1.14"
+version = "0.1.15"
 description = "Local-first desktop workspace"
 edition = "2021"
 license = "MIT"
@@ -10,6 +10,7 @@ repository = "https://github.com/littleweb/workstore"
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
+flate2 = "1"
 tauri = { version = "2", features = [] }
 tauri-plugin-dialog = "2"
 tauri-plugin-opener = "2"

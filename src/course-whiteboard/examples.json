@@ -1,0 +1,142 @@
+[
+  {
+    "id": "soap-oil",
+    "title": "肥皂怎样带走油污",
+    "topic": "肥皂怎样带走油污",
+    "config": {
+      "duration": 30,
+      "audience": "儿童",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/soap-oil/cover.png",
+    "video": "/course/whiteboard/soap-oil/tutorial.mp4",
+    "scenes": 1
+  },
+  {
+    "id": "paper-bridge",
+    "title": "折一座更稳的纸桥",
+    "topic": "折一座更稳的纸桥",
+    "config": {
+      "duration": 30,
+      "audience": "儿童",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/paper-bridge/cover.png",
+    "video": "/course/whiteboard/paper-bridge/tutorial.mp4",
+    "scenes": 1
+  },
+  {
+    "id": "moon-phases",
+    "title": "月亮为什么有圆有缺",
+    "topic": "月亮为什么有圆有缺",
+    "config": {
+      "duration": 60,
+      "audience": "青少年",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/moon-phases/cover.png",
+    "video": "/course/whiteboard/moon-phases/tutorial.mp4",
+    "scenes": 2
+  },
+  {
+    "id": "simple-lever",
+    "title": "看懂支点与杠杆",
+    "topic": "看懂支点与杠杆",
+    "config": {
+      "duration": 60,
+      "audience": "青少年",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/simple-lever/cover.png",
+    "video": "/course/whiteboard/simple-lever/tutorial.mp4",
+    "scenes": 2
+  },
+  {
+    "id": "water-journey",
+    "title": "一滴水的循环旅行",
+    "topic": "一滴水的循环旅行",
+    "config": {
+      "duration": 120,
+      "audience": "儿童",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/water-journey/cover.png",
+    "video": "/course/whiteboard/water-journey/tutorial.mp4",
+    "scenes": 4
+  },
+  {
+    "id": "teach-to-learn",
+    "title": "用讲解检验理解",
+    "topic": "用讲解检验理解",
+    "config": {
+      "duration": 120,
+      "audience": "大众学习者",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/teach-to-learn/cover.png",
+    "video": "/course/whiteboard/teach-to-learn/tutorial.mp4",
+    "scenes": 4
+  },
+  {
+    "id": "battery-energy",
+    "title": "电池怎样提供能量",
+    "topic": "电池怎样提供能量",
+    "config": {
+      "duration": 180,
+      "audience": "青少年",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/battery-energy/cover.png",
+    "video": "/course/whiteboard/battery-energy/tutorial.mp4",
+    "scenes": 6
+  },
+  {
+    "id": "recycle-rules",
+    "title": "把垃圾分类变成小流程",
+    "topic": "把垃圾分类变成小流程",
+    "config": {
+      "duration": 180,
+      "audience": "大众学习者",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/recycle-rules/cover.png",
+    "video": "/course/whiteboard/recycle-rules/tutorial.mp4",
+    "scenes": 6
+  },
+  {
+    "id": "circuit-course",
+    "title": "五分钟看懂简单电路",
+    "topic": "五分钟看懂简单电路",
+    "config": {
+      "duration": 300,
+      "audience": "青少年",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/circuit-course/cover.png",
+    "video": "/course/whiteboard/circuit-course/tutorial.mp4",
+    "scenes": 10
+  },
+  {
+    "id": "focus-work",
+    "title": "安排一次专注工作",
+    "topic": "安排一次专注工作",
+    "config": {
+      "duration": 300,
+      "audience": "职场人士",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/whiteboard/focus-work/cover.png",
+    "video": "/course/whiteboard/focus-work/tutorial.mp4",
+    "scenes": 10
+  }
+]

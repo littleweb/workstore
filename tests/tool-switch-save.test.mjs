@@ -25,3 +25,30 @@ test('failed note save still prevents switching; full flush still covers every o
   for(const owner of [undefined,'app.doc','app.story-comic']) l.registerDocumentFlusher(async()=>calls.push(owner),owner);
   await l.flushDocuments(); assert.deepEqual(calls,[undefined,'app.doc','app.story-comic']);
 });
+
+test('every tool switch ignores hung foreign owners, including workspace and hidden HTML', async () => {
+  for (const owner of ['app.doc','app.whiteboard','app.comic','app.cover','app.story-comic','app.design','app.html','app.animation']) {
+    const l=lifecycle(),calls=[];
+    l.registerDocumentFlusher(()=>new Promise(()=>{}));
+    l.registerDocumentFlusher(()=>new Promise(()=>{}),'foreign');
+    l.registerDocumentFlusher(async()=>calls.push(owner),owner);
+    await l.flushBeforeToolSwitch(owner);
+    assert.deepEqual(calls,[owner]);
+  }
+});
+
+test('tool switch queues through sync activation and saves only after release', async () => {
+  const l=lifecycle(); const release=l.beginSyncActivation(); const calls=[];
+  l.registerDocumentFlusher(async()=>calls.push('save'),'app.cover');
+  const pending=l.flushBeforeToolSwitch('app.cover');
+  await Promise.resolve(); assert.deepEqual(calls,[]);
+  release(); await pending; assert.deepEqual(calls,['save']);
+});
+test('new editor cannot mount when sync activation starts during its departing save', async () => {
+  const l=lifecycle(); let releaseSave, committed=false;
+  l.registerDocumentFlusher(()=>new Promise(resolve=>{releaseSave=resolve}),'app.doc');
+  const pending=l.flushBeforeToolSwitch('app.doc').then(()=>l.runAfterSyncActivation(()=>{committed=true}));
+  await Promise.resolve(); const release=l.beginSyncActivation(); releaseSave();
+  await new Promise(resolve=>setImmediate(resolve)); assert.equal(committed,false);
+  release(); await pending; assert.equal(committed,true);
+});

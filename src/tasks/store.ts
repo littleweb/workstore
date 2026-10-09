@@ -1,7 +1,7 @@
 /** In-memory execution state. Content/results stay in each tool's local files.
  * Never persist live controllers or pretend a process survives application exit. */
 export type TaskState = 'running' | 'stopping' | 'done' | 'error' | 'cancelled';
-export type TaskInfo = { id: string; toolId: string; title: string; stage: string; state: TaskState; startedAt: number; endedAt?: number; done?: number; total?: number; error?: string };
+export type TaskInfo = { cancellable?: boolean; id: string; toolId: string; title: string; stage: string; state: TaskState; startedAt: number; endedAt?: number; done?: number; total?: number; error?: string };
 const listeners = new Set<() => void>();
 const controls = new Map<string, AbortController>();
 const signals = new WeakMap<AbortSignal, string>();
@@ -20,7 +20,7 @@ export function failTask(signal: AbortSignal, error: unknown) {
   tasks = tasks.map(task => task.id === id && isRunning(task) ? {...task, error: String(error)} : task);
   emit();
 }
-export function beginTask(controller: AbortController, meta: { toolId: string; title: string; stage?: string }) {
+export function beginTask(controller: AbortController, meta: { toolId: string; title: string; stage?: string; cancellable?: boolean }) {
   const existing = signals.get(controller.signal);
   // Nested stages share their parent's card and cancellation.
   if (existing && controls.has(existing)) return { finish() {} };
@@ -46,7 +46,7 @@ export function beginTask(controller: AbortController, meta: { toolId: string; t
   }};
 }
 export const hasTask = (signal?: AbortSignal) => !!signal && controls.has(signals.get(signal) ?? '');
-export function cancelTask(id: string) { controls.get(id)?.abort(); }
+export function cancelTask(id: string) { if(tasks.find(task=>task.id===id)?.cancellable!==false) controls.get(id)?.abort(); }
 export function clearFinishedTasks() { tasks = tasks.filter(isRunning); emit(); }
 
-export function cancelAllTasks() { for (const controller of controls.values()) controller.abort(); }
+export function cancelAllTasks() { for (const [id, controller] of controls) if(tasks.find(task=>task.id===id)?.cancellable!==false) controller.abort(); }

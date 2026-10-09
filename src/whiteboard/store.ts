@@ -270,7 +270,7 @@ export async function flushBoard(id: string): Promise<void> {
 export async function flushWhiteboards() {
   for (const id of cache.keys()) await flushBoard(id);
 }
-registerDocumentFlusher(flushWhiteboards);
+registerDocumentFlusher(flushWhiteboards, "app.whiteboard");
 export function exportBoard(id: string) {
   const doc = currentBoard(id);
   if (!doc) return;

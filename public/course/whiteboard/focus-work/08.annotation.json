@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-08",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "离开工作一小会儿，可以起身活动或看看远处。休息方式和长度按个人情况选择，不追求固定模板。回来时查看刚记录的下一步，减少重新找方向。如果确实疲劳，就调整计划，不必强行延长这一轮。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "人从桌前起身伸展，窗边留白",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：离开工作一小会儿，可以起身活动或看看远处。",
+      "subtitle": "离开工作一小会儿，可以起身活动或看看远处。",
+      "type": "concept",
+      "region": {
+        "x": 90,
+        "y": 35,
+        "width": 601,
+        "height": 406
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3867,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          390.5,
+          45
+        ],
+        "end": [
+          390.5,
+          431
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "无数字计时器与散步小人",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：休息方式和长度按个人情况选择，不追求固定模板。",
+      "subtitle": "休息方式和长度按个人情况选择，不追求固定模板。",
+      "type": "concept",
+      "region": {
+        "x": 967,
+        "y": 68,
+        "width": 586,
+        "height": 365
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4367,
+        "durationMs": 4451,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1260,
+          78
+        ],
+        "end": [
+          1260,
+          423
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "手查看便签上的简单下一步箭头",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：回来时查看刚记录的下一步，减少重新找方向。",
+      "subtitle": "回来时查看刚记录的下一步，减少重新找方向。",
+      "type": "concept",
+      "region": {
+        "x": 67,
+        "y": 531,
+        "width": 602,
+        "height": 369
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 9018,
+        "durationMs": 4047,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          368,
+          541
+        ],
+        "end": [
+          368,
+          890
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "人安静休息，旁边合上的电脑",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：如果确实疲劳，就调整计划，不必强行延长这一轮。",
+      "subtitle": "如果确实疲劳，就调整计划，不必强行延长这一轮。",
+      "type": "concept",
+      "region": {
+        "x": 955,
+        "y": 561,
+        "width": 646,
+        "height": 335
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13265,
+        "durationMs": 16035,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1278,
+          571
+        ],
+        "end": [
+          1278,
+          886
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

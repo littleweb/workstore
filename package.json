@@ -1,6 +1,6 @@
 {
   "name": "workstore",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,19 +10,23 @@
     "tauri": "tauri",
     "desktop": "tauri dev",
     "desktop:build": "tauri build",
-    "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs",
-    "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs",
+    "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs && node scripts/course/build-resources.mjs && node scripts/course-animation/build-runtime.mjs && node scripts/course-whiteboard/build-runtime.mjs",
+    "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs && node scripts/course/build-resources.mjs && node scripts/course-animation/build-runtime.mjs && node scripts/course-whiteboard/build-runtime.mjs",
     "desktop:update:build": "node scripts/build-update.mjs",
     "demo:apos": "vite --config demos/apos/vite.config.mjs",
     "demo:apos:build": "tsc -p demos/apos/tsconfig.json && vite build --config demos/apos/vite.config.mjs",
     "demo:apos:preview": "vite preview --config demos/apos/vite.config.mjs",
     "html:install": "npx --yes pnpm@10.33.2 --dir vendor/html-anything install --frozen-lockfile",
     "html:build": "node scripts/html-anything/build.mjs",
-    "html:start": "node scripts/html-anything/start.mjs"
+    "html:start": "node scripts/html-anything/start.mjs",
+    "desktop:release:build": "node scripts/build-release.mjs"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "@excalidraw/excalidraw": "^0.18.1",
+    "@remotion/captions": "4.0.534",
+    "@remotion/media": "4.0.534",
+    "@remotion/player": "4.0.534",
     "@tauri-apps/api": "^2.11.1",
     "@tauri-apps/plugin-clipboard-manager": "^2.3.3",
     "@tauri-apps/plugin-dialog": "^2.7.3",
@@ -35,9 +39,13 @@
     "antd": "^6.0.0",
     "jszip": "^3.10.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.534"
   },
   "devDependencies": {
+    "@remotion/bundler": "4.0.534",
+    "@remotion/cli": "4.0.534",
+    "@remotion/renderer": "4.0.534",
     "@tauri-apps/cli": "^2.11.4",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-04",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "用自己的话，把蒸发、凝结和降水连成一次旅行。遇到太阳和水面，就想起能量与蒸发。遇到冷空气和小水滴，就想起凝结。练习：雨停之后地面慢慢变干，水可能去了哪里？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "小人向另一个人展示水滴旅行的图形卡片，无字",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：用自己的话，把蒸发、凝结和降水连成一次旅行。",
+      "subtitle": "用自己的话，把蒸发、凝结和降水连成一次旅行。",
+      "type": "concept",
+      "region": {
+        "x": 101,
+        "y": 101,
+        "width": 632,
+        "height": 311
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4101,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          417,
+          111
+        ],
+        "end": [
+          417,
+          402
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "太阳、水面和上升的水汽",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：遇到太阳和水面，就想起能量与蒸发。",
+      "subtitle": "遇到太阳和水面，就想起能量与蒸发。",
+      "type": "concept",
+      "region": {
+        "x": 969,
+        "y": 51,
+        "width": 643,
+        "height": 417
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4601,
+        "durationMs": 3263,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1290.5,
+          61
+        ],
+        "end": [
+          1290.5,
+          458
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "冷空气波纹旁稀疏小水滴",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：遇到冷空气和小水滴，就想起凝结。",
+      "subtitle": "遇到冷空气和小水滴，就想起凝结。",
+      "type": "concept",
+      "region": {
+        "x": 93,
+        "y": 542,
+        "width": 593,
+        "height": 286
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8064,
+        "durationMs": 3059,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          389.5,
+          552
+        ],
+        "end": [
+          389.5,
+          818
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "雨后湿地面旁小水坑与上升波纹",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：雨停之后地面慢慢变干，水可能去了哪里？",
+      "subtitle": "练习：雨停之后地面慢慢变干，水可能去了哪里？",
+      "type": "concept",
+      "region": {
+        "x": 935,
+        "y": 595,
+        "width": 670,
+        "height": 291
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 11323,
+        "durationMs": 17977,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1270,
+          605
+        ],
+        "end": [
+          1270,
+          876
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

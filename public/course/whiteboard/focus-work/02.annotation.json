@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-02",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "开始之前，把本次任务真正需要的材料放在手边。把不相关的物品移开，减少临时寻找的机会。先确认文件和工具能打开，避免开始后再来回切换。准备不是无限整理，够支持第一步就可以开始。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "桌面书本、笔和电脑整齐摆放",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：开始之前，把本次任务真正需要的材料放在手边。",
+      "subtitle": "开始之前，把本次任务真正需要的材料放在手边。",
+      "type": "concept",
+      "region": {
+        "x": 78,
+        "y": 117,
+        "width": 719,
+        "height": 312
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4031,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          437.5,
+          127
+        ],
+        "end": [
+          437.5,
+          419
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "手把多余杂物放进收纳盒",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：把不相关的物品移开，减少临时寻找的机会。",
+      "subtitle": "把不相关的物品移开，减少临时寻找的机会。",
+      "type": "concept",
+      "region": {
+        "x": 905,
+        "y": 38,
+        "width": 677,
+        "height": 402
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4531,
+        "durationMs": 3811,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1243.5,
+          48
+        ],
+        "end": [
+          1243.5,
+          430
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "电脑显示纯图形文件夹和工具图标，无字",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：先确认文件和工具能打开，避免开始后再来回切换。",
+      "subtitle": "先确认文件和工具能打开，避免开始后再来回切换。",
+      "type": "concept",
+      "region": {
+        "x": 130,
+        "y": 535,
+        "width": 647,
+        "height": 326
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8542,
+        "durationMs": 4411,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          453.5,
+          545
+        ],
+        "end": [
+          453.5,
+          851
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "简洁桌面旁开始工作的一个人",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：准备不是无限整理，够支持第一步就可以开始。",
+      "subtitle": "准备不是无限整理，够支持第一步就可以开始。",
+      "type": "concept",
+      "region": {
+        "x": 883,
+        "y": 500,
+        "width": 705,
+        "height": 371
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13153,
+        "durationMs": 16147,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1235.5,
+          510
+        ],
+        "end": [
+          1235.5,
+          861
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

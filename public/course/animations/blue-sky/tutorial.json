@@ -1,0 +1,309 @@
+{
+  "title": "为什么天空是蓝色的",
+  "summary": "日落时光路变长，较多蓝光被散到别处，直接阳光里的红橙更显眼。观察天空时不要直视太阳。",
+  "scenes": [
+    {
+      "title": "先问光从哪里来",
+      "seconds": 10,
+      "narration": "白天照亮天空的主要光源是太阳。阳光经过空气后，一部分光改变方向，进入我们的眼睛。",
+      "points": [
+        "阳光经过空气"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "太阳光",
+          "空气",
+          "眼睛"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "白天照亮天空的主要光源是太阳",
+          "startMs": 120,
+          "endMs": 3159,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "阳光经过空气后",
+          "startMs": 3159,
+          "endMs": 4779,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "一部分光改变方向",
+          "startMs": 4779,
+          "endMs": 6602,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "进入我们的眼睛",
+          "startMs": 6602,
+          "endMs": 8223,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/blue-sky/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "白光里有多种颜色",
+      "seconds": 9,
+      "narration": "阳光接近白色，但包含多种颜色。红光的波长比较长，蓝光和紫光的波长比较短。",
+      "points": [
+        "不同颜色有不同波长"
+      ],
+      "visual": {
+        "kind": "compare",
+        "labels": [
+          "红光：较长",
+          "蓝光：较短"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "阳光接近白色",
+          "startMs": 120,
+          "endMs": 1652,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "但包含多种颜色",
+          "startMs": 1652,
+          "endMs": 3403,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "红光的波长比较长",
+          "startMs": 3403,
+          "endMs": 5372,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "蓝光和紫光的波长比较短",
+          "startMs": 5372,
+          "endMs": 7998,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/blue-sky/02.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "空气让光散向各处",
+      "seconds": 10,
+      "narration": "空气中的微小分子会让光向不同方向传播，这叫散射。它不是镜子反光，也不是空气染色。",
+      "points": [
+        "散射：方向发生改变"
+      ],
+      "visual": {
+        "kind": "orbit",
+        "labels": [
+          "入射光",
+          "空气分子",
+          "不同方向",
+          "眼睛"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "空气中的微小分子会让光向不同方向传播",
+          "startMs": 120,
+          "endMs": 4080,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "这叫散射",
+          "startMs": 4080,
+          "endMs": 5122,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "它不是镜子反光",
+          "startMs": 5122,
+          "endMs": 6789,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "也不是空气染色",
+          "startMs": 6789,
+          "endMs": 8456,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/blue-sky/03.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "蓝光更容易被散射",
+      "seconds": 10,
+      "narration": "对空气分子来说，短波长光的散射更强。与红光相比，蓝光更容易散向天空各个方向。",
+      "points": [
+        "蓝光比红光更易散射"
+      ],
+      "visual": {
+        "kind": "compare",
+        "labels": [
+          "红光：较弱",
+          "蓝光：较强"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "对空气分子来说",
+          "startMs": 120,
+          "endMs": 1824,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "短波长光的散射更强",
+          "startMs": 1824,
+          "endMs": 3955,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "与红光相比",
+          "startMs": 3955,
+          "endMs": 5233,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "蓝光更容易散向天空各个方向",
+          "startMs": 5233,
+          "endMs": 8215,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/blue-sky/04.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "紫光为什么不占主导",
+      "seconds": 10,
+      "narration": "紫光散射也很强，但太阳光中的紫光较少，我们的眼睛对紫光没那么敏感，天空通常呈蓝色。",
+      "points": [
+        "光源和眼睛也有影响"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "太阳光谱",
+          "空气散射",
+          "视觉感受"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "紫光散射也很强",
+          "startMs": 120,
+          "endMs": 1772,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "但太阳光中的紫光较少",
+          "startMs": 1772,
+          "endMs": 4043,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "我们的眼睛对紫光没那么敏感",
+          "startMs": 4043,
+          "endMs": 6934,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "天空通常呈蓝色",
+          "startMs": 6934,
+          "endMs": 8585,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/blue-sky/05.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "观察傍晚再解释",
+      "seconds": 11,
+      "narration": "日落时光路变长，较多蓝光被散到别处，直接阳光里的红橙更显眼。观察天空时不要直视太阳。",
+      "points": [
+        "长光路",
+        "红橙更显眼"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "太阳接近地平线",
+          "更长光路",
+          "晚霞"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "日落时光路变长",
+          "startMs": 120,
+          "endMs": 1791,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "较多蓝光被散到别处",
+          "startMs": 1791,
+          "endMs": 3881,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "直接阳光里的红橙更显眼",
+          "startMs": 3881,
+          "endMs": 6388,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "观察天空时不要直视太阳",
+          "startMs": 6388,
+          "endMs": 8895,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/blue-sky/06.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "duration": 60,
+  "style": "clean",
+  "video": "/course/animations/blue-sky/tutorial.mp4"
+}

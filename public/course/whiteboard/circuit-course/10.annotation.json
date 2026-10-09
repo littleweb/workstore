@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-10",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "完整路径、电源和合适用电器，共同让简单电路工作。开关决定接通与断开，串并联决定路径结构。电流描述电荷运动，能量转换解释小灯发光与发热。用自己的话解释一次断路，你就完成了今天的练习。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "电池、完整导线和发光灯泡的组合",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：完整路径、电源和合适用电器，共同让简单电路工作。",
+      "subtitle": "完整路径、电源和合适用电器，共同让简单电路工作。",
+      "type": "concept",
+      "region": {
+        "x": 154,
+        "y": 127,
+        "width": 511,
+        "height": 278
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4426,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          409.5,
+          137
+        ],
+        "end": [
+          409.5,
+          395
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "开关与单一路径、分支路径三个图形",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：开关决定接通与断开，串并联决定路径结构。",
+      "subtitle": "开关决定接通与断开，串并联决定路径结构。",
+      "type": "concept",
+      "region": {
+        "x": 927,
+        "y": 80,
+        "width": 669,
+        "height": 291
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4926,
+        "durationMs": 3805,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1261.5,
+          90
+        ],
+        "end": [
+          1261.5,
+          361
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "导线小圆点与灯泡光热两个示意",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：电流描述电荷运动，能量转换解释小灯发光与发热。",
+      "subtitle": "电流描述电荷运动，能量转换解释小灯发光与发热。",
+      "type": "concept",
+      "region": {
+        "x": 77,
+        "y": 521,
+        "width": 634,
+        "height": 287
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8931,
+        "durationMs": 4406,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          394,
+          531
+        ],
+        "end": [
+          394,
+          798
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "一个人向朋友讲解断开的低压电路",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：用自己的话解释一次断路，你就完成了今天的练习。",
+      "subtitle": "用自己的话解释一次断路，你就完成了今天的练习。",
+      "type": "concept",
+      "region": {
+        "x": 900,
+        "y": 523,
+        "width": 712,
+        "height": 328
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13537,
+        "durationMs": 15763,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1256,
+          533
+        ],
+        "end": [
+          1256,
+          841
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

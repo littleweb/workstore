@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-04",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "把电流理解成电荷的定向运动，是一种入门描述。电池向电路提供能量，小灯把能量转成光和热。电荷没有在灯泡里全部消失，它们仍参与回路。类比可以帮助理解，但不要把导线想成真实水管。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "导线环路中均匀小圆点沿一个方向移动",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：把电流理解成电荷的定向运动，是一种入门描述。",
+      "subtitle": "把电流理解成电荷的定向运动，是一种入门描述。",
+      "type": "concept",
+      "region": {
+        "x": 159,
+        "y": 62,
+        "width": 478,
+        "height": 315
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4003,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          398,
+          72
+        ],
+        "end": [
+          398,
+          367
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "电池和灯泡旁少量光线与热波纹",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：电池向电路提供能量，小灯把能量转成光和热。",
+      "subtitle": "电池向电路提供能量，小灯把能量转成光和热。",
+      "type": "concept",
+      "region": {
+        "x": 1043,
+        "y": 62,
+        "width": 405,
+        "height": 320
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4503,
+        "durationMs": 3985,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1245.5,
+          72
+        ],
+        "end": [
+          1245.5,
+          372
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "灯泡两侧导线都带有小圆点",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：电荷没有在灯泡里全部消失，它们仍参与回路。",
+      "subtitle": "电荷没有在灯泡里全部消失，它们仍参与回路。",
+      "type": "concept",
+      "region": {
+        "x": 186,
+        "y": 538,
+        "width": 422,
+        "height": 318
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8688,
+        "durationMs": 3984,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          397,
+          548
+        ],
+        "end": [
+          397,
+          846
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "导线环路与水管类比小图并列，不含字",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：类比可以帮助理解，但不要把导线想成真实水管。",
+      "subtitle": "类比可以帮助理解，但不要把导线想成真实水管。",
+      "type": "concept",
+      "region": {
+        "x": 888,
+        "y": 541,
+        "width": 719,
+        "height": 295
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12872,
+        "durationMs": 16428,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1247.5,
+          551
+        ],
+        "end": [
+          1247.5,
+          826
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+use tauri::Manager;
 use crate::storage::{atomic_write, Store};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -262,29 +263,34 @@ mod tests {
 
 #[tauri::command]
 pub async fn save_design_export(path: String, data: String) -> Result<()> {
-    use base64::{engine::general_purpose::STANDARD, Engine};
-    let path = PathBuf::from(path);
-    if !path.is_absolute() || !matches!(path.extension().and_then(|s| s.to_str()), Some("png" | "jpeg" | "webp" | "zip")) {
-        return Err("导出路径或格式无效".into());
-    }
-    if data.len() > 180_000_000 { return Err("导出文件过大".into()); }
-    let bytes = STANDARD.decode(data).map_err(|_| "导出内容无效")?;
-    if path.extension().and_then(|s| s.to_str()) == Some("png") && !bytes.starts_with(b"\x89PNG\r\n\x1a\n") {
-        return Err("图片格式无效".into());
-    }
-    if path.extension().and_then(|s| s.to_str()) == Some("jpeg") && !bytes.starts_with(b"\xff\xd8\xff") {
-        return Err("JPEG图片格式无效".into());
-    }
-    if path.extension().and_then(|s| s.to_str()) == Some("webp") && !(bytes.starts_with(b"RIFF") && bytes.get(8..12) == Some(b"WEBP".as_slice())) {
-        return Err("WebP图片格式无效".into());
-    }
-    atomic_write(&path, &bytes)
+    crate::file_operation(move || {
+        use base64::{engine::general_purpose::STANDARD, Engine};
+        let path = PathBuf::from(path);
+        if !path.is_absolute() || !matches!(path.extension().and_then(|s| s.to_str()), Some("png" | "jpeg" | "webp" | "zip")) {
+            return Err("导出路径或格式无效".into());
+        }
+        if data.len() > 180_000_000 { return Err("导出文件过大".into()); }
+        let bytes = STANDARD.decode(data).map_err(|_| "导出内容无效")?;
+        if path.extension().and_then(|s| s.to_str()) == Some("png") && !bytes.starts_with(b"\x89PNG\r\n\x1a\n") {
+            return Err("图片格式无效".into());
+        }
+        if path.extension().and_then(|s| s.to_str()) == Some("jpeg") && !bytes.starts_with(b"\xff\xd8\xff") {
+            return Err("JPEG图片格式无效".into());
+        }
+        if path.extension().and_then(|s| s.to_str()) == Some("webp") && !(bytes.starts_with(b"RIFF") && bytes.get(8..12) == Some(b"WEBP".as_slice())) {
+            return Err("WebP图片格式无效".into());
+        }
+        atomic_write(&path, &bytes)
+    }).await
 }
 
 #[tauri::command]
-pub fn save_design_image(data: String, workspace: tauri::State<crate::Workspace>) -> Result<String> {
-    let bytes = crate::ai_images::decode(&data)?;
-    let slot = workspace.0.lock().map_err(|e| e.to_string())?;
-    let root = slot.as_ref().ok_or("工作空间尚未打开")?.root_path();
-    crate::ai_images::save(root, &bytes)
+pub async fn save_design_image(data: String, app: tauri::AppHandle) -> Result<String> {
+    crate::file_operation(move || {
+        let workspace = app.state::<crate::Workspace>();
+        let bytes = crate::ai_images::decode(&data)?;
+        let slot = workspace.0.lock().map_err(|e| e.to_string())?;
+        let root = slot.as_ref().ok_or("工作空间尚未打开")?.root_path();
+        crate::ai_images::save(root, &bytes)
+    }).await
 }

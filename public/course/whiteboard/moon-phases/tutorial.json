@@ -1,0 +1,459 @@
+{
+  "title": "月亮为什么有圆有缺",
+  "summary": "月亮并非自己发光；用灯和球理解月相",
+  "duration": 60,
+  "scenes": [
+    {
+      "title": "月亮并非自己发光",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "夜里看见月亮，是因为它反射了太阳照来的光。",
+          "subject": "太阳轮廓与旁边月球圆面，少量橙色光线"
+        },
+        {
+          "text": "不论我们看见什么形状，月球总有一半被照亮。",
+          "subject": "月球球体一半浅色一半深灰，侧面光源"
+        },
+        {
+          "text": "月球绕着地球转，我们的位置改变了观察角度。",
+          "subject": "地球球体与周围月球轨道，不用箭头文字"
+        },
+        {
+          "text": "所以月相主要来自观察角度，不是地球的影子。",
+          "subject": "一个人抬头观察夜空的弯月"
+        }
+      ],
+      "narration": "夜里看见月亮，是因为它反射了太阳照来的光。不论我们看见什么形状，月球总有一半被照亮。月球绕着地球转，我们的位置改变了观察角度。所以月相主要来自观察角度，不是地球的影子。",
+      "image": "/course/whiteboard/moon-phases/01.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"夜里看见月亮，是因为它反射了太阳照来的光。\",\"图形\":\"太阳轮廓与旁边月球圆面，少量橙色光线\"},{\"讲解\":\"不论我们看见什么形状，月球总有一半被照亮。\",\"图形\":\"月球球体一半浅色一半深灰，侧面光源\"},{\"讲解\":\"月球绕着地球转，我们的位置改变了观察角度。\",\"图形\":\"地球球体与周围月球轨道，不用箭头文字\"},{\"讲解\":\"所以月相主要来自观察角度，不是地球的影子。\",\"图形\":\"一个人抬头观察夜空的弯月\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "夜里看见月亮",
+          "startMs": 0,
+          "endMs": 1480,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "是因为它反射了太阳照来的光",
+          "startMs": 1480,
+          "endMs": 4199,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不论我们看见什么形状",
+          "startMs": 4199,
+          "endMs": 6335,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "月球总有一半被照亮",
+          "startMs": 6335,
+          "endMs": 8277,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "月球绕着地球转",
+          "startMs": 8277,
+          "endMs": 9831,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "我们的位置改变了观察角度",
+          "startMs": 9831,
+          "endMs": 12356,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "所以月相主要来自观察角度",
+          "startMs": 12356,
+          "endMs": 14881,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不是地球的影子",
+          "startMs": 14881,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-01",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "夜里看见月亮，是因为它反射了太阳照来的光。不论我们看见什么形状，月球总有一半被照亮。月球绕着地球转，我们的位置改变了观察角度。所以月相主要来自观察角度，不是地球的影子。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "太阳轮廓与旁边月球圆面，少量橙色光线",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：夜里看见月亮，是因为它反射了太阳照来的光。",
+            "subtitle": "夜里看见月亮，是因为它反射了太阳照来的光。",
+            "type": "concept",
+            "region": {
+              "x": 107,
+              "y": 75,
+              "width": 631,
+              "height": 328
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3699,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                422.5,
+                85
+              ],
+              "end": [
+                422.5,
+                393
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "月球球体一半浅色一半深灰，侧面光源",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：不论我们看见什么形状，月球总有一半被照亮。",
+            "subtitle": "不论我们看见什么形状，月球总有一半被照亮。",
+            "type": "concept",
+            "region": {
+              "x": 1010,
+              "y": 128,
+              "width": 411,
+              "height": 237
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4199,
+              "durationMs": 3878,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1215.5,
+                138
+              ],
+              "end": [
+                1215.5,
+                355
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "地球球体与周围月球轨道，不用箭头文字",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：月球绕着地球转，我们的位置改变了观察角度。",
+            "subtitle": "月球绕着地球转，我们的位置改变了观察角度。",
+            "type": "concept",
+            "region": {
+              "x": 131,
+              "y": 499,
+              "width": 557,
+              "height": 345
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8277,
+              "durationMs": 3879,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                409.5,
+                509
+              ],
+              "end": [
+                409.5,
+                834
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "一个人抬头观察夜空的弯月",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：所以月相主要来自观察角度，不是地球的影子。",
+            "subtitle": "所以月相主要来自观察角度，不是地球的影子。",
+            "type": "concept",
+            "region": {
+              "x": 928,
+              "y": 511,
+              "width": 617,
+              "height": 379
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12356,
+              "durationMs": 16944,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1236.5,
+                521
+              ],
+              "end": [
+                1236.5,
+                880
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/moon-phases/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "用灯和球理解月相",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "拿一盏灯代表太阳，用一个球代表月球。",
+          "subject": "桌面台灯和一个小圆球"
+        },
+        {
+          "text": "灯固定不动，让球绕着观察者缓慢移动。",
+          "subject": "观察者手持球，旁边固定灯，简单动作虚线"
+        },
+        {
+          "text": "你会看到亮面有时大、有时小，光源并没改变。",
+          "subject": "三个不同亮面的小球排列，纯图形无文字"
+        },
+        {
+          "text": "练习：灯还亮着，为什么我们仍可能只看见弯月？",
+          "subject": "观察者侧面视角看一个部分明亮的小球"
+        }
+      ],
+      "narration": "拿一盏灯代表太阳，用一个球代表月球。灯固定不动，让球绕着观察者缓慢移动。你会看到亮面有时大、有时小，光源并没改变。练习：灯还亮着，为什么我们仍可能只看见弯月？",
+      "image": "/course/whiteboard/moon-phases/02.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"拿一盏灯代表太阳，用一个球代表月球。\",\"图形\":\"桌面台灯和一个小圆球\"},{\"讲解\":\"灯固定不动，让球绕着观察者缓慢移动。\",\"图形\":\"观察者手持球，旁边固定灯，简单动作虚线\"},{\"讲解\":\"你会看到亮面有时大、有时小，光源并没改变。\",\"图形\":\"三个不同亮面的小球排列，纯图形无文字\"},{\"讲解\":\"练习：灯还亮着，为什么我们仍可能只看见弯月？\",\"图形\":\"观察者侧面视角看一个部分明亮的小球\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "拿一盏灯代表太阳",
+          "startMs": 0,
+          "endMs": 1837,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "用一个球代表月球",
+          "startMs": 1837,
+          "endMs": 3553,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "灯固定不动",
+          "startMs": 3553,
+          "endMs": 4697,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "让球绕着观察者缓慢移动",
+          "startMs": 4697,
+          "endMs": 6986,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "你会看到亮面有时大、有时小",
+          "startMs": 6986,
+          "endMs": 9657,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "光源并没改变",
+          "startMs": 9657,
+          "endMs": 10992,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "练习：灯还亮着",
+          "startMs": 10992,
+          "endMs": 12518,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "为什么我们仍可能只看见弯月",
+          "startMs": 12518,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-02",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "拿一盏灯代表太阳，用一个球代表月球。灯固定不动，让球绕着观察者缓慢移动。你会看到亮面有时大、有时小，光源并没改变。练习：灯还亮着，为什么我们仍可能只看见弯月？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "桌面台灯和一个小圆球",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：拿一盏灯代表太阳，用一个球代表月球。",
+            "subtitle": "拿一盏灯代表太阳，用一个球代表月球。",
+            "type": "concept",
+            "region": {
+              "x": 97,
+              "y": 101,
+              "width": 600,
+              "height": 264
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3053,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                397,
+                111
+              ],
+              "end": [
+                397,
+                355
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "观察者手持球，旁边固定灯，简单动作虚线",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：灯固定不动，让球绕着观察者缓慢移动。",
+            "subtitle": "灯固定不动，让球绕着观察者缓慢移动。",
+            "type": "concept",
+            "region": {
+              "x": 940,
+              "y": 120,
+              "width": 630,
+              "height": 308
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 3553,
+              "durationMs": 3233,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1255,
+                130
+              ],
+              "end": [
+                1255,
+                418
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "三个不同亮面的小球排列，纯图形无文字",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：你会看到亮面有时大、有时小，光源并没改变。",
+            "subtitle": "你会看到亮面有时大、有时小，光源并没改变。",
+            "type": "concept",
+            "region": {
+              "x": 152,
+              "y": 624,
+              "width": 532,
+              "height": 155
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 6986,
+              "durationMs": 3806,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                418,
+                634
+              ],
+              "end": [
+                418,
+                769
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "观察者侧面视角看一个部分明亮的小球",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：练习：灯还亮着，为什么我们仍可能只看见弯月？",
+            "subtitle": "练习：灯还亮着，为什么我们仍可能只看见弯月？",
+            "type": "concept",
+            "region": {
+              "x": 900,
+              "y": 571,
+              "width": 652,
+              "height": 303
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 10992,
+              "durationMs": 18308,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1226,
+                581
+              ],
+              "end": [
+                1226,
+                864
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/moon-phases/02.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "srt": "1\n00:00:00,000 --> 00:00:01,480\n夜里看见月亮\n\n2\n00:00:01,480 --> 00:00:04,199\n是因为它反射了太阳照来的光\n\n3\n00:00:04,199 --> 00:00:06,335\n不论我们看见什么形状\n\n4\n00:00:06,335 --> 00:00:08,277\n月球总有一半被照亮\n\n5\n00:00:08,277 --> 00:00:09,831\n月球绕着地球转\n\n6\n00:00:09,831 --> 00:00:12,356\n我们的位置改变了观察角度\n\n7\n00:00:12,356 --> 00:00:14,881\n所以月相主要来自观察角度\n\n8\n00:00:14,881 --> 00:00:30,000\n不是地球的影子\n\n9\n00:00:30,000 --> 00:00:31,837\n拿一盏灯代表太阳\n\n10\n00:00:31,837 --> 00:00:33,553\n用一个球代表月球\n\n11\n00:00:33,553 --> 00:00:34,697\n灯固定不动\n\n12\n00:00:34,697 --> 00:00:36,986\n让球绕着观察者缓慢移动\n\n13\n00:00:36,986 --> 00:00:39,657\n你会看到亮面有时大、有时小\n\n14\n00:00:39,657 --> 00:00:40,992\n光源并没改变\n\n15\n00:00:40,992 --> 00:00:42,518\n练习：灯还亮着\n\n16\n00:00:42,518 --> 00:01:00,000\n为什么我们仍可能只看见弯月\n",
+  "video": "/course/whiteboard/moon-phases/tutorial.mp4"
+}

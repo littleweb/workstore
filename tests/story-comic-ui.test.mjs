@@ -46,6 +46,8 @@ const code = buildSync({
     "../comics/images",
     "./render",
     "./ComicCanvas",
+    "./previewImages",
+    "../design-studio/images",
     "../workspace",
     "@tauri-apps/plugin-clipboard-manager",
     "../ai/client",
@@ -65,7 +67,7 @@ const initial = () => ({
   },
   history: [],
 });
-async function harness({ empty = false } = {}) {
+async function harness({ empty = false, upload = async()=>"workstore-image:"+"c".repeat(64) } = {}) {
   window.localStorage.clear();
   let resolve;
   const waiting = new Promise((r) => (resolve = r)),
@@ -157,6 +159,8 @@ async function harness({ empty = false } = {}) {
           exportPage: async () => {},
           exportPdf: async () => {},
         };
+      if (id === "../design-studio/images") return {uploadImage:upload};
+      if (id === "./previewImages") return {previewImageSource:async src=>src};
       if (id === "./ComicCanvas") return ({children}) => React.createElement("div", {className:"story-pages"}, children);
       if (id === "./render")
         return { composePage: async () => "workstore-image:" + "b".repeat(64) };
@@ -194,6 +198,9 @@ async function harness({ empty = false } = {}) {
         return {
           App: { useApp: () => ({ message: { success: () => {} } }) },
           Input,
+          Tabs: ({items,activeKey,onChange,className}) => React.createElement('nav',{className},items.map(item=>React.createElement('button',{key:item.key,'aria-current':activeKey===item.key?'page':undefined,onClick:()=>onChange(item.key)},item.label))),
+          Empty: ({description}) => React.createElement('p',{},description),
+          Card: Object.assign(({cover,children})=>React.createElement('div',{},cover,children),{Meta:({title})=>React.createElement('strong',{},title)}),
           Switch: ({checked,onChange,disabled,...props}) => React.createElement("button", {"aria-label":props["aria-label"],"aria-pressed":checked,disabled,onClick:()=>onChange(!checked)}, checked ? "开" : "关"),
           Button: ({
             children,
@@ -286,7 +293,7 @@ async function harness({ empty = false } = {}) {
 test("upstream styles, separate result tabs, creation at top and collapse keeps current file", async () => {
   const h = await harness({ empty: true });
   try {
-    assert.equal(h.host.querySelectorAll(".story-styles>button").length, 12);
+    assert.equal(h.host.querySelectorAll(".story-styles>button").length, 0);
     assert.equal(h.host.querySelectorAll(".story-tabs button").length, 5);
     assert.equal(h.host.querySelector("textarea").rows, 1);
     assert.equal(h.host.querySelector("textarea").hasAttribute("maxlength"), false);
@@ -295,6 +302,8 @@ test("upstream styles, separate result tabs, creation at top and collapse keeps 
     await h.click("故事漫画");
     assert.equal(h.host.querySelector(".story-work.controls-collapsed"), null);
     assert.equal(h.docs.size, 0);
+    assert.ok(h.host.querySelector(".tool-sidebar-create.selected"));
+    assert.equal(h.host.querySelector(".tool-sidebar-create.selected").getAttribute("aria-current"), "page");
     await act(async () => {
       h.host.querySelector('[aria-label="折叠故事漫画导航"]').click();
     });
@@ -510,7 +519,7 @@ test("card selection does not open preview and selects matching style", async ()
       assert.equal(h.requests.length, 0);
       assert.equal(cover.getAttribute('aria-pressed'), 'true');
 
-      const selected = h.host.querySelector('.story-styles > button[aria-pressed="true"]');
+      const selected = h.host.querySelector('.story-style-card[data-selected="true"]');
       assert.ok(selected.textContent.includes(name));
       assert.equal(h.host.querySelector('textarea').value, topic);
       assert.equal(h.requests.length, 0);
@@ -622,4 +631,113 @@ test("print tab previews duplex blanks, booklet imposition and prevents incomple
   assert.ok([...h.host.querySelectorAll('figcaption')].every(n=>n.textContent.includes('背面')));
   assert.equal(h.docs.get('a').content,before);assert.equal(h.requests.length,0);
  } finally { await h.close(); }
+});
+
+test('my works includes every saved work, filters styles and opens original document without creating', async () => {
+  const h = await harness();
+  try {
+    const a = h.docs.get('a'), b = h.docs.get('b');
+    const ca = JSON.parse(a.content), cb = JSON.parse(b.content);
+    ca.config.style = 'ligne-claire'; cb.config.style = 'warm-manga';
+    const plan = hash => ({summary:'故事摘要',characters:'主角',pages:Array.from({length:4},(_,i)=>({title:'标题',text:'正文',visual:'场景'+i,layout:'standard',history:[],image:'workstore-image:'+hash.repeat(64)}))});
+    ca.plan = plan('a'); cb.plan = plan('b');
+    a.content = JSON.stringify(ca); b.content = JSON.stringify(cb);
+    await h.click('我的作品');
+    assert.equal(h.host.querySelectorAll('.story-work-card').length, 2);
+    assert.equal(h.host.querySelector('.story-work').hidden, true);
+    assert.equal(h.host.querySelectorAll('.story-gallery-tabs button').length, 13);
+    assert.equal(h.host.querySelector('.story-work-card img').getAttribute('src'), 'workstore-image:'+'a'.repeat(64));
+    const tabs = [...h.host.querySelectorAll('.story-gallery-tabs button')];
+    await act(async()=>tabs[2].click());
+    assert.equal(h.host.querySelectorAll('.story-work-card').length, 1);
+    assert.match(h.host.querySelector('.story-work-card').textContent, /b/);
+    await act(async()=>h.host.querySelector('.story-work-card').click());
+    assert.equal(h.host.querySelector('.story-work-gallery'), null);
+    assert.equal(h.host.querySelector('.story-title').textContent, 'b');
+    assert.equal(h.docs.size, 2);
+  } finally { await h.close(); }
+});
+
+test('clicking a completed page opens its own AI conversation and can close without editing the work', async()=>{
+ const h=await harness();
+ try {
+  const c=JSON.parse(h.docs.get('a').content);
+  c.plan={summary:'故事摘要',characters:'主角',pages:Array.from({length:4},(_,i)=>({title:'标题',text:'对白',visual:'场景'+i,layout:'standard',history:[],image:'workstore-image:'+'a'.repeat(64)}))};
+  await act(async()=>{h.store.stageDocument('a',{content:JSON.stringify(c)});await drain();});
+  await h.click('漫画');
+  const before=h.docs.get('a').content;
+  await act(async()=>{h.host.querySelector('[aria-label="优化第2页"]').click();await drain();});
+  assert.match(h.host.querySelector('[aria-label="页面AI优化"]').textContent,/第 2 页/);
+  assert(h.host.querySelector('[aria-label="页面修改要求"]'));
+  assert.equal(h.host.querySelectorAll('.story-refiner-suggestions button').length,3);
+  await act(async()=>h.host.querySelectorAll('.story-refiner-suggestions button')[1].click());
+  assert.match(h.host.querySelector('[aria-label="页面修改要求"]').value,/文字修改/);
+  await act(async()=>h.host.querySelector('[aria-label="关闭AI优化"]').click());
+  assert.equal(h.host.querySelector('[aria-label="页面AI优化"]'),null);
+  const preview=h.host.querySelector('[aria-label="预览第2页"]');
+  assert(preview.closest('footer'));
+  await act(async()=>{preview.click();await drain();});
+  assert(h.host.querySelector('[role="dialog"] .story-preview img'));
+  assert.equal(h.docs.get('a').content,before);assert.equal(h.requests.length,0);
+ } finally {await h.close();}
+});
+
+test('preferences keep references optional in a draft and show split settings with three upload tiles per kind',async()=>{
+ const h=await harness({empty:true});try{
+  const headings=[...h.host.querySelectorAll('.story-controls h2')].map(n=>n.textContent);
+  assert(headings.some(t=>t.includes('尺寸篇幅')));assert(headings.some(t=>t.includes('其他偏好')));assert(headings.some(t=>t.includes('参考图样')));
+  assert.equal(h.host.querySelectorAll('.story-reference-tile').length,6);assert.equal(h.host.querySelector('.story-style-gallery header'),null);
+  assert.match(h.host.querySelector('.story-style-caption').textContent,/清晰轮廓，平涂叙事/);
+  const input=h.host.querySelector('[aria-label="上传场景图"]');
+  Object.defineProperty(input,'files',{value:[new window.File(['image'],'scene.png',{type:'image/png'})],configurable:true});
+  await act(async()=>{input.dispatchEvent(new window.Event('change',{bubbles:true}));await drain();});
+  assert(h.host.querySelector('[aria-label="移除场景图1"]'));assert.equal(h.docs.size,0);
+  await act(async()=>h.host.querySelector('[aria-label="移除场景图1"]').click());
+  assert.equal(h.host.querySelector('[aria-label="移除场景图1"]'),null);
+ }finally{await h.close();}
+});
+test('late reference upload does not overwrite a new draft after navigation',async()=>{
+ let release;const waiting=new Promise(r=>release=r);const h=await harness({upload:()=>waiting});
+ try{
+  await h.click('偏好');const input=h.host.querySelector('[aria-label="上传角色图"]');
+  Object.defineProperty(input,'files',{value:[new window.File(['image'],'role.png',{type:'image/png'})],configurable:true});
+  await act(async()=>{input.dispatchEvent(new window.Event('change',{bubbles:true}));await drain();});
+  await h.click('故事漫画');
+  await act(async()=>{release('workstore-image:'+'c'.repeat(64));await drain();});
+  assert.equal(h.host.querySelector('[aria-label="移除角色图1"]'),null);assert.equal(h.docs.size,2);
+ }finally{await h.close();}
+});
+
+test("create and works entries accept down-only navigation and deduplicate trailing clicks", async () => {
+  const h = await harness();
+  try {
+    const create = [...h.host.querySelectorAll(".tool-sidebar-create")].find(e => e.textContent.includes("故事漫画"));
+    await act(async () => { down(create); await drain(); });
+    assert.equal(h.host.querySelector(".story-title").textContent, "画漫画");
+    const flushes = h.flushes;
+    await act(async () => { create.dispatchEvent(new dom.window.MouseEvent("click", {bubbles:true,detail:1})); await drain(); });
+    assert.equal(h.flushes, flushes);
+    const works = [...h.host.querySelectorAll(".tool-sidebar-create")].find(e => e.textContent.includes("我的作品"));
+    await act(async () => { down(works); await drain(); });
+    assert.equal(works.getAttribute("aria-current"), "page");
+    await act(async () => { works.dispatchEvent(new dom.window.MouseEvent("click", {bubbles:true,detail:1})); await drain(); });
+    assert.equal(works.getAttribute("aria-current"), "page");
+  } finally { await h.close(); }
+});
+
+test("works navigation defers during IME and touch requires click", async () => {
+ const h=await harness();
+ try {
+  const works=[...h.host.querySelectorAll('.tool-sidebar-create')].find(e=>e.textContent.includes('我的作品'));
+  const field=h.host.querySelector('textarea');
+  await act(async()=>{
+   const event=new dom.window.MouseEvent('pointerdown',{bubbles:true,button:0});
+   Object.defineProperty(event,'pointerType',{value:'touch'}); works.dispatchEvent(event); await drain();
+  });
+  assert.notEqual(works.getAttribute('aria-current'),'page');
+  await act(async()=>{field.dispatchEvent(new dom.window.CompositionEvent('compositionstart',{bubbles:true}));down(works);await drain();});
+  assert.notEqual(works.getAttribute('aria-current'),'page');
+  await act(async()=>{field.dispatchEvent(new dom.window.CompositionEvent('compositionend',{bubbles:true}));await new Promise(r=>setTimeout(r,15));});
+  assert.equal(works.getAttribute('aria-current'),'page');
+ } finally {await h.close();}
 });

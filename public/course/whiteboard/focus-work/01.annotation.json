@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-01",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "准备工作时，先把模糊目标变成一个具体的小任务。选择能够看到结果的动作，比如完成一段草稿。任务太大时，先找出可以开始的第一步。练习：你今天能完成的最小成果是什么？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "人把一大堆空白工作卡整理成一张",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：准备工作时，先把模糊目标变成一个具体的小任务。",
+      "subtitle": "准备工作时，先把模糊目标变成一个具体的小任务。",
+      "type": "concept",
+      "region": {
+        "x": 137,
+        "y": 51,
+        "width": 572,
+        "height": 386
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4200,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          423,
+          61
+        ],
+        "end": [
+          423,
+          427
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "打开的电脑旁一张只有图形的草稿纸",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：选择能够看到结果的动作，比如完成一段草稿。",
+      "subtitle": "选择能够看到结果的动作，比如完成一段草稿。",
+      "type": "concept",
+      "region": {
+        "x": 936,
+        "y": 96,
+        "width": 582,
+        "height": 334
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4700,
+        "durationMs": 3982,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1227,
+          106
+        ],
+        "end": [
+          1227,
+          420
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "阶梯图形中第一阶被橙色强调",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：任务太大时，先找出可以开始的第一步。",
+      "subtitle": "任务太大时，先找出可以开始的第一步。",
+      "type": "concept",
+      "region": {
+        "x": 209,
+        "y": 538,
+        "width": 478,
+        "height": 312
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8882,
+        "durationMs": 3385,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          448,
+          548
+        ],
+        "end": [
+          448,
+          840
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "手挑选一张小任务卡片",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：你今天能完成的最小成果是什么？",
+      "subtitle": "练习：你今天能完成的最小成果是什么？",
+      "type": "concept",
+      "region": {
+        "x": 989,
+        "y": 514,
+        "width": 510,
+        "height": 343
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12467,
+        "durationMs": 16833,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1244,
+          524
+        ],
+        "end": [
+          1244,
+          847
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

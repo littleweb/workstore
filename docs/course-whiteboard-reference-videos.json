@@ -1,0 +1,284 @@
+{
+  "method": "ffprobe metadata, original annotation/SRT and first/middle/end rendered frames",
+  "skillCommit": "696a7243c0e6ffb6827676e539c2ca5ebae2bf6b",
+  "totalSeconds": 1380,
+  "totalScenes": 46,
+  "videos": [
+    {
+      "id": "soap-oil",
+      "title": "肥皂怎样带走油污",
+      "seconds": 30,
+      "scenes": 1,
+      "frames": 720,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "b3c2a6254f9c18580d04705f33370da321da96bc34145bd2c4d0b96af02fe0bb",
+      "reviewedFramesSeconds": [
+        1,
+        15.0,
+        29.25
+      ],
+      "meanAudioDb": -19.7,
+      "srtSceneDurationsMs": [
+        30000
+      ]
+    },
+    {
+      "id": "paper-bridge",
+      "title": "折一座更稳的纸桥",
+      "seconds": 30,
+      "scenes": 1,
+      "frames": 720,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "d41ef41c787481850f8c47003d09fc58860a4ac617d06aadaf5ec243a7045e3a",
+      "reviewedFramesSeconds": [
+        1,
+        15.0,
+        29.25
+      ],
+      "meanAudioDb": -19.4,
+      "srtSceneDurationsMs": [
+        30000
+      ]
+    },
+    {
+      "id": "moon-phases",
+      "title": "月亮为什么有圆有缺",
+      "seconds": 60,
+      "scenes": 2,
+      "frames": 1440,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "8cf212869c7a3d2a7cd5e6af30c984fa2e4477c27f67246ad281d59f49fc7697",
+      "reviewedFramesSeconds": [
+        1,
+        44.0,
+        59.25
+      ],
+      "meanAudioDb": -19.7,
+      "srtSceneDurationsMs": [
+        30000,
+        30000
+      ]
+    },
+    {
+      "id": "simple-lever",
+      "title": "看懂支点与杠杆",
+      "seconds": 60,
+      "scenes": 2,
+      "frames": 1440,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "6fa70d69cce361fdec55e2c0092b895a6a340a7f0186313f0754457ef4ea1d92",
+      "reviewedFramesSeconds": [
+        1,
+        44.0,
+        59.25
+      ],
+      "meanAudioDb": -19.7,
+      "srtSceneDurationsMs": [
+        30000,
+        30000
+      ]
+    },
+    {
+      "id": "water-journey",
+      "title": "一滴水的循环旅行",
+      "seconds": 120,
+      "scenes": 4,
+      "frames": 2880,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "6bae796488202583d84eb30bbccef9d35f95d0935da5824ce81e066cb892137d",
+      "reviewedFramesSeconds": [
+        1,
+        74.0,
+        119.25
+      ],
+      "meanAudioDb": -19.9,
+      "srtSceneDurationsMs": [
+        30000,
+        30000,
+        30000,
+        30000
+      ]
+    },
+    {
+      "id": "teach-to-learn",
+      "title": "用讲解检验理解",
+      "seconds": 120,
+      "scenes": 4,
+      "frames": 2880,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "b2e111f40c9d92628da926a0cc9e6a939c83b8ba39dff807319b4b2af159175f",
+      "reviewedFramesSeconds": [
+        1,
+        74.0,
+        119.25
+      ],
+      "meanAudioDb": -19.7,
+      "srtSceneDurationsMs": [
+        30000,
+        30000,
+        30000,
+        30000
+      ]
+    },
+    {
+      "id": "battery-energy",
+      "title": "电池怎样提供能量",
+      "seconds": 180,
+      "scenes": 6,
+      "frames": 4320,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "d02a89ec1d279c2d1d2523677a2a527bfd67f4fc8974e21a4492af045f1b1edf",
+      "reviewedFramesSeconds": [
+        1,
+        104.0,
+        179.25
+      ],
+      "meanAudioDb": -19.7,
+      "srtSceneDurationsMs": [
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000
+      ]
+    },
+    {
+      "id": "recycle-rules",
+      "title": "把垃圾分类变成小流程",
+      "seconds": 180,
+      "scenes": 6,
+      "frames": 4320,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "d751bb15f690fd731486a1d736daf2992542e55dc6933b798810a50e794ce226",
+      "reviewedFramesSeconds": [
+        1,
+        104.0,
+        179.25
+      ],
+      "meanAudioDb": -19.6,
+      "srtSceneDurationsMs": [
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000
+      ]
+    },
+    {
+      "id": "circuit-course",
+      "title": "五分钟看懂简单电路",
+      "seconds": 300,
+      "scenes": 10,
+      "frames": 7200,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "bd67a1118945c8f81f096ba50fc29d2cf59453b3855a3caff79fc8583edf5fa0",
+      "reviewedFramesSeconds": [
+        1,
+        164.0,
+        299.25
+      ],
+      "meanAudioDb": -19.5,
+      "srtSceneDurationsMs": [
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000
+      ]
+    },
+    {
+      "id": "focus-work",
+      "title": "安排一次专注工作",
+      "seconds": 300,
+      "scenes": 10,
+      "frames": 7200,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 24,
+      "sha256": "19faca1f63f684b684fee8b98f6d4abdae583f89612860173850f25a19eb4023",
+      "reviewedFramesSeconds": [
+        1,
+        164.0,
+        299.25
+      ],
+      "meanAudioDb": -19.4,
+      "srtSceneDurationsMs": [
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000,
+        30000
+      ]
+    }
+  ]
+}

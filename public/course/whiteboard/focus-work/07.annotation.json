@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-07",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "到结束点，先看看任务实际完成到了哪里。把完成和未完成分开记录，避免只记得忙了多久。检查结果是否符合最开始选定的目标。练习：你能用一句话描述这一轮的实际成果吗？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "人查看桌面已经完成的草稿片段",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：到结束点，先看看任务实际完成到了哪里。",
+      "subtitle": "到结束点，先看看任务实际完成到了哪里。",
+      "type": "concept",
+      "region": {
+        "x": 146,
+        "y": 69,
+        "width": 554,
+        "height": 339
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3421,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          423,
+          79
+        ],
+        "end": [
+          423,
+          398
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "两组不同状态的无字任务卡片",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：把完成和未完成分开记录，避免只记得忙了多久。",
+      "subtitle": "把完成和未完成分开记录，避免只记得忙了多久。",
+      "type": "concept",
+      "region": {
+        "x": 989,
+        "y": 84,
+        "width": 567,
+        "height": 303
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 3921,
+        "durationMs": 4202,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1272.5,
+          94
+        ],
+        "end": [
+          1272.5,
+          377
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "任务卡与完成的图形作品相互对照",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：检查结果是否符合最开始选定的目标。",
+      "subtitle": "检查结果是否符合最开始选定的目标。",
+      "type": "concept",
+      "region": {
+        "x": 125,
+        "y": 540,
+        "width": 591,
+        "height": 342
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8323,
+        "durationMs": 3201,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          420.5,
+          550
+        ],
+        "end": [
+          420.5,
+          872
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "小人向朋友展示一份简洁成果",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：你能用一句话描述这一轮的实际成果吗？",
+      "subtitle": "练习：你能用一句话描述这一轮的实际成果吗？",
+      "type": "concept",
+      "region": {
+        "x": 991,
+        "y": 566,
+        "width": 591,
+        "height": 300
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 11724,
+        "durationMs": 17576,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1286.5,
+          576
+        ],
+        "end": [
+          1286.5,
+          856
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

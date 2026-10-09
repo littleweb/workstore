@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-03",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "开关控制回路是否接通，不是凭空制造电能。开关闭合，导电路径连起来，小灯可能亮起。开关打开，路径中断，普通电路中的灯会熄灭。找到开关的位置，再说清楚它控制的哪一段路径。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "打开状态的简洁机械开关",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：开关控制回路是否接通，不是凭空制造电能。",
+      "subtitle": "开关控制回路是否接通，不是凭空制造电能。",
+      "type": "concept",
+      "region": {
+        "x": 294,
+        "y": 95,
+        "width": 254,
+        "height": 259
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3555,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          421,
+          105
+        ],
+        "end": [
+          421,
+          344
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "闭合开关连着亮灯与电池",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：开关闭合，导电路径连起来，小灯可能亮起。",
+      "subtitle": "开关闭合，导电路径连起来，小灯可能亮起。",
+      "type": "concept",
+      "region": {
+        "x": 1011,
+        "y": 119,
+        "width": 506,
+        "height": 240
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4055,
+        "durationMs": 3734,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1264,
+          129
+        ],
+        "end": [
+          1264,
+          349
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "打开开关连着暗灯与电池",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：开关打开，路径中断，普通电路中的灯会熄灭。",
+      "subtitle": "开关打开，路径中断，普通电路中的灯会熄灭。",
+      "type": "concept",
+      "region": {
+        "x": 177,
+        "y": 526,
+        "width": 486,
+        "height": 306
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 7989,
+        "durationMs": 3931,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          420,
+          536
+        ],
+        "end": [
+          420,
+          822
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "手指向导线环路上的开关",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：找到开关的位置，再说清楚它控制的哪一段路径。",
+      "subtitle": "找到开关的位置，再说清楚它控制的哪一段路径。",
+      "type": "concept",
+      "region": {
+        "x": 1011,
+        "y": 484,
+        "width": 506,
+        "height": 351
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12120,
+        "durationMs": 17180,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1264,
+          494
+        ],
+        "end": [
+          1264,
+          825
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

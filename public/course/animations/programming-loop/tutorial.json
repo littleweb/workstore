@@ -1,0 +1,665 @@
+{
+  "title": "第一次看懂程序循环",
+  "summary": "读循环时确认初始值、继续条件、每轮动作和更新方式。用几行追踪表，就能看清次数和结果。",
+  "scenes": [
+    {
+      "title": "重复工作可以交给循环",
+      "seconds": 15,
+      "narration": "假如需要向三位同学问好，逐句写三次很重复。循环可以按规则重复一组动作，但必须有停止条件。",
+      "points": [
+        "重复动作",
+        "停止条件"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "开始",
+          "重复动作",
+          "停止"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "假如需要向三位同学问好",
+          "startMs": 120,
+          "endMs": 2624,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "逐句写三次很重复",
+          "startMs": 2624,
+          "endMs": 4502,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "循环可以按规则重复一组动作",
+          "startMs": 4502,
+          "endMs": 7424,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "但必须有停止条件",
+          "startMs": 7424,
+          "endMs": 9302,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "先描述一个简单任务",
+      "seconds": 15,
+      "narration": "我们用一到三的序号逐个问好。先写出目标：恰好问好三次，顺序是一、二、三，不能遗漏。",
+      "points": [
+        "目标：恰好三次"
+      ],
+      "visual": {
+        "kind": "code",
+        "labels": [
+          "目标：问好三次",
+          "顺序：1、2、3",
+          "结束后停止"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "我们用一到三的序号逐个问好",
+          "startMs": 120,
+          "endMs": 2813,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先写出目标：恰好问好三次",
+          "startMs": 2813,
+          "endMs": 5314,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "顺序是一、二、三",
+          "startMs": 5314,
+          "endMs": 7045,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "不能遗漏",
+          "startMs": 7045,
+          "endMs": 8007,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/02.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "循环变量记录进度",
+      "seconds": 15,
+      "narration": "变量可以记录当前序号。从一开始，每做完一次增加一。变量让程序知道下一次该处理谁。",
+      "points": [
+        "序号记录进度"
+      ],
+      "visual": {
+        "kind": "code",
+        "labels": [
+          "i = 1",
+          "输出 i",
+          "i = i + 1"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "变量可以记录当前序号",
+          "startMs": 120,
+          "endMs": 2392,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "从一开始",
+          "startMs": 2392,
+          "endMs": 3425,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "每做完一次增加一",
+          "startMs": 3425,
+          "endMs": 5284,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "变量让程序知道下一次该处理谁",
+          "startMs": 5284,
+          "endMs": 8382,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/03.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "条件决定是否继续",
+      "seconds": 15,
+      "narration": "每次执行动作前检查条件。如果序号不大于三，就继续；如果已经大于三，就结束循环。",
+      "points": [
+        "先检查条件"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "检查 i ≤ 3",
+          "是：执行动作",
+          "否：停止"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "每次执行动作前检查条件",
+          "startMs": 120,
+          "endMs": 2708,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "如果序号不大于三",
+          "startMs": 2708,
+          "endMs": 4649,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就继续",
+          "startMs": 4649,
+          "endMs": 5512,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "如果已经大于三",
+          "startMs": 5512,
+          "endMs": 7237,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就结束循环",
+          "startMs": 7237,
+          "endMs": 8531,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/04.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "追踪第一次执行",
+      "seconds": 15,
+      "narration": "最初序号是一，满足不大于三。程序完成一次问好，再把序号改为二，回到条件检查。",
+      "points": [
+        "1满足条件",
+        "动作后变成2"
+      ],
+      "visual": {
+        "kind": "code",
+        "labels": [
+          "i = 1",
+          "1 ≤ 3：成立",
+          "问好后 i = 2"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "最初序号是一",
+          "startMs": 120,
+          "endMs": 1505,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "满足不大于三",
+          "startMs": 1505,
+          "endMs": 2890,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "程序完成一次问好",
+          "startMs": 2890,
+          "endMs": 4670,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再把序号改为二",
+          "startMs": 4670,
+          "endMs": 6253,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "回到条件检查",
+          "startMs": 6253,
+          "endMs": 7638,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/05.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "追踪第二次执行",
+      "seconds": 15,
+      "narration": "第二次序号是二，条件依然成立。程序执行同一动作，把序号加一，接下来检查三。",
+      "points": [
+        "2满足条件",
+        "动作后变成3"
+      ],
+      "visual": {
+        "kind": "code",
+        "labels": [
+          "i = 2",
+          "2 ≤ 3：成立",
+          "问好后 i = 3"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "第二次序号是二",
+          "startMs": 120,
+          "endMs": 1789,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "条件依然成立",
+          "startMs": 1789,
+          "endMs": 3249,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "程序执行同一动作",
+          "startMs": 3249,
+          "endMs": 5127,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "把序号加一",
+          "startMs": 5127,
+          "endMs": 6378,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "接下来检查三",
+          "startMs": 6378,
+          "endMs": 7839,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/06.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "第三次之后会怎样",
+      "seconds": 15,
+      "narration": "序号三也满足条件，所以还会执行一次。完成后序号变成四，四不满足条件，循环结束。",
+      "points": [
+        "第三次执行",
+        "第四次检查后结束"
+      ],
+      "visual": {
+        "kind": "code",
+        "labels": [
+          "i = 3：执行",
+          "i = 4：检查",
+          "4 ≤ 3：不成立"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "序号三也满足条件",
+          "startMs": 120,
+          "endMs": 2022,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "所以还会执行一次",
+          "startMs": 2022,
+          "endMs": 3924,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "完成后序号变成四",
+          "startMs": 3924,
+          "endMs": 5826,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "四不满足条件",
+          "startMs": 5826,
+          "endMs": 7305,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "循环结束",
+          "startMs": 7305,
+          "endMs": 8361,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/07.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "边界为什么容易出错",
+      "seconds": 15,
+      "narration": "如果把不大于三误写成小于三，就只执行两次。判断符号差一点，次数就可能不同，要检查边界。",
+      "points": [
+        "小于与不大于不同"
+      ],
+      "visual": {
+        "kind": "compare",
+        "labels": [
+          "i < 3：两次",
+          "i ≤ 3：三次"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "如果把不大于三误写成小于三",
+          "startMs": 120,
+          "endMs": 2984,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就只执行两次",
+          "startMs": 2984,
+          "endMs": 4416,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "判断符号差一点",
+          "startMs": 4416,
+          "endMs": 6053,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "次数就可能不同",
+          "startMs": 6053,
+          "endMs": 7690,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "要检查边界",
+          "startMs": 7690,
+          "endMs": 8917,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/08.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "忘记更新变量会怎样",
+      "seconds": 15,
+      "narration": "如果一直让序号保持一，条件可能永远成立，循环无法停止。这就是一种无限循环，需要终止并修正更新。",
+      "points": [
+        "检查变量更新"
+      ],
+      "visual": {
+        "kind": "cycle",
+        "labels": [
+          "i仍为1",
+          "条件成立",
+          "执行",
+          "回到检查"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "如果一直让序号保持一",
+          "startMs": 120,
+          "endMs": 2389,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "条件可能永远成立",
+          "startMs": 2389,
+          "endMs": 4245,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "循环无法停止",
+          "startMs": 4245,
+          "endMs": 5688,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "这就是一种无限循环",
+          "startMs": 5688,
+          "endMs": 7750,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "需要终止并修正更新",
+          "startMs": 7750,
+          "endMs": 9813,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/09.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "循环也能累计结果",
+      "seconds": 15,
+      "narration": "计算一加二加三，可以从总数零开始，每轮把当前序号加到总数里。每一步都能画表追踪。",
+      "points": [
+        "总数初始为0"
+      ],
+      "visual": {
+        "kind": "code",
+        "labels": [
+          "sum = 0",
+          "加1：sum = 1",
+          "加2：sum = 3",
+          "加3：sum = 6"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "计算一加二加三",
+          "startMs": 120,
+          "endMs": 1794,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "可以从总数零开始",
+          "startMs": 1794,
+          "endMs": 3677,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "每轮把当前序号加到总数里",
+          "startMs": 3677,
+          "endMs": 6397,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "每一步都能画表追踪",
+          "startMs": 6397,
+          "endMs": 8490,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/10.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "先预测再看答案",
+      "seconds": 15,
+      "narration": "如果从二开始，每次增加二，直到不大于六，会依次输出什么？答案是二、四、六，一共三次。",
+      "points": [
+        "先预测",
+        "再逐轮检查"
+      ],
+      "visual": {
+        "kind": "code",
+        "labels": [
+          "开始：2",
+          "下一次：4",
+          "下一次：6",
+          "8时停止"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "如果从二开始",
+          "startMs": 120,
+          "endMs": 1415,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "每次增加二",
+          "startMs": 1415,
+          "endMs": 2525,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "直到不大于六",
+          "startMs": 2525,
+          "endMs": 3820,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "会依次输出什么",
+          "startMs": 3820,
+          "endMs": 5300,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "答案是二、四、六",
+          "startMs": 5300,
+          "endMs": 6965,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "一共三次",
+          "startMs": 6965,
+          "endMs": 7890,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/11.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "用四件事检查循环",
+      "seconds": 15,
+      "narration": "读循环时确认初始值、继续条件、每轮动作和更新方式。用几行追踪表，就能看清次数和结果。",
+      "points": [
+        "初始值、条件、动作、更新"
+      ],
+      "visual": {
+        "kind": "flow",
+        "labels": [
+          "初始值",
+          "条件与动作",
+          "更新与停止"
+        ],
+        "values": [],
+        "note": ""
+      },
+      "captions": [
+        {
+          "text": "读循环时确认初始值、继续条件、每轮动作和更新方式",
+          "startMs": 120,
+          "endMs": 5344,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "用几行追踪表",
+          "startMs": 5344,
+          "endMs": 6806,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就能看清次数和结果",
+          "startMs": 6806,
+          "endMs": 8895,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "audio": "/course/animations/programming-loop/12.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "duration": 180,
+  "style": "chalk",
+  "video": "/course/animations/programming-loop/tutorial.mp4"
+}

@@ -1,0 +1,25 @@
+{
+  "repository": "https://github.com/geeklee/srt-whiteboard-animation",
+  "commit": "696a7243c0e6ffb6827676e539c2ca5ebae2bf6b",
+  "sha256": {
+    "LICENSE": "e3b216f44f5956d7a3e10d6793b4105efdbb24d7b8e1c4277cbfeb90c2854585",
+    "README.md": "40e76f8cf16efd4e6db032053f932fe5923a5af02bcff6df9732627f0197526b",
+    ".gitignore": "50b25fe606ac8d5b1023abe47d4f2a16dafc25c1a801dae87e6e16a7e874dc59",
+    "SKILL.md": "0778b795cc53856b4841eb5ce65d879936bacaf79840a17b188011edd7caab11",
+    "agents/openai.yaml": "20cae49636ade7d4d815eb1fbc3c41e604cbb00497844d3c66b6def7c0054670",
+    "examples/scene-01-monkey-mountain-banana-whiteboard.gif": "0643cd0cde391b5344e019410bf969854b61eae3f27e2fe2bae65807de5ad965",
+    "examples/scene-01-monkey-mountain-stream.gif": "f2d19b31c1c2b6bbaf8e97126f45369617eaf1a1bb99c08392b4d6f63c9f2d87",
+    "examples/scene-01-monkey-mountain.png": "255233d0e93e80bb7d14bd59b91416dbbc44446ac29b44102865a63f5079c75e",
+    "examples/scene-01-monkey-mountain-banana-whiteboard.mp4": "729446fea63aaace7ed946db3a355d7d95a3c706388209db5427babcc9e69b29",
+    "examples/scene-01-monkey-mountain-banana.png": "bbe63984c858fbb3ebbe844fe8dba52d1d92cb5321a71ad19e2479290385b611",
+    "examples/scene-01-monkey-mountain-banana.annotation.json": "104863b07848f8a22494ff8cb27db722991439f168633ba73c80b83032ca48db",
+    "scripts/prepare_env.py": "e9758c25bfb477f86ade20f1dc44ce0e670cbcc7511fc5e406a1ae4f029ac29d",
+    "scripts/merge_scenes.py": "0827285f2e2f5388712d6beba9c93d6648d0d709ffd54436efb00d31e52c1935",
+    "scripts/render_stream_whiteboard.py": "a476483d5fcd149f685e61963573f081e11e6aff0517f916c44929504534079e",
+    "scripts/render_annotation_preview.py": "202f28df0fe50f28fc932a61ac64af441721434babbac6de473d89c92f33979f",
+    "scripts/stream_render.py": "6544d58593642eb9e7056170212dc22ed88b652f5fb7666830b58c8114c5fad0",
+    "scripts/parse_srt.py": "723999ee7e5e6c045d5bf43baff810bdfb41262bc7dcef6ac03a3b2b3c308a40",
+    "assets/preview.html": "51d9040b0f59f59f1e0a8df18f5fda83067132fc0852b882055be912509f9f1a",
+    "assets/drawing-hand.png": "978ee3ca979e0bf3f0b6187926828c30464adafbb0a6bbb61c9dbe327d3bfd61"
+  }
+}

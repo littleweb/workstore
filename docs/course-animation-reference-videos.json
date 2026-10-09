@@ -1,0 +1,260 @@
+{
+  "engine": "Remotion 4.0.534",
+  "skillCommit": "32b241b97f4e0e4ab61fe9a41b05e6e64503f8c5",
+  "speech": {
+    "engine": "Kokoro-82M-v1.1-zh ONNX int8",
+    "voice": "zf_007",
+    "profile": "kokoro-zh-gentle-v1",
+    "release": "model-files-v1.1",
+    "modelRepository": "https://huggingface.co/hexgrad/Kokoro-82M-v1.1-zh",
+    "modelRevision": "01e7505bd6a7a2ac4975463114c3a7650a9f7218",
+    "license": "Apache-2.0",
+    "files": [
+      {
+        "name": "kokoro-v1.1-zh.int8.onnx",
+        "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/kokoro-v1.1-zh.int8.onnx",
+        "sha256": "11751c087b4bbeed031e2b687b11dda698bd27ba0509472f960b57f835a999f7"
+      },
+      {
+        "name": "voices-v1.1-zh.bin",
+        "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/voices-v1.1-zh.bin",
+        "sha256": "14cb6186c99e4f6016871405f62046c5df863ae27465cbdc4ee08be7dd703acd"
+      },
+      {
+        "name": "config.json",
+        "url": "https://huggingface.co/hexgrad/Kokoro-82M-v1.1-zh/resolve/01e7505bd6a7a2ac4975463114c3a7650a9f7218/config.json",
+        "sha256": "bc333efa5ce4ceff433c8c8e5d027a1eca0166001e4e4a62bea2d26ff7a46890"
+      }
+    ]
+  },
+  "videos": [
+    {
+      "id": "water-trip",
+      "path": "public/course/animations/water-trip/tutorial.mp4",
+      "duration": "30.016000",
+      "frames": "720",
+      "sha256": "9de17f3c2cc53426a7f30cf5b4bc468067142e9757af5d48d575a095ba54e08f",
+      "audio": "aac",
+      "scenes": 3,
+      "meanAudioDb": -18.2,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "id": "one-quarter",
+      "path": "public/course/animations/one-quarter/tutorial.mp4",
+      "duration": "30.016000",
+      "frames": "720",
+      "sha256": "d22261320dabd5f0e5b9af9255f9713cbed7419d53653797c3e7efc596ed3a81",
+      "audio": "aac",
+      "scenes": 3,
+      "meanAudioDb": -18.0,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "id": "feynman-method",
+      "path": "public/course/animations/feynman-method/tutorial.mp4",
+      "duration": "60.011000",
+      "frames": "1440",
+      "sha256": "57f2722970dfe05ce58dba0bc89f87ea3a049c1cf5ca10b6afe576dcad9a9363",
+      "audio": "aac",
+      "scenes": 6,
+      "meanAudioDb": -18.0,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "id": "blue-sky",
+      "path": "public/course/animations/blue-sky/tutorial.mp4",
+      "duration": "60.011000",
+      "frames": "1440",
+      "sha256": "815e0e8fa58425c30bf9ec01a9f574273d13336501f109f0bd54314cff95723c",
+      "audio": "aac",
+      "scenes": 6,
+      "meanAudioDb": -17.9,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        10,
+        9,
+        10,
+        10,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "photosynthesis",
+      "path": "public/course/animations/photosynthesis/tutorial.mp4",
+      "duration": "120.000000",
+      "frames": "2880",
+      "sha256": "bcdc6f893e54d83a98f791bcc014c7d53f27e8e21ad0228f0ea058a7572917b3",
+      "audio": "aac",
+      "scenes": 8,
+      "meanAudioDb": -19.3,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15
+      ]
+    },
+    {
+      "id": "percent-discount",
+      "path": "public/course/animations/percent-discount/tutorial.mp4",
+      "duration": "120.000000",
+      "frames": "2880",
+      "sha256": "4a008baa65db7abd909cbb833c8c7237c33b004f1c40f15b9d4bcd75f736dfd6",
+      "audio": "aac",
+      "scenes": 8,
+      "meanAudioDb": -19.4,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15
+      ]
+    },
+    {
+      "id": "programming-loop",
+      "path": "public/course/animations/programming-loop/tutorial.mp4",
+      "duration": "180.011000",
+      "frames": "4320",
+      "sha256": "00c644674c759313ec46c56bcf4d19f82e919e236c1a5cc2e713b9203c70040b",
+      "audio": "aac",
+      "scenes": 12,
+      "meanAudioDb": -19.5,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15
+      ]
+    },
+    {
+      "id": "simple-circuit",
+      "path": "public/course/animations/simple-circuit/tutorial.mp4",
+      "duration": "180.011000",
+      "frames": "4320",
+      "sha256": "98404ed7add1de1a98bea4e85e19cf9ab86fc583277b64f471807c6302e20e5a",
+      "audio": "aac",
+      "scenes": 12,
+      "meanAudioDb": -19.4,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15
+      ]
+    },
+    {
+      "id": "probability-basics",
+      "path": "public/course/animations/probability-basics/tutorial.mp4",
+      "duration": "300.011000",
+      "frames": "7200",
+      "sha256": "90e8c5634e68d331b68a0ac0e37d1e4dc3725f9d28356a875f9b19d0efd499a8",
+      "audio": "aac",
+      "scenes": 20,
+      "meanAudioDb": -19.1,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15
+      ]
+    },
+    {
+      "id": "clear-questions",
+      "path": "public/course/animations/clear-questions/tutorial.mp4",
+      "duration": "300.011000",
+      "frames": "7200",
+      "sha256": "c088c7ea87ecdd3edb39565ccd0a249a6aeda10c58a92688dd4b0647569d2fa4",
+      "audio": "aac",
+      "scenes": 20,
+      "meanAudioDb": -18.9,
+      "voice": "kokoro-zh-zf_021-s0.93-v1",
+      "sceneSeconds": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15
+      ]
+    }
+  ]
+}

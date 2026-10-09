@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-02",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "跷跷板可以帮我们理解：较重的人更靠近支点。较轻的人坐得更远，两边可能达到平衡。如果两人同时改变位置，就难判断哪项改变有效。练习：想让小孩更容易压下另一端，他应往哪边坐？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "一个大人和小孩坐在跷跷板两端",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：跷跷板可以帮我们理解：较重的人更靠近支点。",
+      "subtitle": "跷跷板可以帮我们理解：较重的人更靠近支点。",
+      "type": "concept",
+      "region": {
+        "x": 133,
+        "y": 121,
+        "width": 585,
+        "height": 264
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3891,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          425.5,
+          131
+        ],
+        "end": [
+          425.5,
+          375
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "大人靠近中心，小孩坐远的平衡跷跷板",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：较轻的人坐得更远，两边可能达到平衡。",
+      "subtitle": "较轻的人坐得更远，两边可能达到平衡。",
+      "type": "concept",
+      "region": {
+        "x": 960,
+        "y": 134,
+        "width": 559,
+        "height": 251
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4391,
+        "durationMs": 3461,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1239.5,
+          144
+        ],
+        "end": [
+          1239.5,
+          375
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "两个小人同时移动的跷跷板，灰色虚线轨迹",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：如果两人同时改变位置，就难判断哪项改变有效。",
+      "subtitle": "如果两人同时改变位置，就难判断哪项改变有效。",
+      "type": "concept",
+      "region": {
+        "x": 154,
+        "y": 570,
+        "width": 587,
+        "height": 257
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8052,
+        "durationMs": 4275,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          447.5,
+          580
+        ],
+        "end": [
+          447.5,
+          817
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "小孩坐在跷跷板上，远端空座位和轻微方向箭头",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：想让小孩更容易压下另一端，他应往哪边坐？",
+      "subtitle": "练习：想让小孩更容易压下另一端，他应往哪边坐？",
+      "type": "concept",
+      "region": {
+        "x": 955,
+        "y": 556,
+        "width": 597,
+        "height": 271
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12527,
+        "durationMs": 16773,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1253.5,
+          566
+        ],
+        "end": [
+          1253.5,
+          817
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

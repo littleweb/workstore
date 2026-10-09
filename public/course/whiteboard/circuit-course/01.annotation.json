@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-01",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "今天用简单电路，理解小灯为什么会亮。只讨论合适的低压教学器材，不接家庭电源。观察电源、导线和小灯，先认识三个部分。带着问题开始：少了哪一段，小灯就会熄灭？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "桌面完整的小灯泡和电池",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：今天用简单电路，理解小灯为什么会亮。",
+      "subtitle": "今天用简单电路，理解小灯为什么会亮。",
+      "type": "concept",
+      "region": {
+        "x": 208,
+        "y": 122,
+        "width": 474,
+        "height": 256
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3233,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          445,
+          132
+        ],
+        "end": [
+          445,
+          368
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "安全低压教具盒与手势提醒，无文字符号",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：只讨论合适的低压教学器材，不接家庭电源。",
+      "subtitle": "只讨论合适的低压教学器材，不接家庭电源。",
+      "type": "concept",
+      "region": {
+        "x": 935,
+        "y": 71,
+        "width": 645,
+        "height": 350
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 3733,
+        "durationMs": 3815,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1257.5,
+          81
+        ],
+        "end": [
+          1257.5,
+          411
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "无字电池、一圈导线和灯泡三个物件",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：观察电源、导线和小灯，先认识三个部分。",
+      "subtitle": "观察电源、导线和小灯，先认识三个部分。",
+      "type": "concept",
+      "region": {
+        "x": 200,
+        "y": 572,
+        "width": 509,
+        "height": 210
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 7748,
+        "durationMs": 3614,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          454.5,
+          582
+        ],
+        "end": [
+          454.5,
+          772
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "一处导线断开的小灯回路",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：带着问题开始：少了哪一段，小灯就会熄灭？",
+      "subtitle": "带着问题开始：少了哪一段，小灯就会熄灭？",
+      "type": "concept",
+      "region": {
+        "x": 981,
+        "y": 539,
+        "width": 508,
+        "height": 276
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 11562,
+        "durationMs": 17738,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1235,
+          549
+        ],
+        "end": [
+          1235,
+          805
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

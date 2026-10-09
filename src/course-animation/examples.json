@@ -1,0 +1,152 @@
+[
+  {
+    "id": "water-trip",
+    "title": "水的一次旅行",
+    "topic": "水的一次旅行",
+    "config": {
+      "duration": 30,
+      "style": "chalk",
+      "audience": "儿童",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/water-trip/cover.png",
+    "video": "/course/animations/water-trip/tutorial.mp4",
+    "scenes": 3
+  },
+  {
+    "id": "one-quarter",
+    "title": "四分之一到底是多少",
+    "topic": "四分之一到底是多少",
+    "config": {
+      "duration": 30,
+      "style": "warm",
+      "audience": "儿童",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/one-quarter/cover.png",
+    "video": "/course/animations/one-quarter/tutorial.mp4",
+    "scenes": 3
+  },
+  {
+    "id": "feynman-method",
+    "title": "把知识讲明白",
+    "topic": "把知识讲明白",
+    "config": {
+      "duration": 60,
+      "style": "clean",
+      "audience": "大众学习者",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/feynman-method/cover.png",
+    "video": "/course/animations/feynman-method/tutorial.mp4",
+    "scenes": 6
+  },
+  {
+    "id": "blue-sky",
+    "title": "为什么天空是蓝色的",
+    "topic": "为什么天空是蓝色的",
+    "config": {
+      "duration": 60,
+      "style": "clean",
+      "audience": "青少年",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/blue-sky/cover.png",
+    "video": "/course/animations/blue-sky/tutorial.mp4",
+    "scenes": 6
+  },
+  {
+    "id": "photosynthesis",
+    "title": "叶子的能量工厂",
+    "topic": "叶子的能量工厂",
+    "config": {
+      "duration": 120,
+      "style": "warm",
+      "audience": "青少年",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/photosynthesis/cover.png",
+    "video": "/course/animations/photosynthesis/tutorial.mp4",
+    "scenes": 8
+  },
+  {
+    "id": "percent-discount",
+    "title": "看懂百分数与折扣",
+    "topic": "看懂百分数与折扣",
+    "config": {
+      "duration": 120,
+      "style": "clean",
+      "audience": "大众学习者",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/percent-discount/cover.png",
+    "video": "/course/animations/percent-discount/tutorial.mp4",
+    "scenes": 8
+  },
+  {
+    "id": "programming-loop",
+    "title": "第一次看懂程序循环",
+    "topic": "第一次看懂程序循环",
+    "config": {
+      "duration": 180,
+      "style": "chalk",
+      "audience": "青少年",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/programming-loop/cover.png",
+    "video": "/course/animations/programming-loop/tutorial.mp4",
+    "scenes": 12
+  },
+  {
+    "id": "simple-circuit",
+    "title": "电路怎样让小灯亮起来",
+    "topic": "电路怎样让小灯亮起来",
+    "config": {
+      "duration": 180,
+      "style": "clean",
+      "audience": "青少年",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/simple-circuit/cover.png",
+    "video": "/course/animations/simple-circuit/tutorial.mp4",
+    "scenes": 12
+  },
+  {
+    "id": "probability-basics",
+    "title": "用五分钟理解概率",
+    "topic": "用五分钟理解概率",
+    "config": {
+      "duration": 300,
+      "style": "warm",
+      "audience": "青少年",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/probability-basics/cover.png",
+    "video": "/course/animations/probability-basics/tutorial.mp4",
+    "scenes": 20
+  },
+  {
+    "id": "clear-questions",
+    "title": "把问题变成可执行的请求",
+    "topic": "把问题变成可执行的请求",
+    "config": {
+      "duration": 300,
+      "style": "clean",
+      "audience": "职场人士",
+      "voice": true,
+      "voiceId": "zf_021"
+    },
+    "cover": "/course/animations/clear-questions/cover.png",
+    "video": "/course/animations/clear-questions/tutorial.mp4",
+    "scenes": 20
+  }
+]

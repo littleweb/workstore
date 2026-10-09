@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-04",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "使用过程中，能参与反应的材料状态会改变。继续供电的能力下降，我们就说电池快用完了。有些电池能充电，有些不能随意再次充电。判断能否充电，应看产品说明，不靠外形猜测。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "电池剖面两份不同阶段的材料状态",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：使用过程中，能参与反应的材料状态会改变。",
+      "subtitle": "使用过程中，能参与反应的材料状态会改变。",
+      "type": "concept",
+      "region": {
+        "x": 235,
+        "y": 95,
+        "width": 400,
+        "height": 303
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3601,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          435,
+          105
+        ],
+        "end": [
+          435,
+          388
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "同一灯泡由亮到暗的两个图形",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：继续供电的能力下降，我们就说电池快用完了。",
+      "subtitle": "继续供电的能力下降，我们就说电池快用完了。",
+      "type": "concept",
+      "region": {
+        "x": 953,
+        "y": 116,
+        "width": 607,
+        "height": 271
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4101,
+        "durationMs": 3980,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1256.5,
+          126
+        ],
+        "end": [
+          1256.5,
+          377
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "充电线连接电池，与单独一次性电池并列，不含符号字",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：有些电池能充电，有些不能随意再次充电。",
+      "subtitle": "有些电池能充电，有些不能随意再次充电。",
+      "type": "concept",
+      "region": {
+        "x": 113,
+        "y": 548,
+        "width": 551,
+        "height": 256
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8281,
+        "durationMs": 3583,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          388.5,
+          558
+        ],
+        "end": [
+          388.5,
+          794
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "手拿无字产品说明书和一节电池",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：判断能否充电，应看产品说明，不靠外形猜测。",
+      "subtitle": "判断能否充电，应看产品说明，不靠外形猜测。",
+      "type": "concept",
+      "region": {
+        "x": 873,
+        "y": 532,
+        "width": 727,
+        "height": 334
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12064,
+        "durationMs": 17236,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1236.5,
+          542
+        ],
+        "end": [
+          1236.5,
+          856
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

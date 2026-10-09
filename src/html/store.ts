@@ -309,7 +309,7 @@ export async function flushDocuments() {
   for (const id of cache.keys()) await flushDocument(id);
 }
 
-registerDocumentFlusher(flushDocuments);
+registerDocumentFlusher(flushDocuments, "app.html");
 
 export function exportDocument(id: string) {
   const doc = currentDocument(id);

@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-06",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "并联让电路形成不同支路，各支路连接到共同两端。电荷可以经过不同支路，结构与串联不相同。只断开一条支路，另一条完整支路仍可能工作。判断串联或并联，追踪路径比看摆放位置更可靠。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "电池连接两条独立支路，每支路一只灯泡",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：并联让电路形成不同支路，各支路连接到共同两端。",
+      "subtitle": "并联让电路形成不同支路，各支路连接到共同两端。",
+      "type": "concept",
+      "region": {
+        "x": 159,
+        "y": 69,
+        "width": 487,
+        "height": 281
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4194,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          402.5,
+          79
+        ],
+        "end": [
+          402.5,
+          340
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "两条支路各有小圆点的电路示意",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：电荷可以经过不同支路，结构与串联不相同。",
+      "subtitle": "电荷可以经过不同支路，结构与串联不相同。",
+      "type": "concept",
+      "region": {
+        "x": 992,
+        "y": 83,
+        "width": 512,
+        "height": 263
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4694,
+        "durationMs": 3777,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1248,
+          93
+        ],
+        "end": [
+          1248,
+          336
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "一支路断开灯暗，另一支路连接灯亮",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：只断开一条支路，另一条完整支路仍可能工作。",
+      "subtitle": "只断开一条支路，另一条完整支路仍可能工作。",
+      "type": "concept",
+      "region": {
+        "x": 159,
+        "y": 522,
+        "width": 513,
+        "height": 272
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8671,
+        "durationMs": 3977,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          415.5,
+          532
+        ],
+        "end": [
+          415.5,
+          784
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "放大镜沿两条分叉导线追踪",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：判断串联或并联，追踪路径比看摆放位置更可靠。",
+      "subtitle": "判断串联或并联，追踪路径比看摆放位置更可靠。",
+      "type": "concept",
+      "region": {
+        "x": 991,
+        "y": 519,
+        "width": 517,
+        "height": 324
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12848,
+        "durationMs": 16452,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1249.5,
+          529
+        ],
+        "end": [
+          1249.5,
+          833
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

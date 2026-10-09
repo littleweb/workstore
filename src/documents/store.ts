@@ -3,6 +3,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { native } from "../workspace";
 import { scheduleAutosync, registerSyncRefresher } from "../workspace";
 import { registerDocumentFlusher } from "../documentLifecycle";
+import { sameNoteContent } from "./content";
 
 export type DocumentInfo = {
   id: string;
@@ -240,7 +241,9 @@ export function stageDocument(
   if (deleting.has(id) || deleted.has(id)) throw new Error("笔记已删除或正在删除");
   const c = cache.get(id);
   if (!c) throw new Error("笔记尚未载入");
-  if (Object.entries(patch).every(([key, value]) => c.document[key as keyof typeof c.document] === value)) return;
+  if (Object.entries(patch).every(([key, value]) => key === "content"
+    ? sameNoteContent(c.document.content, value as string)
+    : c.document[key as keyof typeof c.document] === value)) return;
 
   const next = { ...c.document, ...patch, updatedAt: Date.now() };
   if (patch.title !== undefined) next.title = sanitizeTitle(patch.title);
@@ -380,7 +383,12 @@ registerSyncRefresher(async (paths) => {
     if (!paths.includes(`data/app.doc/${id}.doc.json`)) continue;
     if (cached.generation !== cached.saved || cached.saving) continue;
     try {
+      const generation = cached.generation;
+      const token = cached.token;
       const loaded = await invoke<LoadedDocument>("load_document", { id });
+      if (cache.get(id) !== cached || cached.generation !== generation ||
+        cached.token !== token || cached.generation !== cached.saved || cached.saving ||
+        deleting.has(id) || deleted.has(id)) continue;
       if (loaded.document.content !== cached.document.content) {
         remoteVersions.set(id, (remoteVersions.get(id) ?? 0) + 1);
       }

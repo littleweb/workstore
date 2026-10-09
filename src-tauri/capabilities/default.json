@@ -18,6 +18,7 @@
     },
     "core:window:allow-destroy",
     "clipboard-manager:allow-write-text",
+    "clipboard-manager:allow-read-image",
     "updater:default",
     "process:allow-restart",
     "dialog:allow-save"

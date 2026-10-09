@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-04",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "工作中突然想起另一件事，可以先简短记下来。记好后回到当前任务，不必立刻打开另一项工作。为临时想法留一个收集位置，减少反复担心忘记。这里的目标是减少切换，并非压住所有新想法。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "小人把一个小想法画在旁边便签上",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：工作中突然想起另一件事，可以先简短记下来。",
+      "subtitle": "工作中突然想起另一件事，可以先简短记下来。",
+      "type": "concept",
+      "region": {
+        "x": 189,
+        "y": 67,
+        "width": 564,
+        "height": 345
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3856,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          471,
+          77
+        ],
+        "end": [
+          471,
+          402
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "手回到原来的一张任务卡",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：记好后回到当前任务，不必立刻打开另一项工作。",
+      "subtitle": "记好后回到当前任务，不必立刻打开另一项工作。",
+      "type": "concept",
+      "region": {
+        "x": 912,
+        "y": 152,
+        "width": 556,
+        "height": 260
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4356,
+        "durationMs": 4238,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1190,
+          162
+        ],
+        "end": [
+          1190,
+          402
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "几个简洁图形便签放进小收集盒",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：为临时想法留一个收集位置，减少反复担心忘记。",
+      "subtitle": "为临时想法留一个收集位置，减少反复担心忘记。",
+      "type": "concept",
+      "region": {
+        "x": 211,
+        "y": 530,
+        "width": 482,
+        "height": 305
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8794,
+        "durationMs": 4237,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          452,
+          540
+        ],
+        "end": [
+          452,
+          825
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "当前工作桌与旁边独立想法盒",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：这里的目标是减少切换，并非压住所有新想法。",
+      "subtitle": "这里的目标是减少切换，并非压住所有新想法。",
+      "type": "concept",
+      "region": {
+        "x": 874,
+        "y": 563,
+        "width": 669,
+        "height": 278
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13231,
+        "durationMs": 16069,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1208.5,
+          573
+        ],
+        "end": [
+          1208.5,
+          831
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

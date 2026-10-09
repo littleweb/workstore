@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-01",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "电池把内部储存的化学能转成可以使用的电能。它有两个连接端，电路要把两端连进完整的路径。只把一根线碰到灯上，通常不能形成完整回路。先记住能量来源和完整路径，再看内部怎么工作。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "一节无文字电池与旁边发光小灯泡",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：电池把内部储存的化学能转成可以使用的电能。",
+      "subtitle": "电池把内部储存的化学能转成可以使用的电能。",
+      "type": "concept",
+      "region": {
+        "x": 218,
+        "y": 103,
+        "width": 467,
+        "height": 260
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3753,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          451.5,
+          113
+        ],
+        "end": [
+          451.5,
+          353
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "无标记电池的两个金属连接端",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：它有两个连接端，电路要把两端连进完整的路径。",
+      "subtitle": "它有两个连接端，电路要把两端连进完整的路径。",
+      "type": "concept",
+      "region": {
+        "x": 1191,
+        "y": 62,
+        "width": 174,
+        "height": 341
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4253,
+        "durationMs": 4129,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1278,
+          72
+        ],
+        "end": [
+          1278,
+          393
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "电池和灯泡之间只有一根导线",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：只把一根线碰到灯上，通常不能形成完整回路。",
+      "subtitle": "只把一根线碰到灯上，通常不能形成完整回路。",
+      "type": "concept",
+      "region": {
+        "x": 215,
+        "y": 572,
+        "width": 460,
+        "height": 239
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8582,
+        "durationMs": 3933,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          445,
+          582
+        ],
+        "end": [
+          445,
+          801
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "电池与灯泡的闭合导线回路",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：先记住能量来源和完整路径，再看内部怎么工作。",
+      "subtitle": "先记住能量来源和完整路径，再看内部怎么工作。",
+      "type": "concept",
+      "region": {
+        "x": 1007,
+        "y": 560,
+        "width": 483,
+        "height": 251
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12715,
+        "durationMs": 16585,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1248.5,
+          570
+        ],
+        "end": [
+          1248.5,
+          801
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

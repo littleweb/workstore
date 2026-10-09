@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-03",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "落下来的雨，有一部分流入河流和湖泊。还有一些进入土壤，补充地下的水。植物从土壤中吸水，也把水带回空气。不同路径连在一起，水循环没有唯一的起点。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "小山坡的雨水沿溪流进入湖泊",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：落下来的雨，有一部分流入河流和湖泊。",
+      "subtitle": "落下来的雨，有一部分流入河流和湖泊。",
+      "type": "concept",
+      "region": {
+        "x": 147,
+        "y": 45,
+        "width": 584,
+        "height": 383
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3067,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          439,
+          55
+        ],
+        "end": [
+          439,
+          418
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "简洁土地剖面，蓝色水滴下渗",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：还有一些进入土壤，补充地下的水。",
+      "subtitle": "还有一些进入土壤，补充地下的水。",
+      "type": "concept",
+      "region": {
+        "x": 1032,
+        "y": 45,
+        "width": 422,
+        "height": 387
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 3567,
+        "durationMs": 2863,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1243,
+          55
+        ],
+        "end": [
+          1243,
+          422
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "小植物根系吸水，叶片附近水汽波纹",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：植物从土壤中吸水，也把水带回空气。",
+      "subtitle": "植物从土壤中吸水，也把水带回空气。",
+      "type": "concept",
+      "region": {
+        "x": 203,
+        "y": 498,
+        "width": 438,
+        "height": 380
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 6630,
+        "durationMs": 3055,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          422,
+          508
+        ],
+        "end": [
+          422,
+          868
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "河流、土壤与树木三个独立小图标组成循环",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：不同路径连在一起，水循环没有唯一的起点。",
+      "subtitle": "不同路径连在一起，水循环没有唯一的起点。",
+      "type": "concept",
+      "region": {
+        "x": 990,
+        "y": 497,
+        "width": 502,
+        "height": 358
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 9885,
+        "durationMs": 19415,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1241,
+          507
+        ],
+        "end": [
+          1241,
+          845
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-01",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "整理垃圾时，先看物品的材料和当前状态。看见一个包装，不要只凭外形就猜它的类别。同样像纸的东西，可能带有复合涂层。当地规则是判断依据，不同地区的分类可能不同。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "桌面纸盒、玻璃瓶、塑料瓶与菜叶",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：整理垃圾时，先看物品的材料和当前状态。",
+      "subtitle": "整理垃圾时，先看物品的材料和当前状态。",
+      "type": "concept",
+      "region": {
+        "x": 60,
+        "y": 95,
+        "width": 720,
+        "height": 306
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3353,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          420,
+          105
+        ],
+        "end": [
+          420,
+          391
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "手翻看无字包装袋的材料层",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：看见一个包装，不要只凭外形就猜它的类别。",
+      "subtitle": "看见一个包装，不要只凭外形就猜它的类别。",
+      "type": "concept",
+      "region": {
+        "x": 980,
+        "y": 58,
+        "width": 597,
+        "height": 392
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 3853,
+        "durationMs": 3729,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1278.5,
+          68
+        ],
+        "end": [
+          1278.5,
+          440
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "纸张与多层饮料盒剖面并列，无文字",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：同样像纸的东西，可能带有复合涂层。",
+      "subtitle": "同样像纸的东西，可能带有复合涂层。",
+      "type": "concept",
+      "region": {
+        "x": 72,
+        "y": 499,
+        "width": 649,
+        "height": 351
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 7782,
+        "durationMs": 3139,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          396.5,
+          509
+        ],
+        "end": [
+          396.5,
+          840
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "小人查看社区的纯图标公告板，无字",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：当地规则是判断依据，不同地区的分类可能不同。",
+      "subtitle": "当地规则是判断依据，不同地区的分类可能不同。",
+      "type": "concept",
+      "region": {
+        "x": 877,
+        "y": 503,
+        "width": 751,
+        "height": 388
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 11121,
+        "durationMs": 18179,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1252.5,
+          513
+        ],
+        "end": [
+          1252.5,
+          881
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-01",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "撬动一个重物时，一根结实的杆可以帮助我们。杆子绕着支撑的位置转动，这个位置叫作支点。支点两边的距离，会影响需要多大的作用力。先找支点，再看两边的距离，别只看杆有多长。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "杆子撬动小石块的手",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：撬动一个重物时，一根结实的杆可以帮助我们。",
+      "subtitle": "撬动一个重物时，一根结实的杆可以帮助我们。",
+      "type": "concept",
+      "region": {
+        "x": 97,
+        "y": 81,
+        "width": 661,
+        "height": 286
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3518,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          427.5,
+          91
+        ],
+        "end": [
+          427.5,
+          357
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "木杆架在三角形支撑上",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：杆子绕着支撑的位置转动，这个位置叫作支点。",
+      "subtitle": "杆子绕着支撑的位置转动，这个位置叫作支点。",
+      "type": "concept",
+      "region": {
+        "x": 959,
+        "y": 122,
+        "width": 591,
+        "height": 249
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4018,
+        "durationMs": 3699,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1254.5,
+          132
+        ],
+        "end": [
+          1254.5,
+          361
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "一边长一边短的杆与两端不同大小的力箭头，无字",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：支点两边的距离，会影响需要多大的作用力。",
+      "subtitle": "支点两边的距离，会影响需要多大的作用力。",
+      "type": "concept",
+      "region": {
+        "x": 124,
+        "y": 516,
+        "width": 597,
+        "height": 323
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 7917,
+        "durationMs": 3513,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          422.5,
+          526
+        ],
+        "end": [
+          422.5,
+          829
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "放大镜观察木杆下的支撑位置",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：先找支点，再看两边的距离，别只看杆有多长。",
+      "subtitle": "先找支点，再看两边的距离，别只看杆有多长。",
+      "type": "concept",
+      "region": {
+        "x": 1092,
+        "y": 527,
+        "width": 432,
+        "height": 327
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 11630,
+        "durationMs": 17670,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1308,
+          537
+        ],
+        "end": [
+          1308,
+          844
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

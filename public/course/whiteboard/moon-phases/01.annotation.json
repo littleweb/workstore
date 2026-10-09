@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-01",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "夜里看见月亮，是因为它反射了太阳照来的光。不论我们看见什么形状，月球总有一半被照亮。月球绕着地球转，我们的位置改变了观察角度。所以月相主要来自观察角度，不是地球的影子。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "太阳轮廓与旁边月球圆面，少量橙色光线",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：夜里看见月亮，是因为它反射了太阳照来的光。",
+      "subtitle": "夜里看见月亮，是因为它反射了太阳照来的光。",
+      "type": "concept",
+      "region": {
+        "x": 107,
+        "y": 75,
+        "width": 631,
+        "height": 328
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3699,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          422.5,
+          85
+        ],
+        "end": [
+          422.5,
+          393
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "月球球体一半浅色一半深灰，侧面光源",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：不论我们看见什么形状，月球总有一半被照亮。",
+      "subtitle": "不论我们看见什么形状，月球总有一半被照亮。",
+      "type": "concept",
+      "region": {
+        "x": 1010,
+        "y": 128,
+        "width": 411,
+        "height": 237
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4199,
+        "durationMs": 3878,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1215.5,
+          138
+        ],
+        "end": [
+          1215.5,
+          355
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "地球球体与周围月球轨道，不用箭头文字",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：月球绕着地球转，我们的位置改变了观察角度。",
+      "subtitle": "月球绕着地球转，我们的位置改变了观察角度。",
+      "type": "concept",
+      "region": {
+        "x": 131,
+        "y": 499,
+        "width": 557,
+        "height": 345
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8277,
+        "durationMs": 3879,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          409.5,
+          509
+        ],
+        "end": [
+          409.5,
+          834
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "一个人抬头观察夜空的弯月",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：所以月相主要来自观察角度，不是地球的影子。",
+      "subtitle": "所以月相主要来自观察角度，不是地球的影子。",
+      "type": "concept",
+      "region": {
+        "x": 928,
+        "y": 511,
+        "width": 617,
+        "height": 379
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12356,
+        "durationMs": 16944,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1236.5,
+          521
+        ],
+        "end": [
+          1236.5,
+          880
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

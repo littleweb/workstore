@@ -5,6 +5,8 @@ import { transformSync } from 'esbuild';
 import vm from 'node:vm';
 
 const code = transformSync(readFileSync(new URL('../src/documents/store.ts', import.meta.url), 'utf8'), { loader: 'ts', format: 'cjs' }).code;
+const contentModule = { exports: {} };
+vm.runInNewContext(transformSync(readFileSync(new URL('../src/documents/content.ts', import.meta.url), 'utf8'), { loader: 'ts', format: 'cjs' }).code, { module: contentModule });
 function loaded(id, content = 'original', revision = 1) {
   return { document: { id, type: 'workstore.document', schemaVersion: 1, title: id, content,
     favorite: false, createdAt: 1, updatedAt: revision, lastOpenedAt: 1, revision }, token: `${id}:${revision}` };
@@ -16,19 +18,60 @@ function deferred() {
 }
 function harness(invoke) {
   const module = { exports: {} }; const timers = new Map(); let serial = 0;
+  let refreshSyncedDocuments;
   vm.runInNewContext(code, { module, console, Blob,
     setTimeout: fn => { const id = ++serial; timers.set(id, fn); return id; },
     clearTimeout: id => timers.delete(id),
     require(id) {
+      if (id === './content') return contentModule.exports;
       if (id === 'react-dom') return { flushSync: fn => fn() };
       if (id === '@tauri-apps/api/core') return { invoke };
       if (id.includes('documentLifecycle')) return { registerDocumentFlusher: () => {} };
-      if (id.includes('workspace')) return { native: true, scheduleAutosync: () => {}, registerSyncRefresher: () => {} };
+      if (id.includes('workspace')) return { native: true, scheduleAutosync: () => {}, registerSyncRefresher: refresh => { refreshSyncedDocuments = refresh; } };
       throw new Error(id);
     },
   });
+  module.exports.refreshSyncedDocuments = (...args) => refreshSyncedDocuments(...args);
   return module.exports;
 }
+
+test('opening a new empty note does not persist editor initialization as a competing edit', async () => {
+  const saves = [];
+  const store = harness(async (command, args) => {
+    if (command === 'create_document') return loaded('new', '');
+    saves.push(args); return loaded('new', args.document.content, 2);
+  });
+  await store.createDocument();
+  store.stageDocument('new', { content: '<p class="PlaygroundEditorTheme__paragraph"><br></p><p><br></p>' });
+  await store.flushDocuments();
+  assert.equal(saves.length, 0);
+  store.stageDocument('new', { content: '<p>Actual note</p>' });
+  await store.flushDocuments();
+  assert.equal(saves.length, 1);
+  store.stageDocument('new', { content: '<p><br></p>' });
+  await store.flushDocuments();
+  assert.equal(saves.length, 2, 'intentional clearing must still save');
+  assert.equal(contentModule.exports.emptyNoteHtml('<p><img src="x"></p>'), false);
+  assert.equal(contentModule.exports.emptyNoteHtml('<table></table>'), false);
+});
+
+test('a delayed sync read cannot overwrite an edit made and saved while it was loading', async () => {
+  const read = deferred(); let reads = 0;
+  const store = harness(async (command, args) => {
+    if (command === 'list_documents') return { documents: [], warnings: [] };
+    if (command === 'load_document') return ++reads === 1 ? loaded('a') : read.promise;
+    if (command === 'save_document') return loaded('a', args.document.content, 2);
+  });
+  await store.openDocument('a');
+  const refreshing = store.refreshSyncedDocuments(['data/app.doc/a.doc.json']);
+  await new Promise(resolve => setImmediate(resolve));
+  store.stageDocument('a', { title: 'Named note', content: 'new saved text' });
+  await store.flushDocuments();
+  read.resolve(loaded('a', 'stale remote empty', 1));
+  await refreshing;
+  assert.equal(store.currentDocument('a').content, 'new saved text');
+  assert.equal(store.remoteVersion('a'), 0);
+});
 
 test('loading or creating a document cannot change the active document until explicitly activated', async () => {
   const store = harness(async (command, args) => loaded(command === 'create_document' ? 'new' : args.id));

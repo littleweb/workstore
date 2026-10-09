@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-05",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "先检查哪些通知与这一段工作直接相关。在允许的范围内，给不紧急的提醒安排晚一点处理。如果必须响应，就记录回来之后要继续的下一步。练习：现在的打断是必须处理，还是可以稍后再看？",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "手机与几枚纯图形通知圆点",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：先检查哪些通知与这一段工作直接相关。",
+      "subtitle": "先检查哪些通知与这一段工作直接相关。",
+      "type": "concept",
+      "region": {
+        "x": 254,
+        "y": 82,
+        "width": 372,
+        "height": 297
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 3230,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          440,
+          92
+        ],
+        "end": [
+          440,
+          369
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "手机放在一旁，旁边无数字计时器",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：在允许的范围内，给不紧急的提醒安排晚一点处理。",
+      "subtitle": "在允许的范围内，给不紧急的提醒安排晚一点处理。",
+      "type": "concept",
+      "region": {
+        "x": 962,
+        "y": 158,
+        "width": 529,
+        "height": 210
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 3730,
+        "durationMs": 4412,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1226.5,
+          168
+        ],
+        "end": [
+          1226.5,
+          358
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "手在任务卡上画出一个小箭头",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：如果必须响应，就记录回来之后要继续的下一步。",
+      "subtitle": "如果必须响应，就记录回来之后要继续的下一步。",
+      "type": "concept",
+      "region": {
+        "x": 222,
+        "y": 572,
+        "width": 505,
+        "height": 274
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8342,
+        "durationMs": 4212,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          474.5,
+          582
+        ],
+        "end": [
+          474.5,
+          836
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "人比较两张紧急程度不同的图形卡，无文字",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：练习：现在的打断是必须处理，还是可以稍后再看？",
+      "subtitle": "练习：现在的打断是必须处理，还是可以稍后再看？",
+      "type": "concept",
+      "region": {
+        "x": 967,
+        "y": 532,
+        "width": 521,
+        "height": 325
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12754,
+        "durationMs": 16546,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1227.5,
+          542
+        ],
+        "end": [
+          1227.5,
+          847
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

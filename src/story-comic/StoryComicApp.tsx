@@ -1,3 +1,13 @@
+import coverThemes from './coverThemes.json';
+import ReferenceUploads from './ReferenceUploads';
+import { uploadImage } from '../design-studio/images';
+import PageRefiner from './PageRefiner';
+import { previewImageSource } from './previewImages';
+import { refinePage, restorePage } from './refine';
+import { audiences } from './audiences';
+import WorksGallery from './WorksGallery';
+import XhsPublisher from './XhsPublisher';
+import { NavigationSection } from '../list-projects/NavigationSection';
 import { ProjectSection, useProjects } from "../list-projects/Projects";
 import { beginTask, failTask, updateTask } from "../tasks/store";
 import { sizes, sizeFor, pageCounts } from "./sizes";
@@ -32,6 +42,7 @@ import {
   topicTitle,
   topicInputValue,
   styles,
+  userReferences,
   copyText,
   type Config,
   type Content,
@@ -42,14 +53,14 @@ import { composePage } from "./render";
 import { exportPage, exportZip, exportPdf } from "./export";
 import StoryComicIcon from "./StoryComicIcon";
 import "./story-comic.css";
-function PageImage({ src, alt }: { src: string; alt: string }) {
+function PageImage({ src, alt, thumbnail=false }: { src: string; alt: string; thumbnail?:boolean }) {
   const [url, setUrl] = useState(""),
     [error, setError] = useState("");
   useEffect(() => {
     let live = true;
     setUrl("");
     setError("");
-    void imageSource(src)
+    void (thumbnail ? previewImageSource(src) : imageSource(src))
       .then((s) => {
         if (live) setUrl(s);
       })
@@ -59,12 +70,13 @@ function PageImage({ src, alt }: { src: string; alt: string }) {
     return () => {
       live = false;
     };
-  }, [src]);
+  }, [src,thumbnail]);
   return url ? (
     <img
       src={url}
       alt={alt}
       draggable={false}
+      decoding="async"
       onError={() => {
         setUrl("");
         setError("图片无法显示");
@@ -83,6 +95,12 @@ const topics = [
   "AI会取代人类吗",
 ];
 export default function StoryComicApp() {
+  const [gallery, setGallery] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const uploadInProgress = useRef(false);
+  const currentConfig = useRef<Config | null>(null);
+  const [refineIndex, setRefineIndex] = useState<number | null>(null);
+  const [optimizing, setOptimizing] = useState(false);
   const projects = useProjects("app.story-comic");
   const creationProject = useRef<string | null>(null);
   const { message, modal } = App.useApp();
@@ -129,6 +147,7 @@ export default function StoryComicApp() {
     }
   }, [doc?.content]);
   const config = content?.config ?? draft;
+  currentConfig.current = config;
   const inputTopic = content ? topicInputValue(content, doc?.title) : config.topic;
   const fail = (e: unknown) => {
     if (mounted.current) setError(String(e));
@@ -161,9 +180,11 @@ export default function StoryComicApp() {
       if (!mounted.current || ticket !== request.current) return;
       if (next) store.activateDocument(next);
       active.current = next;
+      setGallery(false);
       setId(next);
       setError("");
       setPreview(null);
+      setRefineIndex(null);
       setTab(next && store.currentDocument(next)?.content && readContent(store.currentDocument(next)!.content).plan ? "漫画" : "偏好");
     } catch (e) {
       if (ticket === request.current) fail(e);
@@ -216,8 +237,26 @@ export default function StoryComicApp() {
       });
     else setDraft({ ...draft, ...change });
   }
+  async function addReferences(field: 'sceneReferences' | 'characterReferences', files: File[]) {
+    if (uploadInProgress.current || busy || opening || corrupt) return;
+    const snapshot = signature(config), targetId = id, ticket = request.current;
+    const remote = targetId ? store.remoteVersion(targetId) : 0;
+    uploadInProgress.current=true;setUploading(true);setError('');
+    try {
+      const images=[...(config[field] ?? [])];
+      if (images.length+files.length>3) throw new Error('每类参考图最多3张');
+      for (const file of files) {
+        images.push(await uploadImage(file));
+        if (!mounted.current || ticket !== request.current || active.current !== targetId) return;
+      }
+      const latest=targetId ? readContent(store.currentDocument(targetId)!.content).config : currentConfig.current!;
+      if (signature(latest)!==snapshot || targetId && store.remoteVersion(targetId)!==remote) throw new Error('上传期间设置已变化，请重新添加参考图');
+      patch({[field]:images});
+    } catch(e) { if (mounted.current && ticket===request.current) fail(e); }
+    finally {uploadInProgress.current=false;if(mounted.current)setUploading(false);}
+  }
   async function generate(onlyPage?: number, retryFailed = false) {
-    if (controller.current || pending.current || composing.current || corrupt)
+    if (controller.current || pending.current || composing.current || corrupt || uploadInProgress.current)
       return;
     const abort = new AbortController();
     controller.current = abort;
@@ -240,6 +279,7 @@ export default function StoryComicApp() {
           if (abort.signal.aborted || !mounted.current || ticket !== request.current) return;
           if (!caps.imageGenerate || !caps.referenceImages)
             throw new Error("当前 AI 服务需要支持图片生成及参考图，请在设置中检查");
+          if (userReferences(source.config).length + 1 > caps.maxReferences) throw new Error(`当前AI服务最多支持${caps.maxReferences}张参考图，请减少参考图样数量（需预留1张人物参考图）`);
           if (!target) {
             creating.current = true;
             pending.current = true;
@@ -298,7 +338,6 @@ export default function StoryComicApp() {
               image: async (prompt, references) => {
                 const refs = await Promise.all(
                   references
-                    .slice(0, caps.maxReferences)
                     .map((src) => referenceImage({ src }))
                 );
                 if (!valid()) throw new Error("作品已修改");
@@ -358,6 +397,47 @@ export default function StoryComicApp() {
       })()
     );
   }
+  async function optimize(index: number, instruction: string): Promise<boolean> {
+    if (controller.current || pending.current || composing.current || !doc || corrupt) return false;
+    const abort = new AbortController();
+    const targetId = doc.id;
+    const expected = store.currentDocument(targetId)!.content;
+    const remote = store.remoteVersion(targetId);
+    const source = readContent(expected);
+    controller.current = abort; setBusy(true); setOptimizing(true); setError('');
+    const task = beginTask(abort,{toolId:'app.story-comic',title:`优化第 ${index+1} 页 · ${doc.title}`,stage:'正在整理修改方案…'});
+    const valid = () => mounted.current && !abort.signal.aborted && controller.current === abort && active.current === targetId && store.remoteVersion(targetId) === remote && store.currentDocument(targetId)?.content === expected;
+    return trackAiExecution(abort,(async()=>{
+      try {
+        const caps = await ai.capabilities();
+        if (!caps.text || !caps.imageGenerate || !caps.referenceImages || caps.maxReferences < 1) throw new Error('当前AI服务需要支持文字、参考图片及图片生成');
+        const original = source.plan!.pages[index].image!;
+        const reference = await referenceImage({src:original});
+        const next = await refinePage(source,index,instruction,{
+          valid,
+          text: async prompt => {
+            const result = await ai.generate({toolId:'app.story-comic',vision:true,references:[reference],messages:[{role:'user',content:prompt}]},abort.signal);
+            if (result.saveError) throw new Error(result.saveError);
+            return result.text;
+          },
+          image: async prompt => {
+            updateTask(abort.signal,{stage:'正在修改本页图片…'});
+            const result = await ai.generate({toolId:'app.story-comic',image:true,references:[reference],messages:[{role:'user',content:prompt}]},abort.signal);
+            if (result.saveError) throw new Error(result.saveError);
+            if (!result.images?.[0]) throw new Error('AI未返回修改后的图片');
+            return result.images[0];
+          },
+          compose: composePage,
+        });
+        if (!valid()) throw new Error('作品已修改，未覆盖新内容');
+        store.stageDocument(targetId,{content:JSON.stringify(next)});
+        await store.flushDocument(targetId);
+        updateTask(abort.signal,{stage:'本页优化完成'});
+        return true;
+      } catch(e) { failTask(abort.signal,e); if (!abort.signal.aborted) fail(e); return false; }
+      finally { task.finish(); if (controller.current === abort) { controller.current=null; if (mounted.current) {setBusy(false);setOptimizing(false);} } }
+    })());
+  }
   async function copy(text: string) {
     try {
       if (native) await writeText(text);
@@ -383,15 +463,38 @@ export default function StoryComicApp() {
     const d = await store.ensureDocument(targetId);
     await exportZip(emptyContent(), d.title, JSON.stringify(d, null, 2));
   };
+  // These are navigation entries: accept a primary mouse press even when WebView
+  // loses the subsequent click, while retaining keyboard/touch click semantics.
+  const entryEvents = (action: () => void) => ({
+    onPointerDownCapture: (e: React.PointerEvent<HTMLButtonElement>) => {
+      delete e.currentTarget.dataset.down;
+      if (e.isPrimary !== false && e.pointerType === "mouse" && e.button === 0 &&
+          !e.altKey && !e.metaKey && !e.ctrlKey && !e.shiftKey) {
+        if (!composing.current) e.preventDefault();
+        e.currentTarget.dataset.down = "true";
+        action();
+      }
+    },
+    onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
+      const down = e.currentTarget.dataset.down;
+      delete e.currentTarget.dataset.down;
+      if (e.detail !== 0 && down) return;
+      action();
+    },
+  });
+  const openGallery = () => {
+    if (composing.current) { queued.current = openGallery; return; }
+    setGallery(true);
+  };
   const row = (item: store.DocumentInfo) => (
         <div
-          className={`story-row ${id === item.id ? "selected" : ""}`}
+          className={`story-row ${id === item.id && !gallery ? "selected" : ""}`}
           key={item.id}
         >
           <button
             className="story-row-name"
             title={item.title}
-            aria-current={id === item.id ? "page" : undefined}
+            aria-current={id === item.id && !gallery ? "page" : undefined}
             onPointerDownCapture={(e) => {
               delete e.currentTarget.dataset.down;
               if (
@@ -527,7 +630,7 @@ export default function StoryComicApp() {
         <aside className="story-nav">
           <header className="story-heading">
             <StoryComicIcon />
-            <strong>绘漫画</strong>
+            <strong>画漫画</strong>
             <Button
               type="text"
               className="navigation-toggle"
@@ -540,22 +643,26 @@ export default function StoryComicApp() {
           <div className="tool-sidebar-create-section">
             <div className="tool-sidebar-create-label">创建</div>
             <button
-              className="tool-sidebar-create"
+              className={`tool-sidebar-create ${id === null && !gallery ? "selected" : ""}`}
+              aria-current={id === null && !gallery ? "page" : undefined}
               disabled={opening && creating.current}
-              onClick={() => void navigate(null, true)}
+              {...entryEvents(() => void navigate(null, true))}
             >
               <PlusOutlined />
               故事漫画
             </button>
+            <button className={`tool-sidebar-create ${gallery ? 'selected' : ''}`} aria-current={gallery ? 'page' : undefined}
+              {...entryEvents(openGallery)}><StoryComicIcon />我的作品</button>
           </div>
           <div className="story-list">
-            {rows(true).length > 0 && <section><h3>常用</h3>{rows(true)}</section>}
+            {rows(true).length > 0 && <NavigationSection title="常用">{rows(true)}</NavigationSection>}
             <ProjectSection navigation={projects} items={store.documentList()} renderItem={row} activeId={id} onCreate={projectId=>void navigate(null, true, projectId)} />
-            <section><h3>最近打开</h3>{rows(false).length ? rows(false) : <p>暂无</p>}</section>
+            <NavigationSection title="最近打开">{rows(false).length ? rows(false) : <p>暂无</p>}</NavigationSection>
           </div>
         </aside>
       )}
-      <main
+      {gallery && <WorksGallery collapsed={collapsed} expand={() => setCollapsed(false)} open={next => void navigate(next)} />}
+      <main hidden={gallery}
         className={`story-work ${
           controlsCollapsed ? "controls-collapsed" : ""
         }`}
@@ -572,7 +679,7 @@ export default function StoryComicApp() {
                 onClick={() => setCollapsed(false)}
               />
             )}
-            <span className="story-title" title={doc?.title}>{doc?.title ?? "绘漫画"}</span>
+            <span className="story-title" title={doc?.title}>{doc?.title ?? "画漫画"}</span>
             <Button type="text" size="small" icon={<EditOutlined />}
               aria-label="重命名作品" title="重命名作品" disabled={!doc}
               onClick={() => doc && setRename({ id: doc.id, title: doc.title })} />
@@ -590,8 +697,8 @@ export default function StoryComicApp() {
           </nav>
           <div className="story-job-status">
             {(busy || content?.job) && (
-              <span role="status" title={busy ? content?.job?.stage || "正在准备…" : complete ? "生成完成" : "已暂停"}>
-                {busy ? content?.job?.stage || "正在准备…" : complete ? "生成完成" : "已暂停"}
+              <span role="status" title={busy ? (optimizing ? "正在优化本页…" : content?.job?.stage || "正在准备…") : complete ? "生成完成" : "已暂停"}>
+                {busy ? (optimizing ? "正在优化本页…" : content?.job?.stage || "正在准备…") : complete ? "生成完成" : "已暂停"}
                 {" · "}{displayPages.filter((p) => !!p.image && !p.error).length}/{displayPages.length || config.count || 8} 页
               </span>
             )}
@@ -628,7 +735,7 @@ export default function StoryComicApp() {
             正在打开…
           </div>
         )}
-        <div className="story-body">
+        <div className={`story-body ${refineIndex !== null && tab === '漫画' ? 'has-refiner' : ''}`}>
           <aside className="story-controls">
             <div className="story-controls-scroll">
               <section>
@@ -658,42 +765,9 @@ export default function StoryComicApp() {
                 </div>
               </section>
               <section>
-                <h2>
-                  <b>2</b>选择风格 <small>12种风格，轻松创作</small>
-                </h2>
-                <div className="story-styles">
-                  {styles.map((s) => (
-                    <button
-                      key={s.id}
-                      aria-pressed={resolveStyle(config).id === s.id}
-                      disabled={!!corrupt}
-                      onClick={() => patch({ style: s.id, tone: s.tone })}
-                    >
-                      <span
-                        className={`story-style-art style-${s.id}`}
-                        style={{
-                          background: s.paper,
-                          color: s.ink,
-                          borderColor: s.accent,
-                        }}
-                      >
-                        <span>{s.name}</span>
-                        <i />
-                        <i />
-                        <i />
-                      </span>
-                      <strong>{s.name}</strong>
-                      <small>{s.hint}</small>
-                    </button>
-                  ))}
-                </div>
+                <h2 className="story-style-heading"><b>2</b>选择风格 <small>右边选 →</small></h2>
               </section>
-              <section>
-                <h2>
-                  <b>3</b>生成设置 <small>可选</small>
-                </h2>
-                <div className="story-options">
-                  <label className="story-size-option">
+              <section><h2><b>3</b>尺寸篇幅</h2><div className="story-options"><label className="story-size-option">
                     尺寸
                     <Select
                       aria-label="尺寸"
@@ -704,18 +778,7 @@ export default function StoryComicApp() {
                         label: `${s.label}（${s.width}×${s.height}）`,
                       }))}
                     />
-                  </label>
-                  <label>
-                    基调
-                    <Select
-                      aria-label="基调"
-                      value={resolveStyle(config).tone}
-                      disabled={!!resolveStyle(config).preset}
-                      onChange={(tone) => patch({ tone })}
-                      options={tones}
-                    />
-                  </label>
-                  <label>
+                  </label><label>
                     篇幅
                     <Select
                       aria-label="篇幅"
@@ -731,8 +794,17 @@ export default function StoryComicApp() {
                           })),
                       ]}
                     />
-                  </label>
-                  <label>
+                  </label></div></section>
+              <section><h2><b>4</b>其他偏好 <small>可选</small></h2><div className="story-options"><label>
+                    基调
+                    <Select
+                      aria-label="基调"
+                      value={resolveStyle(config).tone}
+                      disabled={!!resolveStyle(config).preset}
+                      onChange={(tone) => patch({ tone })}
+                      options={tones}
+                    />
+                  </label><label>
                     语言
                     <Select
                       aria-label="语言"
@@ -743,19 +815,25 @@ export default function StoryComicApp() {
                         label: value,
                       }))}
                     />
-                  </label>
-                  <label>
+                  </label><label>
                     受众
                     <Select
                       aria-label="受众"
                       value={config.audience}
                       onChange={(audience) => patch({ audience })}
-                      options={["大众读者", "青少年", "职场人士"].map(
-                        (value) => ({ value, label: value })
+                      options={audiences.map(
+                        ({value}) => ({ value, label: value })
                       )}
                     />
-                  </label>
-                </div>
+                  </label></div></section>
+              <section>
+                <h2><b>5</b>参考图样 <small>可选</small></h2>
+                <ReferenceUploads label="场景图" images={config.sceneReferences ?? []} disabled={uploading || busy || opening || !!corrupt}
+                  add={files => addReferences('sceneReferences',files)} remove={index => patch({sceneReferences:(config.sceneReferences ?? []).filter((_,i)=>i!==index)})} />
+                <ReferenceUploads label="角色图" images={config.characterReferences ?? []} disabled={uploading || busy || opening || !!corrupt}
+                  add={files => addReferences('characterReferences',files)} remove={index => patch({characterReferences:(config.characterReferences ?? []).filter((_,i)=>i!==index)})} />
+                <small className="story-reference-hint">PNG / JPG，每张不超过 10MB</small>
+                {uploading && <p role="status">正在添加参考图…</p>}
               </section>
             </div>
             {!controlsCollapsed && (
@@ -764,7 +842,7 @@ export default function StoryComicApp() {
                   type="primary"
                   size="small"
                   block
-                  disabled={busy || opening || !!corrupt || !inputTopic.trim() ||
+                  disabled={uploading || busy || opening || !!corrupt || !inputTopic.trim() ||
                     (complete && !changed && !pages.some((p) => p.error))}
                   onClick={() => void generate()}
                 >生成</Button>
@@ -807,6 +885,7 @@ export default function StoryComicApp() {
                       <article
                         key={i}
                         data-page-state={pageState(p)}
+                        data-optimizing={refineIndex === i}
                         style={
                           {
                             "--story-page-ratio": `${
@@ -822,8 +901,8 @@ export default function StoryComicApp() {
                         }
                       >
                         {p.image ? (
-                          <button className="story-page-image" onClick={() => setPreview(i)}>
-                            <PageImage src={p.image} alt={`第${i + 1}页 ${p.title}`} />
+                          <button className="story-page-image" aria-label={`优化第${i+1}页`} onClick={() => setRefineIndex(i)}>
+                            <PageImage thumbnail src={p.image} alt={`第${i + 1}页 ${p.title}`} />
                           </button>
                         ) : (
                           <div className="story-page-image story-page-empty">
@@ -842,6 +921,8 @@ export default function StoryComicApp() {
                           <small className="story-page-state">
                             {pageLabel(p)}
                           </small>
+                          <button className="story-page-more story-page-preview" aria-label={`预览第${i+1}页`} title="放大预览"
+                            disabled={!p.image} onClick={() => setPreview(i)}><ZoomInOutlined /></button>
                           <Dropdown
                             trigger={["click"]}
                             menu={{
@@ -867,13 +948,8 @@ export default function StoryComicApp() {
                                 else if (key === "download")
                                   act(exportPage(content!, i));
                                 else if (content && doc) {
-                                  const next = structuredClone(content),
-                                    page = next.plan!.pages[i],
-                                    old = page.history.pop()!;
-                                  if (page.image) page.history.push(page.image);
-                                  page.image = old;
-                                  page.status = "ready";
-                                  delete page.error;
+                                  const next = structuredClone(content), page = next.plan!.pages[i];
+                                  restorePage(page);
                                   store.stageDocument(doc.id, {
                                     content: JSON.stringify(next),
                                   });
@@ -901,7 +977,7 @@ export default function StoryComicApp() {
               ) : tab === "漫画" ? <div className="story-empty">请在偏好中设置并生成漫画</div> : (
                 <div className="story-style-welcome">
                   <section className="story-style-gallery" aria-label="风格模板参考">
-                    <header><h3>风格模板参考</h3><span>点击选择风格 · 悬停预览</span></header>
+
                     <div className="story-style-covers">
                       {styles.map((s) => (
                         <div key={s.id} className="story-style-card" data-selected={resolveStyle(config).id === s.id}>
@@ -911,8 +987,8 @@ export default function StoryComicApp() {
                             title={`${s.name} · ${s.hint}`}
                             disabled={busy || opening || !!corrupt}
                             onClick={() => patch({ style: s.id, tone: s.tone })}>
-                            <div className="story-cover-art"><img src={`/story-comic/covers/${s.id}.jpg`} alt={`${s.name}封面：日常奇遇`} decoding="async" /></div>
-                            <span>{s.name}</span>
+                            <div className="story-cover-art"><img src={`/story-comic/covers/${s.id}.jpg?v=20261006`} alt={`${s.name}封面：${coverThemes[s.id as keyof typeof coverThemes]}`} decoding="async" /></div>
+                            <span className="story-style-caption"><strong>{s.name}</strong><small>{s.hint.replace(/ · /g, "，")}</small></span>
                           </button>
                           <button type="button" className="story-style-preview-button"
                             aria-label={`预览${s.name}模板`} title="放大预览"
@@ -928,6 +1004,7 @@ export default function StoryComicApp() {
                 <div className="story-copy">
                   <header>
                     <h2>发布文案</h2>
+                    {doc && <XhsPublisher key={doc.id} documentId={doc.id} copy={content.copy} pages={pages} />}
                     <Button
                       icon={<CopyOutlined />}
                       onClick={() => void copy(copyText(content.copy!))}
@@ -1032,6 +1109,8 @@ export default function StoryComicApp() {
               </div>
             )}
           </section>
+          {tab === '漫画' && refineIndex !== null && pages[refineIndex]?.image && <PageRefiner key={`${id}-${refineIndex}`} page={pages[refineIndex]} index={refineIndex} busy={busy||opening}
+            close={() => setRefineIndex(null)} submit={text => optimize(refineIndex,text)} />}
         </div>
       </main>
       <Modal
@@ -1082,7 +1161,7 @@ export default function StoryComicApp() {
         centered
       >
         <div className="story-preview story-style-preview">
-          {stylePreview && <img src={`/story-comic/covers/${stylePreview}.jpg`} decoding="async"
+          {stylePreview && <img src={`/story-comic/covers/${stylePreview}.jpg?v=20261006`} decoding="async"
             alt={`${styles.find((s) => s.id === stylePreview)?.name}封面放大预览`} />}
         </div>
       </Modal>

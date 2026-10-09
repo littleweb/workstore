@@ -1,3 +1,4 @@
+import { NavigationSection } from './NavigationSection';
 import { useEffect, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { App, Button, Dropdown, Input, type MenuProps } from 'antd';
 import { FolderOpenOutlined, FolderOutlined, MoreOutlined, PlusOutlined } from '@ant-design/icons';
@@ -54,8 +55,7 @@ export function ProjectSection<T extends {id:string}>({navigation,items,renderIt
   const [closed,setClosed]=useState<Set<string>>(new Set());
   const current=activeId ? navigation.projectOf(activeId) : null;
   useEffect(()=>{if(current)setClosed(previous=>{const next=new Set(previous);next.delete(current);return next;});},[current]);
-  return <section className="list-project-section" aria-label="项目分组">
-    <div className="list-project-label"><span>项目</span><button aria-label="创建项目" title="创建项目" disabled={!navigation.ready || !!navigation.error || navigation.busy} onClick={navigation.create}><PlusOutlined/></button></div>
+  return <NavigationSection className="list-project-section" title="项目" action={<button aria-label="创建项目" title="创建项目" disabled={!navigation.ready || !!navigation.error || navigation.busy} onClick={navigation.create}><PlusOutlined/></button>}>
     {navigation.error ? <div className="list-project-error" role="alert">项目加载或保存失败 <Button type="link" size="small" onClick={navigation.retry}>重试</Button><span>{navigation.error}</span></div> : !navigation.ready ? <p>正在加载…</p> : !navigation.projects.length ? <p>暂无</p> : null}
     {navigation.projects.map(([id,project])=>{
       const children=items.filter(item=>navigation.projectOf(item.id)===id), expanded=!closed.has(id);
@@ -68,5 +68,5 @@ export function ProjectSection<T extends {id:string}>({navigation,items,renderIt
         {expanded && <div className="list-project-children">{children.length?children.map(renderItem):<p>暂无</p>}</div>}
       </div>;
     })}
-  </section>;
+  </NavigationSection>;
 }

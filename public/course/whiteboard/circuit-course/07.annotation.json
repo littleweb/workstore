@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-07",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "如果直接把电源两端用低阻导体连接，可能发生短路。短路可能让电流过大，导致发热和损坏。教学器材也要按说明使用，不能随意尝试短接。遇到异常，先停止使用，再按说明处理。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "电池两端被一根导线直接连接的示意",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：如果直接把电源两端用低阻导体连接，可能发生短路。",
+      "subtitle": "如果直接把电源两端用低阻导体连接，可能发生短路。",
+      "type": "concept",
+      "region": {
+        "x": 320,
+        "y": 92,
+        "width": 218,
+        "height": 287
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4378,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          429,
+          102
+        ],
+        "end": [
+          429,
+          369
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "发热电池附近柔和红色波纹，非夸张爆炸",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：短路可能让电流过大，导致发热和损坏。",
+      "subtitle": "短路可能让电流过大，导致发热和损坏。",
+      "type": "concept",
+      "region": {
+        "x": 1060,
+        "y": 92,
+        "width": 360,
+        "height": 286
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4878,
+        "durationMs": 3368,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1240,
+          102
+        ],
+        "end": [
+          1240,
+          368
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "合上的教具盒与无字安全说明书",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：教学器材也要按说明使用，不能随意尝试短接。",
+      "subtitle": "教学器材也要按说明使用，不能随意尝试短接。",
+      "type": "concept",
+      "region": {
+        "x": 146,
+        "y": 554,
+        "width": 587,
+        "height": 305
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8446,
+        "durationMs": 3963,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          439.5,
+          564
+        ],
+        "end": [
+          439.5,
+          849
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "手断开开关并移开教具",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：遇到异常，先停止使用，再按说明处理。",
+      "subtitle": "遇到异常，先停止使用，再按说明处理。",
+      "type": "concept",
+      "region": {
+        "x": 962,
+        "y": 504,
+        "width": 613,
+        "height": 323
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12609,
+        "durationMs": 16691,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1268.5,
+          514
+        ],
+        "end": [
+          1268.5,
+          817
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

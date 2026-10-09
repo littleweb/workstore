@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-01",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "想理解一个知识点，先选一个可以说清楚的小问题。把大主题拆成小问题，今天只处理其中一个。写下你要让别人学会的动作，比如比较或解释。范围明确之后，学习时才知道自己要寻找什么。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "一个人从几张空白图形卡片中挑一张",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：想理解一个知识点，先选一个可以说清楚的小问题。",
+      "subtitle": "想理解一个知识点，先选一个可以说清楚的小问题。",
+      "type": "concept",
+      "region": {
+        "x": 218,
+        "y": 77,
+        "width": 425,
+        "height": 324
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4144,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          430.5,
+          87
+        ],
+        "end": [
+          430.5,
+          391
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "一大块拼图拆成四块，其中一块橙色",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：把大主题拆成小问题，今天只处理其中一个。",
+      "subtitle": "把大主题拆成小问题，今天只处理其中一个。",
+      "type": "concept",
+      "region": {
+        "x": 976,
+        "y": 85,
+        "width": 544,
+        "height": 268
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4644,
+        "durationMs": 3733,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1248,
+          95
+        ],
+        "end": [
+          1248,
+          343
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "手指向两件物品进行比较，不含文字",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：写下你要让别人学会的动作，比如比较或解释。",
+      "subtitle": "写下你要让别人学会的动作，比如比较或解释。",
+      "type": "concept",
+      "region": {
+        "x": 230,
+        "y": 576,
+        "width": 428,
+        "height": 280
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 8577,
+        "durationMs": 3931,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          444,
+          586
+        ],
+        "end": [
+          444,
+          846
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "手电筒照亮一小块拼图",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：范围明确之后，学习时才知道自己要寻找什么。",
+      "subtitle": "范围明确之后，学习时才知道自己要寻找什么。",
+      "type": "concept",
+      "region": {
+        "x": 985,
+        "y": 569,
+        "width": 484,
+        "height": 223
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 12708,
+        "durationMs": 16592,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1227,
+          579
+        ],
+        "end": [
+          1227,
+          782
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}

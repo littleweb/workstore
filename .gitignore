@@ -28,3 +28,17 @@ dist/
 /.html-anything-build/
 /src-tauri/html-runtime/
 /vendor/html-anything/next/.next/
+
+.course-animation-build/
+src-tauri/course-runtime/
+
+.course-whiteboard-build/
+src-tauri/whiteboard-runtime/
+vendor/srt-whiteboard-animation/.venv/
+
+.course-tts-build/
+
+# Native validation may contain private workspace content
+/docs/course-animation-proof/
+/docs/course-whiteboard-proof/
+/.release-build/

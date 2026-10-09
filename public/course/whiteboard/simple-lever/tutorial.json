@@ -1,0 +1,459 @@
+{
+  "title": "看懂支点与杠杆",
+  "summary": "认识支点与杠杆；用跷跷板做判断",
+  "duration": 60,
+  "scenes": [
+    {
+      "title": "认识支点与杠杆",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "撬动一个重物时，一根结实的杆可以帮助我们。",
+          "subject": "杆子撬动小石块的手"
+        },
+        {
+          "text": "杆子绕着支撑的位置转动，这个位置叫作支点。",
+          "subject": "木杆架在三角形支撑上"
+        },
+        {
+          "text": "支点两边的距离，会影响需要多大的作用力。",
+          "subject": "一边长一边短的杆与两端不同大小的力箭头，无字"
+        },
+        {
+          "text": "先找支点，再看两边的距离，别只看杆有多长。",
+          "subject": "放大镜观察木杆下的支撑位置"
+        }
+      ],
+      "narration": "撬动一个重物时，一根结实的杆可以帮助我们。杆子绕着支撑的位置转动，这个位置叫作支点。支点两边的距离，会影响需要多大的作用力。先找支点，再看两边的距离，别只看杆有多长。",
+      "image": "/course/whiteboard/simple-lever/01.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"撬动一个重物时，一根结实的杆可以帮助我们。\",\"图形\":\"杆子撬动小石块的手\"},{\"讲解\":\"杆子绕着支撑的位置转动，这个位置叫作支点。\",\"图形\":\"木杆架在三角形支撑上\"},{\"讲解\":\"支点两边的距离，会影响需要多大的作用力。\",\"图形\":\"一边长一边短的杆与两端不同大小的力箭头，无字\"},{\"讲解\":\"先找支点，再看两边的距离，别只看杆有多长。\",\"图形\":\"放大镜观察木杆下的支撑位置\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "撬动一个重物时",
+          "startMs": 0,
+          "endMs": 1605,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "一根结实的杆可以帮助我们",
+          "startMs": 1605,
+          "endMs": 4018,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "杆子绕着支撑的位置转动",
+          "startMs": 4018,
+          "endMs": 6246,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "这个位置叫作支点",
+          "startMs": 6246,
+          "endMs": 7917,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "支点两边的距离",
+          "startMs": 7917,
+          "endMs": 9403,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "会影响需要多大的作用力",
+          "startMs": 9403,
+          "endMs": 11630,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "先找支点",
+          "startMs": 11630,
+          "endMs": 12558,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "再看两边的距离",
+          "startMs": 12558,
+          "endMs": 14044,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "别只看杆有多长",
+          "startMs": 14044,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-01",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "撬动一个重物时，一根结实的杆可以帮助我们。杆子绕着支撑的位置转动，这个位置叫作支点。支点两边的距离，会影响需要多大的作用力。先找支点，再看两边的距离，别只看杆有多长。",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "杆子撬动小石块的手",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：撬动一个重物时，一根结实的杆可以帮助我们。",
+            "subtitle": "撬动一个重物时，一根结实的杆可以帮助我们。",
+            "type": "concept",
+            "region": {
+              "x": 97,
+              "y": 81,
+              "width": 661,
+              "height": 286
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3518,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                427.5,
+                91
+              ],
+              "end": [
+                427.5,
+                357
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "木杆架在三角形支撑上",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：杆子绕着支撑的位置转动，这个位置叫作支点。",
+            "subtitle": "杆子绕着支撑的位置转动，这个位置叫作支点。",
+            "type": "concept",
+            "region": {
+              "x": 959,
+              "y": 122,
+              "width": 591,
+              "height": 249
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4018,
+              "durationMs": 3699,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1254.5,
+                132
+              ],
+              "end": [
+                1254.5,
+                361
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "一边长一边短的杆与两端不同大小的力箭头，无字",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：支点两边的距离，会影响需要多大的作用力。",
+            "subtitle": "支点两边的距离，会影响需要多大的作用力。",
+            "type": "concept",
+            "region": {
+              "x": 124,
+              "y": 516,
+              "width": 597,
+              "height": 323
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 7917,
+              "durationMs": 3513,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                422.5,
+                526
+              ],
+              "end": [
+                422.5,
+                829
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "放大镜观察木杆下的支撑位置",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：先找支点，再看两边的距离，别只看杆有多长。",
+            "subtitle": "先找支点，再看两边的距离，别只看杆有多长。",
+            "type": "concept",
+            "region": {
+              "x": 1092,
+              "y": 527,
+              "width": 432,
+              "height": 327
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 11630,
+              "durationMs": 17670,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1308,
+                537
+              ],
+              "end": [
+                1308,
+                844
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/simple-lever/01.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    },
+    {
+      "title": "用跷跷板做判断",
+      "seconds": 30,
+      "events": [
+        {
+          "text": "跷跷板可以帮我们理解：较重的人更靠近支点。",
+          "subject": "一个大人和小孩坐在跷跷板两端"
+        },
+        {
+          "text": "较轻的人坐得更远，两边可能达到平衡。",
+          "subject": "大人靠近中心，小孩坐远的平衡跷跷板"
+        },
+        {
+          "text": "如果两人同时改变位置，就难判断哪项改变有效。",
+          "subject": "两个小人同时移动的跷跷板，灰色虚线轨迹"
+        },
+        {
+          "text": "练习：想让小孩更容易压下另一端，他应往哪边坐？",
+          "subject": "小孩坐在跷跷板上，远端空座位和轻微方向箭头"
+        }
+      ],
+      "narration": "跷跷板可以帮我们理解：较重的人更靠近支点。较轻的人坐得更远，两边可能达到平衡。如果两人同时改变位置，就难判断哪项改变有效。练习：想让小孩更容易压下另一端，他应往哪边坐？",
+      "image": "/course/whiteboard/simple-lever/02.png",
+      "imagePrompt": "16:9暖米黄纸张底#F5EBD7，极简手绘深灰素描线条，Notion克制涂鸦、大量留白。只允许少量红橙蓝点缀，所有植物、树叶、土地、容器也必须用灰色，不得用绿色或黄色，禁止其他强调色、复杂纹理、写实、摄影、3D、绘画质感。绝对不含任何文字、字母、数字、问号、电池正负号、字符标签或水印。\n这是一幅将按字幕逐笔绘制的教程源图。四个主体严格分别在宽松2×2网格的左上、右上、左下、右下象限内，象限间留宽阔干净纸面，不画网格线/边框/连接跨区箭头，各主体完整、不重叠、不越过画面中线。画面四周保留8%安全边距，底部留出字幕区域。四个象限分别表达以下教学事件（文字仅用于理解，不得写进图中）：[{\"讲解\":\"跷跷板可以帮我们理解：较重的人更靠近支点。\",\"图形\":\"一个大人和小孩坐在跷跷板两端\"},{\"讲解\":\"较轻的人坐得更远，两边可能达到平衡。\",\"图形\":\"大人靠近中心，小孩坐远的平衡跷跷板\"},{\"讲解\":\"如果两人同时改变位置，就难判断哪项改变有效。\",\"图形\":\"两个小人同时移动的跷跷板，灰色虚线轨迹\"},{\"讲解\":\"练习：想让小孩更容易压下另一端，他应往哪边坐？\",\"图形\":\"小孩坐在跷跷板上，远端空座位和轻微方向箭头\"}]。四个象限的所有主体均完成，画面无绘图手，画风一致。",
+      "captions": [
+        {
+          "text": "跷跷板可以帮我们理解：较重的人更靠近支点",
+          "startMs": 0,
+          "endMs": 4391,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "较轻的人坐得更远",
+          "startMs": 4391,
+          "endMs": 6222,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "两边可能达到平衡",
+          "startMs": 6222,
+          "endMs": 8052,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "如果两人同时改变位置",
+          "startMs": 8052,
+          "endMs": 10290,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "就难判断哪项改变有效",
+          "startMs": 10290,
+          "endMs": 12527,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "练习：想让小孩更容易压下另一端",
+          "startMs": 12527,
+          "endMs": 15781,
+          "timestampMs": null,
+          "confidence": null
+        },
+        {
+          "text": "他应往哪边坐",
+          "startMs": 15781,
+          "endMs": 30000,
+          "timestampMs": null,
+          "confidence": null
+        }
+      ],
+      "annotation": {
+        "sceneId": "scene-02",
+        "canvas": {
+          "width": 1672,
+          "height": 941
+        },
+        "storyBasis": "跷跷板可以帮我们理解：较重的人更靠近支点。较轻的人坐得更远，两边可能达到平衡。如果两人同时改变位置，就难判断哪项改变有效。练习：想让小孩更容易压下另一端，他应往哪边坐？",
+        "sceneDurationMs": 30000,
+        "elements": [
+          {
+            "id": "event-1",
+            "label": "一个大人和小孩坐在跷跷板两端",
+            "sequence": 1,
+            "narrativeRole": "字幕事件1：跷跷板可以帮我们理解：较重的人更靠近支点。",
+            "subtitle": "跷跷板可以帮我们理解：较重的人更靠近支点。",
+            "type": "concept",
+            "region": {
+              "x": 133,
+              "y": 121,
+              "width": 585,
+              "height": 264
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 300,
+              "durationMs": 3891,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                425.5,
+                131
+              ],
+              "end": [
+                425.5,
+                375
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-2",
+            "label": "大人靠近中心，小孩坐远的平衡跷跷板",
+            "sequence": 2,
+            "narrativeRole": "字幕事件2：较轻的人坐得更远，两边可能达到平衡。",
+            "subtitle": "较轻的人坐得更远，两边可能达到平衡。",
+            "type": "concept",
+            "region": {
+              "x": 960,
+              "y": 134,
+              "width": 559,
+              "height": 251
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 4391,
+              "durationMs": 3461,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1239.5,
+                144
+              ],
+              "end": [
+                1239.5,
+                375
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-3",
+            "label": "两个小人同时移动的跷跷板，灰色虚线轨迹",
+            "sequence": 3,
+            "narrativeRole": "字幕事件3：如果两人同时改变位置，就难判断哪项改变有效。",
+            "subtitle": "如果两人同时改变位置，就难判断哪项改变有效。",
+            "type": "concept",
+            "region": {
+              "x": 154,
+              "y": 570,
+              "width": 587,
+              "height": 257
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 8052,
+              "durationMs": 4275,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                447.5,
+                580
+              ],
+              "end": [
+                447.5,
+                817
+              ],
+              "easing": "easeInOut"
+            }
+          },
+          {
+            "id": "event-4",
+            "label": "小孩坐在跷跷板上，远端空座位和轻微方向箭头",
+            "sequence": 4,
+            "narrativeRole": "字幕事件4：练习：想让小孩更容易压下另一端，他应往哪边坐？",
+            "subtitle": "练习：想让小孩更容易压下另一端，他应往哪边坐？",
+            "type": "concept",
+            "region": {
+              "x": 955,
+              "y": 556,
+              "width": 597,
+              "height": 271
+            },
+            "reveal": {
+              "direction": "top_to_bottom",
+              "startMs": 12527,
+              "durationMs": 16773,
+              "maskPaddingPx": 0,
+              "protectedRegions": []
+            },
+            "handPath": {
+              "start": [
+                1253.5,
+                566
+              ],
+              "end": [
+                1253.5,
+                817
+              ],
+              "easing": "easeInOut"
+            }
+          }
+        ]
+      },
+      "inspection": "已实际查看源图，四个独立象限与字幕事件对应，无源图文字、交叠或跨区主体。",
+      "audio": "/course/whiteboard/simple-lever/02.wav",
+      "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+    }
+  ],
+  "srt": "1\n00:00:00,000 --> 00:00:01,605\n撬动一个重物时\n\n2\n00:00:01,605 --> 00:00:04,018\n一根结实的杆可以帮助我们\n\n3\n00:00:04,018 --> 00:00:06,246\n杆子绕着支撑的位置转动\n\n4\n00:00:06,246 --> 00:00:07,917\n这个位置叫作支点\n\n5\n00:00:07,917 --> 00:00:09,403\n支点两边的距离\n\n6\n00:00:09,403 --> 00:00:11,630\n会影响需要多大的作用力\n\n7\n00:00:11,630 --> 00:00:12,558\n先找支点\n\n8\n00:00:12,558 --> 00:00:14,044\n再看两边的距离\n\n9\n00:00:14,044 --> 00:00:30,000\n别只看杆有多长\n\n10\n00:00:30,000 --> 00:00:34,391\n跷跷板可以帮我们理解：较重的人更靠近支点\n\n11\n00:00:34,391 --> 00:00:36,222\n较轻的人坐得更远\n\n12\n00:00:36,222 --> 00:00:38,052\n两边可能达到平衡\n\n13\n00:00:38,052 --> 00:00:40,290\n如果两人同时改变位置\n\n14\n00:00:40,290 --> 00:00:42,527\n就难判断哪项改变有效\n\n15\n00:00:42,527 --> 00:00:45,781\n练习：想让小孩更容易压下另一端\n\n16\n00:00:45,781 --> 00:01:00,000\n他应往哪边坐\n",
+  "video": "/course/whiteboard/simple-lever/tutorial.mp4"
+}

@@ -5,15 +5,20 @@ mod ai;
 mod documents;
 mod html;
 mod covers;
+mod courses;
+mod course_animation;
+mod ai_speech;
 mod design;
 mod story_comics;
 mod html_runtime;
+mod xiaohongshu;
 mod comics;
 use comics::{Comic, ComicList, LoadedComic};
 mod preferences;
 mod list_projects;
 mod storage;
 mod sync;
+mod sync_bytes;
 mod sync_history;
 mod whiteboard;
 use documents::{Document, DocumentList, LoadedDocument};
@@ -23,6 +28,10 @@ use tauri::{Emitter, Manager};
 use whiteboard::{Board, BoardList, LoadedBoard};
 struct Workspace(Mutex<Option<Store>>);
 struct SyncWorker(Mutex<()>);
+// File I/O and mutex waits must never run on the desktop event thread.
+async fn file_operation<T: Send + 'static>(operation: impl FnOnce() -> Result<T, String> + Send + 'static) -> Result<T, String> {
+    tauri::async_runtime::spawn_blocking(operation).await.map_err(|error| error.to_string())?
+}
 #[tauri::command]
 async fn list_projects(tool_id: String, app: tauri::AppHandle) -> Result<list_projects::ProjectData, String> {
     tauri::async_runtime::spawn_blocking(move || {
@@ -40,27 +49,27 @@ async fn update_list_project(tool_id: String, operation: list_projects::Operatio
     }).await.map_err(|e| e.to_string())?
 }
 #[tauri::command]
-fn load_workspace(
-    app: tauri::AppHandle,
-    state: tauri::State<Workspace>,
-) -> Result<Snapshot, String> {
-    let mut slot = state.0.lock().map_err(|e| e.to_string())?;
-    if slot.is_none() {
-        let config = app.path().app_config_dir().map_err(|e| e.to_string())?;
-        let default = app
-            .path()
-            .app_local_data_dir()
-            .map_err(|e| e.to_string())?
-            .join("workspace");
-        let legacy = app
-            .path()
-            .document_dir()
-            .or_else(|_| app.path().home_dir())
-            .map_err(|e| e.to_string())?
-            .join("WorkStore");
-        *slot = Some(Store::open_default(config, default, legacy)?);
-    }
-    slot.as_ref().ok_or("工作空间尚未打开")?.snapshot()
+async fn load_workspace(app: tauri::AppHandle) -> Result<Snapshot, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let mut slot = state.0.lock().map_err(|e| e.to_string())?;
+        if slot.is_none() {
+            let config = app.path().app_config_dir().map_err(|e| e.to_string())?;
+            let default = app
+                .path()
+                .app_local_data_dir()
+                .map_err(|e| e.to_string())?
+                .join("workspace");
+            let legacy = app
+                .path()
+                .document_dir()
+                .or_else(|_| app.path().home_dir())
+                .map_err(|e| e.to_string())?
+                .join("WorkStore");
+            *slot = Some(Store::open_default(config, default, legacy)?);
+        }
+        slot.as_ref().ok_or("工作空间尚未打开")?.snapshot()
+    }).await
 }
 #[tauri::command]
 async fn save_workspace(data: Data, app: tauri::AppHandle) -> Result<bool, String> {
@@ -74,68 +83,74 @@ async fn save_workspace(data: Data, app: tauri::AppHandle) -> Result<bool, Strin
     }).await.map_err(|e| e.to_string())?
 }
 #[tauri::command]
-fn relocate_workspace(target: PathBuf, state: tauri::State<Workspace>) -> Result<Snapshot, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_mut()
-        .ok_or("工作空间尚未打开")?
-        .relocate(target)
+async fn relocate_workspace(target: PathBuf, app: tauri::AppHandle) -> Result<Snapshot, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let mut slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_mut()
+            .ok_or("工作空间尚未打开")?
+            .relocate(target)
+    }).await
 }
 #[tauri::command]
-fn list_comics(state: tauri::State<Workspace>) -> Result<ComicList, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .list_comics()
+async fn list_comics(app: tauri::AppHandle) -> Result<ComicList, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .list_comics()
+    }).await
 }
 #[tauri::command]
-fn create_comic(content: serde_json::Value, state: tauri::State<Workspace>) -> Result<LoadedComic, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .create_comic(content)
+async fn create_comic(content: serde_json::Value, app: tauri::AppHandle) -> Result<LoadedComic, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .create_comic(content)
+    }).await
 }
 #[tauri::command]
-fn load_comic(id: String, state: tauri::State<Workspace>) -> Result<LoadedComic, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .load_comic(&id)
+async fn load_comic(id: String, app: tauri::AppHandle) -> Result<LoadedComic, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .load_comic(&id)
+    }).await
 }
 #[tauri::command]
-fn save_comic(
+async fn save_comic(
     comic: Comic,
     expected_token: String,
-    state: tauri::State<Workspace>,
+    app: tauri::AppHandle,
 ) -> Result<LoadedComic, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .save_comic(comic, expected_token)
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .save_comic(comic, expected_token)
+    }).await
 }
 #[tauri::command]
-fn list_whiteboards(state: tauri::State<Workspace>) -> Result<BoardList, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .list_boards()
+async fn list_whiteboards(app: tauri::AppHandle) -> Result<BoardList, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .list_boards()
+    }).await
 }
 #[tauri::command]
 async fn list_documents(app: tauri::AppHandle) -> Result<DocumentList, String> {
@@ -149,161 +164,177 @@ async fn list_documents(app: tauri::AppHandle) -> Result<DocumentList, String> {
     }).await.map_err(|e| e.to_string())?
 }
 #[tauri::command]
-fn create_whiteboard(state: tauri::State<Workspace>) -> Result<LoadedBoard, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .create_board()
+async fn create_whiteboard(app: tauri::AppHandle) -> Result<LoadedBoard, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .create_board()
+    }).await
 }
 #[tauri::command]
-fn load_whiteboard(id: String, state: tauri::State<Workspace>) -> Result<LoadedBoard, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .load_board(&id)
+async fn load_whiteboard(id: String, app: tauri::AppHandle) -> Result<LoadedBoard, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .load_board(&id)
+    }).await
 }
 #[tauri::command]
-fn save_html_export(path: String, content: String) -> Result<(), String> {
-    if content.len() > 64 * 1024 * 1024 { return Err("导出超过 64 MB".into()); }
-    storage::atomic_write(std::path::Path::new(&path), content.as_bytes())
+async fn save_html_export(path: String, content: String) -> Result<(), String> {
+    file_operation(move || {
+        if content.len() > 64 * 1024 * 1024 { return Err("导出超过 64 MB".into()); }
+        storage::atomic_write(std::path::Path::new(&path), content.as_bytes())
+    }).await
 }
 #[tauri::command]
-fn list_html_documents(state: tauri::State<Workspace>) -> Result<html::DocumentList, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .list_html_documents()
+async fn list_html_documents(app: tauri::AppHandle) -> Result<html::DocumentList, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .list_html_documents()
+    }).await
 }
 #[tauri::command]
-fn create_html_document(state: tauri::State<Workspace>) -> Result<html::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .create_html_document()
+async fn create_html_document(app: tauri::AppHandle) -> Result<html::LoadedDocument, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .create_html_document()
+    }).await
 }
 #[tauri::command]
-fn load_html_document(id: String, state: tauri::State<Workspace>) -> Result<html::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .load_html_document(&id)
+async fn load_html_document(id: String, app: tauri::AppHandle) -> Result<html::LoadedDocument, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .load_html_document(&id)
+    }).await
 }
 #[tauri::command]
-fn save_html_document(
+async fn save_html_document(
     document: html::Document,
     expected_token: String,
-    state: tauri::State<Workspace>,
+    app: tauri::AppHandle,
 ) -> Result<html::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .save_html_document(document, expected_token)
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .save_html_document(document, expected_token)
+    }).await
 }
 #[tauri::command]
-fn list_cover_documents(state: tauri::State<Workspace>) -> Result<covers::DocumentList, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .list_cover_documents()
+async fn list_cover_documents(app: tauri::AppHandle) -> Result<covers::DocumentList, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .list_cover_documents()
+    }).await
 }
 #[tauri::command]
-fn create_cover_document(state: tauri::State<Workspace>) -> Result<covers::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .create_cover_document()
+async fn create_cover_document(app: tauri::AppHandle) -> Result<covers::LoadedDocument, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .create_cover_document()
+    }).await
 }
 #[tauri::command]
-fn load_cover_document(id: String, state: tauri::State<Workspace>) -> Result<covers::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .load_cover_document(&id)
+async fn load_cover_document(id: String, app: tauri::AppHandle) -> Result<covers::LoadedDocument, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .load_cover_document(&id)
+    }).await
 }
 #[tauri::command]
-fn save_cover_document(
+async fn save_cover_document(
     document: covers::Document,
     expected_token: String,
-    state: tauri::State<Workspace>,
+    app: tauri::AppHandle,
 ) -> Result<covers::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .save_cover_document(document, expected_token)
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .save_cover_document(document, expected_token)
+    }).await
 }
 #[tauri::command]
-fn list_design_documents(state: tauri::State<Workspace>) -> Result<design::DocumentList, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .list_design_documents()
+async fn list_design_documents(app: tauri::AppHandle) -> Result<design::DocumentList, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .list_design_documents()
+    }).await
 }
 #[tauri::command]
-fn create_design_document(state: tauri::State<Workspace>) -> Result<design::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .create_design_document()
+async fn create_design_document(app: tauri::AppHandle) -> Result<design::LoadedDocument, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .create_design_document()
+    }).await
 }
 #[tauri::command]
-fn load_design_document(id: String, state: tauri::State<Workspace>) -> Result<design::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .load_design_document(&id)
+async fn load_design_document(id: String, app: tauri::AppHandle) -> Result<design::LoadedDocument, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .load_design_document(&id)
+    }).await
 }
 #[tauri::command]
-fn save_design_document(
+async fn save_design_document(
     document: design::Document,
     expected_token: String,
-    state: tauri::State<Workspace>,
+    app: tauri::AppHandle,
 ) -> Result<design::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .save_design_document(document, expected_token)
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .save_design_document(document, expected_token)
+    }).await
 }
 #[tauri::command]
 async fn list_story_comic_documents(app: tauri::AppHandle) -> Result<story_comics::DocumentList, String> {
@@ -317,14 +348,15 @@ async fn list_story_comic_documents(app: tauri::AppHandle) -> Result<story_comic
     }).await.map_err(|e| e.to_string())?
 }
 #[tauri::command]
-fn create_story_comic_document(state: tauri::State<Workspace>) -> Result<story_comics::LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .create_story_comic_document()
+async fn create_story_comic_document(app: tauri::AppHandle) -> Result<story_comics::LoadedDocument, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .create_story_comic_document()
+    }).await
 }
 #[tauri::command]
 async fn load_story_comic_document(id: String, app: tauri::AppHandle) -> Result<story_comics::LoadedDocument, String> {
@@ -361,14 +393,71 @@ async fn save_story_comic_document(
     }).await.map_err(|e| e.to_string())?
 }
 #[tauri::command]
-fn create_document(state: tauri::State<Workspace>) -> Result<LoadedDocument, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .create_document()
+async fn list_course_documents(app: tauri::AppHandle) -> Result<courses::DocumentList, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .list_course_documents()
+    }).await.map_err(|e| e.to_string())?
+}
+#[tauri::command]
+async fn create_course_document(app: tauri::AppHandle) -> Result<courses::LoadedDocument, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .create_course_document()
+    }).await
+}
+#[tauri::command]
+async fn load_course_document(id: String, app: tauri::AppHandle) -> Result<courses::LoadedDocument, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .load_course_document(&id)
+    }).await.map_err(|e| e.to_string())?
+}
+#[tauri::command]
+async fn delete_course_document(app: tauri::AppHandle, id: String, expected_token: String) -> Result<(), String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot.as_ref().ok_or("工作空间尚未打开")?.delete_course_document(&id, &expected_token)
+    }).await.map_err(|e| e.to_string())?
+}
+#[tauri::command]
+async fn save_course_document(
+    document: courses::Document,
+    expected_token: String,
+    app: tauri::AppHandle,
+) -> Result<courses::LoadedDocument, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .save_course_document(document, expected_token)
+    }).await.map_err(|e| e.to_string())?
+}
+#[tauri::command]
+async fn create_document(app: tauri::AppHandle) -> Result<LoadedDocument, String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .create_document()
+    }).await
 }
 #[tauri::command]
 async fn load_document(id: String, app: tauri::AppHandle) -> Result<LoadedDocument, String> {
@@ -395,23 +484,28 @@ async fn save_document(
     }).await.map_err(|e| e.to_string())?
 }
 #[tauri::command]
-fn delete_document(id: String, expected_token: String, state: tauri::State<Workspace>) -> Result<(), String> {
-    state.0.lock().map_err(|e| e.to_string())?.as_ref()
-        .ok_or("工作空间尚未打开")?.delete_document(&id, &expected_token)
+async fn delete_document(id: String, expected_token: String, app: tauri::AppHandle) -> Result<(), String> {
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot.as_ref()
+            .ok_or("工作空间尚未打开")?.delete_document(&id, &expected_token)
+    }).await
 }
 #[tauri::command]
-fn save_whiteboard(
+async fn save_whiteboard(
     document: Board,
     expected_token: String,
-    state: tauri::State<Workspace>,
+    app: tauri::AppHandle,
 ) -> Result<LoadedBoard, String> {
-    state
-        .0
-        .lock()
-        .map_err(|e| e.to_string())?
-        .as_ref()
-        .ok_or("工作空间尚未打开")?
-        .save_board(document, expected_token)
+    file_operation(move || {
+        let state = app.state::<Workspace>();
+        let slot = state.0.lock().map_err(|e| e.to_string())?;
+        slot
+            .as_ref()
+            .ok_or("工作空间尚未打开")?
+            .save_board(document, expected_token)
+    }).await
 }
 #[tauri::command]
 fn quit_ready(app: tauri::AppHandle) {
@@ -520,7 +614,10 @@ fn main() {
         return;
     }
     tauri::Builder::default()
+        .manage(course_animation::Jobs::default())
+        .register_asynchronous_uri_scheme_protocol("course-media",|ctx,request,responder|{let app=ctx.app_handle().clone();std::thread::spawn(move||responder.respond(course_animation::serve(&app,request)));})
         .manage(html_runtime::HtmlRuntime::default())
+        .manage(xiaohongshu::Publisher::default())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_single_instance::init(|app, _, _| {
@@ -566,10 +663,25 @@ fn main() {
             quit_ready,
             list_whiteboards,
             list_documents,
+            xiaohongshu::xhs_connect,
+            xiaohongshu::xhs_publish,
             html_runtime::html_original_start,
             html_runtime::html_original_cancel,
             html_runtime::html_original_backup,
             html_runtime::html_original_export,
+            list_course_documents,
+            create_course_document,
+            load_course_document,
+            save_course_document,
+            delete_course_document,
+            courses::save_course_export,
+            course_animation::prepare_course_animation,
+            course_animation::render_course_animation,
+            course_animation::inspect_course_whiteboard_image,
+            course_animation::prepare_course_whiteboard,
+            course_animation::render_course_whiteboard,
+            course_animation::cancel_course_animation,
+            course_animation::export_course_media,
             list_story_comic_documents,
             create_story_comic_document,
             load_story_comic_document,
@@ -625,7 +737,7 @@ fn main() {
         .build(application_context())
         .expect("WorkStore failed to start; your existing files have not been overwritten")
         .run(|app, event| {
-            if matches!(event, tauri::RunEvent::Exit) { html_runtime::shutdown(app); }
+            if matches!(event, tauri::RunEvent::Exit) { html_runtime::shutdown(app); xiaohongshu::shutdown(app); }
             if let tauri::RunEvent::ExitRequested {
                 api, code: None, ..
             } = event
@@ -654,5 +766,30 @@ mod window_config_tests {
             .expect("main window must be configured");
         assert!(main.accept_first_mouse, "the first click must reach the webview");
         assert!(!main.drag_drop_enabled, "web tools own their drag interactions");
+    }
+}
+
+#[cfg(test)]
+mod file_operation_tests {
+    #[test]
+    fn waiting_for_a_file_lock_does_not_block_async_dispatch() {
+        use std::sync::{Arc, Mutex, mpsc};
+        let lock = Arc::new(Mutex::new(()));
+        let held = lock.lock().unwrap();
+        let worker_lock = lock.clone();
+        let (started, received) = mpsc::channel();
+        let blocked = tauri::async_runtime::spawn(async move {
+            super::file_operation(move || {
+                started.send(()).unwrap();
+                let _guard = worker_lock.lock().unwrap();
+                Ok(())
+            }).await
+        });
+        received.recv_timeout(std::time::Duration::from_secs(5)).unwrap();
+        let (sent, responsive) = mpsc::channel();
+        tauri::async_runtime::spawn(async move { sent.send(()).unwrap(); });
+        responsive.recv_timeout(std::time::Duration::from_secs(2)).expect("file lock blocked async dispatch");
+        drop(held);
+        tauri::async_runtime::block_on(blocked).unwrap().unwrap();
     }
 }

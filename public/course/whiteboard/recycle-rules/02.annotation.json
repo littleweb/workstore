@@ -1,0 +1,139 @@
+{
+  "sceneId": "scene-02",
+  "canvas": {
+    "width": 1672,
+    "height": 941
+  },
+  "storyBasis": "干净的纸、金属和一些包装，可以进入相应回收流程。严重污染会影响回收，不是材质对了就一定能回收。适当清空容器，能减少残液污染其他物品。具体清洗和分类要求，仍要遵循所在地说明。",
+  "sceneDurationMs": 30000,
+  "elements": [
+    {
+      "id": "event-1",
+      "label": "干净纸盒、金属罐和玻璃瓶整齐摆放",
+      "sequence": 1,
+      "narrativeRole": "字幕事件1：干净的纸、金属和一些包装，可以进入相应回收流程。",
+      "subtitle": "干净的纸、金属和一些包装，可以进入相应回收流程。",
+      "type": "concept",
+      "region": {
+        "x": 136,
+        "y": 109,
+        "width": 593,
+        "height": 273
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 300,
+        "durationMs": 4378,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          432.5,
+          119
+        ],
+        "end": [
+          432.5,
+          372
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-2",
+      "label": "干净纸盒与油污纸盒并列",
+      "sequence": 2,
+      "narrativeRole": "字幕事件2：严重污染会影响回收，不是材质对了就一定能回收。",
+      "subtitle": "严重污染会影响回收，不是材质对了就一定能回收。",
+      "type": "concept",
+      "region": {
+        "x": 933,
+        "y": 99,
+        "width": 597,
+        "height": 294
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 4878,
+        "durationMs": 4359,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1231.5,
+          109
+        ],
+        "end": [
+          1231.5,
+          383
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-3",
+      "label": "手把空瓶里的少量液体倒出",
+      "sequence": 3,
+      "narrativeRole": "字幕事件3：适当清空容器，能减少残液污染其他物品。",
+      "subtitle": "适当清空容器，能减少残液污染其他物品。",
+      "type": "concept",
+      "region": {
+        "x": 245,
+        "y": 467,
+        "width": 377,
+        "height": 387
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 9437,
+        "durationMs": 3567,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          433.5,
+          477
+        ],
+        "end": [
+          433.5,
+          844
+        ],
+        "easing": "easeInOut"
+      }
+    },
+    {
+      "id": "event-4",
+      "label": "小人把无字空瓶对照社区图标说明",
+      "sequence": 4,
+      "narrativeRole": "字幕事件4：具体清洗和分类要求，仍要遵循所在地说明。",
+      "subtitle": "具体清洗和分类要求，仍要遵循所在地说明。",
+      "type": "concept",
+      "region": {
+        "x": 944,
+        "y": 485,
+        "width": 609,
+        "height": 363
+      },
+      "reveal": {
+        "direction": "top_to_bottom",
+        "startMs": 13204,
+        "durationMs": 16096,
+        "maskPaddingPx": 0,
+        "protectedRegions": []
+      },
+      "handPath": {
+        "start": [
+          1248.5,
+          495
+        ],
+        "end": [
+          1248.5,
+          838
+        ],
+        "easing": "easeInOut"
+      }
+    }
+  ]
+}
