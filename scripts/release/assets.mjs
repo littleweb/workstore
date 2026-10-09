@@ -39,15 +39,17 @@ export function copyPublicAssets(root, output) {
   return files;
 }
 export function checkModules(root, bundle) {
-  const manifest = readManifest(root);
+  const manifest = readManifest(root), present = new Set();
   for (const item of Object.values(bundle)) {
     if (item.type !== 'chunk') continue;
     for (const [module, metadata] of Object.entries(item.modules)) {
       if (metadata.renderedLength === 0) continue;
       const name = relative(root, module).replaceAll('\\', '/');
+      present.add(name);
       if (manifest.excludedModules.some(prefix => name === prefix || name.startsWith(prefix.endsWith('/') ? prefix : `${prefix}?`))) throw Error(`隐藏工具进入正式包：${name}`);
     }
   }
+  for (const name of manifest.requiredModules || []) if(!present.has(name)) throw Error(`正式工具缺失：${name}`);
 }
 export function verifyFrontend(root, output) {
   const manifest = readManifest(root), expected = publicAssets(root), actual = tree(output);

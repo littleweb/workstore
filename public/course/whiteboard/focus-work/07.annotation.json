@@ -15,10 +15,10 @@
       "subtitle": "到结束点，先看看任务实际完成到了哪里。",
       "type": "concept",
       "region": {
-        "x": 146,
-        "y": 69,
-        "width": 554,
-        "height": 339
+        "x": 44,
+        "y": 15,
+        "width": 775,
+        "height": 433
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          423,
-          79
+          431.5,
+          25
         ],
         "end": [
-          423,
-          398
+          431.5,
+          438
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "把完成和未完成分开记录，避免只记得忙了多久。",
       "type": "concept",
       "region": {
-        "x": 989,
-        "y": 84,
-        "width": 567,
-        "height": 303
+        "x": 901,
+        "y": 117,
+        "width": 698,
+        "height": 311
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1272.5,
-          94
+          1250,
+          127
         ],
         "end": [
-          1272.5,
-          377
+          1250,
+          418
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "检查结果是否符合最开始选定的目标。",
       "type": "concept",
       "region": {
-        "x": 125,
-        "y": 540,
-        "width": 591,
-        "height": 342
+        "x": 21,
+        "y": 489,
+        "width": 759,
+        "height": 421
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          420.5,
-          550
+          400.5,
+          499
         ],
         "end": [
-          420.5,
-          872
+          400.5,
+          900
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：你能用一句话描述这一轮的实际成果吗？",
       "type": "concept",
       "region": {
-        "x": 991,
-        "y": 566,
-        "width": 591,
-        "height": 300
+        "x": 852,
+        "y": 483,
+        "width": 816,
+        "height": 408
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1286.5,
-          576
+          1260,
+          493
         ],
         "end": [
-          1286.5,
-          856
+          1260,
+          881
         ],
         "easing": "easeInOut"
       }

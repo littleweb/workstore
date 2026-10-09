@@ -1,8 +1,9 @@
 import {mkdir,writeFile,readFile,copyFile} from 'node:fs/promises';
 import path from 'node:path';
 import {spawn} from 'node:child_process';
+const styledReferences=new Map(JSON.parse(await readFile('src/course-animation/examples.json','utf8')).map(r=>[r.id,r]));
 const curriculum=[];
-const add=(id,title,duration,style,audience,rows)=>curriculum.push({id,title,topic:title,config:{duration,style,audience,voice:true,voiceId:'zf_021'},tutorial:{title,summary:rows.at(-1)[1],duration,style,scenes:rows.map(([title,narration,points,kind,labels,values=[]])=>({title,narration,points:points.split('|'),seconds:duration/rows.length,visual:{kind,labels:labels.split('|'),values,note:kind==='chart'?'示意数据，用于说明关系':''}}))}});
+const add=(id,title,duration,style,audience,rows)=>{style=styledReferences.get(id)?.config.style??style;curriculum.push({id,title,topic:title,config:{duration,style,audience,voice:true,voiceId:'zf_021'},tutorial:{title,summary:rows.at(-1)[1],duration,style,scenes:rows.map(([title,narration,points,kind,labels,values=[]])=>({title,narration,points:points.split('|'),seconds:duration/rows.length,visual:{kind,labels:labels.split('|'),values,note:kind==='chart'?'示意数据，用于说明关系':''}}))}})};
 add('water-trip','水的一次旅行',30,'chalk','儿童',[
  ['水在不断旅行','水从海洋来到天空，又从天空回到大地。这不是水消失了，而是位置和状态在变化。','水没有消失|位置和状态改变','cycle','海洋|水汽|云|降雨'],
  ['蒸发与凝结','太阳提供能量，液态水蒸发成为水蒸气。水蒸气冷却，凝结成小水滴，组成我们看到的云。','蒸发：液态变气态|凝结：气态变液态','flow','液态水|水蒸气|小水滴'],
@@ -113,7 +114,7 @@ add('clear-questions','把问题变成可执行的请求',300,'clean','职场人
  ['问题清楚就更接近成品','清楚交代背景、目标、限制和输出，再用示例和验收标准减少误解。好的问题让合作形成下一步可执行的动作。','背景、目标、限制、输出','cycle','清楚请求|执行|验收|具体反馈']]);
 await mkdir('public/course/animations',{recursive:true});
 const refs=[];
-for(const x of curriculum){const dir=path.resolve('public/course/animations',x.id);await mkdir(dir,{recursive:true});await writeFile(path.join(dir,'input.json'),JSON.stringify({tutorial:x.tutorial,config:x.config},null,2));await writeFile(path.join(dir,'source.md'),x.topic);refs.push({id:x.id,title:x.title,topic:x.topic,config:x.config,cover:`/course/animations/${x.id}/cover.png`,video:`/course/animations/${x.id}/tutorial.mp4`,scenes:x.tutorial.scenes.length});}
+for(const x of curriculum){const dir=path.resolve('public/course/animations',x.id);await mkdir(dir,{recursive:true});await writeFile(path.join(dir,'input.json'),JSON.stringify({tutorial:x.tutorial,config:x.config},null,2));await writeFile(path.join(dir,'source.md'),x.topic);refs.push({id:x.id,title:x.title,topic:x.topic,config:x.config,cover:styledReferences.get(x.id)?.cover??`/course/animations/${x.id}/style-cover.png`,video:`/course/animations/${x.id}/tutorial.mp4`,scenes:x.tutorial.scenes.length});}
 await writeFile('src/course-animation/examples.json',JSON.stringify(refs,null,2)+'\n');
 if(process.argv.includes('--write-only'))process.exit(0);
 const runner=path.resolve('.course-animation-build/runtime/runner.mjs');

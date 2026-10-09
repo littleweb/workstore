@@ -15,10 +15,10 @@
       "subtitle": "离开工作一小会儿，可以起身活动或看看远处。",
       "type": "concept",
       "region": {
-        "x": 90,
-        "y": 35,
-        "width": 601,
-        "height": 406
+        "x": 67,
+        "y": 0,
+        "width": 723,
+        "height": 435
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          390.5,
-          45
+          428.5,
+          10
         ],
         "end": [
-          390.5,
-          431
+          428.5,
+          425
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "休息方式和长度按个人情况选择，不追求固定模板。",
       "type": "concept",
       "region": {
-        "x": 967,
-        "y": 68,
-        "width": 586,
-        "height": 365
+        "x": 902,
+        "y": 20,
+        "width": 700,
+        "height": 402
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1260,
-          78
+          1252,
+          30
         ],
         "end": [
-          1260,
-          423
+          1252,
+          412
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "回来时查看刚记录的下一步，减少重新找方向。",
       "type": "concept",
       "region": {
-        "x": 67,
-        "y": 531,
-        "width": 602,
-        "height": 369
+        "x": 43,
+        "y": 481,
+        "width": 735,
+        "height": 423
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          368,
-          541
+          410.5,
+          491
         ],
         "end": [
-          368,
-          890
+          410.5,
+          894
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "如果确实疲劳，就调整计划，不必强行延长这一轮。",
       "type": "concept",
       "region": {
-        "x": 955,
-        "y": 561,
-        "width": 646,
-        "height": 335
+        "x": 912,
+        "y": 480,
+        "width": 745,
+        "height": 424
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1278,
-          571
+          1284.5,
+          490
         ],
         "end": [
-          1278,
-          886
+          1284.5,
+          894
         ],
         "easing": "easeInOut"
       }

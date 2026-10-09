@@ -15,10 +15,10 @@
       "subtitle": "把电流理解成电荷的定向运动，是一种入门描述。",
       "type": "concept",
       "region": {
-        "x": 159,
-        "y": 62,
-        "width": 478,
-        "height": 315
+        "x": 123,
+        "y": 18,
+        "width": 593,
+        "height": 408
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          398,
-          72
+          419.5,
+          28
         ],
         "end": [
-          398,
-          367
+          419.5,
+          416
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "电池向电路提供能量，小灯把能量转成光和热。",
       "type": "concept",
       "region": {
-        "x": 1043,
-        "y": 62,
-        "width": 405,
-        "height": 320
+        "x": 980,
+        "y": 44,
+        "width": 511,
+        "height": 378
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1245.5,
-          72
+          1235.5,
+          54
         ],
         "end": [
-          1245.5,
-          372
+          1235.5,
+          412
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "电荷没有在灯泡里全部消失，它们仍参与回路。",
       "type": "concept",
       "region": {
-        "x": 186,
-        "y": 538,
-        "width": 422,
-        "height": 318
+        "x": 152,
+        "y": 488,
+        "width": 537,
+        "height": 381
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          397,
-          548
+          420.5,
+          498
         ],
         "end": [
-          397,
-          846
+          420.5,
+          859
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "类比可以帮助理解，但不要把导线想成真实水管。",
       "type": "concept",
       "region": {
-        "x": 888,
-        "y": 541,
-        "width": 719,
-        "height": 295
+        "x": 869,
+        "y": 529,
+        "width": 754,
+        "height": 324
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1247.5,
-          551
+          1246,
+          539
         ],
         "end": [
-          1247.5,
-          826
+          1246,
+          843
         ],
         "easing": "easeInOut"
       }

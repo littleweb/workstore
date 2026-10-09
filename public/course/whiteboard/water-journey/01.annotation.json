@@ -15,10 +15,10 @@
       "subtitle": "想象一滴水落进小池塘，它的旅行才刚开始。",
       "type": "concept",
       "region": {
-        "x": 156,
-        "y": 107,
-        "width": 520,
-        "height": 320
+        "x": 23,
+        "y": 46,
+        "width": 756,
+        "height": 393
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          416,
-          117
+          401,
+          56
         ],
         "end": [
-          416,
-          417
+          401,
+          429
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "太阳把能量带到水面，部分水变成看不见的水蒸气。",
       "type": "concept",
       "region": {
-        "x": 999,
-        "y": 58,
-        "width": 511,
-        "height": 374
+        "x": 871,
+        "y": 13,
+        "width": 769,
+        "height": 436
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1254.5,
-          68
+          1255.5,
+          23
         ],
         "end": [
-          1254.5,
-          422
+          1255.5,
+          439
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "蒸发可以发生在常温下，不必等水沸腾。",
       "type": "concept",
       "region": {
-        "x": 147,
-        "y": 527,
-        "width": 565,
-        "height": 322
+        "x": 33,
+        "y": 482,
+        "width": 706,
+        "height": 416
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          429.5,
-          537
+          386,
+          492
         ],
         "end": [
-          429.5,
-          839
+          386,
+          888
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "小实验：观察同样的水，放在不同位置有什么变化？",
       "type": "concept",
       "region": {
-        "x": 920,
-        "y": 538,
-        "width": 669,
-        "height": 297
+        "x": 885,
+        "y": 489,
+        "width": 753,
+        "height": 402
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1254.5,
-          548
+          1261.5,
+          499
         ],
         "end": [
-          1254.5,
-          825
+          1261.5,
+          881
         ],
         "easing": "easeInOut"
       }

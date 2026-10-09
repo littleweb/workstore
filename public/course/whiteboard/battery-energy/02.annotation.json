@@ -15,10 +15,10 @@
       "subtitle": "电池内部有不同材料，它们能参与化学反应。",
       "type": "concept",
       "region": {
-        "x": 321,
-        "y": 63,
-        "width": 204,
-        "height": 336
+        "x": 273,
+        "y": 27,
+        "width": 322,
+        "height": 406
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          423,
-          73
+          434,
+          37
         ],
         "end": [
-          423,
-          389
+          434,
+          423
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "反应推动电荷移动，形成两端的电势差。",
       "type": "concept",
       "region": {
-        "x": 1014,
-        "y": 69,
-        "width": 449,
-        "height": 332
+        "x": 1048,
+        "y": 27,
+        "width": 380,
+        "height": 410
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1238.5,
-          79
+          1238,
+          37
         ],
         "end": [
-          1238.5,
-          391
+          1238,
+          427
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "材料和结构决定不同电池的使用特点。",
       "type": "concept",
       "region": {
-        "x": 187,
-        "y": 546,
-        "width": 513,
-        "height": 287
+        "x": 152,
+        "y": 523,
+        "width": 611,
+        "height": 352
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          443.5,
-          556
+          457.5,
+          533
         ],
         "end": [
-          443.5,
-          823
+          457.5,
+          865
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "这是简化模型；真实电池的具体反应并不完全相同。",
       "type": "concept",
       "region": {
-        "x": 1036,
-        "y": 518,
-        "width": 495,
-        "height": 324
+        "x": 1020,
+        "y": 486,
+        "width": 599,
+        "height": 416
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1283.5,
-          528
+          1319.5,
+          496
         ],
         "end": [
-          1283.5,
-          832
+          1319.5,
+          892
         ],
         "easing": "easeInOut"
       }

@@ -6,7 +6,7 @@
 
 ## 下载与当前状态
 
-从 [GitHub Releases](https://github.com/littleweb/workstore/releases) 下载。当前稳定版为 **0.1.16**，已发布 macOS Apple Silicon（M 系列）安装更新包。Windows、Linux 和 Intel Mac 尚未完成实机验收，也未提供正式安装包。当前 macOS 包使用 ad-hoc 签名，尚未完成 Apple Developer ID 签名和公证。
+从 [GitHub Releases](https://github.com/littleweb/workstore/releases) 下载。当前稳定版为 **0.1.17**，已发布 macOS Apple Silicon（M 系列）安装更新包。Windows、Linux 和 Intel Mac 尚未完成实机验收，也未提供正式安装包。当前 macOS 包使用 ad-hoc 签名，尚未完成 Apple Developer ID 签名和公证。
 
 - **记笔记**：本地富文本编辑、自动保存、重命名、导出；右侧 AI 助手生成草稿后可追加、替换正文或新建文档。
 - **画白板**：基于 Excalidraw 的绘图文档；右侧常规 AI 对话可直接生成、分步绘制或修改内容；支持选中矩形/Frame 内补充手绘原型控件、可选选区限定、停止与逐步撤销。
@@ -98,3 +98,6 @@ npm run desktop:build                           # 本机轻量构建，无需更
 
 
 设计室的模板封面和示例图自0.1.16起按需从GitHub加载，完整目录和提示词随软件提供，图片校验后缓存在设备上。首次查看未缓存图片需要联网；已缓存图片可离线使用。素材缓存与用户作品分开，作品仍保存在本地工作区并通过可选GitHub数据同步在设备间传输。
+
+
+做课程在0.1.17正式开放知识卡片、白板沙画、动画教程与交互网页。课程参考与大型渲染/配音组件按需获取并缓存，首次使用需要联网；用户内容仍本地保存。发布必须通过[发布规则](docs/RELEASE-CHECKLIST.md)，保留资源白名单、固定版本校验与安装包体积检查，不能以实验包绕过。

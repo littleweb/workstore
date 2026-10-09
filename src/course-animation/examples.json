@@ -10,7 +10,7 @@
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/water-trip/cover.png",
+    "cover": "/course/animations/water-trip/style-cover.png",
     "video": "/course/animations/water-trip/tutorial.mp4",
     "scenes": 3
   },
@@ -25,7 +25,7 @@
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/one-quarter/cover.png",
+    "cover": "/course/animations/one-quarter/style-cover.png",
     "video": "/course/animations/one-quarter/tutorial.mp4",
     "scenes": 3
   },
@@ -40,7 +40,7 @@
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/feynman-method/cover.png",
+    "cover": "/course/animations/feynman-method/style-cover.png",
     "video": "/course/animations/feynman-method/tutorial.mp4",
     "scenes": 6
   },
@@ -50,12 +50,12 @@
     "topic": "为什么天空是蓝色的",
     "config": {
       "duration": 60,
-      "style": "clean",
+      "style": "blueprint",
       "audience": "青少年",
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/blue-sky/cover.png",
+    "cover": "/course/animations/blue-sky/style-cover.png",
     "video": "/course/animations/blue-sky/tutorial.mp4",
     "scenes": 6
   },
@@ -65,12 +65,12 @@
     "topic": "叶子的能量工厂",
     "config": {
       "duration": 120,
-      "style": "warm",
+      "style": "paper",
       "audience": "青少年",
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/photosynthesis/cover.png",
+    "cover": "/course/animations/photosynthesis/style-cover.png",
     "video": "/course/animations/photosynthesis/tutorial.mp4",
     "scenes": 8
   },
@@ -80,12 +80,12 @@
     "topic": "看懂百分数与折扣",
     "config": {
       "duration": 120,
-      "style": "clean",
+      "style": "editorial",
       "audience": "大众学习者",
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/percent-discount/cover.png",
+    "cover": "/course/animations/percent-discount/style-cover.png",
     "video": "/course/animations/percent-discount/tutorial.mp4",
     "scenes": 8
   },
@@ -95,12 +95,12 @@
     "topic": "第一次看懂程序循环",
     "config": {
       "duration": 180,
-      "style": "chalk",
+      "style": "terminal",
       "audience": "青少年",
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/programming-loop/cover.png",
+    "cover": "/course/animations/programming-loop/style-cover.png",
     "video": "/course/animations/programming-loop/tutorial.mp4",
     "scenes": 12
   },
@@ -110,12 +110,12 @@
     "topic": "电路怎样让小灯亮起来",
     "config": {
       "duration": 180,
-      "style": "clean",
+      "style": "neon",
       "audience": "青少年",
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/simple-circuit/cover.png",
+    "cover": "/course/animations/simple-circuit/style-cover.png",
     "video": "/course/animations/simple-circuit/tutorial.mp4",
     "scenes": 12
   },
@@ -125,12 +125,12 @@
     "topic": "用五分钟理解概率",
     "config": {
       "duration": 300,
-      "style": "warm",
+      "style": "pastel",
       "audience": "青少年",
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/probability-basics/cover.png",
+    "cover": "/course/animations/probability-basics/style-cover.png",
     "video": "/course/animations/probability-basics/tutorial.mp4",
     "scenes": 20
   },
@@ -140,12 +140,12 @@
     "topic": "把问题变成可执行的请求",
     "config": {
       "duration": 300,
-      "style": "clean",
+      "style": "minimal",
       "audience": "职场人士",
       "voice": true,
       "voiceId": "zf_021"
     },
-    "cover": "/course/animations/clear-questions/cover.png",
+    "cover": "/course/animations/clear-questions/style-cover.png",
     "video": "/course/animations/clear-questions/tutorial.mp4",
     "scenes": 20
   }

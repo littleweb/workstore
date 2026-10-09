@@ -15,10 +15,10 @@
       "subtitle": "跷跷板可以帮我们理解：较重的人更靠近支点。",
       "type": "concept",
       "region": {
-        "x": 133,
-        "y": 121,
-        "width": 585,
-        "height": 264
+        "x": 49,
+        "y": 45,
+        "width": 726,
+        "height": 352
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          425.5,
-          131
+          412,
+          55
         ],
         "end": [
-          425.5,
-          375
+          412,
+          387
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "较轻的人坐得更远，两边可能达到平衡。",
       "type": "concept",
       "region": {
-        "x": 960,
-        "y": 134,
-        "width": 559,
-        "height": 251
+        "x": 896,
+        "y": 56,
+        "width": 721,
+        "height": 330
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1239.5,
-          144
+          1256.5,
+          66
         ],
         "end": [
-          1239.5,
-          375
+          1256.5,
+          376
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "如果两人同时改变位置，就难判断哪项改变有效。",
       "type": "concept",
       "region": {
-        "x": 154,
-        "y": 570,
-        "width": 587,
-        "height": 257
+        "x": 54,
+        "y": 492,
+        "width": 732,
+        "height": 356
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          447.5,
-          580
+          420,
+          502
         ],
         "end": [
-          447.5,
-          817
+          420,
+          838
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：想让小孩更容易压下另一端，他应往哪边坐？",
       "type": "concept",
       "region": {
-        "x": 955,
-        "y": 556,
-        "width": 597,
-        "height": 271
+        "x": 896,
+        "y": 564,
+        "width": 727,
+        "height": 279
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1253.5,
-          566
+          1259.5,
+          574
         ],
         "end": [
-          1253.5,
-          817
+          1259.5,
+          833
         ],
         "easing": "easeInOut"
       }

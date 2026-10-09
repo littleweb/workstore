@@ -15,10 +15,10 @@
       "subtitle": "一天结束，挑一次打断，看看它发生在什么条件下。",
       "type": "concept",
       "region": {
-        "x": 119,
-        "y": 106,
-        "width": 612,
-        "height": 314
+        "x": 59,
+        "y": 9,
+        "width": 701,
+        "height": 442
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          425,
-          116
+          409.5,
+          19
         ],
         "end": [
-          425,
-          410
+          409.5,
+          441
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "找出一个可以改变的小条件，比如提前准备文件。",
       "type": "concept",
       "region": {
-        "x": 950,
-        "y": 84,
-        "width": 613,
-        "height": 311
+        "x": 888,
+        "y": 39,
+        "width": 715,
+        "height": 391
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1256.5,
-          94
+          1245.5,
+          49
         ],
         "end": [
-          1256.5,
-          385
+          1245.5,
+          420
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "下一次只调整这一点，再比较自己的体验。",
       "type": "concept",
       "region": {
-        "x": 95,
-        "y": 558,
-        "width": 654,
-        "height": 275
+        "x": 19,
+        "y": 541,
+        "width": 792,
+        "height": 356
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          422,
-          568
+          415,
+          551
         ],
         "end": [
-          422,
-          823
+          415,
+          887
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "这是个人工作实验，不需要宣称对所有人都有效。",
       "type": "concept",
       "region": {
-        "x": 952,
-        "y": 528,
-        "width": 613,
-        "height": 307
+        "x": 867,
+        "y": 480,
+        "width": 761,
+        "height": 400
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1258.5,
-          538
+          1247.5,
+          490
         ],
         "end": [
-          1258.5,
-          825
+          1247.5,
+          870
         ],
         "easing": "easeInOut"
       }

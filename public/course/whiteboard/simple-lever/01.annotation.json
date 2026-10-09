@@ -15,10 +15,10 @@
       "subtitle": "撬动一个重物时，一根结实的杆可以帮助我们。",
       "type": "concept",
       "region": {
-        "x": 97,
-        "y": 81,
-        "width": 661,
-        "height": 286
+        "x": 62,
+        "y": 75,
+        "width": 753,
+        "height": 334
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          427.5,
-          91
+          438.5,
+          85
         ],
         "end": [
-          427.5,
-          357
+          438.5,
+          399
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "杆子绕着支撑的位置转动，这个位置叫作支点。",
       "type": "concept",
       "region": {
-        "x": 959,
-        "y": 122,
-        "width": 591,
-        "height": 249
+        "x": 912,
+        "y": 203,
+        "width": 685,
+        "height": 190
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -62,11 +62,11 @@
       "handPath": {
         "start": [
           1254.5,
-          132
+          213
         ],
         "end": [
           1254.5,
-          361
+          383
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "支点两边的距离，会影响需要多大的作用力。",
       "type": "concept",
       "region": {
-        "x": 124,
-        "y": 516,
-        "width": 597,
-        "height": 323
+        "x": 60,
+        "y": 498,
+        "width": 706,
+        "height": 312
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          422.5,
-          526
+          413,
+          508
         ],
         "end": [
-          422.5,
-          829
+          413,
+          800
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "先找支点，再看两边的距离，别只看杆有多长。",
       "type": "concept",
       "region": {
-        "x": 1092,
-        "y": 527,
-        "width": 432,
-        "height": 327
+        "x": 901,
+        "y": 445,
+        "width": 701,
+        "height": 398
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1308,
-          537
+          1251.5,
+          455
         ],
         "end": [
-          1308,
-          844
+          1251.5,
+          833
         ],
         "easing": "easeInOut"
       }

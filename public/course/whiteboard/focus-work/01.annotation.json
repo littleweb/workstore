@@ -15,10 +15,10 @@
       "subtitle": "准备工作时，先把模糊目标变成一个具体的小任务。",
       "type": "concept",
       "region": {
-        "x": 137,
-        "y": 51,
-        "width": 572,
-        "height": 386
+        "x": 42,
+        "y": 9,
+        "width": 724,
+        "height": 455
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          423,
-          61
+          404,
+          19
         ],
         "end": [
-          423,
-          427
+          404,
+          454
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "选择能够看到结果的动作，比如完成一段草稿。",
       "type": "concept",
       "region": {
-        "x": 936,
-        "y": 96,
-        "width": 582,
-        "height": 334
+        "x": 893,
+        "y": 46,
+        "width": 717,
+        "height": 403
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1227,
-          106
+          1251.5,
+          56
         ],
         "end": [
-          1227,
-          420
+          1251.5,
+          439
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "任务太大时，先找出可以开始的第一步。",
       "type": "concept",
       "region": {
-        "x": 209,
-        "y": 538,
-        "width": 478,
-        "height": 312
+        "x": 78,
+        "y": 596,
+        "width": 683,
+        "height": 261
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          448,
-          548
+          419.5,
+          606
         ],
         "end": [
-          448,
-          840
+          419.5,
+          847
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：你今天能完成的最小成果是什么？",
       "type": "concept",
       "region": {
-        "x": 989,
-        "y": 514,
-        "width": 510,
-        "height": 343
+        "x": 907,
+        "y": 500,
+        "width": 718,
+        "height": 417
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1244,
-          524
+          1266,
+          510
         ],
         "end": [
-          1244,
-          847
+          1266,
+          907
         ],
         "easing": "easeInOut"
       }

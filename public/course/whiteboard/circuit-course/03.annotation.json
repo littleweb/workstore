@@ -15,10 +15,10 @@
       "subtitle": "开关控制回路是否接通，不是凭空制造电能。",
       "type": "concept",
       "region": {
-        "x": 294,
-        "y": 95,
-        "width": 254,
-        "height": 259
+        "x": 195,
+        "y": 57,
+        "width": 470,
+        "height": 313
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          421,
-          105
+          430,
+          67
         ],
         "end": [
-          421,
-          344
+          430,
+          360
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "开关闭合，导电路径连起来，小灯可能亮起。",
       "type": "concept",
       "region": {
-        "x": 1011,
-        "y": 119,
-        "width": 506,
-        "height": 240
+        "x": 913,
+        "y": 26,
+        "width": 626,
+        "height": 396
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1264,
-          129
+          1226,
+          36
         ],
         "end": [
-          1264,
-          349
+          1226,
+          412
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "开关打开，路径中断，普通电路中的灯会熄灭。",
       "type": "concept",
       "region": {
-        "x": 177,
-        "y": 526,
-        "width": 486,
-        "height": 306
+        "x": 122,
+        "y": 499,
+        "width": 612,
+        "height": 383
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          420,
-          536
+          428,
+          509
         ],
         "end": [
-          420,
-          822
+          428,
+          872
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "找到开关的位置，再说清楚它控制的哪一段路径。",
       "type": "concept",
       "region": {
-        "x": 1011,
-        "y": 484,
-        "width": 506,
-        "height": 351
+        "x": 920,
+        "y": 447,
+        "width": 619,
+        "height": 433
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1264,
-          494
+          1229.5,
+          457
         ],
         "end": [
-          1264,
-          825
+          1229.5,
+          870
         ],
         "easing": "easeInOut"
       }

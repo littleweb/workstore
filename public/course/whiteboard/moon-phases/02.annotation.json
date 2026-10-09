@@ -15,10 +15,10 @@
       "subtitle": "拿一盏灯代表太阳，用一个球代表月球。",
       "type": "concept",
       "region": {
-        "x": 97,
-        "y": 101,
-        "width": 600,
-        "height": 264
+        "x": 71,
+        "y": 61,
+        "width": 619,
+        "height": 351
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          397,
-          111
+          380.5,
+          71
         ],
         "end": [
-          397,
-          355
+          380.5,
+          402
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "灯固定不动，让球绕着观察者缓慢移动。",
       "type": "concept",
       "region": {
-        "x": 940,
-        "y": 120,
-        "width": 630,
-        "height": 308
+        "x": 867,
+        "y": 56,
+        "width": 762,
+        "height": 353
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1255,
-          130
+          1248,
+          66
         ],
         "end": [
-          1255,
-          418
+          1248,
+          399
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "你会看到亮面有时大、有时小，光源并没改变。",
       "type": "concept",
       "region": {
-        "x": 152,
-        "y": 624,
-        "width": 532,
-        "height": 155
+        "x": 69,
+        "y": 584,
+        "width": 675,
+        "height": 221
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          418,
-          634
+          406.5,
+          594
         ],
         "end": [
-          418,
-          769
+          406.5,
+          795
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：灯还亮着，为什么我们仍可能只看见弯月？",
       "type": "concept",
       "region": {
-        "x": 900,
-        "y": 571,
-        "width": 652,
-        "height": 303
+        "x": 869,
+        "y": 483,
+        "width": 766,
+        "height": 398
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1226,
-          581
+          1252,
+          493
         ],
         "end": [
-          1226,
-          864
+          1252,
+          871
         ],
         "easing": "easeInOut"
       }

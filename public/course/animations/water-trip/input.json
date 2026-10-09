@@ -1,1 +1,179 @@
-{"tutorial":{"title":"水的一次旅行","summary":"雨落在地面，一部分流进河流，一部分渗入地下。想一想：你家附近的雨水会去哪里？","scenes":[{"title":"水在不断旅行","seconds":10,"narration":"水从海洋来到天空，又从天空回到大地。这不是水消失了，而是位置和状态在变化。","points":["水没有消失","位置和状态改变"],"visual":{"kind":"cycle","labels":["海洋","水汽","云","降雨"],"values":[],"note":""},"captions":[{"text":"水从海洋来到天空","startMs":120,"endMs":1958,"timestampMs":null,"confidence":null},{"text":"又从天空回到大地","startMs":1958,"endMs":3796,"timestampMs":null,"confidence":null},{"text":"这不是水消失了","startMs":3796,"endMs":5430,"timestampMs":null,"confidence":null},{"text":"而是位置和状态在变化","startMs":5430,"endMs":7678,"timestampMs":null,"confidence":null}],"audio":"/course/animations/water-trip/01.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"蒸发与凝结","seconds":10,"narration":"太阳提供能量，液态水蒸发成为水蒸气。水蒸气冷却，凝结成小水滴，组成我们看到的云。","points":["蒸发：液态变气态","凝结：气态变液态"],"visual":{"kind":"flow","labels":["液态水","水蒸气","小水滴"],"values":[],"note":""},"captions":[{"text":"太阳提供能量","startMs":120,"endMs":1586,"timestampMs":null,"confidence":null},{"text":"液态水蒸发成为水蒸气","startMs":1586,"endMs":3890,"timestampMs":null,"confidence":null},{"text":"水蒸气冷却","startMs":3890,"endMs":5147,"timestampMs":null,"confidence":null},{"text":"凝结成小水滴","startMs":5147,"endMs":6613,"timestampMs":null,"confidence":null},{"text":"组成我们看到的云","startMs":6613,"endMs":8499,"timestampMs":null,"confidence":null}],"audio":"/course/animations/water-trip/02.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"雨去了哪里","seconds":10,"narration":"雨落在地面，一部分流进河流，一部分渗入地下。想一想：你家附近的雨水会去哪里？","points":["流进河流","渗入地下"],"visual":{"kind":"flow","labels":["降雨","河流与地下","海洋"],"values":[],"note":""},"captions":[{"text":"雨落在地面","startMs":120,"endMs":1283,"timestampMs":null,"confidence":null},{"text":"一部分流进河流","startMs":1283,"endMs":2833,"timestampMs":null,"confidence":null},{"text":"一部分渗入地下","startMs":2833,"endMs":4383,"timestampMs":null,"confidence":null},{"text":"想一想：你家附近的雨水会去哪里","startMs":4383,"endMs":7485,"timestampMs":null,"confidence":null}],"audio":"/course/animations/water-trip/03.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"}],"duration":30,"style":"chalk","video":"/course/animations/water-trip/tutorial.mp4"},"config":{"duration":30,"style":"chalk","audience":"儿童","voice":true,"voiceId":"zf_021"}}
+{
+  "tutorial": {
+    "title": "水的一次旅行",
+    "summary": "雨落在地面，一部分流进河流，一部分渗入地下。想一想：你家附近的雨水会去哪里？",
+    "scenes": [
+      {
+        "title": "水在不断旅行",
+        "seconds": 10,
+        "narration": "水从海洋来到天空，又从天空回到大地。这不是水消失了，而是位置和状态在变化。",
+        "points": [
+          "水没有消失",
+          "位置和状态改变"
+        ],
+        "visual": {
+          "kind": "cycle",
+          "labels": [
+            "海洋",
+            "水汽",
+            "云",
+            "降雨"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "水从海洋来到天空",
+            "startMs": 120,
+            "endMs": 1958,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "又从天空回到大地",
+            "startMs": 1958,
+            "endMs": 3796,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "这不是水消失了",
+            "startMs": 3796,
+            "endMs": 5430,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "而是位置和状态在变化",
+            "startMs": 5430,
+            "endMs": 7678,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/water-trip/01.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "蒸发与凝结",
+        "seconds": 10,
+        "narration": "太阳提供能量，液态水蒸发成为水蒸气。水蒸气冷却，凝结成小水滴，组成我们看到的云。",
+        "points": [
+          "蒸发：液态变气态",
+          "凝结：气态变液态"
+        ],
+        "visual": {
+          "kind": "flow",
+          "labels": [
+            "液态水",
+            "水蒸气",
+            "小水滴"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "太阳提供能量",
+            "startMs": 120,
+            "endMs": 1586,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "液态水蒸发成为水蒸气",
+            "startMs": 1586,
+            "endMs": 3890,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "水蒸气冷却",
+            "startMs": 3890,
+            "endMs": 5147,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "凝结成小水滴",
+            "startMs": 5147,
+            "endMs": 6613,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "组成我们看到的云",
+            "startMs": 6613,
+            "endMs": 8499,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/water-trip/02.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "雨去了哪里",
+        "seconds": 10,
+        "narration": "雨落在地面，一部分流进河流，一部分渗入地下。想一想：你家附近的雨水会去哪里？",
+        "points": [
+          "流进河流",
+          "渗入地下"
+        ],
+        "visual": {
+          "kind": "flow",
+          "labels": [
+            "降雨",
+            "河流与地下",
+            "海洋"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "雨落在地面",
+            "startMs": 120,
+            "endMs": 1283,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "一部分流进河流",
+            "startMs": 1283,
+            "endMs": 2833,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "一部分渗入地下",
+            "startMs": 2833,
+            "endMs": 4383,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "想一想：你家附近的雨水会去哪里",
+            "startMs": 4383,
+            "endMs": 7485,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/water-trip/03.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      }
+    ],
+    "duration": 30,
+    "style": "chalk",
+    "video": "/course/animations/water-trip/tutorial.mp4"
+  },
+  "config": {
+    "duration": 30,
+    "style": "chalk",
+    "audience": "儿童",
+    "voice": true,
+    "voiceId": "zf_021"
+  }
+}

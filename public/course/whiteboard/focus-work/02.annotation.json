@@ -15,10 +15,10 @@
       "subtitle": "开始之前，把本次任务真正需要的材料放在手边。",
       "type": "concept",
       "region": {
-        "x": 78,
-        "y": 117,
-        "width": 719,
-        "height": 312
+        "x": 3,
+        "y": 78,
+        "width": 812,
+        "height": 303
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          437.5,
-          127
+          409,
+          88
         ],
         "end": [
-          437.5,
-          419
+          409,
+          371
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "把不相关的物品移开，减少临时寻找的机会。",
       "type": "concept",
       "region": {
-        "x": 905,
-        "y": 38,
-        "width": 677,
-        "height": 402
+        "x": 872,
+        "y": 0,
+        "width": 800,
+        "height": 431
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1243.5,
-          48
+          1272,
+          10
         ],
         "end": [
-          1243.5,
-          430
+          1272,
+          421
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "先确认文件和工具能打开，避免开始后再来回切换。",
       "type": "concept",
       "region": {
-        "x": 130,
-        "y": 535,
-        "width": 647,
-        "height": 326
+        "x": 0,
+        "y": 512,
+        "width": 825,
+        "height": 368
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          453.5,
-          545
+          412.5,
+          522
         ],
         "end": [
-          453.5,
-          851
+          412.5,
+          870
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "准备不是无限整理，够支持第一步就可以开始。",
       "type": "concept",
       "region": {
-        "x": 883,
-        "y": 500,
-        "width": 705,
-        "height": 371
+        "x": 874,
+        "y": 451,
+        "width": 798,
+        "height": 453
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1235.5,
-          510
+          1273,
+          461
         ],
         "end": [
-          1235.5,
-          861
+          1273,
+          894
         ],
         "easing": "easeInOut"
       }

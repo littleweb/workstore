@@ -30,10 +30,17 @@
   "videos": [
     {
       "id": "water-trip",
+      "style": "chalk",
+      "cover": "/course/animations/water-trip/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "2588720478289b2d45f439c7341da4f09863a0676b44b3b3ae2c20dfb3b4ecfe",
       "path": "public/course/animations/water-trip/tutorial.mp4",
       "duration": "30.016000",
       "frames": "720",
-      "sha256": "9de17f3c2cc53426a7f30cf5b4bc468067142e9757af5d48d575a095ba54e08f",
+      "sha256": "cd3a97f7a819568e5bffc3d75a7b6bdfa27fb22756fa46a6eacef9d5fae5a8c1",
       "audio": "aac",
       "scenes": 3,
       "meanAudioDb": -18.2,
@@ -46,10 +53,17 @@
     },
     {
       "id": "one-quarter",
+      "style": "warm",
+      "cover": "/course/animations/one-quarter/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "c3a6fd4e1041e0bc521f6ea89441b8b8021f2344e444f3cb76e7403d88dd709f",
       "path": "public/course/animations/one-quarter/tutorial.mp4",
       "duration": "30.016000",
       "frames": "720",
-      "sha256": "d22261320dabd5f0e5b9af9255f9713cbed7419d53653797c3e7efc596ed3a81",
+      "sha256": "114db2662f00c9f5e649de1a69a6bc1d4532125adb108a5422335c88a3fc25cf",
       "audio": "aac",
       "scenes": 3,
       "meanAudioDb": -18.0,
@@ -62,10 +76,17 @@
     },
     {
       "id": "feynman-method",
+      "style": "clean",
+      "cover": "/course/animations/feynman-method/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "3e5f5bef6a2cbfec42996ff159c71207b566f15ed1b450d07af12bd01ca8f43d",
       "path": "public/course/animations/feynman-method/tutorial.mp4",
       "duration": "60.011000",
       "frames": "1440",
-      "sha256": "57f2722970dfe05ce58dba0bc89f87ea3a049c1cf5ca10b6afe576dcad9a9363",
+      "sha256": "f7c087d0fadc59293ae1964f56f80ce3dea4178ff0cc25f2192cd462d968f0ad",
       "audio": "aac",
       "scenes": 6,
       "meanAudioDb": -18.0,
@@ -81,10 +102,17 @@
     },
     {
       "id": "blue-sky",
+      "style": "blueprint",
+      "cover": "/course/animations/blue-sky/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "86d8c29f77d074c7f5223a1e4d46871c742a7fa437b8fc703207b9100d2e9a16",
       "path": "public/course/animations/blue-sky/tutorial.mp4",
       "duration": "60.011000",
       "frames": "1440",
-      "sha256": "815e0e8fa58425c30bf9ec01a9f574273d13336501f109f0bd54314cff95723c",
+      "sha256": "baa8b2f38f23866e7f37bb074562ee9d1eeae635b802e9195c627c56ec1c07de",
       "audio": "aac",
       "scenes": 6,
       "meanAudioDb": -17.9,
@@ -100,10 +128,17 @@
     },
     {
       "id": "photosynthesis",
+      "style": "paper",
+      "cover": "/course/animations/photosynthesis/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "9efa84c2d45e6a19172b9d0fc21836cc6f0b152198e69b24d4a2afa0d35a5a06",
       "path": "public/course/animations/photosynthesis/tutorial.mp4",
       "duration": "120.000000",
       "frames": "2880",
-      "sha256": "bcdc6f893e54d83a98f791bcc014c7d53f27e8e21ad0228f0ea058a7572917b3",
+      "sha256": "2bfae6214c744383a158f6f26dba814e1be7cd7e85d094e69418e090bd0ecde0",
       "audio": "aac",
       "scenes": 8,
       "meanAudioDb": -19.3,
@@ -121,10 +156,17 @@
     },
     {
       "id": "percent-discount",
+      "style": "editorial",
+      "cover": "/course/animations/percent-discount/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "fa92b8fd11606f0ca6709f94309703c385e99e98e89e2279d663c8d974ec8a97",
       "path": "public/course/animations/percent-discount/tutorial.mp4",
       "duration": "120.000000",
       "frames": "2880",
-      "sha256": "4a008baa65db7abd909cbb833c8c7237c33b004f1c40f15b9d4bcd75f736dfd6",
+      "sha256": "9feda61a3927efdf1200c46824959165ecc0d1df3232099a869b02950163033d",
       "audio": "aac",
       "scenes": 8,
       "meanAudioDb": -19.4,
@@ -142,10 +184,17 @@
     },
     {
       "id": "programming-loop",
+      "style": "terminal",
+      "cover": "/course/animations/programming-loop/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "fcab35646323ae99ee0d6544d2d37d64d44dde2beb8054aa6e881c4d2b913bcb",
       "path": "public/course/animations/programming-loop/tutorial.mp4",
       "duration": "180.011000",
       "frames": "4320",
-      "sha256": "00c644674c759313ec46c56bcf4d19f82e919e236c1a5cc2e713b9203c70040b",
+      "sha256": "43b76a5f47edb0374cd0bffb3743ac64bc0c3989a1e3b11ebe0792af5b8edb61",
       "audio": "aac",
       "scenes": 12,
       "meanAudioDb": -19.5,
@@ -167,10 +216,17 @@
     },
     {
       "id": "simple-circuit",
+      "style": "neon",
+      "cover": "/course/animations/simple-circuit/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "912291088ffad4ebdaaa0384ce8d7c31e3bd7afbda12ab5d32ba5f951ea5ab3e",
       "path": "public/course/animations/simple-circuit/tutorial.mp4",
       "duration": "180.011000",
       "frames": "4320",
-      "sha256": "98404ed7add1de1a98bea4e85e19cf9ab86fc583277b64f471807c6302e20e5a",
+      "sha256": "273a6c89956181719d085c8c00aad20a470bc828b11635e199ddbc1b2c05059b",
       "audio": "aac",
       "scenes": 12,
       "meanAudioDb": -19.4,
@@ -192,10 +248,17 @@
     },
     {
       "id": "probability-basics",
+      "style": "pastel",
+      "cover": "/course/animations/probability-basics/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "2e2af2b664518c54b22403f410c0f5f50106da6b04552dcbb97f8efab9deb24d",
       "path": "public/course/animations/probability-basics/tutorial.mp4",
       "duration": "300.011000",
       "frames": "7200",
-      "sha256": "90e8c5634e68d331b68a0ac0e37d1e4dc3725f9d28356a875f9b19d0efd499a8",
+      "sha256": "b4ae6ded2cc79f01f753a7eb5bd8a336d554dc31fc3502231c79cb96dcd1cac8",
       "audio": "aac",
       "scenes": 20,
       "meanAudioDb": -19.1,
@@ -225,10 +288,17 @@
     },
     {
       "id": "clear-questions",
+      "style": "minimal",
+      "cover": "/course/animations/clear-questions/style-cover.png",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverSha256": "8594ff8fd8d4c4ffb97aeb4f65c6e5bef08faec52250a522de19c04ac09c197e",
       "path": "public/course/animations/clear-questions/tutorial.mp4",
       "duration": "300.011000",
       "frames": "7200",
-      "sha256": "c088c7ea87ecdd3edb39565ccd0a249a6aeda10c58a92688dd4b0647569d2fa4",
+      "sha256": "658ffed1747b8452274cdb86fee9a8510690704a3afad3a32575f3bf4487642f",
       "audio": "aac",
       "scenes": 20,
       "meanAudioDb": -18.9,

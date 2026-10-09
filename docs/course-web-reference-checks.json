@@ -1,0 +1,113 @@
+{
+  "method": "Headless Chromium real WebGL rendering, parameter input, reset and mobile layout",
+  "checks": [
+    {
+      "id": "electric-motor",
+      "feedback": "磁场速度 38% · 正向 · 永磁转子跟随旋转磁场",
+      "changed": "磁场速度 0% · 正向 · 永磁转子跟随旋转磁场",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "b79378462836e6a1df54a305e7ae44daa3a5913b364ece62b27b6ac5d8ca9572",
+      "coverSha256": "ef6f17aa51876d55a6a6176ed814c3f96fbec491ded7916538062f75b3ed5e93"
+    },
+    {
+      "id": "human-layers",
+      "feedback": "当前结构层：器官 · 外层透明度 18%",
+      "changed": "当前结构层：器官 · 外层透明度 0%",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "42a1a130764537ab880291d93b8ed225dd35b9237a995f47dbb68bea8eb47309",
+      "coverSha256": "e1261643652ad38bc9bab2ec48cab23ec90d05be0bc037d5e6f902c561547782"
+    },
+    {
+      "id": "ink-water",
+      "feedback": "蒸发强度 55% · 降水强度 35% · 水在各环节不断迁移",
+      "changed": "蒸发强度 0% · 降水强度 35% · 水在各环节不断迁移",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "a24d464469d24ef642f4001f2eecb5ec152141e4ad5331660ab2aeaff0b0d9d2",
+      "coverSha256": "947d84ebabd9ff87cb2dace5d47b2562d5bb942bbff44bf534fa5191928457c8"
+    },
+    {
+      "id": "leaf-lab",
+      "feedback": "光合作用相对速率 55% · 限制因素：二氧化碳",
+      "changed": "光合作用相对速率 0% · 限制因素：光照",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "d4cd2d22d64940d06c533e955d8def32a554e62db16a8bbc21ff3ef6e67d8bdc",
+      "coverSha256": "192a73e2027a0cd8bf55f9e9d3a7cc382fca974ed1d7cb514f81d209f3b7e904"
+    },
+    {
+      "id": "circuit-lab",
+      "feedback": "I = 0.500 A · P = 6.00 W · 通路",
+      "changed": "I = 0.000 A · P = 0.00 W · 通路",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "a567b4d1451ca20394bbd571139dbcdab5824f10012bcc6a37788e2c8eaded65",
+      "coverSha256": "d79e2a3f6c30d68597d3d3b0188f620dc3f9db16675e5eccc73fc761e014fab2"
+    },
+    {
+      "id": "solar-orbits",
+      "feedback": "已选择：地球 · 拖动场景旋转 · 时间速度 25%",
+      "changed": "已选择：地球 · 拖动场景旋转 · 时间速度 0%",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "0d0f2fa89fc8bf314ff591d5c230bc9d0f36c25184879884367ac530fff45879",
+      "coverSha256": "5aa65e514573f0c3ef2e3574a81de5158d7dc95917b9d9fc90ece4af84a2616a"
+    },
+    {
+      "id": "gear-workshop",
+      "feedback": "从动轮 / 主动轮转速 = −0.50 · 外啮合转向相反",
+      "changed": "从动轮 / 主动轮转速 = −0.25 · 外啮合转向相反",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "848dc5939d15e4a08d49c9adcd5dd99b9ea9dbdb32a71a515b121d50ffdd9e2a",
+      "coverSha256": "e8ee7b07bb759e2da5a033c13d5b26f106572345cc187d2cf334029e42721f4b"
+    },
+    {
+      "id": "fraction-pieces",
+      "feedback": "1 / 4 = 0.250",
+      "changed": "1 / 2 = 0.500",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "01cd091aa0e8dec25793254e76046c68ac9e81d40dda1e5d22e095ab74a77768",
+      "coverSha256": "500f213a5d26b52420731630cd1479e04c90750da102f1f1746e1e166462e3d2"
+    },
+    {
+      "id": "loop-playground",
+      "feedback": "i = 0 · sum = 0 · 下一次累加 1",
+      "changed": "i = 1 · sum = 1 · 执行结束",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "1e1202807958660e5ea80ab3aa5984450fec8cc456a19ab747a10c1046c60c88",
+      "coverSha256": "a84fe7045aeb6486c2608bd749e4f07b0da5328b57b36486d083c2a67cb9fd09"
+    },
+    {
+      "id": "wave-spectrum",
+      "feedback": "频率 440 Hz · 周期 2.27 ms · 振幅 45%",
+      "changed": "频率 100 Hz · 周期 10.00 ms · 振幅 45%",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "3ab276d10e468a6e1b3025665022ff4283d37bc82b57151bc998943768c7c7ab",
+      "coverSha256": "cd111e932d1ddd7bbfa8f269692418b3694092ae6d004562e3d98b649a40688b"
+    },
+    {
+      "id": "growth-chart",
+      "feedback": "r = 0.12 / 步 · K = 500 · 初始数量 20",
+      "changed": "r = 0.01 / 步 · K = 500 · 初始数量 20",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "c089dbe4da0f6aeed48bc5ee711f661974387fabb1cc07acd916906ae7f9b4e5",
+      "coverSha256": "7e836174a33b9c6ed4aea38fcba9e3f068b696afa59a313e5bf5cb61caa43cb5"
+    },
+    {
+      "id": "coin-probability",
+      "feedback": "试验 0 次 · 正面 0 次 · 经验频率 0% · 理论概率 50%",
+      "changed": "试验 0 次 · 正面 0 次 · 经验频率 0% · 理论概率 0%",
+      "errors": [],
+      "sceneReady": true,
+      "htmlSha256": "e8300558aed6bd8b2727cb6be06d66d02da3bfe846b3f5d67b6bbcf5d0363743",
+      "coverSha256": "e774259c2229e93c7ac2638c33b0fb6826a28d70b845555322e7431c578290b0"
+    }
+  ]
+}

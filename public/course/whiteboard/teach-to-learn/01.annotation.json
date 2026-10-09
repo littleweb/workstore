@@ -15,10 +15,10 @@
       "subtitle": "想理解一个知识点，先选一个可以说清楚的小问题。",
       "type": "concept",
       "region": {
-        "x": 218,
-        "y": 77,
-        "width": 425,
-        "height": 324
+        "x": 98,
+        "y": 4,
+        "width": 667,
+        "height": 460
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          430.5,
-          87
+          431.5,
+          14
         ],
         "end": [
-          430.5,
-          391
+          431.5,
+          454
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "把大主题拆成小问题，今天只处理其中一个。",
       "type": "concept",
       "region": {
-        "x": 976,
-        "y": 85,
-        "width": 544,
-        "height": 268
+        "x": 935,
+        "y": 27,
+        "width": 581,
+        "height": 419
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1248,
-          95
+          1225.5,
+          37
         ],
         "end": [
-          1248,
-          343
+          1225.5,
+          436
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "写下你要让别人学会的动作，比如比较或解释。",
       "type": "concept",
       "region": {
-        "x": 230,
-        "y": 576,
-        "width": 428,
-        "height": 280
+        "x": 91,
+        "y": 556,
+        "width": 682,
+        "height": 275
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          444,
-          586
+          432,
+          566
         ],
         "end": [
-          444,
-          846
+          432,
+          821
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "范围明确之后，学习时才知道自己要寻找什么。",
       "type": "concept",
       "region": {
-        "x": 985,
-        "y": 569,
-        "width": 484,
-        "height": 223
+        "x": 924,
+        "y": 448,
+        "width": 670,
+        "height": 448
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1227,
-          579
+          1259,
+          458
         ],
         "end": [
-          1227,
-          782
+          1259,
+          886
         ],
         "easing": "easeInOut"
       }

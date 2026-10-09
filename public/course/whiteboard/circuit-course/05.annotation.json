@@ -15,10 +15,10 @@
       "subtitle": "把两个小灯依次接在同一条路径上，就是简单串联。",
       "type": "concept",
       "region": {
-        "x": 163,
-        "y": 63,
-        "width": 505,
-        "height": 322
+        "x": 117,
+        "y": 22,
+        "width": 629,
+        "height": 404
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          415.5,
-          73
+          431.5,
+          32
         ],
         "end": [
-          415.5,
-          375
+          431.5,
+          416
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "只有一条主要通过用电器的路径，元件首尾相接。",
       "type": "concept",
       "region": {
-        "x": 1007,
-        "y": 60,
-        "width": 523,
-        "height": 325
+        "x": 931,
+        "y": 17,
+        "width": 640,
+        "height": 376
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1268.5,
-          70
+          1251,
+          27
         ],
         "end": [
-          1268.5,
-          375
+          1251,
+          383
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "断开其中一处，整个串联路径都会受到影响。",
       "type": "concept",
       "region": {
-        "x": 138,
-        "y": 542,
-        "width": 537,
-        "height": 299
+        "x": 111,
+        "y": 495,
+        "width": 630,
+        "height": 373
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          406.5,
-          552
+          426,
+          505
         ],
         "end": [
-          406.5,
-          831
+          426,
+          858
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：另一只灯也熄灭，怎样用路径来解释？",
       "type": "concept",
       "region": {
-        "x": 992,
-        "y": 542,
-        "width": 555,
-        "height": 299
+        "x": 931,
+        "y": 490,
+        "width": 638,
+        "height": 375
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1269.5,
-          552
+          1250,
+          500
         ],
         "end": [
-          1269.5,
-          831
+          1250,
+          855
         ],
         "easing": "easeInOut"
       }

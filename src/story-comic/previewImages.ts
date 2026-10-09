@@ -11,7 +11,7 @@ async function limited<T>(work:()=>Promise<T>) {
 export function previewImageSource(src:string) {
   return cachedPreview(src,()=>limited(async()=>{
     const source=await imageSource(src);
-    const image=new Image();image.src=source;
+    const image=new Image();if(/^asset:|^https?:\/\/asset\.localhost/.test(source))image.crossOrigin='anonymous';image.src=source;
     try {
       await image.decode();
       const scale=Math.min(1,768/Math.max(image.naturalWidth||image.width,image.naturalHeight||image.height));

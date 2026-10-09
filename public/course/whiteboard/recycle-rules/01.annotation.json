@@ -15,10 +15,10 @@
       "subtitle": "整理垃圾时，先看物品的材料和当前状态。",
       "type": "concept",
       "region": {
-        "x": 60,
-        "y": 95,
-        "width": 720,
-        "height": 306
+        "x": 26,
+        "y": 55,
+        "width": 824,
+        "height": 374
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          420,
-          105
+          438,
+          65
         ],
         "end": [
-          420,
-          391
+          438,
+          419
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "看见一个包装，不要只凭外形就猜它的类别。",
       "type": "concept",
       "region": {
-        "x": 980,
-        "y": 58,
-        "width": 597,
-        "height": 392
+        "x": 891,
+        "y": 36,
+        "width": 737,
+        "height": 390
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1278.5,
-          68
+          1259.5,
+          46
         ],
         "end": [
-          1278.5,
-          440
+          1259.5,
+          416
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "同样像纸的东西，可能带有复合涂层。",
       "type": "concept",
       "region": {
-        "x": 72,
-        "y": 499,
-        "width": 649,
-        "height": 351
+        "x": 45,
+        "y": 466,
+        "width": 758,
+        "height": 406
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          396.5,
-          509
+          424,
+          476
         ],
         "end": [
-          396.5,
-          840
+          424,
+          862
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "当地规则是判断依据，不同地区的分类可能不同。",
       "type": "concept",
       "region": {
-        "x": 877,
-        "y": 503,
-        "width": 751,
-        "height": 388
+        "x": 833,
+        "y": 430,
+        "width": 833,
+        "height": 480
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1252.5,
-          513
+          1249.5,
+          440
         ],
         "end": [
-          1252.5,
-          881
+          1249.5,
+          900
         ],
         "easing": "easeInOut"
       }

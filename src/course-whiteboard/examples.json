@@ -7,9 +7,10 @@
       "duration": 30,
       "audience": "儿童",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "graphite"
     },
-    "cover": "/course/whiteboard/soap-oil/cover.png",
+    "cover": "/course/whiteboard/soap-oil/square-cover.png",
     "video": "/course/whiteboard/soap-oil/tutorial.mp4",
     "scenes": 1
   },
@@ -21,9 +22,10 @@
       "duration": 30,
       "audience": "儿童",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "ink"
     },
-    "cover": "/course/whiteboard/paper-bridge/cover.png",
+    "cover": "/course/whiteboard/paper-bridge/square-cover.png",
     "video": "/course/whiteboard/paper-bridge/tutorial.mp4",
     "scenes": 1
   },
@@ -35,9 +37,10 @@
       "duration": 60,
       "audience": "青少年",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "marker"
     },
-    "cover": "/course/whiteboard/moon-phases/cover.png",
+    "cover": "/course/whiteboard/moon-phases/square-cover.png",
     "video": "/course/whiteboard/moon-phases/tutorial.mp4",
     "scenes": 2
   },
@@ -49,9 +52,10 @@
       "duration": 60,
       "audience": "青少年",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "watercolor"
     },
-    "cover": "/course/whiteboard/simple-lever/cover.png",
+    "cover": "/course/whiteboard/simple-lever/square-cover.png",
     "video": "/course/whiteboard/simple-lever/tutorial.mp4",
     "scenes": 2
   },
@@ -63,9 +67,10 @@
       "duration": 120,
       "audience": "儿童",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "charcoal"
     },
-    "cover": "/course/whiteboard/water-journey/cover.png",
+    "cover": "/course/whiteboard/water-journey/square-cover.png",
     "video": "/course/whiteboard/water-journey/tutorial.mp4",
     "scenes": 4
   },
@@ -77,9 +82,10 @@
       "duration": 120,
       "audience": "大众学习者",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "woodcut"
     },
-    "cover": "/course/whiteboard/teach-to-learn/cover.png",
+    "cover": "/course/whiteboard/teach-to-learn/square-cover.png",
     "video": "/course/whiteboard/teach-to-learn/tutorial.mp4",
     "scenes": 4
   },
@@ -91,9 +97,10 @@
       "duration": 180,
       "audience": "青少年",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "sepia"
     },
-    "cover": "/course/whiteboard/battery-energy/cover.png",
+    "cover": "/course/whiteboard/battery-energy/square-cover.png",
     "video": "/course/whiteboard/battery-energy/tutorial.mp4",
     "scenes": 6
   },
@@ -105,9 +112,10 @@
       "duration": 180,
       "audience": "大众学习者",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "crayon"
     },
-    "cover": "/course/whiteboard/recycle-rules/cover.png",
+    "cover": "/course/whiteboard/recycle-rules/square-cover.png",
     "video": "/course/whiteboard/recycle-rules/tutorial.mp4",
     "scenes": 6
   },
@@ -119,9 +127,10 @@
       "duration": 300,
       "audience": "青少年",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "paper"
     },
-    "cover": "/course/whiteboard/circuit-course/cover.png",
+    "cover": "/course/whiteboard/circuit-course/square-cover.png",
     "video": "/course/whiteboard/circuit-course/tutorial.mp4",
     "scenes": 10
   },
@@ -133,9 +142,10 @@
       "duration": 300,
       "audience": "职场人士",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "fineline"
     },
-    "cover": "/course/whiteboard/focus-work/cover.png",
+    "cover": "/course/whiteboard/focus-work/square-cover.png",
     "video": "/course/whiteboard/focus-work/tutorial.mp4",
     "scenes": 10
   }

@@ -65,11 +65,11 @@ const CoverApp = lazy(() => import("./covers/CoverApp"));
 const DocumentApp = lazy(() => import("./documents/DocumentApp"));
 const sessionTools: Record<string, React.ComponentType> = {
   ...(!releaseBuild ? {
-    "app.course": lazy(() => import("./course/CourseApp")),
+
     "app.html": lazy(() => import("./html/HtmlApp")),
     "app.comic": lazy(() => import("./comics/ComicApp")),
     "app.animation": lazy(() => import("./animations/AnimationApp")),
-  } : {}), "app.story-comic": StoryComicApp,
+  } : {}), "app.course": lazy(() => import("./course/CourseApp")), "app.story-comic": StoryComicApp,
   "app.design": DesignStudio, "app.cover": CoverApp, "app.whiteboard": Whiteboard, "app.doc": DocumentApp};
 import {
   native,
@@ -99,8 +99,9 @@ type Tool = {
   status?: "dev";
 };
 const tools: Tool[] = [
-  ...(!releaseBuild ? [
     { id: "app.course", name: "做课程", description: "把知识变成清晰易懂的学习卡片。", category: "设计工具", color: "green", icon: <CourseIcon /> },
+  ...(!releaseBuild ? [
+
     { id: "app.html", name: "HTML", description: "把内容变成精美的网页、卡片与演示。", category: "设计工具", color: "green", icon: <GlobalOutlined /> },
     { id: "app.animation", name: "小动画", description: "一点灵感，让想法动起来。", category: "设计工具", color: "green", icon: <PlayCircleOutlined style={{ color: "#64867b" }} /> },
     { id: "app.comic", name: "小漫画", description: "一句话，画出你的故事。", category: "设计工具", color: "green", icon: <ComicIcon /> },

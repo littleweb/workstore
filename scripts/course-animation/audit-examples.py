@@ -8,14 +8,27 @@ from PIL import Image, ImageDraw
 root=Path(__file__).resolve().parents[2]
 refs=json.loads((root/'src/course-animation/examples.json').read_text())
 assert len(refs)==10
+assert len(set(r['config']['style'] for r in refs))==10
+assert sorted(r['config']['duration'] for r in refs)==[30,30,60,60,120,120,180,180,300,300]
 sheet=Image.new('RGB',(960,len(refs)*204),'#f7f8f4')
 draw=ImageDraw.Draw(sheet)
 records=[]
+cover_sheet=Image.new('RGB',(1000,5*524),'white')
+cover_draw=ImageDraw.Draw(cover_sheet)
 for row,ref in enumerate(refs):
     folder=root/'public/course/animations'/ref['id']
     video=folder/'tutorial.mp4'
     plan=json.loads((folder/'tutorial.json').read_text())
     seconds=ref['config']['duration']
+    assert plan['style']==ref['config']['style']
+    manifest=json.loads((folder/'style.json').read_text())
+    assert manifest['style']==ref['config']['style'] and manifest['cover']==ref['cover'] and manifest['ratio']=='1:1'
+    cover=root/'public'/ref['cover'].lstrip('/')
+    image=Image.open(cover)
+    assert image.width==image.height and image.width>=1024
+    assert (folder/'style-cover-prompt.md').is_file()
+    cover_sheet.paste(image.convert('RGB').resize((500,500)),((row%2)*500,(row//2)*524+24))
+    cover_draw.text(((row%2)*500+8,(row//2)*524+5),ref['config']['style']+' | '+ref['id'],fill='#333333')
     assert sum(s['seconds'] for s in plan['scenes'])==seconds
     for scene in plan['scenes']:
         assert scene['audioVoice']=='kokoro-zh-zf_021-s0.93-v1'
@@ -34,8 +47,9 @@ for row,ref in enumerate(refs):
         subprocess.run(['ffmpeg','-v','error','-y','-ss',str(time),'-i',str(video),'-frames:v','1',str(target)],check=True)
         sheet.paste(Image.open(target).convert('RGB').resize((320,180)),(column*320,row*204+24))
     draw.text((8,row*204+5),f"{ref['id']} | {seconds}s | natural neural voice",fill='#333333')
-    records.append({'id':ref['id'],'path':f"public/course/animations/{ref['id']}/tutorial.mp4",'duration':data['format']['duration'],'frames':v['nb_frames'],'sha256':hashlib.sha256(video.read_bytes()).hexdigest(),'audio':'aac','scenes':len(plan['scenes']),'meanAudioDb':db,'voice':'kokoro-zh-zf_021-s0.93-v1','sceneSeconds':[s['seconds'] for s in plan['scenes']]})
+    records.append({'id':ref['id'],'style':ref['config']['style'],'cover':ref['cover'],'coverSize':[image.width,image.height],'coverSha256':hashlib.sha256(cover.read_bytes()).hexdigest(),'path':f"public/course/animations/{ref['id']}/tutorial.mp4",'duration':data['format']['duration'],'frames':v['nb_frames'],'sha256':hashlib.sha256(video.read_bytes()).hexdigest(),'audio':'aac','scenes':len(plan['scenes']),'meanAudioDb':db,'voice':'kokoro-zh-zf_021-s0.93-v1','sceneSeconds':[s['seconds'] for s in plan['scenes']]})
 sheet.save(root/'docs/course-animation-proof/natural-voice-references.jpg',quality=90)
+cover_sheet.save(root/'docs/course-animation-proof/style-square-covers.jpg',quality=90)
 audit={'engine':'Remotion 4.0.534','skillCommit':'32b241b97f4e0e4ab61fe9a41b05e6e64503f8c5','speech':json.loads((root/'vendor/course-tts/UPSTREAM.json').read_text()),'videos':records}
 (root/'docs/course-animation-reference-videos.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2)+'\n')
 print('Verified all ten naturally narrated tutorials, video frames, captions and audio.')

@@ -15,10 +15,10 @@
       "subtitle": "电池利用内部化学变化，为完整电路提供电能。",
       "type": "concept",
       "region": {
-        "x": 135,
-        "y": 85,
-        "width": 545,
-        "height": 294
+        "x": 126,
+        "y": 48,
+        "width": 601,
+        "height": 350
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          407.5,
-          95
+          426.5,
+          58
         ],
         "end": [
-          407.5,
-          369
+          426.5,
+          388
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "灯亮不亮，要同时看电池、连接和用电器。",
       "type": "concept",
       "region": {
-        "x": 1006,
-        "y": 129,
-        "width": 548,
-        "height": 228
+        "x": 926,
+        "y": 102,
+        "width": 652,
+        "height": 278
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1280,
-          139
+          1252,
+          112
         ],
         "end": [
-          1280,
-          347
+          1252,
+          370
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "当灯不亮时，先从说明允许的安全检查开始。",
       "type": "concept",
       "region": {
-        "x": 120,
-        "y": 515,
-        "width": 578,
-        "height": 330
+        "x": 69,
+        "y": 415,
+        "width": 676,
+        "height": 463
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          409,
-          525
+          407,
+          425
         ],
         "end": [
-          409,
-          835
+          407,
+          868
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：电池放进手电筒，为什么还需要打开开关？",
       "type": "concept",
       "region": {
-        "x": 994,
-        "y": 538,
-        "width": 599,
-        "height": 293
+        "x": 947,
+        "y": 436,
+        "width": 584,
+        "height": 438
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1293.5,
-          548
+          1239,
+          446
         ],
         "end": [
-          1293.5,
-          821
+          1239,
+          864
         ],
         "easing": "easeInOut"
       }

@@ -15,10 +15,10 @@
       "subtitle": "菜叶、果皮等食物残余，通常有专门处理路径。",
       "type": "concept",
       "region": {
-        "x": 257,
-        "y": 123,
-        "width": 347,
-        "height": 272
+        "x": 180,
+        "y": 59,
+        "width": 460,
+        "height": 376
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          430.5,
-          133
+          410,
+          69
         ],
         "end": [
-          430.5,
-          385
+          410,
+          425
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "把包装和里面的食物分开，能减少后续处理麻烦。",
       "type": "concept",
       "region": {
-        "x": 971,
-        "y": 125,
-        "width": 578,
-        "height": 264
+        "x": 870,
+        "y": 103,
+        "width": 726,
+        "height": 317
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1260,
-          135
+          1233,
+          113
         ],
         "end": [
-          1260,
-          379
+          1233,
+          410
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "水分和混杂物会影响处理，不要把袋子当食物残余。",
       "type": "concept",
       "region": {
-        "x": 162,
-        "y": 583,
-        "width": 512,
-        "height": 233
+        "x": 53,
+        "y": 497,
+        "width": 714,
+        "height": 353
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          418,
-          593
+          410,
+          507
         ],
         "end": [
-          418,
-          806
+          410,
+          840
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：带包装的剩饭，你会先做哪个分开动作？",
       "type": "concept",
       "region": {
-        "x": 935,
-        "y": 575,
-        "width": 647,
-        "height": 276
+        "x": 836,
+        "y": 522,
+        "width": 793,
+        "height": 320
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1258.5,
-          585
+          1232.5,
+          532
         ],
         "end": [
-          1258.5,
-          841
+          1232.5,
+          832
         ],
         "easing": "easeInOut"
       }

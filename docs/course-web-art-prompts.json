@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ink-water",
+    "file": "public/course/web/ink-water/scene-art.webp",
+    "prompt": "Chinese shan shui landscape, layered misty ink mountains, winding river in lower half, pine branches and pavilion, dry brush rock texture, warm ivory rice paper grain, uncluttered river/sky, no text/UI/watermark.",
+    "tool": "imagegen"
+  },
+  {
+    "id": "leaf-lab",
+    "file": "public/course/web/leaf-lab/scene-art.webp",
+    "prompt": "Premium botanical watercolor illustration, sage leaves and detailed veins on curving stem, sunlight upper right, subtle pigment blooms and cold pressed paper, natural history plate, no text/UI/watermark.",
+    "tool": "imagegen"
+  }
+]

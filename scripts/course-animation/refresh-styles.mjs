@@ -1,0 +1,20 @@
+import {readFile,writeFile,rm} from 'node:fs/promises';
+import {spawn} from 'node:child_process';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+const runtime=path.resolve('.course-animation-build/runtime');
+const model=createRequire(import.meta.url)(path.join(runtime,'model.cjs'));
+const refs=JSON.parse(await readFile('src/course-animation/examples.json','utf8'));
+const ids=process.argv.slice(2),selected=ids.length?refs.filter(r=>ids.includes(r.id)):refs;
+let cursor=0;
+await Promise.all(Array.from({length:2},async()=>{while(cursor<selected.length){
+ const r=selected[cursor++],job=path.resolve('public/course/animations',r.id);
+ const tutorial=JSON.parse(await readFile(path.join(job,'tutorial.json'),'utf8'));
+ tutorial.style=r.config.style;model.validateTutorial(tutorial,r.config);
+ await writeFile(path.join(job,'input.json'),JSON.stringify({tutorial,config:r.config},null,2));
+ console.log('RENDER STYLE',r.id,r.config.style);
+ await new Promise((resolve,reject)=>{const child=spawn(process.execPath,[path.join(runtime,'runner.mjs'),'render',job],{env:{...process.env,WORKSTORE_CHROME:path.join(runtime,'chrome/chrome-headless-shell')},stdio:['ignore','pipe','pipe']});let error='',last=-1;child.stdout.on('data',b=>{for(const line of String(b).split('\n'))try{const p=JSON.parse(line),step=Math.floor(p.progress*4);if(step!==last){last=step;console.log(r.id,Math.round(p.progress*100)+'%');}}catch{}});child.stderr.on('data',b=>error+=b);child.on('error',reject);child.on('exit',c=>c?reject(Error(error)):resolve());});
+ await writeFile(path.join(job,'tutorial.json'),JSON.stringify(tutorial,null,2));
+ await writeFile(path.join(job,'style.json'),JSON.stringify({style:r.config.style,cover:r.cover,ratio:'1:1'},null,2));
+ await rm(path.join(job,'result.json'),{force:true});console.log('COMPLETE STYLE',r.id);
+}}));

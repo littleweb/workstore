@@ -1,0 +1,158 @@
+[
+  {
+    "id": "electric-motor",
+    "title": "电车电机怎样转起来",
+    "topic": "以特斯拉电车为引子，交互讲解永磁同步电机的通用原理，调节磁场转速、反转和查看定子转子",
+    "summary": "调节旋转磁场，观察转子与磁场的同步关系。",
+    "config": {
+      "style": "simulation",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/electric-motor/cover.webp",
+    "page": "/course/web/electric-motor/index.html"
+  },
+  {
+    "id": "human-layers",
+    "title": "人体 3D 透视实验室",
+    "topic": "人体3D透视图：拖动旋转、切换皮肤骨骼器官层，选择心脏、肺、肝和胃查看概念性说明",
+    "summary": "拖动三维人体，切换结构层并查看器官。",
+    "config": {
+      "style": "anatomy",
+      "audience": "青少年",
+      "instruction": ""
+    },
+    "cover": "/course/web/human-layers/cover.webp",
+    "page": "/course/web/human-layers/index.html"
+  },
+  {
+    "id": "ink-water",
+    "title": "山水间的一滴水",
+    "topic": "用水墨山水体验水循环，调节日照与降水，观察蒸发、凝结和回流",
+    "summary": "调节日照和降水，追踪一滴水的循环。",
+    "config": {
+      "style": "ink",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/ink-water/cover.webp",
+    "page": "/course/web/ink-water/index.html"
+  },
+  {
+    "id": "leaf-lab",
+    "title": "叶子的光合作用工坊",
+    "topic": "水彩植物实验，改变光照与二氧化碳供应，观察光合作用的限制因素和氧气反馈",
+    "summary": "改变光照与气体供应，发现限制因素。",
+    "config": {
+      "style": "watercolor",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/leaf-lab/cover.webp",
+    "page": "/course/web/leaf-lab/index.html"
+  },
+  {
+    "id": "circuit-lab",
+    "title": "电路参数实验台",
+    "topic": "工程蓝图风格直流电路，调节电压、电阻和开关，按欧姆定律计算电流与功率",
+    "summary": "连接开关，观察电流、电压与电阻的关系。",
+    "config": {
+      "style": "blueprint",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/circuit-lab/cover.webp",
+    "page": "/course/web/circuit-lab/index.html"
+  },
+  {
+    "id": "solar-orbits",
+    "title": "太阳系轨道漫游",
+    "topic": "3D霓虹太阳系模型，拖动旋转、调节时间速度并点击地球与火星查看轨道运动",
+    "summary": "旋转空间视角，比较行星绕太阳的运动。",
+    "config": {
+      "style": "neon",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/solar-orbits/cover.webp",
+    "page": "/course/web/solar-orbits/index.html"
+  },
+  {
+    "id": "gear-workshop",
+    "title": "齿轮的速度交换",
+    "topic": "黏土工坊风格齿轮机构，调节两个齿轮的齿数，观察转向与传动比",
+    "summary": "改变齿数，观察从动齿轮的方向和速度。",
+    "config": {
+      "style": "clay",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/gear-workshop/cover.webp",
+    "page": "/course/web/gear-workshop/index.html"
+  },
+  {
+    "id": "fraction-pieces",
+    "title": "把分数拼成整块",
+    "topic": "纸艺分数互动，选择分母与分子，观察整体的等分与已选部分并验证分数",
+    "summary": "调节等分数量，亲手组合一个分数。",
+    "config": {
+      "style": "paper",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/fraction-pieces/cover.webp",
+    "page": "/course/web/fraction-pieces/index.html"
+  },
+  {
+    "id": "loop-playground",
+    "title": "亲手执行一次循环",
+    "topic": "像素乐园编程循环，设置重复次数，逐步执行并跟踪计数器和累加变量",
+    "summary": "单步执行，看到每一次循环怎样改变变量。",
+    "config": {
+      "style": "pixel",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/loop-playground/cover.webp",
+    "page": "/course/web/loop-playground/index.html"
+  },
+  {
+    "id": "wave-spectrum",
+    "title": "声音的波形实验",
+    "topic": "玻璃光谱风格声波交互，改变频率与振幅，观察波形并理解音调和响度的关系",
+    "summary": "改变频率和振幅，实时观察波形。",
+    "config": {
+      "style": "glass",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/wave-spectrum/cover.webp",
+    "page": "/course/web/wave-spectrum/index.html"
+  },
+  {
+    "id": "growth-chart",
+    "title": "增长为什么会放缓",
+    "topic": "杂志数据风格逻辑斯蒂增长模型，调节增长率与环境容量，对比限制下的增长曲线",
+    "summary": "调节环境容量，看增长曲线如何变化。",
+    "config": {
+      "style": "editorial",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/growth-chart/cover.webp",
+    "page": "/course/web/growth-chart/index.html"
+  },
+  {
+    "id": "coin-probability",
+    "title": "概率与频率小实验",
+    "topic": "极简硬币概率实验，可设置正面概率并投掷1次、100次，观察经验频率与理论概率",
+    "summary": "重复试验，比较理论概率和实验频率。",
+    "config": {
+      "style": "minimal",
+      "audience": "大众学习者",
+      "instruction": ""
+    },
+    "cover": "/course/web/coin-probability/cover.webp",
+    "page": "/course/web/coin-probability/index.html"
+  }
+]

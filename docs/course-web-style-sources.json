@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://dusk-villa-fidelity.pages.dev/",
+    "use": "场景主导的版式、精细材质与光影、视角操作；未复制模型和素材"
+  },
+  {
+    "url": "https://github.com/mrdoob/three.js",
+    "use": "本地渲染库、PBR、RoomEnvironment、OrbitControls、RoundedBoxGeometry",
+    "license": "MIT",
+    "version": "0.186.1"
+  },
+  {
+    "url": "https://github.com/shellcat-com/formwork-sumi",
+    "use": "研究纸张纤维、墨色扩散、留白和绘画风网页；未复制代码/素材"
+  },
+  {
+    "url": "https://github.com/amiradeu/mistwood-cottage",
+    "use": "研究微缩场景、氛围光与轻交互；未复制代码/素材"
+  },
+  {
+    "url": "https://github.com/davidllona/threejs-realistic-rendering",
+    "use": "研究PBR材料、环境光和阴影；未复制代码/素材"
+  },
+  {
+    "url": "https://github.com/UMRAM-Bilkent/supine-human-model",
+    "use": "人体外形几何，非解剖器官数据；自主归一化和计算法线",
+    "license": "CC0-1.0",
+    "credit": "Quaternius / UMRAM, Bilkent University"
+  }
+]

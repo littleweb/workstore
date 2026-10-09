@@ -64,3 +64,13 @@ test('browser development keeps original local images without download requests'
  const h=harness(false);await act(async()=>h.root.render(React.createElement(h.default,{src:'/design-studio/covers/a.webp',alt:'封面'})));
  assert.equal(h.host.querySelector('img').getAttribute('src'),'/design-studio/covers/a.webp');assert.equal(h.requests.length,0);await h.close();
 });
+
+test('course thumbnails use their own command and ignore late results when switching catalogs',async()=>{
+ const h=harness(),Image=h.default;
+ await act(async()=>h.root.render(React.createElement(Image,{src:'/same',alt:'课程',command:'course_asset',loading:'eager'})));
+ assert.equal(h.requests[0].command,'course_asset');
+ await act(async()=>h.root.render(React.createElement(Image,{src:'/same',alt:'设计',loading:'eager'})));
+ assert.equal(h.requests[1].command,'design_asset');
+ await act(async()=>h.requests[0].resolve('/cache/course.png'));assert.equal(h.host.querySelector('img'),null);
+ await act(async()=>h.requests[1].resolve('/cache/design.webp'));assert.equal(h.host.querySelector('img').src,'asset:/cache/design.webp');await h.close();
+});

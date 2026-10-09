@@ -15,10 +15,10 @@
       "subtitle": "水蒸气来到较冷的地方，可能凝结成小水滴。",
       "type": "concept",
       "region": {
-        "x": 256,
-        "y": 59,
-        "width": 391,
-        "height": 352
+        "x": 169,
+        "y": 62,
+        "width": 530,
+        "height": 341
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          451.5,
-          69
+          434,
+          72
         ],
         "end": [
-          451.5,
-          401
+          434,
+          393
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "云里聚集着小水滴或冰晶，云不是一团水蒸气。",
       "type": "concept",
       "region": {
-        "x": 967,
-        "y": 73,
-        "width": 520,
-        "height": 321
+        "x": 846,
+        "y": 20,
+        "width": 788,
+        "height": 414
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1227,
-          83
+          1240,
+          30
         ],
         "end": [
-          1227,
-          384
+          1240,
+          424
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "水滴不断碰合，变大后可能落下来形成雨。",
       "type": "concept",
       "region": {
-        "x": 223,
-        "y": 487,
-        "width": 437,
-        "height": 390
+        "x": 57,
+        "y": 460,
+        "width": 723,
+        "height": 417
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,11 +93,11 @@
       },
       "handPath": {
         "start": [
-          441.5,
-          497
+          418.5,
+          470
         ],
         "end": [
-          441.5,
+          418.5,
           867
         ],
         "easing": "easeInOut"
@@ -111,10 +111,10 @@
       "subtitle": "回想一下：看到云和看不到水蒸气，有什么区别？",
       "type": "concept",
       "region": {
-        "x": 995,
-        "y": 501,
-        "width": 499,
-        "height": 397
+        "x": 850,
+        "y": 466,
+        "width": 809,
+        "height": 455
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1244.5,
-          511
+          1254.5,
+          476
         ],
         "end": [
-          1244.5,
-          888
+          1254.5,
+          911
         ],
         "easing": "easeInOut"
       }

@@ -15,10 +15,10 @@
       "subtitle": "干净的纸、金属和一些包装，可以进入相应回收流程。",
       "type": "concept",
       "region": {
-        "x": 136,
-        "y": 109,
-        "width": 593,
-        "height": 273
+        "x": 80,
+        "y": 43,
+        "width": 685,
+        "height": 397
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          432.5,
-          119
+          422.5,
+          53
         ],
         "end": [
-          432.5,
-          372
+          422.5,
+          430
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "严重污染会影响回收，不是材质对了就一定能回收。",
       "type": "concept",
       "region": {
-        "x": 933,
-        "y": 99,
-        "width": 597,
-        "height": 294
+        "x": 875,
+        "y": 32,
+        "width": 736,
+        "height": 406
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1231.5,
-          109
+          1243,
+          42
         ],
         "end": [
-          1231.5,
-          383
+          1243,
+          428
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "适当清空容器，能减少残液污染其他物品。",
       "type": "concept",
       "region": {
-        "x": 245,
-        "y": 467,
-        "width": 377,
-        "height": 387
+        "x": 140,
+        "y": 494,
+        "width": 521,
+        "height": 389
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          433.5,
-          477
+          400.5,
+          504
         ],
         "end": [
-          433.5,
-          844
+          400.5,
+          873
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "具体清洗和分类要求，仍要遵循所在地说明。",
       "type": "concept",
       "region": {
-        "x": 944,
-        "y": 485,
-        "width": 609,
-        "height": 363
+        "x": 842,
+        "y": 475,
+        "width": 828,
+        "height": 420
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1248.5,
-          495
+          1256,
+          485
         ],
         "end": [
-          1248.5,
-          838
+          1256,
+          885
         ],
         "easing": "easeInOut"
       }

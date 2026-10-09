@@ -1,0 +1,65 @@
+{
+  "method": "builtin imagegen edit: preserve original style, recompose square",
+  "covers": [
+    {
+      "id": "soap-oil",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"肥皂怎样带走油污\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/soap-oil/cover.png",
+      "target": "public/course/whiteboard/soap-oil/square-cover.png"
+    },
+    {
+      "id": "paper-bridge",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"折一座更稳的纸桥\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/paper-bridge/cover.png",
+      "target": "public/course/whiteboard/paper-bridge/square-cover.png"
+    },
+    {
+      "id": "moon-phases",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"月亮为什么有圆有缺\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/moon-phases/cover.png",
+      "target": "public/course/whiteboard/moon-phases/square-cover.png"
+    },
+    {
+      "id": "simple-lever",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"看懂支点与杠杆\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/simple-lever/cover.png",
+      "target": "public/course/whiteboard/simple-lever/square-cover.png"
+    },
+    {
+      "id": "water-journey",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"一滴水的循环旅行\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/water-journey/cover.png",
+      "target": "public/course/whiteboard/water-journey/square-cover.png"
+    },
+    {
+      "id": "teach-to-learn",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"用讲解检验理解\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/teach-to-learn/cover.png",
+      "target": "public/course/whiteboard/teach-to-learn/square-cover.png"
+    },
+    {
+      "id": "battery-energy",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"电池怎样提供能量\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/battery-energy/cover.png",
+      "target": "public/course/whiteboard/battery-energy/square-cover.png"
+    },
+    {
+      "id": "recycle-rules",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"把垃圾分类变成小流程\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/recycle-rules/cover.png",
+      "target": "public/course/whiteboard/recycle-rules/square-cover.png"
+    },
+    {
+      "id": "circuit-course",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"五分钟看懂简单电路\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/circuit-course/cover.png",
+      "target": "public/course/whiteboard/circuit-course/square-cover.png"
+    },
+    {
+      "id": "focus-work",
+      "prompt": "Use case: scientific-educational. Edit target: supplied landscape tutorial cover. Recompose it into a genuine 1:1 square cover (equal width and height), with complete readable title \"安排一次专注工作\" above a balanced illustration. Preserve its original distinctive drawing medium, palette, subject and educational meaning. Rearrange objects to fit the square, do not merely crop, stretch or pad the landscape. Keep all title characters inside a safe margin, optionally split title into two lines. No extra words, page numbers or watermarks. Preserve scientific accuracy: for electrical examples exactly one wire from each battery terminal to a different bulb holder post, forming one closed loop; do not short circuit. For lunar phases show full, half, crescent with the same lit side.",
+      "reference": "public/course/whiteboard/focus-work/cover.png",
+      "target": "public/course/whiteboard/focus-work/square-cover.png"
+    }
+  ]
+}

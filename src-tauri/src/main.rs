@@ -1,6 +1,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 mod comic_catalog;
 mod cover_previews;
+mod remote_resources;
 mod ai_images;
 mod ai;
 mod documents;
@@ -12,6 +13,7 @@ mod ai_speech;
 mod design;
 mod story_comics;
 mod html_runtime;
+mod course_web;
 mod xiaohongshu;
 mod comics;
 use comics::{Comic, ComicList, LoadedComic};
@@ -617,6 +619,8 @@ fn main() {
     tauri::Builder::default()
         .manage(course_animation::Jobs::default())
         .register_asynchronous_uri_scheme_protocol("course-media",|ctx,request,responder|{let app=ctx.app_handle().clone();std::thread::spawn(move||responder.respond(course_animation::serve(&app,request)));})
+        .manage(course_web::Previews::default())
+        .register_uri_scheme_protocol("course-web",|ctx,request|course_web::serve(ctx.app_handle(),request))
         .manage(html_runtime::HtmlRuntime::default())
         .manage(xiaohongshu::Publisher::default())
         .plugin(tauri_plugin_updater::Builder::new().build())
@@ -667,6 +671,9 @@ fn main() {
             xiaohongshu::xhs_connect,
             xiaohongshu::xhs_publish,
             html_runtime::html_original_start,
+            html_runtime::course_web_publish,
+            course_web::preview_course_web,
+            course_web::release_course_web_preview,
             html_runtime::html_original_cancel,
             html_runtime::html_original_backup,
             html_runtime::html_original_export,
@@ -730,6 +737,8 @@ fn main() {
             ai_images::ai_read_image,
             cover_previews::cover_preview,
             cover_previews::design_asset,
+            remote_resources::course_asset,
+            remote_resources::course_asset_text,
             comic_catalog::comic_template_catalog,
             comic_catalog::comic_template_activate,
             comics::save_comic_export,

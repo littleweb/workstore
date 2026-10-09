@@ -7,7 +7,7 @@ import {imageSource} from '../comics/images';
 import {pdfBlob} from '../story-comic/export';
 import {pageFilename,publicationCopy,copyText,type Content} from './model';
 export const safeName=(s:string)=>s.replace(/[\\/:*?"<>|]/g,'_');
-export async function pngData(src:string){const resolved=await imageSource(src);if(resolved.startsWith('data:image/png;base64,'))return resolved;const im=new Image();im.src=resolved;await im.decode();const canvas=document.createElement('canvas');canvas.width=im.naturalWidth;canvas.height=im.naturalHeight;canvas.getContext('2d')!.drawImage(im,0,0);return canvas.toDataURL('image/png');}
+export async function pngData(src:string){const resolved=await imageSource(src);if(resolved.startsWith('data:image/png;base64,'))return resolved;const im=new Image();if(/^asset:|^https?:\/\/asset\.localhost/.test(resolved))im.crossOrigin='anonymous';im.src=resolved;await im.decode();const canvas=document.createElement('canvas');canvas.width=im.naturalWidth;canvas.height=im.naturalHeight;canvas.getContext('2d')!.drawImage(im,0,0);return canvas.toDataURL('image/png');}
 const bytes=(s:string)=>Uint8Array.from(atob(s.split(',')[1]),c=>c.charCodeAt(0));
 export async function download(blob:Blob,name:string,ext:string){
  if(native){const path=await save({defaultPath:name,filters:[{name:ext.toUpperCase(),extensions:[ext]}]});if(!path)return;

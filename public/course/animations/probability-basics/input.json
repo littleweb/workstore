@@ -1,1 +1,1070 @@
-{"tutorial":{"title":"用五分钟理解概率","summary":"概率描述可能性，频率记录实际结果。完整记录、公平假设和清晰条件比猜测更重要，先做小实验再解释。","scenes":[{"title":"概率回答什么问题","seconds":15,"narration":"有些事情必然发生，有些不可能发生，还有一些结果不确定。概率用一个数描述特定结果发生的可能性。","points":["先确定要讨论的结果"],"visual":{"kind":"compare","labels":["一定发生","不可能发生","可能发生"],"values":[],"note":""},"captions":[{"text":"有些事情必然发生","startMs":120,"endMs":1937,"timestampMs":null,"confidence":null},{"text":"有些不可能发生","startMs":1937,"endMs":3552,"timestampMs":null,"confidence":null},{"text":"还有一些结果不确定","startMs":3552,"endMs":5570,"timestampMs":null,"confidence":null},{"text":"概率用一个数描述特定结果发生的可能性","startMs":5570,"endMs":9405,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/01.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"概率在零和一之间","seconds":15,"narration":"不可能事件概率为零，必然事件为一。介于零和一之间，表示不同程度的可能性，但不保证一次实验的结果。","points":["0到1","不是单次保证"],"visual":{"kind":"chart","labels":["不可能","可能","必然"],"values":[0,50,100],"note":"示意数据，用于说明关系"},"captions":[{"text":"不可能事件概率为零","startMs":120,"endMs":2055,"timestampMs":null,"confidence":null},{"text":"必然事件为一","startMs":2055,"endMs":3409,"timestampMs":null,"confidence":null},{"text":"介于零和一之间","startMs":3409,"endMs":4957,"timestampMs":null,"confidence":null},{"text":"表示不同程度的可能性","startMs":4957,"endMs":7085,"timestampMs":null,"confidence":null},{"text":"但不保证一次实验的结果","startMs":7085,"endMs":9406,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/02.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"从公平硬币开始","seconds":15,"narration":"假设一枚公平硬币，每次落地只有正反两种等可能结果。正面占两种结果中的一种，概率是二分之一。","points":["明确公平假设"],"visual":{"kind":"fraction","labels":["正面占一种","两种等可能结果"],"values":[1,2],"note":""},"captions":[{"text":"假设一枚公平硬币","startMs":120,"endMs":2003,"timestampMs":null,"confidence":null},{"text":"每次落地只有正反两种等可能结果","startMs":2003,"endMs":5351,"timestampMs":null,"confidence":null},{"text":"正面占两种结果中的一种","startMs":5351,"endMs":7861,"timestampMs":null,"confidence":null},{"text":"概率是二分之一","startMs":7861,"endMs":9535,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/03.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"先写清楚样本空间","seconds":15,"narration":"样本空间列出一次实验所有可能结果。掷普通骰子时是一到六，不能漏掉某个结果，再凭印象计算。","points":["列出所有可能结果"],"visual":{"kind":"code","labels":["1、2、3","4、5、6","共6种结果"],"values":[],"note":""},"captions":[{"text":"样本空间列出一次实验所有可能结果","startMs":120,"endMs":3671,"timestampMs":null,"confidence":null},{"text":"掷普通骰子时是一到六","startMs":3671,"endMs":5968,"timestampMs":null,"confidence":null},{"text":"不能漏掉某个结果","startMs":5968,"endMs":7848,"timestampMs":null,"confidence":null},{"text":"再凭印象计算","startMs":7848,"endMs":9311,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/04.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"事件是结果的集合","seconds":15,"narration":"掷骰子得到偶数，是得到二、四或六这三种结果的集合。我们把符合条件的一组结果叫一个事件。","points":["符合条件的结果"],"visual":{"kind":"code","labels":["全部：1到6","偶数：2、4、6","符合条件有3种"],"values":[],"note":""},"captions":[{"text":"掷骰子得到偶数","startMs":120,"endMs":1745,"timestampMs":null,"confidence":null},{"text":"是得到二、四或六这三种结果的集合","startMs":1745,"endMs":5197,"timestampMs":null,"confidence":null},{"text":"我们把符合条件的一组结果叫一个事件","startMs":5197,"endMs":8853,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/05.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"什么时候可以数格子","seconds":15,"narration":"如果六个点数等可能，偶数概率是三除以六，也就是二分之一。等可能条件不成立，就不能简单按数量算。","points":["有利结果 ÷ 全部结果"],"visual":{"kind":"fraction","labels":["3种偶数结果","6种等可能结果"],"values":[3,6],"note":""},"captions":[{"text":"如果六个点数等可能","startMs":120,"endMs":2159,"timestampMs":null,"confidence":null},{"text":"偶数概率是三除以六","startMs":2159,"endMs":4198,"timestampMs":null,"confidence":null},{"text":"也就是二分之一","startMs":4198,"endMs":5829,"timestampMs":null,"confidence":null},{"text":"等可能条件不成立","startMs":5829,"endMs":7664,"timestampMs":null,"confidence":null},{"text":"就不能简单按数量算","startMs":7664,"endMs":9705,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/06.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"一个袋子的例子","seconds":15,"narration":"袋里有三个红球和一个蓝球。假设每个球被抽中的机会相同，抽到蓝球就是四个球中的一个，概率四分之一。","points":["每个球等机会"],"visual":{"kind":"fraction","labels":["1个蓝球","一共4个球"],"values":[1,4],"note":""},"captions":[{"text":"袋里有三个红球和一个蓝球","startMs":120,"endMs":2803,"timestampMs":null,"confidence":null},{"text":"假设每个球被抽中的机会相同","startMs":2803,"endMs":5692,"timestampMs":null,"confidence":null},{"text":"抽到蓝球就是四个球中的一个","startMs":5692,"endMs":8582,"timestampMs":null,"confidence":null},{"text":"概率四分之一","startMs":8582,"endMs":10026,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/07.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"换一种描述同一事件","seconds":15,"narration":"同一个袋子里抽到红球，有三种球符合要求，一共四个。概率四分之三，它与蓝球事件的概率相加为一。","points":["红球和蓝球覆盖全部"],"visual":{"kind":"fraction","labels":["3个红球","一共4个球"],"values":[3,4],"note":""},"captions":[{"text":"同一个袋子里抽到红球","startMs":120,"endMs":2372,"timestampMs":null,"confidence":null},{"text":"有三种球符合要求","startMs":2372,"endMs":4214,"timestampMs":null,"confidence":null},{"text":"一共四个","startMs":4214,"endMs":5237,"timestampMs":null,"confidence":null},{"text":"概率四分之三","startMs":5237,"endMs":6670,"timestampMs":null,"confidence":null},{"text":"它与蓝球事件的概率相加为一","startMs":6670,"endMs":9535,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/08.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"概率不是短期配额","seconds":15,"narration":"公平硬币正面概率二分之一，不代表投两次必须出现一次正面。两次都正面、都反面也都可能发生。","points":["两次不必一正一反"],"visual":{"kind":"compare","labels":["理论概率","单次实验结果"],"values":[],"note":""},"captions":[{"text":"公平硬币正面概率二分之一","startMs":120,"endMs":2836,"timestampMs":null,"confidence":null},{"text":"不代表投两次必须出现一次正面","startMs":2836,"endMs":5971,"timestampMs":null,"confidence":null},{"text":"两次都正面、都反面也都可能发生","startMs":5971,"endMs":9313,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/09.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"频率来自实际记录","seconds":15,"narration":"频率是实际发生次数除以实验次数。例如十次里有六次正面，观察到的正面频率就是六除以十。","points":["记录真实次数"],"visual":{"kind":"fraction","labels":["6次正面","10次实验"],"values":[6,10],"note":""},"captions":[{"text":"频率是实际发生次数除以实验次数","startMs":120,"endMs":3458,"timestampMs":null,"confidence":null},{"text":"例如十次里有六次正面","startMs":3458,"endMs":5754,"timestampMs":null,"confidence":null},{"text":"观察到的正面频率就是六除以十","startMs":5754,"endMs":8884,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/10.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"频率和概率有区别","seconds":15,"narration":"频率会随每批实验变化。重复次数增多时，频率通常在概率附近波动，但不能用一次短实验断定硬币不公平。","points":["实验会有波动"],"visual":{"kind":"compare","labels":["概率：模型","频率：记录"],"values":[],"note":""},"captions":[{"text":"频率会随每批实验变化","startMs":120,"endMs":2388,"timestampMs":null,"confidence":null},{"text":"重复次数增多时","startMs":2388,"endMs":4037,"timestampMs":null,"confidence":null},{"text":"频率通常在概率附近波动","startMs":4037,"endMs":6511,"timestampMs":null,"confidence":null},{"text":"但不能用一次短实验断定硬币不公平","startMs":6511,"endMs":10015,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/11.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"设计一张记录表","seconds":15,"narration":"先确定规则，再记录每次结果。不要看到某次不合心意就删掉，也不要中途改变实验方式，只保留喜欢的数据。","points":["规则一致","完整记录"],"visual":{"kind":"flow","labels":["确定规则","逐次记录","计算频率"],"values":[],"note":""},"captions":[{"text":"先确定规则","startMs":120,"endMs":1341,"timestampMs":null,"confidence":null},{"text":"再记录每次结果","startMs":1341,"endMs":2969,"timestampMs":null,"confidence":null},{"text":"不要看到某次不合心意就删掉","startMs":2969,"endMs":5818,"timestampMs":null,"confidence":null},{"text":"也不要中途改变实验方式","startMs":5818,"endMs":8260,"timestampMs":null,"confidence":null},{"text":"只保留喜欢的数据","startMs":8260,"endMs":10091,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/12.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"独立意味着什么","seconds":15,"narration":"独立事件意味着前一个结果不会改变后一个的概率。理想的独立掷硬币，前面几次都是反面，不会让下一次必须正面。","points":["前次结果不改变下次概率"],"visual":{"kind":"compare","labels":["过去的结果","下一次仍有两种"],"values":[],"note":""},"captions":[{"text":"独立事件意味着前一个结果不会改变后一个的概率","startMs":120,"endMs":4833,"timestampMs":null,"confidence":null},{"text":"理想的独立掷硬币","startMs":4833,"endMs":6676,"timestampMs":null,"confidence":null},{"text":"前面几次都是反面","startMs":6676,"endMs":8520,"timestampMs":null,"confidence":null},{"text":"不会让下一次必须正面","startMs":8520,"endMs":10774,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/13.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"连续两次正面的概率","seconds":15,"narration":"在独立且公平的条件下，两次结果是正正、正反、反正、反反，四种等可能。正正只占一种，所以四分之一。","points":["列出四种等可能组合"],"visual":{"kind":"fraction","labels":["正正占1种","一共4种组合"],"values":[1,4],"note":""},"captions":[{"text":"在独立且公平的条件下","startMs":120,"endMs":2289,"timestampMs":null,"confidence":null},{"text":"两次结果是正正、正反、反正、反反","startMs":2289,"endMs":5642,"timestampMs":null,"confidence":null},{"text":"四种等可能","startMs":5642,"endMs":6825,"timestampMs":null,"confidence":null},{"text":"正正只占一种","startMs":6825,"endMs":8206,"timestampMs":null,"confidence":null},{"text":"所以四分之一","startMs":8206,"endMs":9585,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/14.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"放回和不放回不同","seconds":15,"narration":"从袋子抽球后放回，袋中比例保持不变；不放回，下一次的组成就变了。计算前一定问清楚抽样规则。","points":["放回：组成不变","不放回：组成变化"],"visual":{"kind":"compare","labels":["放回抽样","不放回抽样"],"values":[],"note":""},"captions":[{"text":"从袋子抽球后放回","startMs":120,"endMs":1988,"timestampMs":null,"confidence":null},{"text":"袋中比例保持不变","startMs":1988,"endMs":3856,"timestampMs":null,"confidence":null},{"text":"不放回","startMs":3856,"endMs":4686,"timestampMs":null,"confidence":null},{"text":"下一次的组成就变了","startMs":4686,"endMs":6761,"timestampMs":null,"confidence":null},{"text":"计算前一定问清楚抽样规则","startMs":6761,"endMs":9460,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/15.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"一个不放回的练习","seconds":15,"narration":"三个红球一个蓝球，先抽到蓝球且不放回后，袋里只剩红球。因此在这个条件下，第二次抽到蓝球概率为零。","points":["条件改变了样本空间"],"visual":{"kind":"flow","labels":["抽走蓝球","只剩3个红球","再次蓝球不可能"],"values":[],"note":""},"captions":[{"text":"三个红球一个蓝球","startMs":120,"endMs":1963,"timestampMs":null,"confidence":null},{"text":"先抽到蓝球且不放回后","startMs":1963,"endMs":4216,"timestampMs":null,"confidence":null},{"text":"袋里只剩红球","startMs":4216,"endMs":5650,"timestampMs":null,"confidence":null},{"text":"因此在这个条件下","startMs":5650,"endMs":7493,"timestampMs":null,"confidence":null},{"text":"第二次抽到蓝球概率为零","startMs":7493,"endMs":9949,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/16.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"不要把相关当因果","seconds":15,"narration":"两件事一起出现，不自动证明一件导致另一件。解释概率数据时，还要考虑共同原因、样本和记录方法。","points":["共同出现不等于导致"],"visual":{"kind":"compare","labels":["一起出现","因果证据"],"values":[],"note":""},"captions":[{"text":"两件事一起出现","startMs":120,"endMs":1702,"timestampMs":null,"confidence":null},{"text":"不自动证明一件导致另一件","startMs":1702,"endMs":4271,"timestampMs":null,"confidence":null},{"text":"解释概率数据时","startMs":4271,"endMs":5853,"timestampMs":null,"confidence":null},{"text":"还要考虑共同原因、样本和记录方法","startMs":5853,"endMs":9213,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/17.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"先判断条件再计算","seconds":15,"narration":"遇到概率题，先问结果有哪些、是否等可能、是否独立、是否放回。问题说清楚，计算才有可靠的基础。","points":["条件先于公式"],"visual":{"kind":"flow","labels":["结果与条件","合适模型","计算与解释"],"values":[],"note":""},"captions":[{"text":"遇到概率题","startMs":120,"endMs":1310,"timestampMs":null,"confidence":null},{"text":"先问结果有哪些、是否等可能、是否独立、是否放回","startMs":1310,"endMs":6068,"timestampMs":null,"confidence":null},{"text":"问题说清楚","startMs":6068,"endMs":7258,"timestampMs":null,"confidence":null},{"text":"计算才有可靠的基础","startMs":7258,"endMs":9241,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/18.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"最后自己做一题","seconds":15,"narration":"公平骰子掷一次，点数大于四的概率是多少？符合条件的是五和六，两种除以六种，得到三分之一。","points":["先列出5、6","2 ÷ 6 = 1/3"],"visual":{"kind":"fraction","labels":["2种大于4的结果","6种等可能结果"],"values":[2,6],"note":""},"captions":[{"text":"公平骰子掷一次","startMs":120,"endMs":1696,"timestampMs":null,"confidence":null},{"text":"点数大于四的概率是多少","startMs":1696,"endMs":4060,"timestampMs":null,"confidence":null},{"text":"符合条件的是五和六","startMs":4060,"endMs":6030,"timestampMs":null,"confidence":null},{"text":"两种除以六种","startMs":6030,"endMs":7409,"timestampMs":null,"confidence":null},{"text":"得到三分之一","startMs":7409,"endMs":8789,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/19.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"带着模型去观察","seconds":15,"narration":"概率描述可能性，频率记录实际结果。完整记录、公平假设和清晰条件比猜测更重要，先做小实验再解释。","points":["概率、频率、条件"],"visual":{"kind":"flow","labels":["明确条件","记录实验","解释结果"],"values":[],"note":""},"captions":[{"text":"概率描述可能性","startMs":120,"endMs":1842,"timestampMs":null,"confidence":null},{"text":"频率记录实际结果","startMs":1842,"endMs":3779,"timestampMs":null,"confidence":null},{"text":"完整记录、公平假设和清晰条件比猜测更重要","startMs":3779,"endMs":8300,"timestampMs":null,"confidence":null},{"text":"先做小实验再解释","startMs":8300,"endMs":10238,"timestampMs":null,"confidence":null}],"audio":"/course/animations/probability-basics/20.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"}],"duration":300,"style":"warm","video":"/course/animations/probability-basics/tutorial.mp4"},"config":{"duration":300,"style":"warm","audience":"青少年","voice":true,"voiceId":"zf_021"}}
+{
+  "tutorial": {
+    "title": "用五分钟理解概率",
+    "summary": "概率描述可能性，频率记录实际结果。完整记录、公平假设和清晰条件比猜测更重要，先做小实验再解释。",
+    "scenes": [
+      {
+        "title": "概率回答什么问题",
+        "seconds": 15,
+        "narration": "有些事情必然发生，有些不可能发生，还有一些结果不确定。概率用一个数描述特定结果发生的可能性。",
+        "points": [
+          "先确定要讨论的结果"
+        ],
+        "visual": {
+          "kind": "compare",
+          "labels": [
+            "一定发生",
+            "不可能发生",
+            "可能发生"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "有些事情必然发生",
+            "startMs": 120,
+            "endMs": 1937,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "有些不可能发生",
+            "startMs": 1937,
+            "endMs": 3552,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "还有一些结果不确定",
+            "startMs": 3552,
+            "endMs": 5570,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "概率用一个数描述特定结果发生的可能性",
+            "startMs": 5570,
+            "endMs": 9405,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/01.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "概率在零和一之间",
+        "seconds": 15,
+        "narration": "不可能事件概率为零，必然事件为一。介于零和一之间，表示不同程度的可能性，但不保证一次实验的结果。",
+        "points": [
+          "0到1",
+          "不是单次保证"
+        ],
+        "visual": {
+          "kind": "chart",
+          "labels": [
+            "不可能",
+            "可能",
+            "必然"
+          ],
+          "values": [
+            0,
+            50,
+            100
+          ],
+          "note": "示意数据，用于说明关系"
+        },
+        "captions": [
+          {
+            "text": "不可能事件概率为零",
+            "startMs": 120,
+            "endMs": 2055,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "必然事件为一",
+            "startMs": 2055,
+            "endMs": 3409,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "介于零和一之间",
+            "startMs": 3409,
+            "endMs": 4957,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "表示不同程度的可能性",
+            "startMs": 4957,
+            "endMs": 7085,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "但不保证一次实验的结果",
+            "startMs": 7085,
+            "endMs": 9406,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/02.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "从公平硬币开始",
+        "seconds": 15,
+        "narration": "假设一枚公平硬币，每次落地只有正反两种等可能结果。正面占两种结果中的一种，概率是二分之一。",
+        "points": [
+          "明确公平假设"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "正面占一种",
+            "两种等可能结果"
+          ],
+          "values": [
+            1,
+            2
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "假设一枚公平硬币",
+            "startMs": 120,
+            "endMs": 2003,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "每次落地只有正反两种等可能结果",
+            "startMs": 2003,
+            "endMs": 5351,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "正面占两种结果中的一种",
+            "startMs": 5351,
+            "endMs": 7861,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "概率是二分之一",
+            "startMs": 7861,
+            "endMs": 9535,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/03.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "先写清楚样本空间",
+        "seconds": 15,
+        "narration": "样本空间列出一次实验所有可能结果。掷普通骰子时是一到六，不能漏掉某个结果，再凭印象计算。",
+        "points": [
+          "列出所有可能结果"
+        ],
+        "visual": {
+          "kind": "code",
+          "labels": [
+            "1、2、3",
+            "4、5、6",
+            "共6种结果"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "样本空间列出一次实验所有可能结果",
+            "startMs": 120,
+            "endMs": 3671,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "掷普通骰子时是一到六",
+            "startMs": 3671,
+            "endMs": 5968,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "不能漏掉某个结果",
+            "startMs": 5968,
+            "endMs": 7848,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "再凭印象计算",
+            "startMs": 7848,
+            "endMs": 9311,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/04.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "事件是结果的集合",
+        "seconds": 15,
+        "narration": "掷骰子得到偶数，是得到二、四或六这三种结果的集合。我们把符合条件的一组结果叫一个事件。",
+        "points": [
+          "符合条件的结果"
+        ],
+        "visual": {
+          "kind": "code",
+          "labels": [
+            "全部：1到6",
+            "偶数：2、4、6",
+            "符合条件有3种"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "掷骰子得到偶数",
+            "startMs": 120,
+            "endMs": 1745,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "是得到二、四或六这三种结果的集合",
+            "startMs": 1745,
+            "endMs": 5197,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "我们把符合条件的一组结果叫一个事件",
+            "startMs": 5197,
+            "endMs": 8853,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/05.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "什么时候可以数格子",
+        "seconds": 15,
+        "narration": "如果六个点数等可能，偶数概率是三除以六，也就是二分之一。等可能条件不成立，就不能简单按数量算。",
+        "points": [
+          "有利结果 ÷ 全部结果"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "3种偶数结果",
+            "6种等可能结果"
+          ],
+          "values": [
+            3,
+            6
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "如果六个点数等可能",
+            "startMs": 120,
+            "endMs": 2159,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "偶数概率是三除以六",
+            "startMs": 2159,
+            "endMs": 4198,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "也就是二分之一",
+            "startMs": 4198,
+            "endMs": 5829,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "等可能条件不成立",
+            "startMs": 5829,
+            "endMs": 7664,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "就不能简单按数量算",
+            "startMs": 7664,
+            "endMs": 9705,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/06.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "一个袋子的例子",
+        "seconds": 15,
+        "narration": "袋里有三个红球和一个蓝球。假设每个球被抽中的机会相同，抽到蓝球就是四个球中的一个，概率四分之一。",
+        "points": [
+          "每个球等机会"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "1个蓝球",
+            "一共4个球"
+          ],
+          "values": [
+            1,
+            4
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "袋里有三个红球和一个蓝球",
+            "startMs": 120,
+            "endMs": 2803,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "假设每个球被抽中的机会相同",
+            "startMs": 2803,
+            "endMs": 5692,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "抽到蓝球就是四个球中的一个",
+            "startMs": 5692,
+            "endMs": 8582,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "概率四分之一",
+            "startMs": 8582,
+            "endMs": 10026,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/07.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "换一种描述同一事件",
+        "seconds": 15,
+        "narration": "同一个袋子里抽到红球，有三种球符合要求，一共四个。概率四分之三，它与蓝球事件的概率相加为一。",
+        "points": [
+          "红球和蓝球覆盖全部"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "3个红球",
+            "一共4个球"
+          ],
+          "values": [
+            3,
+            4
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "同一个袋子里抽到红球",
+            "startMs": 120,
+            "endMs": 2372,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "有三种球符合要求",
+            "startMs": 2372,
+            "endMs": 4214,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "一共四个",
+            "startMs": 4214,
+            "endMs": 5237,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "概率四分之三",
+            "startMs": 5237,
+            "endMs": 6670,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "它与蓝球事件的概率相加为一",
+            "startMs": 6670,
+            "endMs": 9535,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/08.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "概率不是短期配额",
+        "seconds": 15,
+        "narration": "公平硬币正面概率二分之一，不代表投两次必须出现一次正面。两次都正面、都反面也都可能发生。",
+        "points": [
+          "两次不必一正一反"
+        ],
+        "visual": {
+          "kind": "compare",
+          "labels": [
+            "理论概率",
+            "单次实验结果"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "公平硬币正面概率二分之一",
+            "startMs": 120,
+            "endMs": 2836,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "不代表投两次必须出现一次正面",
+            "startMs": 2836,
+            "endMs": 5971,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "两次都正面、都反面也都可能发生",
+            "startMs": 5971,
+            "endMs": 9313,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/09.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "频率来自实际记录",
+        "seconds": 15,
+        "narration": "频率是实际发生次数除以实验次数。例如十次里有六次正面，观察到的正面频率就是六除以十。",
+        "points": [
+          "记录真实次数"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "6次正面",
+            "10次实验"
+          ],
+          "values": [
+            6,
+            10
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "频率是实际发生次数除以实验次数",
+            "startMs": 120,
+            "endMs": 3458,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "例如十次里有六次正面",
+            "startMs": 3458,
+            "endMs": 5754,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "观察到的正面频率就是六除以十",
+            "startMs": 5754,
+            "endMs": 8884,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/10.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "频率和概率有区别",
+        "seconds": 15,
+        "narration": "频率会随每批实验变化。重复次数增多时，频率通常在概率附近波动，但不能用一次短实验断定硬币不公平。",
+        "points": [
+          "实验会有波动"
+        ],
+        "visual": {
+          "kind": "compare",
+          "labels": [
+            "概率：模型",
+            "频率：记录"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "频率会随每批实验变化",
+            "startMs": 120,
+            "endMs": 2388,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "重复次数增多时",
+            "startMs": 2388,
+            "endMs": 4037,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "频率通常在概率附近波动",
+            "startMs": 4037,
+            "endMs": 6511,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "但不能用一次短实验断定硬币不公平",
+            "startMs": 6511,
+            "endMs": 10015,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/11.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "设计一张记录表",
+        "seconds": 15,
+        "narration": "先确定规则，再记录每次结果。不要看到某次不合心意就删掉，也不要中途改变实验方式，只保留喜欢的数据。",
+        "points": [
+          "规则一致",
+          "完整记录"
+        ],
+        "visual": {
+          "kind": "flow",
+          "labels": [
+            "确定规则",
+            "逐次记录",
+            "计算频率"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "先确定规则",
+            "startMs": 120,
+            "endMs": 1341,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "再记录每次结果",
+            "startMs": 1341,
+            "endMs": 2969,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "不要看到某次不合心意就删掉",
+            "startMs": 2969,
+            "endMs": 5818,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "也不要中途改变实验方式",
+            "startMs": 5818,
+            "endMs": 8260,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "只保留喜欢的数据",
+            "startMs": 8260,
+            "endMs": 10091,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/12.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "独立意味着什么",
+        "seconds": 15,
+        "narration": "独立事件意味着前一个结果不会改变后一个的概率。理想的独立掷硬币，前面几次都是反面，不会让下一次必须正面。",
+        "points": [
+          "前次结果不改变下次概率"
+        ],
+        "visual": {
+          "kind": "compare",
+          "labels": [
+            "过去的结果",
+            "下一次仍有两种"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "独立事件意味着前一个结果不会改变后一个的概率",
+            "startMs": 120,
+            "endMs": 4833,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "理想的独立掷硬币",
+            "startMs": 4833,
+            "endMs": 6676,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "前面几次都是反面",
+            "startMs": 6676,
+            "endMs": 8520,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "不会让下一次必须正面",
+            "startMs": 8520,
+            "endMs": 10774,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/13.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "连续两次正面的概率",
+        "seconds": 15,
+        "narration": "在独立且公平的条件下，两次结果是正正、正反、反正、反反，四种等可能。正正只占一种，所以四分之一。",
+        "points": [
+          "列出四种等可能组合"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "正正占1种",
+            "一共4种组合"
+          ],
+          "values": [
+            1,
+            4
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "在独立且公平的条件下",
+            "startMs": 120,
+            "endMs": 2289,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "两次结果是正正、正反、反正、反反",
+            "startMs": 2289,
+            "endMs": 5642,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "四种等可能",
+            "startMs": 5642,
+            "endMs": 6825,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "正正只占一种",
+            "startMs": 6825,
+            "endMs": 8206,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "所以四分之一",
+            "startMs": 8206,
+            "endMs": 9585,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/14.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "放回和不放回不同",
+        "seconds": 15,
+        "narration": "从袋子抽球后放回，袋中比例保持不变；不放回，下一次的组成就变了。计算前一定问清楚抽样规则。",
+        "points": [
+          "放回：组成不变",
+          "不放回：组成变化"
+        ],
+        "visual": {
+          "kind": "compare",
+          "labels": [
+            "放回抽样",
+            "不放回抽样"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "从袋子抽球后放回",
+            "startMs": 120,
+            "endMs": 1988,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "袋中比例保持不变",
+            "startMs": 1988,
+            "endMs": 3856,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "不放回",
+            "startMs": 3856,
+            "endMs": 4686,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "下一次的组成就变了",
+            "startMs": 4686,
+            "endMs": 6761,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "计算前一定问清楚抽样规则",
+            "startMs": 6761,
+            "endMs": 9460,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/15.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "一个不放回的练习",
+        "seconds": 15,
+        "narration": "三个红球一个蓝球，先抽到蓝球且不放回后，袋里只剩红球。因此在这个条件下，第二次抽到蓝球概率为零。",
+        "points": [
+          "条件改变了样本空间"
+        ],
+        "visual": {
+          "kind": "flow",
+          "labels": [
+            "抽走蓝球",
+            "只剩3个红球",
+            "再次蓝球不可能"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "三个红球一个蓝球",
+            "startMs": 120,
+            "endMs": 1963,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "先抽到蓝球且不放回后",
+            "startMs": 1963,
+            "endMs": 4216,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "袋里只剩红球",
+            "startMs": 4216,
+            "endMs": 5650,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "因此在这个条件下",
+            "startMs": 5650,
+            "endMs": 7493,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "第二次抽到蓝球概率为零",
+            "startMs": 7493,
+            "endMs": 9949,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/16.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "不要把相关当因果",
+        "seconds": 15,
+        "narration": "两件事一起出现，不自动证明一件导致另一件。解释概率数据时，还要考虑共同原因、样本和记录方法。",
+        "points": [
+          "共同出现不等于导致"
+        ],
+        "visual": {
+          "kind": "compare",
+          "labels": [
+            "一起出现",
+            "因果证据"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "两件事一起出现",
+            "startMs": 120,
+            "endMs": 1702,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "不自动证明一件导致另一件",
+            "startMs": 1702,
+            "endMs": 4271,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "解释概率数据时",
+            "startMs": 4271,
+            "endMs": 5853,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "还要考虑共同原因、样本和记录方法",
+            "startMs": 5853,
+            "endMs": 9213,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/17.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "先判断条件再计算",
+        "seconds": 15,
+        "narration": "遇到概率题，先问结果有哪些、是否等可能、是否独立、是否放回。问题说清楚，计算才有可靠的基础。",
+        "points": [
+          "条件先于公式"
+        ],
+        "visual": {
+          "kind": "flow",
+          "labels": [
+            "结果与条件",
+            "合适模型",
+            "计算与解释"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "遇到概率题",
+            "startMs": 120,
+            "endMs": 1310,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "先问结果有哪些、是否等可能、是否独立、是否放回",
+            "startMs": 1310,
+            "endMs": 6068,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "问题说清楚",
+            "startMs": 6068,
+            "endMs": 7258,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "计算才有可靠的基础",
+            "startMs": 7258,
+            "endMs": 9241,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/18.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "最后自己做一题",
+        "seconds": 15,
+        "narration": "公平骰子掷一次，点数大于四的概率是多少？符合条件的是五和六，两种除以六种，得到三分之一。",
+        "points": [
+          "先列出5、6",
+          "2 ÷ 6 = 1/3"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "2种大于4的结果",
+            "6种等可能结果"
+          ],
+          "values": [
+            2,
+            6
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "公平骰子掷一次",
+            "startMs": 120,
+            "endMs": 1696,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "点数大于四的概率是多少",
+            "startMs": 1696,
+            "endMs": 4060,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "符合条件的是五和六",
+            "startMs": 4060,
+            "endMs": 6030,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "两种除以六种",
+            "startMs": 6030,
+            "endMs": 7409,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "得到三分之一",
+            "startMs": 7409,
+            "endMs": 8789,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/19.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "带着模型去观察",
+        "seconds": 15,
+        "narration": "概率描述可能性，频率记录实际结果。完整记录、公平假设和清晰条件比猜测更重要，先做小实验再解释。",
+        "points": [
+          "概率、频率、条件"
+        ],
+        "visual": {
+          "kind": "flow",
+          "labels": [
+            "明确条件",
+            "记录实验",
+            "解释结果"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "概率描述可能性",
+            "startMs": 120,
+            "endMs": 1842,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "频率记录实际结果",
+            "startMs": 1842,
+            "endMs": 3779,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "完整记录、公平假设和清晰条件比猜测更重要",
+            "startMs": 3779,
+            "endMs": 8300,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "先做小实验再解释",
+            "startMs": 8300,
+            "endMs": 10238,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/probability-basics/20.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      }
+    ],
+    "duration": 300,
+    "style": "pastel",
+    "video": "/course/animations/probability-basics/tutorial.mp4"
+  },
+  "config": {
+    "duration": 300,
+    "style": "pastel",
+    "audience": "青少年",
+    "voice": true,
+    "voiceId": "zf_021"
+  }
+}

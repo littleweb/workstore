@@ -15,10 +15,10 @@
       "subtitle": "带着具体疑问回到资料，避免从头漫无目的重读。",
       "type": "concept",
       "region": {
-        "x": 210,
-        "y": 74,
-        "width": 480,
-        "height": 338
+        "x": 93,
+        "y": 38,
+        "width": 632,
+        "height": 388
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          450,
-          84
+          409,
+          48
         ],
         "end": [
-          450,
-          402
+          409,
+          416
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "把新理解接回原来的例子，检查是否自洽。",
       "type": "concept",
       "region": {
-        "x": 1017,
-        "y": 92,
-        "width": 447,
-        "height": 280
+        "x": 993,
+        "y": 57,
+        "width": 584,
+        "height": 348
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1240.5,
-          102
+          1285,
+          67
         ],
         "end": [
-          1240.5,
-          362
+          1285,
+          395
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "换一个例子，看看原来的解释还能不能成立。",
       "type": "concept",
       "region": {
-        "x": 167,
-        "y": 545,
-        "width": 552,
-        "height": 298
+        "x": 123,
+        "y": 490,
+        "width": 576,
+        "height": 379
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          443,
-          555
+          411,
+          500
         ],
         "end": [
-          443,
-          833
+          411,
+          859
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：你能找到一个让旧解释失效的例子吗？",
       "type": "concept",
       "region": {
-        "x": 956,
-        "y": 582,
-        "width": 553,
-        "height": 285
+        "x": 905,
+        "y": 483,
+        "width": 703,
+        "height": 404
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1232.5,
-          592
+          1256.5,
+          493
         ],
         "end": [
-          1232.5,
-          857
+          1256.5,
+          877
         ],
         "easing": "easeInOut"
       }

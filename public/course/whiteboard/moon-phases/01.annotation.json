@@ -15,10 +15,10 @@
       "subtitle": "夜里看见月亮，是因为它反射了太阳照来的光。",
       "type": "concept",
       "region": {
-        "x": 107,
-        "y": 75,
-        "width": 631,
-        "height": 328
+        "x": 74,
+        "y": 23,
+        "width": 755,
+        "height": 405
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          422.5,
-          85
+          451.5,
+          33
         ],
         "end": [
-          422.5,
-          393
+          451.5,
+          418
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "不论我们看见什么形状，月球总有一半被照亮。",
       "type": "concept",
       "region": {
-        "x": 1010,
-        "y": 128,
-        "width": 411,
-        "height": 237
+        "x": 963,
+        "y": 79,
+        "width": 503,
+        "height": 313
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1215.5,
-          138
+          1214.5,
+          89
         ],
         "end": [
-          1215.5,
-          355
+          1214.5,
+          382
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "月球绕着地球转，我们的位置改变了观察角度。",
       "type": "concept",
       "region": {
-        "x": 131,
-        "y": 499,
-        "width": 557,
-        "height": 345
+        "x": 86,
+        "y": 440,
+        "width": 686,
+        "height": 438
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          409.5,
-          509
+          429,
+          450
         ],
         "end": [
-          409.5,
-          834
+          429,
+          868
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "所以月相主要来自观察角度，不是地球的影子。",
       "type": "concept",
       "region": {
-        "x": 928,
-        "y": 511,
-        "width": 617,
-        "height": 379
+        "x": 878,
+        "y": 424,
+        "width": 756,
+        "height": 499
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1236.5,
-          521
+          1256,
+          434
         ],
         "end": [
-          1236.5,
-          880
+          1256,
+          913
         ],
         "easing": "easeInOut"
       }

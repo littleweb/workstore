@@ -42,3 +42,5 @@ vendor/srt-whiteboard-animation/.venv/
 /docs/course-animation-proof/
 /docs/course-whiteboard-proof/
 /.release-build/
+
+/docs/course-web-proof/

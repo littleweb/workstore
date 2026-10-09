@@ -15,10 +15,10 @@
       "subtitle": "工作中突然想起另一件事，可以先简短记下来。",
       "type": "concept",
       "region": {
-        "x": 189,
-        "y": 67,
-        "width": 564,
-        "height": 345
+        "x": 49,
+        "y": 25,
+        "width": 735,
+        "height": 405
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          471,
-          77
+          416.5,
+          35
         ],
         "end": [
-          471,
-          402
+          416.5,
+          420
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "记好后回到当前任务，不必立刻打开另一项工作。",
       "type": "concept",
       "region": {
-        "x": 912,
-        "y": 152,
-        "width": 556,
-        "height": 260
+        "x": 884,
+        "y": 40,
+        "width": 742,
+        "height": 394
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1190,
-          162
+          1255,
+          50
         ],
         "end": [
-          1190,
-          402
+          1255,
+          424
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "为临时想法留一个收集位置，减少反复担心忘记。",
       "type": "concept",
       "region": {
-        "x": 211,
-        "y": 530,
-        "width": 482,
-        "height": 305
+        "x": 173,
+        "y": 546,
+        "width": 521,
+        "height": 311
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          452,
-          540
+          433.5,
+          556
         ],
         "end": [
-          452,
-          825
+          433.5,
+          847
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "这里的目标是减少切换，并非压住所有新想法。",
       "type": "concept",
       "region": {
-        "x": 874,
-        "y": 563,
-        "width": 669,
-        "height": 278
+        "x": 848,
+        "y": 530,
+        "width": 808,
+        "height": 356
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1208.5,
-          573
+          1252,
+          540
         ],
         "end": [
-          1208.5,
-          831
+          1252,
+          876
         ],
         "easing": "easeInOut"
       }

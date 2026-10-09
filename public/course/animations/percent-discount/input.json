@@ -1,1 +1,471 @@
-{"tutorial":{"title":"看懂百分数与折扣","summary":"看到百分数，先确认基准；看到折扣，区分支付和减少；看到多次变化，按每次的新基准计算。","scenes":[{"title":"百分数是在比较什么","seconds":15,"narration":"百分数把一个量与基准量比较，再以一百份来表达。百分之二十五表示基准量的四分之一。","points":["先找基准量"],"visual":{"kind":"chart","labels":["基准量","四分之一"],"values":[100,25],"note":"示意数据，用于说明关系"},"captions":[{"text":"百分数把一个量与基准量比较","startMs":120,"endMs":2926,"timestampMs":null,"confidence":null},{"text":"再以一百份来表达","startMs":2926,"endMs":4730,"timestampMs":null,"confidence":null},{"text":"百分之二十五表示基准量的四分之一","startMs":4730,"endMs":8137,"timestampMs":null,"confidence":null}],"audio":"/course/animations/percent-discount/01.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"同一个比例不同的量","seconds":15,"narration":"一百元的百分之二十五是二十五元，两百元的百分之二十五是五十元。比例相同，基准不同，结果不同。","points":["比例相同","基准可以不同"],"visual":{"kind":"compare","labels":["100元 × 25%","200元 × 25%"],"values":[],"note":""},"captions":[{"text":"一百元的百分之二十五是二十五元","startMs":120,"endMs":3290,"timestampMs":null,"confidence":null},{"text":"两百元的百分之二十五是五十元","startMs":3290,"endMs":6262,"timestampMs":null,"confidence":null},{"text":"比例相同","startMs":6262,"endMs":7252,"timestampMs":null,"confidence":null},{"text":"基准不同","startMs":7252,"endMs":8242,"timestampMs":null,"confidence":null},{"text":"结果不同","startMs":8242,"endMs":9234,"timestampMs":null,"confidence":null}],"audio":"/course/animations/percent-discount/02.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"八折是什么意思","seconds":15,"narration":"八折表示按原价的百分之八十付款，不是便宜了百分之八十。原价一百元，八折的价格是八十元。","points":["付款80%","减少20%"],"visual":{"kind":"chart","labels":["原价","八折支付"],"values":[100,80],"note":"示意数据，用于说明关系"},"captions":[{"text":"八折表示按原价的百分之八十付款","startMs":120,"endMs":3242,"timestampMs":null,"confidence":null},{"text":"不是便宜了百分之八十","startMs":3242,"endMs":5388,"timestampMs":null,"confidence":null},{"text":"原价一百元","startMs":5388,"endMs":6558,"timestampMs":null,"confidence":null},{"text":"八折的价格是八十元","startMs":6558,"endMs":8510,"timestampMs":null,"confidence":null}],"audio":"/course/animations/percent-discount/03.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"从原价算现价","seconds":15,"narration":"把原价乘以折扣比例，就得到现价。原价两百元打八折，是两百乘零点八，结果一百六十元。","points":["原价 × 折扣 = 现价"],"visual":{"kind":"code","labels":["原价 = 200","折扣 = 0.8","现价 = 160"],"values":[],"note":""},"captions":[{"text":"把原价乘以折扣比例","startMs":120,"endMs":2164,"timestampMs":null,"confidence":null},{"text":"就得到现价","startMs":2164,"endMs":3390,"timestampMs":null,"confidence":null},{"text":"原价两百元打八折","startMs":3390,"endMs":5230,"timestampMs":null,"confidence":null},{"text":"是两百乘零点八","startMs":5230,"endMs":6865,"timestampMs":null,"confidence":null},{"text":"结果一百六十元","startMs":6865,"endMs":8500,"timestampMs":null,"confidence":null}],"audio":"/course/animations/percent-discount/04.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"连续折扣不能直接相加","seconds":15,"narration":"先八折，再九折，是原价乘零点八再乘零点九，最后支付百分之七十二，并不是七折。","points":["连续相乘","基准发生变化"],"visual":{"kind":"flow","labels":["原价100","八折80","再九折72"],"values":[],"note":""},"captions":[{"text":"先八折","startMs":120,"endMs":991,"timestampMs":null,"confidence":null},{"text":"再九折","startMs":991,"endMs":1861,"timestampMs":null,"confidence":null},{"text":"是原价乘零点八再乘零点九","startMs":1861,"endMs":4691,"timestampMs":null,"confidence":null},{"text":"最后支付百分之七十二","startMs":4691,"endMs":7085,"timestampMs":null,"confidence":null},{"text":"并不是七折","startMs":7085,"endMs":8391,"timestampMs":null,"confidence":null}],"audio":"/course/animations/percent-discount/05.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"百分比和百分点","seconds":15,"narration":"比例从百分之二十变成百分之三十，增加了十个百分点。相对于原来的二十，增幅则是百分之五十。","points":["百分点是差","增幅需要基准"],"visual":{"kind":"chart","labels":["原比例","新比例"],"values":[20,30],"note":"示意数据，用于说明关系"},"captions":[{"text":"比例从百分之二十变成百分之三十","startMs":120,"endMs":3396,"timestampMs":null,"confidence":null},{"text":"增加了十个百分点","startMs":3396,"endMs":5238,"timestampMs":null,"confidence":null},{"text":"相对于原来的二十","startMs":5238,"endMs":7080,"timestampMs":null,"confidence":null},{"text":"增幅则是百分之五十","startMs":7080,"endMs":9127,"timestampMs":null,"confidence":null}],"audio":"/course/animations/percent-discount/06.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"先自己算一道题","seconds":15,"narration":"原价三百元，七折后是多少钱？先找基准和比例，再相乘。三百乘零点七，结果是二百一十元。","points":["300 × 0.7 = 210"],"visual":{"kind":"code","labels":["基准：300元","比例：70%","结果：210元"],"values":[],"note":""},"captions":[{"text":"原价三百元","startMs":120,"endMs":1398,"timestampMs":null,"confidence":null},{"text":"七折后是多少钱","startMs":1398,"endMs":3101,"timestampMs":null,"confidence":null},{"text":"先找基准和比例","startMs":3101,"endMs":4804,"timestampMs":null,"confidence":null},{"text":"再相乘","startMs":4804,"endMs":5656,"timestampMs":null,"confidence":null},{"text":"三百乘零点七","startMs":5656,"endMs":7146,"timestampMs":null,"confidence":null},{"text":"结果是二百一十元","startMs":7146,"endMs":9062,"timestampMs":null,"confidence":null}],"audio":"/course/animations/percent-discount/07.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"记住三个检查","seconds":15,"narration":"看到百分数，先确认基准；看到折扣，区分支付和减少；看到多次变化，按每次的新基准计算。","points":["找基准","分清含义","按顺序计算"],"visual":{"kind":"flow","labels":["基准","含义","顺序"],"values":[],"note":""},"captions":[{"text":"看到百分数","startMs":120,"endMs":1352,"timestampMs":null,"confidence":null},{"text":"先确认基准","startMs":1352,"endMs":2585,"timestampMs":null,"confidence":null},{"text":"看到折扣","startMs":2585,"endMs":3612,"timestampMs":null,"confidence":null},{"text":"区分支付和减少","startMs":3612,"endMs":5255,"timestampMs":null,"confidence":null},{"text":"看到多次变化","startMs":5255,"endMs":6692,"timestampMs":null,"confidence":null},{"text":"按每次的新基准计算","startMs":6692,"endMs":8746,"timestampMs":null,"confidence":null}],"audio":"/course/animations/percent-discount/08.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"}],"duration":120,"style":"clean","video":"/course/animations/percent-discount/tutorial.mp4"},"config":{"duration":120,"style":"clean","audience":"大众学习者","voice":true,"voiceId":"zf_021"}}
+{
+  "tutorial": {
+    "title": "看懂百分数与折扣",
+    "summary": "看到百分数，先确认基准；看到折扣，区分支付和减少；看到多次变化，按每次的新基准计算。",
+    "scenes": [
+      {
+        "title": "百分数是在比较什么",
+        "seconds": 15,
+        "narration": "百分数把一个量与基准量比较，再以一百份来表达。百分之二十五表示基准量的四分之一。",
+        "points": [
+          "先找基准量"
+        ],
+        "visual": {
+          "kind": "chart",
+          "labels": [
+            "基准量",
+            "四分之一"
+          ],
+          "values": [
+            100,
+            25
+          ],
+          "note": "示意数据，用于说明关系"
+        },
+        "captions": [
+          {
+            "text": "百分数把一个量与基准量比较",
+            "startMs": 120,
+            "endMs": 2926,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "再以一百份来表达",
+            "startMs": 2926,
+            "endMs": 4730,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "百分之二十五表示基准量的四分之一",
+            "startMs": 4730,
+            "endMs": 8137,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/percent-discount/01.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "同一个比例不同的量",
+        "seconds": 15,
+        "narration": "一百元的百分之二十五是二十五元，两百元的百分之二十五是五十元。比例相同，基准不同，结果不同。",
+        "points": [
+          "比例相同",
+          "基准可以不同"
+        ],
+        "visual": {
+          "kind": "compare",
+          "labels": [
+            "100元 × 25%",
+            "200元 × 25%"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "一百元的百分之二十五是二十五元",
+            "startMs": 120,
+            "endMs": 3290,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "两百元的百分之二十五是五十元",
+            "startMs": 3290,
+            "endMs": 6262,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "比例相同",
+            "startMs": 6262,
+            "endMs": 7252,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "基准不同",
+            "startMs": 7252,
+            "endMs": 8242,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "结果不同",
+            "startMs": 8242,
+            "endMs": 9234,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/percent-discount/02.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "八折是什么意思",
+        "seconds": 15,
+        "narration": "八折表示按原价的百分之八十付款，不是便宜了百分之八十。原价一百元，八折的价格是八十元。",
+        "points": [
+          "付款80%",
+          "减少20%"
+        ],
+        "visual": {
+          "kind": "chart",
+          "labels": [
+            "原价",
+            "八折支付"
+          ],
+          "values": [
+            100,
+            80
+          ],
+          "note": "示意数据，用于说明关系"
+        },
+        "captions": [
+          {
+            "text": "八折表示按原价的百分之八十付款",
+            "startMs": 120,
+            "endMs": 3242,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "不是便宜了百分之八十",
+            "startMs": 3242,
+            "endMs": 5388,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "原价一百元",
+            "startMs": 5388,
+            "endMs": 6558,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "八折的价格是八十元",
+            "startMs": 6558,
+            "endMs": 8510,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/percent-discount/03.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "从原价算现价",
+        "seconds": 15,
+        "narration": "把原价乘以折扣比例，就得到现价。原价两百元打八折，是两百乘零点八，结果一百六十元。",
+        "points": [
+          "原价 × 折扣 = 现价"
+        ],
+        "visual": {
+          "kind": "code",
+          "labels": [
+            "原价 = 200",
+            "折扣 = 0.8",
+            "现价 = 160"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "把原价乘以折扣比例",
+            "startMs": 120,
+            "endMs": 2164,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "就得到现价",
+            "startMs": 2164,
+            "endMs": 3390,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "原价两百元打八折",
+            "startMs": 3390,
+            "endMs": 5230,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "是两百乘零点八",
+            "startMs": 5230,
+            "endMs": 6865,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "结果一百六十元",
+            "startMs": 6865,
+            "endMs": 8500,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/percent-discount/04.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "连续折扣不能直接相加",
+        "seconds": 15,
+        "narration": "先八折，再九折，是原价乘零点八再乘零点九，最后支付百分之七十二，并不是七折。",
+        "points": [
+          "连续相乘",
+          "基准发生变化"
+        ],
+        "visual": {
+          "kind": "flow",
+          "labels": [
+            "原价100",
+            "八折80",
+            "再九折72"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "先八折",
+            "startMs": 120,
+            "endMs": 991,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "再九折",
+            "startMs": 991,
+            "endMs": 1861,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "是原价乘零点八再乘零点九",
+            "startMs": 1861,
+            "endMs": 4691,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "最后支付百分之七十二",
+            "startMs": 4691,
+            "endMs": 7085,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "并不是七折",
+            "startMs": 7085,
+            "endMs": 8391,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/percent-discount/05.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "百分比和百分点",
+        "seconds": 15,
+        "narration": "比例从百分之二十变成百分之三十，增加了十个百分点。相对于原来的二十，增幅则是百分之五十。",
+        "points": [
+          "百分点是差",
+          "增幅需要基准"
+        ],
+        "visual": {
+          "kind": "chart",
+          "labels": [
+            "原比例",
+            "新比例"
+          ],
+          "values": [
+            20,
+            30
+          ],
+          "note": "示意数据，用于说明关系"
+        },
+        "captions": [
+          {
+            "text": "比例从百分之二十变成百分之三十",
+            "startMs": 120,
+            "endMs": 3396,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "增加了十个百分点",
+            "startMs": 3396,
+            "endMs": 5238,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "相对于原来的二十",
+            "startMs": 5238,
+            "endMs": 7080,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "增幅则是百分之五十",
+            "startMs": 7080,
+            "endMs": 9127,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/percent-discount/06.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "先自己算一道题",
+        "seconds": 15,
+        "narration": "原价三百元，七折后是多少钱？先找基准和比例，再相乘。三百乘零点七，结果是二百一十元。",
+        "points": [
+          "300 × 0.7 = 210"
+        ],
+        "visual": {
+          "kind": "code",
+          "labels": [
+            "基准：300元",
+            "比例：70%",
+            "结果：210元"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "原价三百元",
+            "startMs": 120,
+            "endMs": 1398,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "七折后是多少钱",
+            "startMs": 1398,
+            "endMs": 3101,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "先找基准和比例",
+            "startMs": 3101,
+            "endMs": 4804,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "再相乘",
+            "startMs": 4804,
+            "endMs": 5656,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "三百乘零点七",
+            "startMs": 5656,
+            "endMs": 7146,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "结果是二百一十元",
+            "startMs": 7146,
+            "endMs": 9062,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/percent-discount/07.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "记住三个检查",
+        "seconds": 15,
+        "narration": "看到百分数，先确认基准；看到折扣，区分支付和减少；看到多次变化，按每次的新基准计算。",
+        "points": [
+          "找基准",
+          "分清含义",
+          "按顺序计算"
+        ],
+        "visual": {
+          "kind": "flow",
+          "labels": [
+            "基准",
+            "含义",
+            "顺序"
+          ],
+          "values": [],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "看到百分数",
+            "startMs": 120,
+            "endMs": 1352,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "先确认基准",
+            "startMs": 1352,
+            "endMs": 2585,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "看到折扣",
+            "startMs": 2585,
+            "endMs": 3612,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "区分支付和减少",
+            "startMs": 3612,
+            "endMs": 5255,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "看到多次变化",
+            "startMs": 5255,
+            "endMs": 6692,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "按每次的新基准计算",
+            "startMs": 6692,
+            "endMs": 8746,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/percent-discount/08.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      }
+    ],
+    "duration": 120,
+    "style": "editorial",
+    "video": "/course/animations/percent-discount/tutorial.mp4"
+  },
+  "config": {
+    "duration": 120,
+    "style": "editorial",
+    "audience": "大众学习者",
+    "voice": true,
+    "voiceId": "zf_021"
+  }
+}

@@ -15,10 +15,10 @@
       "subtitle": "电源两端通过导线和用电器连接，才能形成回路。",
       "type": "concept",
       "region": {
-        "x": 172,
-        "y": 111,
-        "width": 508,
-        "height": 257
+        "x": 143,
+        "y": 31,
+        "width": 555,
+        "height": 399
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          426,
-          121
+          420.5,
+          41
         ],
         "end": [
-          426,
-          358
+          420.5,
+          420
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "路线看起来挨着，不等于接点真的接通。",
       "type": "concept",
       "region": {
-        "x": 932,
-        "y": 180,
-        "width": 644,
-        "height": 91
+        "x": 854,
+        "y": 117,
+        "width": 790,
+        "height": 200
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1254,
-          190
+          1249,
+          127
         ],
         "end": [
-          1254,
-          261
+          1249,
+          307
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "轻轻检查安全接点，观察导线是否实际接触。",
       "type": "concept",
       "region": {
-        "x": 93,
-        "y": 582,
-        "width": 641,
-        "height": 246
+        "x": 0,
+        "y": 463,
+        "width": 808,
+        "height": 428
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          413.5,
-          592
+          404,
+          473
         ],
         "end": [
-          413.5,
-          818
+          404,
+          881
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：把一个接点拿开，整个路径发生什么变化？",
       "type": "concept",
       "region": {
-        "x": 1000,
-        "y": 480,
-        "width": 494,
-        "height": 360
+        "x": 835,
+        "y": 452,
+        "width": 715,
+        "height": 415
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1247,
-          490
+          1192.5,
+          462
         ],
         "end": [
-          1247,
-          830
+          1192.5,
+          857
         ],
         "easing": "easeInOut"
       }

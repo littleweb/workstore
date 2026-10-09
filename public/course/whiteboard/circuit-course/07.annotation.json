@@ -15,10 +15,10 @@
       "subtitle": "如果直接把电源两端用低阻导体连接，可能发生短路。",
       "type": "concept",
       "region": {
-        "x": 320,
-        "y": 92,
-        "width": 218,
-        "height": 287
+        "x": 182,
+        "y": 124,
+        "width": 509,
+        "height": 241
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          429,
-          102
+          436.5,
+          134
         ],
         "end": [
-          429,
-          369
+          436.5,
+          355
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "短路可能让电流过大，导致发热和损坏。",
       "type": "concept",
       "region": {
-        "x": 1060,
-        "y": 92,
-        "width": 360,
-        "height": 286
+        "x": 966,
+        "y": 30,
+        "width": 558,
+        "height": 352
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1240,
-          102
+          1245,
+          40
         ],
         "end": [
-          1240,
-          368
+          1245,
+          372
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "教学器材也要按说明使用，不能随意尝试短接。",
       "type": "concept",
       "region": {
-        "x": 146,
-        "y": 554,
-        "width": 587,
-        "height": 305
+        "x": 67,
+        "y": 460,
+        "width": 763,
+        "height": 436
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          439.5,
-          564
+          448.5,
+          470
         ],
         "end": [
-          439.5,
-          849
+          448.5,
+          886
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "遇到异常，先停止使用，再按说明处理。",
       "type": "concept",
       "region": {
-        "x": 962,
-        "y": 504,
-        "width": 613,
-        "height": 323
+        "x": 955,
+        "y": 427,
+        "width": 717,
+        "height": 414
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1268.5,
-          514
+          1313.5,
+          437
         ],
         "end": [
-          1268.5,
-          817
+          1313.5,
+          831
         ],
         "easing": "easeInOut"
       }

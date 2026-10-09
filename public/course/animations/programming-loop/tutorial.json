@@ -660,6 +660,6 @@
     }
   ],
   "duration": 180,
-  "style": "chalk",
+  "style": "terminal",
   "video": "/course/animations/programming-loop/tutorial.mp4"
 }

@@ -15,10 +15,10 @@
       "subtitle": "完整路径、电源和合适用电器，共同让简单电路工作。",
       "type": "concept",
       "region": {
-        "x": 154,
-        "y": 127,
-        "width": 511,
-        "height": 278
+        "x": 114,
+        "y": 49,
+        "width": 655,
+        "height": 363
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          409.5,
-          137
+          441.5,
+          59
         ],
         "end": [
-          409.5,
-          395
+          441.5,
+          402
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "开关决定接通与断开，串并联决定路径结构。",
       "type": "concept",
       "region": {
-        "x": 927,
-        "y": 80,
-        "width": 669,
-        "height": 291
+        "x": 917,
+        "y": 31,
+        "width": 673,
+        "height": 391
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1261.5,
-          90
+          1253.5,
+          41
         ],
         "end": [
-          1261.5,
-          361
+          1253.5,
+          412
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "电流描述电荷运动，能量转换解释小灯发光与发热。",
       "type": "concept",
       "region": {
-        "x": 77,
-        "y": 521,
-        "width": 634,
-        "height": 287
+        "x": 35,
+        "y": 479,
+        "width": 741,
+        "height": 337
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          394,
-          531
+          405.5,
+          489
         ],
         "end": [
-          394,
-          798
+          405.5,
+          806
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "用自己的话解释一次断路，你就完成了今天的练习。",
       "type": "concept",
       "region": {
-        "x": 900,
-        "y": 523,
-        "width": 712,
-        "height": 328
+        "x": 856,
+        "y": 455,
+        "width": 783,
+        "height": 460
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1256,
-          533
+          1247.5,
+          465
         ],
         "end": [
-          1256,
-          841
+          1247.5,
+          905
         ],
         "easing": "easeInOut"
       }

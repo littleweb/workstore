@@ -39,9 +39,11 @@ test('missing dependencies, undeclared payloads, path escape and excessive size 
  }finally{f.close();}
 });
 test('hidden entry code cannot leak via renamed generated chunks, but shared image utilities remain usable',()=>{
- const chunk=name=>({renamed:{type:'chunk',modules:{[join(process.cwd(),name)]:{}}}});
- for(const name of ['src/html/HtmlApp.tsx','src/animations/AnimationApp.tsx','src/course/CourseApp.tsx','src/comics/ComicApp.tsx','src/comics/catalog.ts'])assert.throws(()=>checkModules(process.cwd(),chunk(name)),/隐藏工具/);
+ const chunk=name=>({renamed:{type:'chunk',modules:Object.fromEntries([name,...readManifest().requiredModules].map(p=>[join(process.cwd(),p),{}]))}});
+ for(const name of ['src/html/HtmlApp.tsx','src/animations/AnimationApp.tsx','src/comics/ComicApp.tsx','src/comics/catalog.ts'])assert.throws(()=>checkModules(process.cwd(),chunk(name)),/隐藏工具/);
  assert.doesNotThrow(()=>checkModules(process.cwd(),chunk('src/comics/images.ts')));
+ assert.doesNotThrow(()=>checkModules(process.cwd(),chunk('src/html/export.ts')));
+ assert.throws(()=>checkModules(process.cwd(),{entry:{type:'chunk',modules:{}}}),/正式工具缺失/);
 });
 
 test('native resource guard rejects an accidentally bundled HTML runtime',()=>{

@@ -15,10 +15,10 @@
       "subtitle": "手上沾了油，清水常常很难把油直接冲走。",
       "type": "concept",
       "region": {
-        "x": 261,
-        "y": 11,
-        "width": 365,
-        "height": 436
+        "x": 127,
+        "y": 18,
+        "width": 646,
+        "height": 425
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          443.5,
-          21
+          450,
+          28
         ],
         "end": [
-          443.5,
-          437
+          450,
+          433
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "加入肥皂，揉搓会让肥皂和油污充分接触。",
       "type": "concept",
       "region": {
-        "x": 963,
-        "y": 59,
-        "width": 516,
-        "height": 357
+        "x": 961,
+        "y": 68,
+        "width": 567,
+        "height": 328
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1221,
-          69
+          1244.5,
+          78
         ],
         "end": [
-          1221,
-          406
+          1244.5,
+          386
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "肥皂帮助油污分散到水中，变得容易带走。",
       "type": "concept",
       "region": {
-        "x": 267,
-        "y": 495,
-        "width": 360,
-        "height": 370
+        "x": 144,
+        "y": 511,
+        "width": 610,
+        "height": 349
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          447,
-          505
+          449,
+          521
         ],
         "end": [
-          447,
-          855
+          449,
+          850
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "最后用流水冲洗。想一想，为什么揉搓有帮助？",
       "type": "concept",
       "region": {
-        "x": 964,
-        "y": 442,
-        "width": 540,
-        "height": 484
+        "x": 897,
+        "y": 428,
+        "width": 658,
+        "height": 505
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1234,
-          452
+          1226,
+          438
         ],
         "end": [
-          1234,
-          916
+          1226,
+          923
         ],
         "easing": "easeInOut"
       }

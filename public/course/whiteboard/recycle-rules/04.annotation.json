@@ -15,10 +15,10 @@
       "subtitle": "电池、灯管等特殊物品，不应靠普通包装规则处理。",
       "type": "concept",
       "region": {
-        "x": 130,
-        "y": 91,
-        "width": 606,
-        "height": 310
+        "x": 59,
+        "y": 43,
+        "width": 746,
+        "height": 349
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          433,
-          101
+          432,
+          53
         ],
         "end": [
-          433,
-          391
+          432,
+          382
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "先保持完整，避免破损，再查看当地收集方式。",
       "type": "concept",
       "region": {
-        "x": 947,
-        "y": 84,
-        "width": 610,
-        "height": 300
+        "x": 890,
+        "y": 77,
+        "width": 720,
+        "height": 375
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1252,
-          94
+          1250,
+          87
         ],
         "end": [
-          1252,
-          374
+          1250,
+          442
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "闲置电器可能有专门回收渠道，别随手混入日常垃圾。",
       "type": "concept",
       "region": {
-        "x": 100,
-        "y": 509,
-        "width": 655,
-        "height": 356
+        "x": 49,
+        "y": 475,
+        "width": 782,
+        "height": 395
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          427.5,
-          519
+          440,
+          485
         ],
         "end": [
-          427.5,
-          855
+          440,
+          860
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "拿不准时先查询，比直接猜测更可靠。",
       "type": "concept",
       "region": {
-        "x": 964,
-        "y": 502,
-        "width": 594,
-        "height": 375
+        "x": 995,
+        "y": 457,
+        "width": 539,
+        "height": 450
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1261,
-          512
+          1264.5,
+          467
         ],
         "end": [
-          1261,
-          867
+          1264.5,
+          897
         ],
         "easing": "easeInOut"
       }

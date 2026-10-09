@@ -15,10 +15,10 @@
       "subtitle": "落下来的雨，有一部分流入河流和湖泊。",
       "type": "concept",
       "region": {
-        "x": 147,
-        "y": 45,
-        "width": 584,
-        "height": 383
+        "x": 68,
+        "y": 0,
+        "width": 789,
+        "height": 451
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          439,
-          55
+          462.5,
+          10
         ],
         "end": [
-          439,
-          418
+          462.5,
+          441
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "还有一些进入土壤，补充地下的水。",
       "type": "concept",
       "region": {
-        "x": 1032,
-        "y": 45,
-        "width": 422,
-        "height": 387
+        "x": 994,
+        "y": 15,
+        "width": 539,
+        "height": 427
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1243,
-          55
+          1263.5,
+          25
         ],
         "end": [
-          1243,
-          422
+          1263.5,
+          432
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "植物从土壤中吸水，也把水带回空气。",
       "type": "concept",
       "region": {
-        "x": 203,
-        "y": 498,
-        "width": 438,
-        "height": 380
+        "x": 112,
+        "y": 468,
+        "width": 628,
+        "height": 467
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          422,
-          508
+          426,
+          478
         ],
         "end": [
-          422,
-          868
+          426,
+          925
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "不同路径连在一起，水循环没有唯一的起点。",
       "type": "concept",
       "region": {
-        "x": 990,
-        "y": 497,
-        "width": 502,
-        "height": 358
+        "x": 893,
+        "y": 452,
+        "width": 688,
+        "height": 458
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1241,
-          507
+          1237,
+          462
         ],
         "end": [
-          1241,
-          845
+          1237,
+          900
         ],
         "easing": "easeInOut"
       }

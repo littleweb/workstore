@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import path from 'node:path';
 const root=process.cwd(),out=path.join(root,'src-tauri/course-runtime'),staging=path.join(root,'.course-animation-build/runtime');
-const files=['src/course-animation/TutorialVideo.tsx','src/course-animation/Diagram.tsx','src/course-animation/BasicCaptions.tsx','src/course-animation/model.ts','remotion-tutorial/src/Composition.tsx','remotion-tutorial/src/Root.tsx','remotion-tutorial/src/index.ts','scripts/course-animation/runner.mjs','scripts/ai/speech-timing.mjs','vendor/course-animation-runtime/package-lock.json','scripts/course-whiteboard/runner.mjs','src/course-whiteboard/model.ts'];
+const files=['src/course-animation/TutorialVideo.tsx','src/course-animation/Diagram.tsx','src/course-animation/BasicCaptions.tsx','src/course-animation/model.ts','src/course-animation/styles.ts','remotion-tutorial/src/Composition.tsx','remotion-tutorial/src/Root.tsx','remotion-tutorial/src/index.ts','scripts/course-animation/runner.mjs','scripts/ai/speech-timing.mjs','vendor/course-animation-runtime/package-lock.json','scripts/course-whiteboard/runner.mjs','src/course-whiteboard/model.ts','src/course-whiteboard/styles.ts'];
 const h=createHash('sha256');for(const f of files)h.update(await readFile(path.join(root,f)));h.update(process.platform+process.arch);const buildId=h.digest('hex').slice(0,24);
 try{const old=JSON.parse(await readFile(path.join(out,'manifest.json'),'utf8'));if(old.buildId===buildId){await readFile(path.join(out,'app.tar.gz'));console.log('Remotion runtime is up to date.');process.exit(0);}}catch{}
 await rm(staging,{recursive:true,force:true});await mkdir(staging,{recursive:true});await mkdir(out,{recursive:true});

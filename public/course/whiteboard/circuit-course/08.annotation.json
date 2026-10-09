@@ -15,10 +15,10 @@
       "subtitle": "电路图强调连接关系，不要求外形和实物一样。",
       "type": "concept",
       "region": {
-        "x": 100,
-        "y": 120,
-        "width": 668,
-        "height": 244
+        "x": 47,
+        "y": 97,
+        "width": 756,
+        "height": 295
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          434,
-          130
+          425,
+          107
         ],
         "end": [
-          434,
-          354
+          425,
+          382
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "沿路径逐个检查，找到电源、开关和用电器。",
       "type": "concept",
       "region": {
-        "x": 987,
-        "y": 115,
-        "width": 499,
-        "height": 269
+        "x": 1060,
+        "y": 84,
+        "width": 451,
+        "height": 335
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1236.5,
-          125
+          1285.5,
+          94
         ],
         "end": [
-          1236.5,
-          374
+          1285.5,
+          409
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "导线交叉不一定连接，要看图中的连接标记。",
       "type": "concept",
       "region": {
-        "x": 137,
-        "y": 570,
-        "width": 577,
-        "height": 217
+        "x": 71,
+        "y": 531,
+        "width": 681,
+        "height": 264
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          425.5,
-          580
+          411.5,
+          541
         ],
         "end": [
-          425.5,
-          777
+          411.5,
+          785
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：同一回路换个摆放形状，性质会改变吗？",
       "type": "concept",
       "region": {
-        "x": 947,
-        "y": 532,
-        "width": 616,
-        "height": 288
+        "x": 843,
+        "y": 492,
+        "width": 756,
+        "height": 329
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1255,
-          542
+          1221,
+          502
         ],
         "end": [
-          1255,
-          810
+          1221,
+          811
         ],
         "easing": "easeInOut"
       }

@@ -15,10 +15,10 @@
       "subtitle": "并联让电路形成不同支路，各支路连接到共同两端。",
       "type": "concept",
       "region": {
-        "x": 159,
-        "y": 69,
-        "width": 487,
-        "height": 281
+        "x": 98,
+        "y": 79,
+        "width": 651,
+        "height": 278
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          402.5,
-          79
+          423.5,
+          89
         ],
         "end": [
-          402.5,
-          340
+          423.5,
+          347
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "电荷可以经过不同支路，结构与串联不相同。",
       "type": "concept",
       "region": {
-        "x": 992,
-        "y": 83,
-        "width": 512,
-        "height": 263
+        "x": 984,
+        "y": 75,
+        "width": 552,
+        "height": 285
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1248,
-          93
+          1260,
+          85
         ],
         "end": [
-          1248,
-          336
+          1260,
+          350
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "只断开一条支路，另一条完整支路仍可能工作。",
       "type": "concept",
       "region": {
-        "x": 159,
-        "y": 522,
-        "width": 513,
-        "height": 272
+        "x": 102,
+        "y": 486,
+        "width": 633,
+        "height": 333
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          415.5,
-          532
+          418.5,
+          496
         ],
         "end": [
-          415.5,
-          784
+          418.5,
+          809
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "判断串联或并联，追踪路径比看摆放位置更可靠。",
       "type": "concept",
       "region": {
-        "x": 991,
-        "y": 519,
-        "width": 517,
-        "height": 324
+        "x": 919,
+        "y": 451,
+        "width": 681,
+        "height": 438
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1249.5,
-          529
+          1259.5,
+          461
         ],
         "end": [
-          1249.5,
-          833
+          1259.5,
+          879
         ],
         "easing": "easeInOut"
       }

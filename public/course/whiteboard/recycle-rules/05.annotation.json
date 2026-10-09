@@ -15,10 +15,10 @@
       "subtitle": "把容器放在方便的位置，减少每次分类的额外步骤。",
       "type": "concept",
       "region": {
-        "x": 60,
-        "y": 37,
-        "width": 627,
-        "height": 411
+        "x": 56,
+        "y": 17,
+        "width": 726,
+        "height": 431
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,11 +29,11 @@
       },
       "handPath": {
         "start": [
-          373.5,
-          47
+          419,
+          27
         ],
         "end": [
-          373.5,
+          419,
           438
         ],
         "easing": "easeInOut"
@@ -47,10 +47,10 @@
       "subtitle": "用物品图片作提示，让家人更容易知道放哪里。",
       "type": "concept",
       "region": {
-        "x": 998,
-        "y": 76,
-        "width": 596,
-        "height": 364
+        "x": 916,
+        "y": 43,
+        "width": 720,
+        "height": 409
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1296,
-          86
+          1276,
+          53
         ],
         "end": [
-          1296,
-          430
+          1276,
+          442
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "发现投放错误，先说明具体原因，再一起修正。",
       "type": "concept",
       "region": {
-        "x": 99,
-        "y": 508,
-        "width": 592,
-        "height": 389
+        "x": 45,
+        "y": 463,
+        "width": 752,
+        "height": 461
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          395,
-          518
+          421,
+          473
         ],
         "end": [
-          395,
-          887
+          421,
+          914
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "每次只解决一个常见问题，流程会更容易保持。",
       "type": "concept",
       "region": {
-        "x": 973,
-        "y": 553,
-        "width": 622,
-        "height": 336
+        "x": 955,
+        "y": 491,
+        "width": 683,
+        "height": 432
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1284,
-          563
+          1296.5,
+          501
         ],
         "end": [
-          1284,
-          879
+          1296.5,
+          913
         ],
         "easing": "easeInOut"
       }

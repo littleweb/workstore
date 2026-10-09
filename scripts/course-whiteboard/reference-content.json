@@ -7,7 +7,8 @@
       "duration": 30,
       "audience": "儿童",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "graphite"
     },
     "scenes": [
       {
@@ -41,7 +42,8 @@
       "duration": 30,
       "audience": "儿童",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "ink"
     },
     "scenes": [
       {
@@ -75,7 +77,8 @@
       "duration": 60,
       "audience": "青少年",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "marker"
     },
     "scenes": [
       {
@@ -130,7 +133,8 @@
       "duration": 60,
       "audience": "青少年",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "watercolor"
     },
     "scenes": [
       {
@@ -185,7 +189,8 @@
       "duration": 120,
       "audience": "儿童",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "charcoal"
     },
     "scenes": [
       {
@@ -282,7 +287,8 @@
       "duration": 120,
       "audience": "大众学习者",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "woodcut"
     },
     "scenes": [
       {
@@ -379,7 +385,8 @@
       "duration": 180,
       "audience": "青少年",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "sepia"
     },
     "scenes": [
       {
@@ -518,7 +525,8 @@
       "duration": 180,
       "audience": "大众学习者",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "crayon"
     },
     "scenes": [
       {
@@ -657,7 +665,8 @@
       "duration": 300,
       "audience": "青少年",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "paper"
     },
     "scenes": [
       {
@@ -880,7 +889,8 @@
       "duration": 300,
       "audience": "职场人士",
       "voice": true,
-      "voiceId": "zf_021"
+      "voiceId": "zf_021",
+      "style": "fineline"
     },
     "scenes": [
       {

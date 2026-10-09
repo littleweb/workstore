@@ -15,10 +15,10 @@
       "subtitle": "不要把电池两端直接用金属连接，这会造成短路。",
       "type": "concept",
       "region": {
-        "x": 202,
-        "y": 54,
-        "width": 491,
-        "height": 344
+        "x": 29,
+        "y": 41,
+        "width": 774,
+        "height": 396
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          447.5,
-          64
+          416,
+          51
         ],
         "end": [
-          447.5,
-          388
+          416,
+          427
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "不拆开、不加热，也不要混用不同状态的电池。",
       "type": "concept",
       "region": {
-        "x": 940,
-        "y": 80,
-        "width": 567,
-        "height": 327
+        "x": 933,
+        "y": 17,
+        "width": 719,
+        "height": 419
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1223.5,
-          90
+          1292.5,
+          27
         ],
         "end": [
-          1223.5,
-          397
+          1292.5,
+          426
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "不用的电池按当地要求收集，避免随手丢弃。",
       "type": "concept",
       "region": {
-        "x": 165,
-        "y": 554,
-        "width": 499,
-        "height": 296
+        "x": 84,
+        "y": 475,
+        "width": 643,
+        "height": 375
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,11 +93,11 @@
       },
       "handPath": {
         "start": [
-          414.5,
-          564
+          405.5,
+          485
         ],
         "end": [
-          414.5,
+          405.5,
           840
         ],
         "easing": "easeInOut"
@@ -111,10 +111,10 @@
       "subtitle": "这里只解释工作原理，不演示拆电池或危险实验。",
       "type": "concept",
       "region": {
-        "x": 967,
-        "y": 590,
-        "width": 527,
-        "height": 247
+        "x": 909,
+        "y": 549,
+        "width": 730,
+        "height": 297
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1230.5,
-          600
+          1274,
+          559
         ],
         "end": [
-          1230.5,
-          827
+          1274,
+          836
         ],
         "easing": "easeInOut"
       }

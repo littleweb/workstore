@@ -75,9 +75,11 @@ npm run tauri -- build --debug
 
 原技能及MIT许可在vendor/srt-whiteboard-animation，上游文件不得改写；开发核查执行原prepare_env.py --check，缺失时建立技能自己的隔离.venv。产品运行使用独立打包解释器隔离依赖。Noto中文字体及许可在vendor/course-whiteboard-font；手部素材的去字版本位于src/course-whiteboard/assets。
 
-参考的原创教学内容与构图在scripts/course-whiteboard/reference-content.json；实际imagegen原始/修正提示词记录于docs/course-whiteboard-image-prompts.json。检查源图后生成.reviewed标记，examples.mjs以实际像素边界建立标注并渲染十条真实教程；此任务消耗CPU与时间，不作为常规测试。原图、标注、SRT、旁白及成片在public/course/whiteboard。成片核验：python3 scripts/course-whiteboard/audit-examples.py（检查十条视频、音轨、帧数、SRT并生成联系表）。常规回归：node --test tests/course-whiteboard*.test.mjs tests/course-ui.test.mjs；完整Rust回归保持--test-threads=1。
+参考的原创教学内容与构图在scripts/course-whiteboard/reference-content.json；实际imagegen原始/修正提示词记录于docs/course-whiteboard-image-prompts.json。检查源图后生成.reviewed标记，examples.mjs以实际像素边界建立标注并渲染十条真实教程；此任务消耗CPU与时间，不作为常规测试。原图、标注、SRT、旁白及成片在public/course/whiteboard。风格素材的内置imagegen生成及定向修正提示词分别记录于docs/course-whiteboard-style-image-prompts.json与docs/course-whiteboard-style-image-corrections.json。src/course-whiteboard/examples.json与reference-content.json保存一一对应的十种画风；cover.png是独立封面，不从01.png拷贝。替换源图后运行node scripts/course-whiteboard/refresh-styles.mjs（可传参考id）只重新测量标注与渲染，复用既有配音/SRT，无模型调用。成片核验：python3 scripts/course-whiteboard/audit-examples.py（检查十条视频、音轨、帧数、SRT并生成联系表）。常规回归：node --test tests/course-whiteboard*.test.mjs tests/course-ui.test.mjs；完整Rust回归保持--test-threads=1。
 
 课程内置视频换声时运行scripts/course-animation/refresh-voices.mjs与scripts/course-whiteboard/refresh-voices.mjs；先构建共享运行环境，两者只替换内置参考，旧字节备份于忽略目录。每类十条完成后分别运行audit-examples.py，校验音色版本、无首尾标点字幕、SRT、时长/帧数/音轨和首中末画面，再构建最终桌面包。
+
+动画风格参考配置在src/course-animation/examples.json，主题描述/配色/版式/动效统一于styles.ts。构建运行组件后执行node scripts/course-animation/refresh-styles.mjs（可传参考id），只渲染并保留98幕配音、字幕与教学内容，不调用语音或模型服务。十张独立正方形封面由内置imagegen制作，提示词保存在docs/course-animation-style-cover-prompts.json；style-cover.png不被runner输出的cover.png覆盖。audit-examples.py额外检查十个独立样式、1:1封面像素/哈希、与计划一致性，并生成封面联系表。不要把这些批量渲染加入常规测试。
 
 仅调整动画字幕排版时，可在构建渲染运行环境后运行scripts/course-animation/refresh-captions.mjs，复用已验证WAV与字幕时间并重新渲染十条参考，不重复合成或调用AI。
 
@@ -105,3 +107,20 @@ npm run tauri -- build --debug
 运行`npm run design:publish`只发布catalog引用的公开设计室WebP到assets/design-studio分支；同清单复用不可变提交，变更非force追加，产生src/design-studio/remote-assets.json。发布构建自动先发布/验证封面预览和设计室两套素材；本机构建只校验固定索引，修改原素材后须先发布。不能将用户作品放入公开catalog或素材目录。
 
 production前端不复制public/design-studio，正式包前端预算80MiB、macOS应用90MiB。设计室原图仍在源码Git用于校验和发布，浏览器dev使用原图。回归包含tests/design-assets.test.mjs、tests/release-assets.test.mjs及共享Rust下载器测试；完整Rust仍单线程。首次未缓存图片需要联网，离线占位可重试；已缓存图片可离线显示。发布仅交付经过实测的平台，沿用原更新公钥，新建版本标签，不替换旧Release附件。
+
+本机需要验收“做课程”时，使用`npm run desktop:experimental:build -- --bundles app`构建完整开发桌面包并正常退出后安装；默认`desktop:build`仍遵循正式白名单，不显示课程。开发包仅本机验收，不作为正式Release上传。
+
+白板沙画参考的封面使用square-cover.png（1:1），旧cover.png及原提示词保留；两套参考生成/刷新脚本保留方形封面路径和ratio元数据，不由视频首帧覆盖。audit-examples.py校验方形尺寸与元数据，并生成方形封面联系表。新生成和重新生成的白板发布封面固定1:1，既有版本不迁移。
+
+交互网页参考由scripts/course-web/build-examples.mjs生成12个自包含HTML、本地Course3D运行库（固定Three.js版本）及真实场景方形WebP封面。tests/course-web.test.mjs验证全部控件、计算反馈与沙箱边界；course-web-ui验证持久化先于模型、后台完成、停止及晚到结果守卫。桌面需完整实验包包含原HTML发布运行组件，正式白名单不自动开放该品类；在线发布依赖用户现有Vercel配置，不在开发验收自动上传。
+
+交互网页视觉验收：node scripts/course-web/render-references.mjs（开发依赖Playwright，默认本机Chrome，可用COURSE_CHROME指定可执行文件），使用独立无界面测试浏览器，验证12条实际WebGL/绘画场景、参数、复位和390px布局，截图存忽略目录docs/course-web-proof。场景代码改动后重跑渲染并从*-cover.png生成cover.webp；普通predev/prebuild只编译自包含HTML/渲染库，不调用模型或联网下载素材。材质及素材来源见docs/course-web-style-sources.json；不复制第三方展示站的模型、纹理或源码。
+
+
+## 0.1.17发布课程与必检规则
+
+发布前读取AGENTS.md及docs/RELEASE-CHECKLIST.md。做课程已纳入正式范围，原封面/设计室优化继续生效。release:check检查五处版本、原公钥及三套固定资源索引；正式入口自动跑全部前端/单线程Rust测试、检查完整工具模块及80/90MiB预算、应用和更新包签名及DMG。不能用完整实验构建替代正式包。
+
+课程资源由scripts/resources/catalog.mjs从四类examples目录与12段试听收集，不复制其他生成中间文件。发布入口校验/准备两类原渲染运行环境，仅打包Node、动画、白板/自然配音及HTML发布服务的声明文件为独立组件，然后resources:publish上传内容寻址附件、逐项核对远端摘要并生成src/remote-resources.json。默认本机模式不上传素材、不要求私钥，复用已提交索引；新设备运行时自动获取必要组件。首次从源码发布需要原课程构建依赖；pack.py拒绝在未验证平台标记macOS ARM64组件。
+
+三套公共资源索引与代码共同维护main；源码原图与公开参考保留用于验收/再发布，缓存与用户工作区不进源Git。资源版本独立、不可覆盖且不设为软件Latest；安装更新另建软件版本标签。验证中不默认调用AI或执行Vercel上传。

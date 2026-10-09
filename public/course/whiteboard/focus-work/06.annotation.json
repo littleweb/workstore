@@ -15,10 +15,10 @@
       "subtitle": "卡住时，先描述具体困难，而不是给自己贴标签。",
       "type": "concept",
       "region": {
-        "x": 184,
-        "y": 118,
-        "width": 428,
-        "height": 302
+        "x": 108,
+        "y": 55,
+        "width": 623,
+        "height": 372
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          398,
-          128
+          419.5,
+          65
         ],
         "end": [
-          398,
-          410
+          419.5,
+          417
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "问自己缺的是资料、决定，还是一个可操作的小动作。",
       "type": "concept",
       "region": {
-        "x": 911,
-        "y": 132,
-        "width": 640,
-        "height": 260
+        "x": 825,
+        "y": 134,
+        "width": 800,
+        "height": 246
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1231,
-          142
+          1225,
+          144
         ],
         "end": [
-          1231,
-          382
+          1225,
+          370
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "只解决眼前的一个阻碍，再检查能否继续。",
       "type": "concept",
       "region": {
-        "x": 191,
-        "y": 549,
-        "width": 422,
-        "height": 286
+        "x": 94,
+        "y": 483,
+        "width": 644,
+        "height": 382
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          402,
-          559
+          416,
+          493
         ],
         "end": [
-          402,
-          825
+          416,
+          855
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "如果问题超出能力，写清需要什么帮助再去求助。",
       "type": "concept",
       "region": {
-        "x": 995,
-        "y": 531,
-        "width": 485,
-        "height": 303
+        "x": 874,
+        "y": 464,
+        "width": 736,
+        "height": 392
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1237.5,
-          541
+          1242,
+          474
         ],
         "end": [
-          1237.5,
-          824
+          1242,
+          846
         ],
         "easing": "easeInOut"
       }

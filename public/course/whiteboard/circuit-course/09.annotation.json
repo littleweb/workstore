@@ -15,10 +15,10 @@
       "subtitle": "一个低压小灯不亮，先确认开关是否闭合。",
       "type": "concept",
       "region": {
-        "x": 132,
-        "y": 92,
-        "width": 625,
-        "height": 296
+        "x": 117,
+        "y": 24,
+        "width": 579,
+        "height": 391
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          444.5,
-          102
+          406.5,
+          34
         ],
         "end": [
-          444.5,
-          378
+          406.5,
+          405
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "再查看安全接点是否松动，以及元件是否符合说明。",
       "type": "concept",
       "region": {
-        "x": 959,
-        "y": 92,
-        "width": 626,
-        "height": 304
+        "x": 829,
+        "y": 34,
+        "width": 800,
+        "height": 373
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1272,
-          102
+          1229,
+          44
         ],
         "end": [
-          1272,
-          386
+          1229,
+          397
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "不要用短接电池或家庭插座来验证猜想。",
       "type": "concept",
       "region": {
-        "x": 167,
-        "y": 595,
-        "width": 522,
-        "height": 233
+        "x": 146,
+        "y": 491,
+        "width": 549,
+        "height": 348
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          428,
-          605
+          420.5,
+          501
         ],
         "end": [
-          428,
-          818
+          420.5,
+          829
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "每次只改变一个允许的条件，记录观察到的结果。",
       "type": "concept",
       "region": {
-        "x": 974,
-        "y": 519,
-        "width": 553,
-        "height": 324
+        "x": 992,
+        "y": 450,
+        "width": 595,
+        "height": 448
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1250.5,
-          529
+          1289.5,
+          460
         ],
         "end": [
-          1250.5,
-          833
+          1289.5,
+          888
         ],
         "easing": "easeInOut"
       }

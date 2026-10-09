@@ -15,10 +15,10 @@
       "subtitle": "把小灯连成回路，电池就能向电路提供能量。",
       "type": "concept",
       "region": {
-        "x": 191,
-        "y": 32,
-        "width": 464,
-        "height": 382
+        "x": 145,
+        "y": 80,
+        "width": 617,
+        "height": 309
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          423,
-          42
+          453.5,
+          90
         ],
         "end": [
-          423,
-          404
+          453.5,
+          379
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "能量在小灯处变成光，也有一部分变成热。",
       "type": "concept",
       "region": {
-        "x": 1015,
-        "y": 27,
-        "width": 490,
-        "height": 378
+        "x": 996,
+        "y": 36,
+        "width": 487,
+        "height": 406
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1260,
-          37
+          1239.5,
+          46
         ],
         "end": [
-          1260,
-          395
+          1239.5,
+          432
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "导线上的电荷不是被灯泡吃掉，它们持续参与回路。",
       "type": "concept",
       "region": {
-        "x": 182,
-        "y": 494,
-        "width": 480,
-        "height": 391
+        "x": 140,
+        "y": 503,
+        "width": 619,
+        "height": 318
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          422,
-          504
+          449.5,
+          513
         ],
         "end": [
-          422,
-          875
+          449.5,
+          811
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "练习：断开一处连接，为什么灯通常会熄灭？",
       "type": "concept",
       "region": {
-        "x": 1008,
-        "y": 532,
-        "width": 486,
-        "height": 341
+        "x": 945,
+        "y": 472,
+        "width": 609,
+        "height": 347
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1251,
-          542
+          1249.5,
+          482
         ],
         "end": [
-          1251,
-          863
+          1249.5,
+          809
         ],
         "easing": "easeInOut"
       }

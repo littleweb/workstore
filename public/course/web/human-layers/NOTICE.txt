@@ -1,0 +1,1 @@
+Human outer surface: Quaternius / UMRAM, Bilkent University. Source: https://github.com/UMRAM-Bilkent/supine-human-model / assets/human_posed.glb. CC0-1.0. Rescaled for this teaching scene. Skeleton and organ shapes are authored conceptual models, not clinical anatomy data.

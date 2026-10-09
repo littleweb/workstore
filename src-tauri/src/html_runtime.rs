@@ -34,7 +34,7 @@ fn bundle_root(app: &tauri::AppHandle) -> Result<PathBuf, String> {
         let development = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("html-runtime");
         if development.join("manifest.json").is_file() { return Ok(development); }
     }
-    Err("HTML Anything 运行组件缺失，请重新安装完整 WorkStore 安装包".into())
+    crate::remote_resources::source(app,"html-service")
 }
 fn start(app: &tauri::AppHandle) -> Result<RuntimeInfo, String> {
     let state = app.state::<HtmlRuntime>();
@@ -74,7 +74,8 @@ fn start(app: &tauri::AppHandle) -> Result<RuntimeInfo, String> {
     drop(TcpListener::bind(("127.0.0.1", port)).map_err(|_| "HTML 本地端口被占用，请关闭占用该端口的程序后重试；未切换端口或清除作品")?);
     let nonce = Uuid::new_v4().to_string();
     let entry = cache.join(manifest.entry.strip_prefix("app/").ok_or("HTML 运行入口无效")?);
-    let mut command = Command::new(resource.join(&manifest.node));
+    let node = if resource.join(&manifest.node).is_file() { resource.join(&manifest.node) } else { crate::remote_resources::source(app,"node")?.join("node") };
+    let mut command = Command::new(node);
     // GUI launches do not inherit the terminal PATH. Reuse WorkStore discovery.
     if let Ok(codex) = crate::ai::codex_path("") { command.env("CODEX_BIN", codex); }
     command.args(["--require"]).arg(resource.join("preload.cjs")).arg(&entry)
@@ -143,4 +144,67 @@ pub async fn html_original_export(path: String, data: String) -> Result<(), Stri
     if data.len() > 180_000_000 { return Err("导出文件超过 128 MB".into()); }
     let bytes = STANDARD.decode(data).map_err(|_| "导出数据无效")?;
     crate::storage::atomic_write(&target, &bytes)
+}
+
+// Reuse pinned HTML Anything publishing and device-private configuration.
+// No workspace lock is held while starting the runtime or waiting on Vercel.
+fn web_publish_body(action: &str, payload: &serde_json::Value) -> Result<(&'static str, reqwest::Method, Option<serde_json::Value>), String> {
+    use serde_json::json;
+    match action {
+        "config" => Ok(("api/deploy/config?provider=vercel", reqwest::Method::GET, None)),
+        "save-config" => {
+            let mut body = serde_json::Map::new();
+            for key in ["token", "teamId", "teamSlug"] {
+                if let Some(value) = payload.get(key) {
+                    let text = value.as_str().ok_or("发布设置无效")?;
+                    if text.len() > 4096 { return Err("发布设置过长".into()); }
+                    body.insert(key.into(), json!(text));
+                }
+            }
+            Ok(("api/deploy/config?provider=vercel", reqwest::Method::PUT, Some(serde_json::Value::Object(body))))
+        }
+        "publish" => {
+            let id = payload["taskId"].as_str().ok_or("作品标识无效")?;
+            if uuid::Uuid::parse_str(id).is_err() { return Err("作品标识无效".into()); }
+            let html = payload["html"].as_str().ok_or("网页内容无效")?;
+            if html.len() > 2 * 1024 * 1024 || !html.trim_start().to_ascii_lowercase().starts_with("<!doctype html") || !html.to_ascii_lowercase().contains("</html>") { return Err("需要完整HTML，且不超过2MB".into()); }
+            Ok(("api/deploy", reqwest::Method::POST, Some(json!({"provider":"vercel","taskId":id,"html":html}))))
+        }
+        _ => Err("不支持的发布操作".into()),
+    }
+}
+#[tauri::command]
+pub async fn course_web_publish(app: tauri::AppHandle, action: String, payload: serde_json::Value) -> Result<serde_json::Value, String> {
+    let (route, method, body) = web_publish_body(&action, &payload)?;
+    let info = html_original_start(app).await?;
+    let client = reqwest::Client::builder().no_proxy().redirect(reqwest::redirect::Policy::none()).timeout(Duration::from_secs(300)).build().map_err(|_| "发布连接初始化失败")?;
+    let mut request = client.request(method, format!("{}{route}", info.url));
+    if let Some(body) = body { request = request.json(&body); }
+    let response = request.send().await.map_err(|_| "发布服务连接失败，请重试")?;
+    if !response.status().is_success() { return Err(if response.status().as_u16() == 400 { "请检查Vercel发布配置与作品内容" } else { "HTML发布服务未完成操作，请检查配置后重试" }.into()); }
+    let value: serde_json::Value = response.json().await.map_err(|_| "发布服务返回无效结果")?;
+    if action != "publish" {
+        // Explicit projection prevents plaintext credentials leaving the local service.
+        return Ok(serde_json::json!({"configured":value["configured"].as_bool().unwrap_or(false),"tokenMask":if value["configured"].as_bool().unwrap_or(false){"saved-vercel-token"}else{""},"teamId":value["teamId"].as_str().unwrap_or(""),"teamSlug":value["teamSlug"].as_str().unwrap_or("")}));
+    }
+    let url = value["url"].as_str().ok_or("发布地址无效")?;
+    let parsed = reqwest::Url::parse(url).map_err(|_| "发布地址无效")?;
+    if parsed.scheme() != "https" || !parsed.host_str().is_some_and(|h| h.ends_with(".vercel.app")) || !parsed.username().is_empty() || parsed.password().is_some() { return Err("发布地址无效".into()); }
+    let status = value["status"].as_str().unwrap_or("");
+    if !["ready", "protected", "link-delayed"].contains(&status) { return Err("发布状态无效".into()); }
+    Ok(serde_json::json!({"url":url,"deploymentId":value["deploymentId"].as_str().unwrap_or(""),"status":status,"statusMessage":match status {"ready"=>"网页已就绪", "protected"=>"网页已部署，平台访问保护仍开启", _=>"网页已部署，链接可达性等待平台确认"}}))
+}
+#[cfg(test)]
+mod web_publish_tests {
+    use super::*;
+    #[test]
+    fn narrow_publish_actions_and_credentials() {
+        assert!(web_publish_body("arbitrary-url", &serde_json::json!({})).is_err());
+        assert!(web_publish_body("publish", &serde_json::json!({"taskId":"../escape","html":"<!DOCTYPE html></html>"})).is_err());
+        let (_,_,body) = web_publish_body("save-config", &serde_json::json!({"token":"sample-only", "endpoint":"https://attacker.invalid", "teamId":"team_demo"})).unwrap();
+        assert!(body.as_ref().unwrap().get("endpoint").is_none());
+        assert_eq!(body.unwrap()["teamId"], "team_demo");
+        let id=uuid::Uuid::new_v4().to_string();
+        assert!(web_publish_body("publish", &serde_json::json!({"taskId":id,"html":"<!DOCTYPE html><html></html>"})).is_ok());
+    }
 }

@@ -15,10 +15,10 @@
       "subtitle": "今天用简单电路，理解小灯为什么会亮。",
       "type": "concept",
       "region": {
-        "x": 208,
-        "y": 122,
-        "width": 474,
-        "height": 256
+        "x": 41,
+        "y": 130,
+        "width": 778,
+        "height": 289
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          445,
-          132
+          430,
+          140
         ],
         "end": [
-          445,
-          368
+          430,
+          409
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "只讨论合适的低压教学器材，不接家庭电源。",
       "type": "concept",
       "region": {
-        "x": 935,
-        "y": 71,
-        "width": 645,
-        "height": 350
+        "x": 907,
+        "y": 41,
+        "width": 727,
+        "height": 405
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1257.5,
-          81
+          1270.5,
+          51
         ],
         "end": [
-          1257.5,
-          411
+          1270.5,
+          436
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "观察电源、导线和小灯，先认识三个部分。",
       "type": "concept",
       "region": {
-        "x": 200,
-        "y": 572,
-        "width": 509,
-        "height": 210
+        "x": 84,
+        "y": 545,
+        "width": 724,
+        "height": 287
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          454.5,
-          582
+          446,
+          555
         ],
         "end": [
-          454.5,
-          772
+          446,
+          822
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "带着问题开始：少了哪一段，小灯就会熄灭？",
       "type": "concept",
       "region": {
-        "x": 981,
-        "y": 539,
-        "width": 508,
-        "height": 276
+        "x": 909,
+        "y": 584,
+        "width": 692,
+        "height": 239
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1235,
-          549
+          1255,
+          594
         ],
         "end": [
-          1235,
-          805
+          1255,
+          813
         ],
         "easing": "easeInOut"
       }

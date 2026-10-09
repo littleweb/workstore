@@ -1,1 +1,191 @@
-{"tutorial":{"title":"四分之一到底是多少","summary":"再取一份，就有四份中的两份。它写成四分之二，和二分之一一样大。试着画图说明原因。","scenes":[{"title":"先分成一样大的份","seconds":10,"narration":"把同一个整体平均分成四份。平均分很重要：每一份的大小必须相同，不能一大一小。","points":["同一个整体","每一份一样大"],"visual":{"kind":"fraction","labels":["平均分成四份","每份大小相同"],"values":[1,4],"note":""},"captions":[{"text":"把同一个整体平均分成四份","startMs":120,"endMs":2804,"timestampMs":null,"confidence":null},{"text":"平均分很重要：每一份的大小必须相同","startMs":2804,"endMs":6520,"timestampMs":null,"confidence":null},{"text":"不能一大一小","startMs":6520,"endMs":7965,"timestampMs":null,"confidence":null}],"audio":"/course/animations/one-quarter/01.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"取出一份就是四分之一","seconds":10,"narration":"四分之一的分母四，表示平均分成四份；分子一，表示取出其中一份。看着色块，把它读出来。","points":["分母：一共几份","分子：取了几份"],"visual":{"kind":"fraction","labels":["取出一份","读作四分之一"],"values":[1,4],"note":""},"captions":[{"text":"四分之一的分母四","startMs":120,"endMs":1951,"timestampMs":null,"confidence":null},{"text":"表示平均分成四份","startMs":1951,"endMs":3783,"timestampMs":null,"confidence":null},{"text":"分子一","startMs":3783,"endMs":4596,"timestampMs":null,"confidence":null},{"text":"表示取出其中一份","startMs":4596,"endMs":6427,"timestampMs":null,"confidence":null},{"text":"看着色块","startMs":6427,"endMs":7444,"timestampMs":null,"confidence":null},{"text":"把它读出来","startMs":7444,"endMs":8665,"timestampMs":null,"confidence":null}],"audio":"/course/animations/one-quarter/02.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"},{"title":"两份会是多少","seconds":10,"narration":"再取一份，就有四份中的两份。它写成四分之二，和二分之一一样大。试着画图说明原因。","points":["四分之二等于二分之一","整体大小必须一致"],"visual":{"kind":"fraction","labels":["四份中的两份","等于二分之一"],"values":[2,4],"note":""},"captions":[{"text":"再取一份","startMs":120,"endMs":1118,"timestampMs":null,"confidence":null},{"text":"就有四份中的两份","startMs":1118,"endMs":2914,"timestampMs":null,"confidence":null},{"text":"它写成四分之二","startMs":2914,"endMs":4511,"timestampMs":null,"confidence":null},{"text":"和二分之一一样大","startMs":4511,"endMs":6307,"timestampMs":null,"confidence":null},{"text":"试着画图说明原因","startMs":6307,"endMs":8103,"timestampMs":null,"confidence":null}],"audio":"/course/animations/one-quarter/03.wav","audioVoice":"kokoro-zh-zf_021-s0.93-v1"}],"duration":30,"style":"warm","video":"/course/animations/one-quarter/tutorial.mp4"},"config":{"duration":30,"style":"warm","audience":"儿童","voice":true,"voiceId":"zf_021"}}
+{
+  "tutorial": {
+    "title": "四分之一到底是多少",
+    "summary": "再取一份，就有四份中的两份。它写成四分之二，和二分之一一样大。试着画图说明原因。",
+    "scenes": [
+      {
+        "title": "先分成一样大的份",
+        "seconds": 10,
+        "narration": "把同一个整体平均分成四份。平均分很重要：每一份的大小必须相同，不能一大一小。",
+        "points": [
+          "同一个整体",
+          "每一份一样大"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "平均分成四份",
+            "每份大小相同"
+          ],
+          "values": [
+            1,
+            4
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "把同一个整体平均分成四份",
+            "startMs": 120,
+            "endMs": 2804,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "平均分很重要：每一份的大小必须相同",
+            "startMs": 2804,
+            "endMs": 6520,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "不能一大一小",
+            "startMs": 6520,
+            "endMs": 7965,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/one-quarter/01.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "取出一份就是四分之一",
+        "seconds": 10,
+        "narration": "四分之一的分母四，表示平均分成四份；分子一，表示取出其中一份。看着色块，把它读出来。",
+        "points": [
+          "分母：一共几份",
+          "分子：取了几份"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "取出一份",
+            "读作四分之一"
+          ],
+          "values": [
+            1,
+            4
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "四分之一的分母四",
+            "startMs": 120,
+            "endMs": 1951,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "表示平均分成四份",
+            "startMs": 1951,
+            "endMs": 3783,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "分子一",
+            "startMs": 3783,
+            "endMs": 4596,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "表示取出其中一份",
+            "startMs": 4596,
+            "endMs": 6427,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "看着色块",
+            "startMs": 6427,
+            "endMs": 7444,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "把它读出来",
+            "startMs": 7444,
+            "endMs": 8665,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/one-quarter/02.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      },
+      {
+        "title": "两份会是多少",
+        "seconds": 10,
+        "narration": "再取一份，就有四份中的两份。它写成四分之二，和二分之一一样大。试着画图说明原因。",
+        "points": [
+          "四分之二等于二分之一",
+          "整体大小必须一致"
+        ],
+        "visual": {
+          "kind": "fraction",
+          "labels": [
+            "四份中的两份",
+            "等于二分之一"
+          ],
+          "values": [
+            2,
+            4
+          ],
+          "note": ""
+        },
+        "captions": [
+          {
+            "text": "再取一份",
+            "startMs": 120,
+            "endMs": 1118,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "就有四份中的两份",
+            "startMs": 1118,
+            "endMs": 2914,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "它写成四分之二",
+            "startMs": 2914,
+            "endMs": 4511,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "和二分之一一样大",
+            "startMs": 4511,
+            "endMs": 6307,
+            "timestampMs": null,
+            "confidence": null
+          },
+          {
+            "text": "试着画图说明原因",
+            "startMs": 6307,
+            "endMs": 8103,
+            "timestampMs": null,
+            "confidence": null
+          }
+        ],
+        "audio": "/course/animations/one-quarter/03.wav",
+        "audioVoice": "kokoro-zh-zf_021-s0.93-v1"
+      }
+    ],
+    "duration": 30,
+    "style": "warm",
+    "video": "/course/animations/one-quarter/tutorial.mp4"
+  },
+  "config": {
+    "duration": 30,
+    "style": "warm",
+    "audience": "儿童",
+    "voice": true,
+    "voiceId": "zf_021"
+  }
+}

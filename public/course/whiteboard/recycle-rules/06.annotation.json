@@ -15,10 +15,10 @@
       "subtitle": "现在拿一个空饮料盒，先观察材料和残留状态。",
       "type": "concept",
       "region": {
-        "x": 196,
-        "y": 52,
-        "width": 373,
-        "height": 395
+        "x": 203,
+        "y": 27,
+        "width": 419,
+        "height": 415
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          382.5,
-          62
+          412.5,
+          37
         ],
         "end": [
-          382.5,
-          437
+          412.5,
+          432
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "清空残液，再查你所在地对复合包装的要求。",
       "type": "concept",
       "region": {
-        "x": 918,
-        "y": 80,
-        "width": 619,
-        "height": 365
+        "x": 909,
+        "y": 25,
+        "width": 694,
+        "height": 420
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,11 +61,11 @@
       },
       "handPath": {
         "start": [
-          1227.5,
-          90
+          1256,
+          35
         ],
         "end": [
-          1227.5,
+          1256,
           435
         ],
         "easing": "easeInOut"
@@ -79,10 +79,10 @@
       "subtitle": "按当地规则投放，并避免污染其他已分好的物品。",
       "type": "concept",
       "region": {
-        "x": 181,
-        "y": 493,
-        "width": 470,
-        "height": 387
+        "x": 69,
+        "y": 491,
+        "width": 708,
+        "height": 409
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          416,
-          503
+          423,
+          501
         ],
         "end": [
-          416,
-          870
+          423,
+          890
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "总结：辨材料、看状态、查规则，再进行投放。",
       "type": "concept",
       "region": {
-        "x": 925,
-        "y": 591,
-        "width": 657,
-        "height": 235
+        "x": 825,
+        "y": 531,
+        "width": 824,
+        "height": 319
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1253.5,
-          601
+          1237,
+          541
         ],
         "end": [
-          1253.5,
-          816
+          1237,
+          840
         ],
         "easing": "easeInOut"
       }

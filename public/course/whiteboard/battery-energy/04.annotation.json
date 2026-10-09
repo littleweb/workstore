@@ -15,10 +15,10 @@
       "subtitle": "使用过程中，能参与反应的材料状态会改变。",
       "type": "concept",
       "region": {
-        "x": 235,
-        "y": 95,
-        "width": 400,
-        "height": 303
+        "x": 185,
+        "y": 38,
+        "width": 538,
+        "height": 382
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          435,
-          105
+          454,
+          48
         ],
         "end": [
-          435,
-          388
+          454,
+          410
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "继续供电的能力下降，我们就说电池快用完了。",
       "type": "concept",
       "region": {
-        "x": 953,
-        "y": 116,
-        "width": 607,
-        "height": 271
+        "x": 870,
+        "y": 85,
+        "width": 752,
+        "height": 330
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1256.5,
-          126
+          1246,
+          95
         ],
         "end": [
-          1256.5,
-          377
+          1246,
+          405
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "有些电池能充电，有些不能随意再次充电。",
       "type": "concept",
       "region": {
-        "x": 113,
-        "y": 548,
-        "width": 551,
-        "height": 256
+        "x": 1,
+        "y": 474,
+        "width": 758,
+        "height": 373
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          388.5,
-          558
+          380,
+          484
         ],
         "end": [
-          388.5,
-          794
+          380,
+          837
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "判断能否充电，应看产品说明，不靠外形猜测。",
       "type": "concept",
       "region": {
-        "x": 873,
-        "y": 532,
-        "width": 727,
-        "height": 334
+        "x": 895,
+        "y": 475,
+        "width": 732,
+        "height": 454
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1236.5,
-          542
+          1261,
+          485
         ],
         "end": [
-          1236.5,
-          856
+          1261,
+          919
         ],
         "easing": "easeInOut"
       }

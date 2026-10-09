@@ -1,6 +1,6 @@
 {
   "name": "workstore",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,8 +10,8 @@
     "tauri": "tauri",
     "desktop": "tauri dev",
     "desktop:build": "node scripts/build-release.mjs --local",
-    "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs && node scripts/course/build-resources.mjs && node scripts/course-animation/build-runtime.mjs && node scripts/course-whiteboard/build-runtime.mjs",
-    "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs && node scripts/course/build-resources.mjs && node scripts/course-animation/build-runtime.mjs && node scripts/course-whiteboard/build-runtime.mjs",
+    "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs && node scripts/course/build-resources.mjs && node scripts/course-animation/build-runtime.mjs && node scripts/course-whiteboard/build-runtime.mjs && node scripts/course-web/build-examples.mjs",
+    "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs && node scripts/course/build-resources.mjs && node scripts/course-animation/build-runtime.mjs && node scripts/course-whiteboard/build-runtime.mjs && node scripts/course-web/build-examples.mjs",
     "desktop:update:build": "node scripts/build-release.mjs",
     "demo:apos": "vite --config demos/apos/vite.config.mjs",
     "demo:apos:build": "tsc -p demos/apos/tsconfig.json && vite build --config demos/apos/vite.config.mjs",
@@ -22,7 +22,9 @@
     "desktop:release:build": "node scripts/build-release.mjs",
     "covers:publish": "node scripts/covers/publish.mjs",
     "desktop:experimental:build": "tauri build",
-    "design:publish": "node scripts/design-studio/publish.mjs"
+    "design:publish": "node scripts/design-studio/publish.mjs",
+    "release:check": "node scripts/release/check.mjs",
+    "resources:publish": "node scripts/resources/publish.mjs"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
@@ -43,7 +45,8 @@
     "jszip": "^3.10.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "remotion": "4.0.534"
+    "remotion": "4.0.534",
+    "three": "0.186.1"
   },
   "devDependencies": {
     "@remotion/bundler": "4.0.534",
@@ -53,6 +56,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "jsdom": "26.1.0",
+    "playwright": "1.61.1",
     "typescript": "~5.8.3",
     "vite": "^6.1.0"
   },

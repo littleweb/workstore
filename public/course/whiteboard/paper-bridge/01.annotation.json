@@ -15,10 +15,10 @@
       "subtitle": "把一张纸平放在两本书之间，它很容易弯下去。",
       "type": "concept",
       "region": {
-        "x": 79,
-        "y": 171,
-        "width": 672,
-        "height": 176
+        "x": 36,
+        "y": 127,
+        "width": 778,
+        "height": 236
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -29,12 +29,12 @@
       },
       "handPath": {
         "start": [
-          415,
-          181
+          425,
+          137
         ],
         "end": [
-          415,
-          337
+          425,
+          353
         ],
         "easing": "easeInOut"
       }
@@ -47,10 +47,10 @@
       "subtitle": "折出几道均匀的褶皱，再放回同样的间距。",
       "type": "concept",
       "region": {
-        "x": 885,
-        "y": 139,
-        "width": 738,
-        "height": 251
+        "x": 846,
+        "y": 104,
+        "width": 813,
+        "height": 318
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -61,12 +61,12 @@
       },
       "handPath": {
         "start": [
-          1254,
-          149
+          1252.5,
+          114
         ],
         "end": [
-          1254,
-          380
+          1252.5,
+          412
         ],
         "easing": "easeInOut"
       }
@@ -79,10 +79,10 @@
       "subtitle": "相同纸张，形状改变后，就更难发生弯曲。",
       "type": "concept",
       "region": {
-        "x": 80,
-        "y": 535,
-        "width": 671,
-        "height": 240
+        "x": 31,
+        "y": 556,
+        "width": 781,
+        "height": 245
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -93,12 +93,12 @@
       },
       "handPath": {
         "start": [
-          415.5,
-          545
+          421.5,
+          566
         ],
         "end": [
-          415.5,
-          765
+          421.5,
+          791
         ],
         "easing": "easeInOut"
       }
@@ -111,10 +111,10 @@
       "subtitle": "比较时只改变折法。你会怎样做一次公平测试？",
       "type": "concept",
       "region": {
-        "x": 865,
-        "y": 644,
-        "width": 769,
-        "height": 125
+        "x": 854,
+        "y": 600,
+        "width": 797,
+        "height": 170
       },
       "reveal": {
         "direction": "top_to_bottom",
@@ -125,12 +125,12 @@
       },
       "handPath": {
         "start": [
-          1249.5,
-          654
+          1252.5,
+          610
         ],
         "end": [
-          1249.5,
-          759
+          1252.5,
+          760
         ],
         "easing": "easeInOut"
       }

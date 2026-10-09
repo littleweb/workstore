@@ -7,6 +7,13 @@
     {
       "id": "soap-oil",
       "title": "肥皂怎样带走油污",
+      "style": "graphite",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "6a840d868114335143a0998a54ac05ee742658c6f23071cdbdef6c10a86636b4",
       "seconds": 30,
       "scenes": 1,
       "frames": 720,
@@ -17,7 +24,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "b3c2a6254f9c18580d04705f33370da321da96bc34145bd2c4d0b96af02fe0bb",
+      "sha256": "5897d13d978db7145db918baa2c8458ee3c23462d4cf774af0e8ab444ea7a435",
       "reviewedFramesSeconds": [
         1,
         15.0,
@@ -31,6 +38,13 @@
     {
       "id": "paper-bridge",
       "title": "折一座更稳的纸桥",
+      "style": "ink",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "0996415171b4be95268691a4bbe8edd568256b5d0ae8e4de525cdec633d7b4d3",
       "seconds": 30,
       "scenes": 1,
       "frames": 720,
@@ -41,7 +55,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "d41ef41c787481850f8c47003d09fc58860a4ac617d06aadaf5ec243a7045e3a",
+      "sha256": "5d4593f112697c47c3bac65d3aa976065a04ab13fd32985504ba03d307a50ba7",
       "reviewedFramesSeconds": [
         1,
         15.0,
@@ -55,6 +69,13 @@
     {
       "id": "moon-phases",
       "title": "月亮为什么有圆有缺",
+      "style": "marker",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "9042168cc073057bfa7cfe561c870d9bc85ca7b2c9adfe0b7921be8c65d4aba9",
       "seconds": 60,
       "scenes": 2,
       "frames": 1440,
@@ -65,7 +86,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "8cf212869c7a3d2a7cd5e6af30c984fa2e4477c27f67246ad281d59f49fc7697",
+      "sha256": "0cdecb14a3d7e5ee0c7d4ed756d4749ba7e33c96ffb09e7e89116a5072958c16",
       "reviewedFramesSeconds": [
         1,
         44.0,
@@ -80,6 +101,13 @@
     {
       "id": "simple-lever",
       "title": "看懂支点与杠杆",
+      "style": "watercolor",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "a01f7eb222ae16d93ddcc79f5b07e9e5cf4e51e91b619225562b7ed15eb9db3a",
       "seconds": 60,
       "scenes": 2,
       "frames": 1440,
@@ -90,7 +118,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "6fa70d69cce361fdec55e2c0092b895a6a340a7f0186313f0754457ef4ea1d92",
+      "sha256": "448dac56453c2aa53ee1a7fd639db78024666a89e511c9765a2aa217ada40b5b",
       "reviewedFramesSeconds": [
         1,
         44.0,
@@ -105,6 +133,13 @@
     {
       "id": "water-journey",
       "title": "一滴水的循环旅行",
+      "style": "charcoal",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "5605f8f4e781cd2bd5713158557073184265de09a36382be4efc07d1b5d5f568",
       "seconds": 120,
       "scenes": 4,
       "frames": 2880,
@@ -115,7 +150,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "6bae796488202583d84eb30bbccef9d35f95d0935da5824ce81e066cb892137d",
+      "sha256": "0f4ddc13d4c3d0245591425fd9e9fd48cecd0b25c8f2d0add7a6ad14ba9e47c9",
       "reviewedFramesSeconds": [
         1,
         74.0,
@@ -132,6 +167,13 @@
     {
       "id": "teach-to-learn",
       "title": "用讲解检验理解",
+      "style": "woodcut",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "bcfd7cab18fddf39920d82dac89d9139b86e2aafbcc474a17963800d203a42fd",
       "seconds": 120,
       "scenes": 4,
       "frames": 2880,
@@ -142,7 +184,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "b2e111f40c9d92628da926a0cc9e6a939c83b8ba39dff807319b4b2af159175f",
+      "sha256": "030e02bad450dd88db46bc3618578607485c214767f18ff233eac00de1941dd6",
       "reviewedFramesSeconds": [
         1,
         74.0,
@@ -159,6 +201,13 @@
     {
       "id": "battery-energy",
       "title": "电池怎样提供能量",
+      "style": "sepia",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "580fc89fef005d8080791ed7d284b4c7119c66d75b3e5a9083bd45679bc3ec32",
       "seconds": 180,
       "scenes": 6,
       "frames": 4320,
@@ -169,7 +218,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "d02a89ec1d279c2d1d2523677a2a527bfd67f4fc8974e21a4492af045f1b1edf",
+      "sha256": "4f3ebed9a75713c5aace9e0162093914b93cb3b0431a8acd93818ab5d91eeb5b",
       "reviewedFramesSeconds": [
         1,
         104.0,
@@ -188,6 +237,13 @@
     {
       "id": "recycle-rules",
       "title": "把垃圾分类变成小流程",
+      "style": "crayon",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "5ddd9e3483125ac97233c6ef0af6944f75e609a9e6761c9166ea89912a372174",
       "seconds": 180,
       "scenes": 6,
       "frames": 4320,
@@ -198,7 +254,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "d751bb15f690fd731486a1d736daf2992542e55dc6933b798810a50e794ce226",
+      "sha256": "df3ecb280257d40fb682f0f5db821dbdefba6cd9d0053ace541b7548fbd4a7e9",
       "reviewedFramesSeconds": [
         1,
         104.0,
@@ -217,6 +273,13 @@
     {
       "id": "circuit-course",
       "title": "五分钟看懂简单电路",
+      "style": "paper",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "048aeca67d986e3165664902fb731f9754b1f5720ffdefd534b630948addf0cb",
       "seconds": 300,
       "scenes": 10,
       "frames": 7200,
@@ -227,7 +290,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "bd67a1118945c8f81f096ba50fc29d2cf59453b3855a3caff79fc8583edf5fa0",
+      "sha256": "efa1a5f897d3120d12126c17cadc337eb3f611b8ff7877dbf7cbdae278ac4578",
       "reviewedFramesSeconds": [
         1,
         164.0,
@@ -250,6 +313,13 @@
     {
       "id": "focus-work",
       "title": "安排一次专注工作",
+      "style": "fineline",
+      "coverSize": [
+        1254,
+        1254
+      ],
+      "coverRatio": "1:1",
+      "coverSha256": "094c24958e4e468807069adcd498d56fc9bd230c57e5e3aab806f0e0d584e5cc",
       "seconds": 300,
       "scenes": 10,
       "frames": 7200,
@@ -260,7 +330,7 @@
         720
       ],
       "fps": 24,
-      "sha256": "19faca1f63f684b684fee8b98f6d4abdae583f89612860173850f25a19eb4023",
+      "sha256": "c555e521a24fa07bb11b5098735f18ffb3c9f2d125590a4be24a0cb62dcf381a",
       "reviewedFramesSeconds": [
         1,
         164.0,
