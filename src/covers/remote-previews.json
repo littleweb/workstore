@@ -1,0 +1,1669 @@
+{
+  "schemaVersion": 1,
+  "repository": "littleweb/workstore",
+  "entries": {
+    "/handraw-style/covers/chinese/124.png": {
+      "path": "covers/chinese/124.png",
+      "size": 3191573,
+      "sha256": "5ee52f84284c81a32f33280613937768f090af6ee1292eb3f4d5682da275c7ab",
+      "blob": "a2857d8ff240331659b465f4df4ef7a282dec47c"
+    },
+    "/handraw-style/covers/chinese/125.png": {
+      "path": "covers/chinese/125.png",
+      "size": 1285565,
+      "sha256": "2233552c0548fe2e968ac3aea9e48cc3d4a75fd9800541d7da8a1e8109348895",
+      "blob": "8ceacb2674bf8de4301bb8abebc8edd5eaf76869"
+    },
+    "/handraw-style/covers/chinese/126.png": {
+      "path": "covers/chinese/126.png",
+      "size": 3080321,
+      "sha256": "8a17cc35329d891bac0779b5844bb1526e804bf50132ca8ab4ec59eb552bfc16",
+      "blob": "9f1461ae9c6975154d2e47b37d04dbc1f85c425a"
+    },
+    "/handraw-style/covers/chinese/127.png": {
+      "path": "covers/chinese/127.png",
+      "size": 3353894,
+      "sha256": "5ffca48929717182b6bd87d068bdd72913cfe9424cb722702f830a33391bb56c",
+      "blob": "c4a21799a826eb339840e554794387dbc7a7a394"
+    },
+    "/handraw-style/covers/chinese/128.png": {
+      "path": "covers/chinese/128.png",
+      "size": 3078484,
+      "sha256": "ea32c7c5396c41febf16b559b6bb90235f942400319f76f2229c89a17530eac0",
+      "blob": "9ff93f201afa76d50c3ab46912e8433c22981133"
+    },
+    "/handraw-style/covers/chinese/129.png": {
+      "path": "covers/chinese/129.png",
+      "size": 3375822,
+      "sha256": "a2707ddf3b497d429d3332d1b336cf94da308f59e4d8d2d74544ecbfed07d443",
+      "blob": "a7eeb0035a3d32a98c8c3052c8d068088fa6f83e"
+    },
+    "/handraw-style/covers/chinese/130.png": {
+      "path": "covers/chinese/130.png",
+      "size": 2791537,
+      "sha256": "e01822f460454b0dda0bb8ed3617bfd2714a9863f3943a430ec94d3ea46e6810",
+      "blob": "8ddc755e9cc8692ba66f2026f8e1394f62ca732d"
+    },
+    "/handraw-style/covers/chinese/131.png": {
+      "path": "covers/chinese/131.png",
+      "size": 3141203,
+      "sha256": "8b197b50c195c0e80075ab04003d25195cf679c191250ceb03056bb0c5739a83",
+      "blob": "58da51d6060c6989a9fa9a535880db4a09e32087"
+    },
+    "/handraw-style/covers/chinese/132.png": {
+      "path": "covers/chinese/132.png",
+      "size": 3313489,
+      "sha256": "7c078ce19d43e79777033a69fb34538c433b59ddb7e4bbcff5f6ced0e8c301e6",
+      "blob": "d53ea1edb2db6ab883249261f6f3e221e3da712f"
+    },
+    "/handraw-style/covers/chinese/133.png": {
+      "path": "covers/chinese/133.png",
+      "size": 3495048,
+      "sha256": "e5c15afb6484ec2756fb4ec2f8cdf39ecfeadb24e175c20de266e2c72deeec99",
+      "blob": "ca723e595b8cb675584d8deb0706bbc57945a648"
+    },
+    "/handraw-style/covers/chinese/134.png": {
+      "path": "covers/chinese/134.png",
+      "size": 3036390,
+      "sha256": "06b5b8dc6700b9d855e885218b55ddcddbdc5e239790c773861a5702f10dcba3",
+      "blob": "9b309775ca1ac2de159b0290d369d343820ebb89"
+    },
+    "/handraw-style/covers/chinese/135.png": {
+      "path": "covers/chinese/135.png",
+      "size": 3084615,
+      "sha256": "1d182a2f2b00fae016c29c0b05b2d9e24470d1179edf98acc627c9bc26d1926f",
+      "blob": "b7e848d33df4e4631cab8b823ac2da7fb81d0379"
+    },
+    "/handraw-style/covers/chinese/136.png": {
+      "path": "covers/chinese/136.png",
+      "size": 2482588,
+      "sha256": "6aa8d2036506accae8745f179880c3ce3e192d2b3e57f80dc9acbdb506f9b095",
+      "blob": "bef83d04fd6e9afe1be1e08d9c69e3ab71454683"
+    },
+    "/handraw-style/covers/chinese/137.png": {
+      "path": "covers/chinese/137.png",
+      "size": 3362150,
+      "sha256": "c10f97e82eae947e31d1fc9f87dab35a459fd52754d0bbca1d6cfaa310ba1530",
+      "blob": "50bb77a1383922a311da0c5b908625f99a5f548b"
+    },
+    "/handraw-style/covers/chinese/138.png": {
+      "path": "covers/chinese/138.png",
+      "size": 3268925,
+      "sha256": "8119f6d7338dbba2ad2d9c4d9cc56b39107217ca7a20663542c0ba01427ff1b7",
+      "blob": "1ba38046f4c10e6bd4af7d342bf1b6a7494e2b54"
+    },
+    "/handraw-style/covers/chinese/139.png": {
+      "path": "covers/chinese/139.png",
+      "size": 3031211,
+      "sha256": "8d164c769032c9659f647687b3277283ad7a6de4f3313f97aa0a5ed7925fb54e",
+      "blob": "7ca73426ec3e18b9746662fa7892ad26cd65a889"
+    },
+    "/handraw-style/covers/chinese/140.png": {
+      "path": "covers/chinese/140.png",
+      "size": 3242896,
+      "sha256": "f88c61b125c172766c5b84ba2626d860c006661dcde5b2d0928355c3f0f54ba7",
+      "blob": "8469bd61759ab8b1cad4c59d588fbfa61455818f"
+    },
+    "/handraw-style/covers/chinese/141.png": {
+      "path": "covers/chinese/141.png",
+      "size": 2959727,
+      "sha256": "c77c91b16b158913f8deb14316654b5d3abed59e7ac4048e4662e492c257869e",
+      "blob": "47c3bef50dae0c281b85e5e2c81a40ed6b727313"
+    },
+    "/handraw-style/covers/chinese/142.png": {
+      "path": "covers/chinese/142.png",
+      "size": 3176273,
+      "sha256": "561e324a90f101ce4277917411416a1d441b1e7fd35b590437631c70b3f01aca",
+      "blob": "4a37d3538366db1d53ea0d031c89df1eb7849b40"
+    },
+    "/handraw-style/covers/chinese/143.png": {
+      "path": "covers/chinese/143.png",
+      "size": 3528146,
+      "sha256": "10689ecd74cca458db355cd6b9023157b8ce1e643a22887a2694328e83b2e663",
+      "blob": "190a6fb6c9c2c803c53c0e4915eb8c55b43ce7d9"
+    },
+    "/handraw-style/covers/chinese/144.png": {
+      "path": "covers/chinese/144.png",
+      "size": 3128916,
+      "sha256": "0e5496ab819ecebb124892024a41f0411e0bc8ee9436f06a079a4272c24218d0",
+      "blob": "40305d50f2fe2c5c4ca0af9f0aa2be42b74041f8"
+    },
+    "/handraw-style/covers/chinese/145.png": {
+      "path": "covers/chinese/145.png",
+      "size": 2698206,
+      "sha256": "18a07436cc7f82807af792a7f95bf8991148e6d616104cd993f867e2d43f8dcd",
+      "blob": "db40e42239e85cebbfdcea8cd841811d01a172ab"
+    },
+    "/handraw-style/covers/chinese/146.png": {
+      "path": "covers/chinese/146.png",
+      "size": 1906218,
+      "sha256": "40f06855e7a258fd8bb8ae9fc9607610b73f046b5aaee39563797e4d5c9b5d9d",
+      "blob": "95b18325266ec6be4e46e34d0a2e88d4af3bbb3f"
+    },
+    "/handraw-style/covers/chinese/147.png": {
+      "path": "covers/chinese/147.png",
+      "size": 3055712,
+      "sha256": "d3f6d7b4488d58ec310c5673aa65af31b653fcb01b9f1f2b3dab89553112e674",
+      "blob": "edb3babf4bbea5bdf564ab4d0cb944ebc418fd16"
+    },
+    "/handraw-style/covers/chinese/148.png": {
+      "path": "covers/chinese/148.png",
+      "size": 1753015,
+      "sha256": "a1a03739d6131a61e2e8569c5939d048a12eeef433a76b7c3aa4faac0f3c50cd",
+      "blob": "f62a73b7e939f0cd6360e9bb9677fadd36744853"
+    },
+    "/handraw-style/covers/chinese/149.png": {
+      "path": "covers/chinese/149.png",
+      "size": 2819731,
+      "sha256": "cd5b04f94e4f5a13cef1b8ab0447ae5b09e1ff33da6bd64f853f9f8c0b43426d",
+      "blob": "ef16352beafadfb7d31c249a340ad914ab00b337"
+    },
+    "/handraw-style/covers/chinese/150.png": {
+      "path": "covers/chinese/150.png",
+      "size": 2540566,
+      "sha256": "fd6d3154714e3ebd860ef95aaf7e88d318194eb0d234614fa43f75a6b4a704c1",
+      "blob": "5bfd3840fcef1c03aebb81b5d7b78843b71e75f3"
+    },
+    "/handraw-style/covers/chinese/151.png": {
+      "path": "covers/chinese/151.png",
+      "size": 2454869,
+      "sha256": "85e77321b2da23e7e0789482b9e4495169f5d7048fe78e6753d9d43c09b1820f",
+      "blob": "8b088ad98202d297282c678311680f7293d67ea3"
+    },
+    "/handraw-style/covers/chinese/152.png": {
+      "path": "covers/chinese/152.png",
+      "size": 2187559,
+      "sha256": "129d6d92069284e5c8a09ff4ae597b544eee641139cadf65f0cb4d82172de328",
+      "blob": "b2f0230891eef9ace5818e3321fcc7ddac3ead64"
+    },
+    "/handraw-style/covers/chinese/153.png": {
+      "path": "covers/chinese/153.png",
+      "size": 3087087,
+      "sha256": "4d6d1682d6a7c4cbc4546ad4d64e2e7d0af3b0926f17b062ad19b16042c87bf6",
+      "blob": "2ab952be7b63002fce88853ce8d968358c716a8f"
+    },
+    "/handraw-style/covers/chinese/154.png": {
+      "path": "covers/chinese/154.png",
+      "size": 2812361,
+      "sha256": "f4f3c25a094bd1726c14c7fd2d56a75c977a120c425049e3d1a3983e5768de63",
+      "blob": "9f47b75071c5743583da4d5539a778e774a1bce4"
+    },
+    "/handraw-style/covers/chinese-extra/201.png": {
+      "path": "covers/chinese-extra/201.png",
+      "size": 2814842,
+      "sha256": "7692fa2adb9b8a38c34874f8088524fd4b8a56d7ddd7a0cce3b6b763d237ec1c",
+      "blob": "3bfe1b77cd03a71e14f03b2e70d8578796945e9d"
+    },
+    "/handraw-style/covers/chinese-extra/202.png": {
+      "path": "covers/chinese-extra/202.png",
+      "size": 2587028,
+      "sha256": "d6759f89c2910418718b59b03ee675ae8945cf050d348aa21d5dd6107993de3d",
+      "blob": "f0d85e9bd3f52b5f76305e68fdd031bee918a6d5"
+    },
+    "/handraw-style/covers/chinese-extra/203.png": {
+      "path": "covers/chinese-extra/203.png",
+      "size": 2614069,
+      "sha256": "53c1029ae2a9bb261b187fab84f308eab55ea31984787a6f9eafc24ee728b2b9",
+      "blob": "52bb1782e69361eb8d8cbdf86c12110074d93f2a"
+    },
+    "/handraw-style/covers/chinese-extra/204.png": {
+      "path": "covers/chinese-extra/204.png",
+      "size": 3159743,
+      "sha256": "eeea77cfb357c3c41423388dba87f7491b62d5f9f6b1c8e52face75392d04932",
+      "blob": "87d1dad4657b9e0b7b23b4556a8f0a39f2aec5c8"
+    },
+    "/handraw-style/covers/chinese-extra/205.png": {
+      "path": "covers/chinese-extra/205.png",
+      "size": 1321059,
+      "sha256": "0d0a40cae681b6902f20500fe2a7bab416fec1da9c24e89f3f0293df475d798a",
+      "blob": "72dcc161948b959b4f28d6a68ef11757e3b690b8"
+    },
+    "/handraw-style/covers/chinese-extra/206.png": {
+      "path": "covers/chinese-extra/206.png",
+      "size": 2532534,
+      "sha256": "0827636d41a42a9f2863329f2f8e0cdd578ab6b079b5d0e59ae67599a140d14c",
+      "blob": "9e9aee5bc2fe595b0299097f48ee39df119b6457"
+    },
+    "/handraw-style/covers/chinese-extra/207.png": {
+      "path": "covers/chinese-extra/207.png",
+      "size": 2123167,
+      "sha256": "a08714efda759b207bf6c4a6f1156cc91c5299f13b241a04f3be1de73954f4f7",
+      "blob": "836a595c8e561e4104c28bc0ffe1fdd204f3c6b2"
+    },
+    "/handraw-style/covers/chinese-extra/208.png": {
+      "path": "covers/chinese-extra/208.png",
+      "size": 3021940,
+      "sha256": "bca2ba61a29319934ed6f8f68ac4318cc0ea8ffde7022d9559b0c0079b65e4c3",
+      "blob": "e81f0f744515face2ff1f884d9455e70d0e4e9fc"
+    },
+    "/handraw-style/covers/chinese-extra/209.png": {
+      "path": "covers/chinese-extra/209.png",
+      "size": 3009304,
+      "sha256": "d51700d0039c77822581353622d8c5403ea816c0abb878612fa877532ac2d3d3",
+      "blob": "3fe93a299fb0943d579e864ef2200b805e10eb9f"
+    },
+    "/handraw-style/covers/chinese-extra/210.png": {
+      "path": "covers/chinese-extra/210.png",
+      "size": 3328522,
+      "sha256": "79621bc4482b71b2b3f355dedb4da40a78a819f902973da61e9c42842447099c",
+      "blob": "13a127843584dc2232ab9d50526c14198fcb568d"
+    },
+    "/handraw-style/covers/chinese-extra/211.png": {
+      "path": "covers/chinese-extra/211.png",
+      "size": 2502745,
+      "sha256": "42fe1ef0265ff7a003db1ede4592e8cde01d95daa2623aebfac8a6c9c5096ef5",
+      "blob": "8ecfbbbf567c1e99ba08bfb6b81a03079fa9bcaf"
+    },
+    "/handraw-style/covers/chinese-extra/212.png": {
+      "path": "covers/chinese-extra/212.png",
+      "size": 2730637,
+      "sha256": "d56fe55c084f63a6f0fd3253647417b8a61762490f796bcbde4bd7966cdd78c7",
+      "blob": "967173cfc03408007df15913286f87a64d52dc71"
+    },
+    "/handraw-style/covers/chinese-extra/213.png": {
+      "path": "covers/chinese-extra/213.png",
+      "size": 2136738,
+      "sha256": "f72812dec5174dd09515b789b2779cdcaff0d40e13cddd996b9c1fc0f3213f7b",
+      "blob": "1ea0918443dd56ad6b5a0f4811e8712a6a240eed"
+    },
+    "/handraw-style/covers/chinese-extra/214.png": {
+      "path": "covers/chinese-extra/214.png",
+      "size": 3379031,
+      "sha256": "1b726e407d7a31e7448aa28fcd6209fcd39867bf1ed97cdfd14b70f49636699c",
+      "blob": "066d11989e417cc9f2d73398516be91b2791588a"
+    },
+    "/handraw-style/covers/chinese-extra/215.png": {
+      "path": "covers/chinese-extra/215.png",
+      "size": 2462078,
+      "sha256": "2f1ea560476e70b6e29c75a40daad604dc3fcf2404b391a808adcefe97399b9c",
+      "blob": "11163c4a80f8090a8f000aae6ddab048c1a976d3"
+    },
+    "/handraw-style/covers/chinese-extra/216.png": {
+      "path": "covers/chinese-extra/216.png",
+      "size": 2571783,
+      "sha256": "701e9be7dd9cdf07d262b6ab58e6eb1a20a21e8ae86d78f366f5d3010d6461be",
+      "blob": "3f341ec49815ac0c80f293ac0c2e44e33ba8d840"
+    },
+    "/handraw-style/covers/editorial/001.png": {
+      "path": "covers/editorial/001.png",
+      "size": 1918343,
+      "sha256": "14b4fd9074ca9ed862019091f8394ffa32c0ff0498f6bb05b4911cb12c85d09b",
+      "blob": "9df3f776a1deb4db3bd0dd728df6f07d1f68c657"
+    },
+    "/handraw-style/covers/editorial/002.png": {
+      "path": "covers/editorial/002.png",
+      "size": 1931003,
+      "sha256": "2d414a06b1b9d8f5a9c4cadd8d093213b5d864c331e82223b5f8d5741131bfc1",
+      "blob": "f3507d44a03032b35c58f516aaec1380dc84a46f"
+    },
+    "/handraw-style/covers/editorial/003.png": {
+      "path": "covers/editorial/003.png",
+      "size": 3081435,
+      "sha256": "a9b7186b0159509cb405b7826b33820b70099732237f3596f6a4fd2ef02db2b8",
+      "blob": "5d6c11105360188e678c8ad4f8cd26db96e8f188"
+    },
+    "/handraw-style/covers/editorial/004.png": {
+      "path": "covers/editorial/004.png",
+      "size": 1406818,
+      "sha256": "7b013ef557a004c03923695f81b4144497d3a03ee3548b4007f3f3d11d22012f",
+      "blob": "248949376591c91e4001d518d01d115437ec7e49"
+    },
+    "/handraw-style/covers/editorial/005.png": {
+      "path": "covers/editorial/005.png",
+      "size": 1726031,
+      "sha256": "0e21c2acb057704a14b8816ed714870d700dcafacd3e4571156d946b4448b77c",
+      "blob": "279203c56f0ca0f8151b1c1abd1b5da62bbe1a38"
+    },
+    "/handraw-style/covers/editorial/006.png": {
+      "path": "covers/editorial/006.png",
+      "size": 3886873,
+      "sha256": "7ebdcce93d56cabc65f707d8e5e9e300c46a94d462bfa1d5df330ed03e5ec8ce",
+      "blob": "b0ce4afaf8b607b28cbd1944f8675e1f98bc4b74"
+    },
+    "/handraw-style/covers/editorial/007.png": {
+      "path": "covers/editorial/007.png",
+      "size": 3465136,
+      "sha256": "d42857d81390484e81aecce2f15b6e60c9e8a0d3ba0468d903aad5bf90471028",
+      "blob": "845a23e2277a95c0e579e2dc7bccb9b10478f34a"
+    },
+    "/handraw-style/covers/editorial/008.png": {
+      "path": "covers/editorial/008.png",
+      "size": 3239164,
+      "sha256": "37fe81691cb0a8f35d6dd8f50c81d8f13926234f7776d0e5f711828757d320db",
+      "blob": "029b71c62a14452198c18ee7957cf3675b0b66d3"
+    },
+    "/handraw-style/covers/editorial/009.png": {
+      "path": "covers/editorial/009.png",
+      "size": 3640732,
+      "sha256": "10039b7d9160e1012422a8e2af1aaced16ae215401f0393514b2b49df49115bd",
+      "blob": "d42eb528e60a746deb0ea0e954b08d3d16bba48c"
+    },
+    "/handraw-style/covers/editorial/010.png": {
+      "path": "covers/editorial/010.png",
+      "size": 2844688,
+      "sha256": "8b4b36af25131953917aabc7edda125ffa8189affd2f954cdc92d421370b2512",
+      "blob": "93f67907fd5a5a0616320cc2b56f29adf6f9d548"
+    },
+    "/handraw-style/covers/editorial/011.png": {
+      "path": "covers/editorial/011.png",
+      "size": 1515009,
+      "sha256": "4d1dfffbd8e853cd10d7541285760d9e1ed59e5f420161e8ee4e1f6eaf5a9ab0",
+      "blob": "80627562847dd3d2a559c7e55c2fef2a10826489"
+    },
+    "/handraw-style/covers/editorial/012.png": {
+      "path": "covers/editorial/012.png",
+      "size": 1729352,
+      "sha256": "fedea2ee22788f62c57ac59dfd243ea5facb24574bd0e33a398f0ca3f3e4b4fe",
+      "blob": "9fa972563e5b0ab049228cb63c8d0b4cd04a4125"
+    },
+    "/handraw-style/covers/editorial/013.png": {
+      "path": "covers/editorial/013.png",
+      "size": 2290192,
+      "sha256": "18e189e7e3115ef7623f919f47b7a343a126af6ecd47c004dcd3f7ebc2b98a45",
+      "blob": "2f2fc8db1541d34debba9b4e90aae2ebbae78b94"
+    },
+    "/handraw-style/covers/editorial/014.png": {
+      "path": "covers/editorial/014.png",
+      "size": 2186687,
+      "sha256": "449faadc06dcd305059855ea6ca5a4d6d7bf872146367cb0b6f822114024e335",
+      "blob": "09ec144ac8622b4c07cf681b1c4337bf09838ced"
+    },
+    "/handraw-style/covers/editorial/015.png": {
+      "path": "covers/editorial/015.png",
+      "size": 2034140,
+      "sha256": "8cb0b34086ba4adf576543bfc24555bb0a7d79114c6fcffe57e04f850bdbf081",
+      "blob": "fc2ca53130190d4a278a2cc6188447a602139fb9"
+    },
+    "/handraw-style/covers/editorial/016.png": {
+      "path": "covers/editorial/016.png",
+      "size": 3184605,
+      "sha256": "f6a6f110909b840957ac60baeaf8f8f99ea7e6e5b3007d712869c691fb5f87ae",
+      "blob": "b29a3889b7f17825dd03f24f24d750601c64f951"
+    },
+    "/handraw-style/covers/editorial/017.png": {
+      "path": "covers/editorial/017.png",
+      "size": 2109265,
+      "sha256": "d0f1572e487f59a296c5423cf2462ee7e606c9b67cb5c314c44735451c67cd3f",
+      "blob": "8951a1804b20fe9951bf442d9d14dc26f8e22e2e"
+    },
+    "/handraw-style/covers/editorial/018.png": {
+      "path": "covers/editorial/018.png",
+      "size": 1159084,
+      "sha256": "14fd18b4ea427ee8c89dadf287d512c622fd82c5ced5847b79e7492e11d229d7",
+      "blob": "076daeb9781b6df22cd4bfaeda6f58a42b0a0b49"
+    },
+    "/handraw-style/covers/editorial/019.png": {
+      "path": "covers/editorial/019.png",
+      "size": 1966344,
+      "sha256": "d3fbc165e4f925b20462b6e52d4745b9e80f2842beec44f91391d3a560d40210",
+      "blob": "0d57b90380cad3679ec934ea704a85b1abd3ba2d"
+    },
+    "/handraw-style/covers/editorial/020.png": {
+      "path": "covers/editorial/020.png",
+      "size": 1917940,
+      "sha256": "3a1aa494b98c078dab6add6e39160dd570cb80de2e1b1200c7579af6a5c9a794",
+      "blob": "34112e90e462a3e7e8469144c98c74db74905708"
+    },
+    "/handraw-style/covers/editorial/021.png": {
+      "path": "covers/editorial/021.png",
+      "size": 2494222,
+      "sha256": "f0b50e38577c7f288dc401358d0648cac5a78d9c382d761457cfdc32b895905f",
+      "blob": "5d62fda09e245babd45fe1ffca420f5b433451bb"
+    },
+    "/handraw-style/covers/editorial/022.png": {
+      "path": "covers/editorial/022.png",
+      "size": 3284262,
+      "sha256": "da96d39603d8e9ee30cf76b0da0af346a70a1ce74fd7afaef8979a252dfcee38",
+      "blob": "a74a3ebf2679971b9306e2c40ef2c1197a534c38"
+    },
+    "/handraw-style/covers/editorial/023.png": {
+      "path": "covers/editorial/023.png",
+      "size": 2094844,
+      "sha256": "e777d0181470ec43949b175de8f08d1e066aed45d22811f39ddbcd57bf7fb1f0",
+      "blob": "849991ac20cf87f9f0af2eef75e634a34db84a23"
+    },
+    "/handraw-style/covers/editorial/024.png": {
+      "path": "covers/editorial/024.png",
+      "size": 3324053,
+      "sha256": "f4dd65ef2ef14ac09b9893b923037f211dfa4580a51a397f4dabc14cb842787e",
+      "blob": "13cdc4d677842b096e7794446910b184170018a1"
+    },
+    "/handraw-style/covers/editorial/025.png": {
+      "path": "covers/editorial/025.png",
+      "size": 2992916,
+      "sha256": "416911b5ec3cb73470a65a2c23ce9907196dfdc9031be907cb9773662da5229c",
+      "blob": "f22672084451c852e0e7bb845c2089e1812f4245"
+    },
+    "/handraw-style/covers/editorial/026.png": {
+      "path": "covers/editorial/026.png",
+      "size": 2850411,
+      "sha256": "45ba90050206e66e2afcc3274ec6b9ce1551877efedca136f755c48991f9bd79",
+      "blob": "171a54f09d42781270531d14fd91932321dc9770"
+    },
+    "/handraw-style/covers/editorial/027.png": {
+      "path": "covers/editorial/027.png",
+      "size": 3654924,
+      "sha256": "f69dfd8a531531e05607a117aca14a258f38a498804eaea9720abee0b1d1a8da",
+      "blob": "17b2a4c65c7e14bb93c86e201c6c3ca6f6cb33f0"
+    },
+    "/handraw-style/covers/editorial/028.png": {
+      "path": "covers/editorial/028.png",
+      "size": 1981332,
+      "sha256": "6c3f2e34e0720e606eab694fa262117579a8029ea115a419233c2ea1a16fc342",
+      "blob": "e438326c2a73539863a3ce099b70d7bbc05c734e"
+    },
+    "/handraw-style/covers/editorial/029.png": {
+      "path": "covers/editorial/029.png",
+      "size": 1770128,
+      "sha256": "8d3134b9d0557470cb0e486dd7830947e139be6f5e483244f49aae15fb71cf85",
+      "blob": "2a68a284f0b2ab3eb30737de2d6893ec63d9915f"
+    },
+    "/handraw-style/covers/editorial/030.png": {
+      "path": "covers/editorial/030.png",
+      "size": 2152647,
+      "sha256": "27eaa7c943cc1fa1e66b45c6b43e3e4821b0f764f9506cd18c27d33fd4000a5d",
+      "blob": "d5fa5c5767f260a1f0fdd7e54c15160f3c79e440"
+    },
+    "/handraw-style/covers/editorial/031.png": {
+      "path": "covers/editorial/031.png",
+      "size": 1248972,
+      "sha256": "4b0f80d7096f97526e7956efc3731a8c8778f24685bb9dc32401a68c7061b474",
+      "blob": "74f8b197dc88c39a22d5294ebbc3ff08640722e4"
+    },
+    "/handraw-style/covers/editorial/032.png": {
+      "path": "covers/editorial/032.png",
+      "size": 3169454,
+      "sha256": "e85d03dbed745aec36e03f958d20d5ff19c2917b5d19e984eceead6811113e38",
+      "blob": "caed85bcd7610694764a906974e62bedf85e45f4"
+    },
+    "/handraw-style/covers/editorial/033.png": {
+      "path": "covers/editorial/033.png",
+      "size": 1819011,
+      "sha256": "a2c873767e67ef4e99f702e0d29b0ceda2b67065e03c7085150f0b7c725a7109",
+      "blob": "25af09dde2d42ff26779839552f490c7e826b4c0"
+    },
+    "/handraw-style/covers/editorial/034.png": {
+      "path": "covers/editorial/034.png",
+      "size": 3155648,
+      "sha256": "656529f5b47fb8d0ae819ba787f9401df89c4818368293d8de1f06e142bb6927",
+      "blob": "f5652beae4756ee0be3293dedc583a3fe2ab23ae"
+    },
+    "/handraw-style/covers/editorial/035.png": {
+      "path": "covers/editorial/035.png",
+      "size": 1797450,
+      "sha256": "8ec1983ba2fa4e732698e1694200b93b7b35c9d43a1a80818d1b2a30597aecc1",
+      "blob": "43aabfb589904646f5b408b72a41265ee96f7d31"
+    },
+    "/handraw-style/covers/general/155.png": {
+      "path": "covers/general/155.png",
+      "size": 2120036,
+      "sha256": "d7370bd1ac69f3b524cfa2a48bb2f18d2c06b09adb75fbd991fa03e08312838d",
+      "blob": "38a14f4acbff7363846b240e0f2deda24a1e6b9f"
+    },
+    "/handraw-style/covers/general/156.png": {
+      "path": "covers/general/156.png",
+      "size": 2325304,
+      "sha256": "64b193e32e1888d18b8c70e5a16b6b4ef069b3ea5e3d2e17d5d5ad03681f844b",
+      "blob": "ce8cc7a5094f33e219b47c70ea25e83b53b6e280"
+    },
+    "/handraw-style/covers/general/157.png": {
+      "path": "covers/general/157.png",
+      "size": 1135915,
+      "sha256": "bf6bb71483ae23a3f8f405eda147b82cd64e58424fdbae803c979a89918a05ee",
+      "blob": "6b9e3f492a8ad83e0f36d677cb11b6f644ddff50"
+    },
+    "/handraw-style/covers/general/158.png": {
+      "path": "covers/general/158.png",
+      "size": 2567949,
+      "sha256": "22da263bd91eb0a942126d307f9534d6cd816457df2e8715f6562fb274dbcc2d",
+      "blob": "bda253750d91b0c66f2174b25e4e70e074f80054"
+    },
+    "/handraw-style/covers/general/159.png": {
+      "path": "covers/general/159.png",
+      "size": 3436666,
+      "sha256": "f64b4907db83191655c9c785b23e567445818ce091f6e86e0ac5b25a076e1f1a",
+      "blob": "f28877842845484cb4eb379109fe62521f63f4eb"
+    },
+    "/handraw-style/covers/general/160.png": {
+      "path": "covers/general/160.png",
+      "size": 2034111,
+      "sha256": "e9a0af89ff856a0e880072bbddfd5a5433feae9431352015c82c0da2005bc591",
+      "blob": "415034db692065d913ba1429ef6ee23425efaa68"
+    },
+    "/handraw-style/covers/general/161.png": {
+      "path": "covers/general/161.png",
+      "size": 2742507,
+      "sha256": "761d81b5b5b295992ac25e6a4068e76ecd1bbe3ac20d40773ac3f7698bfb7220",
+      "blob": "cb86d395fb876bf00a942e6fe0f8c3af57084e8b"
+    },
+    "/handraw-style/covers/general/162.png": {
+      "path": "covers/general/162.png",
+      "size": 2741205,
+      "sha256": "7d2ce593825e04032d9fb9f9e424ddd0b5e7f8d7e1149b01e81ad7d7bbbe4f30",
+      "blob": "2de4d563be45855e72f4670b5cdbc50ab3618ac8"
+    },
+    "/handraw-style/covers/general/163.png": {
+      "path": "covers/general/163.png",
+      "size": 1766488,
+      "sha256": "6a14e07608aa23b60c6e84c5f61622a9accefedd9cc2917f0b6c406041710f2d",
+      "blob": "568b089e17770ac51028aa36717b425a93af11d1"
+    },
+    "/handraw-style/covers/general/164.png": {
+      "path": "covers/general/164.png",
+      "size": 3117604,
+      "sha256": "ce758ec55e0c671af4d889048aba78328773ca59c616eb9675c8d533f5866f95",
+      "blob": "e7381cf1eab3ee09d0a00087352d67991b050694"
+    },
+    "/handraw-style/covers/general/165.png": {
+      "path": "covers/general/165.png",
+      "size": 2191295,
+      "sha256": "6cfa47df939fa475c054803135f2f63a0910a705bb45d37e6a601b8b4c95ba13",
+      "blob": "b5dbdb19882c978328e378fc82724a48ef1f9cac"
+    },
+    "/handraw-style/covers/general/166.png": {
+      "path": "covers/general/166.png",
+      "size": 3206890,
+      "sha256": "fd65cff9aafd043a019a000a153e6b20f7e73d03e2c0006ab2d4144dde38e208",
+      "blob": "cfdfd1d2413a94695e77470fbe072cf02bd671ed"
+    },
+    "/handraw-style/covers/general/167.png": {
+      "path": "covers/general/167.png",
+      "size": 3521995,
+      "sha256": "ed9d59d1a2d1135bc925ee4599b94d542c11dcfa865769acc84b1da45b2a7d18",
+      "blob": "07a03810f52080667290c83b805a9db8c02754e5"
+    },
+    "/handraw-style/covers/general/168.png": {
+      "path": "covers/general/168.png",
+      "size": 3275261,
+      "sha256": "ca41733a5bfec1645abb48d45add949dae7d8ead23d258b685cf6481f745ee86",
+      "blob": "615afb585f6f5843e04114b3221c61b8d963f138"
+    },
+    "/handraw-style/covers/general/169.png": {
+      "path": "covers/general/169.png",
+      "size": 3597290,
+      "sha256": "067827b1448dd65ab54cd89ea98bfa763d856e7748d53b8739afdbf437011d34",
+      "blob": "41657edf0ddc554d6be2ae9b4b6a84275839a9c6"
+    },
+    "/handraw-style/covers/general/170.png": {
+      "path": "covers/general/170.png",
+      "size": 2134609,
+      "sha256": "0bfc3a0cb2a06ea2f9b88666da593f31d1ac73cc37c3bb90c41bef0074eafc98",
+      "blob": "9511331bf89f3c13e7ac09737e8faf0f83a4c3ab"
+    },
+    "/handraw-style/covers/general/171.png": {
+      "path": "covers/general/171.png",
+      "size": 1583712,
+      "sha256": "23f19b8a1dd03a623c85ca388b5780fceff7f7e019d86c3e2d005fb63e297c6c",
+      "blob": "8651a99fdab20174ea8e9addbb586f85b64c1d79"
+    },
+    "/handraw-style/covers/general/172.png": {
+      "path": "covers/general/172.png",
+      "size": 2453084,
+      "sha256": "033d7104c4ea2322ad81dcd47ac2b4924a50e83babecec16372a302152de74ea",
+      "blob": "9fb0d35d0ab1f080f170ee0faed642f6ac5d0bc8"
+    },
+    "/handraw-style/covers/general/173.png": {
+      "path": "covers/general/173.png",
+      "size": 1834612,
+      "sha256": "bdbe5f9abc9a7e229508c1bf16b2cc7dbda41f8eb9596df47fa85421abaa983d",
+      "blob": "9a3befe82c20e9dbf4741676dff26d1e05f60719"
+    },
+    "/handraw-style/covers/general/174.png": {
+      "path": "covers/general/174.png",
+      "size": 3607753,
+      "sha256": "922e1aeca85d0fb9415e3b5ec788745706bf8653aaa5d9600a49de0c219d7f6e",
+      "blob": "859d3bc40096e7a4c1213825f77f24fe1fb0b15f"
+    },
+    "/handraw-style/covers/general/175.png": {
+      "path": "covers/general/175.png",
+      "size": 2190108,
+      "sha256": "7258217240342b0c310b66fe45fc7c3cb0f0047b94729f2f89856cb8fe5e6c23",
+      "blob": "48eebe74d01325418d23fde508bfd89ef4a8a89c"
+    },
+    "/handraw-style/covers/general/176.png": {
+      "path": "covers/general/176.png",
+      "size": 2898393,
+      "sha256": "3bc04400a2a7a48724da7eb6faebdc253d9a4a5078a9b2a600b9903c993cd26e",
+      "blob": "dbcad9468a2348163ee2a733a41aeb582e856b94"
+    },
+    "/handraw-style/covers/general/177.png": {
+      "path": "covers/general/177.png",
+      "size": 2375981,
+      "sha256": "34134cfbd0c168ebdb8a9e8b4b2ea9f25fe16593be9fe4b16cebecbc5e8477b0",
+      "blob": "535a9a29c8ab656338af6c58726c5f01b7aad4a8"
+    },
+    "/handraw-style/covers/general/178.png": {
+      "path": "covers/general/178.png",
+      "size": 3000518,
+      "sha256": "275e8e4c5bf6a05c1bc04d041d7a3599efb65bd478ee303e1d9e0a3b45af881b",
+      "blob": "cfefc8c1f66a4ddb00f6c07115954f7da87ed472"
+    },
+    "/handraw-style/covers/general/179.png": {
+      "path": "covers/general/179.png",
+      "size": 2897461,
+      "sha256": "1f26e57361f6b360377c5e190ed0a07ea3c01339eae8a108e049253a0c664e78",
+      "blob": "c14e73cc8d2f066842c86c1e7f9cb54db16388e1"
+    },
+    "/handraw-style/covers/general/180.png": {
+      "path": "covers/general/180.png",
+      "size": 3328127,
+      "sha256": "fa0aa4de1c0fa76e52f3b68d38d6cebcf7203480025ca87873247b6f8a7a5aa1",
+      "blob": "28c58883eeadea2fdeae677255e7a0a928a70f0e"
+    },
+    "/handraw-style/covers/general/181.png": {
+      "path": "covers/general/181.png",
+      "size": 3293648,
+      "sha256": "65e7e6199333e1573e9d531f067221be2571b4a4fec00ac772c0d90cb3d11a4a",
+      "blob": "43f05b795b127574163e568385772b54510e3568"
+    },
+    "/handraw-style/covers/general/182.png": {
+      "path": "covers/general/182.png",
+      "size": 2267248,
+      "sha256": "f1ff8e38324acef21c3dbf617269f60cf90f336c37e626b0817106a42e672452",
+      "blob": "ec881ad7290ff2ad4ea950bdafbc3f6fbe087ba2"
+    },
+    "/handraw-style/covers/general/183.png": {
+      "path": "covers/general/183.png",
+      "size": 2623942,
+      "sha256": "22185892d6541cc809adfd4fbcda6ee63bbbfc6ea61df866d13dea423a35dbdc",
+      "blob": "30ab877cb0bdab7f6fa4dfe0b7aaa5f1bed0f55b"
+    },
+    "/handraw-style/covers/general/184.png": {
+      "path": "covers/general/184.png",
+      "size": 3609997,
+      "sha256": "ca5a7739cac34376dfdeb8847ad8b0dba42c706d72036fb0c126b47d62e05701",
+      "blob": "f502d834c5cf9feaf7dc46efd662d2975e19e687"
+    },
+    "/handraw-style/covers/general/185.png": {
+      "path": "covers/general/185.png",
+      "size": 2551948,
+      "sha256": "d3bf7ea0f66ebe9b99116aa34ed6ea1c9980f15574ea72290939a0d3d462b90e",
+      "blob": "945c1e25772ebd1e370a23cf34712dae431d3afe"
+    },
+    "/handraw-style/covers/general/186.png": {
+      "path": "covers/general/186.png",
+      "size": 2546584,
+      "sha256": "97b1316b3bbeb3cfd211acc2a6d1c4f13088ffe3ef48cbfe9cd8b21e5b0f41f3",
+      "blob": "7a9b1fa846080cbec73e4332631af23bd55d6d4d"
+    },
+    "/handraw-style/covers/general/187.png": {
+      "path": "covers/general/187.png",
+      "size": 2578123,
+      "sha256": "370161e74ee693942b8ea96f372e506fce25b23760d524c6fd04e0dcc3638656",
+      "blob": "eec7251a40a9398aaf52b094813d08bcc763ba73"
+    },
+    "/handraw-style/covers/general/188.png": {
+      "path": "covers/general/188.png",
+      "size": 3681516,
+      "sha256": "c84d8b5a2ee770c721aa4a6c9e42877e06d7e141da83efa54d2121f672f4bcbe",
+      "blob": "1b0f25b631be1a81ff825d13928b723e92676972"
+    },
+    "/handraw-style/covers/general/189.png": {
+      "path": "covers/general/189.png",
+      "size": 3061129,
+      "sha256": "5e043b7966c3b10d790dcfd39665c62ffa8ebbf4c58a342883b1f5701039cad3",
+      "blob": "6e66f68de8f4b47ecb015ac59daf710011092634"
+    },
+    "/handraw-style/covers/general/190.png": {
+      "path": "covers/general/190.png",
+      "size": 3531982,
+      "sha256": "0d8696c9369ac65e500f3e6c969648577872335cb7059df42a6a70f72f084954",
+      "blob": "c749365f775eac6cb17d836bd78db0221c66317d"
+    },
+    "/handraw-style/covers/general/191.png": {
+      "path": "covers/general/191.png",
+      "size": 2814643,
+      "sha256": "b9e82620ff029a0ccda9d4aa6f93a04585b327c4b40cbffa21ef399e74f7e5e8",
+      "blob": "fc5aa6d26886d63874032bde55f199d6814860ab"
+    },
+    "/handraw-style/covers/general/192.png": {
+      "path": "covers/general/192.png",
+      "size": 2801841,
+      "sha256": "0aa04c6426f585021424f8472a8506dc818d8a46f77eb6d7ed281742d3e88acc",
+      "blob": "569789aaaa9c7aee1b27a0ff4e67a58870c8a738"
+    },
+    "/handraw-style/covers/general/193.png": {
+      "path": "covers/general/193.png",
+      "size": 3049585,
+      "sha256": "610ce6484f9874958d17b511ca81091c43b614385dd5574e0f5ab397f907613e",
+      "blob": "a9bd654b90bca1bc2b70712498f767328665c2f7"
+    },
+    "/handraw-style/covers/general/194.png": {
+      "path": "covers/general/194.png",
+      "size": 2793773,
+      "sha256": "4e86d3bfea38a9bfd56c4984f47f3bd6ec177da37ac8a1e6802413afd9ca3872",
+      "blob": "d7da1291f215c7cbef5ff5d4127d402b829884aa"
+    },
+    "/handraw-style/covers/general/195.png": {
+      "path": "covers/general/195.png",
+      "size": 2701894,
+      "sha256": "c4b450fba38ddaa5eba764424c984d88d7cb4ce9e614db3b117c61a49c8d2b56",
+      "blob": "d02dd8e3f195713292d0772740dbbfdc7e8c04fc"
+    },
+    "/handraw-style/covers/general/196.png": {
+      "path": "covers/general/196.png",
+      "size": 3286317,
+      "sha256": "fcb50f46dc4e53c80a3f36f24f6824db8e6ba061a5cc35764e4d9146c6c88fdb",
+      "blob": "ae69658f72fef09c18e92548b242c2afb0d469a2"
+    },
+    "/handraw-style/covers/general/197.png": {
+      "path": "covers/general/197.png",
+      "size": 3414846,
+      "sha256": "8cdf66098f323e7cca882852a7b61dc4b1f91fb2dc119355e092a73e392299d4",
+      "blob": "8772aaab5b791db5c344457ce39a4e2946d41f79"
+    },
+    "/handraw-style/covers/general/198.png": {
+      "path": "covers/general/198.png",
+      "size": 1432430,
+      "sha256": "bab86d5faead719ba8fe045b72d8eea7610dee4806fc1edd000a0c6ef088eaa1",
+      "blob": "7d6fe5340af94eb87cc4444cc66f841c069d696a"
+    },
+    "/handraw-style/covers/general/199.png": {
+      "path": "covers/general/199.png",
+      "size": 3712817,
+      "sha256": "bccb1452f6ea0699ef950ad134690de690919ea92468d6e35aaf91698c3eb71a",
+      "blob": "80df1310201f93f5f18ffed3d2cd8a5c9557381b"
+    },
+    "/handraw-style/covers/general/200.png": {
+      "path": "covers/general/200.png",
+      "size": 1974679,
+      "sha256": "030e77ec7b6dd7085f3ad8cb1fca5122a6cf680e6908a67703d21943a1082183",
+      "blob": "5e3875397b221c8850bd309124795ba0092f90b2"
+    },
+    "/handraw-style/covers/japanese/083.png": {
+      "path": "covers/japanese/083.png",
+      "size": 2740510,
+      "sha256": "b7fdd3fe240edcfd0c28472c40ac9ebc63d73bd656e99c41a42b63070d4dab1f",
+      "blob": "88d735dc06b30641c03fb6755d1fc836643b331e"
+    },
+    "/handraw-style/covers/japanese/084.png": {
+      "path": "covers/japanese/084.png",
+      "size": 2187967,
+      "sha256": "722a91019be291e4bed1d471776e1b02f1644d3f231f4111fdfccffe038dac74",
+      "blob": "2772096c4d634a8b3d263faf74a1ba7ba5431009"
+    },
+    "/handraw-style/covers/japanese/085.png": {
+      "path": "covers/japanese/085.png",
+      "size": 1370231,
+      "sha256": "5d081b815c347a969efbfffe450e6cdc31516daed5e9e8ec387b4374538456d8",
+      "blob": "767d66a2d98b6cf44df1d68472ae6fda7ba22b63"
+    },
+    "/handraw-style/covers/japanese/086.png": {
+      "path": "covers/japanese/086.png",
+      "size": 1308611,
+      "sha256": "43242f14b2d2e99c7d5ce05cc8970508f7f9f648067fc9cef146f1b26533ff65",
+      "blob": "4a748a68fccb29a2069a8abd7cc3a135685fff69"
+    },
+    "/handraw-style/covers/japanese/087.png": {
+      "path": "covers/japanese/087.png",
+      "size": 2444528,
+      "sha256": "ea46083e987c1f5359c47edd6bbb65262b6752c229cc3498a4f9437a76779f92",
+      "blob": "fd79a4f87338671055372c09536998b79be49460"
+    },
+    "/handraw-style/covers/japanese/088.png": {
+      "path": "covers/japanese/088.png",
+      "size": 1965582,
+      "sha256": "2b63195afc1748538863c85e4ed9e4bbac3c716e97f8643d86d609347d280fa5",
+      "blob": "f9f765cc5ae9d1dea7334d7609d65dc0f9106d84"
+    },
+    "/handraw-style/covers/japanese/089.png": {
+      "path": "covers/japanese/089.png",
+      "size": 2108403,
+      "sha256": "a71be491c4294f1b4d6ed35b61fafdca53ac31a4ce1b4405ae6dad994d58ed14",
+      "blob": "87325f9ed3bfd91114ed805709ef0ffb773d3483"
+    },
+    "/handraw-style/covers/japanese/090.png": {
+      "path": "covers/japanese/090.png",
+      "size": 3360224,
+      "sha256": "9d6e2eae18b6e2a686dcbc85894d26db833a58cd347760360f7dc0cbc61673ed",
+      "blob": "3e92960f7ea2dcdeb78a895d41f109ff8e4e2492"
+    },
+    "/handraw-style/covers/japanese/091.png": {
+      "path": "covers/japanese/091.png",
+      "size": 1884594,
+      "sha256": "f746019f094d602122e70ef94fafd934726aa92db5e1e8faa5f0fa073c033404",
+      "blob": "37362c77753baf573e4f1ab6836aec2315a08a2d"
+    },
+    "/handraw-style/covers/japanese/092.png": {
+      "path": "covers/japanese/092.png",
+      "size": 3072244,
+      "sha256": "2df74b93bd8abf6f6a56efb6366172bc4310cdd0fcba9e846a5605c8045d23d4",
+      "blob": "73e0d65c09af6b922e31d4c3172baa0f4ec1a883"
+    },
+    "/handraw-style/covers/japanese/093.png": {
+      "path": "covers/japanese/093.png",
+      "size": 2280063,
+      "sha256": "e67ccce88d46b096b48940810146422384d11cf8224d22d5a02bc35edb88c43b",
+      "blob": "0e526c6b6017428d1c39dcc7f8b87f6cc1edeed4"
+    },
+    "/handraw-style/covers/japanese/094.png": {
+      "path": "covers/japanese/094.png",
+      "size": 3793297,
+      "sha256": "3e34aaf1c671c5cae37839b6304a344b374553e1c3fb671fc0e5df351751811a",
+      "blob": "cef7fe732a896d6934a6cc233c2d1c274859057d"
+    },
+    "/handraw-style/covers/japanese/095.png": {
+      "path": "covers/japanese/095.png",
+      "size": 2575512,
+      "sha256": "ea39982431cdfd534a7b818e4727b6fe642c19a2ea5d40b1a59d9d747c146a34",
+      "blob": "44323f869ffbaf8ab9b1c9352fbf1a849a6a82bc"
+    },
+    "/handraw-style/covers/japanese/096.png": {
+      "path": "covers/japanese/096.png",
+      "size": 3050011,
+      "sha256": "7e8bda14d4f01b4dc5543a47b79f502730687097ff6c9686767dbd0a1378ee16",
+      "blob": "2f6541ac4fae83d639c7e98a7f648d2885d86e14"
+    },
+    "/handraw-style/covers/japanese/097.png": {
+      "path": "covers/japanese/097.png",
+      "size": 1386866,
+      "sha256": "823f96920d9490125e2f8fcd8c0a5ae3c9d597288144809c50068a1037b25fb0",
+      "blob": "14eeec24d90fc61cbdecc88582f0f77d47585663"
+    },
+    "/handraw-style/covers/japanese/098.png": {
+      "path": "covers/japanese/098.png",
+      "size": 2936100,
+      "sha256": "da4dccfeb55bb63bd9477de145a4240381df049061f301f17bf4d5cbdf92404d",
+      "blob": "dcdd8218ed27472b624649c667ac4603a2bb6fca"
+    },
+    "/handraw-style/covers/japanese/099.png": {
+      "path": "covers/japanese/099.png",
+      "size": 2123510,
+      "sha256": "922b5fe42296e96168b83a5d2487997e919d729bad95aa2103961829b02d1151",
+      "blob": "94c6b67f6234d33234e5a865471594091608a775"
+    },
+    "/handraw-style/covers/japanese/100.png": {
+      "path": "covers/japanese/100.png",
+      "size": 2462552,
+      "sha256": "693fab7b0f23817b8b505b1e5fcaa700a5eaaea0bc3e65ecdc16f06bf6e72161",
+      "blob": "50b25c3fe1aa65554adb9ef01f287ac8944a3e1c"
+    },
+    "/handraw-style/covers/japanese/101.png": {
+      "path": "covers/japanese/101.png",
+      "size": 2610411,
+      "sha256": "c8d6e226284ed500b3a8a44464e50af1b8f07bea7ed7b9a94ec21cb513a007b0",
+      "blob": "48ecebe4273e5e80474186e51175ee03fd815d13"
+    },
+    "/handraw-style/covers/japanese/102.png": {
+      "path": "covers/japanese/102.png",
+      "size": 2104196,
+      "sha256": "737ac1a745ecb0c3a702d69b3e2ebb49afa25ea2c88be1491f098bcf9ff02d36",
+      "blob": "1a1056a7148136cfa4c98a2e514c2c511c0e5101"
+    },
+    "/handraw-style/covers/japanese/103.png": {
+      "path": "covers/japanese/103.png",
+      "size": 1021436,
+      "sha256": "9bb72ebb2c112ca69886589120feb718855fa7d5d6a81a6bdf20ece1ad2d1edd",
+      "blob": "d116634345ade9db22986a80a1e6cd98256842fa"
+    },
+    "/handraw-style/covers/japanese/104.png": {
+      "path": "covers/japanese/104.png",
+      "size": 2601740,
+      "sha256": "d60a845cc5b648d6db405449c493d286135841e8549059fa11917742d85dec57",
+      "blob": "563a6ab258e9a3958b05bd07a1944971e9cdf18c"
+    },
+    "/handraw-style/covers/japanese/105.png": {
+      "path": "covers/japanese/105.png",
+      "size": 2962908,
+      "sha256": "877896189bcfca0892c1f77bc87c4751c459590603fad44d4d34ae96864c4224",
+      "blob": "38c869df825ba4f118ba788980ebb62620a9e63b"
+    },
+    "/handraw-style/covers/japanese/106.png": {
+      "path": "covers/japanese/106.png",
+      "size": 1233270,
+      "sha256": "1f925461e057727ca155ff15c67125170a0e4603e1785d889e955a500ccbbcd1",
+      "blob": "6c7bbe536e450fcd0a9f03cc19860334c51b7cd8"
+    },
+    "/handraw-style/covers/japanese/107.png": {
+      "path": "covers/japanese/107.png",
+      "size": 1827447,
+      "sha256": "7dda413eda05b180df25a7ecd5e312f5828bb1e9b46c304c3e09e43243e4e051",
+      "blob": "283fdef663aea92fef46e1d47ce3c2937cb9acd0"
+    },
+    "/handraw-style/covers/japanese/108.png": {
+      "path": "covers/japanese/108.png",
+      "size": 2762942,
+      "sha256": "f23c901e33689e44ec7a97732c753bb8ad7401ecd1cfc752e9ca5ddbd99cc2a1",
+      "blob": "d840bc4562cb874d66c3cf78b4112812a2d0f81a"
+    },
+    "/handraw-style/covers/japanese/109.png": {
+      "path": "covers/japanese/109.png",
+      "size": 1609421,
+      "sha256": "e7d73a66d9c4c789cd68c77cca809745d6b909a7fa0471fcab664ca5b98c32dd",
+      "blob": "a2ff1722778e8f60348ba50c5919523438c7f1c3"
+    },
+    "/handraw-style/covers/japanese/110.png": {
+      "path": "covers/japanese/110.png",
+      "size": 2279039,
+      "sha256": "97402fc5ffbd3ac9c76237273eaf8eaca00014b9263583075298d5fea2909f00",
+      "blob": "c6178bde21a6ce01bd2f368178704ff27a46d0ad"
+    },
+    "/handraw-style/covers/japanese/111.png": {
+      "path": "covers/japanese/111.png",
+      "size": 2734704,
+      "sha256": "873801da29efb113a43395d8c84358df856fcb0823917d4f471aec6efa197355",
+      "blob": "e945543423727bb03186edad479b3356e08a4738"
+    },
+    "/handraw-style/covers/japanese/112.png": {
+      "path": "covers/japanese/112.png",
+      "size": 1918309,
+      "sha256": "59d708b65ef168e5c68082f2d4d1a64f3602bdf9d82634babd6b65502dee0649",
+      "blob": "c727be43202b87cad8db1c550d9b496b585d1622"
+    },
+    "/handraw-style/covers/japanese/113.png": {
+      "path": "covers/japanese/113.png",
+      "size": 2632708,
+      "sha256": "46070433308d494f19f45721877d673a083876097e63c6d298edf5349fcf76ea",
+      "blob": "02103aff79e734a2c200257a78ce976304ebd7bf"
+    },
+    "/handraw-style/covers/japanese/114.png": {
+      "path": "covers/japanese/114.png",
+      "size": 2469485,
+      "sha256": "2bb94b3ea00859f9e066f4be141c5caac1f8883abb71c0e3ab1727b411865fba",
+      "blob": "06a23b7c214cf754a923e75a8914683e7ae82c96"
+    },
+    "/handraw-style/covers/japanese/115.png": {
+      "path": "covers/japanese/115.png",
+      "size": 1907966,
+      "sha256": "8e634f06c1a73dbedb0bc20d5796a8c4b5bbdd2b80e6de542b0dc1c00da12df4",
+      "blob": "d007e6b2d44b2c414694ab6932f83f7fd4dbaa25"
+    },
+    "/handraw-style/covers/japanese/116.png": {
+      "path": "covers/japanese/116.png",
+      "size": 2331994,
+      "sha256": "036a5ac48e632e64bfe6a6458b713d4933e59d54cbbc2caa4fbd3e25264763bc",
+      "blob": "dddbcf4369fa30ab75a71666643a94f698cffccc"
+    },
+    "/handraw-style/covers/japanese/117.png": {
+      "path": "covers/japanese/117.png",
+      "size": 2883037,
+      "sha256": "a35e25a8a912ab9af29560cada11972c8bcaa162228629f4eb307ef99365d23e",
+      "blob": "fdfcfb313582ae29ddfbe52ad91926e6e1dfed97"
+    },
+    "/handraw-style/covers/japanese/118.png": {
+      "path": "covers/japanese/118.png",
+      "size": 1760064,
+      "sha256": "1f4bdcf1cea54bf038eae885fc1771e903b4973f02bc8445479f1ddd1dc04e79",
+      "blob": "2245723b3adb53ea165ecbec92134d6bf58add09"
+    },
+    "/handraw-style/covers/japanese/119.png": {
+      "path": "covers/japanese/119.png",
+      "size": 2480124,
+      "sha256": "68e89b66a857d5a398320132c8e13542ecadeef0f6beda3ad8b1fb8517b678d6",
+      "blob": "7579a4360aa741ab15817a881637a6a350f717cd"
+    },
+    "/handraw-style/covers/japanese/120.png": {
+      "path": "covers/japanese/120.png",
+      "size": 2245436,
+      "sha256": "1306ed9f42e4334e97e1eabab9ba6997860ac0a4aa3411840dd68ce5d9bebf53",
+      "blob": "0019fddc740139cf19f2c0100bcd1f3a4fe7e5f8"
+    },
+    "/handraw-style/covers/japanese/121.png": {
+      "path": "covers/japanese/121.png",
+      "size": 2478714,
+      "sha256": "7e9ae5ee1509bca77827ac3e2c05cd8ce1ca665b2bd48fe1f55112b31ac10cb2",
+      "blob": "f5e3dd783fe5ff4c56a3e6ce6a8b108afdaec641"
+    },
+    "/handraw-style/covers/japanese/122.png": {
+      "path": "covers/japanese/122.png",
+      "size": 2480666,
+      "sha256": "c8db4b5765fa6c7f220f1cf98c70b4bffaee2925a2cb0657407ebdb9e035da1a",
+      "blob": "c8a41ce864080edaf6e7e7d903e7193db2d5e061"
+    },
+    "/handraw-style/covers/japanese/123.png": {
+      "path": "covers/japanese/123.png",
+      "size": 2567570,
+      "sha256": "c64df28c675134533d2ca3a431d9cfd454ce564a89fc0848b4b2fd399fe0fe01",
+      "blob": "d19e7b8c1f7cc1d3ea7c435d80012c03330501dd"
+    },
+    "/handraw-style/covers/modern/055.png": {
+      "path": "covers/modern/055.png",
+      "size": 2838172,
+      "sha256": "cabcd5cf6c2b100aa2dfb82b53bef855bd73b9d356851dea6ec7a4c9a2305002",
+      "blob": "dcb423dfb80521ac176f069097cabb56044d1672"
+    },
+    "/handraw-style/covers/modern/056.png": {
+      "path": "covers/modern/056.png",
+      "size": 2599352,
+      "sha256": "04538e51d6533e97171a11b6cedc28a27f99fe7177159c6bc5f3fb715b7b5192",
+      "blob": "2244a1c43605c13ba03ad4611f6e6320dd8c703b"
+    },
+    "/handraw-style/covers/modern/057.png": {
+      "path": "covers/modern/057.png",
+      "size": 2624174,
+      "sha256": "a1a0c48c425dfb7c4e976af63d2a9cd0baee4b71420c9c61774dc03a6f7422f8",
+      "blob": "4851ffa8fbf3664a6b45e4734cc359ed6351eb40"
+    },
+    "/handraw-style/covers/modern/058.png": {
+      "path": "covers/modern/058.png",
+      "size": 1484677,
+      "sha256": "b05f509bbf7a2aa314f30cd7dbab40099a778805c0159e6a0ad22292980bb0fe",
+      "blob": "d78e9afd912a543f2c7d9986de19c12e918bf7a8"
+    },
+    "/handraw-style/covers/modern/059.png": {
+      "path": "covers/modern/059.png",
+      "size": 1250217,
+      "sha256": "7470a00a891a6241e8516f7469ffdd60e99624a76a49deaaf9571c0d956c7915",
+      "blob": "a1bafabdbaf31da85fcdf6931258ffb20217c946"
+    },
+    "/handraw-style/covers/modern/060.png": {
+      "path": "covers/modern/060.png",
+      "size": 1139997,
+      "sha256": "f4b78a5473c427b814654312aa00c4e6e12f3085e5fe41e54ec36b15021a55c9",
+      "blob": "182b61fcbf42e20771c6ebe8e33b7029d5bad8e6"
+    },
+    "/handraw-style/covers/modern/061.png": {
+      "path": "covers/modern/061.png",
+      "size": 3043402,
+      "sha256": "217be5ec8d106f63f3966a9d16166cbf766d0e1c84d474f5f2548cc44f53d81e",
+      "blob": "069c5659c3de560d80c1597abd4dc76809b0818a"
+    },
+    "/handraw-style/covers/modern/062.png": {
+      "path": "covers/modern/062.png",
+      "size": 2466267,
+      "sha256": "accb78d17c682c9c2ad3a0898b73a13ae32f9d5612a31b77e7c1470b398a847c",
+      "blob": "2d6447c27036f8c38879ef344f49a871f53afcfe"
+    },
+    "/handraw-style/covers/modern/063.png": {
+      "path": "covers/modern/063.png",
+      "size": 2686137,
+      "sha256": "1c2732d081ebddfcc147e496e988479021886f52ee312be22bc3bb1fc8a84802",
+      "blob": "526d2863bca6acda078617207266538604718500"
+    },
+    "/handraw-style/covers/modern/064.png": {
+      "path": "covers/modern/064.png",
+      "size": 2591659,
+      "sha256": "5195b2258b63eb1432a13fc8c2eba4a4c26ab04c7c6804b75603d83ede18e70b",
+      "blob": "4ee616d91e11bf88893f46c3f6eee9233bd33c5b"
+    },
+    "/handraw-style/covers/modern/065.png": {
+      "path": "covers/modern/065.png",
+      "size": 2394962,
+      "sha256": "4d713735a39567a2c153afd455a55dea122aa729fe0c0043e0fdf9d174c9e442",
+      "blob": "1c6e02a23089158da594dff2d1beb527ec67c8b0"
+    },
+    "/handraw-style/covers/modern/066.png": {
+      "path": "covers/modern/066.png",
+      "size": 2339804,
+      "sha256": "882a390ffaedf03c44b042d51f7048c7013f265f6bdeb1f25c32a78fb93781d7",
+      "blob": "722c769cde5f191977ff9cde2cae573a70b09d87"
+    },
+    "/handraw-style/covers/modern/067.png": {
+      "path": "covers/modern/067.png",
+      "size": 2956196,
+      "sha256": "0127836a59478a9d533095fa17e4a36b40108713ef56b55cf66e4b56062348fb",
+      "blob": "255fac2e38db13e9f820e4558fe0dec5dd17e2b3"
+    },
+    "/handraw-style/covers/modern/068.png": {
+      "path": "covers/modern/068.png",
+      "size": 2864274,
+      "sha256": "a9b4f508bb594a8c86937ca9740ea6e6087c7094b490cf34b6e2aeef7a9e5f7c",
+      "blob": "072db032290646146bf49880936b82f768728fe8"
+    },
+    "/handraw-style/covers/modern/069.png": {
+      "path": "covers/modern/069.png",
+      "size": 1107034,
+      "sha256": "ca2ab765dfe24275a48dfdb097172712660453f0a7da352c70503804e9d49709",
+      "blob": "4940897e977db181f48523cd08c62351f4f556b9"
+    },
+    "/handraw-style/covers/modern/070.png": {
+      "path": "covers/modern/070.png",
+      "size": 1999214,
+      "sha256": "4ece20bed4e5cd4773f5449992e3f34b5feb5bad9cb9fc9f2ea89bea7f2653ea",
+      "blob": "7b4b4eacff73fc881a9f822fc639cc906cff0615"
+    },
+    "/handraw-style/covers/modern/071.png": {
+      "path": "covers/modern/071.png",
+      "size": 1535088,
+      "sha256": "803578c971dfc97d3d23a4df7975523f912eb5f59f11c62c2e40dfeebc881aee",
+      "blob": "9c1ef3f7691555ccde83bb1c1aa027dccf98f320"
+    },
+    "/handraw-style/covers/modern/072.png": {
+      "path": "covers/modern/072.png",
+      "size": 2654262,
+      "sha256": "27b9b3c4ed5c065e7225023f74a0a39bfd650bdb074042255f6ab47f9b3c1255",
+      "blob": "e7c792a0b28cb3e381557083e9e9c2ec832bed9a"
+    },
+    "/handraw-style/covers/modern/073.png": {
+      "path": "covers/modern/073.png",
+      "size": 3449754,
+      "sha256": "98143cb1ba845abfa51afb1c813cfac81672ac0850563e2b26919b567339c0b5",
+      "blob": "8ce4862bb24e69c85e1dc092e91b1d1db5f33a4c"
+    },
+    "/handraw-style/covers/modern/074.png": {
+      "path": "covers/modern/074.png",
+      "size": 3517491,
+      "sha256": "aeedf73821ec023c30609f7673914527970bfa2632bf14ae50e63f01f1baa4bf",
+      "blob": "05f51d111008658f423afac59f687a52052f43eb"
+    },
+    "/handraw-style/covers/modern/075.png": {
+      "path": "covers/modern/075.png",
+      "size": 2558165,
+      "sha256": "74510b7e0e58ee18afb046186823a12e5f6e367ae198fa665ea6767292f59b39",
+      "blob": "f518af82d8ca6fdce19b709727988b1d92c01701"
+    },
+    "/handraw-style/covers/modern/076.png": {
+      "path": "covers/modern/076.png",
+      "size": 3469754,
+      "sha256": "2a64ae600176e048330fa40677707dd64201303834c7f651240ff4bb7ece44de",
+      "blob": "249c6ee01d6862160cb7a2b61729efc7fea925f7"
+    },
+    "/handraw-style/covers/modern/077.png": {
+      "path": "covers/modern/077.png",
+      "size": 3340695,
+      "sha256": "6d8287e769474d7a5bf4477e0dae73e058ecd07455be2df15ef953caf3e38667",
+      "blob": "b63acf08c5e5e0996e3dd9cd2f6df74e3038e59f"
+    },
+    "/handraw-style/covers/modern/078.png": {
+      "path": "covers/modern/078.png",
+      "size": 2516482,
+      "sha256": "dd1dcb57a600d8a05a62e3e49216054e247a31fe7a308cad4240f6a28a9906e6",
+      "blob": "de1bdea7014f4b18ae84bf388bc04047caa0fd62"
+    },
+    "/handraw-style/covers/modern/079.png": {
+      "path": "covers/modern/079.png",
+      "size": 1916802,
+      "sha256": "a1e135f77a88cbfb561a34b04e690e35bcfdb7da932849e31eec72341b92b784",
+      "blob": "5cc1d88abbec8a9696a92573ade174f13c6ee2c4"
+    },
+    "/handraw-style/covers/modern/080.png": {
+      "path": "covers/modern/080.png",
+      "size": 1202527,
+      "sha256": "8bd36bb99bfa24df3f3ab8ec565f25ad2573e90a7056a33ccfed1bfbb6653a3d",
+      "blob": "94b6106cc81e9bbf088d3956ea181e7c73a1e400"
+    },
+    "/handraw-style/covers/modern/081.png": {
+      "path": "covers/modern/081.png",
+      "size": 3204987,
+      "sha256": "764af1eeba5b1ca92a3395a98036f525ff6ceab75beccc2d97af4bc679a9987d",
+      "blob": "e626a7fc0f2d224c9974807f79238325dba34612"
+    },
+    "/handraw-style/covers/modern/082.png": {
+      "path": "covers/modern/082.png",
+      "size": 3277442,
+      "sha256": "38c94b2f568a602eeef04b711124d7b034cd6fffe3634228ec840356c943a59c",
+      "blob": "87fecd072b69e9970bceb9a01f2f65dfabae73d1"
+    },
+    "/handraw-style/covers/other/217.png": {
+      "path": "covers/other/217.png",
+      "size": 2464174,
+      "sha256": "f113a7bf840578b1316e6e18a73d3874320cc55b94fef931405e851e2d436da7",
+      "blob": "68a4104bab73a1c4f53865391a23e4fed3642b6b"
+    },
+    "/handraw-style/covers/other/218.png": {
+      "path": "covers/other/218.png",
+      "size": 3178964,
+      "sha256": "67e44b9b691a4f8a28a592a22f8e0085d006b752a372b6858c1adc1dfc349ecc",
+      "blob": "485eaa3fce3563a7baefb575e0337260ba8e3da9"
+    },
+    "/handraw-style/covers/other/219.png": {
+      "path": "covers/other/219.png",
+      "size": 3289369,
+      "sha256": "ea347a155c5683b461c7a58b5457a0e3297e64d576e7c1f54ce8538f6c416264",
+      "blob": "23ca206f8bf1f3c24599b412999a75333ff8a137"
+    },
+    "/handraw-style/covers/other/220.png": {
+      "path": "covers/other/220.png",
+      "size": 2358299,
+      "sha256": "78fbfae05f573ad769c94c8bd078f6706c9a9117cb345f0ac3963fd1b1aaacd4",
+      "blob": "35809998204a214fc17e7859a778af776f711a5d"
+    },
+    "/handraw-style/covers/other/221.png": {
+      "path": "covers/other/221.png",
+      "size": 2619349,
+      "sha256": "c546415e1d269ef4b2e5863e8c80af0dc74dd7e30046d19a24c2605ff9d2efe9",
+      "blob": "29b81b1601fbd9106f243992d240abc9e85b4090"
+    },
+    "/handraw-style/covers/other/222.png": {
+      "path": "covers/other/222.png",
+      "size": 2771679,
+      "sha256": "dc2f8fa408ab44047ea8ff996179e6a93e04e694e6cb1a635e9ff6f92d7b6a53",
+      "blob": "4348278afc332ca203d2a42f668443480e10bccb"
+    },
+    "/handraw-style/covers/other/223.png": {
+      "path": "covers/other/223.png",
+      "size": 2838623,
+      "sha256": "a47c664fea758976d5de774b38871cd0eeef9b5329f90008166f81d113a21efe",
+      "blob": "26bd48838bc37d4ef90a8a61c1d588b43281e3cc"
+    },
+    "/handraw-style/covers/other/224.png": {
+      "path": "covers/other/224.png",
+      "size": 2557940,
+      "sha256": "2bee60e00667bf5806e597acd2b4e9ac574c7c157cac7261a0d00ae703bd36b8",
+      "blob": "61cb9035131051a0ff3f1660a5b0473c7b3c3306"
+    },
+    "/handraw-style/covers/other/225.png": {
+      "path": "covers/other/225.png",
+      "size": 3342520,
+      "sha256": "a5e58ea19064cc3e5cbc078ee767515c0a1fbd33aaef75db0043da519fd31e36",
+      "blob": "627d79e57b7ed67130d300160459921df6e09edf"
+    },
+    "/handraw-style/covers/other/226.png": {
+      "path": "covers/other/226.png",
+      "size": 2845757,
+      "sha256": "ae7137698d298048136298d7938188014597116b8633aca6ad1842a3aec1f9b8",
+      "blob": "5cec9ee82873416ad917568ee20e02746d6583f9"
+    },
+    "/handraw-style/covers/other/227.png": {
+      "path": "covers/other/227.png",
+      "size": 1926584,
+      "sha256": "b1b629cc2498459cf8de5b3c99f386c66d634216b639901751240430752357df",
+      "blob": "7925ba05c10658e91add6bc9424b4162437e7b39"
+    },
+    "/handraw-style/covers/other/228.png": {
+      "path": "covers/other/228.png",
+      "size": 3003753,
+      "sha256": "0b9860749693c696fd896d208be5bf9ce57358d7461dd31fff658433a5252b6f",
+      "blob": "506273d17da343188b6b3385059594f3f8e7eb50"
+    },
+    "/handraw-style/covers/other/229.png": {
+      "path": "covers/other/229.png",
+      "size": 2478437,
+      "sha256": "b5cf51894b4b0a5baf38c69f35f707fad6d74dd4ee4d875ba10ba63ce3a6bf6c",
+      "blob": "a44ffd824a7063286b312d64945d27896d04ec3f"
+    },
+    "/handraw-style/covers/other/230.png": {
+      "path": "covers/other/230.png",
+      "size": 3504426,
+      "sha256": "4ba1f5b3d268ae66ba020a8a637033e4c5d373d17f6ef16215ff74f2ffdd77ac",
+      "blob": "857d6b720613002fb3f811817c78611214eef133"
+    },
+    "/handraw-style/covers/other/231.png": {
+      "path": "covers/other/231.png",
+      "size": 2586883,
+      "sha256": "ab5836d515aebb9825238052aee1efafc5b213df242ed1ee58f5880539efa1a7",
+      "blob": "0831d0a48d1409572e371d542b89e993f5bf2d46"
+    },
+    "/handraw-style/covers/other/232.png": {
+      "path": "covers/other/232.png",
+      "size": 2644858,
+      "sha256": "344a64eb9cfb658581ddf0c0959ed6c48de6c6088beaa7561616dd1490c5893f",
+      "blob": "68c8e8f2cfd8ad793a1892c037df7a14a22c8ab5"
+    },
+    "/handraw-style/covers/other/233.png": {
+      "path": "covers/other/233.png",
+      "size": 2803102,
+      "sha256": "b11bd757997d850b02a68dbeff255cd4af27bb977a317a2aff71e30b93698264",
+      "blob": "c4bd244ef3ac11f0a1b0550534dbd93cb45e6339"
+    },
+    "/handraw-style/covers/other/234.png": {
+      "path": "covers/other/234.png",
+      "size": 2944338,
+      "sha256": "8b29a1d24c7da5aa8169e97436e4c7b4602196e2b3249f658736e835f0a9368f",
+      "blob": "2a6d6e0761ca7ae6f9a4deee131a29d5959d1550"
+    },
+    "/handraw-style/covers/other/235.png": {
+      "path": "covers/other/235.png",
+      "size": 3116949,
+      "sha256": "8a8f2039391bb0d017db60a6537437369b4b9bacb50cf233eebddd3bff20804c",
+      "blob": "e510a6ef2fc7599b7240e9b03c693f21d36671bc"
+    },
+    "/handraw-style/covers/other/236.png": {
+      "path": "covers/other/236.png",
+      "size": 2413221,
+      "sha256": "c8c76af160268e267cc45338c7808ebe877848e2fbb60248d2078f53c7416ccf",
+      "blob": "2f2e8ec026376c02d87981bc2669a0ca4cc1c057"
+    },
+    "/handraw-style/covers/other/237.png": {
+      "path": "covers/other/237.png",
+      "size": 2384694,
+      "sha256": "2a96ea99910e6d526cfe6689090671fe5eccbbc9057ea068bbe1a63325ddeb7d",
+      "blob": "250c9a5e8aaa14a069c85dda6f21b25de7288f52"
+    },
+    "/handraw-style/covers/other/238.png": {
+      "path": "covers/other/238.png",
+      "size": 3079678,
+      "sha256": "a87ca92d6f39a92b69835a20374f7ab5127a0202b7d07f0bce1867a47ee87c46",
+      "blob": "3e848132d80358d813f8b0a3d5ccc3e0844a246f"
+    },
+    "/handraw-style/covers/other/239.png": {
+      "path": "covers/other/239.png",
+      "size": 2683670,
+      "sha256": "a785201c042a682088d051fc26a75f4edcd9b947dffbaf785457dc6d35f86018",
+      "blob": "1ee6a1a9726b0c34de4a1ac2762ad169092df907"
+    },
+    "/handraw-style/covers/other/240.png": {
+      "path": "covers/other/240.png",
+      "size": 3268400,
+      "sha256": "cb740b6c833cfde10f6a87e8ef4385b26c346100fd643e80f2da1ffca6316acf",
+      "blob": "4baa0804a98f59fc9d2d09857a71b9c4f0ec9409"
+    },
+    "/handraw-style/covers/other/241.png": {
+      "path": "covers/other/241.png",
+      "size": 3170669,
+      "sha256": "ecb55cabe996a19e2c3f552f986930728894a4073e2b517179d800e3d6d6a4f0",
+      "blob": "dac2aeda77970a7d6fd495e8a0ef2f5fa43260a8"
+    },
+    "/handraw-style/covers/other/242.png": {
+      "path": "covers/other/242.png",
+      "size": 3828908,
+      "sha256": "51604ab4c7ea8143b567c197a34c346c44abcc86b105149c5d4fabd8d5035be3",
+      "blob": "c70cfcad0e682c3357335eec0a7c245ea8304253"
+    },
+    "/handraw-style/covers/other/243.png": {
+      "path": "covers/other/243.png",
+      "size": 3477109,
+      "sha256": "d094057a716ab81a20f046e49a3fd0bfa13431c9ec2da4273b6380d44047bec3",
+      "blob": "66f5850a38e42e80406c59673abd409b9ea1ee62"
+    },
+    "/handraw-style/covers/other/244.png": {
+      "path": "covers/other/244.png",
+      "size": 3219023,
+      "sha256": "731f45d29df9c9cda98bd5745c0d90023acb85854f868f427dc3f8ada5deaa5a",
+      "blob": "8a7a438b71466a0b806eea8007970de65854ee82"
+    },
+    "/handraw-style/covers/other/245.png": {
+      "path": "covers/other/245.png",
+      "size": 2747231,
+      "sha256": "b2f993e628814e49abc5a6cf14fed74a3c795e174d785f3d0e766d3d5c2e33a4",
+      "blob": "e491367831f574cf1c016c4b2feccf5f7b09051e"
+    },
+    "/handraw-style/covers/other/246.png": {
+      "path": "covers/other/246.png",
+      "size": 3161402,
+      "sha256": "c42cabf3697a4f8f1056009850bccd683c738269c67b6d41247b43b72bc9aab8",
+      "blob": "daecc1ac37a8c592b2838d6c501c89076f1f38ca"
+    },
+    "/handraw-style/covers/other/247.png": {
+      "path": "covers/other/247.png",
+      "size": 2037442,
+      "sha256": "79a24018aa17206a10e2962f5c1169ace7c48d9d721eb37de08b1d2a1570e751",
+      "blob": "7b7c394dc9fd43d9593d1d7c163246d14a1d0d46"
+    },
+    "/handraw-style/covers/other/248.png": {
+      "path": "covers/other/248.png",
+      "size": 2515277,
+      "sha256": "ee6e8f75bf08c68d3d1093c300d23002b704fe283c153a6c7588d76c5f165086",
+      "blob": "71b1b128effaed811a4dd3488ab9f99f3e9c26b1"
+    },
+    "/handraw-style/covers/other/249.png": {
+      "path": "covers/other/249.png",
+      "size": 2747396,
+      "sha256": "334abc054b4cea7b9ebe5b9dff7bbcdacb0e0257d74283c6269ea5c8fbb4fcb4",
+      "blob": "3e44803f096485ed7a8107685d2b2483c9fecc6f"
+    },
+    "/handraw-style/covers/other/250.png": {
+      "path": "covers/other/250.png",
+      "size": 2558496,
+      "sha256": "99ca85c581881aaa142a2489ab213974551e92252b8bd006929c2c026db1eb80",
+      "blob": "3843eeb6e6171114618ae7aac6c4710423b8f90d"
+    },
+    "/handraw-style/covers/other/251.png": {
+      "path": "covers/other/251.png",
+      "size": 3164589,
+      "sha256": "2bf3995b860f10cfd1c43487c1fab37e0a65cb0061df6985891a25b0afec63e3",
+      "blob": "1f36c2ad9a647ccc2f9f75f8f78ca3a68f2691c2"
+    },
+    "/handraw-style/covers/other/252.png": {
+      "path": "covers/other/252.png",
+      "size": 3454567,
+      "sha256": "a86606a5e93fc399d17d2e5714b03589e09f355f635d53a9371a3b31bd19f834",
+      "blob": "83c5a1b234930317d245a032fa5d1da74804ecdb"
+    },
+    "/handraw-style/covers/other/253.png": {
+      "path": "covers/other/253.png",
+      "size": 1446163,
+      "sha256": "4d16cae417684bf07d3a3ebd927ef1cc6d1b07fb76406d677b484f5f3c660acd",
+      "blob": "33a2c1472350b863422e2b57d2954761893ef6f9"
+    },
+    "/handraw-style/covers/other/254.png": {
+      "path": "covers/other/254.png",
+      "size": 3084447,
+      "sha256": "c44692eb219e5d529ff5756228c3865796caedf2dca8af547bd6c5cb46f93297",
+      "blob": "f100e27d1ec345189f31275d0d550f19a173c7b0"
+    },
+    "/handraw-style/covers/other/255.png": {
+      "path": "covers/other/255.png",
+      "size": 2871491,
+      "sha256": "34a816106b44b52a27223f1a4f49148527fa0c936a8b75342b7086e414a230c6",
+      "blob": "bdc24492e514fbf577cda69065ab4676ee786f9a"
+    },
+    "/handraw-style/covers/other/256.png": {
+      "path": "covers/other/256.png",
+      "size": 2629296,
+      "sha256": "b7c330b93d81d235fe05eb6d0a990558a50b2ce6a4047e7fb5cab542524c6474",
+      "blob": "73b7fa40473e0c97f1d2c3bb695af7d006797ad6"
+    },
+    "/handraw-style/covers/other/257.png": {
+      "path": "covers/other/257.png",
+      "size": 2843886,
+      "sha256": "c3601e274307ba3ce65793882acc3ade17e7242ebf2f87027d5da04748832c99",
+      "blob": "8e27180efe9ff2ccd91a61e10f16ed2e692f9ccd"
+    },
+    "/handraw-style/covers/other/258.png": {
+      "path": "covers/other/258.png",
+      "size": 2688202,
+      "sha256": "4a183b43eeec40f12c0ec36edce197d069b2c8fe4cd8bc82f6da66c7633c52e2",
+      "blob": "ff4ea8181293e72ca558e7d083fd4179cde47119"
+    },
+    "/handraw-style/covers/other/259.png": {
+      "path": "covers/other/259.png",
+      "size": 2965337,
+      "sha256": "67af2ed0cc87fdda0c7b9b432f6e39cafb398def87b77de9c32307144d81d566",
+      "blob": "4ef9e1f84941e823983085a65e9f8bb780a874be"
+    },
+    "/handraw-style/covers/other/260.png": {
+      "path": "covers/other/260.png",
+      "size": 3318120,
+      "sha256": "5bcdb7fa51a29d4e5ecc24cc5743976805ca3f5fe4b0cf19d67ee850011437a9",
+      "blob": "30e58eef6ed49100df698b9fd8e6712bcada0114"
+    },
+    "/handraw-style/covers/other/261.png": {
+      "path": "covers/other/261.png",
+      "size": 2102962,
+      "sha256": "08ae4457144fc04d7a210967f85941b5798485abe711738b63fdc17d84594a4e",
+      "blob": "41581643845ad3405f47cb809c8b810c305d7ade"
+    },
+    "/handraw-style/covers/other/262.png": {
+      "path": "covers/other/262.png",
+      "size": 1643956,
+      "sha256": "97076a92ec31e514e7d5efee0a8dfe7628183de5c3ed04e8d977f9ebc69901c6",
+      "blob": "f32dfaaedd60fe5249e85628f40c18929324c161"
+    },
+    "/handraw-style/covers/other/263.png": {
+      "path": "covers/other/263.png",
+      "size": 1486148,
+      "sha256": "72af9f62143ebdce591afc30f87442722d6910e6a0f68aed73c7d593c619cc71",
+      "blob": "3d8e111230d502006bdf315cbe794df3b5512040"
+    },
+    "/handraw-style/covers/other/264.png": {
+      "path": "covers/other/264.png",
+      "size": 3228269,
+      "sha256": "ba1c6d2a101e84040ae156ee9c3eb7602bdcf2ab1583157eb01d44c55dee672b",
+      "blob": "1b793e97f080aad15a4192111d870362bd67be37"
+    },
+    "/handraw-style/covers/other/265.png": {
+      "path": "covers/other/265.png",
+      "size": 3013289,
+      "sha256": "5e40297ba3c2e8b6e324e8d427de9adbc14d1bc9175c5f8c92d30df69170c515",
+      "blob": "1fa82d0fd71471738212ddc1e76223f930f089c8"
+    },
+    "/handraw-style/covers/other/266.png": {
+      "path": "covers/other/266.png",
+      "size": 2238516,
+      "sha256": "b7537458755f7007971873771ee81e9490719f2c1a90ae3ca672822329f25fe1",
+      "blob": "be031ceed863c4563c6dcde439585f812df7ac2a"
+    },
+    "/handraw-style/covers/other/267.png": {
+      "path": "covers/other/267.png",
+      "size": 1648605,
+      "sha256": "f65f552c9352c75d443c55e52c8dba26cac92db5a1392aa2124ef94a2605d8f6",
+      "blob": "896acc46ff973622ec88eb5c55717439039fd3d0"
+    },
+    "/handraw-style/covers/other/268.png": {
+      "path": "covers/other/268.png",
+      "size": 2660234,
+      "sha256": "6d8cb0ba09f6506c19683db1e935f4f8475a4cc3cd4519fd296a3f3f8455fba3",
+      "blob": "79db84601065408f59a7a03a28f52860e169c844"
+    },
+    "/handraw-style/covers/other/269.png": {
+      "path": "covers/other/269.png",
+      "size": 2862914,
+      "sha256": "cb3f8d0828fe87e1e9c352698b12b1434afddae7bc2c37c363b585c58f8d43ed",
+      "blob": "b95a74acb4bcfc96a2548d2b408ef3e0f524f439"
+    },
+    "/handraw-style/covers/other/270.png": {
+      "path": "covers/other/270.png",
+      "size": 2589246,
+      "sha256": "cb10858a5e5deb103b6e69fc0a8227cb3faf6cc17efce1f0d06169bc72c9c6d3",
+      "blob": "42fd9acf9d6d3d3c6322dc26aa158ebe107b554f"
+    },
+    "/handraw-style/covers/other/271.png": {
+      "path": "covers/other/271.png",
+      "size": 3207690,
+      "sha256": "fccd5cc62c726e6074a5984cce5f85f5dfce89cb95b738a8601bb001ddf733d4",
+      "blob": "6d0ea5fc7850d779ee49766855594b4f811fb57e"
+    },
+    "/handraw-style/covers/other/272.png": {
+      "path": "covers/other/272.png",
+      "size": 2518116,
+      "sha256": "78e9420c3e90bb11399ab993f031fb1a965bc9d985288cc7f8d444d41d17b4eb",
+      "blob": "1053ef14f7b29ca1401147b9b1729bf0720604e3"
+    },
+    "/handraw-style/covers/other/273.png": {
+      "path": "covers/other/273.png",
+      "size": 2756096,
+      "sha256": "02fe5ab07bf5d489daaac756a5023ad6459f381788fd415cf60de8db10660777",
+      "blob": "e3340306040fe77745fb8ed37cb876b0e6c91518"
+    },
+    "/handraw-style/covers/other/274.png": {
+      "path": "covers/other/274.png",
+      "size": 1678720,
+      "sha256": "91da67cacc5f28bbcf6f2993d2ba78e11b3528cec3a7a7183db71debc312c897",
+      "blob": "fa1a81e921e776358c71192b65bbb58d0fa90f82"
+    },
+    "/handraw-style/covers/other/275.png": {
+      "path": "covers/other/275.png",
+      "size": 3478760,
+      "sha256": "6411f2dea3ba7ce15b6493a793246c6e5404faafd5f1c9eafbec9caae0465840",
+      "blob": "2da97a2b03d9a01421be850beb1dd2628a6ee926"
+    },
+    "/handraw-style/covers/other/276.png": {
+      "path": "covers/other/276.png",
+      "size": 1866714,
+      "sha256": "bebd8bab71c8de18eec6e548ba2bb3767270a5a856d65a978823f5b24c8e114e",
+      "blob": "c1b351e6ab0d4fc0ee27fbc7e7cf72f01b8d025c"
+    },
+    "/handraw-style/covers/other/277.png": {
+      "path": "covers/other/277.png",
+      "size": 2405860,
+      "sha256": "1e4d696a495115df96a7e94d41efd66c5fb7bb15e9af78941b35a833f887f1ab",
+      "blob": "f3bc940eb64a780e74f2be7c755d3c71a4122ff5"
+    },
+    "/handraw-style/covers/storybook/036.png": {
+      "path": "covers/storybook/036.png",
+      "size": 3175034,
+      "sha256": "e820ea575447c6437b0acb0000a71c911f27494c08ca047b75d9efb779bab195",
+      "blob": "fb50b98db2777cb994e41381cbe01238a46da22a"
+    },
+    "/handraw-style/covers/storybook/037.png": {
+      "path": "covers/storybook/037.png",
+      "size": 3313901,
+      "sha256": "d3d108c22872d400ad86c518226459748e0a8e796bcf20fb17e691f8e9b9f63d",
+      "blob": "0f5fb35f22929c4eb6f200d9c75d239d8a049b5a"
+    },
+    "/handraw-style/covers/storybook/038.png": {
+      "path": "covers/storybook/038.png",
+      "size": 3214258,
+      "sha256": "1bf6305f2d589d39b5549c3b9ba9f5d1a1e5cfaf005e65054eee48a79655c157",
+      "blob": "87dd9ca6af539c8e2024bf77fb197113cdba0fae"
+    },
+    "/handraw-style/covers/storybook/039.png": {
+      "path": "covers/storybook/039.png",
+      "size": 3432009,
+      "sha256": "962616f0791e7ab99248209945464fc9e12ae7555e2d125248ce797e4655dce4",
+      "blob": "8e71cf1702194e99ef731499918a831b6cb18c8c"
+    },
+    "/handraw-style/covers/storybook/040.png": {
+      "path": "covers/storybook/040.png",
+      "size": 3884604,
+      "sha256": "1aaaa9519ec05a4b15ed63def520c54ec947e4741b0470bd4df0e4fda75b6743",
+      "blob": "d8bfb64439edd9dc23eed00e4e5fc8452fe37623"
+    },
+    "/handraw-style/covers/storybook/041.png": {
+      "path": "covers/storybook/041.png",
+      "size": 3440190,
+      "sha256": "e874c6fe5983a74449e47735a1f43fd1c0033c373638ad8bfd31fe9808642925",
+      "blob": "50a7dd938a0c528548ee22c81d3201fbb53124e5"
+    },
+    "/handraw-style/covers/storybook/042.png": {
+      "path": "covers/storybook/042.png",
+      "size": 3350082,
+      "sha256": "adf744850076da31f72ffc4f809a6e534bda4e020364320488db9308c16a63ed",
+      "blob": "591f781d71c2bcadfd3df32e61b7438b5d335bab"
+    },
+    "/handraw-style/covers/storybook/043.png": {
+      "path": "covers/storybook/043.png",
+      "size": 3433429,
+      "sha256": "846ab33ea16e830c6642cdae78173d4b00661cf645fdc6f439bfe0ed63f2a495",
+      "blob": "715f234c34a5a34db8ecb2d4929b0388062fdb11"
+    },
+    "/handraw-style/covers/storybook/044.png": {
+      "path": "covers/storybook/044.png",
+      "size": 3244054,
+      "sha256": "04a96d94c21e23bb5aa5e1844aadfa5811aa5eb4e7e1ef1cc83643287e4202b6",
+      "blob": "efa000301690f2134cdc6eb3021044febb85a69a"
+    },
+    "/handraw-style/covers/storybook/045.png": {
+      "path": "covers/storybook/045.png",
+      "size": 2574356,
+      "sha256": "652e371157c7a2bfffefe78a136c1f93935b926b5b6faa05c70b57743700a81b",
+      "blob": "e8a9f3d86702738b27c566ec9628bdf84fe6c22e"
+    },
+    "/handraw-style/covers/storybook/046.png": {
+      "path": "covers/storybook/046.png",
+      "size": 1813603,
+      "sha256": "ad9e5c6e1b156eec5e0428a4000a6c9b719212e46467cc74d1b0515b213b1a00",
+      "blob": "82e9dd0a622211344bd1a7e57d29d01adb40df26"
+    },
+    "/handraw-style/covers/storybook/047.png": {
+      "path": "covers/storybook/047.png",
+      "size": 2585581,
+      "sha256": "34856cd2827f41a697819adfb4bf9490dd5a34c1cfd2c3bf85b529bcc3f2f7c0",
+      "blob": "da4c3fb375d1b7debd6b199bd6a6576769a4e13a"
+    },
+    "/handraw-style/covers/storybook/048.png": {
+      "path": "covers/storybook/048.png",
+      "size": 3189571,
+      "sha256": "4cba3261f7b37bca85a1b5de601b0a6c53e4cb550c536c33b83d2b0b9319fc17",
+      "blob": "d837b1fbe86a98ef3f4fe7d5d79b81bc237a2064"
+    },
+    "/handraw-style/covers/storybook/049.png": {
+      "path": "covers/storybook/049.png",
+      "size": 2954970,
+      "sha256": "121971520a97372a973108d0af38e50dceaa467b31f807edb37db4d0ae86c9fb",
+      "blob": "c2495f51855725ac3b3044510eef3e7344927d27"
+    },
+    "/handraw-style/covers/storybook/050.png": {
+      "path": "covers/storybook/050.png",
+      "size": 3492073,
+      "sha256": "73e1c4db50a1706bb3ae195931eaa487b1c63d18fdb2379a90daceafdb61e171",
+      "blob": "cfbd733fb18f62b70f124202b64e3f957e9db488"
+    },
+    "/handraw-style/covers/storybook/051.png": {
+      "path": "covers/storybook/051.png",
+      "size": 3131023,
+      "sha256": "aec293f9bc3d711c62a30109aa1b157c7f65608b04316dcd652330aa77c3b1de",
+      "blob": "407209c6a95acf3a5a5bf8fbefcfa9310b8f7b47"
+    },
+    "/handraw-style/covers/storybook/052.png": {
+      "path": "covers/storybook/052.png",
+      "size": 2144634,
+      "sha256": "ac40c29a9897c17927590b0de489298193d471e8131a66aadeb5034d39bf829e",
+      "blob": "fc340b453069ec20e6aadee4bd2d08b2d06bb429"
+    },
+    "/handraw-style/covers/storybook/053.png": {
+      "path": "covers/storybook/053.png",
+      "size": 2207620,
+      "sha256": "0c9f12adea6e06ccf8ec82208050aff9eaf2b25639c3b36e46d59c3ba311657b",
+      "blob": "ef546f83264f70a827949e3b824601701f593122"
+    },
+    "/handraw-style/covers/storybook/054.png": {
+      "path": "covers/storybook/054.png",
+      "size": 1522026,
+      "sha256": "83390c47e74dcfb3d505ef9bff65b006b0288d467cde93fabf12bddd635c33bd",
+      "blob": "87e9cdeeb54b6783b365748e2c8d96bc8752a622"
+    }
+  },
+  "commit": "30ea4b8d9cba6a247c97b01bd95bb3110d0cefde"
+}

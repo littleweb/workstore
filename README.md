@@ -58,7 +58,7 @@ npm run desktop:build                           # 本机正式构建
 3. [架构与决定](docs/ARCHITECTURE.md)：必须保持的行为和数据边界。
 4. [多设备开发流程](docs/DEVELOPMENT.md)：分支、提交、同步与交接。
 
-发布代码与共享上下文统一维护在默认分支 `main`；克隆后可执行 `git switch main` 接续开发。
+发布代码和共享开发上下文维护在 `main`；克隆后在 `main` 上接续，并为各设备创建独立工作分支。
 
 开发前 `git pull --ff-only`；完成后同步更新上下文文档，与代码一起 commit、push。另一台设备 pull 后即可接续。AI 助手应读取这些仓库文档；这不是对任何聊天软件私有记忆的自动同步。
 
@@ -87,3 +87,5 @@ npm run desktop:build                           # 本机正式构建
 ### HTML Anything 原版开发
 
 首次开发先执行 `npm run html:install`，按上游锁文件安装独立依赖。桌面构建会自动生成并打包原版运行组件；最终用户无需安装 Node 或另启服务。浏览器开发需要另开 `npm run html:start`，再运行 `npm run dev -- --port 1420`。原版来源和适配边界见 [说明](third-party/html-anything/README.md)。
+
+封面模板预览按需从公开GitHub素材分支下载并在本机缓存，已缓存图片可离线查看；本地画风、配色及版式参考继续随应用提供。未缓存预览在断网时显示本地画风参考，生成的用户封面仍保存在工作区。正式打包会自动发布并核验预览素材，详见[开发与发布流程](docs/DEVELOPMENT.md#发布封面预览素材)。

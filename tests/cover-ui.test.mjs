@@ -35,7 +35,7 @@ const code = buildSync({
   format: "cjs",
   jsx: "automatic",
   loader: { ".css": "empty" },
-  external: ["../list-projects/Projects",
+  external: ["./Preview","../list-projects/Projects",
     "react",
     "react/jsx-runtime",
     "antd",
@@ -144,6 +144,7 @@ async function harness({ empty = false, project = false } = {}) {
     setTimeout,
     clearTimeout,
     require(id) {
+      if(id === "./Preview") return ({src,alt})=>React.createElement("img",{src,alt});
     if (id === "../list-projects/Projects") return project ? {
       useProjects:()=>({...noProjects.useProjects(),move:async(id,target)=>memberships.set(id,target)}),
       ProjectSection:({onCreate})=>React.createElement('button',{onClick:()=>onCreate('project-a')},'项目中创建'),

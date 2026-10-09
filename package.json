@@ -19,7 +19,8 @@
     "html:install": "npx --yes pnpm@10.33.2 --dir vendor/html-anything install --frozen-lockfile",
     "html:build": "node scripts/html-anything/build.mjs",
     "html:start": "node scripts/html-anything/start.mjs",
-    "desktop:release:build": "node scripts/build-release.mjs"
+    "desktop:release:build": "node scripts/build-release.mjs",
+    "covers:publish": "node scripts/covers/publish.mjs"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",

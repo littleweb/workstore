@@ -80,3 +80,11 @@ npm run tauri -- build --debug
 课程内置视频换声时运行scripts/course-animation/refresh-voices.mjs与scripts/course-whiteboard/refresh-voices.mjs；先构建共享运行环境，两者只替换内置参考，旧字节备份于忽略目录。每类十条完成后分别运行audit-examples.py，校验音色版本、无首尾标点字幕、SRT、时长/帧数/音轨和首中末画面，再构建最终桌面包。
 
 仅调整动画字幕排版时，可在构建渲染运行环境后运行scripts/course-animation/refresh-captions.mjs，复用已验证WAV与字幕时间并重新渲染十条参考，不重复合成或调用AI。
+
+## 发布封面预览素材
+
+`npm run covers:publish`使用开发者已有的GitHub CLI授权，将`public/handraw-style/covers`的277张公开PNG及清单发布到`littleweb/workstore`的`assets/covers`分支，生成`src/covers/remote-previews.json`。相同清单复用已发布提交，内容改变时非force追加素材提交；引用已有Git blob避免重复上传，新增图片才上传。执行前应确认图片属于公开内置素材，不能放用户作品或私有图片。
+
+`npm run desktop:release:build`自动执行素材发布和远端树/大小/对象校验，再构建去掉大预览的正式包。无需新建服务，也无需客户端登录。开发者发布需要GitHub写权限；客户端通过公共raw下载，失败回退官方匿名API并接受其频率限制。索引与相关代码一起维护在main，素材分支用于读取与发布，不能用force覆盖。原始PNG暂留源码用于校验、测试和再次发布；原生缓存放应用cache目录，不参与用户工作区Git同步。
+
+更新过PNG后，先发布素材再构建（普通production构建也校验本地PNG与索引一致）；已有安装包引用固定素材提交，所以后续素材分支更新不会改变旧包的预览。发布脚本本身只推素材，不创建软件Release或改写已有安装附件。

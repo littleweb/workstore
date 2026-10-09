@@ -1,5 +1,6 @@
 import { readFileSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { collectPreviews, validatePublished } from './covers/preview-assets.mjs';
 import { spawnSync } from 'node:child_process';
 
 // Formal releases exclude the unfinished course UI, examples and native runtimes.
@@ -14,10 +15,13 @@ const run = (file, args) => {
 for (const script of ['prepare-excalidraw.mjs', 'comics/build-validator.mjs', 'html-anything/build.mjs', 'story-comic/build-resources.mjs']) {
   run(process.execPath, ['scripts/' + script]);
 }
+run(process.execPath, ['scripts/covers/publish.mjs']);
+validatePublished(JSON.parse(readFileSync('src/covers/remote-previews.json', 'utf8')), collectPreviews());
 const frontend = resolve('.release-build/frontend');
 rmSync(frontend, { recursive: true, force: true });
 run(process.execPath, ['node_modules/typescript/bin/tsc', '-b']);
 run(process.execPath, ['node_modules/vite/bin/vite.js', 'build', '--outDir', frontend]);
+if (existsSync(resolve(frontend, 'handraw-style/covers'))) throw new Error('封面预览意外进入正式包');
 if (existsSync(resolve(frontend, 'course')) || readdirSync(resolve(frontend, 'assets')).some(name => name.startsWith('CourseApp-'))) {
   throw new Error('课程资源意外进入正式包');
 }

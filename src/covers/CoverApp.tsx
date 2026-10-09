@@ -33,6 +33,7 @@ import { copyPrompt, fillCopy } from "./copy";
 import { imageSource, pngReference } from "./images";
 import { exportCover } from "./export";
 import CoverIcon from "./CoverIcon";
+import CoverPreview from "./Preview";
 import { recommendationPrompt, parseRecommendation } from "./recommendation";
 import attribution from "./attribution.json";
 import "./covers.css";
@@ -944,8 +945,8 @@ export default function CoverApp() {
                           aria-label={`选择 ${s.number} ${s.displayName}`}
                         >
                           <div className="cover-template-image">
-                            <img
-                              loading="lazy"
+                            <CoverPreview
+                              fallback={s.image}
                               src={s.preview}
                               alt={`${s.number} ${s.displayName}`}
                             />
@@ -983,7 +984,7 @@ export default function CoverApp() {
           page === "config" ? (
             <section className="cover-config">
               <div className="cover-reference">
-                <img src={style.preview} alt={`${style.number} 风格参考`} />
+                <CoverPreview src={style.preview} fallback={style.image} alt={`${style.number} 风格参考`} loading="eager" />
                 <p>
                   {style.number} · {style.displayName}
                 </p>
@@ -1063,7 +1064,7 @@ export default function CoverApp() {
                 <div className="cover-field">
                   <span>风格模板</span>
                   <div className="cover-selected-style">
-                    <img src={style.preview} alt="当前画风" />
+                    <CoverPreview src={style.preview} fallback={style.image} alt="当前画风" loading="eager" />
                     <span>
                       {style.number}
                       <small>{style.displayName}</small>

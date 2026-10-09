@@ -1,5 +1,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 mod comic_catalog;
+mod cover_previews;
 mod ai_images;
 mod ai;
 mod documents;
@@ -727,6 +728,7 @@ fn main() {
             ai::ai_save_settings,
             ai::ai_generate,
             ai_images::ai_read_image,
+            cover_previews::cover_preview,
             comic_catalog::comic_template_catalog,
             comic_catalog::comic_template_activate,
             comics::save_comic_export,
