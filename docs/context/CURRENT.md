@@ -4,7 +4,7 @@
 - 版本五处统一0.1.15；正式构建新增desktop:release:build独立前端输出，显式生成macOS app/DMG及既有公钥的签名更新包。修复独立checkout下生成验证器带入设备路径，生成输出与仓库一致。代码和共享上下文维护main，原工作区未提交内容保留。
 - 完整前端465项、TypeScript、Rust单线程89项通过（5项外部测试按约定忽略）；生成器修复后15项漫画模板回归通过。macOS ARM64正式app、DMG、更新包构建成功，使用原更新密钥；Ed25519更新签名及可信注释、ad-hoc应用签名和DMG完整性通过。
 - 确认后台暂无任务后正常关闭、安装并重开本机应用；10项全部文件/链接SHA-256及权限一致，DMG内应用与更新包/本机安装也一致。旧包保留设备备份.WorkStore-release-0.1.15/WorkStore.previous.app；本机下载目录保留0.1.15 DMG。原生确认已保存笔记正常、顶部与工具弹窗无做课程/小动画、右键移除菜单正常，未改变快捷记录或调用模型。
-- GitHub v0.1.15已发布为Latest正式版，四个附件的远端大小与SHA-256完全匹配本机构建，公开网页与GitHub API确认发布状态及源码标签一致；没有改写旧标签。源码及共享上下文已更新main。Git HTTPS获取后续文档提交时超时，使用GitHub Git Data API上传并核对相同blob/tree/commit SHA，非force更新main，拒绝并发覆盖。
+- GitHub v0.1.15已发布为Latest正式版，四个附件的远端大小与SHA-256完全匹配本机构建，公开网页与GitHub API确认发布状态及源码标签一致；匿名GitHub API实际下载latest.json，与本地清单完全一致；没有改写旧标签。源码及共享上下文已更新main。Git HTTPS获取后续文档提交时超时，使用GitHub Git Data API上传并核对相同blob/tree/commit SHA，非force更新main，拒绝并发覆盖。
 - 当前设备直连github.com下载域名多次连接超时，公开Latest下载URL的本机直连检查未完成，也未进行旧版到新版的真实应用内升级；这项网络验收限制与附件完整性/本机安装验收分开记录。Apple公证及其他平台未验证，原生proof/用户内容不进入源码Git。
 
 ## 2026-10-09 · 封面分类与直接选取

@@ -19,7 +19,8 @@
     "installedFilesAndLinks": 10,
     "appDmgAndUpdateBytesAndModesMatch": true,
     "githubAssetHashesAndSizesMatch": true,
-    "directLatestUrlOnThisHost": "connection timeout; actual online upgrade not tested"
+    "directLatestUrlOnThisHost": "connection timeout; actual online upgrade not tested",
+    "anonymousManifestViaGithubApi": true
   },
   "assets": {
     "darwin-aarch64-WorkStore.app.tar.gz": {
