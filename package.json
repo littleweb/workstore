@@ -1,6 +1,6 @@
 {
   "name": "workstore",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "private": true,
   "type": "module",
   "scripts": {
@@ -21,7 +21,8 @@
     "html:start": "node scripts/html-anything/start.mjs",
     "desktop:release:build": "node scripts/build-release.mjs",
     "covers:publish": "node scripts/covers/publish.mjs",
-    "desktop:experimental:build": "tauri build"
+    "desktop:experimental:build": "tauri build",
+    "design:publish": "node scripts/design-studio/publish.mjs"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",

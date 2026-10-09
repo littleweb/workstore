@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { buildPlan } from './release/plan.mjs';
 import { readManifest, verifyFrontend, verifyMacBundle } from './release/assets.mjs';
 import { collectPreviews, validatePublished } from './covers/preview-assets.mjs';
+import { collectDesignAssets, validateDesignPublished } from './design-studio/assets.mjs';
 import { spawnSync } from 'node:child_process';
 
 // Formal releases include only the tools and resources in the release manifest.
@@ -17,8 +18,12 @@ const run = (file, args) => {
 for (const script of ['prepare-excalidraw.mjs', 'story-comic/build-resources.mjs']) {
   run(process.execPath, ['scripts/' + script]);
 }
-if (plan.publishPreviews) run(process.execPath, ['scripts/covers/publish.mjs']);
+if (plan.publishPreviews) {
+  run(process.execPath, ['scripts/covers/publish.mjs']);
+  run(process.execPath, ['scripts/design-studio/publish.mjs']);
+}
 validatePublished(JSON.parse(readFileSync('src/covers/remote-previews.json', 'utf8')), collectPreviews());
+validateDesignPublished(JSON.parse(readFileSync('src/design-studio/remote-assets.json', 'utf8')), collectDesignAssets());
 const frontend = resolve('.release-build/frontend');
 rmSync(frontend, { recursive: true, force: true });
 run(process.execPath, ['node_modules/typescript/bin/tsc', '-b']);

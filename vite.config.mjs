@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { copyPublicAssets, checkModules, verifyFrontend } from './scripts/release/assets.mjs';
 import { collectPreviews, validatePublished } from './scripts/covers/preview-assets.mjs';
+import { collectDesignAssets, validateDesignPublished } from './scripts/design-studio/assets.mjs';
 import { cpSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
@@ -16,10 +17,11 @@ export default defineConfig(({ command }) => ({
     generateBundle(_, bundle) { if (release) checkModules(root, bundle); },
     writeBundle() {
       validatePublished(JSON.parse(readFileSync(resolve(root, "src/covers/remote-previews.json"), "utf8")), collectPreviews(root));
+      validateDesignPublished(JSON.parse(readFileSync(resolve(root, "src/design-studio/remote-assets.json"), "utf8")), collectDesignAssets(root));
       if (release) { copyPublicAssets(root, output); verifyFrontend(root, output); return; }
       for (const entry of readdirSync(resolve(root, 'public'))) {
         if (release && entry === 'course') continue;
-        cpSync(resolve(root, 'public', entry), resolve(output, entry), { recursive: true, dereference: true, filter: path => !path.startsWith(resolve(root, "public/handraw-style/covers")) });
+        cpSync(resolve(root, 'public', entry), resolve(output, entry), { recursive: true, dereference: true, filter: path => !path.startsWith(resolve(root, "public/handraw-style/covers")) && !path.startsWith(resolve(root, "public/design-studio")) });
       }
     },
   }] : [],

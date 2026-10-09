@@ -5,6 +5,6 @@
   "nativeResources": [],
   "publicFiles": ["workstore-icon.svg", "icons/whiteboard-v4.png"],
   "fontDirectories": ["excalidraw/fonts"],
-  "maxFrontendBytes": 251658240,
+  "maxFrontendBytes": 83886080,
   "excludedModules": ["src/html/", "src/animations/", "src/course/", "src/course-animation/", "src/course-whiteboard/", "src/comics/ComicApp.tsx", "src/comics/catalog.ts"]
 }

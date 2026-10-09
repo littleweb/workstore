@@ -1,8 +1,9 @@
 import {readImage} from '@tauri-apps/plugin-clipboard-manager';
 import {invoke} from '@tauri-apps/api/core';
 import {native, scheduleAutosync} from '../workspace';
-import {imageSource, referenceImage} from '../comics/images';
-export {imageSource};
+import {imageSource as storedImageSource, referenceImage} from '../comics/images';
+import {designImageSource} from './remoteSource';
+export function imageSource(src:string):Promise<string>{return src.startsWith('/design-studio/')?designImageSource(src):storedImageSource(src);}
 export async function storeImage(png: string) {if(!native)return png;const id=await invoke<string>('save_design_image',{data:png});scheduleAutosync();return id;}
 export async function uploadImage(file: File,onProgress?:(stage:string)=>void) {
  if(!file.type.startsWith('image/'))throw Error('请选择图片文件');
@@ -14,7 +15,7 @@ export async function cropImage(src: string, ratio: string, x: number, y: number
  const width=Math.min(im.width,im.height*aspect),height=width/aspect;
  const sx=(im.width-width)*x/100,sy=(im.height-height)*y/100;const canvas=document.createElement('canvas');canvas.width=Math.round(width);canvas.height=Math.round(height);canvas.getContext('2d')!.drawImage(im,sx,sy,width,height,0,0,canvas.width,canvas.height);return storeImage(canvas.toDataURL('image/png'));
 }
-export async function reference(src: string) {return referenceImage({src});}
+export async function reference(src: string) {return referenceImage({src:await imageSource(src)});}
 
 // Read only on an explicit paste action; never fetch clipboard URLs or HTML.
 export async function clipboardImageFile(onProgress?:(stage:string)=>void): Promise<File> {

@@ -92,9 +92,16 @@ npm run tauri -- build --debug
 
 ## 正式打包资源范围
 
-正式包使用`src/release-manifest.json`和`scripts/release/assets.mjs`维护工具、原生资源及公开素材白名单。新增正式工具时须同时更新入口和白名单，列出实际素材引用及运行依赖；禁止复制整个public或用隐藏入口代替删除打包依赖。设计室示例按catalog收集，封面原始参考按catalog收集，漫画JPG按coverThemes收集，白板字体/授权按限定目录收集。
+正式包使用`src/release-manifest.json`和`scripts/release/assets.mjs`维护工具、原生资源及公开素材白名单。新增正式工具时须同时更新入口和白名单，列出实际素材引用及运行依赖；禁止复制整个public或用隐藏入口代替删除打包依赖。设计室示例按catalog独立发布，封面原始参考按catalog收集，漫画JPG按coverThemes收集，白板字体/授权按限定目录收集。
 
-`desktop:release:build`目前只准备白板字体与漫画技能参考，不构建或打包HTML/课程运行库及旧漫画素材；普通开发构建仍沿用全部实验工具的预构建。正式前端生成`release-inventory.json`，检查隐藏模块、未声明文件、缺图和240MiB预算；macOS构建完成后检查Resources仅有应用图标及260MiB应用预算。预算调整需要说明新增依赖的用途，不通过放宽检查来隐藏多余资源。安装前仍须正常退出、保留旧包、校验签名与全部文件一致性。GitHub软件Release继续只在用户明确要求时发布。
+`desktop:release:build`目前只准备白板字体与漫画技能参考，不构建或打包HTML/课程运行库及旧漫画素材；普通开发构建仍沿用全部实验工具的预构建。正式前端生成`release-inventory.json`，检查隐藏模块、未声明文件、缺图和80MiB预算；macOS构建完成后检查Resources仅有应用图标及90MiB应用预算。预算调整需要说明新增依赖的用途，不通过放宽检查来隐藏多余资源。安装前仍须正常退出、保留旧包、校验签名与全部文件一致性。GitHub软件Release继续只在用户明确要求时发布。
 
 
 默认`npm run desktop:build`现在使用同一正式白名单的本机模式，不需要更新私钥、不调用GitHub发布，复用已经提交的预览索引。签名更新包仍用`desktop:release:build`（`desktop:update:build`为同一入口），才推送/验证公共预览并要求原更新私钥。包含完整实验工具和运行库的构建需明确执行`desktop:experimental:build`，不能拿实验包当正式包发布。无密钥验收可以使用`npm run desktop:build -- --ci --no-bundle`完成正式前端与Rust可执行文件构建；完整app/DMG由对应本机平台生成并验收。
+
+
+## 发布设计室素材与0.1.16体积限制
+
+运行`npm run design:publish`只发布catalog引用的公开设计室WebP到assets/design-studio分支；同清单复用不可变提交，变更非force追加，产生src/design-studio/remote-assets.json。发布构建自动先发布/验证封面预览和设计室两套素材；本机构建只校验固定索引，修改原素材后须先发布。不能将用户作品放入公开catalog或素材目录。
+
+production前端不复制public/design-studio，正式包前端预算80MiB、macOS应用90MiB。设计室原图仍在源码Git用于校验和发布，浏览器dev使用原图。回归包含tests/design-assets.test.mjs、tests/release-assets.test.mjs及共享Rust下载器测试；完整Rust仍单线程。首次未缓存图片需要联网，离线占位可重试；已缓存图片可离线显示。发布仅交付经过实测的平台，沿用原更新公钥，新建版本标签，不替换旧Release附件。

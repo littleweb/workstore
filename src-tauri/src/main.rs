@@ -729,6 +729,7 @@ fn main() {
             ai::ai_generate,
             ai_images::ai_read_image,
             cover_previews::cover_preview,
+            cover_previews::design_asset,
             comic_catalog::comic_template_catalog,
             comic_catalog::comic_template_activate,
             comics::save_comic_export,

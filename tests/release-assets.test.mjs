@@ -21,21 +21,21 @@ test('formal asset list preserves references for every open tool and excludes hi
  const files=publicAssets(),paths=new Set(files.map(f=>f.path));assert.ok(paths.has('workstore-icon.svg'));assert.ok(paths.has('icons/whiteboard-v4.png'));
  assert.ok(paths.has('handraw-style/styles/001.webp'));assert.ok(paths.has('story-comic/covers/manga.jpg'));
  assert.ok([...paths].some(p=>p.startsWith('excalidraw/fonts/')));
- assert.equal([...paths].filter(p=>p.startsWith('design-studio/')).length,1018);
+ assert.equal([...paths].filter(p=>p.startsWith('design-studio/')).length,0);
  assert.equal([...paths].filter(p=>p.startsWith('handraw-style/styles/')).length,277);
  assert.ok([...paths].every(p=>!p.startsWith('comics/')&&!p.startsWith('course/')&&!p.startsWith('handraw-style/covers/')));
  assert.ok([...paths].every(p=>!p.endsWith('README.md')&&!p.endsWith('sources.json')&&!p.includes('whiteboard-v2')&&!p.includes('whiteboard-v3')));
  assert.deepEqual(readManifest().nativeResources,[]);
 });
 test('copy follows the actual catalogs and produces a checked inventory, leaving unrelated assets out',()=>{
- const f=fixture();try{const files=copyPublicAssets(f.root,f.output);assert.equal(files.length,8);const inventory=verifyFrontend(f.root,f.output);assert.equal(inventory.publicFileCount,8);assert.equal(inventory.publicBytes,40);assert.ok(inventory.totalBytes<1024);assert.deepEqual(inventory.tools,readManifest().tools);}finally{f.close();}
+ const f=fixture();try{const files=copyPublicAssets(f.root,f.output);assert.equal(files.length,6);const inventory=verifyFrontend(f.root,f.output);assert.equal(inventory.publicFileCount,6);assert.equal(inventory.publicBytes,30);assert.ok(inventory.totalBytes<1024);assert.deepEqual(inventory.tools,readManifest().tools);}finally{f.close();}
 });
 test('missing dependencies, undeclared payloads, path escape and excessive size fail the build',()=>{
  const f=fixture();try{
   copyPublicAssets(f.root,f.output);f.write('out/comics/unused.png','junk');assert.throws(()=>verifyFrontend(f.root,f.output),/未声明/);unlinkSync(join(f.output,'comics/unused.png'));
   f.write('out/assets/huge.js','a'.repeat(1025));assert.throws(()=>verifyFrontend(f.root,f.output),/预算/);unlinkSync(join(f.output,'assets/huge.js'));
   unlinkSync(join(f.output,'handraw-style/styles/001.webp'));assert.throws(()=>verifyFrontend(f.root,f.output));
-  f.write('src/design-studio/catalog.json',[{cover:'/design-studio/../../private.key'}]);assert.throws(()=>publicAssets(f.root),/不允许/);
+  f.write('src/release-manifest.json',{...readManifest(f.root),publicFiles:['../private.key']});assert.throws(()=>publicAssets(f.root),/不允许/);
  }finally{f.close();}
 });
 test('hidden entry code cannot leak via renamed generated chunks, but shared image utilities remain usable',()=>{
