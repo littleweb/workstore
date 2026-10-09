@@ -1,33 +1,39 @@
-import { readFileSync, rmSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { buildPlan } from './release/plan.mjs';
+import { readManifest, verifyFrontend, verifyMacBundle } from './release/assets.mjs';
 import { collectPreviews, validatePublished } from './covers/preview-assets.mjs';
 import { spawnSync } from 'node:child_process';
 
-// Formal releases exclude the unfinished course UI, examples and native runtimes.
+// Formal releases include only the tools and resources in the release manifest.
 // Native JSON/storage support stays compatible with already saved course files.
-if (!process.env.TAURI_SIGNING_PRIVATE_KEY) throw new Error('需要现有更新签名私钥，请勿生成替代密钥');
+const plan = buildPlan(process.argv.slice(2), process.env);
 const env = { ...process.env, WORKSTORE_RELEASE: '1' };
 const run = (file, args) => {
   const result = spawnSync(file, args, { stdio: 'inherit', env });
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 };
-for (const script of ['prepare-excalidraw.mjs', 'comics/build-validator.mjs', 'html-anything/build.mjs', 'story-comic/build-resources.mjs']) {
+for (const script of ['prepare-excalidraw.mjs', 'story-comic/build-resources.mjs']) {
   run(process.execPath, ['scripts/' + script]);
 }
-run(process.execPath, ['scripts/covers/publish.mjs']);
+if (plan.publishPreviews) run(process.execPath, ['scripts/covers/publish.mjs']);
 validatePublished(JSON.parse(readFileSync('src/covers/remote-previews.json', 'utf8')), collectPreviews());
 const frontend = resolve('.release-build/frontend');
 rmSync(frontend, { recursive: true, force: true });
 run(process.execPath, ['node_modules/typescript/bin/tsc', '-b']);
 run(process.execPath, ['node_modules/vite/bin/vite.js', 'build', '--outDir', frontend]);
-if (existsSync(resolve(frontend, 'handraw-style/covers'))) throw new Error('封面预览意外进入正式包');
-if (existsSync(resolve(frontend, 'course')) || readdirSync(resolve(frontend, 'assets')).some(name => name.startsWith('CourseApp-'))) {
-  throw new Error('课程资源意外进入正式包');
-}
-const base = JSON.parse(readFileSync('src-tauri/tauri.conf.json', 'utf8'));
-const resources = Object.keys(base.bundle.resources).filter(path => !/^(course-runtime|whiteboard-runtime)\//.test(path));
+const inventory = verifyFrontend(process.cwd(), frontend);
+console.log('正式版资源清单：', inventory);
+const resources = readManifest().nativeResources;
 run(process.execPath, ['node_modules/@tauri-apps/cli/tauri.js', 'build', '--config', JSON.stringify({
   build: { beforeBuildCommand: '', frontendDist: frontend },
-  bundle: { resources, createUpdaterArtifacts: true, ...(process.platform === 'darwin' ? { targets: ['app', 'dmg'] } : {}) },
-}), ...process.argv.slice(2)]);
+  bundle: { resources, createUpdaterArtifacts: plan.createUpdaterArtifacts, ...(process.platform === 'darwin' ? { targets: ['app', 'dmg'] } : {}) },
+}), ...plan.cliArgs]);
+
+if (process.platform === 'darwin' && !plan.cliArgs.includes('--no-bundle')) {
+  const targetAt = process.argv.indexOf('--target');
+  const target = targetAt < 0 ? '' : process.argv[targetAt + 1];
+  const profile = process.argv.includes('--debug') ? 'debug' : 'release';
+  console.log('正式应用字节数：', verifyMacBundle(resolve(process.env.CARGO_TARGET_DIR || 'src-tauri/target', target, profile, 'bundle/macos/WorkStore.app')));
+}

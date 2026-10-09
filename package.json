@@ -9,10 +9,10 @@
     "preview": "vite preview --host 127.0.0.1",
     "tauri": "tauri",
     "desktop": "tauri dev",
-    "desktop:build": "tauri build",
+    "desktop:build": "node scripts/build-release.mjs --local",
     "predev": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs && node scripts/course/build-resources.mjs && node scripts/course-animation/build-runtime.mjs && node scripts/course-whiteboard/build-runtime.mjs",
     "prebuild": "node scripts/prepare-excalidraw.mjs && node scripts/comics/build-validator.mjs && node scripts/html-anything/build.mjs && node scripts/story-comic/build-resources.mjs && node scripts/course/build-resources.mjs && node scripts/course-animation/build-runtime.mjs && node scripts/course-whiteboard/build-runtime.mjs",
-    "desktop:update:build": "node scripts/build-update.mjs",
+    "desktop:update:build": "node scripts/build-release.mjs",
     "demo:apos": "vite --config demos/apos/vite.config.mjs",
     "demo:apos:build": "tsc -p demos/apos/tsconfig.json && vite build --config demos/apos/vite.config.mjs",
     "demo:apos:preview": "vite preview --config demos/apos/vite.config.mjs",
@@ -20,7 +20,8 @@
     "html:build": "node scripts/html-anything/build.mjs",
     "html:start": "node scripts/html-anything/start.mjs",
     "desktop:release:build": "node scripts/build-release.mjs",
-    "covers:publish": "node scripts/covers/publish.mjs"
+    "covers:publish": "node scripts/covers/publish.mjs",
+    "desktop:experimental:build": "tauri build"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",

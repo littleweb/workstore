@@ -56,17 +56,21 @@ import { flushDocuments, flushBeforeToolSwitch, registerDocumentFlusher, runAfte
 import { flushSync } from "react-dom";
 const Whiteboard = lazy(() => import("./whiteboard/Whiteboard"));
 const StoryComicApp = lazy(() => import("./story-comic/StoryComicApp"));
-const AnimationApp = lazy(() => import("./animations/AnimationApp"));
 const DesignStudio = lazy(() => import("./design-studio/DesignStudio"));
+import releaseManifest from "./release-manifest.json";
+const releasedTools = new Set(releaseManifest.tools);
 declare const __WORKSTORE_RELEASE__: boolean;
 const releaseBuild = typeof __WORKSTORE_RELEASE__ !== "undefined" && __WORKSTORE_RELEASE__;
 const CoverApp = lazy(() => import("./covers/CoverApp"));
-const ComicApp = lazy(() => import("./comics/ComicApp"));
-const HtmlApp = lazy(() => import("./html/HtmlApp"));
 const DocumentApp = lazy(() => import("./documents/DocumentApp"));
 const sessionTools: Record<string, React.ComponentType> = {
-  ...(!releaseBuild ? {"app.course": lazy(() => import("./course/CourseApp"))} : {}), "app.html": HtmlApp, "app.story-comic": StoryComicApp, "app.animation": AnimationApp,
-  "app.design": DesignStudio, "app.cover": CoverApp, "app.comic": ComicApp, "app.whiteboard": Whiteboard, "app.doc": DocumentApp};
+  ...(!releaseBuild ? {
+    "app.course": lazy(() => import("./course/CourseApp")),
+    "app.html": lazy(() => import("./html/HtmlApp")),
+    "app.comic": lazy(() => import("./comics/ComicApp")),
+    "app.animation": lazy(() => import("./animations/AnimationApp")),
+  } : {}), "app.story-comic": StoryComicApp,
+  "app.design": DesignStudio, "app.cover": CoverApp, "app.whiteboard": Whiteboard, "app.doc": DocumentApp};
 import {
   native,
   loadWorkspace,
@@ -95,14 +99,12 @@ type Tool = {
   status?: "dev";
 };
 const tools: Tool[] = [
-  { id: "app.course", name: "做课程", description: "把知识变成清晰易懂的学习卡片。", category: "设计工具", color: "green", icon: <CourseIcon /> },
-  { id: "app.html", name: "HTML", description: "把内容变成精美的网页、卡片与演示。", category: "设计工具", color: "green", icon: <GlobalOutlined /> },
-  { id: "app.story-comic", name: "画漫画", description: "输入主题，一键生成漫画与发布文案。", category: "设计工具", color: "green", icon: <StoryComicIcon /> },
-  { id: "app.animation", name: "小动画", description: "一点灵感，让想法动起来。", category: "设计工具", color: "green", icon: <PlayCircleOutlined style={{ color: "#64867b" }} /> },
-  { id: "app.design", name: "设计室", description: "商品、创意、人像与空间设计。", category: "设计工具", color: "green", icon: <ExperimentOutlined style={{ color: "#64867b" }} /> },
-  { id: "app.cover", name: "做封面", description: "选个画风，把灵感变成封面。", category: "设计工具", color: "green", icon: <CoverIcon /> },
-  { id: "app.comic", name: "小漫画", description: "一句话，画出你的故事。", category: "设计工具", color: "green", icon: <ComicIcon /> },
-  {
+  ...(!releaseBuild ? [
+    { id: "app.course", name: "做课程", description: "把知识变成清晰易懂的学习卡片。", category: "设计工具", color: "green", icon: <CourseIcon /> },
+    { id: "app.html", name: "HTML", description: "把内容变成精美的网页、卡片与演示。", category: "设计工具", color: "green", icon: <GlobalOutlined /> },
+    { id: "app.animation", name: "小动画", description: "一点灵感，让想法动起来。", category: "设计工具", color: "green", icon: <PlayCircleOutlined style={{ color: "#64867b" }} /> },
+    { id: "app.comic", name: "小漫画", description: "一句话，画出你的故事。", category: "设计工具", color: "green", icon: <ComicIcon /> },
+    {
     id: "app.project",
     name: "项目",
     description: "让目标、任务与进展，井然有序。",
@@ -111,6 +113,26 @@ const tools: Tool[] = [
     icon: <FolderOutlined />,
     status: "dev",
   },
+    {
+    id: "tool.color",
+    name: "色彩拾取",
+    description: "找到下一份作品的灵感色彩。",
+    category: "设计工具",
+    color: "pink",
+    icon: <FormatPainterOutlined />,
+  },
+    {
+    id: "web.github",
+    name: "GitHub",
+    description: "打开代码与协作的世界。",
+    category: "Web 工具",
+    color: "gray",
+    icon: <GithubOutlined />,
+  },
+  ] as Tool[] : []),
+  { id: "app.story-comic", name: "画漫画", description: "输入主题，一键生成漫画与发布文案。", category: "设计工具", color: "green", icon: <StoryComicIcon /> },
+  { id: "app.design", name: "设计室", description: "商品、创意、人像与空间设计。", category: "设计工具", color: "green", icon: <ExperimentOutlined style={{ color: "#64867b" }} /> },
+  { id: "app.cover", name: "做封面", description: "选个画风，把灵感变成封面。", category: "设计工具", color: "green", icon: <CoverIcon /> },
   {
     id: "app.doc",
     name: "记笔记",
@@ -127,25 +149,9 @@ const tools: Tool[] = [
     color: "green",
     icon: <WhiteboardIcon />,
   },
-  {
-    id: "tool.color",
-    name: "色彩拾取",
-    description: "找到下一份作品的灵感色彩。",
-    category: "设计工具",
-    color: "pink",
-    icon: <FormatPainterOutlined />,
-  },
-  {
-    id: "web.github",
-    name: "GitHub",
-    description: "打开代码与协作的世界。",
-    category: "Web 工具",
-    color: "gray",
-    icon: <GithubOutlined />,
-  },
 ];
 // Temporarily hidden; retain registration and saved entries for restoration.
-const hiddenTools = new Set([...(releaseBuild ? ["app.course"] : []),"app.project", "app.html", "app.comic", "app.animation", "tool.json", "tool.color", "web.github"]);
+const hiddenTools = new Set([...(releaseBuild ? releaseManifest.excludedTools : []),"app.project", "app.html", "app.comic", "app.animation", "tool.json", "tool.color", "web.github"]);
 const visibleTools = tools.filter((tool) => !hiddenTools.has(tool.id));
 type Entry = {
   id: string;
@@ -165,7 +171,7 @@ function restore(): Entry[] {
     if (Array.isArray(a))
       return a.filter(
         (e: Entry, i: number) =>
-          tools.some((t) => t.id === e.id) &&
+          (tools.some((t) => t.id === e.id) || releaseManifest.excludedTools.includes(e.id)) &&
           a.findIndex((x: Entry) => x.id === e.id) === i,
       );
   } catch {}
@@ -517,11 +523,11 @@ function WorkStore() {
   });
   useEffect(() => () => toolNavigation.current?.dispose(), []);
   const navigate = async (id: string) => {
-    if (releaseBuild && id === "app.course") return;
+    if (releaseBuild && !releasedTools.has(id)) return;
     await toolNavigation.current!.select(id, () => { activeTool.current = id; setActive(id); });
   };
   const open = async (id: string) => {
-    if (releaseBuild && id === "app.course") return;
+    if (releaseBuild && !releasedTools.has(id)) return;
     const openedAt = Date.now();
     const switched = await toolNavigation.current!.select(id, () => {
       activeTool.current = id;

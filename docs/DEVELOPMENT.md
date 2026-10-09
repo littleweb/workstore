@@ -88,3 +88,13 @@ npm run tauri -- build --debug
 `npm run desktop:release:build`自动执行素材发布和远端树/大小/对象校验，再构建去掉大预览的正式包。无需新建服务，也无需客户端登录。开发者发布需要GitHub写权限；客户端通过公共raw下载，失败回退官方匿名API并接受其频率限制。索引与相关代码一起维护在main，素材分支用于读取与发布，不能用force覆盖。原始PNG暂留源码用于校验、测试和再次发布；原生缓存放应用cache目录，不参与用户工作区Git同步。
 
 更新过PNG后，先发布素材再构建（普通production构建也校验本地PNG与索引一致）；已有安装包引用固定素材提交，所以后续素材分支更新不会改变旧包的预览。发布脚本本身只推素材，不创建软件Release或改写已有安装附件。
+
+
+## 正式打包资源范围
+
+正式包使用`src/release-manifest.json`和`scripts/release/assets.mjs`维护工具、原生资源及公开素材白名单。新增正式工具时须同时更新入口和白名单，列出实际素材引用及运行依赖；禁止复制整个public或用隐藏入口代替删除打包依赖。设计室示例按catalog收集，封面原始参考按catalog收集，漫画JPG按coverThemes收集，白板字体/授权按限定目录收集。
+
+`desktop:release:build`目前只准备白板字体与漫画技能参考，不构建或打包HTML/课程运行库及旧漫画素材；普通开发构建仍沿用全部实验工具的预构建。正式前端生成`release-inventory.json`，检查隐藏模块、未声明文件、缺图和240MiB预算；macOS构建完成后检查Resources仅有应用图标及260MiB应用预算。预算调整需要说明新增依赖的用途，不通过放宽检查来隐藏多余资源。安装前仍须正常退出、保留旧包、校验签名与全部文件一致性。GitHub软件Release继续只在用户明确要求时发布。
+
+
+默认`npm run desktop:build`现在使用同一正式白名单的本机模式，不需要更新私钥、不调用GitHub发布，复用已经提交的预览索引。签名更新包仍用`desktop:release:build`（`desktop:update:build`为同一入口），才推送/验证公共预览并要求原更新私钥。包含完整实验工具和运行库的构建需明确执行`desktop:experimental:build`，不能拿实验包当正式包发布。无密钥验收可以使用`npm run desktop:build -- --ci --no-bundle`完成正式前端与Rust可执行文件构建；完整app/DMG由对应本机平台生成并验收。
