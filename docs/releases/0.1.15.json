@@ -1,0 +1,42 @@
+{
+  "version": "0.1.15",
+  "release": "https://github.com/littleweb/workstore/releases/tag/v0.1.15",
+  "sourceTagCommit": "cef65e6632a4b08baf104f1b0eaa27a52f4e4951",
+  "platforms": [
+    "darwin-aarch64"
+  ],
+  "hiddenTools": [
+    "app.course",
+    "app.animation"
+  ],
+  "courseFrontendAndRuntimeExcluded": true,
+  "checks": {
+    "frontendTests": 465,
+    "rustTests": 89,
+    "rustExternalTestsIgnored": 5,
+    "updaterSignatureAndTrustedComment": true,
+    "applicationSignature": "ad-hoc",
+    "installedFilesAndLinks": 10,
+    "appDmgAndUpdateBytesAndModesMatch": true,
+    "githubAssetHashesAndSizesMatch": true,
+    "directLatestUrlOnThisHost": "connection timeout; actual online upgrade not tested"
+  },
+  "assets": {
+    "darwin-aarch64-WorkStore.app.tar.gz": {
+      "size": 1040072636,
+      "digest": "sha256:1c6501286b82f52b4e824bbd8182275cd6fde6cc4be07280feb5341901d01a20"
+    },
+    "darwin-aarch64-WorkStore.app.tar.gz.sig": {
+      "size": 408,
+      "digest": "sha256:84ef31935992b9e7e0a54c8884e1726bb65be524eda1729ebb92263999c8dede"
+    },
+    "latest.json": {
+      "size": 793,
+      "digest": "sha256:611075dd9e21710a0efd4340bf994d92b6f38419f1038390f67f2819b66cef68"
+    },
+    "WorkStore_0.1.15_aarch64.dmg": {
+      "size": 1038278665,
+      "digest": "sha256:8589f16ef871f3d1dc3fb707c77d89d1cafc6ad7ecd046561c259851ccdb512c"
+    }
+  }
+}
