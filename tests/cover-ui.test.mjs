@@ -2,7 +2,7 @@ import {noProjects} from './helpers/projects.mjs';
 import { test, after } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
-import { buildSync } from "esbuild";
+import { buildSync, transformSync } from "esbuild";
 import vm from "node:vm";
 import { JSDOM } from "jsdom";
 import React, { act } from "react";
@@ -35,7 +35,7 @@ const code = buildSync({
   format: "cjs",
   jsx: "automatic",
   loader: { ".css": "empty" },
-  external: ["./Preview","../list-projects/Projects",
+  external: ["../tasks/store", "./Preview","../list-projects/Projects",
     "react",
     "react/jsx-runtime",
     "antd",
@@ -134,6 +134,8 @@ async function harness({ empty = false, project = false } = {}) {
   const Input = ({ allowClear, prefix, ...props }) =>
     React.createElement("input", props);
   Input.TextArea = (props) => React.createElement("textarea", props);
+  const taskModule = { exports: {} };
+  vm.runInNewContext(transformSync(require('node:fs').readFileSync(new URL('../src/tasks/store.ts', import.meta.url), 'utf8'), {loader:'ts',format:'cjs'}).code, {module:taskModule,crypto:webcrypto});
   const module = { exports: {} };
   vm.runInNewContext(code, {
     module,
@@ -144,6 +146,7 @@ async function harness({ empty = false, project = false } = {}) {
     setTimeout,
     clearTimeout,
     require(id) {
+      if(id === "../tasks/store") return taskModule.exports;
       if(id === "./Preview") return ({src,alt})=>React.createElement("img",{src,alt});
     if (id === "../list-projects/Projects") return project ? {
       useProjects:()=>({...noProjects.useProjects(),move:async(id,target)=>memberships.set(id,target)}),
@@ -244,6 +247,8 @@ async function harness({ empty = false, project = false } = {}) {
     });
   return {
     host,
+    tasks: taskModule.exports,
+    async remount() { await act(async()=>{root.render(null);await drain();}); await act(async()=>{root.render(React.createElement(module.exports.default));await drain();}); },
     memberships,
     store,
     docs,
@@ -279,7 +284,7 @@ test("all 277 templates are selectable; header steps preserve configuration and 
   const h = await harness({ empty: true });
   try {
     await h.click("风格模板");
-    assert.equal(h.host.querySelectorAll(".cover-template").length, 277);
+    assert.ok(h.host.querySelectorAll(".cover-template").length < 277);
     assert.ok(
       h.host
         .querySelector(".tool-sidebar-create-section")
@@ -287,6 +292,7 @@ test("all 277 templates are selectable; header steps preserve configuration and 
     );
     const step = h.host.querySelector(".cover-steps button:last-child");
     assert.equal(step.disabled, true);
+    await h.click("通用网感 / 媒介 / 地域手绘");
     await act(async () => {
       h.host
         .querySelector('[aria-label="选择 200 世纪中叶冷幽默墨绘吉祥物"]')
@@ -304,7 +310,7 @@ test("all 277 templates are selectable; header steps preserve configuration and 
       "step",
     );
     await h.click("01 选择风格模板");
-    assert.equal(h.host.querySelectorAll(".cover-template").length, 277);
+    assert.ok(h.host.querySelectorAll(".cover-template").length < 277);
     await h.click("02 配置封面");
     assert.ok(h.host.querySelector(".cover-config"));
   } finally {
@@ -361,8 +367,8 @@ test("remote refresh invalidates a pending generation even when content matches"
     await h.close();
   }
 });
-test("cancel and switch reject late images", async () => {
-  for (const action of ["取消生成", "b"]) {
+test("explicit cancel rejects late images", async () => {
+  for (const action of ["取消生成"]) {
     const h = await harness();
     try {
       await h.click("生成封面 →");
@@ -477,7 +483,7 @@ test("theme entry recommends valid catalog choices and automatically generates a
     assert.ok(h.host.querySelector(".cover-editor"));
   } finally { await h.close(); }
 });
-for (const action of ["取消生成", "风格模板"]) {
+for (const action of ["取消生成"]) {
   test(`late recommendation after ${action} preserves the original draft without applying late results`, async () => {
     const h = await harness({ empty: true });
     try {
@@ -590,6 +596,7 @@ test("new style configuration creates exactly one record when generation starts"
   const h = await harness({ empty: true });
   try {
     await h.click("风格模板");
+    await h.click("通用网感 / 媒介 / 地域手绘");
     await act(async () => {
       h.host.querySelector('[aria-label="选择 200 世纪中叶冷幽默墨绘吉祥物"]').click();
       await drain();
@@ -617,6 +624,7 @@ test("project creation keeps a draft and generation saves into its chosen projec
     await h.click("项目中创建");
     assert.equal(h.docs.size, 0);
     await h.click("风格模板");
+    await h.click("通用网感 / 媒介 / 地域手绘");
     await act(async () => {
       h.host.querySelector('[aria-label="选择 200 世纪中叶冷幽默墨绘吉祥物"]').click();await drain();
     });
@@ -629,4 +637,67 @@ test("project creation keeps a draft and generation saves into its chosen projec
     await h.click('生成封面 →');
     assert.equal(h.docs.size,1);assert.equal(h.memberships.get([...h.docs.keys()][0]),'project-a');
   } finally { await h.close(); }
+});
+
+test("category tabs mount only the selected group and collectively expose all 277 templates", async () => {
+  const h = await harness({empty:true});
+  try {
+    await h.click('风格模板');
+    const tabs = [...h.host.querySelectorAll('[role="tab"]')];
+    assert.equal(tabs.length,8);
+    const seen=new Set();
+    for(const tab of tabs) {
+      await h.click(tab.textContent);
+      assert.equal(h.host.querySelectorAll('[role="tabpanel"]').length,1);
+      assert.equal(tab.getAttribute('aria-selected'),'true');
+      for(const card of h.host.querySelectorAll('.cover-template')) seen.add(card.getAttribute('aria-label'));
+    }
+    assert.equal(seen.size,277);
+  } finally {await h.close();}
+});
+test("switching documents and remounting retains the running task and saves to its original cover", async () => {
+  const h=await harness();
+  try {
+    await h.click('生成封面 →');
+    const task=h.tasks.taskSnapshot()[0];
+    assert.equal(task.state,'running');
+    await h.click('b');
+    assert.equal(h.requests[0].signal.aborted,false);
+    assert.equal(h.tasks.taskSnapshot()[0].id,task.id);
+    await h.remount();
+    assert.equal(h.requests[0].signal.aborted,false);
+    assert.ok(h.host.querySelector('.cover-generating'));
+    await h.click('b');
+    await h.resolve();
+    assert.equal(JSON.parse(h.docs.get('a').content).versions.length,1);
+    assert.equal(JSON.parse(h.docs.get('b').content).versions.length,0);
+    assert.equal(h.host.querySelector('.cover-generating'),null);
+    assert.equal(h.tasks.taskSnapshot()[0].state,'done');
+  } finally {await h.close();}
+});
+test("matching and image generation share one background task after leaving the editor",async()=>{
+  const h=await harness({empty:true});
+  try {
+    await h.click('秋日第一杯奶茶，温暖又俏皮');await h.click('生成封面');
+    const task=h.tasks.taskSnapshot()[0];
+    await h.click('风格模板');
+    assert.equal(h.requests[0].signal.aborted,false);
+    await h.resolve({text:JSON.stringify({...initial().config,layout:'SC-001',color:'C-01'})});
+    assert.equal(h.requests.length,2);
+    assert.equal(h.tasks.taskSnapshot().length,1);
+    assert.equal(h.tasks.taskSnapshot()[0].id,task.id);
+    assert.equal(h.tasks.taskSnapshot()[0].state,'done');
+    assert.equal(JSON.parse([...h.docs.values()][0].content).versions.length,1);
+    assert.ok(h.host.querySelector('.cover-gallery'));
+  }finally{await h.close();}
+});
+test("task-center cancellation prevents a background result from being applied",async()=>{
+ const h=await harness();
+ try{
+  await h.click('生成封面 →');await h.click('b');
+  await act(async()=>h.tasks.cancelTask(h.tasks.taskSnapshot()[0].id));
+  assert.equal(h.requests[0].signal.aborted,true);
+  await h.resolve();assert.equal(JSON.parse(h.docs.get('a').content).versions.length,0);
+  assert.equal(h.tasks.taskSnapshot()[0].state,'cancelled');
+ }finally{await h.close();}
 });

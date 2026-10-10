@@ -213,7 +213,7 @@
 .cover-categories button:hover {
   background: #eef2ee;
 }
-.cover-categories button[aria-pressed="true"] {
+.cover-categories button[aria-selected="true"] {
   color: #376c58;
   background: #e6eee8;
 }
