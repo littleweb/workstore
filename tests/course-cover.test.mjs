@@ -20,3 +20,10 @@ test('video covers follow rendered sizes and web covers have independent sizes',
  }
  assert.equal(m.coverConfig({...source,mode:'web',webConfig:{style:'ink',coverRatio:'2:3'}}).ratio,'2:3');
 });
+
+test('illustrated web covers reference the same saved scene instead of an unrelated style image',async()=>{
+ const artwork={image:'workstore-image:'+'b'.repeat(64),prompt:'原画'},h=deps();
+ const c={...source,mode:'web',webConfig:{style:'simulation'},webPlan:{title:'电车',summary:'电池到车轮',artwork}};
+ const result=await m.generateCourseCover(c,undefined,h.api);
+ assert.deepEqual(Array.from(h.requests[0].refs),[artwork.image]);assert.match(h.requests[0].prompt,/主场景原画/);assert.equal(result.webPlan.artwork.image,artwork.image);
+});

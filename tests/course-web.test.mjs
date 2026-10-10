@@ -2,6 +2,27 @@ import {test} from 'node:test';import assert from 'node:assert/strict';import fs
 function bundle(file,extra={}){const module={exports:{}};vm.runInNewContext(buildSync({entryPoints:[file],bundle:true,write:false,format:'cjs',platform:'node'}).outputFiles[0].text,{module,structuredClone,TextEncoder,Date,...extra});return module.exports;}
 const model=bundle('src/course-web/model.ts'),workflow=bundle('src/course-web/workflow.ts');const refs=JSON.parse(fs.readFileSync('src/course-web/examples.json'));
 const html=id=>fs.readFileSync('public/course/web/'+id+'/index.html','utf8');
+test('scene packing uses the same uncropped canvas for PNG vision and bounded JPEG export',async()=>{
+ const draws=[],canvas={getContext:()=>({fillRect(){},drawImage(...args){draws.push(args);}}),toDataURL:type=>type==='image/png'?'data:image/png;base64,YQ==':'data:image/jpeg;base64,YQ=='};
+ const art=bundle('src/course-web/artwork.ts',{Image:class{width=1600;height=1200;decode(){return Promise.resolve();}},document:{createElement:()=>canvas}});
+ const packed=await art.sceneData('data:image/png;base64,YQ==');
+ assert.equal(canvas.width,1600);assert.equal(canvas.height,900);
+ assert.equal(draws[0][1],200);assert.equal(draws[0][2],0);assert.equal(draws[0][3],1200);assert.equal(draws[0][4],900);
+ assert.match(packed.reference,/^data:image\/png/);assert.match(packed.data,/^data:image\/jpeg/);
+});
+test('illustrated pages embed the actual artwork safely and preserve it in sandbox previews',()=>{
+ const art=bundle('src/course-web/artwork.ts'),data='data:image/jpeg;base64,YQ==';
+ const input='<!DOCTYPE html><html><body><img src="COURSE_SCENE_IMAGE"><input><script>document.body.dataset.ready=1</script></body></html>';
+ const result=art.embedScene(input,data);assert.match(result,/src="data:image\/jpeg;base64,YQ=="/);
+ assert.throws(()=>art.embedScene(input.replace('COURSE_SCENE_IMAGE','fake'),data),/原画/);
+ assert.throws(()=>art.embedScene(input,'https://example.com/image'),/数据无效/);
+ assert.throws(()=>art.embedScene(input.replace('<input>','<img src="COURSE_SCENE_IMAGE"><input>'),data),/原画/);
+ const dom=new JSDOM(''),policy=bundle('src/course-web/htmlPolicy.ts',{document:dom.window.document});
+ const preview=policy.previewHtml(result.replace('<input>','<img src="https://example.com/x"><input>'));
+ assert.match(preview,/src="data:image\/jpeg;base64,YQ=="/);assert.doesNotMatch(preview,/https:\/\/example.com/);dom.window.close();
+ assert.match(art.illustratedPrompt('base'),/不承诺自由旋转/);assert.match(art.scenePrompt('电车',model.defaults()),/不画燃油发动机/);
+ const old=model.generationPrompt('电车',model.defaults(),result);assert.doesNotMatch(old,/YQ==/);
+});
 test('12 self-contained references have unique styles and operating controls',()=>{assert.equal(refs.length,12);assert.equal(new Set(refs.map(r=>r.config.style)).size,12);for(const r of refs){model.validateConfig(r.config);model.extractHtml(html(r.id));assert.ok(fs.existsSync('public'+r.cover));const dom=new JSDOM(html(r.id),{runScripts:'dangerously',beforeParse(w){w.HTMLCanvasElement.prototype.getContext=type=>type==='webgl'?null:new Proxy({},{get:(_,key)=>key==='getExtension'?()=>null:()=>{}});w.requestAnimationFrame=()=>{};w.matchMedia=()=>({matches:false});}});const d=dom.window.document;assert.ok(d.getElementById('feedback').textContent);const el=d.querySelector('input');el.value=el.max;el.dispatchEvent(new dom.window.Event('input'));assert.equal(d.getElementById(el.id+'-value').textContent,el.value);d.getElementById('reset').click();assert.equal(el.value,el.defaultValue);dom.window.close();}});
 test('reference experiments produce calculated state, not decorative changes',()=>{function run(id,check){const dom=new JSDOM(html(id),{runScripts:'dangerously',beforeParse(w){w.HTMLCanvasElement.prototype.getContext=()=>null;w.requestAnimationFrame=()=>{};}});check(dom.window.document,dom.window);dom.window.close();}
  run('circuit-lab',d=>{assert.match(d.getElementById('feedback').textContent,/0.500 A/);d.querySelector('[data-action=switch]').click();assert.match(d.getElementById('feedback').textContent,/0.000 A.*断路/);});

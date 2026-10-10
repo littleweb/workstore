@@ -126,3 +126,5 @@ production前端不复制public/design-studio，正式包前端预算80MiB、mac
 三套公共资源索引与代码共同维护main；源码原图与公开参考保留用于验收/再发布，缓存与用户工作区不进源Git。资源版本独立、不可覆盖且不设为软件Latest；安装更新另建软件版本标签。验证中不默认调用AI或执行Vercel上传。
 
 课程尺寸回归：tests/course-sizes.test.mjs不调用模型/配音服务，使用固定Remotion FFmpeg生成短片并验证五种导出宽高和音轨。产品video-size-adapter.mjs随Rust内嵌，可兼容已发布固定运行库；其FFmpeg无pad/overlay/rawvideo容器，使用PNG流及源码纸色填充，不依赖用户本机FFmpeg/Python安装。动画无成片时的预览同样完整缩放，已成片播放器按实际视频比例显示。封面比例修改不覆盖历史图；旧视频plannedConfig缺省比例视为16:9。
+
+交互网页原画流程回归使用tests/course-web*.test.mjs及course-cover*.test.mjs，模型以可控响应代替，检查生图/看图/封面共用任务、切页、取消、晚到守卫、原画引用及内嵌图片沙箱。看图引用与网页内嵌图片来自同一16:9完整缩放画布，分别输出AI接口要求的PNG和压缩JPEG；不将JPEG直接作为AI引用。内置12条参考保持固定资源版本。真实生成需使用支持生图及引用图片的全局AI，常规测试不消耗服务额度；实际主题验收应检查部件热点位置、数据计算、手机布局及封面一致性，不能将提示词约束或模拟测试当成实际成图品质验收。
