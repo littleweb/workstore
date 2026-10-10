@@ -17,7 +17,7 @@ test('fixed course index includes only current public references and four platfo
  const index=validateResources();const files=courseFiles();assert.ok(files.length>100);
  assert.equal(Object.keys(index.entries).length,files.length+4);
  assert.ok(!files.some(f=>f.key.endsWith('/tutorial.json')||f.key.includes('/audio/')||f.key==='/course/whiteboard/soap-oil/cover.png'));
- const rule=checkRelease();assert.ok(rule.tools.includes('app.course'));assert.equal(rule.publicFiles,674);assert.equal(rule.version,'0.1.17');
+ const rule=checkRelease();assert.ok(rule.tools.includes('app.course'));assert.equal(rule.publicFiles,674);assert.equal(rule.version,JSON.parse(readFileSync('package.json')).version);
  for(const kind of ['node','animation','whiteboard','html-service'])assert.ok(index.entries[`component:${kind}:darwin-aarch64`].checks);
 });
 test('pre-release rules block bulk native dependencies and budget increases before network',()=>{

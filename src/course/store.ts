@@ -5,6 +5,7 @@ import { scheduleAutosync, registerSyncRefresher } from "../workspace";
 import { registerDocumentFlusher } from "../documentLifecycle";
 
 export type DocumentInfo = {
+  mode?: string;
   id: string;
   title: string;
   favorite: boolean;
@@ -66,7 +67,13 @@ export const documentStatus = (id: string) => {
     : "已保存到浏览器";
 };
 
+function contentMode(doc:DocumentInfo & {content?:string}):string {
+  if(doc.content){try{const mode=JSON.parse(doc.content).mode;return ["whiteboard","animation","web"].includes(mode)?mode:"cards";}catch{}}
+  return doc.mode??"cards";
+}
+
 function publish(c: Cached) {
+  c.document.mode=contentMode(c.document);
   summaries = [...summaries.filter((x) => x.id !== c.document.id), c.document];
   notify();
 }
@@ -162,7 +169,7 @@ export async function refreshDocuments() {
         warnings: [],
       };
 
-  summaries = result.documents;
+  summaries = result.documents.map(doc=>({...doc,mode:contentMode(doc)}));
   warnings = result.warnings;
 
   for (const c of cache.values()) {

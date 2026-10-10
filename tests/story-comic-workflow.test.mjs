@@ -28,6 +28,8 @@ const plan = () => ({
     layout: "single",
   })),
 });
+const reviewed = (p = plan()) => ({ notes: "第2页动作已经推进事件，保留；封面与结尾承诺一致。", plan: p });
+const isReview = prompt => prompt.includes("现在执行一次生图前审稿");
 const copy = () => ({
   title: "从今天开始",
   alternatives: ["试试五分钟", "你也可以做到"],
@@ -57,7 +59,8 @@ function harness(options = {}) {
     },
     deps: {
       valid: () => valid,
-      text: async () => {
+      text: async (prompt) => {
+        if (isReview(prompt)) return JSON.stringify(reviewed());
         texts++;
         return JSON.stringify(texts === 1 ? plan() : copy());
       },
@@ -171,7 +174,7 @@ test("changed settings archive old completed work before rebuilding and reject i
   next.config.topic = "新的故事";
   await assert.rejects(runWorkflow(next, h.deps, h.abort.signal, 1));
   let n = 0;
-  h.deps.text = async () => JSON.stringify(++n === 1 ? plan() : copy());
+  h.deps.text = async prompt => isReview(prompt) ? JSON.stringify(reviewed()) : JSON.stringify(++n === 1 ? plan() : copy());
   await runWorkflow(next, h.deps, h.abort.signal);
   assert.equal(h.current.history.length, 1);
   assert.ok(h.current.history[0].plan.pages.every((p) => p.image));
@@ -192,6 +195,7 @@ test("overlong or structured text is repaired automatically before image generat
     if (issue === "length") bad.pages[0].title = "长".repeat(20);
     else bad.characters = [{ name: "女孩", description: "蓝衣" }];
     h.deps.text = async (prompt) => {
+      if (isReview(prompt)) return JSON.stringify(reviewed());
       prompts.push(prompt);
       return JSON.stringify(
         prompts.length === 1 ? bad : prompts.length === 2 ? plan() : copy()
@@ -350,6 +354,7 @@ test("manual page counts reach all image jobs; inconsistent cached eight-page pl
     source.reference = 'old-reference';
     let calls = 0;
     h.deps.text = async (prompt) => {
+      if (isReview(prompt)) return JSON.stringify(reviewed(makePlan(count)));
       if (++calls === 1) {
         assert.match(prompt, new RegExp(`总页数${count}`));
         return JSON.stringify(makePlan(8));
@@ -454,10 +459,100 @@ test('scene and character references survive storage and reach the matching gene
  const c=m.emptyContent();c.config={...c.config,topic:'朋友',count:4,characterReferences:[id('a')],sceneReferences:[id('b')]};
  assert.equal(m.readContent(JSON.stringify(c)).config.sceneReferences[0],id('b'));
  const calls=[];let saved;
- await runWorkflow(c,{valid:()=>true,text:async prompt=>prompt.includes('只输出 JSON')?JSON.stringify(plan()):JSON.stringify({title:'朋友',alternatives:['朋友们','友情'],description:'朋友的故事',hashtags:['朋友','友情','成长','漫画','故事']}),image:async(prompt,refs)=>{calls.push({prompt,refs});return id('c');},compose:async raw=>raw,save:async next=>saved=next},new AbortController().signal);
+ await runWorkflow(c,{valid:()=>true,text:async prompt=>isReview(prompt)?JSON.stringify(reviewed()):prompt.includes('只输出 JSON')?JSON.stringify(plan()):JSON.stringify({title:'朋友',alternatives:['朋友们','友情'],description:'朋友的故事',hashtags:['朋友','友情','成长','漫画','故事']}),image:async(prompt,refs)=>{calls.push({prompt,refs});return id('c');},compose:async raw=>raw,save:async next=>saved=next},new AbortController().signal);
  assert.deepEqual(Array.from(calls[0].refs),[id('a')]);
  assert.deepEqual(Array.from(calls[1].refs),[id('c'),id('a'),id('b')]);
  assert.match(calls[1].prompt,/用户场景图/);assert.equal(saved.plan.pages.length,4);
  const invalid=m.emptyContent();invalid.config.sceneReferences=Array(4).fill(id('a'));
  assert.throws(()=>m.readContent(JSON.stringify(invalid)));
+});
+
+
+test('reviewed story is saved before images; original draft remains recoverable', async () => {
+  const h = harness(), edited = plan(); edited.pages[1].text = '手机翻过来，又翻回去';
+  h.deps.text = async prompt => JSON.stringify(isReview(prompt) ? reviewed(edited) : prompt.includes('只输出 JSON') ? plan() : copy());
+  const image = h.deps.image;
+  h.deps.image = async (prompt, refs) => {
+    assert.equal(h.current.editorialDraft.pages[1].text, '先做一件小事');
+    assert.equal(h.current.plan.pages[1].text, edited.pages[1].text);
+    assert.ok(h.current.editorialReview.includes('第2页'));
+    return image(prompt, refs);
+  };
+  await runWorkflow(h.current, h.deps, h.abort.signal);
+});
+
+test('failed review resumes saved draft without replanning or generating images early', async () => {
+  const h = harness(); let planning = 0;
+  h.deps.text = async prompt => {
+    if (isReview(prompt)) throw Error('temporary timeout');
+    planning++; return JSON.stringify(plan());
+  };
+  await assert.rejects(runWorkflow(h.current, h.deps, h.abort.signal), /漫画内容审稿失败/);
+  assert.ok(h.current.editorialDraft); assert.equal(h.current.plan, undefined); assert.equal(h.images.length, 0);
+  h.deps.text = async prompt => {
+    if (isReview(prompt)) return JSON.stringify(reviewed());
+    assert.ok(!prompt.includes('只输出 JSON')); return JSON.stringify(copy());
+  };
+  await runWorkflow(h.current, h.deps, h.abort.signal);
+  assert.equal(planning, 1); assert.equal(h.current.job.status, 'done');
+});
+
+test('late review after cancellation or concurrent edit cannot replace saved draft', async () => {
+  for (const cancel of [false, true]) {
+    const h = harness(); let resolve;
+    h.deps.text = async prompt => isReview(prompt) ? new Promise(r => resolve = r) : JSON.stringify(plan());
+    const task = runWorkflow(h.current, h.deps, h.abort.signal);
+    for (let i = 0; i < 40 && !resolve; i++) await new Promise(r => setImmediate(r));
+    const before = h.saves.length;
+    if (cancel) h.abort.abort(); else h.invalidate();
+    resolve(JSON.stringify(reviewed())); await assert.rejects(task);
+    assert.equal(h.saves.length, before); assert.equal(h.current.plan, undefined); assert.equal(h.images.length, 0);
+  }
+});
+
+test('review cannot silently change automatic page count; corrupt internal records rejected', () => {
+  const e = load('editorial'), p = plan(); p.pages.push({...p.pages[0],visual:'extra'});
+  assert.throws(() => e.parseReview(JSON.stringify(reviewed(p)), m.defaults(), plan()), /需要4页/);
+  const c = m.emptyContent(); c.editorialReview = {};
+  assert.throws(() => m.readContent(JSON.stringify(c)), /审稿记录损坏/);
+  const prompt = m.planningPrompt({...m.defaults(),topic:'固定结局'});
+  assert.match(prompt, /三个简短故事方向/); assert.match(prompt, /用户给出完整剧情/);
+  assert.match(m.copyPrompt({...m.emptyContent(),plan:plan()}), /不超过20个字符/);
+});
+
+test('new publishing titles are validated while old copy remains readable', () => {
+  const e = load('editorial'), value = copy(); value.alternatives[0] = '长'.repeat(21);
+  assert.throws(() => e.parsePublishingCopy(JSON.stringify(value)), /最多20个字符/);
+  const c = m.emptyContent(); c.copy = value;
+  assert.equal(m.readContent(JSON.stringify(c)).copy.alternatives[0], value.alternatives[0]);
+});
+
+test('existing completed and manually edited stories never enter automatic review', async () => {
+  const h = harness(); await runWorkflow(h.current, h.deps, h.abort.signal);
+  const c = structuredClone(h.current); delete c.editorialDraft; delete c.editorialReview;
+  c.plan.pages[2].text = '用户自己写的对白';
+  h.deps.text = async () => { throw Error('不应请求审稿'); };
+  await runWorkflow(c, h.deps, h.abort.signal, 2);
+  assert.equal(h.current.plan.pages[2].text, '用户自己写的对白');
+});
+
+test('cover and publishing use independent angle selection within existing requests', async () => {
+  const h = harness(), prompts = [];
+  h.current.config.topic = '沙坡头的来历，以及沙漠历史故事';
+  h.deps.text = async prompt => {
+    prompts.push(prompt);
+    return JSON.stringify(isReview(prompt) ? reviewed() : prompt.includes('只输出 JSON') ? plan() : copy());
+  };
+  await runWorkflow(h.current, h.deps, h.abort.signal);
+  assert.equal(prompts.length, 3); // planning, existing review, existing publishing
+  assert.equal(h.images.length, 5); // same reference and four pages
+  assert.match(prompts[0], /约六个标题候选/);
+  assert.match(prompts[0], /中文title最多10字、text最多20字/);
+  assert.match(prompts[0], /不能包装成游玩攻略/);
+  assert.match(prompts[1], /已经合格则保留/);
+  assert.match(prompts[2], /主标题和备选标题均最多20个字符/);
+  assert.match(prompts[2], /不新增输出字段/);
+  assert.match(prompts[2], /正文实际兑现/);
+  assert.match(prompts[2], /没有外部样本时不声称/);
+  assert.equal(h.current.copy.alternatives.length, 2);
 });

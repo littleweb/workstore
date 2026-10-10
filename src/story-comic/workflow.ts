@@ -1,7 +1,6 @@
 import {
   artPrompt,
   copyPrompt,
-  parseCopy,
   parsePlan,
   planningPrompt,
   signature,
@@ -10,6 +9,7 @@ import {
   userReferences,
   type Content,
 } from "./model";
+import { reviewPrompt, parseReview, parsePublishingCopy } from "./editorial";
 import { baoyuVersion } from "./baoyu";
 export type Dependencies = {
   text(prompt: string): Promise<string>;
@@ -92,7 +92,7 @@ export async function runWorkflow(
   ) {
     if (onlyPage !== undefined || retryFailed)
       throw new Error("设置已改变，请先重新生成完整漫画");
-    if (c.plan) {
+    if (c.plan || c.editorialDraft) {
       const { history, ...previous } = c;
       c.history.push(previous);
     }
@@ -100,12 +100,23 @@ export async function runWorkflow(
   }
   try {
     if (!c.plan) {
-      await update(() => {}, "正在理解主题与设计漫画…");
-      const plan = await structuredText(planningPrompt(c.config), (text) =>
-        parsePlan(text, c.config), "漫画内容规划"
+      if (!c.editorialDraft) {
+        await update(() => {}, "正在理解主题与构思故事…");
+        const draft = await structuredText(planningPrompt(c.config), (text) =>
+          parsePlan(text, c.config), "漫画内容规划"
+        );
+        await update(() => {
+          c.editorialDraft = draft;
+          c.plannedConfig = signature(c.config);
+        }, "正在完善故事与分镜…");
+      }
+      await update(() => {}, "正在完善故事与分镜…");
+      const review = await structuredText(reviewPrompt(c.config, c.editorialDraft!), (text) =>
+        parseReview(text, c.config, c.editorialDraft!), "漫画内容审稿"
       );
       await update(() => {
-        c.plan = plan;
+        c.plan = review.plan;
+        c.editorialReview = review.notes;
         c.engine = baoyuVersion;
         c.plannedConfig = signature(c.config);
       }, "正在设计漫画…");
@@ -209,7 +220,7 @@ export async function runWorkflow(
     check();
     if (!c.copy) {
       await update(() => {}, "正在整理发布文案…");
-      const copy = await structuredText(copyPrompt(c), parseCopy, "发布文案生成");
+      const copy = await structuredText(copyPrompt(c), parsePublishingCopy, "发布文案生成");
       await update(() => {
         c.copy = copy;
       });

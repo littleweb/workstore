@@ -1,3 +1,4 @@
+import {validVideoRatio} from '../course/sizes';
 import {animationThemes,animationTheme} from './styles';
 export const narrationVoice='kokoro-zh-gentle-v1';
 const voiceNames=['暖栀','晴禾','若溪','知夏','云舒','清漾','晚宁','沐晴','月白','晚棠','浅汐','星柔'];
@@ -7,14 +8,14 @@ export const voiceProfile=(c:{voiceId?:string})=>selectedVoice(c).value==='zf_00
 export const durations=[30,60,120,180,300] as const;
 export const durationLabel=(n:number)=>n<120?`${n} 秒`:`${n/60} 分钟`;
 export const styles=animationThemes.map(t=>({value:t.id,label:t.name}));
-export type AnimationConfig={duration:number;style:string;audience:string;voice:boolean;voiceId?:string};
+export type AnimationConfig={ratio?:string;duration:number;style:string;audience:string;voice:boolean;voiceId?:string};
 export type Visual={kind:'flow'|'cycle'|'fraction'|'chart'|'orbit'|'code'|'compare';labels:string[];values:number[];note:string};
 export type Caption={text:string;startMs:number;endMs:number;timestampMs:null;confidence:null};
 export type Scene={title:string;seconds:number;narration:string;points:string[];visual:Visual;audio?:string;audioVoice?:string;captions?:Caption[]};
 export type Tutorial={title:string;summary:string;scenes:Scene[];duration:number;style:string;video?:string};
-export const defaults=():AnimationConfig=>({duration:60,style:'clean',audience:'大众学习者',voice:true,voiceId:'zf_007'});
+export const defaults=():AnimationConfig=>({ratio:'16:9',duration:60,style:'clean',audience:'大众学习者',voice:true,voiceId:'zf_007'});
 const text=(s:unknown,n:number)=>{if(typeof s!=='string'||!s.trim()||s.length>n)throw Error('动画教程文字为空或过长');return s.trim();};
-export function validateConfig(c:AnimationConfig){if(!c||!durations.includes(c.duration as typeof durations[number])||!styles.some(s=>s.value===c.style)||typeof c.voice!=='boolean'||(c.voiceId!==undefined&&!voiceOptions.some(v=>v.value===c.voiceId))||!['大众学习者','儿童','青少年','大学生','职场人士','教师'].includes(c.audience))throw Error('动画教程设置无效');}
+export function validateConfig(c:AnimationConfig){if(!c||!validVideoRatio(c.ratio)||!durations.includes(c.duration as typeof durations[number])||!styles.some(s=>s.value===c.style)||typeof c.voice!=='boolean'||(c.voiceId!==undefined&&!voiceOptions.some(v=>v.value===c.voiceId))||!['大众学习者','儿童','青少年','大学生','职场人士','教师'].includes(c.audience))throw Error('动画教程设置无效');}
 export function parsePlan(raw:string,c:AnimationConfig):Tutorial{
  validateConfig(c);const v=JSON.parse(raw.trim().replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));
  if(!Array.isArray(v.scenes)||v.scenes.length<3||v.scenes.length>40)throw Error('教程须包含3–40个教学场景');

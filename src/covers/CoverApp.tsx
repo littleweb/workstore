@@ -1,7 +1,7 @@
 import { ProjectSection, useProjects } from "../list-projects/Projects";
-import { beginTask, failTask, updateTask } from "../tasks/store";
+import { coverJob, useCoverJob, startCoverJob, cancelCoverJob } from "./jobs";
 import { useEffect, useRef, useState } from "react";
-import { App, Button, Dropdown, Input, Modal, Select, Switch } from "antd";
+import { Button, Dropdown, Input, Modal, Select, Switch } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -12,29 +12,25 @@ import {
   SearchOutlined,
   AppstoreOutlined,
 } from "@ant-design/icons";
-import { ai, trackAiExecution } from "../ai/client";
+import { ai } from "../ai/client";
 import { registerSyncActivationBlocker } from "../documentLifecycle";
 import * as store from "./store";
 import {
   colors,
   emptyContent,
-  generationPrompt,
   groups,
   layouts,
   ratios,
   readContent,
   selectedVersion,
-  stylePolicy,
   styles,
   type CoverConfig,
   type CoverContent,
 } from "./model";
-import { copyPrompt, fillCopy } from "./copy";
-import { imageSource, pngReference } from "./images";
+import { imageSource } from "./images";
 import { exportCover } from "./export";
 import CoverIcon from "./CoverIcon";
 import CoverPreview from "./Preview";
-import { recommendationPrompt, parseRecommendation } from "./recommendation";
 import attribution from "./attribution.json";
 import "./covers.css";
 
@@ -72,7 +68,6 @@ function CoverImage({ src }: { src: string }) {
 export default function CoverApp() {
   const projects = useProjects("app.cover");
   const creationProject = useRef<string | null>(null);
-  const { message } = App.useApp();
   const [, redraw] = useState(0),
     [id, setId] = useState<string | null>(null);
   const [page, setPage] = useState<"create" | "gallery" | "config" | "editor">("create");
@@ -82,13 +77,13 @@ export default function CoverApp() {
   const themeRef = useRef(theme);
   themeRef.current = theme;
   const [collapsed, setCollapsed] = useState(false),
-    [busy, setBusy] = useState(false),
+    [preparing, setBusy] = useState(false),
     [opening, setOpening] = useState(false);
-  const [category, setCategory] = useState("全部"),
+  const [category, setCategory] = useState(groups[0]),
     [search, setSearch] = useState(""),
     [changing, setChanging] = useState(false);
   const [error, setError] = useState(""),
-    [status, setStatus] = useState(""),
+    [preparationStatus, setStatus] = useState(""),
     [about, setAbout] = useState(false);
   const [rename, setRename] = useState<{ id: string; title: string } | null>(
     null,
@@ -119,15 +114,23 @@ export default function CoverApp() {
   }
   const config = content?.config,
     version = content ? selectedVersion(content) : undefined;
+  const job = useCoverJob(id);
+  const busy = preparing || !!job?.running;
+  const status = job?.running ? job.stage : preparationStatus;
+  const matchingTopic = doc ? (content?.needsRecommendation ? content.config.topic : null) : recommendTopic;
   const style = styles.find((s) => s.number === config?.style);
   const fail = (e: unknown) => {
     if (mounted.current) setError(String(e));
   };
-  function cancel() {
+  function cancelPreparation() {
     controller.current?.abort();
     controller.current = null;
     setBusy(false);
     setStatus("");
+  }
+  function cancel() {
+    cancelCoverJob(active.current);
+    cancelPreparation();
   }
   function afterComposition(action: () => void) {
     if (composing.current) {
@@ -144,7 +147,7 @@ export default function CoverApp() {
     const ticket = ++request.current;
     pending.current = true;
     setOpening(true);
-    cancel();
+    cancelPreparation();
     try {
       await store.flushDocuments();
       if (!mounted.current || ticket !== request.current) return;
@@ -161,7 +164,7 @@ export default function CoverApp() {
         setTheme(openedContent.config.topic);
       }
       setError("");
-      setPage(openedContent.needsRecommendation || openedContent.versions.length ? "editor" : "config");
+      setPage(coverJob(next)?.running || openedContent.needsRecommendation || openedContent.versions.length ? "editor" : "config");
     } catch (e) {
       if (ticket === request.current) fail(e);
     } finally {
@@ -204,7 +207,7 @@ export default function CoverApp() {
     }
     const ticket = ++request.current;
     pending.current = true;
-    cancel();
+    cancelPreparation();
     setOpening(true);
     try {
       await store.flushDocuments();
@@ -216,7 +219,7 @@ export default function CoverApp() {
       setRecommendTopic(null);
       setPage(destination);
       setChanging(false);
-      setCategory("全部");
+      setCategory(groups[0]);
       setSearch("");
       setError("");
     } catch (e) {
@@ -247,7 +250,7 @@ export default function CoverApp() {
     const ticket = ++request.current;
     pending.current = true;
     setOpening(true);
-    cancel();
+    cancelPreparation();
     try {
       await store.flushDocuments();
       if (!mounted.current || ticket !== request.current) return;
@@ -286,242 +289,61 @@ export default function CoverApp() {
       }
     }
   }
-  async function recommendAndGenerate() {
-    if (composing.current) {
-      queued.current = () => void recommendAndGenerate();
-      return;
-    }
-    const existing = active.current ? store.currentDocument(active.current) : undefined;
-    const draftContent = existing ? readContent(existing.content) : undefined;
-    const topic = (draftContent?.needsRecommendation ? draftContent.config.topic : themeRef.current).trim();
-    if (!topic || controller.current || pending.current) return;
-    const ticket = ++request.current;
-    const projectId = creationProject.current;
-    const abort = new AbortController();
-    controller.current = abort;
-    setBusy(true);
-    setError("");
-    setRecommendTopic(topic);
-    setStatus("正在匹配风格、版式与配色…");
-    setPage("editor");
-    const valid = () => mounted.current && !abort.signal.aborted && request.current === ticket;
-    const card = beginTask(abort, {toolId: "app.cover", title: topic.slice(0, 40), stage: "正在匹配风格、版式与配色…"});
-    await trackAiExecution(abort, (async () => {
-      try {
-        pending.current = true;
-        const caps = await ai.capabilities();
-        if (!valid()) return;
-        if (!caps.imageGenerate) throw new Error("当前 AI 服务不支持图片生成，请在设置中选择 Codex");
-        await store.flushDocuments();
-        if (!valid()) return;
-        let target = active.current ? store.currentDocument(active.current) : undefined;
-        if (!target || !readContent(target.content).needsRecommendation) {
-          target = await store.createDocument();
-          const draft = emptyContent();
-          draft.config.topic = topic;
-          draft.config.mood = "";
-          draft.needsRecommendation = true;
-          store.stageDocument(target.id, { title: topic.slice(0, 40), content: JSON.stringify(draft) });
-          await store.flushDocument(target.id);
-          if (projectId) await projects.move(target.id, projectId);
-        }
-        if (!valid()) return;
-        store.activateDocument(target.id);
-        active.current = target.id;
-        setId(target.id);
-        const snapshot = store.currentDocument(target.id)!.content;
-        const remote = store.remoteVersion(target.id);
-        pending.current = false;
-        const result = await ai.generate({ toolId: "app.cover", record: false,
-          messages: [{ role: "user", content: recommendationPrompt(topic) }],
-        }, abort.signal);
-        if (!valid()) return;
-        if (result.saveError) throw new Error(result.saveError);
-        const config = parseRecommendation(result.text, topic);
-        if (store.currentDocument(target.id)?.content !== snapshot || store.remoteVersion(target.id) !== remote)
-          throw new Error("匹配期间封面已修改或同步，请按最新内容重试");
-        pending.current = true;
-        store.stageDocument(target.id, {
-          content: JSON.stringify({ ...readContent(snapshot), config, needsRecommendation: false }) });
-        setRecommendTopic(null);
-        setPage("editor");
-        setChanging(false);
-        await store.flushDocument(target.id);
-        if (!valid()) return;
-        pending.current = false;
-        controller.current = null;
-        setBusy(false);
-        card.finish();
-        await generate(store.currentDocument(target.id)!);
-      } catch (e) {
-        failTask(abort.signal, e);
-        if (valid()) fail(e);
-      } finally {
-        card.finish();
-        if (ticket === request.current) pending.current = false;
-        if (controller.current === abort) {
-          controller.current = null;
-          if (mounted.current) setBusy(false);
-        }
+  async function recommendAndGenerate() { await submit(true); }
+  async function generate() { await submit(false); }
+  async function submit(recommend: boolean) {
+    if (composing.current) { queued.current = () => void submit(recommend); return; }
+    let source = active.current ? store.currentDocument(active.current) : undefined;
+    if (coverJob(source?.id ?? null)?.running || controller.current || pending.current) return;
+    let value = source ? readContent(source.content) : draft;
+    if (recommend) {
+      const topic = (value?.needsRecommendation ? value.config.topic : themeRef.current).trim();
+      if (!topic) return;
+      if (!source || !value?.needsRecommendation) {
+        source = undefined;
+        value = emptyContent();
+        value.config.topic = topic;
+        value.config.mood = "";
+        value.needsRecommendation = true;
       }
-    })());
-  }
-  async function generate(prepared?: NonNullable<ReturnType<typeof store.currentDocument>>) {
-    let sourceDoc = prepared ?? (active.current ? store.currentDocument(active.current) : undefined);
-    const sourceContent = sourceDoc ? readContent(sourceDoc.content) : draft;
-    const content = sourceContent, config = content?.config;
-    if (!content || controller.current || pending.current) return;
-    if (composing.current) {
-      queued.current = () => void generate();
-      return;
+      setRecommendTopic(topic);
     }
-    if (!config!.topic.trim() && !config!.title.trim()) {
-      fail("请填写主题或主标题");
-      return;
+    if (!value) return;
+    if (!value.config.topic.trim() && !value.config.title.trim()) { fail("请填写主题或主标题"); return; }
+    if (value.versions.length >= 200) { fail("此作品已有 200 个版本，请创建新封面继续"); return; }
+    const ticket = ++request.current, projectId = creationProject.current;
+    const preparation = new AbortController();
+    controller.current = preparation;
+    const valid = () => mounted.current && request.current === ticket && !preparation.signal.aborted;
+    pending.current = true;
+    setBusy(true); setError(""); setPage("editor");
+    setStatus(recommend ? "正在匹配风格、版式与配色…" : "正在准备封面…");
+    try {
+      const caps = await ai.capabilities();
+      if (!valid()) return;
+      if (!caps.imageGenerate) throw Error("当前 AI 服务不支持图片生成，请在设置中选择 Codex");
+      await store.flushDocuments();
+      if (!valid()) return;
+      if (!source) {
+        source = await store.createDocument();
+        store.stageDocument(source.id, { title: (value.config.title || value.config.topic).slice(0, 40), content: JSON.stringify(value) });
+        await store.flushDocument(source.id);
+        if (projectId) await projects.move(source.id, projectId);
+      }
+      if (!valid()) return;
+      store.activateDocument(source.id);
+      active.current = source.id;
+      setId(source.id); setDraft(undefined); setChanging(false);
+      // The worker owns cancellation and persistence after submission.
+      void startCoverJob(source.id);
+    } catch (e) { if (valid()) fail(e); }
+    finally {
+      if (ticket === request.current) pending.current = false;
+      if (controller.current === preparation) {
+        controller.current = null;
+        if (mounted.current) { setBusy(false); setStatus(""); }
+      }
     }
-    if (content.versions.length >= 200) {
-      fail("此作品已有 200 个版本，请创建新封面继续");
-      return;
-    }
-    if (!sourceDoc) {
-      pending.current = true;
-      const ticket = request.current;
-      const projectId = creationProject.current;
-      try {
-        const caps = await ai.capabilities();
-        if (!caps.imageGenerate) throw new Error("当前 AI 服务不支持图片生成");
-        if (!mounted.current || ticket !== request.current) return;
-        sourceDoc = await store.createDocument();
-        store.stageDocument(sourceDoc.id, { title: (config!.title || config!.topic).slice(0, 40), content: JSON.stringify(content) });
-        await store.flushDocument(sourceDoc.id);
-        if (projectId) await projects.move(sourceDoc.id, projectId);
-        if (!mounted.current || ticket !== request.current) return;
-        store.activateDocument(sourceDoc.id);
-        active.current = sourceDoc.id;
-        setId(sourceDoc.id);
-        sourceDoc = store.currentDocument(sourceDoc.id)!;
-      } catch (e) { fail(e); return; }
-      finally { pending.current = false; }
-    }
-    const doc = sourceDoc;
-    const target = doc.id, remote = store.remoteVersion(target);
-    let snapshot = doc.content, captured = content;
-    const abort = new AbortController();
-    controller.current = abort;
-    setBusy(true);
-    setPage("editor");
-    setError("");
-    setStatus("正在准备画风与参考图片…");
-    const isValid = () =>
-      !abort.signal.aborted && mounted.current && active.current === target;
-    const unchanged = () =>
-      store.currentDocument(target)?.content === snapshot &&
-      store.remoteVersion(target) === remote;
-    const card = beginTask(abort, {toolId: "app.cover", title: doc.title, stage: "正在准备画风与参考图片…"});
-    await trackAiExecution(
-      abort,
-      (async () => {
-        try {
-          await store.flushDocument(target);
-          if (!isValid()) return;
-          const caps = await ai.capabilities();
-          if (!isValid()) return;
-          if (!caps.imageGenerate)
-            throw new Error(
-              "当前 AI 服务不支持图片生成，请在全局设置中选择支持图片生成的 Codex",
-            );
-          if (!captured.config.title.trim() || !captured.config.subtitle.trim()) {
-            setStatus("正在拟写主标题与副文案…"); updateTask(abort.signal, {stage: "正在拟写主标题与副文案…"});
-            const copy = await ai.generate({ toolId: "app.cover", record: false,
-              messages: [{ role: "user", content: copyPrompt(captured.config) }],
-            }, abort.signal);
-            if (!isValid()) return;
-            if (!unchanged()) throw new Error("拟写期间配置已变化，文案未覆盖当前编辑，请重试");
-            if (copy.saveError) throw new Error(copy.saveError);
-            captured = { ...captured, config: fillCopy(copy.text, captured.config) };
-            snapshot = JSON.stringify(captured);
-            store.stageDocument(target, { content: snapshot });
-            await store.flushDocument(target);
-            if (!isValid()) return;
-            if (!unchanged()) throw new Error("保存文案期间配置已变化，请重试");
-          }
-          // Codex's configured model is the orchestrator, not a confirmed image model.
-          // Do not confuse its name with the upstream image-model calibration table.
-          const policy = stylePolicy(captured.config.style),
-            current = selectedVersion(captured);
-          const withCurrent = !!current && captured.config.preserve;
-          if ((policy.reference || withCurrent) && !caps.referenceImages)
-            throw new Error("当前 AI 服务不支持参考图");
-          const references: string[] = [];
-          if (policy.reference)
-            references.push(await pngReference(policy.style.image));
-          if (withCurrent) references.push(await pngReference(current.image));
-          if (!isValid()) return;
-          if (!unchanged()) throw new Error("配置已变化，请按最新配置重新生成");
-          if (references.length > caps.maxReferences)
-            throw new Error("参考图片数量超过当前服务限制");
-          const prompt = generationPrompt(captured.config, withCurrent);
-          setStatus("正在生成封面…"); updateTask(abort.signal, {stage: "正在生成封面…"});
-          const result = await ai.generate(
-            {
-              toolId: "app.cover",
-              image: true,
-              record: false,
-              references,
-              messages: [{ role: "user", content: prompt }],
-            },
-            abort.signal,
-          );
-          if (!isValid()) return;
-          if (!unchanged())
-            throw new Error(
-              "生成期间封面已修改或同步，结果未覆盖当前编辑，请重试",
-            );
-          if (result.saveError)
-            throw new Error("图片保存失败：" + result.saveError);
-          const image = result.images?.[0];
-          if (!image || !/^workstore-image:[0-9a-f]{64}$/.test(image))
-            throw new Error("AI 未返回已保存的图片，请重试");
-          const next = {
-            id: crypto.randomUUID(),
-            image,
-            createdAt: Date.now(),
-            config: captured.config,
-            prompt,
-          };
-          store.stageDocument(target, {
-            content: JSON.stringify({
-              ...captured,
-              versions: [...captured.versions, next],
-              selectedVersion: next.id,
-            }),
-            ...(doc.title === "未命名封面"
-              ? {
-                  title:
-                    captured.config.title.trim() ||
-                    captured.config.topic.trim().slice(0, 40) ||
-                    "未命名封面",
-                }
-              : {}),
-          });
-          setStatus("正在保存封面…"); updateTask(abort.signal, {stage: "正在保存封面…"});
-          await store.flushDocument(target);
-          if (isValid()) message.success("封面已生成");
-        } catch (e) {
-          failTask(abort.signal, e);
-          if (!abort.signal.aborted) fail(e);
-        } finally {
-          card.finish();
-          if (controller.current === abort) {
-            controller.current = null;
-            if (mounted.current) {
-              setBusy(false);
-              setStatus("");
-            }
-          }
-        }
-      })(),
-    );
   }
   async function exportWork(target: string, backup = false) {
     try {
@@ -533,7 +355,7 @@ export default function CoverApp() {
   }
   function showVersion(next: string) {
     if (!doc || !content) return;
-    cancel();
+    cancelPreparation();
     store.stageDocument(doc.id, {
       content: JSON.stringify({ ...content, selectedVersion: next }),
     });
@@ -730,7 +552,7 @@ export default function CoverApp() {
   const query = search.trim().toLowerCase();
   const visible = styles.filter(
     (s) =>
-      (category === "全部" || s.group === category) &&
+      s.group === category &&
       (!query ||
         `${s.number} ${s.displayName} ${s.previewTitle} ${s.generation_name} ${s.reference} ${s.traits}`
           .toLowerCase()
@@ -855,12 +677,12 @@ export default function CoverApp() {
             </Button>
           )}
         </header>
-        {(error ||
+        {(error || job?.error ||
           corrupt ||
           saveError ||
           store.documentWarnings().length > 0) && (
           <div role="alert" className="cover-error">
-            {error ||
+            {error || job?.error ||
               corrupt ||
               saveError ||
               store.documentWarnings().join("；")}
@@ -913,16 +735,26 @@ export default function CoverApp() {
         ) : page === "gallery" ? (
           <section className="cover-gallery">
             <div className="cover-gallery-tools">
-              <div className="cover-categories">
-                {["全部", ...groups].map((g) => (
+              <div className="cover-categories" role="tablist" aria-label="风格分类">
+                {groups.map((g) => (
                   <button
                     key={g}
-                    aria-pressed={g === category}
+                    role="tab"
+                    id={`cover-tab-${groups.indexOf(g)}`}
+                    aria-controls="cover-style-panel"
+                    aria-selected={g === category}
+                    tabIndex={g === category ? 0 : -1}
+                    onKeyDown={(event) => {
+                      const index = groups.indexOf(g);
+                      const next = event.key === "ArrowRight" ? (index + 1) % groups.length : event.key === "ArrowLeft" ? (index + groups.length - 1) % groups.length : event.key === "Home" ? 0 : event.key === "End" ? groups.length - 1 : -1;
+                      if (next < 0) return;
+                      event.preventDefault();
+                      setCategory(groups[next]);
+                      document.getElementById(`cover-tab-${next}`)?.focus();
+                    }}
                     onClick={() => setCategory(g)}
                   >
-                    {g === "全部"
-                      ? `全部 ${styles.length}`
-                      : g.replace(/^[A-Z] /, "")}
+                    {g.replace(/^[A-Z] /, "")}
                   </button>
                 ))}
               </div>
@@ -931,7 +763,7 @@ export default function CoverApp() {
             {groups
               .filter((g) => visible.some((s) => s.group === g))
               .map((g) => (
-                <section className="cover-template-group" key={g}>
+                <section className="cover-template-group" key={g} role="tabpanel" id="cover-style-panel" aria-labelledby={`cover-tab-${groups.indexOf(g)}`}>
                   <h3>{g.replace(/^[A-Z] /, "")}</h3>
                   <div className="cover-template-grid">
                     {visible
@@ -1007,7 +839,7 @@ export default function CoverApp() {
             <div className="cover-editor">
               <section className="cover-canvas">
                 <div className="cover-canvas-bar">
-                  <span>{busy ? (recommendTopic !== null ? "正在匹配" : "正在生成") : "封面预览"}</span>
+                  <span>{busy ? (matchingTopic !== null ? "正在匹配" : "正在生成") : "封面预览"}</span>
                   <small>{version?.config.ratio || config.ratio}</small>
                 </div>
                 <div
@@ -1019,7 +851,7 @@ export default function CoverApp() {
                   }}
                 >
                   {version && <CoverImage src={version.image} />}{" "}
-                  {!version && !busy && <p>{recommendTopic !== null ? "点击右侧重新匹配并生成" : "点击右侧“生成封面”开始绘制"}</p>}
+                  {!version && !busy && <p>{matchingTopic !== null ? "点击右侧重新匹配并生成" : "点击右侧“生成封面”开始绘制"}</p>}
                   {busy && (
                     <div className="cover-generating" role="status" aria-label={status}>
                       <svg className="cover-drawing-grid" viewBox="0 0 240 240" preserveAspectRatio="none" fill="none" aria-hidden="true">
@@ -1050,10 +882,10 @@ export default function CoverApp() {
 
               </section>
               <aside className="cover-settings">
-                {recommendTopic !== null ? (
+                {matchingTopic !== null ? (
                   <div className="cover-matching">
                     <span>封面主题</span>
-                    <p>{recommendTopic}</p>
+                    <p>{matchingTopic}</p>
                     <div role="status">{busy ? status : "匹配尚未完成，可重新尝试"}</div>
                     <ol>
                       <li aria-current={busy ? "step" : undefined}>匹配风格、版式与配色</li>
@@ -1074,7 +906,7 @@ export default function CoverApp() {
                       onClick={() =>
                         afterComposition(() => {
                           setChanging(true);
-                          setCategory("全部");
+                          setCategory(groups[0]);
                           setSearch("");
                           setPage("gallery");
                         })
@@ -1100,9 +932,9 @@ export default function CoverApp() {
                   block
                   type="primary"
                   disabled={busy || opening}
-                  onClick={() => void (recommendTopic !== null ? recommendAndGenerate() : generate())}
+                  onClick={() => void (matchingTopic !== null ? recommendAndGenerate() : generate())}
                 >
-                  {busy ? (recommendTopic !== null ? "匹配中…" : "生成中…") : recommendTopic !== null ? "重新匹配并生成" : version ? "重新生成" : "生成封面"}
+                  {busy ? (matchingTopic !== null ? "匹配中…" : "生成中…") : matchingTopic !== null ? "重新匹配并生成" : version ? "重新生成" : "生成封面"}
                 </Button>
                 {busy && (
                   <Button block className="cover-cancel" onClick={cancel}>

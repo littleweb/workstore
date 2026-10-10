@@ -164,3 +164,10 @@ test('a pending read cannot resurrect a deleted knowledge card',async()=>{
  await store.openDocument('a');const read=store.loadDocument('a');await store.deleteDocument('a');gate.resolve(loaded('a'));
  await assert.rejects(read,/删除/);assert.equal(store.currentDocument('a'),undefined);
 });
+
+test('course list icons follow staged content without reordering recent documents',async()=>{
+ const store=harness(async command=>command==='list_course_documents'?{documents:[{...loaded('web',JSON.stringify({mode:'web'})).document,lastOpenedAt:2},loaded('animation',JSON.stringify({mode:'animation'})).document],warnings:[]}:{...loaded('web',JSON.stringify({mode:'web'})),document:{...loaded('web',JSON.stringify({mode:'web'})).document,lastOpenedAt:2}});
+ await store.refreshDocuments();assert.deepEqual(Array.from(store.documentList(),d=>d.mode),['web','animation']);
+ await store.openDocument('web');const order=Array.from(store.documentList(),d=>d.id);store.stageDocument('web',{content:JSON.stringify({mode:'whiteboard'})});
+ assert.equal(store.documentList().find(d=>d.id==='web').mode,'whiteboard');assert.deepEqual(Array.from(store.documentList(),d=>d.id),order);
+});

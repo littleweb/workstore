@@ -124,3 +124,5 @@ production前端不复制public/design-studio，正式包前端预算80MiB、mac
 课程资源由scripts/resources/catalog.mjs从四类examples目录与12段试听收集，不复制其他生成中间文件。发布入口校验/准备两类原渲染运行环境，仅打包Node、动画、白板/自然配音及HTML发布服务的声明文件为独立组件，然后resources:publish上传内容寻址附件、逐项核对远端摘要并生成src/remote-resources.json。默认本机模式不上传素材、不要求私钥，复用已提交索引；新设备运行时自动获取必要组件。首次从源码发布需要原课程构建依赖；pack.py拒绝在未验证平台标记macOS ARM64组件。
 
 三套公共资源索引与代码共同维护main；源码原图与公开参考保留用于验收/再发布，缓存与用户工作区不进源Git。资源版本独立、不可覆盖且不设为软件Latest；安装更新另建软件版本标签。验证中不默认调用AI或执行Vercel上传。
+
+课程尺寸回归：tests/course-sizes.test.mjs不调用模型/配音服务，使用固定Remotion FFmpeg生成短片并验证五种导出宽高和音轨。产品video-size-adapter.mjs随Rust内嵌，可兼容已发布固定运行库；其FFmpeg无pad/overlay/rawvideo容器，使用PNG流及源码纸色填充，不依赖用户本机FFmpeg/Python安装。动画无成片时的预览同样完整缩放，已成片播放器按实际视频比例显示。封面比例修改不覆盖历史图；旧视频plannedConfig缺省比例视为16:9。

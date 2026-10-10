@@ -1,14 +1,15 @@
+import {validVideoRatio} from '../course/sizes';
 import {whiteboardStyles,whiteboardStyle,type WhiteboardStyle} from './styles';
 import {durations,captionsFor,srt,voiceOptions,type Caption} from '../course-animation/model';
 export {durationLabel,durations} from '../course-animation/model';
-export type Config={duration:number;audience:string;voice:boolean;voiceId?:string;style?:WhiteboardStyle};
+export type Config={ratio?:string;duration:number;audience:string;voice:boolean;voiceId?:string;style?:WhiteboardStyle};
 export type Event={text:string;subject:string};
 export type Region={x:number;y:number;width:number;height:number};
 export type Annotation={sceneId:string;canvas:{width:number;height:number};storyBasis:string;sceneDurationMs:number;elements:{id:string;label:string;sequence:number;narrativeRole:string;subtitle:string;type:string;region:Region;reveal:{direction:string;startMs:number;durationMs:number;maskPaddingPx:number;protectedRegions:Region[]};handPath:{start:number[];end:number[];easing:string}}[]};
 export type Scene={title:string;seconds:number;events:Event[];narration:string;image?:string;annotation?:Annotation;audio?:string;audioVoice?:string;captions?:Caption[];imagePrompt?:string;inspection?:string;candidates?:string[]};
 export type Plan={title:string;summary:string;duration:number;scenes:Scene[];video?:string;srt:string};
-export const defaults=():Config=>({duration:60,audience:'大众学习者',voice:true,voiceId:'zf_007'});
-export function validateConfig(c:Config){if(!c||!durations.includes(c.duration as typeof durations[number])||!['大众学习者','儿童','青少年','大学生','职场人士','教师'].includes(c.audience)||typeof c.voice!=='boolean'||(c.style!==undefined&&!whiteboardStyles.some(s=>s.id===c.style))||(c.voiceId!==undefined&&!voiceOptions.some(v=>v.value===c.voiceId)))throw Error('白板沙画设置无效');}
+export const defaults=():Config=>({ratio:'16:9',duration:60,audience:'大众学习者',voice:true,voiceId:'zf_007'});
+export function validateConfig(c:Config){if(!c||!validVideoRatio(c.ratio)||!durations.includes(c.duration as typeof durations[number])||!['大众学习者','儿童','青少年','大学生','职场人士','教师'].includes(c.audience)||typeof c.voice!=='boolean'||(c.style!==undefined&&!whiteboardStyles.some(s=>s.id===c.style))||(c.voiceId!==undefined&&!voiceOptions.some(v=>v.value===c.voiceId)))throw Error('白板沙画设置无效');}
 const text=(v:unknown,n:number)=>{if(typeof v!=='string'||!v.trim()||v.length>n)throw Error('白板沙画文字为空或过长');return v.trim();};
 export function parsePlan(raw:string,c:Config):Plan{validateConfig(c);const p=JSON.parse(raw.trim().replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));if(!Array.isArray(p.scenes)||p.scenes.length!==c.duration/30)throw Error(`需要${c.duration/30}个30秒教学场景`);const scenes=p.scenes.map((s:Scene)=>{if(!Array.isArray(s.events)||s.events.length!==4)throw Error('每幕需要4个按叙事排序的图解事件');const events=s.events.map(e=>({text:text(e.text,45),subject:text(e.subject,180)}));const narration=events.map(e=>e.text).join('');if(narration.length<50||narration.length>130)throw Error('每幕旁白需要50–130字');return {title:text(s.title,28),seconds:30,events,narration};});const plan:Plan={title:text(p.title,28),summary:text(p.summary,400),duration:c.duration,scenes,srt:''};plan.srt=toSrt(plan);return plan;}
 export function eventCaptions(s:Scene):Caption[]{let from=0;return s.events.flatMap(e=>{const duration=e.text.length/s.narration.length*s.seconds;const lines=captionsFor({narration:e.text,seconds:duration} as never).map(c=>({...c,startMs:Math.round(from+c.startMs),endMs:Math.round(from+c.endMs)}));from+=duration*1000;return lines;});}

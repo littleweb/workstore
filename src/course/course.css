@@ -23,3 +23,5 @@
 .course-cover-style-grid{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:12px}.course-cover-style-grid button{padding:7px;border-radius:8px}.course-cover-style-grid strong{font-size:12px;margin-top:7px}.course-cover-random{font-size:16px}.course-cover-categories .ant-tabs-nav{margin:0}.course-cover-wizard>p{margin:0;color:#718078;font-size:12px}.course-cover-submit{display:flex;justify-content:flex-end;margin-top:20px}
 
 .course-app .ds-remote-image{display:block;width:100%;height:100%}.course-app .ds-asset-placeholder{display:flex;min-height:120px;width:100%;height:100%;justify-content:center;align-items:center;color:#87958c;background:#eef2ee;font-size:12px}.course-app .ds-asset-placeholder [role=button]{cursor:pointer;padding:12px}.course-asset-status{padding:24px;text-align:center;color:#87958c}.course-asset-status button{font:inherit;border:0;border-radius:6px;background:#eef2ee;padding:12px;color:inherit;cursor:pointer}
+
+.course-type-icon{display:block;flex-shrink:0;color:#56856d}.course-row-name .course-type-icon{width:100%;height:100%}

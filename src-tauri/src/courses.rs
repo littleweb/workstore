@@ -15,6 +15,8 @@ type Result<T> = std::result::Result<T, String>;
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DocumentInfo {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub mode: Option<String>,
     pub id: String,
     pub title: String,
     pub favorite: bool,
@@ -168,7 +170,9 @@ impl Store {
             }
             match read_file(&path) {
                 Ok((doc, _)) if name == format!("{}.course.json", doc.info.id) => {
-                    out.documents.push(doc.info)
+                    let mut info=doc.info;
+                    info.mode=Some(doc.content.as_str().and_then(|raw|serde_json::from_str::<Value>(raw).ok()).and_then(|v|v.get("mode").and_then(Value::as_str).map(str::to_owned)).filter(|m|matches!(m.as_str(),"animation"|"whiteboard"|"web")).unwrap_or_else(||"cards".into()));
+                    out.documents.push(info)
                 }
                 Ok(_) => out.warnings.push(format!("{name}：文件名与文档 ID 不一致")),
                 Err(e) => out.warnings.push(format!("{name}：{e}")),
@@ -186,6 +190,7 @@ impl Store {
             kind: "workstore.course".into(),
             schema_version: 1,
             info: DocumentInfo {
+                mode: None,
                 id: Uuid::new_v4().to_string(),
                 title: "未命名知识卡片".into(),
                 favorite: false,
@@ -312,6 +317,23 @@ mod tests {
         assert_eq!(fs::read_dir(&dir).unwrap().count(), 3);
         assert_eq!(fs::read_to_string(first.join("prompts/01-cover.md")).unwrap(), "cover");
         drop(store); fs::remove_dir_all(root).unwrap();
+    }
+    #[test]
+    fn course_list_derives_type_from_legacy_content_without_changing_files() {
+        let root = std::env::temp_dir().join(format!("workstore-course-icons-{}", Uuid::new_v4()));
+        let store = Store::open(root.join("config"), root.join("workspace")).unwrap();
+        let loaded=store.create_course_document().unwrap();
+        let mut doc=loaded.document;
+        let mut token=loaded.token;
+        for mode in ["cards","animation","whiteboard","web"] {
+            doc.content=Value::String(serde_json::json!({"mode":mode}).to_string());
+            let saved=store.save_course_document(doc.clone(),token).unwrap();token=saved.token;
+            let path=store.course_document_path(&doc.info.id).unwrap();
+            let before=fs::read(&path).unwrap();
+            assert_eq!(store.list_course_documents().unwrap().documents[0].mode.as_deref(),Some(mode));
+            assert_eq!(fs::read(&path).unwrap(),before);
+        }
+        drop(store);fs::remove_dir_all(root).unwrap();
     }
     #[test]
     fn course_roundtrip_conflict_and_backup() {

@@ -190,6 +190,7 @@ async function harness({ empty = false, upload = async()=>"workstore-image:"+"c"
             }),
             generate: (input, signal) => {
               requests.push({ input, signal });
+              if (input.messages?.[0]?.content.includes("现在执行一次生图前审稿")) return waiting.then(result => ({ text: JSON.stringify({ notes: "封面与正文承诺一致，保留具体动作与结尾。", plan: JSON.parse(result.text) }) }));
               return waiting;
             },
           },
