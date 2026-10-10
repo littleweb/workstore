@@ -1,5 +1,7 @@
 import {readFileSync,writeFileSync,mkdirSync,copyFileSync} from 'node:fs';
-import {spawnSync} from 'node:child_process';
+import {spawnSync,execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+const execute=promisify(execFile);
 import {createHash} from 'node:crypto';
 import {courseFiles} from './catalog.mjs';
 const repository='littleweb/workstore';
@@ -8,16 +10,31 @@ const api=path=>JSON.parse(run(['api',`repos/${repository}/${path}${path.include
 const files=[...courseFiles(),...JSON.parse(readFileSync('.release-build/resources/components.json'))];
 const tag='resources-'+createHash('sha256').update(JSON.stringify(files.map(({key,size,sha256,kind})=>({key,size,sha256,kind})))).digest('hex').slice(0,16);
 let release=api('releases?per_page=100').find(r=>r.tag_name===tag);
-if(!release){run(['release','create',tag,'--repo',repository,'--draft','--prerelease','--title','WorkStore course resources','--notes','Verified public course examples and optional runtime components. Not a software update.']);release=api('releases?per_page=100').find(r=>r.tag_name===tag);}
+if(!release){release=JSON.parse(run(['api',`repos/${repository}/releases`,'--method','POST','-f',`tag_name=${tag}`,'-F','draft=true','-F','prerelease=true','-f','name=WorkStore course resources','-f','body=Verified public course examples and optional runtime components. Not a software update.']));}
+
 mkdirSync('.release-build/upload',{recursive:true});
+const uploads=[];
 for(const f of new Map(files.map(f=>[f.filename,f])).values()){
  const existing=release.assets.find(a=>a.name===f.filename);
  if(existing){if(existing.size!==f.size||existing.digest!==`sha256:${f.sha256}`||existing.state!=='uploaded')throw Error('已发布资源不可覆盖：'+f.filename);continue;}
  if(!release.draft)throw Error('不可修改已发布资源');
  const dest=`.release-build/upload/${f.filename}`;copyFileSync(f.source,dest);
- run(['release','upload',tag,dest,'--repo',repository],600000);
- console.log('Uploaded public resource',f.filename.slice(0,16),f.size);
+ uploads.push({f,dest});
 }
+let next=0;
+const workers=await Promise.allSettled(Array.from({length:Math.min(4,uploads.length)},async()=>{
+ while(next<uploads.length){const {f,dest}=uploads[next++];let uploaded=false;
+ for(let attempt=0;attempt<3&&!uploaded;attempt++){
+  try{await execute('gh',['release','upload',tag,dest,'--repo',repository],{timeout:f.size<32*1024*1024?120000:600000,maxBuffer:32*1024*1024});uploaded=true;}
+  catch(error){
+   const stored=api(`releases/${release.id}`).assets.find(a=>a.name===f.filename);
+   if(stored){if(stored.size!==f.size||stored.digest!==`sha256:${f.sha256}`||stored.state!=='uploaded')throw Error('远端附件校验失败');uploaded=true;}
+   else if(attempt===2)throw error;else await new Promise(resolve=>setTimeout(resolve,2000*(attempt+1)));
+  }
+ }
+console.log('Uploaded public resource',f.filename.slice(0,16),f.size);}
+}));
+const failed=workers.find(r=>r.status==='rejected');if(failed)throw failed.reason;
 release=api(`releases/${release.id}`);
 const entries={};
 for(const f of files){const a=release.assets.find(a=>a.name===f.filename);if(!a||a.size!==f.size||a.digest!==`sha256:${f.sha256}`||a.state!=='uploaded')throw Error('资源远端校验失败');entries[f.key]={filename:f.filename,id:a.id,size:f.size,sha256:f.sha256,kind:f.kind,...(f.checks?{checks:f.checks}:{})};}

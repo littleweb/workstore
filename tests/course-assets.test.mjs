@@ -33,3 +33,16 @@ test('cached video stays playable when its poster is offline, retry invalidates 
  await act(async()=>h.root.render(React.createElement(Media,{src:'/course/b.mp4',controls:true})));await act(async()=>{h.requests[2].resolve('/cache/a.mp4');h.requests[3].resolve('/cache/a.png');});assert.equal(h.host.querySelector('video'),null);
  await act(async()=>h.requests[4].resolve('/cache/b.mp4'));assert.equal(h.host.querySelector('video').src,'asset:/cache/b.mp4');await h.close();
 });
+
+
+test('runtime archives reject build-machine and escaping links', async t => {
+ const {spawnSync}=await import('node:child_process');
+ if(process.platform!=='darwin'||process.arch!=='arm64'||spawnSync('python3',['--version']).status!==0){t.skip('current component packer supports macOS ARM64');return;}
+ const {mkdtempSync,rmSync}=await import('node:fs');const {tmpdir}=await import('node:os');const {join}=await import('node:path');
+ const dir=mkdtempSync(join(tmpdir(),'course-archive-links-'));
+ try{for(const [target,valid] of [['python3.12',true],['/builder/python3.12',false],['../../../private',false]]){
+  const archive=join(dir,'runtime.tar.gz');
+  const fixture=spawnSync('python3',['-c',"import tarfile,sys; t=tarfile.open(sys.argv[1],'w:gz'); h=tarfile.TarInfo('python/bin/python3'); h.type=tarfile.SYMTYPE; h.linkname=sys.argv[2]; t.addfile(h); t.close()",archive,target]);assert.equal(fixture.status,0);
+  const result=spawnSync('python3',['scripts/resources/pack.py','--verify-archive',archive]);assert.equal(result.status===0,valid,target);
+ }}finally{rmSync(dir,{recursive:true,force:true});}
+});

@@ -96,7 +96,7 @@ npm run tauri -- build --debug
 
 正式包使用`src/release-manifest.json`和`scripts/release/assets.mjs`维护工具、原生资源及公开素材白名单。新增正式工具时须同时更新入口和白名单，列出实际素材引用及运行依赖；禁止复制整个public或用隐藏入口代替删除打包依赖。设计室示例按catalog独立发布，封面原始参考按catalog收集，漫画JPG按coverThemes收集，白板字体/授权按限定目录收集。
 
-`desktop:release:build`目前只准备白板字体与漫画技能参考，不构建或打包HTML/课程运行库及旧漫画素材；普通开发构建仍沿用全部实验工具的预构建。正式前端生成`release-inventory.json`，检查隐藏模块、未声明文件、缺图和80MiB预算；macOS构建完成后检查Resources仅有应用图标及90MiB应用预算。预算调整需要说明新增依赖的用途，不通过放宽检查来隐藏多余资源。安装前仍须正常退出、保留旧包、校验签名与全部文件一致性。GitHub软件Release继续只在用户明确要求时发布。
+`desktop:release:build`准备白板字体、漫画/课程提示及交互参考，签名发布时独立构建并发布课程运行组件，软件包不携带这些大型组件或旧漫画素材；普通开发构建仍沿用全部实验工具的预构建。正式前端生成`release-inventory.json`，检查隐藏模块、未声明文件、缺图和80MiB预算；macOS构建完成后检查Resources仅有应用图标及90MiB应用预算。预算调整需要说明新增依赖的用途，不通过放宽检查来隐藏多余资源。安装前仍须正常退出、保留旧包、校验签名与全部文件一致性。GitHub软件Release继续只在用户明确要求时发布。
 
 
 默认`npm run desktop:build`现在使用同一正式白名单的本机模式，不需要更新私钥、不调用GitHub发布，复用已经提交的预览索引。签名更新包仍用`desktop:release:build`（`desktop:update:build`为同一入口），才推送/验证公共预览并要求原更新私钥。包含完整实验工具和运行库的构建需明确执行`desktop:experimental:build`，不能拿实验包当正式包发布。无密钥验收可以使用`npm run desktop:build -- --ci --no-bundle`完成正式前端与Rust可执行文件构建；完整app/DMG由对应本机平台生成并验收。
@@ -108,18 +108,18 @@ npm run tauri -- build --debug
 
 production前端不复制public/design-studio，正式包前端预算80MiB、macOS应用90MiB。设计室原图仍在源码Git用于校验和发布，浏览器dev使用原图。回归包含tests/design-assets.test.mjs、tests/release-assets.test.mjs及共享Rust下载器测试；完整Rust仍单线程。首次未缓存图片需要联网，离线占位可重试；已缓存图片可离线显示。发布仅交付经过实测的平台，沿用原更新公钥，新建版本标签，不替换旧Release附件。
 
-本机需要验收“做课程”时，使用`npm run desktop:experimental:build -- --bundles app`构建完整开发桌面包并正常退出后安装；默认`desktop:build`仍遵循正式白名单，不显示课程。开发包仅本机验收，不作为正式Release上传。
+默认`desktop:build`已显示做课程并使用固定资源索引；需要携带全部课程参考/运行库或其他实验工具时，显式使用`desktop:experimental:build`，不能以该完整开发包替代正式发布。
 
 白板沙画参考的封面使用square-cover.png（1:1），旧cover.png及原提示词保留；两套参考生成/刷新脚本保留方形封面路径和ratio元数据，不由视频首帧覆盖。audit-examples.py校验方形尺寸与元数据，并生成方形封面联系表。新生成和重新生成的白板发布封面固定1:1，既有版本不迁移。
 
-交互网页参考由scripts/course-web/build-examples.mjs生成12个自包含HTML、本地Course3D运行库（固定Three.js版本）及真实场景方形WebP封面。tests/course-web.test.mjs验证全部控件、计算反馈与沙箱边界；course-web-ui验证持久化先于模型、后台完成、停止及晚到结果守卫。桌面需完整实验包包含原HTML发布运行组件，正式白名单不自动开放该品类；在线发布依赖用户现有Vercel配置，不在开发验收自动上传。
+交互网页参考由scripts/course-web/build-examples.mjs生成12个自包含HTML、本地Course3D运行库（固定Three.js版本）及真实场景方形WebP封面。tests/course-web.test.mjs验证全部控件、计算反馈与沙箱边界；course-web-ui验证持久化先于模型、后台完成、停止及晚到结果守卫。正式课程提供四类页面，原HTML发布运行组件按需加载；在线发布依赖用户现有Vercel配置，不在开发验收自动上传。
 
 交互网页视觉验收：node scripts/course-web/render-references.mjs（开发依赖Playwright，默认本机Chrome，可用COURSE_CHROME指定可执行文件），使用独立无界面测试浏览器，验证12条实际WebGL/绘画场景、参数、复位和390px布局，截图存忽略目录docs/course-web-proof。场景代码改动后重跑渲染并从*-cover.png生成cover.webp；普通predev/prebuild只编译自包含HTML/渲染库，不调用模型或联网下载素材。材质及素材来源见docs/course-web-style-sources.json；不复制第三方展示站的模型、纹理或源码。
 
 
 ## 0.1.17发布课程与必检规则
 
-发布前读取AGENTS.md及docs/RELEASE-CHECKLIST.md。做课程已纳入正式范围，原封面/设计室优化继续生效。release:check检查五处版本、原公钥及三套固定资源索引；正式入口自动跑全部前端/单线程Rust测试、检查完整工具模块及80/90MiB预算、应用和更新包签名及DMG。不能用完整实验构建替代正式包。
+发布前读取AGENTS.md及docs/RELEASE-CHECKLIST.md。macOS正式发布开发设备需要Python3运行资源归档和包内文件检查；最终用户不需要安装开发环境。做课程已纳入正式范围，原封面/设计室优化继续生效。release:check检查五处版本、原公钥及三套固定资源索引；正式入口自动跑全部前端/单线程Rust测试、检查完整工具模块及80/90MiB预算、应用和更新包签名及DMG。不能用完整实验构建替代正式包。
 
 课程资源由scripts/resources/catalog.mjs从四类examples目录与12段试听收集，不复制其他生成中间文件。发布入口校验/准备两类原渲染运行环境，仅打包Node、动画、白板/自然配音及HTML发布服务的声明文件为独立组件，然后resources:publish上传内容寻址附件、逐项核对远端摘要并生成src/remote-resources.json。默认本机模式不上传素材、不要求私钥，复用已提交索引；新设备运行时自动获取必要组件。首次从源码发布需要原课程构建依赖；pack.py拒绝在未验证平台标记macOS ARM64组件。
 

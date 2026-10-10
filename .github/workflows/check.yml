@@ -16,8 +16,9 @@ jobs:
           cache: npm
       - uses: dtolnay/rust-toolchain@stable
       - run: npm ci
-      - run: npm run html:install
-      - run: node --test tests/*.test.mjs
-      - run: npm run build
-      - run: cargo test --locked --manifest-path src-tauri/Cargo.toml -- --test-threads=1
-      - run: npm run tauri -- build --debug --bundles app
+      - run: node scripts/prepare-excalidraw.mjs
+      - run: npm run release:check
+      # The local formal entry runs frontend/Rust regressions, TypeScript,
+      # module/resource budgets, macOS signing and DMG integrity checks.
+      # It does not require publishing credentials or upload releases.
+      - run: npm run desktop:build

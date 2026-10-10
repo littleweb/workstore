@@ -1,22 +1,22 @@
 import {bundle} from '@remotion/bundler';
 import {build} from 'esbuild';
 import {ensureBrowser} from '@remotion/renderer';
-import {mkdir,cp,readFile,writeFile,rm,readdir} from 'node:fs/promises';
+import {mkdir,cp,readFile,writeFile,rm,readdir,realpath} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import path from 'node:path';
 const root=process.cwd(),out=path.join(root,'src-tauri/course-runtime'),staging=path.join(root,'.course-animation-build/runtime');
-const files=['src/course-animation/TutorialVideo.tsx','src/course-animation/Diagram.tsx','src/course-animation/BasicCaptions.tsx','src/course-animation/model.ts','src/course-animation/styles.ts','remotion-tutorial/src/Composition.tsx','remotion-tutorial/src/Root.tsx','remotion-tutorial/src/index.ts','scripts/course-animation/runner.mjs','scripts/ai/speech-timing.mjs','vendor/course-animation-runtime/package-lock.json','scripts/course-whiteboard/runner.mjs','src/course-whiteboard/model.ts','src/course-whiteboard/styles.ts'];
+const files=['scripts/course-animation/build-runtime.mjs','src/course-animation/TutorialVideo.tsx','src/course-animation/Diagram.tsx','src/course-animation/BasicCaptions.tsx','src/course-animation/model.ts','src/course-animation/styles.ts','remotion-tutorial/src/Composition.tsx','remotion-tutorial/src/Root.tsx','remotion-tutorial/src/index.ts','scripts/course-animation/runner.mjs','scripts/ai/speech-timing.mjs','vendor/course-animation-runtime/package-lock.json','scripts/course-whiteboard/runner.mjs','src/course-whiteboard/model.ts','src/course-whiteboard/styles.ts'];
 const h=createHash('sha256');for(const f of files)h.update(await readFile(path.join(root,f)));h.update(process.platform+process.arch);const buildId=h.digest('hex').slice(0,24);
 try{const old=JSON.parse(await readFile(path.join(out,'manifest.json'),'utf8'));if(old.buildId===buildId){await readFile(path.join(out,'app.tar.gz'));console.log('Remotion runtime is up to date.');process.exit(0);}}catch{}
 await rm(staging,{recursive:true,force:true});await mkdir(staging,{recursive:true});await mkdir(out,{recursive:true});
 await bundle({entryPoint:path.join(root,'remotion-tutorial/src/index.ts'),outDir:path.join(staging,'bundle'),publicDir:path.join(root,'remotion-tutorial/public'),webpackOverride:c=>c});
-await cp(path.join(root,'vendor/course-animation-runtime/node_modules'),path.join(staging,'node_modules'),{recursive:true});
+await cp(await realpath(path.join(root,'vendor/course-animation-runtime/node_modules')),path.join(staging,'node_modules'),{recursive:true,verbatimSymlinks:true});
 await cp(path.join(root,'scripts/course-animation/runner.mjs'),path.join(staging,'runner.mjs'));
 await cp('scripts/ai/speech-timing.mjs',path.join(staging,'speech-timing.mjs'));
 await cp('scripts/course-whiteboard/runner.mjs',path.join(staging,'whiteboard-runner.mjs'));await build({entryPoints:['src/course-whiteboard/model.ts'],bundle:true,platform:'node',format:'cjs',outfile:path.join(staging,'whiteboard-model.cjs')});
 await build({entryPoints:[path.join(root,'src/course-animation/model.ts')],bundle:true,platform:'node',format:'cjs',outfile:path.join(staging,'model.cjs')});
-const browser=await ensureBrowser();if(!('path' in browser))throw Error('Remotion Chrome is unavailable');const browserRoot=path.dirname(browser.path);await cp(browserRoot,path.join(staging,'chrome'),{recursive:true});
+const browser=await ensureBrowser();if(!('path' in browser))throw Error('Remotion Chrome is unavailable');const browserRoot=path.dirname(browser.path);await cp(browserRoot,path.join(staging,'chrome'),{recursive:true,verbatimSymlinks:true});
 await writeFile(path.join(staging,'package.json'),'{}');
 const tar=spawnSync('tar',['-czf',path.join(out,'app.tar.gz'),'-C',staging,'.'],{stdio:'inherit'});if(tar.status)throw Error('Remotion runtime archive failed');
 const browserExecutable='chrome/'+path.basename(browser.path);await writeFile(path.join(out,'manifest.json'),JSON.stringify({buildId,browserExecutable,version:'4.0.534',platform:process.platform,arch:process.arch},null,2));

@@ -86,12 +86,12 @@ npm run desktop:build                           # 本机轻量构建，无需更
 
 ### HTML Anything 原版开发
 
-首次开发先执行 `npm run html:install`，按上游锁文件安装独立依赖。桌面构建会自动生成并打包原版运行组件；最终用户无需安装 Node 或另启服务。浏览器开发需要另开 `npm run html:start`，再运行 `npm run dev -- --port 1420`。原版来源和适配边界见 [说明](third-party/html-anything/README.md)。
+首次开发先执行 `npm run html:install`，按上游锁文件安装独立依赖。完整实验构建会生成并打包原版运行组件，正式课程网页发布按需加载该组件；最终用户无需安装 Node 或另启服务。浏览器开发需要另开 `npm run html:start`，再运行 `npm run dev -- --port 1420`。原版来源和适配边界见 [说明](third-party/html-anything/README.md)。
 
 封面模板预览按需从公开GitHub素材分支下载并在本机缓存，已缓存图片可离线查看；本地画风、配色及版式参考继续随应用提供。未缓存预览在断网时显示本地画风参考，生成的用户封面仍保存在工作区。正式打包会自动发布并核验预览素材，详见[开发与发布流程](docs/DEVELOPMENT.md#发布封面预览素材)。
 
 
-正式安装包仅包含当前开放的五个工具所需素材。HTML、旧小漫画、小动画和做课程的页面及专用运行环境保留在源码中供开发，正式包不携带；用户已有文件与同步类型兼容保留。资源白名单与体积预算会在打包时自动检查。
+正式安装包仅包含当前开放的六个工具所需素材。HTML、旧小漫画、小动画的页面及专用运行环境保留在源码中供开发，正式包不携带；做课程保留全部四类页面，参考与运行组件按需加载。用户已有文件与同步类型兼容保留。资源白名单与体积预算会在打包时自动检查。
 
 
 日常打包使用`npm run desktop:build`，复用已发布的预览索引，无需GitHub写权限或更新私钥；正式更新包使用`npm run desktop:release:build`。需要全部实验工具时使用`npm run desktop:experimental:build`，该包不用于正式发布。

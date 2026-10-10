@@ -53,5 +53,7 @@ if (process.platform === 'darwin' && !plan.cliArgs.includes('--no-bundle')) {
   console.log('正式应用字节数：',verifyMacBundle(app));
   run('codesign',['--verify','--deep','--strict',app]);
   if(plan.createUpdaterArtifacts) await verifyUpdateSignature(resolve(bundle,'macos/WorkStore.app.tar.gz'),JSON.parse(readFileSync('src-tauri/tauri.conf.json')).plugins.updater.pubkey);
-  run('hdiutil',['verify',resolve(bundle,`dmg/WorkStore_${JSON.parse(readFileSync('package.json')).version}_${process.arch==='arm64'?'aarch64':'x64'}.dmg`)]);
+  const dmg=resolve(bundle,`dmg/WorkStore_${JSON.parse(readFileSync('package.json')).version}_${process.arch==='arm64'?'aarch64':'x64'}.dmg`);
+  run('hdiutil',['verify',dmg]);
+  run('python3',['scripts/release/verify-packages.py',app,dmg,...(plan.createUpdaterArtifacts?[resolve(bundle,'macos/WorkStore.app.tar.gz')]:[])]);
 }
